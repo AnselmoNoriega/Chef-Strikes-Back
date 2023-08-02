@@ -14,6 +14,10 @@ public class Actions : MonoBehaviour
     [SerializeField]
     private float throwForce;
 
+    [Space, Header("Player Attack")]
+    [SerializeField] CharacterMovement CM;
+    [SerializeField] Player player;
+
 
     private void Start()
     {
@@ -65,4 +69,29 @@ public class Actions : MonoBehaviour
             inventory.ThrowFood(strength, negativeAcceleration, velocity/acceleration);
         }
     }
+
+    public void Attacking()
+    {
+        Vector2 attackDirection = CM.GetMoveDirection();
+        player.SetAttackDirection(attackDirection);
+        player.Attack();
+    }
+
+    public void Boosting()
+    {
+        CM.SpeedBoost(5.0f);
+    }
+
+    public void BoostReleased()
+    {
+        CM.SpeedBoost(-5.0f);
+    }
+
+    public void SwitchWeapon()
+    {
+        player.currentWeaponIndex = (player.currentWeaponIndex + 1) % player.weapons.Length;
+        player.SwitchWeapon(player.currentWeaponIndex);
+    }
+
+
 }

@@ -4,9 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-[CreateAssetMenu(menuName = "Player", fileName = "Player Stats")]
-public class Player : ScriptableObject
+public class Player : MonoBehaviour
 {
     private Vector2 attackDirection;
 
@@ -18,9 +16,9 @@ public class Player : ScriptableObject
 
     public static Player Instance { get; private set; }
 
-    private Transform playerTransform;
+    [SerializeField]private Transform playerTransform;
 
-    private void Awake()
+    public void Awake()
     {
         // create player
         if (Instance == null)
@@ -77,6 +75,7 @@ public class Player : ScriptableObject
 
         if (hitInfo)
         {
+            Debug.Log("------------------------");
             var enemy = hitInfo.transform.GetComponent<Enemy>();
             if (enemy)
             {

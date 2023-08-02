@@ -5,4 +5,9 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public Player playerStats;
+
+    private void Awake()
+    {
+        playerStats.Awake();
+    }
 }

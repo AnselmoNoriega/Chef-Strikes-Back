@@ -6,10 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
-    private InputAction leftMouse;
     private InputAction RightMouse;
-    private InputAction keyE;
+    private InputAction leftMouse;
+    private InputAction shiftKey;
     private InputAction mouse;
+    private InputAction keyQ;
+    private InputAction keyE;
 
     [SerializeField]
     private Actions action;
@@ -21,22 +23,29 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnEnable()
     {
-        leftMouse = inputManager.Player.MouseLeftClick;
         RightMouse = inputManager.Player.MouseRightClick;
-        keyE = inputManager.Player.KeyE;
+        leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
+        shiftKey = inputManager.Player.ShiftKey;
+        keyE = inputManager.Player.KeyE;
+        keyQ = inputManager.Player.KeyQ;
 
-        leftMouse.Enable();
         RightMouse.Enable();
+        leftMouse.Enable();
+        shiftKey.Enable();
+        mouse.Enable(); 
         keyE.Enable();
-        mouse.Enable();
+        keyQ.Enable();
 
-        leftMouse.performed += LeftClick;
+        shiftKey.started += KeyShiftPressed;
         RightMouse.performed += RightClick;
+        leftMouse.performed += LeftClick;
         keyE.performed += KeyEPressed;
+        keyQ.performed += KeyQPressed;
 
-        leftMouse.canceled += RightClick;
+        shiftKey.canceled += KeyShiftReleased;
         RightMouse.canceled += RightClick;
+        leftMouse.canceled += RightClick;
         keyE.canceled += RightClick;
     }
 
@@ -63,15 +72,30 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse);
-        action.GrabItem(mouse);
+        action.Attacking();
     }
     private void RightClick(InputAction.CallbackContext input)
     {
-        Debug.Log("right click");
+        //action.ThrowItem(mouse);
+        //action.GrabItem(mouse);
     }
     private void KeyEPressed(InputAction.CallbackContext input)
     {
         Debug.Log("E key pressed");
+    }
+
+    private void KeyShiftPressed(InputAction.CallbackContext input)
+    {
+        action.Boosting();
+    }
+
+    private void KeyQPressed(InputAction.CallbackContext input)
+    {
+        action.SwitchWeapon();
+    }
+
+    private void KeyShiftReleased(InputAction.CallbackContext input)
+    {
+        action.BoostReleased();
     }
 }
