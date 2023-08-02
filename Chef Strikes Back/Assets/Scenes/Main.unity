@@ -1151,6 +1151,7 @@ MonoBehaviour:
   moveSpeed: 2
   rb: {fileID: 524185278}
   character: {fileID: 524185276}
+  health: 0
 --- !u!50 &524185278
 Rigidbody2D:
   serializedVersion: 4
@@ -1515,6 +1516,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 751758876}
     m_Modifications:
+    - target: {fileID: 8364384400063958420, guid: 04abe911bd9b4bc4098e4606029dced4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8364384400063958422, guid: 04abe911bd9b4bc4098e4606029dced4, type: 3}
       propertyPath: m_ColliderPaths.Array.size
       value: 1

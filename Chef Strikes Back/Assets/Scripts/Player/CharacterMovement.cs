@@ -14,6 +14,9 @@ public class CharacterMovement : MonoBehaviour
     public Transform character;
     private float mouseAngle;
 
+    private float maxHealth = 100.0f;
+    public float health;
+
     private InputControls inputManager;
     private InputAction move;
     private InputAction mouse;
@@ -72,4 +75,9 @@ public class CharacterMovement : MonoBehaviour
         Debug.Log(directionNames[directionIndex]);
     }
 
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0) Destroy(gameObject);
+    }
 }

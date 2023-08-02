@@ -5,27 +5,40 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    public float panSpeed = 24.0f;
+    [SerializeField] Transform playerPos;
+    [SerializeField] Transform lightPos;
     public float zoomSpeed = 1500.0f;
+    private InputControls inputManager;
     private InputAction zoom;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        inputManager = new InputControls();
+    }
+
+    private void OnEnable()
+    {
+        zoom = inputManager.Player.Zoom;
+        zoom.Enable();
+        zoom.performed += zoomIn;
+    }
+
+    private void OnDisable()
+    {
+        zoom.performed -= zoomIn;
+        zoom.Disable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //dx, dy should use player's position to set the camera up
-        float dx = panSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
-        float dy = panSpeed * Time.deltaTime * Input.GetAxis("Vertical");
 
-        Camera.main.transform.Translate(dx, dy, 0);
+        Vector2 dz = zoomSpeed * Time.deltaTime * zoom.ReadValue<Vector2>();
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 1.0f, 1.9f);
+        Camera.main.transform.position = new Vector3(playerPos.position.x, playerPos.position.y, lightPos.position.z - 1.0f);
+    }
 
-        float dz = zoomSpeed * Time.deltaTime * Input.GetAxis("Zoom");
-        
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz, 1.0f, 1.9f);
-
+    private void zoomIn(InputAction.CallbackContext input)
+    {
     }
 }

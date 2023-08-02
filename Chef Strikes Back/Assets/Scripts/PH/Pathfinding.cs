@@ -2,11 +2,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Tilemaps;
 
 public class Pathfinding : MonoBehaviour
 {
     PathRequestManager requestManager;
     Grid grid;
+    [SerializeField]Tilemap tilemap;
+   
 
     void Awake()
     {
@@ -14,20 +17,33 @@ public class Pathfinding : MonoBehaviour
         grid = GetComponent<Grid>();
     }
 
+    private void Start()
+    {
+        List<Vector3Int> positions = new(1000);
+        foreach(var position in tilemap.cellBounds.allPositionsWithin)
+        {
+            var tile = tilemap.GetTile(position);
+            if(tile == null) continue;
+            positions.Add(position);
+        }
 
-    public void StartFindPath(Vector3 startPos, Vector3 targetPos)
+        grid.CreateNodeList(positions, tilemap);
+    }
+
+
+    public void StartFindPath(Vector2 startPos, Vector2 targetPos)
     {
         StartCoroutine(FindPath(startPos, targetPos));
     }
 
-    IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
+    IEnumerator FindPath(Vector2 startPos, Vector2 targetPos)
     {
 
-        Vector3[] waypoints = new Vector3[0];
+        Vector2[] waypoints = new Vector2[0];
         bool pathSuccess = false;
 
-        Node startNode = grid.NodeFromWorldPoint(startPos);
-        Node targetNode = grid.NodeFromWorldPoint(targetPos);
+        Node startNode = grid.NodeFromWorldPoint(startPos, tilemap);
+        Node targetNode = grid.NodeFromWorldPoint(targetPos, tilemap);
 
 
         if (startNode.walkable && targetNode.walkable)
@@ -69,16 +85,17 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
-        yield return null;
+        
         if (pathSuccess)
         {
             waypoints = RetracePath(startNode, targetNode);
         }
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);
 
+        yield return null;
     }
 
-    Vector3[] RetracePath(Node startNode, Node endNode)
+    Vector2[] RetracePath(Node startNode, Node endNode)
     {
         List<Node> path = new List<Node>();
         Node currentNode = endNode;
@@ -88,15 +105,15 @@ public class Pathfinding : MonoBehaviour
             path.Add(currentNode);
             currentNode = currentNode.parent;
         }
-        Vector3[] waypoints = SimplifyPath(path);
+        Vector2[] waypoints = SimplifyPath(path);
         Array.Reverse(waypoints);
         return waypoints;
 
     }
 
-    Vector3[] SimplifyPath(List<Node> path)
+    Vector2[] SimplifyPath(List<Node> path)
     {
-        List<Vector3> waypoints = new List<Vector3>();
+        List<Vector2> waypoints = new List<Vector2>();
         Vector2 directionOld = Vector2.zero;
 
         for (int i = 1; i < path.Count; i++)
