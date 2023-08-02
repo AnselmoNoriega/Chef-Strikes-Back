@@ -9,41 +9,22 @@ public class CharacterMovement : MonoBehaviour
     private float moveSpeed;
     [SerializeField]
     Rigidbody2D rb;
+    [SerializeField]
+    Animator animator;
 
     private Vector2 moveDirection;
-    public Transform character;
-    private float mouseAngle;
-
-    private float maxHealth = 100.0f;
-    public float health;
 
     private InputControls inputManager;
     private InputAction move;
-    private InputAction mouse;
 
     private void Awake()
     {
         inputManager = new InputControls();
     }
 
-    private void OnEnable()
-    {
-        move = inputManager.Player.Move;
-        move.Enable();
-
-        mouse = inputManager.Player.MouseLocation;
-        mouse.Enable();
-    }
-
-    private void Start()
-    {
-        character = GetComponent<Transform>();
-    }
-
     private void Update()
-    { 
+    {
         playerController();
-        FaceMouse();
     }
 
     private void FixedUpdate()
@@ -51,33 +32,47 @@ public class CharacterMovement : MonoBehaviour
         rb.velocity = moveDirection.normalized * moveSpeed;
     }
 
+    private void OnEnable()
+    {
+        move = inputManager.Player.Move;
+        move.Enable();
+    }
+
     private void OnDisable()
     {
         move.Disable();
-        mouse.Disable();
-    }
-
-    private void FaceMouse()
-    {
-        var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-        var distance = mousePos - transform.position;
-        mouseAngle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
     }
 
     private void playerController()
     {
         moveDirection = move.ReadValue<Vector2>();
 
-        int directionIndex = Mathf.FloorToInt((mouseAngle + 360 + 22.5f) / 45f) % 8;
-        string[] directionNames = { "Looking East", "Looking NE", "Looking N", "Looking NW",
-                                    "Looking West", "Looking SW", "Looking South", "Looking SE" };
-
-        Debug.Log(directionNames[directionIndex]);
+        if (moveDirection != Vector2.zero)
+        {
+            FaceMovementDirection();
+        }
     }
 
-    public void TakeDamage(float damage)
+    private void FaceMovementDirection()
     {
-        health -= damage;
-        if (health <= 0) Destroy(gameObject);
+        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
+        string[] directionNames = { "E", "NE", "N", "NW", "W", "SW", "S", "SE" };
+
+        foreach (string direction in directionNames)
+        {
+            animator.SetBool(direction, false);
+        }
+        animator.SetBool(directionNames[directionIndex], true);
+    }
+
+    public Vector2 GetMoveDirection()
+    {
+        return moveDirection;
+    }
+
+    public void SpeedBoost(float boostAmount)
+    {
+        moveSpeed += boostAmount;
     }
 }
+

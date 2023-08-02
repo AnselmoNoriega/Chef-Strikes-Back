@@ -12,8 +12,8 @@ public class Unit : MonoBehaviour
     float speed = 0.8f;
     [SerializeField] Vector2[] path;
     int targetIndex;
-    float damage = 15.0f;
-    public CharacterMovement Player;
+    int damage = 15;
+    public Player player;
     Mode mode;
 
     [SerializeField]
@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour
             if(passTime >= attackDelay)
             {
                 passTime = 0;
-                Player.TakeDamage(damage);
+                player.TakeDamage(damage);
             }
         }
 
@@ -44,7 +44,7 @@ public class Unit : MonoBehaviour
             passTime += Time.deltaTime;
         }
             
-        Debug.Log(Player.health);
+        Debug.Log(player.currentHealth);
     }
 
     
