@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Grid : MonoBehaviour
 {
+   
     public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
@@ -11,51 +14,46 @@ public class Grid : MonoBehaviour
     public TerrainType[] walkableRegions;
     LayerMask walkableMask;
     Dictionary<int, int> walkableRegionDictionary = new Dictionary<int, int>();
+    Tilemap tilemap;
 
     Node[,] grid;
 
     float nodeDiameter;
-    int gridSizeX, gridSizeY;
+    Vector2Int offset;
+    Vector2Int gridSize;
 
     void Awake()
     {
         nodeDiameter = nodeRadius * 2;
-        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
-        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-
-        foreach (TerrainType region in walkableRegions)
-        {
-            walkableMask.value |= region.terrainMask.value;
-            walkableRegionDictionary.Add((int)Mathf.Log(region.terrainMask.value, 2), region.terrainPenalty);
-        }
-        CreateGrid();
     }
+
+  
 
     public int MaxSize
     {
         get
         {
-            return gridSizeX * gridSizeY;
+            return gridSize.x * gridSize.y;
         }
     }
 
     void CreateGrid()
     {
-        grid = new Node[gridSizeX, gridSizeY];
-        Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward * gridWorldSize.y / 2;
+        grid = new Node[gridSize.x, gridSize.y];
+        Vector2 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.up * gridWorldSize.y / 2;
 
-        for (int x = 0; x < gridSizeX; x++)
+        for (int x = 0; x < gridSize.x; x++)
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int y = 0; y < gridSize.y; y++)
             {
-                Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
+                Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius) ;
                 bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
 
                 int movementPenalty = 0;
 
                 if (walkable)
                 {
-                    Ray ray = new Ray(worldPoint + Vector3.up * 50, Vector3.down);
+                    Ray ray = new Ray(worldPoint + Vector2.up * 50, Vector2.down);
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit, 100, walkableMask))
                     {
@@ -66,6 +64,25 @@ public class Grid : MonoBehaviour
                 grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
             }
         }
+    }
+
+    public void CreateNodeList(List<Vector3Int> position, Tilemap tilemap)
+    {
+        Vector2Int max = new(tilemap.cellBounds.xMax, tilemap.cellBounds.yMax);
+        offset.x = tilemap.cellBounds.xMin;
+        offset.y = tilemap.cellBounds.yMin;
+        gridSize.x = max.x - offset.x;
+        gridSize.y = max.y - offset.y;
+
+        grid = new Node[gridSize.x, gridSize.y];
+        foreach(var pos in position)
+        {
+            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos), pos.x - offset.x, pos.y - offset.y, 0);
+        }
+
+
+
+
     }
 
     public List<Node> GetNeighbours(Node node)
@@ -82,7 +99,7 @@ public class Grid : MonoBehaviour
                 int checkX = node.gridX + x;
                 int checkY = node.gridY + y;
 
-                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                if (checkX >= 0 && checkX < gridSize.x && checkY >= 0 && checkY < gridSize.y)
                 {
                     neighbours.Add(grid[checkX, checkY]);
                 }
@@ -93,27 +110,32 @@ public class Grid : MonoBehaviour
     }
 
 
-    public Node NodeFromWorldPoint(Vector3 worldPosition)
+    public Node NodeFromWorldPoint(Vector2 worldPosition, Tilemap tilemap)
     {
-        float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
-        float percentY = (worldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y;
-        percentX = Mathf.Clamp01(percentX);
-        percentY = Mathf.Clamp01(percentY);
+        Vector3Int pos = tilemap.WorldToCell(worldPosition); 
 
-        int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
-        int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
-        return grid[x, y];
+        if (pos.x - offset.x < 0 || pos.x - offset.x > grid.GetUpperBound(0) || pos.y - offset.y < 0 || pos.y - offset.y > grid.GetUpperBound(1))
+        {
+            Debug.LogError((pos.x - offset.x) + " - " + (pos.y - offset.y));
+            return null;
+        }
+
+        return grid[pos.x - offset.x, pos.y - offset.y];
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+        Gizmos.DrawWireCube(transform.position, new Vector2(gridWorldSize.x, gridWorldSize.y));
         if (grid != null && displayGridGizmos)
         {
+            
             foreach (Node n in grid)
             {
+                if (n == null) continue;
+
                 Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter - .1f));
+                
+                Gizmos.DrawCube(n.worldPosition, Vector2.one * (nodeDiameter - .1f));
             }
         }
     }
