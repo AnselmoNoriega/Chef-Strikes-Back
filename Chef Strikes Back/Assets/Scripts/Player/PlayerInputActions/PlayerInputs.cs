@@ -9,6 +9,10 @@ public class PlayerInputs : MonoBehaviour
     private InputAction leftMouse;
     private InputAction RightMouse;
     private InputAction keyE;
+    private InputAction mouse;
+
+    [SerializeField]
+    private Actions action;
 
     private void Awake()
     {
@@ -20,14 +24,20 @@ public class PlayerInputs : MonoBehaviour
         leftMouse = inputManager.Player.MouseLeftClick;
         RightMouse = inputManager.Player.MouseRightClick;
         keyE = inputManager.Player.KeyE;
+        mouse = inputManager.Player.MouseLocation;
 
         leftMouse.Enable();
         RightMouse.Enable();
         keyE.Enable();
+        mouse.Enable();
 
         leftMouse.performed += LeftClick;
         RightMouse.performed += RightClick;
         keyE.performed += KeyEPressed;
+
+        leftMouse.canceled += RightClick;
+        RightMouse.canceled += RightClick;
+        keyE.canceled += RightClick;
     }
 
     private void Update()
@@ -40,11 +50,21 @@ public class PlayerInputs : MonoBehaviour
         leftMouse.performed -= LeftClick;
         RightMouse.performed -= RightClick;
         keyE.performed -= KeyEPressed;
+
+        leftMouse.canceled -= RightClick;
+        RightMouse.canceled -= RightClick;
+        keyE.canceled -= RightClick;
+
+        leftMouse.Disable();
+        RightMouse.Disable();
+        keyE.Disable();
+        mouse.Disable();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        Debug.Log("left click");
+        action.ThrowItem(mouse);
+        action.GrabItem(mouse);
     }
     private void RightClick(InputAction.CallbackContext input)
     {
