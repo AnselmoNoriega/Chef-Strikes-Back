@@ -31,7 +31,7 @@ public class Actions : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 9)
         {
             item = null;
         }
@@ -52,10 +52,8 @@ public class Actions : MonoBehaviour
 
     public void ThrowItem(InputAction mouse)
     {
-        Debug.Log("temp");
         if (inventory.GetFoodItem() != null)
         {
-            Debug.Log("tempdddddddddddddd");
             var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
             var strength = (mousePos - transform.position) * throwForce;
 

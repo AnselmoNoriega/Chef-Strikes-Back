@@ -5237,9 +5237,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.4863391, y: 0.10040176}
-      - {x: 0.22185749, y: 0.23423374}
-      - {x: -0.05053258, y: 0.09907535}
+    - - {x: 1.3195007, y: 0.45185336}
+      - {x: 0.25243407, y: 0.96792865}
+      - {x: -0.7780129, y: 0.45544237}
       - {x: 0.20897558, y: -0.031275272}
 --- !u!4 &1058627816
 Transform:
@@ -5249,7 +5249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058627813}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.53572464, y: 1.1861546, z: 0.17310663}
+  m_LocalPosition: {x: -1.235, y: -0.329, z: 0.17310663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5492,8 +5492,8 @@ GameObject:
   - component: {fileID: 1299871726}
   - component: {fileID: 1299871725}
   - component: {fileID: 1299871724}
-  m_Layer: 0
-  m_Name: Floor
+  m_Layer: 8
+  m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
