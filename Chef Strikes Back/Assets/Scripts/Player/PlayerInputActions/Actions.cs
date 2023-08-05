@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class Actions : MonoBehaviour
 {
     [Header("Inventory Actions")]
-    private Item item;
+    public Item item;
     private Inventory inventory;
     [SerializeField]
     private float throwForce;
@@ -52,8 +52,10 @@ public class Actions : MonoBehaviour
 
     public void ThrowItem(InputAction mouse)
     {
+        Debug.Log("temp");
         if (inventory.GetFoodItem() != null)
         {
+            Debug.Log("tempdddddddddddddd");
             var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
             var strength = (mousePos - transform.position) * throwForce;
 
@@ -64,7 +66,6 @@ public class Actions : MonoBehaviour
             float acceleration = (math.pow(velocity, 2)) / (2 * distance);
             Vector2 negativeAcceleration = new Vector2(-acceleration * (mousePos.x - transform.position.x) / distance,
                                                        -acceleration * (mousePos.y - transform.position.y) / distance);
-            Debug.Log(negativeAcceleration);
 
             inventory.ThrowFood(strength, negativeAcceleration, velocity/acceleration);
         }

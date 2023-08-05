@@ -44,9 +44,6 @@ public class PlayerInputs : MonoBehaviour
         keyQ.performed += KeyQPressed;
 
         shiftKey.canceled += KeyShiftReleased;
-        RightMouse.canceled += RightClick;
-        leftMouse.canceled += RightClick;
-        keyE.canceled += RightClick;
     }
 
     private void Update()
@@ -60,10 +57,6 @@ public class PlayerInputs : MonoBehaviour
         RightMouse.performed -= RightClick;
         keyE.performed -= KeyEPressed;
 
-        leftMouse.canceled -= RightClick;
-        RightMouse.canceled -= RightClick;
-        keyE.canceled -= RightClick;
-
         leftMouse.Disable();
         RightMouse.Disable();
         keyE.Disable();
@@ -76,8 +69,8 @@ public class PlayerInputs : MonoBehaviour
     }
     private void RightClick(InputAction.CallbackContext input)
     {
-        //action.ThrowItem(mouse);
-        //action.GrabItem(mouse);
+        action.ThrowItem(mouse);
+        action.GrabItem(mouse);
     }
     private void KeyEPressed(InputAction.CallbackContext input)
     {
