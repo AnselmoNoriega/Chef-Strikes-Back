@@ -14,9 +14,11 @@ public class CreationTable : MonoBehaviour
     private List<GameObject> items;
     private List<GameObject> waitList;
 
-    [Space, Header("Storage Info")]
+    [Space, Header("Storage Objects")]
     [SerializeField]
     private GameObject burger;
+    [SerializeField]
+    private Transform magnet;
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class CreationTable : MonoBehaviour
             {
                 items[(int)recivedItem.type] = recivedItem.gameObject;
                 count[(int)recivedItem.type] = true;
+                recivedItem.transform.position = magnet.position;
             }
             else if(!items.Contains(recivedItem.gameObject) && !waitList.Contains(recivedItem.gameObject))
             {
