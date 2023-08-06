@@ -71,8 +71,6 @@ public class Actions : MonoBehaviour
 
     public void Attacking()
     {
-        Vector2 attackDirection = CM.GetMoveDirection();
-        player.SetAttackDirection(attackDirection);
         player.Attack();
     }
 
@@ -85,12 +83,5 @@ public class Actions : MonoBehaviour
     {
         CM.SpeedBoost(-5.0f);
     }
-
-    public void SwitchWeapon()
-    {
-        player.currentWeaponIndex = (player.currentWeaponIndex + 1) % player.weapons.Length;
-        player.SwitchWeapon(player.currentWeaponIndex);
-    }
-
 
 }

@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 323981142111727875}
   - component: {fileID: 6355847347339370427}
   - component: {fileID: 1424630937}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4eba0691a94f74181ba61898e0841a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 0}
   throwForce: 1
   CM: {fileID: 6355847347339370370}
   player: {fileID: -7746550428048061511}

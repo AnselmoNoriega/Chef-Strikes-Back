@@ -84,7 +84,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void KeyQPressed(InputAction.CallbackContext input)
     {
-        action.SwitchWeapon();
+        Debug.Log("Q key pressed");
     }
 
     private void KeyShiftReleased(InputAction.CallbackContext input)

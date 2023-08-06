@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 10;
+    public float health = 10.0f;
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 
-        if (health <= 0)
+        if (health <= 0.0f)
         {
             Destroy(gameObject);
             Debug.Log("Enemy destroyed.");

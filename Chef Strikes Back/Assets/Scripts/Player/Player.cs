@@ -7,13 +7,13 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     private Vector2 attackDirection;
+    private Weapon _weapon;
+    private float attackCooldown;
+    private bool isCoolingDown;
+    private int enemyKills;
 
-    public int currentWeaponIndex = 0;
-    public Weapon[] weapons;
-
-    public int maxHealth = 100;
-    public int currentHealth;
-
+    public float maxHealth = 100;
+    public float currentHealth;
     public static Player Instance { get; private set; }
 
     [SerializeField]private Transform playerTransform;
@@ -29,68 +29,70 @@ public class Player : MonoBehaviour
         {
             Destroy(this.GameObject());
         }
-        //create weapon
-        weapons = new Weapon[]
-        {
-            new Knife(),
-            new Colander(),
-            new Spatula() 
-        };
 
+        //create weapon
+        _weapon = new Weapon(0);
         playerTransform = this.GameObject().transform;
     }
-
+    public void Update()
+    {
+        if (isCoolingDown)
+        {
+            attackCooldown -= Time.deltaTime;
+            Debug.Log("In cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown));
+            if (attackCooldown <= 0)
+            {
+                isCoolingDown = false;
+                Debug.Log("Ready to attack!");
+            }
+        }
+    }
     private void Start()
     {
         currentHealth = maxHealth;
-        SwitchWeapon(currentWeaponIndex);
     }
-
-    public void SwitchWeapon(int weaponIndex)
-    {
-        currentWeaponIndex = weaponIndex;
-        Debug.Log("Switched to weapon: " + weapons[currentWeaponIndex].Name);
-    }
-
-    public void SetAttackDirection(Vector2 direction)
-    {
-        attackDirection = direction;
-    }
-
     public void Attack()
     {
-        Weapon currentWeapon = weapons[currentWeaponIndex];
-        int weaponDamage = currentWeapon.Damage;
-        float weaponRange = currentWeapon.Range;
-
-        int layerMask = 1 << LayerMask.NameToLayer("Player");
-        layerMask = ~layerMask;
-
-        RaycastHit2D hitInfo = Physics2D.Raycast(playerTransform.position,
-            attackDirection,
-            weaponRange,
-            layerMask);
-
-        Debug.DrawRay(playerTransform.position, attackDirection * weaponRange, Color.red, 2f);
-
-        if (hitInfo)
+        if (isCoolingDown)
         {
-            Debug.Log("------------------------");
-            var enemy = hitInfo.transform.GetComponent<Enemy>();
+            Debug.Log("Attack is in cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown) + " seconds.");
+            return;
+        }
+
+        Collider2D hitCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+        if (hitCollider != null)
+        {
+            var enemy = hitCollider.GetComponent<Enemy>();
             if (enemy)
             {
-                enemy.TakeDamage(weaponDamage);
-                Debug.Log("Hit " + hitInfo.transform.name);
+                if (Vector2.Distance(transform.position, hitCollider.transform.position) <= _weapon.Range)
+                {
+                    enemy.TakeDamage(Mathf.RoundToInt(_weapon.Damage));
+                    Debug.Log("Hit " + hitCollider.name);
+                }
+                else
+                {
+                    Debug.Log("Range is not enough, missed!");
+                }
             }
         }
 
-        Debug.Log("Hit with:  " + currentWeapon.Name
-                + ". Range: " + weaponRange
-                + ", Damage: " + weaponDamage);
+        Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
+
+        attackCooldown = 2.0f / _weapon.AttackSpeed;
+        isCoolingDown = true;
     }
 
 
-
+    public void EnemyKilled()
+    {
+        enemyKills++;
+        if (enemyKills % 1 == 0)
+        {
+            _weapon.UpgradeTier();
+        }
+    }
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
