@@ -35,7 +35,7 @@ public class CreationTable : MonoBehaviour
             {
                 items[(int)recivedItem.type] = recivedItem.gameObject;
                 count[(int)recivedItem.type] = true;
-                recivedItem.transform.position = magnet.position;
+                recivedItem.LaunchedInTable(magnet);
             }
             else if(!items.Contains(recivedItem.gameObject) && !waitList.Contains(recivedItem.gameObject))
             {
@@ -59,6 +59,7 @@ public class CreationTable : MonoBehaviour
             {
                 items[(int)recivedItem.type] = null;
                 count[(int)recivedItem.type] = false;
+                recivedItem.LaunchedInTable(null);
             }
             else
             {
