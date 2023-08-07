@@ -44,7 +44,7 @@ public class CreationTable : MonoBehaviour
 
             if(!ItemIsMissing())
             {
-                GiveMeBurger();
+                StartCoroutine(GiveMeBurger());
             }
         }
     }
@@ -80,8 +80,10 @@ public class CreationTable : MonoBehaviour
         return itemMissing;
     }
 
-    private void GiveMeBurger()
+    private IEnumerator GiveMeBurger()
     {
+        yield return new WaitForSeconds(1);
+
         for (int i = 0; i < 4; i++)
         {
             Destroy(items[i]);

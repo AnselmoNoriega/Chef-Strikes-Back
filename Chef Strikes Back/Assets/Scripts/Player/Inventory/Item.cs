@@ -16,7 +16,7 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     private float timereduction;
-   
+    
     private float time;
     private Vector2 acceleration;
     private Vector2 handPosition;
