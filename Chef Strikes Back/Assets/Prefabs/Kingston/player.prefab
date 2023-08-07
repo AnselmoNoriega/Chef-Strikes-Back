@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 6355847347339370369}
   - component: {fileID: 6355847347339370370}
   - component: {fileID: -7746550428048061511}
+  - component: {fileID: 6143374723223897878}
   - component: {fileID: 3855817667393855648}
   - component: {fileID: 323981142111727875}
   - component: {fileID: 6355847347339370427}
@@ -336,7 +337,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -370,10 +371,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b20c124d29183e45ba7d95b4f06480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeaponIndex: 0
   maxHealth: 100
   currentHealth: 0
-  playerTransform: {fileID: 0}
+--- !u!114 &6143374723223897878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355847347339370371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387b79cec2272f24180e5130c281e351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodItem: {fileID: 0}
+  weaponItem: {fileID: 0}
 --- !u!114 &3855817667393855648
 MonoBehaviour:
   m_ObjectHideFlags: 0
