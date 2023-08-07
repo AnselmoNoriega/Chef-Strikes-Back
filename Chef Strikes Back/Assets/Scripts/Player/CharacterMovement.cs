@@ -7,10 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed;
-    [SerializeField]
-    Rigidbody2D rb;
-    [SerializeField]
-    Animator animator;
+    public Rigidbody2D rb;
+    public Animator animator;
 
     private Vector2 moveDirection;
 
@@ -49,13 +47,13 @@ public class CharacterMovement : MonoBehaviour
 
         if (moveDirection != Vector2.zero)
         {
-            FaceMovementDirection();
+            FaceMovementDirection(moveDirection);
         }
     }
 
-    private void FaceMovementDirection()
+    public void FaceMovementDirection(Vector2 lookDirection)
     {
-        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
+        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
         string[] directionNames = { "E", "NE", "N", "NW", "W", "SW", "S", "SE" };
 
         foreach (string direction in directionNames)

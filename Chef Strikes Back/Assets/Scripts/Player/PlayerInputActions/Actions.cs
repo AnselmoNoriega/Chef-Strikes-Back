@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -69,9 +70,11 @@ public class Actions : MonoBehaviour
         }
     }
 
-    public void Attacking()
+    public void Attacking(InputAction mouse)
     {
-        player.Attack();
+        var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
+
+        player.Attack(mousePos);
     }
 
     public void Boosting()

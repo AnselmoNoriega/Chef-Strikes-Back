@@ -65,7 +65,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        action.Attacking();
+        action.Attacking(mouse);
     }
     private void RightClick(InputAction.CallbackContext input)
     {
