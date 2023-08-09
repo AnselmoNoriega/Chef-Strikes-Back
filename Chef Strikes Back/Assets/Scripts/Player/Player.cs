@@ -27,11 +27,11 @@ public class Player : MonoBehaviour
         if (isCoolingDown)
         {
             attackCooldown -= Time.deltaTime;
-            //Debug.Log("In cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown));
+            Debug.Log("In cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown));
             if (attackCooldown <= 0)
             {
                 isCoolingDown = false;
-                //Debug.Log("Ready to attack!");
+                Debug.Log("Ready to attack!");
             }
         }
     }
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     {
         if (isCoolingDown)
         {
-            //Debug.Log("Attack is in cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown) + " seconds.");
+            Debug.Log("Attack is in cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown) + " seconds.");
             return;
         }
 
@@ -63,16 +63,16 @@ public class Player : MonoBehaviour
                 if (Vector2.Distance(transform.position, hitCollider.transform.position) <= _weapon.Range)
                 {
                     enemy.TakeDamage(Mathf.RoundToInt(_weapon.Damage));
-                    //Debug.Log("Hit " + hitCollider.name);
+                    Debug.Log("Hit " + hitCollider.name);
                 }
                 else
                 {
-                    //Debug.Log("Range is not enough, missed!");
+                    Debug.Log("Range is not enough, missed!");
                 }
             }
         }
 
-        //Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
+        Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
 
         attackCooldown = 2.0f / _weapon.AttackSpeed;
         isCoolingDown = true;
