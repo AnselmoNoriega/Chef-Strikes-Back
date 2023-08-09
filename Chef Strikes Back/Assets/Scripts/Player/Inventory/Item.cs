@@ -22,7 +22,7 @@ public class Item : MonoBehaviour
     private Vector2 handPosition;
 
     [Space, Header("Movment in table"), SerializeField]
-    private float magnetSmoodTime;
+    private float magnetForce;
     private Transform magnetPos;
     public bool isBeingDrag;
 
@@ -83,9 +83,11 @@ public class Item : MonoBehaviour
     {
         if(isBeingDrag)
         {
-            var temp = rb.velocity;
-            transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
+            var temp = (magnetPos.position - transform.position).normalized * magnetForce;
+            rb.velocity = temp * Time.deltaTime;
+
             isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
+            if(!isBeingDrag) rb.velocity = Vector3.zero;
         }
     }
 

@@ -289,6 +289,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7360178021079257618, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
+      propertyPath: magnetForce
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
 --- !u!4 &116477368 stripped
@@ -1599,7 +1603,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.13999999, y: 0.45999998, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.25, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -5030,6 +5034,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7360178021079257618, guid: cb9081477af5329429df20108069dc4d, type: 3}
+      propertyPath: magnetForce
+      value: 800
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb9081477af5329429df20108069dc4d, type: 3}
 --- !u!1 &519420028
@@ -5448,6 +5456,10 @@ PrefabInstance:
     - target: {fileID: 7360178021079257612, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360178021079257618, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
+      propertyPath: magnetForce
+      value: 800
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
@@ -6199,7 +6211,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.13999999, y: 0.45999998, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.25, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -6831,6 +6843,10 @@ PrefabInstance:
     - target: {fileID: 7360178021079257612, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360178021079257618, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
+      propertyPath: magnetForce
+      value: 800
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b3297e89e96ae040897adfb46439931, type: 3}

@@ -137,7 +137,8 @@ MonoBehaviour:
   rb: {fileID: 3061245746855138179}
   type: 0
   timereduction: 0.8
-  magnetSmoodTime: 0.1
+  magnetForce: 800
+  isBeingDrag: 0
 --- !u!50 &3061245746855138179
 Rigidbody2D:
   serializedVersion: 4
