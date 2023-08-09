@@ -83,11 +83,9 @@ public class Item : MonoBehaviour
     {
         if(isBeingDrag)
         {
-            var temp = (magnetPos.position - transform.position).normalized * magnetForce;
-            rb.velocity = temp * Time.deltaTime;
-
-            isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
-            if(!isBeingDrag) rb.velocity = Vector3.zero;
+            var clipping = magnetForce * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, magnetPos.position, clipping);
+            isBeingDrag = .1 <= Vector3.Distance(transform.position, magnetPos.position);
         }
     }
 
