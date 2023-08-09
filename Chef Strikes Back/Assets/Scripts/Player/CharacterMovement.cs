@@ -11,7 +11,7 @@ public class CharacterMovement : MonoBehaviour
     public Animator animator;
 
     private Vector2 moveDirection;
-
+    bool iswalking = false;
     private InputControls inputManager;
     private InputAction move;
 
@@ -23,6 +23,10 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         playerController();
+        if (rb.velocity!=Vector2.zero)
+        {
+            iswalking = true;
+        }
     }
 
     private void FixedUpdate()
@@ -54,13 +58,9 @@ public class CharacterMovement : MonoBehaviour
     public void FaceMovementDirection(Vector2 lookDirection)
     {
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
-        string[] directionNames = { "E", "NE", "N", "NW", "W", "SW", "S", "SE" };
+        string[] directionNames = { "Right_Idel", "RightTop_Idel", "Top_Idel", "LeftTop_Idel", "Left_Idel", "LeftBot_Idel", "Bot_Idel", "RightBot_Idel" };
 
-        foreach (string direction in directionNames)
-        {
-            animator.SetBool(direction, false);
-        }
-        animator.SetBool(directionNames[directionIndex], true);
+        animator.Play(directionNames[directionIndex]);
     }
 
     public Vector2 GetMoveDirection()
