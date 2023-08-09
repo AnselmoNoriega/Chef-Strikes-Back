@@ -8,7 +8,7 @@ public class Grid : MonoBehaviour
 {
    
     public bool displayGridGizmos;
-    public LayerMask unwalkableMask;
+    public LayerMask obstacleMask;
     public Vector2 gridWorldSize;
     public float nodeRadius;
     public TerrainType[] walkableRegions;
@@ -37,34 +37,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    void CreateGrid()
-    {
-        grid = new Node[gridSize.x, gridSize.y];
-        Vector2 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.up * gridWorldSize.y / 2;
-
-        for (int x = 0; x < gridSize.x; x++)
-        {
-            for (int y = 0; y < gridSize.y; y++)
-            {
-                Vector2 worldPoint = worldBottomLeft + Vector2.right * (x * nodeDiameter + nodeRadius) + Vector2.up * (y * nodeDiameter + nodeRadius) ;
-                bool walkable = !(Physics.CheckSphere(worldPoint, nodeRadius, unwalkableMask));
-
-                int movementPenalty = 0;
-
-                if (walkable)
-                {
-                    Ray ray = new Ray(worldPoint + Vector2.up * 50, Vector2.down);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 100, walkableMask))
-                    {
-                        walkableRegionDictionary.TryGetValue(hit.collider.gameObject.layer, out movementPenalty);
-                    }
-                }
-
-                grid[x, y] = new Node(walkable, worldPoint, x, y, movementPenalty);
-            }
-        }
-    }
+    
 
     public void CreateNodeList(List<Vector3Int> position, Tilemap tilemap)
     {
@@ -74,14 +47,16 @@ public class Grid : MonoBehaviour
         gridSize.x = max.x - offset.x;
         gridSize.y = max.y - offset.y;
 
+        var cellSizeY = (tilemap.layoutGrid.cellSize.y);
+        var cellSizeZ = (tilemap.layoutGrid.cellSize.z);
+
+        Vector3 cellSize = new Vector3(0, cellSizeY, cellSizeZ);
+
         grid = new Node[gridSize.x, gridSize.y];
         foreach(var pos in position)
         {
-            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos), pos.x - offset.x, pos.y - offset.y, 0);
+            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos) + cellSize, pos.x - offset.x, pos.y - offset.y, 0);
         }
-
-
-
 
     }
 
@@ -101,7 +76,9 @@ public class Grid : MonoBehaviour
 
                 if (checkX >= 0 && checkX < gridSize.x && checkY >= 0 && checkY < gridSize.y)
                 {
-                    neighbours.Add(grid[checkX, checkY]);
+                    var Node = grid[checkX, checkY];
+                    if (Node != null)
+                        neighbours.Add(Node);
                 }
             }
         }

@@ -24,6 +24,7 @@ public class Pathfinding : MonoBehaviour
         {
             var tile = tilemap.GetTile(position);
             if(tile == null) continue;
+            if (tile is NonWalkableTile) continue;
             positions.Add(position);
         }
 

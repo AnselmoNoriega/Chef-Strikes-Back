@@ -20,12 +20,10 @@ public class CameraController : MonoBehaviour
     {
         zoom = inputManager.Player.Zoom;
         zoom.Enable();
-        zoom.performed += zoomIn;
     }
 
     private void OnDisable()
     {
-        zoom.performed -= zoomIn;
         zoom.Disable();
     }
 
@@ -33,12 +31,10 @@ public class CameraController : MonoBehaviour
     void Update()
     {
 
-        Vector2 dz = zoomSpeed * Time.deltaTime * zoom.ReadValue<Vector2>();
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 1.0f, 1.9f);
+        Vector2 dz = zoomSpeed * Time.deltaTime * -zoom.ReadValue<Vector2>();
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
         Camera.main.transform.position = new Vector3(playerPos.position.x, playerPos.position.y, lightPos.position.z - 1.0f);
     }
 
-    private void zoomIn(InputAction.CallbackContext input)
-    {
-    }
+    
 }
