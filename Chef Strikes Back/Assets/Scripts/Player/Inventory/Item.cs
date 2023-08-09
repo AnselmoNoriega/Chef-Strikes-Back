@@ -1,0 +1,100 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
+
+public class Item : MonoBehaviour
+{
+    public Collider2D collider;
+    public Rigidbody2D rb;
+    public ItemType type;
+
+    [SerializeField]
+    private float timereduction;
+    
+    private float time;
+    private Vector2 acceleration;
+    private Vector2 handPosition;
+
+    [Space, Header("Movment in table"), SerializeField]
+    private float magnetSmoodTime;
+    private Transform magnetPos;
+    public bool isBeingDrag;
+
+    private void Start()
+    {
+        handPosition = new Vector2(0, 0.1f);
+        isBeingDrag = false;
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (transform.parent != null)
+        {
+            transform.localPosition = handPosition;
+        }
+
+        if (time >= 0)
+        {
+            rb.velocity += acceleration * Time.deltaTime;
+            time -= Time.deltaTime;
+
+            Checktime();
+        }
+
+        DraggingFood();
+    }
+
+    public void Throw(Vector2 velocity, Vector2 acceleration, float time)
+    {
+        this.time = time * timereduction;
+        rb.velocity = velocity;
+        this.acceleration = acceleration;
+    }
+
+    private void Checktime()
+    {
+        if (time <= 0)
+        {
+            rb.velocity = Vector2.zero;
+            rb.rotation = 0;
+            rb.angularVelocity = 0;
+            MagnetToTable();
+        }
+    }
+
+    private void MagnetToTable()
+    {
+        isBeingDrag = magnetPos != null;
+    }
+
+    public void LaunchedInTable(Transform table)
+    {
+        magnetPos = table;
+    }
+
+    public void DraggingFood()
+    {
+        if(isBeingDrag)
+        {
+            var temp = rb.velocity;
+            transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
+            isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
+        }
+    }
+
+}
+
+public enum ItemType
+{
+    BurgerBun,
+    Meat,
+    Tomatoe,
+    Lettuce
+}

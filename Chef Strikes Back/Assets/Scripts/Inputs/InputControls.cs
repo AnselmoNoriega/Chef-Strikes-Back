@@ -80,6 +80,24 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ShiftKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd00e356-4888-4c58-9fa2-9acc59fb79ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeyQ"",
+                    ""type"": ""Button"",
+                    ""id"": ""e823884e-be46-4815-8463-2f2d4e8c2a44"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +210,28 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16f88dd9-ce65-42a0-9772-af004a0ad83e"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47843e62-c994-4984-8182-0f052bf5078c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyQ"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +246,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_KeyE = m_Player.FindAction("KeyE", throwIfNotFound: true);
         m_Player_MouseLocation = m_Player.FindAction("MouseLocation", throwIfNotFound: true);
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_ShiftKey = m_Player.FindAction("ShiftKey", throwIfNotFound: true);
+        m_Player_KeyQ = m_Player.FindAction("KeyQ", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,6 +313,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_KeyE;
     private readonly InputAction m_Player_MouseLocation;
     private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_ShiftKey;
+    private readonly InputAction m_Player_KeyQ;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -281,6 +325,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @KeyE => m_Wrapper.m_Player_KeyE;
         public InputAction @MouseLocation => m_Wrapper.m_Player_MouseLocation;
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @ShiftKey => m_Wrapper.m_Player_ShiftKey;
+        public InputAction @KeyQ => m_Wrapper.m_Player_KeyQ;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -308,6 +354,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @ShiftKey.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShiftKey;
+                @ShiftKey.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShiftKey;
+                @ShiftKey.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShiftKey;
+                @KeyQ.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyQ;
+                @KeyQ.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyQ;
+                @KeyQ.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyQ;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -330,6 +382,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @ShiftKey.started += instance.OnShiftKey;
+                @ShiftKey.performed += instance.OnShiftKey;
+                @ShiftKey.canceled += instance.OnShiftKey;
+                @KeyQ.started += instance.OnKeyQ;
+                @KeyQ.performed += instance.OnKeyQ;
+                @KeyQ.canceled += instance.OnKeyQ;
             }
         }
     }
@@ -342,5 +400,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnKeyE(InputAction.CallbackContext context);
         void OnMouseLocation(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnShiftKey(InputAction.CallbackContext context);
+        void OnKeyQ(InputAction.CallbackContext context);
     }
 }
