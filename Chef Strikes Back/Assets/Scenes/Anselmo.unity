@@ -291,11 +291,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
---- !u!4 &116477368 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1282542958, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-  m_PrefabInstance: {fileID: 5988910741327588504}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &119010604
 GameObject:
   m_ObjectHideFlags: 0
@@ -5321,7 +5316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4eba0691a94f74181ba61898e0841a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: []
   throwForce: 5
   CM: {fileID: 0}
   player: {fileID: 0}
@@ -5534,26 +5529,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1135372687 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 519420028, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-  m_PrefabInstance: {fileID: 5988910741327588504}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1135372692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135372687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c82f2a1f2aa1b47a208fd9fde01bdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPos: {fileID: 1822564909}
-  lightPos: {fileID: 116477368}
-  zoomSpeed: 20
 --- !u!1001 &1181278845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6719,14 +6694,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2061997468}
     m_Modifications:
-    - target: {fileID: 3855817667393855648, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-      propertyPath: throwForce
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6355847347339370370, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-      propertyPath: moveSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6355847347339370371, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Name
       value: player

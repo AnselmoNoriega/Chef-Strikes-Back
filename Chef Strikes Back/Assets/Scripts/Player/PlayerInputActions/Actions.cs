@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 public class Actions : MonoBehaviour
 {
     [Header("Inventory Actions")]
-    public Item item;
+    public List<Item> item;
     private Inventory inventory;
     [SerializeField]
     private float throwForce;
@@ -27,26 +27,30 @@ public class Actions : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        item = collision.GetComponent<Item>();
+        item.Add(collision.GetComponent<Item>());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 9)
         {
-            item = null;
+            item.Remove(collision.GetComponent<Item>());
         }
     }
 
     public void GrabItem(InputAction mouse)
     {
-        if (item != null)
+        if (item.Count > 0)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
-            if (item.collider.OverlapPoint(mousePos))
+            for (int i = 0; i < item.Count; i++)
             {
-                inventory.AddItem(item);
+                if (item[i].collider.OverlapPoint(mousePos))
+                {
+                    inventory.AddItem(item[i]);
+                    return;
+                }
             }
         }
     }
@@ -66,7 +70,7 @@ public class Actions : MonoBehaviour
             Vector2 negativeAcceleration = new Vector2(-acceleration * (mousePos.x - transform.position.x) / distance,
                                                        -acceleration * (mousePos.y - transform.position.y) / distance);
 
-            inventory.ThrowFood(strength, negativeAcceleration, velocity/acceleration);
+            inventory.ThrowFood(strength, negativeAcceleration, velocity / acceleration);
         }
     }
 
