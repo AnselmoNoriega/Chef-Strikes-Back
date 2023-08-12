@@ -12,8 +12,6 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     [SerializeField]
-    private float maxSpeed;
-    [SerializeField]
     private float acceleration;
 
     public Animator animator;
@@ -34,7 +32,6 @@ public class CharacterMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddForce(((moveDirection * moveSpeed) - rb.velocity) * acceleration);
-        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     private void OnEnable()
