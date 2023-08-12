@@ -5,13 +5,19 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
+    [Header("Movement")]
     [SerializeField]
     private float moveSpeed;
-    public Rigidbody2D rb;
+    [SerializeField]
+    private Rigidbody2D rb;
+    private Vector2 moveDirection;
+    [SerializeField]
+    private float maxSpeed;
+    [SerializeField]
+    private float acceleration;
+
     public Animator animator;
 
-    private Vector2 moveDirection;
-    bool iswalking = false;
     private InputControls inputManager;
     private InputAction move;
 
@@ -23,15 +29,12 @@ public class CharacterMovement : MonoBehaviour
     private void Update()
     {
         playerController();
-        if (rb.velocity!=Vector2.zero)
-        {
-            iswalking = true;
-        }
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = moveDirection.normalized * moveSpeed;
+        rb.AddForce(((moveDirection * moveSpeed) - rb.velocity) * acceleration);
+        rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     private void OnEnable()
