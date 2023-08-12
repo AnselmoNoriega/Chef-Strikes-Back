@@ -16,14 +16,14 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     private float timereduction;
-    
+
     private float time;
     private Vector2 acceleration;
     private Vector2 handPosition;
 
     [Space, Header("Movment in table"), SerializeField]
-    private float magnetForce;
-    private Transform magnetPos;
+    private float magnetSmoodTime;
+    public Transform magnetPos;
     public bool isBeingDrag;
 
     private void Start()
@@ -81,11 +81,11 @@ public class Item : MonoBehaviour
 
     public void DraggingFood()
     {
-        if(isBeingDrag)
+        if (isBeingDrag)
         {
-            var clipping = magnetForce * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, magnetPos.position, clipping);
-            isBeingDrag = .1 <= Vector3.Distance(transform.position, magnetPos.position);
+            var temp = rb.velocity;
+            transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
+            isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
         }
     }
 

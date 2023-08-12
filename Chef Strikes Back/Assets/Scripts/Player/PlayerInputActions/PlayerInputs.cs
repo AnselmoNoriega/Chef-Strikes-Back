@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
-    private InputAction RightMouse;
+    private InputAction rightMouse;
     private InputAction leftMouse;
     private InputAction shiftKey;
     private InputAction mouse;
@@ -23,14 +23,14 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnEnable()
     {
-        RightMouse = inputManager.Player.MouseRightClick;
+        rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
         shiftKey = inputManager.Player.ShiftKey;
         keyE = inputManager.Player.KeyE;
         keyQ = inputManager.Player.KeyQ;
 
-        RightMouse.Enable();
+        rightMouse.Enable();
         leftMouse.Enable();
         shiftKey.Enable();
         mouse.Enable(); 
@@ -38,11 +38,12 @@ public class PlayerInputs : MonoBehaviour
         keyQ.Enable();
 
         shiftKey.started += KeyShiftPressed;
-        RightMouse.performed += RightClick;
+        rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
         keyE.performed += KeyEPressed;
         keyQ.performed += KeyQPressed;
 
+        rightMouse.canceled += RightClickRelease;
         shiftKey.canceled += KeyShiftReleased;
     }
 
@@ -54,11 +55,14 @@ public class PlayerInputs : MonoBehaviour
     private void OnDisable()
     {
         leftMouse.performed -= LeftClick;
-        RightMouse.performed -= RightClick;
+        rightMouse.performed -= RightClick;
         keyE.performed -= KeyEPressed;
 
+        rightMouse.canceled -= RightClickRelease;
+        shiftKey.canceled -= KeyShiftReleased;
+
         leftMouse.Disable();
-        RightMouse.Disable();
+        rightMouse.Disable();
         keyE.Disable();
         mouse.Disable();
     }
@@ -67,11 +71,18 @@ public class PlayerInputs : MonoBehaviour
     {
         action.Attacking(mouse);
     }
+
     private void RightClick(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse);
+        action.PrepareToThrow(mouse);
         action.GrabItem(mouse);
     }
+
+    private void RightClickRelease(InputAction.CallbackContext input)
+    {
+        action.ThrowItem(mouse);
+    }
+
     private void KeyEPressed(InputAction.CallbackContext input)
     {
         Debug.Log("E key pressed");

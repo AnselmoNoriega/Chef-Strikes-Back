@@ -4315,6 +4315,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodItem: {fileID: 0}
   weaponItem: {fileID: 0}
+  playerForce: 0
+  distanceMultiplier: 0
+  length: 0
 --- !u!114 &524185282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4508,7 +4511,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4520,10 +4523,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.3195007, y: 0.45185336}
-      - {x: 0.25243407, y: 0.96792865}
-      - {x: -0.7780129, y: 0.45544237}
-      - {x: 0.20897558, y: -0.031275272}
+    - - {x: 1.1716952, y: 0.43841654}
+      - {x: 0.22987479, y: 0.84050417}
+      - {x: -0.67435706, y: 0.43816644}
+      - {x: 0.23392978, y: -0.02359707}
 --- !u!4 &1058627816
 Transform:
   m_ObjectHideFlags: 0
@@ -5512,7 +5515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.21532655
+      value: 0.022
       objectReference: {fileID: 0}
     - target: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_LocalPosition.y

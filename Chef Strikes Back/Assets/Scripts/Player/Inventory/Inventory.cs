@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,36 +11,73 @@ public class Inventory : MonoBehaviour
     private Item foodItem;
     [SerializeField]
     private Item weaponItem;
+    [SerializeField]
+    private float playerForce;
+    [SerializeField]
+    private float distanceMultiplier;
 
-    public bool AddItem(Item item)
+    private bool isLaunchingFood;
+    private InputAction targetMouse;
+    public float length;
+
+    private void Start()
     {
-        if(item.tag == "Food" && foodItem == null)
-        {
-            foodItem = item; 
-            item.transform.SetParent(transform);
-            item.transform.localPosition = new Vector2(0, 0.1f);
-            return true;
-        }
-        else if(item.tag == "Weapon" && weaponItem == null)
-        {
-            weaponItem = item;
-            item.transform.SetParent(transform);
-            item.transform.localPosition = new Vector2(0, 0.1f);
-            return true;
-        }
+        isLaunchingFood = false;
+        length = 1f;
+    }
 
-        return false;
+    private void Update()
+    {
+        if(isLaunchingFood)
+        {
+            length += Time.deltaTime * distanceMultiplier;
+        }
+    }
+
+    public void AddItem(Item item)
+    {
+        foodItem = item;
+        item.transform.SetParent(transform);
+        item.transform.localPosition = new Vector2(0, 0.1f);
     }
 
     public Item GetFoodItem()
     {
-       return foodItem;
+        return foodItem;
     }
 
-    public void ThrowFood(Vector2 velocity, Vector2 negativeAcceleration, float time)
+    public void PrepareToThrowFood(InputAction mouse)
     {
-        foodItem.Throw(velocity, negativeAcceleration, time);
+        targetMouse = mouse;
+        isLaunchingFood = true;
+    }
+
+    public void ThrowFood(Vector2 direction)
+    {
+        SetEquation2Throw(direction);
         foodItem.transform.parent = null;
         foodItem = null;
+        targetMouse = null;
+        isLaunchingFood = false;
+        length = 1f;
+    }
+
+    private void SetEquation2Throw(Vector2 direction)
+    {
+        Vector3 mousePos = direction * length;
+
+        var strength = mousePos * playerForce;
+
+        float velocity = math.sqrt(math.pow(strength.x, 2) + math.pow(strength.y, 2));
+        float distance = math.sqrt(math.pow(mousePos.x, 2) + math.pow(mousePos.y, 2));
+        
+        float acceleration = (math.pow(velocity, 2)) / (2 * distance);
+        Vector2 negativeAcceleration = (-acceleration * mousePos / distance);
+
+        foodItem.Throw(strength, negativeAcceleration, velocity / acceleration);
+        Debug.Log(length);
+        Debug.Log(velocity);
+        Debug.Log(acceleration);
+        Debug.Log(velocity / acceleration);
     }
 }

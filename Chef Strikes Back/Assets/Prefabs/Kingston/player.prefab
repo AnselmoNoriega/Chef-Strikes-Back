@@ -240,13 +240,13 @@ GameObject:
   - component: {fileID: 6355847347339370374}
   - component: {fileID: 6355847347339370375}
   - component: {fileID: 6355847347339370369}
+  - component: {fileID: 6355847347339370427}
+  - component: {fileID: 1424630937}
   - component: {fileID: 6355847347339370370}
   - component: {fileID: -7746550428048061511}
   - component: {fileID: 6143374723223897878}
   - component: {fileID: 3855817667393855648}
   - component: {fileID: 323981142111727875}
-  - component: {fileID: 6355847347339370427}
-  - component: {fileID: 1424630937}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -344,6 +344,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &6355847347339370427
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355847347339370371}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3cefdb150059dd040b3f2ca326fa11d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &1424630937
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355847347339370371}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0016169737, y: 0.016849382}
+  serializedVersion: 2
+  m_Radius: 0.09652256
 --- !u!114 &6355847347339370370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +424,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodItem: {fileID: 0}
   weaponItem: {fileID: 0}
+  playerForce: 10
+  distanceMultiplier: 10
+  length: 0
 --- !u!114 &3855817667393855648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,39 +456,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: {fileID: 3855817667393855648}
---- !u!95 &6355847347339370427
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355847347339370371}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3cefdb150059dd040b3f2ca326fa11d9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &1424630937
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355847347339370371}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0016169737, y: 0.016849382}
-  serializedVersion: 2
-  m_Radius: 0.09652256
