@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
 
     private bool isLaunchingFood;
     private InputAction targetMouse;
-    public float length;
+    private float length;
 
     private void Start()
     {
@@ -75,9 +75,5 @@ public class Inventory : MonoBehaviour
         Vector2 negativeAcceleration = (-acceleration * mousePos / distance);
 
         foodItem.Throw(strength, negativeAcceleration, velocity / acceleration);
-        Debug.Log(length);
-        Debug.Log(velocity);
-        Debug.Log(acceleration);
-        Debug.Log(velocity / acceleration);
     }
 }

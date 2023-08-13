@@ -138,8 +138,6 @@ MonoBehaviour:
   type: 3
   timereduction: 0.8
   magnetSmoodTime: 0
-  magnetPos: {fileID: 0}
-  isBeingDrag: 0
 --- !u!50 &3061245746855138179
 Rigidbody2D:
   serializedVersion: 4
@@ -156,7 +154,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 14387e2c9036a854f8e55051f6876aa4, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
