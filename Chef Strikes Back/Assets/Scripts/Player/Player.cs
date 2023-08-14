@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -11,8 +12,13 @@ public class Player : MonoBehaviour
     private bool isCoolingDown;
     private int enemyKills;
 
-    public float maxHealth = 100;
+    public float maxHealth;
     public float currentHealth;
+
+    public float MaxRage;
+    public float currentRage;
+    [SerializeField]
+    private Slider rageBar;
 
     private CharacterMovement character;
 
@@ -22,8 +28,19 @@ public class Player : MonoBehaviour
         character = GetComponent<CharacterMovement>();
     }
 
+    private void Start()
+    {
+        maxHealth = 100;
+        MaxRage = 100;
+        currentRage = 0;
+        currentHealth = maxHealth;
+        rageBar.maxValue = MaxRage;
+    }
+
     public void Update()
     {
+        rageBar.value = currentRage;
+
         if (isCoolingDown)
         {
             attackCooldown -= Time.deltaTime;
@@ -34,11 +51,6 @@ public class Player : MonoBehaviour
                 Debug.Log("Ready to attack!");
             }
         }
-    }
-
-    private void Start()
-    {
-        currentHealth = maxHealth;
     }
 
     public void Attack(Vector2 mousePos)

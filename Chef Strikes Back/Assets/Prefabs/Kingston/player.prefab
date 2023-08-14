@@ -410,6 +410,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  MaxRage: 0
+  currentRage: 0
+  rageBar: {fileID: 0}
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +429,6 @@ MonoBehaviour:
   weaponItem: {fileID: 0}
   playerForce: 10
   distanceMultiplier: 10
-  length: 0
 --- !u!114 &3855817667393855648
 MonoBehaviour:
   m_ObjectHideFlags: 0
