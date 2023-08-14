@@ -52,15 +52,16 @@ public class CharacterMovement : MonoBehaviour
         if (moveDirection != Vector2.zero)
         {
             FaceMovementDirection(moveDirection);
-        }
+        }       
     }
 
     public void FaceMovementDirection(Vector2 lookDirection)
     {
+        //8 direction animaiton
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
-        string[] directionNames = { "Right_Idel", "RightTop_Idel", "Top_Idel", "LeftTop_Idel", "Left_Idel", "LeftBot_Idel", "Bot_Idel", "RightBot_Idel" };
-
+        string[] directionNames = { "Idle_Right", "Idle_RightTop", "Idel_Front", "Idel_LeftTop", "Idel_Left", "Idel_LeftBot", "Idel_Bottom", "Idel_RightBot" };
         animator.Play(directionNames[directionIndex]);
+        Debug.Log(directionNames[directionIndex]);
     }
 
     public Vector2 GetMoveDirection()
