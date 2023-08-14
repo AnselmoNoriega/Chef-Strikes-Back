@@ -23,8 +23,8 @@ public class Item : MonoBehaviour
 
     [Space, Header("Movment in table"), SerializeField]
     private float magnetSmoodTime;
-    public Transform magnetPos;
-    public bool isBeingDrag;
+    private Transform magnetPos;
+    private bool isBeingDrag;
 
     private void Start()
     {
