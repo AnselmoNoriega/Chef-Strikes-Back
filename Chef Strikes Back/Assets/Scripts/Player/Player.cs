@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private Weapon _weapon;
-    private float attackCooldown;
-    private bool isCoolingDown;
+    public float attackCooldown;
+    public bool isCoolingDown;
     private int enemyKills;
 
     public float maxHealth;
@@ -20,12 +20,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Slider rageBar;
 
+    public Animator animator;
     private CharacterMovement character;
 
     public void Awake()
     {
         _weapon = new Weapon(0);
         character = GetComponent<CharacterMovement>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
         if (isCoolingDown)
         {
             attackCooldown -= Time.deltaTime;
-            Debug.Log("In cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown));
+            Debug.Log("In cooldown. Time remaining: " + attackCooldown);
             if (attackCooldown <= 0)
             {
                 isCoolingDown = false;
@@ -57,14 +59,14 @@ public class Player : MonoBehaviour
     {
         if (isCoolingDown)
         {
-            Debug.Log("Attack is in cooldown. Time remaining: " + Mathf.CeilToInt(attackCooldown) + " seconds.");
             return;
         }
 
         Collider2D hitCollider = Physics2D.OverlapPoint(mousePos);
-
         var direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-        character.FaceMovementDirection(direction);
+
+        string attackAnim = character.GetAttackDirection(direction);
+        animator.Play(attackAnim);
 
         if (hitCollider != null)
         {
@@ -85,9 +87,13 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
-
         attackCooldown = 2.0f / _weapon.AttackSpeed;
         isCoolingDown = true;
+    }
+
+    public void InAttackingFinished()
+    {
+        animator.SetBool("IsAttacking", false);
     }
 
     public void EnemyKilled()

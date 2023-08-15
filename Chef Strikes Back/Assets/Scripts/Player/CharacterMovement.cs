@@ -59,11 +59,21 @@ public class CharacterMovement : MonoBehaviour
     {
         //8 direction animaiton
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
-        string[] directionNames = { "Idle_Right", "Idle_RightTop", "Idel_Front", "Idel_LeftTop", "Idel_Left", "Idel_LeftBot", "Idel_Bottom", "Idel_RightBot" };
+        string[] directionNames = { "Idle_Right", "Idle_RightTop", "Idle_Front", "Idle_LeftTop", "Idle_Left", "Idle_LeftBot", "Idle_Bot", "Idle_RightBot" };
         animator.Play(directionNames[directionIndex]);
         Debug.Log(directionNames[directionIndex]);
     }
+    public string GetAttackDirection(Vector2 lookDirection)
+    {
+        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
+        string[] directionNames =
+        {
+        "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
+        "Attack_Left", "Attack_LeftBot", "Attack_Bot", "Attack_RightBot"
+    };
 
+        return directionNames[directionIndex];
+    }
     public Vector2 GetMoveDirection()
     {
         return moveDirection;
