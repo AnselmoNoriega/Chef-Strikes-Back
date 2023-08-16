@@ -87,7 +87,7 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
-        attackCooldown = 2.0f / _weapon.AttackSpeed;
+        attackCooldown = 0.0f / _weapon.AttackSpeed;
         isCoolingDown = true;
     }
 
