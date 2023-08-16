@@ -47,7 +47,7 @@ public class Grid : MonoBehaviour
         gridSize.x = max.x - offset.x;
         gridSize.y = max.y - offset.y;
 
-        var cellSizeY = (tilemap.layoutGrid.cellSize.y);
+        var cellSizeY = (tilemap.layoutGrid.cellSize.y /2);
         var cellSizeZ = (tilemap.layoutGrid.cellSize.z);
 
         Vector3 cellSize = new Vector3(0, cellSizeY, cellSizeZ);

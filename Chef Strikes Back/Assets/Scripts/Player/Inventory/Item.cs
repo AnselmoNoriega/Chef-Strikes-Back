@@ -16,7 +16,7 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     private float timereduction;
-    
+
     private float time;
     private Vector2 acceleration;
     private Vector2 handPosition;
@@ -24,7 +24,7 @@ public class Item : MonoBehaviour
     [Space, Header("Movment in table"), SerializeField]
     private float magnetSmoodTime;
     private Transform magnetPos;
-    public bool isBeingDrag;
+    private bool isBeingDrag;
 
     private void Start()
     {
@@ -81,7 +81,7 @@ public class Item : MonoBehaviour
 
     public void DraggingFood()
     {
-        if(isBeingDrag)
+        if (isBeingDrag)
         {
             var temp = rb.velocity;
             transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
