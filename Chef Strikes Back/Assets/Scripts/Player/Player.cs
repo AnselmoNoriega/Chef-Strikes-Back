@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private CharacterMovement character;
 
     public bool attacking;
+    private int money;
 
     public void Awake()
     {
@@ -130,6 +131,11 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player died.");
         }
+    }
+
+    public void collectMoney(int amount)
+    {
+        money += amount;
     }
 }
 
