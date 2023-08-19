@@ -36,8 +36,6 @@ public class TargetDetector : Detector
         }
     }
 
-    
-
     private void OnDrawGizmosSelected()
     {
         if(showGizmos == false) return;

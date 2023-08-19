@@ -47,7 +47,7 @@ public class Grid : MonoBehaviour
         gridSize.x = max.x - offset.x;
         gridSize.y = max.y - offset.y;
 
-        var cellSizeY = (tilemap.layoutGrid.cellSize.y / 2);
+        var cellSizeY = (tilemap.layoutGrid.cellSize.y /2);
         var cellSizeZ = (tilemap.layoutGrid.cellSize.z);
 
         Vector3 cellSize = new Vector3(0, cellSizeY, cellSizeZ);
@@ -89,8 +89,7 @@ public class Grid : MonoBehaviour
 
     public Node NodeFromWorldPoint(Vector2 worldPosition, Tilemap tilemap)
     {
-        Vector3Int pos = tilemap.WorldToCell(worldPosition);
-
+        Vector3Int pos = tilemap.WorldToCell(worldPosition); 
 
         if (pos.x - offset.x < 0 || pos.x - offset.x > grid.GetUpperBound(0) || pos.y - offset.y < 0 || pos.y - offset.y > grid.GetUpperBound(1))
         {
