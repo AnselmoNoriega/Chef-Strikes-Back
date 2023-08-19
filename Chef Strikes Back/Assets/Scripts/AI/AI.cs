@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 
-public class EnemyAI : MonoBehaviour
+public class AI : MonoBehaviour
 {
     [SerializeField]
     private List<SteeringBehaviour> steeringBehaviours;
@@ -15,13 +16,13 @@ public class EnemyAI : MonoBehaviour
     private List<Detector> detectors;
 
     [SerializeField]
-    private AIData aiData;
+    public AIData aiData;
 
     [SerializeField]
     private float detectionDelay = 0.05f, aiUpdateDelay = 0.06f, attackDelay = 1f;
 
     [SerializeField]
-    private float attactDistance = 0.5f;
+    private float attackDistance = 0.5f;
 
     public UnityEvent OnAttackPressed;
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
@@ -32,21 +33,30 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
 
-    public Transform target;
-    [SerializeField]
-    Vector2[] path;
-    int targetIndex;
+    public bool isSit = false;
 
-    bool chasing = false;
+    public bool isStand = false;
+    public bool isHit = false;
+    Vector2[] path;
+    int targetIndex;  
+
+    public StateManager stateManager;
+
+    public bool chasing = false;
+    public ContextSolver MovementDirectionSolver => movementDirectionSolver;
+    public List<SteeringBehaviour> SteeringBehaviours => steeringBehaviours;
+    public float AttackDistance => attackDistance;
+    public float AttackDelay => attackDelay;
 
     private void Start()
     {
+        stateManager = new StateManager(this);
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
 
     private void PerformDetection()
     {
-        foreach(Detector detect in detectors)
+        foreach (Detector detect in detectors)
         {
             detect.Detect(aiData);
         }
@@ -54,26 +64,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        if(aiData.currentTarget != null) 
-        {
-            OnPointerInput?.Invoke(aiData.currentTarget.position);
-            if (chasing == false)
-            {
-                chasing = true;
-                Debug.Log("RayCastChase");
-                StartCoroutine(ChaseAndAttack());
-            }
-        }
-        else if(aiData.GetTargetsCount() > 0)
-        {
-            aiData.currentTarget = aiData.targets[0];
-        }
-        else if(aiData.currentTarget == null)
-        {
-            Debug.Log("Pathfinding Call");
-            PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
-        }
-        OnMovementInput?.Invoke(movementInput);
+        stateManager.Update();
     }
 
 
@@ -88,7 +79,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    IEnumerator FollowPath()
+    public IEnumerator FollowPath()
     {
         Vector2 currentWaypoint = path[0];
         while (true)
@@ -109,9 +100,9 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private IEnumerator ChaseAndAttack()
+    public IEnumerator ChaseAndAttack()
     {
-        if(aiData.currentTarget == null)
+        if (aiData.currentTarget == null)
         {
             Debug.Log("Stopping");
             movementInput = Vector2.zero;
@@ -121,17 +112,17 @@ public class EnemyAI : MonoBehaviour
         else
         {
             float distance = Vector2.Distance(aiData.currentTarget.position, transform.position);
-            if(distance < attactDistance)
+            if (distance < AttackDistance)
             {
                 movementInput = Vector2.zero;
                 OnAttackPressed?.Invoke();
-                yield return new WaitForSeconds(attackDelay);
+                yield return new WaitForSeconds(AttackDelay);
                 StartCoroutine(ChaseAndAttack());
             }
             else
             {
-                movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
-                yield return new WaitForSeconds(attackDelay);
+                movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+                yield return new WaitForSeconds(AttackDelay);
                 StartCoroutine(ChaseAndAttack());
             }
         }
@@ -155,6 +146,23 @@ public class EnemyAI : MonoBehaviour
                     Gizmos.DrawLine(path[i - 1], path[i]);
                 }
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Chair")
+        {
+            isSit = true;
+        }
+        
+        if (collision.gameObject.GetComponent<Rigidbody2D>() && collision.transform.tag == "Player" || collision.transform.tag == "Food")
+        {
+            isHit = true;
+            var rb = collision.gameObject.GetComponent<Rigidbody2D>();
+            rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
+            var rage = collision.gameObject.GetComponent<Player>();
+            rage.currentRage += 10;
         }
     }
 }
