@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -15,22 +14,26 @@ public class Inventory : MonoBehaviour
     private float playerForce;
     [SerializeField]
     private float distanceMultiplier;
+    [SerializeField]
+    private Slider length;
+    [SerializeField]
+    private Vector3 offset;
 
     private bool isLaunchingFood;
     private InputAction targetMouse;
-    private float length;
 
     private void Start()
     {
         isLaunchingFood = false;
-        length = 1f;
+        length.value = 0.0f;
     }
 
     private void Update()
     {
         if(isLaunchingFood)
         {
-            length += Time.deltaTime * distanceMultiplier;
+            length.transform.position = transform.localPosition + offset;
+            length.value += Time.deltaTime * distanceMultiplier;
         }
     }
 
@@ -50,6 +53,8 @@ public class Inventory : MonoBehaviour
     {
         targetMouse = mouse;
         isLaunchingFood = true;
+        length.gameObject.SetActive(true);
+        length.value = 0.0f;
     }
 
     public void ThrowFood(Vector2 direction)
@@ -59,12 +64,12 @@ public class Inventory : MonoBehaviour
         foodItem = null;
         targetMouse = null;
         isLaunchingFood = false;
-        length = 1f;
+        length.gameObject.SetActive(false);
     }
 
     private void SetEquation2Throw(Vector2 direction)
     {
-        Vector3 mousePos = direction * length;
+        Vector3 mousePos = direction * length.value;
 
         var strength = mousePos * playerForce;
 

@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
@@ -74,8 +74,10 @@ public class Actions : MonoBehaviour
         if (inventory.GetFoodItem() != null && ready2Throw)
         {
             var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-
-            inventory.ThrowFood((mousePos - transform.position).normalized);
+            var dir = (mousePos - transform.position);
+            dir.z = 0;
+            dir.Normalize();
+            inventory.ThrowFood(dir);
             ready2Throw = false;
         }
     }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6534452127433498941}
   - component: {fileID: 6534452127433498946}
   - component: {fileID: 737474285}
+  - component: {fileID: 1990095783}
   m_Layer: 10
   m_Name: ChefPlayer0.1
   m_TagString: Untagged
@@ -119,11 +120,11 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: c83e85112d40ad446ae460178c1c16b1, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009718835, y: 0.4149592}
-  m_Size: {x: 0.32993758, y: 0.87275195}
+  m_Offset: {x: 0.016849935, y: 0.43991804}
+  m_Size: {x: 0.34419978, y: 0.9369321}
   m_Direction: 0
 --- !u!114 &6534452127433498946
 MonoBehaviour:
@@ -150,3 +151,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0678c366a178b694e8c8e848851dd151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &1990095783
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534452127433498936}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.007397771, y: 0.012912631}
+  serializedVersion: 2
+  m_Radius: 0.12055886

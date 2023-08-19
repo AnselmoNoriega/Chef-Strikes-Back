@@ -5,19 +5,25 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [Header("Movement")]
     [SerializeField]
     private float moveSpeed;
     [SerializeField]
     private Rigidbody2D rb;
     [SerializeField]
     private float acceleration;
+    [SerializeField]
+    private Vector2 movementAngle;
 
     private InputControls inputManager;
     private InputAction move;
+    private Player Player;
     private Vector2 moveDirection;
     private Animator animator;
     private int direction;
+    //testing param
+    private Vector2 currentVelocity;
+
+    private bool canMove = true;
 
     string[] directionNames =
         {
@@ -32,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Awake()
     {
+        Player = GetComponent<Player>();
         inputManager = new InputControls();
         animator = GetComponent<Animator>();
     }
@@ -43,7 +50,18 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(((moveDirection * moveSpeed) - rb.velocity) * acceleration);
+        if (canMove)
+        {
+            // testing velocity.  -- kingston
+            //Vector2 targetVelocity = moveDirection * moveSpeed;
+            //rb.velocity = Vector2.Lerp(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+            //currentVelocity = rb.velocity;
+            rb.AddForce(((moveDirection * moveSpeed) - rb.velocity) * acceleration);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void OnEnable()
@@ -59,16 +77,21 @@ public class CharacterMovement : MonoBehaviour
 
     private void playerController()
     {
-        moveDirection = move.ReadValue<Vector2>();
+        moveDirection = (move.ReadValue<Vector2>() * movementAngle).normalized;
 
         if (moveDirection != Vector2.zero)
         {
             FaceMovementDirection(moveDirection);
         }
     }
-
+    public void SetMoveDirection(Vector2 direction)
+    {
+        moveDirection = direction;
+    }
     public void FaceMovementDirection(Vector2 lookDirection)
     {
+        if (Player.attacking) return;
+        
         //8 direction animaiton
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
         animator.Play(directionNames[directionIndex]);
@@ -90,10 +113,20 @@ public class CharacterMovement : MonoBehaviour
         moveSpeed += boostAmount;
     }
 
-    private void ChangeDirectionSpeed(int newDirection)
+   private void ChangeDirectionSpeed(int newDirection)
+   {
+       rb.velocity = moveDirection * rb.velocity.magnitude;
+       direction = newDirection;
+   }
+    public void SetCanMove(bool value)
     {
-        rb.velocity = moveDirection * rb.velocity.magnitude;
-        direction = newDirection;
+        canMove = value;
     }
+
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
 }
 

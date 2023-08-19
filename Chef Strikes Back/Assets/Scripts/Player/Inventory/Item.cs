@@ -95,6 +95,6 @@ public enum ItemType
 {
     BurgerBun,
     Meat,
-    Tomatoe,
-    Lettuce
+    Lettuce,
+    Burger
 }

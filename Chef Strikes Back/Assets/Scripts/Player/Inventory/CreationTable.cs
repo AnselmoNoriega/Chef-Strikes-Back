@@ -29,9 +29,9 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem != null)
+        if (recivedItem != null && (int)recivedItem.type < 3)
         {
-            if (count[(int)recivedItem.type] == false)
+            if (!count[(int)recivedItem.type])
             {
                 items[(int)recivedItem.type] = recivedItem.gameObject;
                 count[(int)recivedItem.type] = true;
@@ -72,7 +72,7 @@ public class CreationTable : MonoBehaviour
     {
         bool itemMissing = false;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             itemMissing |= items[i] == null;
         }
@@ -84,7 +84,7 @@ public class CreationTable : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             Destroy(items[i]);
         }

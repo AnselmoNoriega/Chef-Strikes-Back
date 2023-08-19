@@ -5,15 +5,15 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [Header("Camera Movement")]
     [SerializeField] Transform playerPos;
     [SerializeField] Transform lightPos;
-    public float followSpeed = 0.05f;
 
-    [Header("Camera Zoom")]
+    public float followSpeed = 0.05f;
     public float zoomSpeed = 1500.0f;
+
     private InputControls inputManager;
     private InputAction zoom;
+    public PolygonCollider2D boundaryPolygon; 
 
     private void Awake()
     {
@@ -34,12 +34,20 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Zoom functionality
+        
         Vector2 dz = zoomSpeed * Time.deltaTime * -zoom.ReadValue<Vector2>();
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
 
-        // Camera movement functionality
+       
         Vector3 targetPosition = new Vector3(playerPos.position.x, playerPos.position.y, lightPos.position.z - 1.0f);
+
+        
+        float halfCamHeight = Camera.main.orthographicSize;
+        float halfCamWidth = Camera.main.aspect * halfCamHeight;
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, boundaryPolygon.bounds.min.x + halfCamWidth, boundaryPolygon.bounds.max.x - halfCamWidth);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, boundaryPolygon.bounds.min.y + halfCamHeight, boundaryPolygon.bounds.max.y - halfCamHeight);
+
         transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed);
     }
 }

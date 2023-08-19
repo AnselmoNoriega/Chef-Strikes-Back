@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     public Animator animator;
     private CharacterMovement character;
 
+    public bool attacking;
+
     public void Awake()
     {
         _weapon = new Weapon(0);
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        attacking = false;
         maxHealth = 100;
         MaxRage = 100;
         currentRage = 0;
@@ -57,10 +60,14 @@ public class Player : MonoBehaviour
 
     public void Attack(Vector2 mousePos)
     {
+        attacking = true;
+
         if (isCoolingDown)
         {
             return;
         }
+        character.SetMoveDirection(Vector2.zero);
+        character.SetCanMove(false);
 
         Collider2D hitCollider = Physics2D.OverlapPoint(mousePos);
         var direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
@@ -93,7 +100,10 @@ public class Player : MonoBehaviour
 
     public void InAttackingFinished()
     {
+        Debug.Log("Attack FINISHED");
         animator.SetBool("IsAttacking", false);
+        attacking = false;
+        character.SetCanMove(true);
     }
 
     public void EnemyKilled()
