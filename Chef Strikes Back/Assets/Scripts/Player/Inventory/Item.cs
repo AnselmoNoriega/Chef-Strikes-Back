@@ -28,7 +28,7 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        handPosition = new Vector2(0, 0.1f);
+        handPosition = new Vector2(0, 0.7f);
         isBeingDrag = false;
     }
 
