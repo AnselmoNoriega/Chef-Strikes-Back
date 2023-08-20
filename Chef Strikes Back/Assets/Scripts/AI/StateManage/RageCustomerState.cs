@@ -23,6 +23,10 @@ public class RageCustomerState : AIBaseState
         {
             customer.aiData.currentTarget = customer.aiData.targets[0];
         }
+        else if(customer.aiData.currentTarget == null) 
+        {
+            //PathRequestManager.RequestPath(customer.transform.position, customer.player.transform.position, customer.OnPathFound);
+        }
 
         customer.OnMovementInput?.Invoke(customer.movementInput);
     }

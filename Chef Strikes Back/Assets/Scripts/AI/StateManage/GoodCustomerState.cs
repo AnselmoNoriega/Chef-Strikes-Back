@@ -11,13 +11,14 @@ public class GoodCustomerState : AIBaseState
 {
     bool IsEat;
     float waitTime = 0;
+    bool readyOrder;
     private LayerMask seatLayerMask;
-    [SerializeField] Player player;
     public override void EnterState(AI customer)
     {
         //variable needed in the update
         Debug.Log("Enter Good Customer");
         IsEat = false;
+        readyOrder = false;
         waitTime = 15.0f;
     }
 
@@ -37,11 +38,12 @@ public class GoodCustomerState : AIBaseState
           
       }
       //-->order food
-
+      
       //if 15secs(no food) --> switch bad customer
       if(!IsEat && customer.isSit)
       {
-          waitTime -= Time.deltaTime;
+            readyOrder = true;
+           waitTime -= Time.deltaTime;
             Debug.Log(waitTime);
       }
 
@@ -52,9 +54,9 @@ public class GoodCustomerState : AIBaseState
       //food served --> leave
       if(IsEat)
       {
-         if (player != null) 
+         if (customer.player != null) 
            {
-               player.collectMoney(10);
+               customer.player.collectMoney(10);
            }
          PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEntrancePos(), customer.OnPathFound);
          IsEat = false;
@@ -62,5 +64,17 @@ public class GoodCustomerState : AIBaseState
       }
     }
 
-    
+   private void OnTriggerEnter2D(Collider2D collision)
+   {
+        if(readyOrder)
+        {
+            Item recivedItem = collision.GetComponent<Item>();
+            if (recivedItem != null && recivedItem.type == ItemType.Burger)
+            {
+                IsEat = true;
+            }
+        }
+   }
+
+
 }

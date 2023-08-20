@@ -33,6 +33,9 @@ public class AI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
 
+
+    [SerializeField] public Player player;
+
     public bool isSit = false;
 
     public bool isStand = false;
@@ -149,17 +152,5 @@ public class AI : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-        
-        if (collision.gameObject.GetComponent<Rigidbody2D>() && collision.transform.tag == "Player" || collision.transform.tag == "Food")
-        {
-            isHit = true;
-            var rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
-            var rage = collision.gameObject.GetComponent<Player>();
-            rage.currentRage += 10;
-        }
-    }
+   
 }

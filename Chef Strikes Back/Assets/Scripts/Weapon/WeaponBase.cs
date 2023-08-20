@@ -6,7 +6,7 @@ public class WeaponBase : MonoBehaviour
 {
     
     public Vector2 PointerPosition { get; set; }
-
+    [SerializeField] Player player;
     
     public float delay = 0.3f;
     private bool attackBlocked;
@@ -48,6 +48,8 @@ public class WeaponBase : MonoBehaviour
             return;
         IsAttacking = true;
         attackBlocked = true;
+        player.currentHealth -= 10;
+        Debug.Log(player.currentHealth);
         StartCoroutine(DelayAttack());
     }
 

@@ -77,20 +77,13 @@ public class TileManager : MonoBehaviour
 
     public Vector2 requestChairPos()
     {
-        int random = UnityEngine.Random.Range(0, checkChairCount());
-        int count = 0;
         foreach (var item in chairs)
         {
-            
-            if (count == random)
+            if (!item.Value)
             {
-                if (!item.Value)
-                {
-                    chairs[item.Key] = true;
-                    return item.Key;
-                }
+                chairs[item.Key] = true;
+                return item.Key;
             }
-            ++count;
         }
 
         return new Vector2(int.MaxValue, int.MaxValue);
