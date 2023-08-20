@@ -89,15 +89,15 @@ public class AI : MonoBehaviour
                 targetIndex++;
                 if (targetIndex >= path.Length)
                 {
-                    yield break;
+                    break;
                 }
                 currentWaypoint = path[targetIndex];
             }
 
             transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
             yield return null;
-
         }
+        isSit = true;
     }
 
     public IEnumerator ChaseAndAttack()
@@ -151,10 +151,7 @@ public class AI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Chair")
-        {
-            isSit = true;
-        }
+        
         
         if (collision.gameObject.GetComponent<Rigidbody2D>() && collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {

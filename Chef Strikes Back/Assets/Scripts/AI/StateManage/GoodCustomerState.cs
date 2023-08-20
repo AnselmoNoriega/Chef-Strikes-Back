@@ -31,9 +31,10 @@ public class GoodCustomerState : AIBaseState
 // Updated upstream
         
         // walk into restaurant and find empty seat
-      if (TileManager.Instance.checkChairCount() && !customer.isSit)
+      if (TileManager.Instance.checkChairCount() > 0 && !customer.isSit)
       {
           PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestChairPos(), customer.OnPathFound);
+          
       }
       //-->order food
 
@@ -41,6 +42,7 @@ public class GoodCustomerState : AIBaseState
       if(!IsEat && customer.isSit)
       {
           waitTime -= Time.deltaTime;
+            Debug.Log(waitTime);
       }
 
       if(waitTime <= 0)

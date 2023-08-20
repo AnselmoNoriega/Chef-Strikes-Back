@@ -77,18 +77,25 @@ public class TileManager : MonoBehaviour
 
     public Vector2 requestChairPos()
     {
+        int random = UnityEngine.Random.Range(0, checkChairCount());
+        int count = 0;
         foreach (var item in chairs)
         {
-            if (!item.Value)
+            
+            if (count == random)
             {
-                chairs[item.Key] = true;
-                return item.Key;
+                if (!item.Value)
+                {
+                    chairs[item.Key] = true;
+                    return item.Key;
+                }
             }
+            ++count;
         }
 
         return new Vector2(int.MaxValue, int.MaxValue);
     }
-    public bool checkChairCount()
+    public int checkChairCount()
     {
         int count = 0;
         foreach (var item in chairs)
@@ -96,9 +103,11 @@ public class TileManager : MonoBehaviour
             if (!item.Value) count++;
         }
 
-        if (count > 0) return true;
-        return false;
+        if (count > 0) return count;
+        return 0;
     }
+
+    
 
     public int checkWalkableCount()
     {
