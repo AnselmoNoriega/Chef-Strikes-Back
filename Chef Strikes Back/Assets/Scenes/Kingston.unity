@@ -3320,12 +3320,36 @@ PrefabInstance:
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6534452127433498937, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534452127433498937, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534452127433498937, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6534452127433498940, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
       propertyPath: m_Constraints
-      value: 4
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534452127433498941, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.567966
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534452127433498941, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1495099
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534452127433498941, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.056009054
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534452127433498941, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.43991804
       objectReference: {fileID: 0}
     - target: {fileID: 6534452127433498942, guid: 710f3b45015bd5941b9da7817bf7e0f4, type: 3}
       propertyPath: m_RootOrder
@@ -4790,7 +4814,6 @@ MonoBehaviour:
   movementDirectionSolver: {fileID: 812237472}
   player: {fileID: 1941952826}
   isSit: 0
-  isStand: 0
   isHit: 0
   chasing: 0
 --- !u!1001 &1060761457
@@ -9565,6 +9588,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1447570368}
+    - target: {fileID: 5574737848875184831, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6143374723223897878, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: distanceMultiplier
       value: 3

@@ -9,4 +9,7 @@ public abstract class AIBaseState
    public abstract void UpdateState(AI customer);
 
     public abstract void ExitState(AI customer);
+
+    public virtual void OnCollisionEnter2D(Collision2D collision, AI customer) { }
+
 }

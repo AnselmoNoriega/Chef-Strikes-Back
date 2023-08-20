@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class BadCustomerState : AIBaseState
 {
+    bool isStand;
     public override void EnterState(AI customer)
     {
         //variable needed in the update
+        isStand = false ;
         Debug.Log("BadCustomer");
     }
     public override void UpdateState(AI customer)
     {
         //walk into restaurant and find a place to stand
-        if(!customer.isStand)
+        if(!isStand)
         {
            PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
-            customer.isStand = true;
+           isStand = true;
         }
 
         //if got hit --> find a new spot to stand && rage++
         if(customer.isHit)
         {
-            customer.isStand = false;
+           isStand = false;
             customer.isHit = false;
         }
         //else --> not moving
@@ -31,13 +33,11 @@ public class BadCustomerState : AIBaseState
     {
 
     }
-    private void OnCollisionEnter2D(Collision2D collision, AI customer)
+    public override void OnCollisionEnter2D(Collision2D collision, AI customer)
     {
-
-        
         if (collision.gameObject.GetComponent<Rigidbody2D>() && collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
-            customer.isHit = true;
+            isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
@@ -45,4 +45,5 @@ public class BadCustomerState : AIBaseState
         }
     }
 
+    
 }

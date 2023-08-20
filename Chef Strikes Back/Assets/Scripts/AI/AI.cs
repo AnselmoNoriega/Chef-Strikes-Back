@@ -38,7 +38,6 @@ public class AI : MonoBehaviour
 
     public bool isSit = false;
 
-    public bool isStand = false;
     public bool isHit = false;
     Vector2[] path;
     int targetIndex;  
@@ -152,5 +151,10 @@ public class AI : MonoBehaviour
         }
     }
 
-   
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        stateManager.CurrentState.OnCollisionEnter2D(collision, this);
+    }
+
+
 }
