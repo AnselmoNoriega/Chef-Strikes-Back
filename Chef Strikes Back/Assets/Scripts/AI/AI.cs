@@ -84,7 +84,7 @@ public class AI : MonoBehaviour
         Vector2 currentWaypoint = path[0];
         while (true)
         {
-            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.085f)
+            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.0f)
             {
                 targetIndex++;
                 if (targetIndex >= path.Length)

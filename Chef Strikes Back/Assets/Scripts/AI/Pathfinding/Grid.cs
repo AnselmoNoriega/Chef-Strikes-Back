@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,10 +11,10 @@ public class Grid : MonoBehaviour
     public bool displayGridGizmos;
     public LayerMask obstacleMask;
     public Vector2 gridWorldSize;
-    public float nodeRadius;
     public TerrainType[] walkableRegions;
     LayerMask walkableMask;
     Dictionary<int, int> walkableRegionDictionary = new Dictionary<int, int>();
+    [SerializeField]Transform AI;
     Tilemap tilemap;
 
     Node[,] grid;
@@ -22,11 +23,7 @@ public class Grid : MonoBehaviour
     Vector2Int offset;
     Vector2Int gridSize;
 
-    void Awake()
-    {
-        nodeDiameter = nodeRadius * 2;
-    }
-
+    
   
 
     public int MaxSize
@@ -47,7 +44,7 @@ public class Grid : MonoBehaviour
         gridSize.x = max.x - offset.x;
         gridSize.y = max.y - offset.y;
 
-        var cellSizeY = (tilemap.layoutGrid.cellSize.y / 2);
+        var cellSizeY = (tilemap.layoutGrid.cellSize.y );
         var cellSizeZ = (tilemap.layoutGrid.cellSize.z);
 
         Vector3 cellSize = new Vector3(0, cellSizeY, cellSizeZ);
@@ -55,7 +52,7 @@ public class Grid : MonoBehaviour
         grid = new Node[gridSize.x, gridSize.y];
         foreach(var pos in position)
         {
-            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos) + cellSize, pos.x - offset.x, pos.y - offset.y, 0);
+            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos) , pos.x - offset.x, pos.y - offset.y, 0);
         }
 
     }
@@ -111,9 +108,11 @@ public class Grid : MonoBehaviour
             {
                 if (n == null) continue;
 
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
                 
+                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                if(n.gridX == 0 && n.gridY == 6) Gizmos.color = Color.red;
                 Gizmos.DrawCube(n.worldPosition, Vector2.one * (nodeDiameter - .1f));
+
             }
         }
     }

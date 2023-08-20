@@ -51,7 +51,7 @@ public class TileManager : MonoBehaviour
         {
             foreach (var position in tilemap.cellBounds.allPositionsWithin)
             {
-                var tile = tilemap.GetTile<EntranceTile>(position);
+                var tile = tilemap.GetTile<WalkableTile>(position);
                 if (tile == null) continue;
                 emptySpot.Add(tilemap.CellToWorld(position)); ;
             }
