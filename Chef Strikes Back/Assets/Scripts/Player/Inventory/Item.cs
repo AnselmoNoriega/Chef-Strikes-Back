@@ -49,9 +49,9 @@ public class Item : MonoBehaviour
             Checktime();
         }
 
-        DraggingFood();
-
         MagnetToTable();
+
+        DraggingFood();
     }
 
     public void Throw(Vector2 velocity, Vector2 acceleration, float time)

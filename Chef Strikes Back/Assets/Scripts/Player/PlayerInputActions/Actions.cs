@@ -17,6 +17,9 @@ public class Actions : MonoBehaviour
     private bool ready2Throw;
     private bool isCarryingItem;
 
+    [Space, Header("Player Throw")]
+    private Vector3 offset;
+
     [Space, Header("Player Attack")]
     [SerializeField] CharacterMovement CM;
     [SerializeField] Player player;
@@ -27,6 +30,7 @@ public class Actions : MonoBehaviour
         inventory = GetComponent<Inventory>();
         ready2Throw = false;
         isCarryingItem = false;
+        offset = new Vector3(0 , 0.35f, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -77,7 +81,7 @@ public class Actions : MonoBehaviour
         if (inventory.GetFoodItem() != null && ready2Throw)
         {
             var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-            var dir = (mousePos - transform.position);
+            var dir = (mousePos - (transform.position + offset));
             dir.z = 0;
             dir.Normalize();
             inventory.ThrowFood(dir);
