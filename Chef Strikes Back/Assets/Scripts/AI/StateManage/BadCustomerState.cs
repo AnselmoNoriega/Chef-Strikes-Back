@@ -27,11 +27,15 @@ public class BadCustomerState : AIBaseState
             customer.isHit = false;
         }
         //else --> not moving
+        if(customer.player.currentRage >= 100)
+        {
+            customer.stateManager.SwitchState(StateManager.AIState.Rage);
+        }
     }
 
     public override void ExitState(AI customer)
     {
-
+        
     }
     public override void OnCollisionEnter2D(Collision2D collision, AI customer)
     {

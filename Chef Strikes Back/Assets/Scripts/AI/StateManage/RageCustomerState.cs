@@ -6,7 +6,7 @@ public class RageCustomerState : AIBaseState
 {
     public override void  EnterState(AI customer)
     {
-
+        Debug.Log("Enter Rage Customer");
     }
     public override void UpdateState(AI customer)
     {
@@ -25,7 +25,7 @@ public class RageCustomerState : AIBaseState
         }
         else if(customer.aiData.currentTarget == null) 
         {
-            //PathRequestManager.RequestPath(customer.transform.position, customer.player.transform.position, customer.OnPathFound);
+            PathRequestManager.RequestPath(customer.transform.position, customer.player.transform.position, customer.OnPathFound);
         }
 
         customer.OnMovementInput?.Invoke(customer.movementInput);

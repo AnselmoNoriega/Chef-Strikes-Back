@@ -99,7 +99,9 @@ public class AI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
             yield return null;
         }
+        
         isSit = true;
+        
     }
 
     public IEnumerator ChaseAndAttack()
@@ -156,5 +158,8 @@ public class AI : MonoBehaviour
         stateManager.CurrentState.OnCollisionEnter2D(collision, this);
     }
 
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        stateManager.CurrentState.OnTriggerEnter2D(collision, this);
+    }
 }

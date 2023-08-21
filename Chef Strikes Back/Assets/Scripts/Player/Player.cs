@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
                 Debug.Log("Ready to attack!");
             }
         }
+        Die();
     }
 
     public void Attack(Vector2 mousePos)
@@ -127,7 +128,7 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
-        if (currentHealth >= 0)
+        if (currentHealth <= 0)
         {
             Debug.Log("Player died.");
         }

@@ -20,14 +20,14 @@ public class StateManager
 
 
 
-    private AIBaseState currentState;
+    public AIBaseState currentState;
 
     public AIBaseState CurrentState { get => currentState; set {  } }
     AI ai;
     public StateManager(AI ai)
     {
         //CurrentState = states[Random.value < 0.5f ? AIState.Good : AIState.Bad];
-        currentState = states[AIState.Bad];
+        currentState = states[AIState.Rage];
         this.ai = ai;
         currentState.EnterState(ai);
     }

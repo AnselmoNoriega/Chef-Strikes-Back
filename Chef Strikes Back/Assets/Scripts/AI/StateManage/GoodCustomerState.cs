@@ -55,26 +55,34 @@ public class GoodCustomerState : AIBaseState
       if(IsEat)
       {
          if (customer.player != null) 
-           {
-               customer.player.collectMoney(10);
-           }
+         {
+             customer.player.collectMoney(10);
+         }
          PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEntrancePos(), customer.OnPathFound);
          IsEat = false;
          Debug.Log("Destroy");
       }
     }
 
-   private void OnTriggerEnter2D(Collider2D collision)
-   {
-        if(readyOrder)
+   
+
+
+    public override void OnTriggerEnter2D(Collider2D collider, AI customer) 
+    {
+        if (readyOrder)
         {
-            Item recivedItem = collision.GetComponent<Item>();
-            if (recivedItem != null && recivedItem.type == ItemType.Burger)
+
+            Item recivedItem = collider.GetComponent<Item>();
+            if (collider.transform.tag == "Food" && recivedItem.type == ItemType.Burger)
             {
                 IsEat = true;
+                customer.isSit = false;
+                Debug.Log("Eat");
+                
+                collider.gameObject.SetActive(false);
             }
         }
-   }
 
+    }
 
 }

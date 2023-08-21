@@ -31,6 +31,7 @@ public class AgentMover : MonoBehaviour
         }
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
         rb2d.velocity = oldMovementInput * currentSpeed;
-
+        Vector3 velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y, 0);
+        transform.Translate(velocity);
     }
 }
