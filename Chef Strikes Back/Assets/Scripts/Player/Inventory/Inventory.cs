@@ -3,6 +3,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class Inventory : MonoBehaviour
         foodItem = item;
         item.transform.SetParent(transform);
         item.transform.localPosition = new Vector2(0, 0.7f);
+        item.collider.enabled = false;
     }
 
     public Item GetFoodItem()
