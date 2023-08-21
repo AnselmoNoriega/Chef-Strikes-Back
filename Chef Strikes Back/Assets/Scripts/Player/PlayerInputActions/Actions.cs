@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
@@ -15,6 +15,10 @@ public class Actions : MonoBehaviour
     [SerializeField]
     private float throwForce;
     private bool ready2Throw;
+    private bool isCarryingItem;
+
+    [Space, Header("Player Throw")]
+    private Vector3 offset;
 
     [Space, Header("Player Attack")]
     [SerializeField] CharacterMovement CM;
@@ -25,6 +29,8 @@ public class Actions : MonoBehaviour
     {
         inventory = GetComponent<Inventory>();
         ready2Throw = false;
+        isCarryingItem = false;
+        offset = new Vector3(0 , 0.35f, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,7 +51,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (item.Count > 0)
+        if (item.Count > 0 && !isCarryingItem)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
@@ -54,6 +60,7 @@ public class Actions : MonoBehaviour
                 if (item[i] && item[i].collider.OverlapPoint(mousePos))
                 {
                     inventory.AddItem(item[i]);
+                    isCarryingItem = true;
                     return;
                 }
             }
@@ -74,11 +81,12 @@ public class Actions : MonoBehaviour
         if (inventory.GetFoodItem() != null && ready2Throw)
         {
             var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-            var dir = (mousePos - transform.position);
+            var dir = (mousePos - (transform.position + offset));
             dir.z = 0;
             dir.Normalize();
             inventory.ThrowFood(dir);
             ready2Throw = false;
+            isCarryingItem = false;
         }
     }
 

@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class Item : MonoBehaviour
@@ -48,6 +49,8 @@ public class Item : MonoBehaviour
             Checktime();
         }
 
+        MagnetToTable();
+
         DraggingFood();
     }
 
@@ -62,10 +65,10 @@ public class Item : MonoBehaviour
     {
         if (time <= 0)
         {
+            collider.enabled = true;
             rb.velocity = Vector2.zero;
             rb.rotation = 0;
             rb.angularVelocity = 0;
-            MagnetToTable();
         }
     }
 
