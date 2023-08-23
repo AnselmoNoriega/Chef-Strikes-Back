@@ -44,7 +44,6 @@ public class GoodCustomerState : AIBaseState
       {
             readyOrder = true;
            waitTime -= Time.deltaTime;
-            Debug.Log(waitTime);
       }
 
       if(waitTime <= 0)

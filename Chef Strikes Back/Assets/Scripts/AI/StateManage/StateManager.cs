@@ -26,8 +26,8 @@ public class StateManager
     AI ai;
     public StateManager(AI ai)
     {
-        //CurrentState = states[Random.value < 0.5f ? AIState.Good : AIState.Bad];
-        currentState = states[AIState.Rage];
+        //currentState = states[Random.value < 0.5f ? AIState.Good : AIState.Bad];
+        currentState = states[AIState.Good];
         this.ai = ai;
         currentState.EnterState(ai);
     }
