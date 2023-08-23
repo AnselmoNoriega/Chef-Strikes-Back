@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     public float currentRage;
     [SerializeField]
     private Slider rageBar;
+    [SerializeField]
+    private Slider healthBar;
 
     public Animator animator;
     private CharacterMovement character;
@@ -51,6 +53,7 @@ public class Player : MonoBehaviour
     public void Update()
     {
         rageBar.value = currentRage;
+        healthBar.value = currentHealth / maxHealth;
 
         if (isCoolingDown)
         {
