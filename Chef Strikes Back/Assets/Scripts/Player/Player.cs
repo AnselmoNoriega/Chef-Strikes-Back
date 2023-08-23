@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    //Edit by kingston  -- 8/22
+    [SerializeField] SceneControl sceneControl;
+    //------------------------------------------
     private Weapon _weapon;
     public float attackCooldown;
     public bool isCoolingDown;
@@ -24,6 +27,7 @@ public class Player : MonoBehaviour
     private CharacterMovement character;
 
     public bool attacking;
+    public bool isDead;
     private int money;
 
     public void Awake()
@@ -36,6 +40,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         attacking = false;
+        isDead = false;
         maxHealth = 100;
         MaxRage = 100;
         currentRage = 0;
@@ -77,20 +82,35 @@ public class Player : MonoBehaviour
         string attackAnim = character.GetAttackDirection(direction);
         animator.Play(attackAnim);
 
+        // Edited by Kingston     ---8//22
+        // logic is Get the currentstate of Ai, if ai.state = rage, attackable.
+        // and update AI's health in here, to destory the ai.
         if (hitCollider != null)
         {
-            var enemy = hitCollider.GetComponent<Enemy>();
+            var enemyAI = hitCollider.GetComponent<AI>();
 
-            if (enemy)
+            if (enemyAI)
             {
-                if (Vector2.Distance(transform.position, hitCollider.transform.position) <= _weapon.Range)
+                if (enemyAI.stateManager.GetCurrentAIState() == StateManager.AIState.Rage)
                 {
-                    enemy.TakeDamage(Mathf.RoundToInt(_weapon.Damage));
-                    Debug.Log("Hit " + hitCollider.name);
+                    if (Vector2.Distance(transform.position, hitCollider.transform.position) <= _weapon.Range)
+                    {
+                        enemyAI.health -= Mathf.RoundToInt(_weapon.Damage);
+                        Debug.Log("Hit " + hitCollider.name);
+
+                        if (enemyAI.health <= 0)
+                        {
+                            Destroy(hitCollider.gameObject);
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Range is not enough, missed!");
+                    }
                 }
                 else
                 {
-                    Debug.Log("Range is not enough, missed!");
+                    Debug.Log("Can only attack AI in Rage state");
                 }
             }
         }
@@ -119,19 +139,19 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        //Edit by kingston  -- 8/22
         currentHealth -= damageAmount;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+
     }
 
     public void Die()
     {
+        //Edit by kingston  -- 8/22
         if (currentHealth <= 0)
         {
-            Debug.Log("Player died.");
-        }
+            isDead = true;
+            sceneControl.switchToGameOverSence();
+        }       
     }
 
     public void collectMoney(int amount)

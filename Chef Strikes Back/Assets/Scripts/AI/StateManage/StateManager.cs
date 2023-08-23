@@ -27,7 +27,7 @@ public class StateManager
     public StateManager(AI ai)
     {
         //CurrentState = states[Random.value < 0.5f ? AIState.Good : AIState.Bad];
-        currentState = states[AIState.Rage];
+        currentState = states[AIState.Good];
         this.ai = ai;
         currentState.EnterState(ai);
     }
@@ -46,5 +46,17 @@ public class StateManager
     public void Update()
     {
         currentState.UpdateState(ai);
+    }
+    //Edited by Kingston   ---- 8/22
+    public AIState GetCurrentAIState()
+    {
+        foreach (var state in states)
+        {
+            if (state.Value == currentState)
+            {
+                return state.Key;
+            }
+        }
+        return default;
     }
 }
