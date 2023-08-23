@@ -3640,7 +3640,7 @@ MonoBehaviour:
   targetDetectionRange: 5
   obstactesLayerMask:
     serializedVersion: 2
-    m_Bits: 2176
+    m_Bits: 128
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -4622,7 +4622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb796cf3c060a1945b5390304bcf823a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 1
+  maxSpeed: 0.02
   acceleration: 50
   deacceleration: 100
   currentSpeed: 0
@@ -4712,6 +4712,7 @@ MonoBehaviour:
   isSit: 0
   isHit: 0
   chasing: 0
+  health: 10
 --- !u!1001 &1060761457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5879,7 +5880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f9e6f9238285e4eb0f680271e59676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.26
+  radius: 1
   agentColliderSize: 0.6
   showGizmo: 1
 --- !u!1 &1676624225

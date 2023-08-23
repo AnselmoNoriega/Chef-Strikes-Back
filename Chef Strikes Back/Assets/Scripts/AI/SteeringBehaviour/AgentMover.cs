@@ -7,7 +7,7 @@ public class AgentMover : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField]
-    private float maxSpeed = 0.5f, acceleration = 50, deacceleration = 100;
+    private float maxSpeed = 1.0f, acceleration = 50, deacceleration = 100;
     [SerializeField]
     private float currentSpeed = 0;
     private Vector2 oldMovementInput;
@@ -30,8 +30,10 @@ public class AgentMover : MonoBehaviour
             currentSpeed -= deacceleration * maxSpeed * Time.deltaTime;
         }
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        rb2d.velocity = oldMovementInput * currentSpeed;
-        Vector3 velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y, 0);
-        transform.Translate(velocity);
+        Vector3 velocity = oldMovementInput * currentSpeed;
+        
+        transform.position += velocity;
+
+        
     }
 }
