@@ -10,6 +10,7 @@ public class BadCustomerState : AIBaseState
         //variable needed in the update
         isStand = false ;
         Debug.Log("BadCustomer");
+        customer.badMode = true ;
     }
     public override void UpdateState(AI customer)
     {

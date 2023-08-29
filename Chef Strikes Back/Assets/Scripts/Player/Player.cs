@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
             if (enemyAI)
             {
-                if (enemyAI.stateManager.GetCurrentAIState() == StateManager.AIState.Rage)
+                if (enemyAI.stateManager.CurrentAIState == StateManager.AIState.Rage)
                 {
                     if (Vector2.Distance(transform.position, hitCollider.transform.position) <= _weapon.Range)
                     {

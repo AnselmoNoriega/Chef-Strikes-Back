@@ -20,6 +20,7 @@ public class GoodCustomerState : AIBaseState
         IsEat = false;
         readyOrder = false;
         waitTime = 15.0f;
+        customer.goodMode = true;
     }
 
     public override void ExitState(AI customer)
@@ -49,6 +50,7 @@ public class GoodCustomerState : AIBaseState
       if(waitTime <= 0)
       {
           customer.stateManager.SwitchState(StateManager.AIState.Bad);
+          customer.goodMode = false;
       }
       //food served --> leave
       if(IsEat)

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class StateManager
+public class StateManager 
 {
     public enum AIState
     {
@@ -11,24 +12,32 @@ public class StateManager
         Rage
     }
 
-    static Dictionary<AIState, AIBaseState> states = new(3)
+    public AIBaseState StateCreater(AIState state)
     {
-        {AIState.Good, new GoodCustomerState() },
-        {AIState.Bad, new BadCustomerState() },
-        {AIState.Rage, new RageCustomerState() },
-    };
+        switch (state) 
+        {
+         default:
+         case AIState.Good: return new GoodCustomerState();
+         case AIState.Bad: return new BadCustomerState();
+         case AIState.Rage: return new RageCustomerState();
+        }
+    }
 
 
 
-    public AIBaseState currentState;
 
-    public AIBaseState CurrentState { get => currentState; set {  } }
+    private AIBaseState currentState;
+    public AIBaseState CurrentState { get => currentState;}
     AI ai;
+    private AIState currentAIState;
+    public AIState CurrentAIState => currentAIState;
+
+
     public StateManager(AI ai)
     {
         //currentState = states[Random.value < 0.5f ? AIState.Good : AIState.Bad];
-        currentState = states[AIState.Good];
         this.ai = ai;
+        currentState = StateCreater(Random.value < 0.5f ? AIState.Good : AIState.Bad);
         currentState.EnterState(ai);
     }
 
@@ -37,7 +46,8 @@ public class StateManager
         if (currentState is not null)
             currentState.ExitState(ai);
 
-        currentState = states[state];
+        currentState = StateCreater(state);
+        currentAIState = state;
 
         if (currentState is not null)
             currentState.EnterState(ai);
@@ -48,15 +58,5 @@ public class StateManager
         currentState.UpdateState(ai);
     }
     //Edited by Kingston   ---- 8/22
-    public AIState GetCurrentAIState()
-    {
-        foreach (var state in states)
-        {
-            if (state.Value == currentState)
-            {
-                return state.Key;
-            }
-        }
-        return default;
-    }
+    
 }

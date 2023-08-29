@@ -45,6 +45,10 @@ public class AI : MonoBehaviour
     public StateManager stateManager;
 
     public bool chasing = false;
+
+    public bool goodMode = false;
+    public bool badMode  = false;
+    public bool rageMode = false;
     public ContextSolver MovementDirectionSolver => movementDirectionSolver;
     public List<SteeringBehaviour> SteeringBehaviours => steeringBehaviours;
     public float AttackDistance => attackDistance;
