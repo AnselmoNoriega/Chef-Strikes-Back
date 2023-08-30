@@ -96,6 +96,6 @@ public class Inventory : MonoBehaviour
         var dir = (mousePos - transform.position);
         var angle = (float)Math.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
         pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
-        pointer.transform.localScale = new Vector3(length.value / 6, length.value / 2, 1.0f);
+        pointer.transform.localScale = new Vector3(0.5f, length.value, 1.0f);
     }
 }
