@@ -58,11 +58,11 @@ public class Player : MonoBehaviour
         if (isCoolingDown)
         {
             attackCooldown -= Time.deltaTime;
-            Debug.Log("In cooldown. Time remaining: " + attackCooldown);
+            //Debug.Log("In cooldown. Time remaining: " + attackCooldown);
             if (attackCooldown <= 0)
             {
                 isCoolingDown = false;
-                Debug.Log("Ready to attack!");
+                //Debug.Log("Ready to attack!");
             }
         }
         Die();
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
                     if (Vector2.Distance(transform.position, hitCollider.transform.position) <= _weapon.Range)
                     {
                         enemyAI.health -= Mathf.RoundToInt(_weapon.Damage);
-                        Debug.Log("Hit " + hitCollider.name);
+                        //Debug.Log("Hit " + hitCollider.name);
 
                         if (enemyAI.health <= 0)
                         {
@@ -108,24 +108,34 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Range is not enough, missed!");
+                        //Debug.Log("Range is not enough, missed!");
                     }
                 }
                 else
                 {
-                    Debug.Log("Can only attack AI in Rage state");
+                    //Debug.Log("Can only attack AI in Rage state");
                 }
+            }
+
+            var foodPile = hitCollider.GetComponent<FoodPile>();
+            if(foodPile != null)
+            {
+                foodPile.Hit(1);
+            }
+            else
+            {
+                Debug.Log(foodPile);
             }
         }
 
-        Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
+        //Debug.Log("Attacked with: " + _weapon.Name + ". Range: " + _weapon.Range + ", Damage: " + _weapon.Damage);
         attackCooldown = 0.0f / _weapon.AttackSpeed;
         isCoolingDown = true;
     }
 
     public void InAttackingFinished()
     {
-        Debug.Log("Attack FINISHED");
+        //Debug.Log("Attack FINISHED");
         animator.SetBool("IsAttacking", false);
         attacking = false;
         character.SetCanMove(true);
