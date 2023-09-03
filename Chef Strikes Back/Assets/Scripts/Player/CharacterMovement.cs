@@ -52,10 +52,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (canMove)
         {
-            // testing velocity.  -- kingston
-            //Vector2 targetVelocity = moveDirection * moveSpeed;
-            //rb.velocity = Vector2.Lerp(currentVelocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-            //currentVelocity = rb.velocity;
+           
             rb.AddForce(((moveDirection * moveSpeed) - rb.velocity) * acceleration);
         }
         else
