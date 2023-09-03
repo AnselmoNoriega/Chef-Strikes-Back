@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FoodPile : MonoBehaviour
@@ -23,11 +25,14 @@ public class FoodPile : MonoBehaviour
 
         if(health <= 0)
         {
-            float x = Random.Range(1.0f, 2.0f);
-            float y = Random.Range(1.0f, 2.0f);
+            float x = UnityEngine.Random.Range(-2.0f, 2.0f);
+            float y = UnityEngine.Random.Range(-2.0f, 2.0f);
 
             var item = Instantiate(foodItem, transform.position, Quaternion.identity);
-            item.GetComponent<Rigidbody2D>().AddForce(new Vector2(x, y) * throwStrength, ForceMode2D.Impulse);
+
+            var strength = new Vector2(x, y) * throwStrength;
+
+            item.GetComponent<Item>().Throw(strength, -strength/ 0.5f, 0.5f);
             health = startHealth;
             Debug.Log(new Vector2(x, y) * throwStrength);
         }
