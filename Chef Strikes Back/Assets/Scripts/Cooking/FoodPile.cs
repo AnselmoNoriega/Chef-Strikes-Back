@@ -23,12 +23,13 @@ public class FoodPile : MonoBehaviour
 
         if(health <= 0)
         {
-            float x = Random.Range(0.0f, 1.0f);
-            float y = Random.Range(0.0f, 1.0f);
+            float x = Random.Range(1.0f, 2.0f);
+            float y = Random.Range(1.0f, 2.0f);
 
             var item = Instantiate(foodItem, transform.position, Quaternion.identity);
             item.GetComponent<Rigidbody2D>().AddForce(new Vector2(x, y) * throwStrength, ForceMode2D.Impulse);
             health = startHealth;
+            Debug.Log(new Vector2(x, y) * throwStrength);
         }
     }
 }

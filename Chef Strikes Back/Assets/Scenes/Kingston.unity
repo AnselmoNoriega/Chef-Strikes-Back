@@ -1494,9 +1494,9 @@ GameObject:
   - component: {fileID: 527163539}
   - component: {fileID: 527163538}
   - component: {fileID: 527163537}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: FoodEnemy
-  m_TagString: Untagged
+  m_TagString: FoodEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodItem: {fileID: 7360178021079257609, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
-  throwStrength: 2
+  throwStrength: 10
   startHealth: 2
 --- !u!212 &527163539
 SpriteRenderer:
@@ -9811,11 +9811,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.21
+      value: -3.453
       objectReference: {fileID: 0}
     - target: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.28
+      value: -0.891
       objectReference: {fileID: 0}
     - target: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_LocalPosition.z
