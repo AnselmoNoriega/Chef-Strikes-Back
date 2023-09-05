@@ -37,6 +37,7 @@ public class AI : MonoBehaviour
     [SerializeField] public Player player;
 
     public bool isSit = false;
+    public bool Ate = false;
 
     public bool isHit = false;
     Vector2[] path;
@@ -46,9 +47,6 @@ public class AI : MonoBehaviour
 
     public bool chasing = false;
 
-    public bool goodMode = false;
-    public bool badMode  = false;
-    public bool rageMode = false;
     public ContextSolver MovementDirectionSolver => movementDirectionSolver;
     public List<SteeringBehaviour> SteeringBehaviours => steeringBehaviours;
     public float AttackDistance => attackDistance;
@@ -72,7 +70,13 @@ public class AI : MonoBehaviour
 
     private void Update()
     {
+        if(stateManager == null) stateManager = new StateManager(this);
         stateManager.Update();
+        if(Ate)
+        {
+            DropMoney();
+            Ate = false;
+        }
     }
 
 
@@ -136,6 +140,11 @@ public class AI : MonoBehaviour
                 StartCoroutine(ChaseAndAttack());
             }
         }
+    }
+
+    void DropMoney()
+    {
+        GetComponent<LootBag>().InstantiateLoot(transform.position);
     }
 
     public void OnDrawGizmos()

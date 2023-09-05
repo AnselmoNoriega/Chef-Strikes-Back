@@ -35,9 +35,9 @@ public class StateManager
 
     public StateManager(AI ai)
     {
-        //currentState = states[Random.value < 0.5f ? AIState.Good : AIState.Bad];
         this.ai = ai;
-        currentState = StateCreater(Random.value < 0.5f ? AIState.Good : AIState.Bad);
+        //currentState = StateCreater(Random.value < 0.5f ? AIState.Good : AIState.Bad);
+        currentState = StateCreater(AIState.Good);
         currentState.EnterState(ai);
     }
 

@@ -2,10 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class GoodCustomerState : AIBaseState
 {
@@ -20,7 +17,6 @@ public class GoodCustomerState : AIBaseState
         IsEat = false;
         readyOrder = false;
         waitTime = 15.0f;
-        customer.goodMode = true;
     }
 
     public override void ExitState(AI customer)
@@ -50,15 +46,11 @@ public class GoodCustomerState : AIBaseState
       if(waitTime <= 0)
       {
           customer.stateManager.SwitchState(StateManager.AIState.Bad);
-          customer.goodMode = false;
       }
       //food served --> leave
       if(IsEat)
       {
-         if (customer.player != null) 
-         {
-             customer.player.collectMoney(10);
-         }
+         customer.isSit = false;
          PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEntrancePos(), customer.OnPathFound);
          IsEat = false;
          Debug.Log("Destroy");
@@ -77,6 +69,7 @@ public class GoodCustomerState : AIBaseState
             if (collider.transform.tag == "Food" && recivedItem.type == ItemType.Burger)
             {
                 IsEat = true;
+                customer.Ate = true;
                 customer.isSit = false;
                 Debug.Log("Eat");
                 
