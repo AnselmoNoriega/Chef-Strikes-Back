@@ -17,6 +17,11 @@ public class GoodCustomerState : AIBaseState
         IsEat = false;
         readyOrder = false;
         waitTime = 15.0f;
+        if (TileManager.Instance.checkChairCount() > 0 && !customer.isSit)
+        {
+            PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestChairPos(), customer.OnPathFound);
+
+        }
     }
 
     public override void ExitState(AI customer)
@@ -29,11 +34,7 @@ public class GoodCustomerState : AIBaseState
 // Updated upstream
         
         // walk into restaurant and find empty seat
-      if (TileManager.Instance.checkChairCount() > 0 && !customer.isSit)
-      {
-          PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestChairPos(), customer.OnPathFound);
-          
-      }
+      
       //-->order food
       
       //if 15secs(no food) --> switch bad customer
