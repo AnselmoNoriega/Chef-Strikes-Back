@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject AIPrefabs;
     public int money = 0;
     private float spawnTime = 0;
+    public float RageValue = 0.0f;
+    private float rageTime = 0;
 
     private void Awake()
     {
@@ -23,6 +25,14 @@ public class GameManager : MonoBehaviour
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
             spawnTime = 0;
         }
-        
+        if(RageValue >=100 && rageTime <= 15)
+        {
+            spawnTime *= 0;
+            rageTime += Time.deltaTime;
+        }
+        else
+        {
+            RageValue = 0;
+        }
     }
 }
