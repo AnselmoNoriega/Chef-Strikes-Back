@@ -22,5 +22,6 @@ public class Loot : ScriptableObject
         {
             GameManager.Instance.money += 10;
         }
+
     }
 }
