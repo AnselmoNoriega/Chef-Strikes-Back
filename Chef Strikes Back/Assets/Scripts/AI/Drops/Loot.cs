@@ -18,9 +18,14 @@ public class Loot : ScriptableObject
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+<<<<<<< Updated upstream
         if (collider.transform.tag == "Player" && lootName == "Money")
         {
             GameManager.Instance.money += 10;
         }
+=======
+        GameObject lootGameObject = Instantiate(droppedItemPrefab, spawnPos, Quaternion.identity);
+        lootGameObject.GetComponent<SpriteRenderer>().sprite = droppedItemPrefab.moneySprite;
+>>>>>>> Stashed changes
     }
 }
