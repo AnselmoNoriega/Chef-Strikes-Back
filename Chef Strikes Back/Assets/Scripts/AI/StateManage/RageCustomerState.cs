@@ -25,8 +25,6 @@ public class RageCustomerState : AIBaseState
             customer.aiData.currentTarget = customer.aiData.targets[0];
         }
         
-        if(GameManager.Instance.)
-        customer.OnMovementInput?.Invoke(customer.movementInput);
     }
 
     public override void ExitState(AI customer)
