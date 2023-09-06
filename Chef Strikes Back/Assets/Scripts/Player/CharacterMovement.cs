@@ -52,7 +52,6 @@ public class CharacterMovement : MonoBehaviour
     {
         if (canMove)
         {
-           
             rb.AddForce(((moveDirection * moveSpeed) - rb.velocity) * acceleration);
         }
         else

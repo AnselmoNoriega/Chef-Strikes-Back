@@ -4,6 +4,7 @@ public interface StateClass<AgentType> where AgentType : class
 {
     public void Enter(AgentType agent);
     public void Update(AgentType agent, float dt);
+    public void FixedUpdate(AgentType agent);
     public void Exit(AgentType agent);
 }
 
