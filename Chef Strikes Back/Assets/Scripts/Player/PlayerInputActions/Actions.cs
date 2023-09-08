@@ -73,6 +73,7 @@ public class Actions : MonoBehaviour
         {
             inventory.PrepareToThrowFood(mouse);
             ready2Throw = true;
+            player.ChangeState(PlayerStates.Throwing);
         }
     }
 
@@ -87,6 +88,7 @@ public class Actions : MonoBehaviour
             inventory.ThrowFood(dir);
             ready2Throw = false;
             isCarryingItem = false;
+            player.ChangeState(PlayerStates.Idle);
         }
     }
 

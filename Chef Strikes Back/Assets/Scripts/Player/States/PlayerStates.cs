@@ -11,12 +11,12 @@ public class PlayerIdle : StateClass<Player>
     private float moveSpeed = 2.3f;
     private float acceleration = 100.0f;
 
-    string[] directionNames =
+    private string[] directionNames =
         {
         "Idle_Right", "Idle_RightTop", "Idle_Front", "Idle_LeftTop",
         "Idle_Left", "Idle_LeftBot", "Idle_Bot", "Idle_RightBot"
     };
-    string[] attackDirection =
+    private string[] attackDirection =
         {
         "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
         "Attack_Left", "Attack_LeftBot", "Attack_Bot", "Attack_RightBot"
@@ -77,7 +77,7 @@ public class PlayerThrowing : StateClass<Player>
 {
     public void Enter(Player agent)
     {
-
+        agent.rb.velocity = Vector2.zero;
     }
 
     public void Update(Player agent, float dt)

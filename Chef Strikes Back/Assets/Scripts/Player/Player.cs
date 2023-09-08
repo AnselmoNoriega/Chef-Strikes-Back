@@ -9,36 +9,41 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Player : MonoBehaviour
 {
-
+    [Header("Counts Info")]
+    public float currentHealth;
+    public float currentRage;
     private int enemyKills;
     private int money;
 
+    [Space, Header("Attack Info")]
     public float attackCooldown;
+    public bool isCoolingDown;
+
+    [Space, Header("MaxStats Info")]
     public float maxHealth;
-    public float currentHealth;
     public float MaxRage;
-    
-    [SerializeField] 
-    SceneControl sceneControl;
+
+
+    [Space, Header("World Info"), SerializeField]
+    private SceneControl sceneControl;
     public Weapon _weapon;
-    public float currentRage;
     [SerializeField]
     private Slider rageBar;
     [SerializeField]
     private Slider healthBar;
 
-    public Animator animator;
-    private CharacterMovement character;
-
-    public bool isCoolingDown;
-
-    //states
-    public InputAction move;
-    public Rigidbody2D rb;
-    private InputControls inputManager;
+    [Space, Header("State Info")]
     public PlayerStates playerState;
+
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public InputAction move;
+    [HideInInspector] public Rigidbody2D rb;
+
+    private InputControls inputManager;
     private StateMachine<Player> stateMachine;
-    string[] attackDirections =
+    private StateMachine<Player> moodState;
+
+    private string[] attackDirections =
         {
         "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
         "Attack_Left", "Attack_LeftBot", "Attack_Bot", "Attack_RightBot"
@@ -47,9 +52,10 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         stateMachine = new StateMachine<Player>(this);
+        moodState = new StateMachine<Player>(this);
+        inputManager = new InputControls();
         inputManager = new InputControls();
         _weapon = new Weapon(0);
-        inputManager = new InputControls();
         move = inputManager.Player.Move;
     }
 
@@ -67,11 +73,9 @@ public class Player : MonoBehaviour
     {
         AddStates();
         stateMachine.ChangeState(0);
-        character = GetComponent<CharacterMovement>();
+        moodState.ChangeState(0);
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        maxHealth = 100;
-        MaxRage = 100;
         currentRage = 0;
         currentHealth = maxHealth;
         rageBar.maxValue = MaxRage;
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour
         rageBar.value = currentRage;
         healthBar.value = currentHealth / maxHealth;
 
-        if(move.ReadValue<Vector2>() != Vector2.zero && playerState == PlayerStates.Idle)
+        if (move.ReadValue<Vector2>() != Vector2.zero && playerState == PlayerStates.Idle)
         {
             ChangeState(PlayerStates.Walking);
         }
@@ -108,7 +112,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damageAmount;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             sceneControl.switchToGameOverSence();
         }
@@ -121,7 +125,7 @@ public class Player : MonoBehaviour
 
     public void ChangeState(PlayerStates state)
     {
-        if(playerState != state)
+        if (playerState != state)
         {
             playerState = state;
             stateMachine.ChangeState((int)state);
@@ -183,6 +187,9 @@ public class Player : MonoBehaviour
         stateMachine.AddState<PlayerWalking>();
         stateMachine.AddState<PlayerAttacking>();
         stateMachine.AddState<PlayerThrowing>();
+
+        moodState.AddState<NormalMode>();
+        moodState.AddState<RageMode>();
     }
 }
 

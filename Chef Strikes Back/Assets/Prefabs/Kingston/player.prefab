@@ -388,7 +388,6 @@ GameObject:
   - component: {fileID: 6355847347339370427}
   - component: {fileID: 1424630937}
   - component: {fileID: 5574737848875184831}
-  - component: {fileID: 6355847347339370370}
   - component: {fileID: -7746550428048061511}
   - component: {fileID: 6143374723223897878}
   - component: {fileID: 3855817667393855648}
@@ -457,7 +456,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1609916735, guid: 53d31054728c6e4499fa74dd0b811a97, type: 3}
   m_Color: {r: 0.87358075, g: 0.4141153, b: 0.8867924, a: 1}
   m_FlipX: 0
@@ -542,22 +541,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.45}
   serializedVersion: 2
   m_Radius: 1.2637179
---- !u!114 &6355847347339370370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355847347339370371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c2784244df6e35479a705cd069cb732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2.3
-  rb: {fileID: 6355847347339370369}
-  acceleration: 100
-  movementAngle: {x: 2, y: 1}
 --- !u!114 &-7746550428048061511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,18 +553,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b20c124d29183e45ba7d95b4f06480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneControl: {fileID: 0}
+  currentHealth: 0
+  currentRage: 0
   attackCooldown: 0
   isCoolingDown: 0
   maxHealth: 100
-  currentHealth: 0
-  MaxRage: 0
-  currentRage: 0
+  MaxRage: 100
+  sceneControl: {fileID: 0}
   rageBar: {fileID: 0}
   healthBar: {fileID: 0}
+  playerState: 0
   animator: {fileID: 0}
-  attacking: 0
-  isDead: 0
+  move:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: efc22e8a-399d-45fb-8f52-51c2e1535f8c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  rb: {fileID: 0}
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: []
   throwForce: 1
-  CM: {fileID: 6355847347339370370}
+  CM: {fileID: 0}
   player: {fileID: -7746550428048061511}
 --- !u!114 &323981142111727875
 MonoBehaviour:
