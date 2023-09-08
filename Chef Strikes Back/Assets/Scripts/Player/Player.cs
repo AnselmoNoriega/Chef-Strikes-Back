@@ -36,7 +36,12 @@ public class Player : MonoBehaviour
     //states
     public InputAction move;
     public Rigidbody2D rb;
-    private InputControls inputManager;
+    private InputControls inputManager; 
+    string[] attackDirections =
+        {
+        "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
+        "Attack_Left", "Attack_LeftBot", "Attack_Bot", "Attack_RightBot"
+    };
 
     public void Awake()
     {
@@ -75,7 +80,6 @@ public class Player : MonoBehaviour
                 isCoolingDown = false;
             }
         }
-        Die();
     }
 
     public void Attack(Vector2 mousePos)
@@ -90,13 +94,11 @@ public class Player : MonoBehaviour
         character.SetMoveDirection(Vector2.zero);
         character.SetCanMove(false);
 
-        float spriteHeight = spriteRenderer.bounds.size.y;
-        Vector2 rayOrigin = new Vector2(transform.position.x, transform.position.y + spriteHeight / 2);
-        Vector2 attackDirection = (mousePos - (Vector2)transform.position).normalized;
-        Debug.DrawRay(transform.position, attackDirection * _weapon.Range, Color.red, 1.0f);
+        var rayOrigin = new Vector2(transform.position.x, transform.position.y + 0.35f);
+        var attackDirection = (mousePos - rayOrigin).normalized;
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, attackDirection, _weapon.Range);
-        string attackAnim = character.GetAttackDirection(attackDirection);
-        animator.Play(attackAnim);
+        animator.Play(PlayerHelper.GetDirection(attackDirection, attackDirections));
 
         foreach (RaycastHit2D hit in hits)
         {
@@ -106,7 +108,7 @@ public class Player : MonoBehaviour
             }
 
             var enemyAI = hit.collider.GetComponent<AI>();
-            var enemyTest = hit.collider.CompareTag("Enemy");
+
             if (enemyAI)
             {
                 if (enemyAI.stateManager.CurrentAIState == StateManager.AIState.Rage)
@@ -118,11 +120,6 @@ public class Player : MonoBehaviour
                         Destroy(hit.collider.gameObject);
                     }
                 }
-            }
-            if (enemyTest)
-            {
-                Debug.Log("hited");
-                Destroy(hit.collider.gameObject);
             }
 
             var foodPile = hit.collider.GetComponent<FoodPile>();
@@ -137,28 +134,10 @@ public class Player : MonoBehaviour
         isCoolingDown = true;
     }
 
-
-
-    public void InAttackingFinished()
-    {
-        animator.SetBool("IsAttacking", false);
-        attacking = false;
-        character.SetCanMove(true);
-    }
-
-    public void EnemyKilled()
-    {
-        enemyKills++;
-        if (enemyKills % 1 == 0)
-        {
-            _weapon.UpgradeTier();
-        }
-    }
-
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-
+        Die();
     }
 
     public void Die()
