@@ -70,11 +70,9 @@ public class Player : MonoBehaviour
         if (isCoolingDown)
         {
             attackCooldown -= Time.deltaTime;
-            //Debug.Log("In cooldown. Time remaining: " + attackCooldown);
             if (attackCooldown <= 0)
             {
                 isCoolingDown = false;
-                //Debug.Log("Ready to attack!");
             }
         }
         Die();
@@ -82,8 +80,6 @@ public class Player : MonoBehaviour
 
     public void Attack(Vector2 mousePos)
     {
-        //edited by kingston
-        // 9.2
         attacking = true;
 
         if (isCoolingDown)
@@ -104,7 +100,6 @@ public class Player : MonoBehaviour
 
         foreach (RaycastHit2D hit in hits)
         {
-            // Ignore the player's own collider
             if (hit.collider.CompareTag("Player"))
             {
                 continue;
@@ -146,7 +141,6 @@ public class Player : MonoBehaviour
 
     public void InAttackingFinished()
     {
-        //Debug.Log("Attack FINISHED");
         animator.SetBool("IsAttacking", false);
         attacking = false;
         character.SetCanMove(true);

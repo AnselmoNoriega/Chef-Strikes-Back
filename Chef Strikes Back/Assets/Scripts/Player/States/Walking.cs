@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerWalking : StateClass<Player>
 {
-    private float moveSpeed;
-    private float acceleration;
-    private Vector2 movementAngle;
+    private float moveSpeed = 2.3f;
+    private float acceleration = 100.0f;
+    private Vector2 movementAngle = new Vector2(2.0f, 1.0f);
 
     private Animator animator;
     private Vector2 moveDirection;
