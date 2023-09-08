@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.XR;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Player : MonoBehaviour
@@ -17,8 +18,9 @@ public class Player : MonoBehaviour
     public float currentHealth;
     public float MaxRage;
     
-    [SerializeField] SceneControl sceneControl;
-    private Weapon _weapon;
+    [SerializeField] 
+    SceneControl sceneControl;
+    public Weapon _weapon;
     public float currentRage;
     [SerializeField]
     private Slider rageBar;
@@ -27,7 +29,6 @@ public class Player : MonoBehaviour
 
     public Animator animator;
     private CharacterMovement character;
-    private SpriteRenderer spriteRenderer;
 
     public bool isCoolingDown;
     public bool attacking;
@@ -36,7 +37,9 @@ public class Player : MonoBehaviour
     //states
     public InputAction move;
     public Rigidbody2D rb;
-    private InputControls inputManager; 
+    private InputControls inputManager;
+    public PlayerStates playerState;
+    private StateMachine<Player> stateMachine;
     string[] attackDirections =
         {
         "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
@@ -45,18 +48,16 @@ public class Player : MonoBehaviour
 
     public void Awake()
     {
+        stateMachine = new StateMachine<Player>(this);
         inputManager = new InputControls();
-        move = inputManager.Player.Move;
         _weapon = new Weapon(0);
-        character = GetComponent<CharacterMovement>();
-        animator = GetComponent<Animator>();
-        //edited by kingston
-        // 9.2
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
     {
+        AddStates();
+        character = GetComponent<CharacterMovement>();
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         attacking = false;
         isDead = false;
@@ -79,6 +80,31 @@ public class Player : MonoBehaviour
             {
                 isCoolingDown = false;
             }
+        }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+
+        if(currentHealth <= 0)
+        {
+            isDead = true;
+            sceneControl.switchToGameOverSence();
+        }
+    }
+
+    public void collectMoney(int amount)
+    {
+        money += amount;
+    }
+
+    public void ChangeState(PlayerStates state)
+    {
+        if(playerState != state)
+        {
+            playerState = state;
+            stateMachine.ChangeState((int)state);
         }
     }
 
@@ -134,27 +160,13 @@ public class Player : MonoBehaviour
         isCoolingDown = true;
     }
 
-    public void TakeDamage(int damageAmount)
+    private void AddStates()
     {
-        currentHealth -= damageAmount;
-        Die();
+        stateMachine.AddState<PlayerIdle>();
+        stateMachine.AddState<PlayerWalking>();
+        stateMachine.AddState<PlayerAttacking>();
+        stateMachine.AddState<PlayerThrowing>();
     }
-
-    public void Die()
-    {
-        if (currentHealth <= 0)
-        {
-            isDead = true;
-            sceneControl.switchToGameOverSence();
-        }       
-    }
-
-    public void collectMoney(int amount)
-    {
-        money += amount;
-    }
-
-    
 }
 
 
