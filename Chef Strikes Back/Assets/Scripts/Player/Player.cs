@@ -31,8 +31,6 @@ public class Player : MonoBehaviour
     private CharacterMovement character;
 
     public bool isCoolingDown;
-    public bool attacking;
-    public bool isDead;
 
     //states
     public InputAction move;
@@ -51,16 +49,27 @@ public class Player : MonoBehaviour
         stateMachine = new StateMachine<Player>(this);
         inputManager = new InputControls();
         _weapon = new Weapon(0);
+        inputManager = new InputControls();
+        move = inputManager.Player.Move;
+    }
+
+    private void OnEnable()
+    {
+        move.Enable();
+    }
+
+    private void OnDisable()
+    {
+        move.Disable();
     }
 
     private void Start()
     {
         AddStates();
+        stateMachine.ChangeState(0);
         character = GetComponent<CharacterMovement>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        attacking = false;
-        isDead = false;
         maxHealth = 100;
         MaxRage = 100;
         currentRage = 0;
@@ -73,6 +82,11 @@ public class Player : MonoBehaviour
         rageBar.value = currentRage;
         healthBar.value = currentHealth / maxHealth;
 
+        if(move.ReadValue<Vector2>() != Vector2.zero && playerState != PlayerStates.Attacking)
+        {
+            ChangeState(PlayerStates.Walking);
+        }
+
         if (isCoolingDown)
         {
             attackCooldown -= Time.deltaTime;
@@ -81,6 +95,13 @@ public class Player : MonoBehaviour
                 isCoolingDown = false;
             }
         }
+
+        stateMachine.Update(Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        stateMachine.FixedUpdate();
     }
 
     public void TakeDamage(int damageAmount)
@@ -89,7 +110,6 @@ public class Player : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            isDead = true;
             sceneControl.switchToGameOverSence();
         }
     }
@@ -110,15 +130,12 @@ public class Player : MonoBehaviour
 
     public void Attack(Vector2 mousePos)
     {
-        attacking = true;
-
         if (isCoolingDown)
         {
             return;
         }
 
-        character.SetMoveDirection(Vector2.zero);
-        character.SetCanMove(false);
+        ChangeState(PlayerStates.Attacking);
 
         var rayOrigin = new Vector2(transform.position.x, transform.position.y + 0.35f);
         var attackDirection = (mousePos - rayOrigin).normalized;

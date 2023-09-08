@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
 
     private InputControls inputManager;
     private InputAction move;
-    private Player Player;
+    private Player player;
     private Vector2 moveDirection;
     private Animator animator;
     private int direction;
@@ -38,7 +38,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Awake()
     {
-        Player = GetComponent<Player>();
+        player = GetComponent<Player>();
         inputManager = new InputControls();
         animator = GetComponent<Animator>();
     }
@@ -86,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
     }
     public void FaceMovementDirection(Vector2 lookDirection)
     {
-        if (Player.attacking) return;
+        if (player.playerState == PlayerStates.Attacking) return;
         
         //8 direction animaiton
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;

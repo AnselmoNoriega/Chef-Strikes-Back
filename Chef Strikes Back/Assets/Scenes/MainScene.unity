@@ -1953,6 +1953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AIPrefabs: {fileID: 3075514583842365006, guid: c965e094b155a724a92856415001440e, type: 3}
   money: 0
+  RageValue: 0
 --- !u!4 &357500826
 Transform:
   m_ObjectHideFlags: 0
@@ -12834,9 +12835,105 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1136535326}
     - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_Id
+      value: efc22e8a-399d-45fb-8f52-51c2e1535f8c
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_Name
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: sceneControl
       value: 
       objectReference: {fileID: 7418929117601166086}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[0].m_Id
+      value: c1bb987a-c823-4449-9c5c-84e58b2ba436
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 04b28c08-600a-4039-a3e3-a246b32a9bfc
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[2].m_Id
+      value: 29abe4f8-f603-4042-b16e-fcb5dbd111f3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[3].m_Id
+      value: b37a5a9c-d8b8-4a3e-a2f5-c7b2ee9c1c9b
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[4].m_Id
+      value: 287dbcab-96a4-4887-a06c-394bbfc99b37
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[0].m_Name
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[0].m_Path
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[1].m_Name
+      value: up
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[2].m_Name
+      value: down
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[3].m_Name
+      value: left
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[4].m_Name
+      value: right
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[0].m_Flags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[1].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[2].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[3].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[4].m_Flags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[2].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[3].m_Action
+      value: Move
+      objectReference: {fileID: 0}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: move.m_SingletonActionBindings.Array.data[4].m_Action
+      value: Move
+      objectReference: {fileID: 0}
     - target: {fileID: 4983911565616285863, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Camera
       value: 
@@ -12893,7 +12990,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6355847347339370370, guid: 27281946ff144974aa050e692b861ef9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 27281946ff144974aa050e692b861ef9, type: 3}
 --- !u!1 &2026625118
 GameObject:

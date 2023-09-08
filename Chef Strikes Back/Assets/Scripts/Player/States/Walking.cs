@@ -29,10 +29,15 @@ public class PlayerWalking : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        moveDirection = (agent.move.ReadValue<Vector2>() * movementAngle).normalized;
         currentDirection = PlayerHelper.FaceMovementDirection(agent.animator, moveDirection, directionNames);
+        moveDirection = (agent.move.ReadValue<Vector2>() * movementAngle).normalized;
 
         if (direction != currentDirection) ChangeDirectionSpeed(agent, currentDirection);
+
+        if (agent.move.ReadValue<Vector2>() == Vector2.zero)
+        {
+            agent.ChangeState(PlayerStates.Idle);
+        }
     }
 
     public void FixedUpdate(Player agent)
