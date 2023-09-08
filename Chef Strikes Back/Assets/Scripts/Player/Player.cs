@@ -27,16 +27,21 @@ public class Player : MonoBehaviour
 
     public Animator animator;
     private CharacterMovement character;
-    //edited by kingston
-    // 9.2
     private SpriteRenderer spriteRenderer;
 
     public bool isCoolingDown;
     public bool attacking;
     public bool isDead;
 
+    //states
+    public InputAction move;
+    public Rigidbody2D rb;
+    private InputControls inputManager;
+
     public void Awake()
     {
+        inputManager = new InputControls();
+        move = inputManager.Player.Move;
         _weapon = new Weapon(0);
         character = GetComponent<CharacterMovement>();
         animator = GetComponent<Animator>();
@@ -47,6 +52,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         attacking = false;
         isDead = false;
         maxHealth = 100;
