@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
         rageBar.value = currentRage;
         healthBar.value = currentHealth / maxHealth;
 
-        if(move.ReadValue<Vector2>() != Vector2.zero && playerState != PlayerStates.Attacking)
+        if(move.ReadValue<Vector2>() != Vector2.zero && playerState == PlayerStates.Idle)
         {
             ChangeState(PlayerStates.Walking);
         }
