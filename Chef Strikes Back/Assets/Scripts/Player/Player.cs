@@ -34,14 +34,19 @@ public class Player : MonoBehaviour
 
     [Space, Header("State Info")]
     public PlayerStates playerState;
+    public PlayerStage playerMode;
 
     [HideInInspector] public Animator animator;
     [HideInInspector] public InputAction move;
     [HideInInspector] public Rigidbody2D rb;
 
-    private InputControls inputManager;
     private StateMachine<Player> stateMachine;
     private StateMachine<Player> moodState;
+
+    [Space, Header("Rage Info")]
+    public GameObject vignette;
+
+    private InputControls inputManager;
 
     private string[] attackDirections =
         {

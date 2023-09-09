@@ -126,7 +126,7 @@ public class RageMode : StateClass<Player>
 {
     public void Enter(Player agent)
     {
-
+        agent.vignette.SetActive(true);
     }
 
     public void Update(Player agent, float dt)
@@ -141,6 +141,6 @@ public class RageMode : StateClass<Player>
 
     public void Exit(Player agent)
     {
-
+        agent.vignette.SetActive(false);
     }
 }
