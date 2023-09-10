@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            sceneControl.switchToGameOverSence();
+            sceneControl.switchToGameOverScene();
         }
     }
 

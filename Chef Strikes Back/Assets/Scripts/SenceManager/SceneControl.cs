@@ -2,28 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class SceneControl : MonoBehaviour
 {
-    //Edit by kingston  -- 8/22
     public static bool GameIsPaused = false;
+    public Text pausingText;
     private void Start()
     {
 
     }
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Kingston") 
+        if (SceneManager.GetActiveScene().name == "MainScene") 
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 TogglePause();
             }
+        if (GameIsPaused) {pausingText.enabled = true;}
+        if (!GameIsPaused) { pausingText.enabled=false; }
         }
     }
-    public void switchToGameOverSence()
+    public void switchToGameOverScene()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene("LoseScene");
+    }
+    public void switchToWinScene()
+    {
+        SceneManager.LoadScene("WinScene");
     }
     public void switchToCreditScene()
     {
@@ -35,7 +42,11 @@ public class SceneControl : MonoBehaviour
     }
     public void switchToGameScene()
     {
-        SceneManager.LoadScene("Kingston");
+        SceneManager.LoadScene("MainScene");
+    }
+    public void switchToHelpScene()
+    {
+        SceneManager.LoadScene("HelpScene");
     }
     public void TogglePause()
     {
