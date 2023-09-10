@@ -76,7 +76,6 @@ public class AI : MonoBehaviour
             DropMoney();
             Ate = false;
         }
-        Debug.Log(health);
     }
 
 

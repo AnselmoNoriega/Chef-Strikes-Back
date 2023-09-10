@@ -8,7 +8,8 @@ public class BadCustomerState : AIBaseState
     public override void EnterState(AI customer)
     {
         //variable needed in the update
-        isStand = false ;
+        PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
+        isStand = true;
         Debug.Log("BadCustomer");
     }
     public override void UpdateState(AI customer)
@@ -27,8 +28,9 @@ public class BadCustomerState : AIBaseState
             customer.isHit = false;
         }
         //else --> not moving
-        if(customer.player.currentRage >= 100)
+        if(GameManager.Instance.rageMode)
         {
+            PathRequestManager.RequestPath(customer.transform.position, customer.transform.position, customer.OnPathFound);
             customer.stateManager.SwitchState(StateManager.AIState.Rage);
         }
     }
@@ -46,6 +48,7 @@ public class BadCustomerState : AIBaseState
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
             rage.currentRage += 10;
+            GameManager.Instance.RageValue += 10;
         }
     }
 

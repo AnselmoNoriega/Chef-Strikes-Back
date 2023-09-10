@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private float spawnTime = 0;
     public float RageValue = 0.0f;
     private float rageTime = 0;
+    public bool rageMode = false;
     public Text moneycounting;
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         spawnTime += Time.deltaTime;
-        if(spawnTime > 5) 
+        if(spawnTime > 5 && rageMode == false) 
         {
             Vector2 spawnPos = TileManager.Instance.requestEntrancePos();
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
@@ -28,13 +29,18 @@ public class GameManager : MonoBehaviour
         }
         if(RageValue >=100 && rageTime <= 15)
         {
-            spawnTime *= 0;
+            rageMode = true;
+            spawnTime = 0;
             rageTime += Time.deltaTime;
         }
-        else
+        else if(rageMode && rageTime >= 15)
         {
             RageValue = 0;
+            rageMode = false;
+            rageTime = 0;
         }
         moneycounting.text = "X " + money.ToString();
+
+        Debug.Log(RageValue);
     }
 }

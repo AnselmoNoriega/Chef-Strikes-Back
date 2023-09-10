@@ -11,7 +11,6 @@ public class RageCustomerState : AIBaseState
     }
     public override void UpdateState(AI customer)
     {
-        Debug.Log("Rage");
         if (customer.aiData.currentTarget != null)
         {
             customer.OnPointerInput?.Invoke(customer.aiData.currentTarget.position);
