@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour
     private float spawnTime = 0;
     public float RageValue = 0.0f;
     private float rageTime = 0;
-
+    public Text moneycounting;
     private void Awake()
     {
         Instance = this;
@@ -34,5 +35,6 @@ public class GameManager : MonoBehaviour
         {
             RageValue = 0;
         }
+        moneycounting.text = "X " + money.ToString();
     }
 }

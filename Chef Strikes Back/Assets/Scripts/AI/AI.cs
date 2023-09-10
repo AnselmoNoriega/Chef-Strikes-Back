@@ -52,7 +52,6 @@ public class AI : MonoBehaviour
     public float AttackDistance => attackDistance;
     public float AttackDelay => attackDelay;
 
-    //Edited by Kingston   ---- 8/22
     public int health = 10;
     private void Start()
     {

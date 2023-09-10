@@ -5,7 +5,6 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-
 public class LevelTimer : MonoBehaviour
 {
     [SerializeField]
@@ -19,6 +18,8 @@ public class LevelTimer : MonoBehaviour
     private float elapsTimeStart;
     private TimeSpan timePlaying;
 
+    //kingston - 9/10
+    [SerializeField] SceneControl sceneControl;
     void Start()
     {
         timePlaying = TimeSpan.FromMinutes(elapsTime);
@@ -30,7 +31,7 @@ public class LevelTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(elapsTime > 0.00f)
+        if (elapsTime > 0.00f)
         {
             elapsTime -= Time.deltaTime / 60;
             worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
@@ -38,9 +39,11 @@ public class LevelTimer : MonoBehaviour
             timePlaying = TimeSpan.FromMinutes(elapsTime);
             textTime.text = timePlaying.ToString("mm':'ss'.'ff");
         }
-        else
+        else if (elapsTime < 0)
         {
-            
+            // scene switching when time is up.
+            // kingston 9/10
+            sceneControl.switchToGameOverScene();
         }
     }
 }
