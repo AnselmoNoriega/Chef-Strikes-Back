@@ -16,12 +16,5 @@ public class Loot : ScriptableObject
         this.dropChance = dropChange;   
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.transform.tag == "Player" && lootName == "Money")
-        {
-            GameManager.Instance.money += 10;
-        }
-
-    }
+    
 }

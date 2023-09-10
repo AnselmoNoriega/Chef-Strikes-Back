@@ -6,6 +6,7 @@ public class RageCustomerState : AIBaseState
 {
     public override void  EnterState(AI customer)
     {
+        
         Debug.Log("Enter Rage Customer");
     }
     public override void UpdateState(AI customer)
@@ -24,7 +25,7 @@ public class RageCustomerState : AIBaseState
         {
             customer.aiData.currentTarget = customer.aiData.targets[0];
         }
-        
+        customer.OnMovementInput?.Invoke(customer.movementInput);
     }
 
     public override void ExitState(AI customer)

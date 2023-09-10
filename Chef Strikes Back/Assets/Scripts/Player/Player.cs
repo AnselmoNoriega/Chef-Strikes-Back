@@ -196,6 +196,15 @@ public class Player : MonoBehaviour
         moodState.AddState<NormalMode>();
         moodState.AddState<RageMode>();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Loot")
+        {
+            GameManager.Instance.money += 10;
+            collision.gameObject.SetActive(false);
+        }
+    }
 }
 
 

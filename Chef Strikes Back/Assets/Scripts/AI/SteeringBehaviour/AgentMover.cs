@@ -18,6 +18,7 @@ public class AgentMover : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+
     private void FixedUpdate()
     {
         if (MovementInput.magnitude > 0 && currentSpeed >= 0)

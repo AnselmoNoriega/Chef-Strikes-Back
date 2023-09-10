@@ -44,7 +44,7 @@ public class Grid : MonoBehaviour
         gridSize.x = max.x - offset.x;
         gridSize.y = max.y - offset.y;
 
-        var cellSizeY = (tilemap.layoutGrid.cellSize.y );
+        var cellSizeY = (tilemap.layoutGrid.cellSize.y / 2);
         var cellSizeZ = (tilemap.layoutGrid.cellSize.z);
 
         Vector3 cellSize = new Vector3(0, cellSizeY, cellSizeZ);
@@ -52,7 +52,7 @@ public class Grid : MonoBehaviour
         grid = new Node[gridSize.x, gridSize.y];
         foreach(var pos in position)
         {
-            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos) , pos.x - offset.x, pos.y - offset.y, 0);
+            grid[pos.x - tilemap.cellBounds.xMin, pos.y - tilemap.cellBounds.yMin] = new Node(true, tilemap.CellToWorld(pos) + cellSize, pos.x - offset.x, pos.y - offset.y, 0);
         }
 
     }
