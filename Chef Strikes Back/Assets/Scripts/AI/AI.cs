@@ -35,8 +35,11 @@ public class AI : MonoBehaviour
 
 
     [SerializeField] public Player player;
+    [SerializeField] public GameObject OrderBubble;
 
     public bool isSit = false;
+    public bool isExist = false;
+    public bool isLeaving = false;
     public bool Ate = false;
 
     public bool isHit = false;
@@ -75,6 +78,7 @@ public class AI : MonoBehaviour
         {
             DropMoney();
             Ate = false;
+            isLeaving = true;
         }
     }
 
@@ -108,9 +112,8 @@ public class AI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
             yield return null;
         }
-        
         isSit = true;
-        
+        if (isLeaving) isExist = true;
     }
 
     public IEnumerator ChaseAndAttack()

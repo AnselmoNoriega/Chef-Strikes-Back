@@ -8,6 +8,7 @@ public class BadCustomerState : AIBaseState
     public override void EnterState(AI customer)
     {
         //variable needed in the update
+        customer.GetComponent<SpriteRenderer>().color = Color.red;
         PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
         isStand = true;
         Debug.Log("BadCustomer");

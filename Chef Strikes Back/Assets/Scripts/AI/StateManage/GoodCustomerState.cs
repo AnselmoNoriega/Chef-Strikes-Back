@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GoodCustomerState : AIBaseState
@@ -31,31 +32,30 @@ public class GoodCustomerState : AIBaseState
 
     public override void UpdateState(AI customer)
     {
-// Updated upstream
-        
-        // walk into restaurant and find empty seat
-      
-      //-->order food
-      
-      //if 15secs(no food) --> switch bad customer
-      if(!IsEat && customer.isSit)
-      {
+        if(!IsEat && customer.isSit)
+        {
             readyOrder = true;
-           waitTime -= Time.deltaTime;
-      }
-
-      if(waitTime <= 0)
-      {
-          customer.stateManager.SwitchState(StateManager.AIState.Bad);
-      }
-      //food served --> leave
-      if(IsEat)
-      {
-         customer.isSit = false;
-         PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEntrancePos(), customer.OnPathFound);
-         IsEat = false;
-         Debug.Log("Destroy");
-      }
+            customer.OrderBubble.gameObject.SetActive(true);
+            waitTime -= Time.deltaTime;
+        }
+        
+        if(waitTime <= 0)
+        {
+            customer.OrderBubble.gameObject.SetActive(false);
+            customer.stateManager.SwitchState(StateManager.AIState.Bad);
+        }
+        if(IsEat & readyOrder)
+        {
+           customer.isSit = false;
+           readyOrder = false;
+           customer.OrderBubble.gameObject.SetActive(false);
+           PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEntrancePos(), customer.OnPathFound);
+        }
+        
+        if(customer.isExist)
+        {
+            customer.gameObject.SetActive(false);
+        }
     }
 
    

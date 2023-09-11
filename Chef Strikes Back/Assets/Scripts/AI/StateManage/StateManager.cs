@@ -17,9 +17,15 @@ public class StateManager
         switch (state) 
         {
          default:
-         case AIState.Good: return new GoodCustomerState();
-         case AIState.Bad: return new BadCustomerState();
-         case AIState.Rage: return new RageCustomerState();
+         case AIState.Good:
+                currentAIState = AIState.Good;
+                return new GoodCustomerState();
+            case AIState.Bad:
+                currentAIState = AIState.Bad;
+                return new BadCustomerState();
+         case AIState.Rage:
+                currentAIState = AIState.Rage;
+                return new RageCustomerState();
         }
     }
 
@@ -36,9 +42,7 @@ public class StateManager
     public StateManager(AI ai)
     {
         this.ai = ai;
-        //currentState = StateCreater(Random.value < 0.5f ? AIState.Good : AIState.Bad);
-        currentState = StateCreater(AIState.Bad);
-        currentAIState = AIState.Bad;
+        currentState = StateCreater(Random.value < 0.5f ? AIState.Good : AIState.Bad);
         currentState.EnterState(ai);
     }
 
