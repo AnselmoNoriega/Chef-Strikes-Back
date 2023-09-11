@@ -105,7 +105,10 @@ public class Player : MonoBehaviour
                 isCoolingDown = false;
             }
         }
-
+        if (money >= 100)
+        {
+            sceneControl.switchToWinScene();
+        }
         stateMachine.Update(Time.deltaTime);
     }
 
