@@ -88,7 +88,6 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        currentRage = GameManager.Instance.RageValue;
         rageBar.value = currentRage;
         healthBar.value = currentHealth / maxHealth;
 

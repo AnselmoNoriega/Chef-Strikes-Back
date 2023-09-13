@@ -16,20 +16,20 @@ public class BadCustomerState : AIBaseState
     public override void UpdateState(AI customer)
     {
         //walk into restaurant and find a place to stand
-        if(!isStand)
+        if (!isStand)
         {
-           PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
-           isStand = true;
+            PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
+            isStand = true;
         }
 
         //if got hit --> find a new spot to stand && rage++
-        if(customer.isHit)
+        if (customer.isHit)
         {
-           isStand = false;
+            isStand = false;
             customer.isHit = false;
         }
         //else --> not moving
-        if(GameManager.Instance.rageMode)
+        if (GameManager.Instance.rageMode)
         {
             PathRequestManager.RequestPath(customer.transform.position, customer.transform.position, customer.OnPathFound);
             customer.stateManager.SwitchState(StateManager.AIState.Rage);
@@ -38,20 +38,23 @@ public class BadCustomerState : AIBaseState
 
     public override void ExitState(AI customer)
     {
-        
+
     }
     public override void OnCollisionEnter2D(Collision2D collision, AI customer)
     {
-        if (collision.gameObject.GetComponent<Rigidbody2D>() && collision.transform.tag == "Player" || collision.transform.tag == "Food")
+        if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
             isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
-            rage.currentRage += 10;
-            GameManager.Instance.RageValue += 10;
+            if (rage)
+            {
+                GameManager.Instance.RageValue += 10;
+                rage.currentRage += 10;
+            }
         }
     }
 
-    
+
 }
