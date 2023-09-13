@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
             sceneControl.switchToWinScene();
         }
         stateMachine.Update(Time.deltaTime);
+        moodState.Update(Time.deltaTime);
     }
 
     private void FixedUpdate()
