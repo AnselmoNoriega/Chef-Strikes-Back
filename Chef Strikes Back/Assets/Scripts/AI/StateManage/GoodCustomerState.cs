@@ -32,7 +32,7 @@ public class GoodCustomerState : AIBaseState
 
     public override void UpdateState(AI customer)
     {
-        if(!IsEat && customer.isSit)
+        if(!IsEat && customer.isSit && !GameManager.Instance.rageMode)
         {
             readyOrder = true;
             customer.OrderBubble.gameObject.SetActive(true);
@@ -54,30 +54,42 @@ public class GoodCustomerState : AIBaseState
         
         if(customer.isExist)
         {
-            customer.gameObject.SetActive(false);
+            Destroy(customer.gameObject);
         }
     }
 
    
 
+    
+    //public override void OnTriggerEnter2D(Collider2D collider, AI customer) 
+    //{
+    //    if (readyOrder)
+    //    {
 
-    public override void OnTriggerEnter2D(Collider2D collider, AI customer) 
+    //        Item recivedItem = collider.GetComponent<Item>();
+    //        if (collider.transform.tag == "Food" && recivedItem.type == ItemType.Burger)
+    //        {
+    //            IsEat = true;
+    //            customer.Ate = true;
+    //            customer.isSit = false;
+    //            Debug.Log("Eat");
+
+    //            collider.gameObject.SetActive(false);
+    //        }
+    //    }
+
+    //}
+
+    public override void OnCollisionEnter2D(Collision2D collision, AI customer) 
     {
-        if (readyOrder)
+        if(collision.gameObject.transform.tag == "Food")
         {
-
-            Item recivedItem = collider.GetComponent<Item>();
-            if (collider.transform.tag == "Food" && recivedItem.type == ItemType.Burger)
-            {
-                IsEat = true;
-                customer.Ate = true;
-                customer.isSit = false;
-                Debug.Log("Eat");
-                
-                collider.gameObject.SetActive(false);
-            }
+            IsEat = true;
+            customer.Ate = true;
+            customer.isSit = false;
+            Destroy(collision.gameObject);
         }
-
+        
     }
 
 }

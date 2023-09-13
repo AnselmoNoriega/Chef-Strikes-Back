@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject AIPrefabs;
+    public SceneControl sc;
     public int money = 0;
     private float spawnTime = 0;
     public float RageValue = 0.0f;
@@ -41,6 +42,10 @@ public class GameManager : MonoBehaviour
         }
         moneycounting.text = "X " + money.ToString();
 
+        if (money>=100)
+        {
+            sc.switchToWinScene();
+        }
         Debug.Log(RageValue);
     }
 }

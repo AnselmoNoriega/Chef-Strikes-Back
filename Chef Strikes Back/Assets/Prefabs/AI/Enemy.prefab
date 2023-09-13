@@ -129,8 +129,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.056009054, y: 0.43991804}
-  m_Size: {x: 0.567966, y: 1.1495099}
+  m_Offset: {x: 0.013597906, y: 0.43991804}
+  m_Size: {x: 0.6527883, y: 1.1495099}
   m_Direction: 0
 --- !u!58 &8070843808051580113
 CircleCollider2D:
@@ -262,7 +262,10 @@ MonoBehaviour:
   movementInput: {x: 0, y: 0}
   movementDirectionSolver: {fileID: 8070843808567550551}
   player: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+  OrderBubble: {fileID: 0}
   isSit: 0
+  isExist: 0
+  isLeaving: 0
   Ate: 0
   isHit: 0
   chasing: 0
