@@ -141,6 +141,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeMood(PlayerStage state)
+    {
+        if (playerMode != state)
+        {
+            playerMode = state;
+            moodState.ChangeState((int)state);
+        }
+    }
+
     public void Attack(Vector2 mousePos)
     {
         if (isCoolingDown)

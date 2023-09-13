@@ -108,7 +108,10 @@ public class NormalMode : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-
+        if(GameManager.Instance.rageMode)
+        {
+            agent.ChangeMood(PlayerStage.Rage);
+        }
     }
 
     public void FixedUpdate(Player agent)
@@ -131,7 +134,10 @@ public class RageMode : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-
+        if (!GameManager.Instance.rageMode)
+        {
+            agent.ChangeMood(PlayerStage.Normal);
+        }
     }
 
     public void FixedUpdate(Player agent)
