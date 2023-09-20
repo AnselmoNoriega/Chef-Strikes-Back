@@ -15,9 +15,8 @@ public class Player : MonoBehaviour
     private int enemyKills;
     private int money;
 
-    [Space, Header("Attack Info")]
-    public float attackCooldown;
-    public bool isCoolingDown;
+    [HideInInspector, Space, Header("Attack Info")]
+    public Vector2 attackDir;
 
     [Space, Header("MaxStats Info")]
     public float maxHealth;
@@ -36,9 +35,12 @@ public class Player : MonoBehaviour
     public PlayerStates playerState;
     public PlayerStage playerMode;
 
-    [HideInInspector] public Animator animator;
-    [HideInInspector] public InputAction move;
-    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] 
+    public Animator animator;
+    [HideInInspector] 
+    public InputAction move;
+    [HideInInspector] 
+    public Rigidbody2D rb;
 
     private StateMachine<Player> stateMachine;
     private StateMachine<Player> moodState;
@@ -47,12 +49,6 @@ public class Player : MonoBehaviour
     public GameObject vignette;
 
     private InputControls inputManager;
-
-    private string[] attackDirections =
-        {
-        "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
-        "Attack_Left", "Attack_LeftBot", "Attack_Bot", "Attack_RightBot"
-    };
 
     public void Awake()
     {
@@ -81,9 +77,9 @@ public class Player : MonoBehaviour
         moodState.ChangeState(0);
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        currentRage = 0;
         currentHealth = maxHealth;
         rageBar.maxValue = MaxRage;
+        currentRage = 0;
     }
 
     public void Update()
@@ -96,14 +92,6 @@ public class Player : MonoBehaviour
             ChangeState(PlayerStates.Walking);
         }
 
-        if (isCoolingDown)
-        {
-            attackCooldown -= Time.deltaTime;
-            if (attackCooldown <= 0)
-            {
-                isCoolingDown = false;
-            }
-        }
         if (money >= 100)
         {
             sceneControl.switchToWinScene();
@@ -150,55 +138,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Attack(Vector2 mousePos)
-    {
-        if (isCoolingDown)
-        {
-            return;
-        }
-
-        ChangeState(PlayerStates.Attacking);
-
-        var rayOrigin = new Vector2(transform.position.x, transform.position.y + 0.35f);
-        var attackDirection = (mousePos - rayOrigin).normalized;
-
-        RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, attackDirection, _weapon.Range);
-        animator.Play(PlayerHelper.GetDirection(attackDirection, attackDirections));
-
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (hit.collider.CompareTag("Player"))
-            {
-                continue;
-            }
-
-            var enemyAI = hit.collider.GetComponent<AI>();
-
-            if (enemyAI)
-            {
-                if (enemyAI.stateManager.CurrentAIState == StateManager.AIState.Rage)
-                {
-                    enemyAI.health -= Mathf.RoundToInt(_weapon.Damage);
-
-                    if (enemyAI.health <= 0)
-                    {
-                        Destroy(hit.collider.gameObject);
-                    }
-                }
-            }
-
-            var foodPile = hit.collider.GetComponent<FoodPile>();
-
-            if (foodPile != null)
-            {
-                foodPile.Hit(1);
-            }
-        }
-
-        attackCooldown = 1.0f / _weapon.AttackSpeed;
-        isCoolingDown = true;
-    }
-
     private void AddStates()
     {
         stateMachine.AddState<PlayerIdle>();
@@ -219,5 +158,3 @@ public class Player : MonoBehaviour
         }
     }
 }
-
-

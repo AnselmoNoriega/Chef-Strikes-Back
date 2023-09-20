@@ -80,6 +80,11 @@ public class AI : MonoBehaviour
             Ate = false;
             isLeaving = true;
         }
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 

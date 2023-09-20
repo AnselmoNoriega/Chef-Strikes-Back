@@ -30,7 +30,7 @@ public class Actions : MonoBehaviour
         inventory = GetComponent<Inventory>();
         ready2Throw = false;
         isCarryingItem = false;
-        offset = new Vector3(0 , 0.35f, 0);
+        offset = new Vector3(0, 0.35f, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -94,9 +94,11 @@ public class Actions : MonoBehaviour
 
     public void Attacking(InputAction mouse)
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-
-        player.Attack(mousePos);
+        if (player.playerState != PlayerStates.Attacking)
+        {
+            player.attackDir = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
+            player.ChangeState(PlayerStates.Attacking);
+        }
     }
 
     public void Boosting()
