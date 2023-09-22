@@ -11,12 +11,6 @@ public class PlayerIdle : StateClass<Player>
     private float moveSpeed = 2.3f;
     private float acceleration = 100.0f;
 
-    private string[] directionNames =
-        {
-        "Idle_Right", "Idle_RightTop", "Idle_Front", "Idle_LeftTop",
-        "Idle_Left", "Idle_LeftBot", "Idle_Bot", "Idle_RightBot"
-    };
-
     public void Enter(Player agent)
     {
 
@@ -112,6 +106,14 @@ public class PlayerAttacking : StateClass<Player>
 
 public class PlayerThrowing : StateClass<Player>
 {
+    private Vector3 offset = new Vector3(0, 0.35f, 0);
+
+    private string[] directionNames =
+        {
+        "Idle_Right", "Idle_RightTop", "Idle_Front", "Idle_LeftTop",
+        "Idle_Left", "Idle_LeftBot", "Idle_Bot", "Idle_RightBot"
+    };
+
     public void Enter(Player agent)
     {
         agent.rb.velocity = Vector2.zero;
@@ -119,7 +121,9 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-
+        var mousePos = Camera.main.ScreenToWorldPoint(agent.mouse.ReadValue<Vector2>());
+        var dir = (mousePos - (agent.transform.position + offset));
+        PlayerHelper.FaceMovementDirection(agent.animator, dir, directionNames);
     }
 
     public void FixedUpdate(Player agent)

@@ -22,6 +22,7 @@ public class Inventory : MonoBehaviour
     private Vector3 offset;
     [SerializeField]
     private GameObject pointer;
+    private Vector3 offsetPointer;
 
     private bool isLaunchingFood;
     private InputAction targetMouse;
@@ -30,6 +31,7 @@ public class Inventory : MonoBehaviour
     {
         isLaunchingFood = false;
         length.value = 0.0f;
+        offsetPointer = new Vector3(0, 0.35f, 0);
     }
 
     private void Update()
@@ -93,7 +95,7 @@ public class Inventory : MonoBehaviour
     private void PointerMovement()
     {
         var mousePos = Camera.main.ScreenToWorldPoint(targetMouse.ReadValue<Vector2>());
-        var dir = (mousePos - transform.position);
+        var dir = (mousePos - (transform.position + offsetPointer));
         var angle = (float)Math.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
         pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
         pointer.transform.localScale = new Vector3(0.5f, length.value, 1.0f);

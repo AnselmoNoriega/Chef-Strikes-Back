@@ -23,7 +23,7 @@ public class CreationTable : MonoBehaviour
     private void Start()
     {
         waitList = new List<List<GameObject>>();
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             waitList.Add(new List<GameObject>());
         }

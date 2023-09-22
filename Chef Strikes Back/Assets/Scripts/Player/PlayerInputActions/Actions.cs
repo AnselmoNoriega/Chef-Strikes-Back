@@ -71,6 +71,7 @@ public class Actions : MonoBehaviour
     {
         if (inventory.GetFoodItem() != null)
         {
+            player.mouse = mouse;
             inventory.PrepareToThrowFood(mouse);
             ready2Throw = true;
             player.ChangeState(PlayerStates.Throwing);

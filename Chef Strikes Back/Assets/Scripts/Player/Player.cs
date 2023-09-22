@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
     public InputAction move;
     [HideInInspector] 
     public Rigidbody2D rb;
+    [HideInInspector]
+    public InputAction mouse;
 
     private StateMachine<Player> stateMachine;
     private StateMachine<Player> moodState;
