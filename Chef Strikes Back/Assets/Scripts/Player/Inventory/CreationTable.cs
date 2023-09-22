@@ -12,7 +12,7 @@ public class CreationTable : MonoBehaviour
     private bool[] count;
     [SerializeField]
     private List<GameObject> items;
-    private List<GameObject> waitList;
+    private List<List<GameObject>> waitList;
 
     [Space, Header("Storage Objects")]
     [SerializeField]
@@ -22,7 +22,11 @@ public class CreationTable : MonoBehaviour
 
     private void Start()
     {
-        waitList = new List<GameObject>();
+        waitList = new List<List<GameObject>>();
+        for (int i = 0; i < 3; ++i)
+        {
+            waitList.Add(new List<GameObject>());
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,15 +41,23 @@ public class CreationTable : MonoBehaviour
                 count[(int)recivedItem.type] = true;
                 recivedItem.LaunchedInTable(magnet);
             }
-            else if(!items.Contains(recivedItem.gameObject) && !waitList.Contains(recivedItem.gameObject))
+            else if (!items.Contains(recivedItem.gameObject) && !waitList[(int)recivedItem.type].Contains(recivedItem.gameObject))
             {
-                waitList.Add(recivedItem.gameObject);
+                waitList[(int)recivedItem.type].Add(recivedItem.gameObject);
             }
 
-            if(!ItemIsMissing())
+            if (!ItemIsMissing())
             {
                 StartCoroutine(GiveMeBurger());
             }
+        }
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            CheckAvailability(i);
         }
     }
 
@@ -63,7 +75,7 @@ public class CreationTable : MonoBehaviour
             }
             else
             {
-                waitList.Remove(recivedItem.gameObject);
+                waitList[(int)recivedItem.type].Remove(recivedItem.gameObject);
             }
         }
     }
@@ -90,5 +102,17 @@ public class CreationTable : MonoBehaviour
         }
 
         Instantiate(burger, transform.position, Quaternion.identity);
+    }
+
+    private void CheckAvailability(int num)
+    {
+        if (items[num] == null && waitList[num].Count > 0)
+        {
+            items[num] = waitList[num][0];
+            waitList[num].RemoveAt(0);
+            count[num] = true;
+            var foodItem = items[num].GetComponent<Item>();
+            foodItem.LaunchedInTable(magnet);
+        }
     }
 }

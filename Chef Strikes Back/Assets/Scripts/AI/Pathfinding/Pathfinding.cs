@@ -23,8 +23,10 @@ public class Pathfinding : MonoBehaviour
         foreach(var position in tilemap.cellBounds.allPositionsWithin)
         {
             var tile = tilemap.GetTile(position);
-            if(tile == null) continue;
-            if (tile is NonWalkableTile) continue;
+            if (tile == null || tile is NonWalkableTile)
+            {
+                continue;
+            }
             positions.Add(position);
         }
 
