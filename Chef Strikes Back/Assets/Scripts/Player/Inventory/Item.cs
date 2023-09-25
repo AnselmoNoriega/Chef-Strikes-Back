@@ -11,7 +11,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class Item : MonoBehaviour
 {
-    public Collider2D collider;
+    public Collider2D myCollider;
     public Rigidbody2D rb;
     public ItemType type;
 
@@ -65,7 +65,7 @@ public class Item : MonoBehaviour
     {
         if (time <= 0)
         {
-            collider.enabled = true;
+            myCollider.enabled = true;
             rb.velocity = Vector2.zero;
             rb.rotation = 0;
             rb.angularVelocity = 0;
@@ -90,6 +90,11 @@ public class Item : MonoBehaviour
             transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
             isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
         }
+    }
+
+    public void DestoyItem()
+    {
+        Destroy(gameObject);
     }
 
 }

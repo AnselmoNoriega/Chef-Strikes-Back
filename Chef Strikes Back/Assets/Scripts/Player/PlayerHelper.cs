@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerHelper : MonoBehaviour
 {
-    public static int FaceMovementDirection(Animator animator, Vector2 lookDirection, string[] directionNames)
+    public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
     {
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
-        animator.Play(directionNames[directionIndex]);
+        animator.SetInteger("PosNum", directionIndex);
+        //animator.Play(directionNames[directionIndex]);
         return directionIndex;
     }
 

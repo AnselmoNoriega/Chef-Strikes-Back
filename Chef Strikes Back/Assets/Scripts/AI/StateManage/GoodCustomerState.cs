@@ -51,11 +51,6 @@ public class GoodCustomerState : AIBaseState
            customer.OrderBubble.gameObject.SetActive(false);
            PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEntrancePos(), customer.OnPathFound);
         }
-        
-        if(customer.isExist)
-        {
-            Destroy(customer.gameObject);
-        }
     }
 
    
@@ -80,14 +75,14 @@ public class GoodCustomerState : AIBaseState
 
     //}
 
-    public override void OnCollisionEnter2D(Collision2D collision, AI customer) 
+    public override void CollisionEnter2D(Collision2D collision, AI customer, Item food) 
     {
         if(collision.gameObject.transform.tag == "Food")
         {
             IsEat = true;
             customer.Ate = true;
             customer.isSit = false;
-            Destroy(collision.gameObject);
+            food.DestoyItem();
         }
         
     }

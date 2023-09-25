@@ -19,7 +19,7 @@ public class AI : MonoBehaviour
     public AIData aiData;
 
     [SerializeField]
-    private float detectionDelay = 0.05f, aiUpdateDelay = 0.06f, attackDelay = 1f;
+    private float detectionDelay = 0.05f, attackDelay = 1f;
 
     [SerializeField]
     private float attackDistance = 0.5f;
@@ -81,7 +81,7 @@ public class AI : MonoBehaviour
             isLeaving = true;
         }
 
-        if(health <= 0)
+        if(health <= 0 || isExist)
         {
             Destroy(gameObject);
         }
@@ -177,11 +177,11 @@ public class AI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        stateManager.CurrentState.OnCollisionEnter2D(collision, this);
+        stateManager.CurrentState.CollisionEnter2D(collision, this, collision.gameObject.GetComponent<Item>());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        stateManager.CurrentState.OnTriggerEnter2D(collision, this);
+        stateManager.CurrentState.TriggerEnter2D(collision, this);
     }
 }

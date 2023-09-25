@@ -8,7 +8,6 @@ public enum PlayerStage { Normal, Rage, None }
 
 public class PlayerIdle : StateClass<Player>
 {
-    private float moveSpeed = 2.3f;
     private float acceleration = 100.0f;
 
     public void Enter(Player agent)
@@ -36,17 +35,12 @@ public class PlayerAttacking : StateClass<Player>
 {
     float timer;
 
-    private string[] attackDirections =
-        {
-        "Attack_Right", "Attack_RightTop", "Attack_Top", "Attack_LeftTop",
-        "Attack_Left", "Attack_LeftBot", "Attack_Bot", "Attack_RightBot"
-    };
-
     public void Enter(Player agent)
     {
         timer = 0.5f;
         agent.rb.velocity = Vector2.zero;
         Attack(agent.attackDir, agent);
+        agent.animator.SetBool("IsAttacking", true);
     }
 
     public void Update(Player agent, float dt)
@@ -66,7 +60,7 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Exit(Player agent)
     {
-
+        agent.animator.SetBool("IsAttacking", false);
     }
 
     public void Attack(Vector2 mousePos, Player player)
@@ -74,8 +68,8 @@ public class PlayerAttacking : StateClass<Player>
         var rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
         var attackDirection = (mousePos - rayOrigin).normalized;
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, attackDirection, player._weapon.Range);
-        player.animator.Play(PlayerHelper.GetDirection(attackDirection, attackDirections));
+        RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, attackDirection, player._weapon.Range); 
+        PlayerHelper.FaceMovementDirection(player.animator, attackDirection);
 
         foreach (RaycastHit2D hit in hits)
         {
@@ -108,12 +102,6 @@ public class PlayerThrowing : StateClass<Player>
 {
     private Vector3 offset = new Vector3(0, 0.35f, 0);
 
-    private string[] directionNames =
-        {
-        "Idle_Right", "Idle_RightTop", "Idle_Front", "Idle_LeftTop",
-        "Idle_Left", "Idle_LeftBot", "Idle_Bot", "Idle_RightBot"
-    };
-
     public void Enter(Player agent)
     {
         agent.rb.velocity = Vector2.zero;
@@ -123,7 +111,7 @@ public class PlayerThrowing : StateClass<Player>
     {
         var mousePos = Camera.main.ScreenToWorldPoint(agent.mouse.ReadValue<Vector2>());
         var dir = (mousePos - (agent.transform.position + offset));
-        PlayerHelper.FaceMovementDirection(agent.animator, dir, directionNames);
+        PlayerHelper.FaceMovementDirection(agent.animator, dir);
     }
 
     public void FixedUpdate(Player agent)

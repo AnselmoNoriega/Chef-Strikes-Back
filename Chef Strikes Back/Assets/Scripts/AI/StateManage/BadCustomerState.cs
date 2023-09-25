@@ -13,6 +13,7 @@ public class BadCustomerState : AIBaseState
         isStand = true;
         Debug.Log("BadCustomer");
     }
+
     public override void UpdateState(AI customer)
     {
         //walk into restaurant and find a place to stand
@@ -40,7 +41,7 @@ public class BadCustomerState : AIBaseState
     {
 
     }
-    public override void OnCollisionEnter2D(Collision2D collision, AI customer)
+    public override void CollisionEnter2D(Collision2D collision, AI customer, Item food)
     {
         if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
@@ -55,6 +56,4 @@ public class BadCustomerState : AIBaseState
             }
         }
     }
-
-
 }

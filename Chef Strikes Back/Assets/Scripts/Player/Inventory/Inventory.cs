@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
         foodItem = item;
         item.transform.SetParent(transform);
         item.transform.localPosition = new Vector2(0, 0.7f);
-        item.collider.enabled = false;
+        item.GetComponent<Collider2D>().enabled = false;
     }
 
     public Item GetFoodItem()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AIBaseState :MonoBehaviour
+public abstract class AIBaseState
 {
    public abstract void EnterState(AI customer);
 
@@ -10,8 +10,8 @@ public abstract class AIBaseState :MonoBehaviour
 
     public abstract void ExitState(AI customer);
 
-    public virtual void OnCollisionEnter2D(Collision2D collision, AI customer) { }
-    public virtual void OnTriggerEnter2D(Collider2D collider, AI customer) { }
+    public virtual void CollisionEnter2D(Collision2D collision, AI customer, Item food) { }
+    public virtual void TriggerEnter2D(Collider2D collider, AI customer) { }
 
 
 
