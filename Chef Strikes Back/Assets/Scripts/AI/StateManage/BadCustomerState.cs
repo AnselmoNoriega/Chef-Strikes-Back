@@ -2,46 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BadCustomerState : AIBaseState
+public class BadCustomerState : StateClass<AI>
 {
     bool isStand;
-    public override void EnterState(AI customer)
+
+    public void Enter(AI agent)
     {
-        //variable needed in the update
-        customer.GetComponent<SpriteRenderer>().color = Color.red;
-        PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
+        agent.GetComponent<SpriteRenderer>().color = Color.red;
+        PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
         isStand = true;
         Debug.Log("BadCustomer");
     }
 
-    public override void UpdateState(AI customer)
+    public void Update(AI agent, float dt)
     {
-        //walk into restaurant and find a place to stand
         if (!isStand)
         {
-            PathRequestManager.RequestPath(customer.transform.position, TileManager.Instance.requestEmptyPos(), customer.OnPathFound);
+            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
             isStand = true;
         }
 
-        //if got hit --> find a new spot to stand && rage++
-        if (customer.isHit)
+        if (agent.isHit)
         {
             isStand = false;
-            customer.isHit = false;
+            agent.isHit = false;
         }
-        //else --> not moving
+
         if (GameManager.Instance.rageMode)
         {
-            PathRequestManager.RequestPath(customer.transform.position, customer.transform.position, customer.OnPathFound);
-            customer.stateManager.SwitchState(StateManager.AIState.Rage);
+            PathRequestManager.RequestPath(agent.transform.position, agent.transform.position, agent.OnPathFound);
+            agent.stateManager.ChangeState((int)AIState.Rage);
         }
     }
 
-    public override void ExitState(AI customer)
+    public void FixedUpdate(AI agent)
     {
 
     }
-    public override void CollisionEnter2D(Collision2D collision, AI customer, Item food)
+
+    public void CollisionEnter2D(AI agent, Collision2D collision)
     {
         if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
@@ -55,5 +54,15 @@ public class BadCustomerState : AIBaseState
                 rage.currentRage += 10;
             }
         }
+    }
+
+    public void TriggerEnter2D(AI agent, Collider2D collision)
+    {
+
+    }
+
+    public void Exit(AI agent)
+    {
+
     }
 }

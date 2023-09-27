@@ -40,6 +40,16 @@ public class PlayerWalking : StateClass<Player>
 
     }
 
+    public void CollisionEnter2D(Player agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision)
+    {
+
+    }
+
     private void ChangeDirectionSpeed(Player agent, int newDirection)
     {
         agent.rb.velocity = moveDirection * agent.rb.velocity.magnitude;

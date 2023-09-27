@@ -29,6 +29,16 @@ public class PlayerIdle : StateClass<Player>
     {
 
     }
+
+    public void CollisionEnter2D(Player agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision)
+    {
+
+    }
 }
 
 public class PlayerAttacking : StateClass<Player>
@@ -63,6 +73,16 @@ public class PlayerAttacking : StateClass<Player>
         agent.animator.SetBool("IsAttacking", false);
     }
 
+    public void CollisionEnter2D(Player agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision)
+    {
+
+    }
+
     public void Attack(Vector2 mousePos, Player player)
     {
         var rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
@@ -82,7 +102,7 @@ public class PlayerAttacking : StateClass<Player>
 
             if (enemyAI)
             {
-                if (enemyAI.stateManager.CurrentAIState == StateManager.AIState.Rage)
+                if (enemyAI.stateManager.CurrentState == (int)AIState.Rage)
                 {
                     enemyAI.health -= Mathf.RoundToInt(player._weapon.Damage);
                 }
@@ -123,6 +143,16 @@ public class PlayerThrowing : StateClass<Player>
     {
 
     }
+
+    public void CollisionEnter2D(Player agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision)
+    {
+
+    }
 }
 
 
@@ -152,6 +182,16 @@ public class NormalMode : StateClass<Player>
     {
 
     }
+
+    public void CollisionEnter2D(Player agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision)
+    {
+
+    }
 }
 
 public class RageMode : StateClass<Player>
@@ -177,5 +217,15 @@ public class RageMode : StateClass<Player>
     public void Exit(Player agent)
     {
         agent.vignette.SetActive(false);
+    }
+
+    public void CollisionEnter2D(Player agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision)
+    {
+
     }
 }

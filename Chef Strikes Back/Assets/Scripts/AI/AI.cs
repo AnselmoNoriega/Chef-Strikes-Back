@@ -7,6 +7,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 
+public enum AIState
+{
+    Good,
+    Bad,
+    Rage
+}
+
 public class AI : MonoBehaviour
 {
     [SerializeField]
@@ -46,7 +53,7 @@ public class AI : MonoBehaviour
     Vector2[] path;
     int targetIndex;  
 
-    public StateManager stateManager;
+    public StateMachine<AI> stateManager;
 
     public bool chasing = false;
 
@@ -56,9 +63,20 @@ public class AI : MonoBehaviour
     public float AttackDelay => attackDelay;
 
     public int health = 10;
+
+
+    private void Awake()
+    {
+        stateManager = new StateMachine<AI>(this);
+    }
+
     private void Start()
     {
-        stateManager = new StateManager(this);
+        stateManager.AddState<GoodCustomerState>();
+        stateManager.AddState<BadCustomerState>();
+        stateManager.AddState<RageCustomerState>();
+        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
+
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
 
@@ -72,8 +90,8 @@ public class AI : MonoBehaviour
 
     private void Update()
     {
-        if(stateManager == null) stateManager = new StateManager(this);
-        stateManager.Update();
+        stateManager.Update(Time.deltaTime);
+
         if(Ate)
         {
             DropMoney();
@@ -177,11 +195,11 @@ public class AI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        stateManager.CurrentState.CollisionEnter2D(collision, this, collision.gameObject.GetComponent<Item>());
+        stateManager.CollisionEnter2D(collision);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        stateManager.CurrentState.TriggerEnter2D(collision, this);
+        stateManager.TriggerEnter2D(collision);
     }
 }

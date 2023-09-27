@@ -12,37 +12,33 @@ public class StateManager
         Rage
     }
 
-    public AIBaseState StateCreater(AIState state)
-    {
-        switch (state) 
-        {
-         default:
-         case AIState.Good:
-                currentAIState = AIState.Good;
-                return new GoodCustomerState();
-            case AIState.Bad:
-                currentAIState = AIState.Bad;
-                return new BadCustomerState();
-         case AIState.Rage:
-                currentAIState = AIState.Rage;
-                return new RageCustomerState();
-        }
-    }
-
-
-
-
     private AIBaseState currentState;
     public AIBaseState CurrentState { get => currentState;}
     AI ai;
     private AIState currentAIState;
     public AIState CurrentAIState => currentAIState;
 
+    //public AIBaseState StateCreater(AIState state)
+    //{
+    //    //switch (state) 
+    //    //{
+    //    // default:
+    //    // case AIState.Good:
+    //    //        currentAIState = AIState.Good;
+    //    //        return new GoodCustomerState();
+    //    //    case AIState.Bad:
+    //    //        currentAIState = AIState.Bad;
+    //    //        return new BadCustomerState();
+    //    // case AIState.Rage:
+    //    //        currentAIState = AIState.Rage;
+    //    //        return new RageCustomerState();
+    //    //}
+    //}
 
     public StateManager(AI ai)
     {
         this.ai = ai;
-        currentState = StateCreater(Random.value < 0.8f ? AIState.Good : AIState.Bad);
+        //currentState = StateCreater(Random.value < 0.8f ? AIState.Good : AIState.Bad);
         currentState.EnterState(ai);
     }
 
@@ -51,7 +47,7 @@ public class StateManager
         if (currentState is not null)
             currentState.ExitState(ai);
 
-        currentState = StateCreater(state);
+        //currentState = StateCreater(state);
         currentAIState = state;
 
         if (currentState is not null)

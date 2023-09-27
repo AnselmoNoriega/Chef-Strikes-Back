@@ -8,7 +8,7 @@ public class LootBag : MonoBehaviour
     public GameObject droppedItemPrefab;
     public List<Loot> lootList = new List<Loot>();
     
-    Loot GetDroppedItem()
+    private Loot GetDroppedItem()
     {
         int randomNumber = Random.Range(1, 101);
         List<Loot> possibleItems = new List<Loot>();

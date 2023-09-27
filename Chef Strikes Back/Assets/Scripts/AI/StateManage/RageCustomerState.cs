@@ -2,34 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RageCustomerState : AIBaseState
+public class RageCustomerState : StateClass<AI>
 {
-    public override void  EnterState(AI customer)
+    public void Enter(AI agent)
     {
-        
-        Debug.Log("Enter Rage Customer");
+
     }
-    public override void UpdateState(AI customer)
+
+    public void Update(AI agent, float dt)
     {
-        if (customer.aiData.currentTarget != null)
+        if (agent.aiData.currentTarget != null)
         {
-            customer.OnPointerInput?.Invoke(customer.aiData.currentTarget.position);
-            if (customer.chasing == false)
+            agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+
+            if (agent.chasing == false)
             {
-                customer.chasing = true;
-                customer.StartCoroutine(customer.ChaseAndAttack());
+                agent.chasing = true;
+                agent.StartCoroutine(agent.ChaseAndAttack());
             }
         }
-        else if (customer.aiData.GetTargetsCount() > 0)
+        else if (agent.aiData.GetTargetsCount() > 0)
         {
-            customer.aiData.currentTarget = customer.aiData.targets[0];
+            agent.aiData.currentTarget = agent.aiData.targets[0];
         }
-        customer.OnMovementInput?.Invoke(customer.movementInput);
 
-        
+        agent.OnMovementInput?.Invoke(agent.movementInput);
     }
 
-    public override void ExitState(AI customer)
+    public void FixedUpdate(AI agent)
+    {
+
+    }
+
+    public void CollisionEnter2D(AI agent, Collision2D collision)
+    {
+
+    }
+
+    public void TriggerEnter2D(AI agent, Collider2D collision)
+    {
+
+    }
+
+    public void Exit(AI agent)
     {
 
     }
