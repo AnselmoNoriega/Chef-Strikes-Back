@@ -13,6 +13,8 @@ public class CreationTable : MonoBehaviour
     [SerializeField]
     private List<GameObject> items;
     private List<List<GameObject>> waitList;
+    [SerializeField]
+    private List<ItemType> acceptedTypes;
 
     [Space, Header("Storage Objects")]
     [SerializeField]
@@ -23,7 +25,7 @@ public class CreationTable : MonoBehaviour
     private void Start()
     {
         waitList = new List<List<GameObject>>();
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i <= items.Count; ++i)
         {
             waitList.Add(new List<GameObject>());
         }
@@ -33,7 +35,7 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem != null && (int)recivedItem.type < 3)
+        if (recivedItem != null && IsAcceptedType(recivedItem.type))
         {
             if (!count[(int)recivedItem.type])
             {
@@ -116,5 +118,18 @@ public class CreationTable : MonoBehaviour
             foodItem.LaunchedInTable(magnet);
             foodItem.isPickable = false;
         }
+    }
+
+    private bool IsAcceptedType(ItemType type)
+    {
+        foreach(var acceptedType in acceptedTypes)
+        {
+            if(acceptedType == type)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7949611368052100238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.069, y: -0.266, z: 0}
+  m_LocalPosition: {x: 0.019, y: -0.085, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 7949611368931973793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2350001, y: -0.329, z: 0.17310667}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.0460224, y: 2.0460224, z: 2.0460224}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7949611368052100239}
@@ -90,10 +90,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.66264737, y: -0.13875484}
-      - {x: 0.18364543, y: 0.098424554}
-      - {x: -0.7887145, y: -0.3882114}
-      - {x: -0.31478307, y: -0.6281409}
+    - - {x: 0.6216228, y: -0.082346044}
+      - {x: 0.04646951, y: 0.21508822}
+      - {x: -0.53615695, y: -0.08309108}
+      - {x: 0.046746105, y: -0.36532718}
 --- !u!114 &7949611368931973794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,5 +112,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  acceptedTypes: 000000000100000002000000
   burger: {fileID: 7360178021079257609, guid: 3b0146762f99960418ab2565375bfa1c, type: 3}
   magnet: {fileID: 7949611368052100239}
