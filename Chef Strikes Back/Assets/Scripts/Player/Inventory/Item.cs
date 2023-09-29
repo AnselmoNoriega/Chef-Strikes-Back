@@ -26,11 +26,13 @@ public class Item : MonoBehaviour
     private float magnetSmoodTime;
     private Transform magnetPos;
     private bool isBeingDrag;
+    public bool isPickable;
 
     private void Start()
     {
         handPosition = new Vector2(0, 0.7f);
         isBeingDrag = false;
+        isPickable = true;
     }
 
     private void FixedUpdate()

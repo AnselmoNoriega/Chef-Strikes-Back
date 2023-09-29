@@ -57,7 +57,7 @@ public class Actions : MonoBehaviour
 
             for (int i = 0; i < item.Count; i++)
             {
-                if (item[i] && item[i].GetComponent<Collider2D>().OverlapPoint(mousePos))
+                if (item[i] && item[i].GetComponent<Collider2D>().OverlapPoint(mousePos) && item[i].isPickable)
                 {
                     inventory.AddItem(item[i]);
                     isCarryingItem = true;

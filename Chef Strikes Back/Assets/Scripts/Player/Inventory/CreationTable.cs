@@ -40,6 +40,7 @@ public class CreationTable : MonoBehaviour
                 items[(int)recivedItem.type] = recivedItem.gameObject;
                 count[(int)recivedItem.type] = true;
                 recivedItem.LaunchedInTable(magnet);
+                recivedItem.isPickable = false;
             }
             else if (!items.Contains(recivedItem.gameObject) && !waitList[(int)recivedItem.type].Contains(recivedItem.gameObject))
             {
@@ -113,6 +114,7 @@ public class CreationTable : MonoBehaviour
             count[num] = true;
             var foodItem = items[num].GetComponent<Item>();
             foodItem.LaunchedInTable(magnet);
+            foodItem.isPickable = false;
         }
     }
 }
