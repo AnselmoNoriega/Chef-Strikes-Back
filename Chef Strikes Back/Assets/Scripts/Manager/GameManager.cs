@@ -46,6 +46,5 @@ public class GameManager : MonoBehaviour
         {
             sc.switchToWinScene();
         }
-        Debug.Log(RageValue);
     }
 }

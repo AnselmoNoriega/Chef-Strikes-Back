@@ -11,7 +11,6 @@ public class BadCustomerState : StateClass<AI>
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
         isStand = true;
-        Debug.Log("BadCustomer");
     }
 
     public void Update(AI agent, float dt)
