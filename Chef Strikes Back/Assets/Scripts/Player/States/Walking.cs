@@ -19,7 +19,6 @@ public class PlayerWalking : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        currentDirection = PlayerHelper.FaceMovementDirection(agent.animator, moveDirection);
         moveDirection = (agent.move.ReadValue<Vector2>() * movementAngle).normalized;
 
         if (direction != currentDirection) ChangeDirectionSpeed(agent, currentDirection);
@@ -27,6 +26,10 @@ public class PlayerWalking : StateClass<Player>
         if (agent.move.ReadValue<Vector2>() == Vector2.zero)
         {
             agent.ChangeState(PlayerStates.Idle);
+        }
+        else
+        {
+            currentDirection = PlayerHelper.FaceMovementDirection(agent.animator, moveDirection);
         }
     }
 
