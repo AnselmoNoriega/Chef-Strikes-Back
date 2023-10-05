@@ -90,7 +90,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void KeyShiftPressed(InputAction.CallbackContext input)
     {
-        action.Boosting();
+
     }
 
     private void KeyQPressed(InputAction.CallbackContext input)
@@ -100,6 +100,6 @@ public class PlayerInputs : MonoBehaviour
 
     private void KeyShiftReleased(InputAction.CallbackContext input)
     {
-        action.BoostReleased();
+
     }
 }

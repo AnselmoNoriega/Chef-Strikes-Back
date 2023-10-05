@@ -21,8 +21,8 @@ public class Actions : MonoBehaviour
     private Vector3 offset;
 
     [Space, Header("Player Attack")]
-    [SerializeField] CharacterMovement CM;
-    [SerializeField] Player player;
+    [SerializeField] 
+    private Player player;
 
 
     private void Start()
@@ -100,16 +100,6 @@ public class Actions : MonoBehaviour
             player.attackDir = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
             player.ChangeState(PlayerStates.Attacking);
         }
-    }
-
-    public void Boosting()
-    {
-        CM.SpeedBoost(5.0f);
-    }
-
-    public void BoostReleased()
-    {
-        CM.SpeedBoost(-5.0f);
     }
 
 }
