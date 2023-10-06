@@ -47,7 +47,7 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Enter(Player agent)
     {
-        timer = 0.5f;
+        timer = 0.1f;
         agent.rb.velocity = Vector2.zero;
         Attack(agent.attackDir, agent);
         agent.animator.SetBool("IsAttacking", true);
