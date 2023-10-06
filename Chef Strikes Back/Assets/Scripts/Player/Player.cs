@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
     [Space, Header("State Info")]
     public PlayerStates playerState;
+    public PlayerActions playerAction;
     public PlayerStage playerMode;
 
     [HideInInspector] 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
     public InputAction mouse;
 
     private StateMachine<Player> stateMachine;
+    private StateMachine<Player> actionState;
     private StateMachine<Player> moodState;
 
     [Space, Header("Rage Info")]
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
     public void Awake()
     {
         stateMachine = new StateMachine<Player>(this);
+        actionState = new StateMachine<Player>(this);
         moodState = new StateMachine<Player>(this);
         inputManager = new InputControls();
         inputManager = new InputControls();
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
     {
         AddStates();
         stateMachine.ChangeState(0);
+        actionState.ChangeState(0);
         moodState.ChangeState(0);
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -99,12 +103,14 @@ public class Player : MonoBehaviour
         }
 
         stateMachine.Update(Time.deltaTime);
+        actionState.Update(Time.deltaTime);
         moodState.Update(Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
         stateMachine.FixedUpdate();
+        actionState.FixedUpdate();
     }
 
     public void TakeDamage(int damageAmount)
@@ -131,6 +137,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ChangeAction(PlayerActions state)
+    {
+        if (playerAction != state)
+        {
+            playerAction = state;
+            actionState.ChangeState((int)state);
+        }
+    }
+
     public void ChangeMood(PlayerStage state)
     {
         if (playerMode != state)
@@ -144,8 +159,10 @@ public class Player : MonoBehaviour
     {
         stateMachine.AddState<PlayerIdle>();
         stateMachine.AddState<PlayerWalking>();
-        stateMachine.AddState<PlayerAttacking>();
-        stateMachine.AddState<PlayerThrowing>();
+
+        actionState.AddState<PlayerNone>();
+        actionState.AddState<PlayerAttacking>();
+        actionState.AddState<PlayerThrowing>();
 
         moodState.AddState<NormalMode>();
         moodState.AddState<RageMode>();
