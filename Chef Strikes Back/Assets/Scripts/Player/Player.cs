@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [Header("Counts Info")]
     public float currentHealth;
     public float currentRage;
-    private int enemyKills;
     private int money;
 
     [HideInInspector, Space, Header("Attack Info")]

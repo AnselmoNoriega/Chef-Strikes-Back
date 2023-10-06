@@ -1738,9 +1738,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIPrefabs: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
+  player: {fileID: 1387458675}
   sc: {fileID: 7418929117601166086}
   money: 0
-  RageValue: 0
+  rageValue: 0
   rageMode: 0
   moneycounting: {fileID: 1746922557}
 --- !u!4 &357500826
@@ -4230,6 +4231,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
   m_PrefabInstance: {fileID: 1846026829}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1387458675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+  m_PrefabInstance: {fileID: 1846026829}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b20c124d29183e45ba7d95b4f06480a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1389098269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12878,10 +12890,6 @@ PrefabInstance:
       propertyPath: sceneControl
       value: 
       objectReference: {fileID: 7418929117601166086}
-    - target: {fileID: 3855817667393855648, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-      propertyPath: CM
-      value: 
-      objectReference: {fileID: 6355847347339370370, guid: 27281946ff144974aa050e692b861ef9, type: 3}
     - target: {fileID: 4983911565616285863, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Camera
       value: 

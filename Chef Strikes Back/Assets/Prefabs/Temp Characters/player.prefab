@@ -212,7 +212,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_TargetDisplay: 0
 --- !u!114 &8093214870544132850
 MonoBehaviour:
@@ -632,8 +632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   currentRage: 0
-  attackCooldown: 0
-  isCoolingDown: 0
+  attackDir: {x: 0, y: 0}
   maxHealth: 100
   MaxRage: 100
   sceneControl: {fileID: 0}
@@ -652,6 +651,15 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   rb: {fileID: 0}
+  mouse:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   vignette: {fileID: 1855404193}
 --- !u!114 &6143374723223897878
 MonoBehaviour:
@@ -686,7 +694,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: []
   throwForce: 1
-  CM: {fileID: 0}
   player: {fileID: -7746550428048061511}
 --- !u!114 &323981142111727875
 MonoBehaviour:
