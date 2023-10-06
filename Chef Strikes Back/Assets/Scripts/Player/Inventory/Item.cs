@@ -11,7 +11,6 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class Item : MonoBehaviour
 {
-    public Collider2D myCollider;
     public Rigidbody2D rb;
     public ItemType type;
 
@@ -61,13 +60,13 @@ public class Item : MonoBehaviour
         this.time = time * timereduction;
         rb.velocity = velocity;
         this.acceleration = acceleration;
+        isPickable = true;
     }
 
     private void Checktime()
     {
         if (time <= 0)
         {
-            myCollider.enabled = true;
             rb.velocity = Vector2.zero;
             rb.rotation = 0;
             rb.angularVelocity = 0;

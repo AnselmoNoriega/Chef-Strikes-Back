@@ -60,12 +60,14 @@ public class GoodCustomerState : StateClass<AI>
 
     public void TriggerEnter2D(AI agent, Collider2D collision)
     {
-        if (collision.gameObject.transform.tag == "Food")
+        var foodItem = collision.gameObject.GetComponent<Item>();
+
+        if (collision.gameObject.transform.tag == "Food" && foodItem && foodItem.isPickable)
         {
             IsEat = true;
             agent.Ate = true;
             agent.isSit = false;
-            collision.gameObject.transform.parent.GetComponent<Item>().DestoyItem();
+            foodItem.DestoyItem();
         }
     }
 

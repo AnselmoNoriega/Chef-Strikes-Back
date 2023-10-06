@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FoodPile : MonoBehaviour
 {
+    [SerializeField]
+    private Transform target;
     [SerializeField]
     private GameObject foodItem;
     [SerializeField]
@@ -25,16 +23,15 @@ public class FoodPile : MonoBehaviour
 
         if(health <= 0)
         {
-            float x = UnityEngine.Random.Range(-2.0f, 2.0f);
-            float y = UnityEngine.Random.Range(-2.0f, 2.0f);
+            Vector2 direction = (target.position - transform.position).normalized;
+            var randAngle = Random.Range(-45, 45);
 
             var item = Instantiate(foodItem, transform.position, Quaternion.identity);
 
-            var strength = new Vector2(x, y) * throwStrength;
+            var strength = Quaternion.Euler(0, 0, randAngle) * direction * throwStrength;
 
             item.GetComponent<Item>().Throw(strength, -strength/ 0.5f, 0.5f);
             health = startHealth;
-            Debug.Log(new Vector2(x, y) * throwStrength);
         }
     }
 }
