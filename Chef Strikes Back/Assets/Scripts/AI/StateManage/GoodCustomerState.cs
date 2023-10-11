@@ -11,16 +11,18 @@ public class GoodCustomerState : StateClass<AI>
     float waitTime;
     bool readyOrder;
     private LayerMask seatLayerMask;
+    Vector2 chairPos;
 
     public void Enter(AI agent)
     {
         IsEat = false;
         readyOrder = false;
         waitTime = 15.0f;
+        chairPos = TileManager.Instance.requestChairPos();
 
         if (TileManager.Instance.checkChairCount() > 0 && !agent.isSit)
         {
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestChairPos(), agent.OnPathFound);
+            PathRequestManager.RequestPath(agent.transform.position, chairPos, agent.OnPathFound);
         }
     }
 
@@ -41,6 +43,7 @@ public class GoodCustomerState : StateClass<AI>
 
         if (IsEat & readyOrder)
         {
+            TileManager.Instance.freeChair(chairPos);
             agent.isSit = false;
             readyOrder = false;
             agent.OrderBubble.gameObject.SetActive(false);
@@ -62,7 +65,7 @@ public class GoodCustomerState : StateClass<AI>
     {
         var foodItem = collision.gameObject.GetComponent<Item>();
 
-        if (collision.gameObject.transform.tag == "Food" && foodItem && foodItem.isPickable)
+        if (collision.gameObject.transform.tag == "Food" && foodItem && foodItem.isPickable )
         {
             IsEat = true;
             agent.Ate = true;
