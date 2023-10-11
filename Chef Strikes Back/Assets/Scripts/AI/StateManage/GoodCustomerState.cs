@@ -16,7 +16,7 @@ public class GoodCustomerState : StateClass<AI>
     {
         IsEat = false;
         readyOrder = false;
-        waitTime = 40.0f;
+        waitTime = 30.0f;
 
         if (TileManager.Instance.checkChairCount() > 0 && !agent.isSit)
         {
