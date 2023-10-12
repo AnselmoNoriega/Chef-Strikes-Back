@@ -98,6 +98,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""60c8d094-ced5-4431-b745-72f8454a5c70"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""KeyQ"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7f1cecb-8ecd-4d1a-92d9-ad071258f83c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +268,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_ShiftKey = m_Player.FindAction("ShiftKey", throwIfNotFound: true);
         m_Player_KeyQ = m_Player.FindAction("KeyQ", throwIfNotFound: true);
+        m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +336,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_ShiftKey;
     private readonly InputAction m_Player_KeyQ;
+    private readonly InputAction m_Player_Esc;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -327,6 +349,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @ShiftKey => m_Wrapper.m_Player_ShiftKey;
         public InputAction @KeyQ => m_Wrapper.m_Player_KeyQ;
+        public InputAction @Esc => m_Wrapper.m_Player_Esc;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +383,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @KeyQ.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyQ;
                 @KeyQ.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyQ;
                 @KeyQ.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKeyQ;
+                @Esc.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEsc;
+                @Esc.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEsc;
+                @Esc.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEsc;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -388,6 +414,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @KeyQ.started += instance.OnKeyQ;
                 @KeyQ.performed += instance.OnKeyQ;
                 @KeyQ.canceled += instance.OnKeyQ;
+                @Esc.started += instance.OnEsc;
+                @Esc.performed += instance.OnEsc;
+                @Esc.canceled += instance.OnEsc;
             }
         }
     }
@@ -402,5 +431,6 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnShiftKey(InputAction.CallbackContext context);
         void OnKeyQ(InputAction.CallbackContext context);
+        void OnEsc(InputAction.CallbackContext context);
     }
 }

@@ -4,26 +4,44 @@ using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+
 public class SceneControl : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public Text pausingText;
-    private void Start()
-    {
+    [SerializeField]
+    private InputActionReference keyPause;
 
+    private void OnEnable()
+    {
+        keyPause.action.Enable();
+        keyPause.action.performed += OnClicked;
     }
+
+    private void OnDisable()
+    {
+        keyPause.action.Disable();
+        keyPause.action.performed -= OnClicked;
+    }
+
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene"|| SceneManager.GetActiveScene().name == "MainScene2") 
+        
+    }
+
+    private void OnClicked(InputAction.CallbackContext input)
+    {
+        if (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "MainScene2")
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                TogglePause();
-            }
-        if (GameIsPaused) {pausingText.enabled = true;}
-        if (!GameIsPaused) { pausingText.enabled=false; }
+            TogglePause();
+
+            if (GameIsPaused) { pausingText.enabled = true; }
+
+            if (!GameIsPaused) { pausingText.enabled = false; }
         }
     }
+
     public void switchToGameOverScene()
     {
         SceneManager.LoadScene("LoseScene");
