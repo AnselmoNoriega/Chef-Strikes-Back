@@ -7,13 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public GameObject AIPrefabs;
+    [SerializeField]
+    private Player player;
+    public List<GameObject> AIPool;
     public SceneControl sc;
     public int money = 0;
     private float spawnTime = 0;
-    public float RageValue = 0.0f;
-    private float rageTime = 0;
+    public float rageValue = 0.0f;
     public bool rageMode = false;
     public Text moneycounting;
+
     private void Awake()
     {
         Instance = this;
@@ -22,27 +25,29 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         spawnTime += Time.deltaTime;
-        if(spawnTime > 5 && rageMode == false) 
+        rageValue = player.currentRage;
+
+        if (spawnTime > 5 && rageMode == false)
         {
             Vector2 spawnPos = TileManager.Instance.requestEntrancePos();
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
             spawnTime = 0;
         }
-        if(RageValue >=100 && rageTime <= 15)
+
+        if (rageMode && AIPool.Count == 0)
+        {
+            player.currentRage = 0;
+            rageMode = false;
+        }
+        else if (rageValue >= 100)
         {
             rageMode = true;
             spawnTime = 0;
-            rageTime += Time.deltaTime;
         }
-        else if(rageMode && rageTime >= 15)
-        {
-            RageValue = 0;
-            rageMode = false;
-            rageTime = 0;
-        }
+
         moneycounting.text = "X " + money.ToString();
 
-        if (money>=100)
+        if (money >= 100)
         {
             sc.switchToWinScene();
         }

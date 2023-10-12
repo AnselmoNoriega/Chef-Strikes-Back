@@ -88,6 +88,20 @@ public class TileManager : MonoBehaviour
 
         return new Vector2(int.MaxValue, int.MaxValue);
     }
+
+    public void freeChair(Vector2 pos)
+    {
+        foreach(var item in chairs)
+        {
+            if(pos == item.Key)
+            {
+                chairs[item.Key] = false;
+                return;
+            }
+        }
+        Debug.Log("Fail to free");
+        return;
+    }
     public int checkChairCount()
     {
         int count = 0;

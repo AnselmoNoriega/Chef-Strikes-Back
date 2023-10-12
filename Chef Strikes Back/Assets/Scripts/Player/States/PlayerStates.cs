@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
-public enum PlayerStates { Idle, Walking, Attacking, Throwing, None }
+public enum PlayerStates { Idle, Walking, None }
+public enum PlayerActions { None, Attacking, Throwing }
 public enum PlayerStage { Normal, Rage, None }
 //------------------------------------------------------------------------------------------------
 
@@ -41,13 +42,30 @@ public class PlayerIdle : StateClass<Player>
     }
 }
 
+public class PlayerNone : StateClass<Player>
+{
+    private float acceleration = 100.0f;
+
+    public void Enter(Player agent) { }
+
+    public void Update(Player agent, float dt) { }
+
+    public void FixedUpdate(Player agent) { }
+
+    public void Exit(Player agent) { }
+
+    public void CollisionEnter2D(Player agent, Collision2D collision) { }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision) { }
+}
+
 public class PlayerAttacking : StateClass<Player>
 {
     float timer;
 
     public void Enter(Player agent)
     {
-        timer = 0.5f;
+        timer = 0.1f;
         agent.rb.velocity = Vector2.zero;
         Attack(agent.attackDir, agent);
         agent.animator.SetBool("IsAttacking", true);
@@ -59,7 +77,7 @@ public class PlayerAttacking : StateClass<Player>
 
         if(timer <= 0.0f) 
         {
-            agent.ChangeState(PlayerStates.Idle);
+            agent.ChangeAction(PlayerActions.None);
         }
     }
 

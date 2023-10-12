@@ -74,7 +74,7 @@ public class Actions : MonoBehaviour
             player.mouse = mouse;
             inventory.PrepareToThrowFood(mouse);
             ready2Throw = true;
-            player.ChangeState(PlayerStates.Throwing);
+            player.ChangeAction(PlayerActions.Throwing);
         }
     }
 
@@ -89,16 +89,16 @@ public class Actions : MonoBehaviour
             inventory.ThrowFood(dir);
             ready2Throw = false;
             isCarryingItem = false;
-            player.ChangeState(PlayerStates.Idle);
+            player.ChangeAction(PlayerActions.None);
         }
     }
 
     public void Attacking(InputAction mouse)
     {
-        if (player.playerState != PlayerStates.Attacking)
+        if (player.playerAction != PlayerActions.Attacking)
         {
             player.attackDir = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-            player.ChangeState(PlayerStates.Attacking);
+            player.ChangeAction(PlayerActions.Attacking);
         }
     }
 

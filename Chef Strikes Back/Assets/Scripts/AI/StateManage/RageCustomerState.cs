@@ -6,7 +6,7 @@ public class RageCustomerState : StateClass<AI>
 {
     public void Enter(AI agent)
     {
-
+        GameManager.Instance.AIPool.Add(agent.gameObject);
     }
 
     public void Update(AI agent, float dt)

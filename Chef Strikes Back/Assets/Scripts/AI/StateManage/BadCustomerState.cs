@@ -49,7 +49,6 @@ public class BadCustomerState : StateClass<AI>
             var rage = collision.gameObject.GetComponent<Player>();
             if (rage)
             {
-                GameManager.Instance.RageValue += 10;
                 rage.currentRage += 10;
             }
         }

@@ -101,6 +101,7 @@ public class AI : MonoBehaviour
 
         if(health <= 0 || isExist)
         {
+            GameManager.Instance.AIPool.Remove(this.gameObject);
             Destroy(gameObject);
         }
     }
