@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public float rageValue = 0.0f;
     public bool rageMode = false;
     public Text moneycounting;
+    
 
     private void Awake()
     {
@@ -45,11 +46,17 @@ public class GameManager : MonoBehaviour
             spawnTime = 0;
         }
 
+
         moneycounting.text = "X " + money.ToString();
 
         if (money >= 100)
         {
             sc.switchToWinScene();
         }
+    }
+
+    public void dealDamage(float damage)
+    {
+        player.TakeDamage(damage);
     }
 }

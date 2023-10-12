@@ -1956,9 +1956,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AIPrefabs: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
+  player: {fileID: 1387458675}
+  AIPool: []
   sc: {fileID: 7418929117601166086}
   money: 0
-  RageValue: 0
+  rageValue: 0
   rageMode: 0
   moneycounting: {fileID: 1746922557}
 --- !u!4 &357500826
@@ -2134,6 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   foodItem: {fileID: 7360178021079257609, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
   throwStrength: 2
   startHealth: 2
@@ -2422,6 +2425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   foodItem: {fileID: 7360178021079257609, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
   throwStrength: 2
   startHealth: 2
@@ -4446,6 +4450,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6355847347339370374, guid: 27281946ff144974aa050e692b861ef9, type: 3}
   m_PrefabInstance: {fileID: 1846026829}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1387458675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+  m_PrefabInstance: {fileID: 1846026829}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b20c124d29183e45ba7d95b4f06480a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1389098269
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8236,6 +8251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   foodItem: {fileID: 7360178021079257609, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
   throwStrength: 2
   startHealth: 2

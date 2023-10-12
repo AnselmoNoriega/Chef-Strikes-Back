@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         actionState.FixedUpdate();
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
 

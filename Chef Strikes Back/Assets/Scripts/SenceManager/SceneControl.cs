@@ -14,7 +14,7 @@ public class SceneControl : MonoBehaviour
     }
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene") 
+        if (SceneManager.GetActiveScene().name == "MainScene"|| SceneManager.GetActiveScene().name == "MainScene2") 
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -63,7 +63,9 @@ public class SceneControl : MonoBehaviour
 
     public void Pause()
     {
+        UnityEngine.Debug.Log(GameIsPaused);
         Time.timeScale = 0f;
+        
         GameIsPaused = true;
     }
 

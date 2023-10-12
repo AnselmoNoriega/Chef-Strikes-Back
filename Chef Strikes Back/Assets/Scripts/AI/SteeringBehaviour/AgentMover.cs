@@ -34,9 +34,7 @@ public class AgentMover : MonoBehaviour
             currentSpeed -= deacceleration * maxSpeed * Time.deltaTime;
         }
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        Vector3 velocity = oldMovementInput * currentSpeed;
-        
-        transform.position += velocity;
+        rb2d.velocity = oldMovementInput * currentSpeed;
 
         
     }

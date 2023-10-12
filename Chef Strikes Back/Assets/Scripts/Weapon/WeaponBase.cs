@@ -48,8 +48,7 @@ public class WeaponBase : MonoBehaviour
             return;
         IsAttacking = true;
         attackBlocked = true;
-        player.currentHealth -= 10;
-        Debug.Log(player.currentHealth);
+        GameManager.Instance.dealDamage(10);
         StartCoroutine(DelayAttack());
     }
 
