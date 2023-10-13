@@ -44,8 +44,6 @@ public class PlayerIdle : StateClass<Player>
 
 public class PlayerNone : StateClass<Player>
 {
-    private float acceleration = 100.0f;
-
     public void Enter(Player agent) { }
 
     public void Update(Player agent, float dt) { }
