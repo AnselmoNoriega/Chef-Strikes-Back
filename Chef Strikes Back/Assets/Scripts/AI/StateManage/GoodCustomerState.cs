@@ -20,14 +20,27 @@ public class GoodCustomerState : StateClass<AI>
         waitTime = 15.0f;
         chairPos = TileManager.Instance.requestChairPos();
 
-        if (TileManager.Instance.checkChairCount() > 0 && !agent.isSit)
-        {
-            PathRequestManager.RequestPath(agent.transform.position, chairPos, agent.OnPathFound);
-        }
+        //if (TileManager.Instance.checkChairCount() > 0 && !agent.isSit)
+        //{
+        //    PathRequestManager.RequestPath(agent.transform.position, chairPos, agent.OnPathFound);
+        //}
     }
 
     public void Update(AI agent, float dt)
     {
+        if (agent.aiData.currentTarget != null)
+        {
+            agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+            agent.FindSeat();
+            
+        }
+        else if (agent.aiData.GetTargetsCount() > 0)
+        {
+            agent.aiData.currentTarget = agent.aiData.targets[0];
+        }
+
+        agent.OnMovementInput?.Invoke(agent.movementInput);
+
         if (!IsEat && agent.isSit && !GameManager.Instance.rageMode)
         {
             readyOrder = true;

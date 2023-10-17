@@ -8,7 +8,7 @@ public class TargetDetector : Detector
     private float targetDetectionRange = 5;
 
     [SerializeField]
-    private LayerMask obstactesLayerMask, playerLayerMask;
+    private LayerMask obstactesLayerMask, targetLayerMask;
 
     [SerializeField]
     private bool showGizmos = false;
@@ -17,16 +17,16 @@ public class TargetDetector : Detector
 
     public override void Detect(AIData aiData)
     {
-        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, targetDetectionRange, playerLayerMask);
+        Collider2D targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, targetLayerMask));
 
-        if(playerCollider != null) 
+        if (targetCollider != null) 
         {
-            Vector2 direction = (playerCollider.transform.position - transform.position).normalized;
+            Vector2 direction = (targetCollider.transform.position - transform.position).normalized;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, targetDetectionRange, obstactesLayerMask);
-
-            if(hit.collider != null && (playerLayerMask & (1<<hit.collider.gameObject.layer)) != 0)
+            
+            if(hit.collider != null && (targetLayerMask & (1<<hit.collider.gameObject.layer)) != 0)
             {
-                colliders = new List<Transform>() { playerCollider.transform };
+                colliders = new List<Transform>() { targetCollider.transform };
             }
             else
             {
@@ -34,6 +34,25 @@ public class TargetDetector : Detector
             }
             aiData.targets = colliders;
         }
+    }
+
+    public Collider2D getClosestObject(Collider2D[] targetCollider)
+    {
+        float distance = 1000;
+        Collider2D targeChair = null;
+        foreach(var target in targetCollider)
+        {
+            if(target.gameObject.GetComponent<Chair>().seatAvaliable)
+            {
+                if (Vector2.Distance(target.transform.position, transform.position) < distance)
+                {
+                    targeChair = target;
+                    
+                }
+            }
+        }
+        return targeChair;
+
     }
 
     

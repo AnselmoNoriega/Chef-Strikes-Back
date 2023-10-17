@@ -82,10 +82,14 @@ public class AI : MonoBehaviour
 
     private void PerformDetection()
     {
-        foreach (Detector detect in detectors)
+        if(!isSit)
         {
-            detect.Detect(aiData);
+            foreach (Detector detect in detectors)
+            {
+                detect.Detect(aiData);
+            }
         }
+        
     }
 
     private void Update()
@@ -165,6 +169,24 @@ public class AI : MonoBehaviour
                 yield return new WaitForSeconds(AttackDelay);
                 StartCoroutine(ChaseAndAttack());
             }
+        }
+    }
+
+    public void FindSeat()
+    {
+        if (!aiData.currentTarget.gameObject.GetComponent<Chair>().seatAvaliable) aiData.currentTarget = null;
+        if (aiData.currentTarget == null || isSit)
+        {
+            Debug.Log("Stopping");
+            movementInput = Vector2.zero;
+        }
+        else
+        {
+            if(aiData.currentTarget.position != transform.position && !isSit)
+            {
+                movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+            }
+            
         }
     }
 
