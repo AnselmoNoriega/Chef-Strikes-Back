@@ -51,7 +51,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (item.Count > 0 && !isCarryingItem)
+        if (item.Count > 0 && !isCarryingItem && !GameManager.Instance.rageMode)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
@@ -91,6 +91,14 @@ public class Actions : MonoBehaviour
             isCarryingItem = false;
             player.ChangeAction(PlayerActions.None);
         }
+    }
+
+    public void DropItem()
+    {
+        inventory.ThrowFood(Vector2.zero);
+        ready2Throw = false;
+        isCarryingItem = false;
+        player.ChangeAction(PlayerActions.None);
     }
 
     public void Attacking(InputAction mouse)

@@ -215,6 +215,7 @@ public class RageMode : StateClass<Player>
     public void Enter(Player agent)
     {
         agent.vignette.SetActive(true);
+        agent.actions.DropItem();
     }
 
     public void Update(Player agent, float dt)

@@ -79,6 +79,12 @@ public class Inventory : MonoBehaviour
 
     private void SetEquation2Throw(Vector2 direction)
     {
+        if(direction == Vector2.zero)
+        {
+            foodItem.Throw(Vector2.zero, Vector2.zero, 0);
+            return;
+        }
+
         Vector3 mousePos = direction * length.value;
 
         var strength = mousePos * playerForce;

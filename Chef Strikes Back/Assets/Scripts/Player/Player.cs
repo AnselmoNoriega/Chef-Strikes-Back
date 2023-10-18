@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.XR;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Player : MonoBehaviour
 {
@@ -35,6 +30,8 @@ public class Player : MonoBehaviour
     public PlayerActions playerAction;
     public PlayerStage playerMode;
 
+    [HideInInspector]
+    public Actions actions;
     [HideInInspector] 
     public Animator animator;
     [HideInInspector] 
@@ -80,8 +77,11 @@ public class Player : MonoBehaviour
         stateMachine.ChangeState(0);
         actionState.ChangeState(0);
         moodState.ChangeState(0);
+
+        actions = GetComponent<Actions>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
         currentHealth = maxHealth;
         rageBar.maxValue = MaxRage;
         currentRage = 0;
