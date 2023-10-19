@@ -26,13 +26,9 @@ public class Chair : MonoBehaviour
             ai.movementInput = Vector2.zero;
             ai.isSit = true;
             ai.gameObject.layer = LayerMask.NameToLayer("SatAi");
-            Debug.Log(transform.position);
-            if (ai.isSit)
-            {
-            Debug.Log(transform.position);
-            Debug.Log(ai.transform.position);
+            
             ai.transform.position = transform.position;
-            }
+            
             seatAvaliable = false;
             chairSprite.enabled = false;
             chairCollider.enabled = false;

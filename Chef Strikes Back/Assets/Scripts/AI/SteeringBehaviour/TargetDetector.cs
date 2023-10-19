@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,17 +21,28 @@ public class TargetDetector : Detector
         if (targetCollider != null) 
         {
             Vector2 direction = (targetCollider.transform.position - transform.position).normalized;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, targetDetectionRange, obstactesLayerMask);
-            
-            if(hit.collider != null && (targetLayerMask & (1<<hit.collider.gameObject.layer)) != 0)
+
+            for(int i = 0; i < targetDetectionRange;++i)
             {
-                colliders = new List<Transform>() { targetCollider.transform };
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, i, obstactesLayerMask);
+                
+                if (hit.collider != null )
+                {
+                    colliders = new List<Transform>() { targetCollider.transform };
+                }
+                else
+                {
+                    colliders = null;
+                }
+
+                if(colliders != null)
+                {
+                    aiData.targets = colliders;
+                    break;
+                }
+                
             }
-            else
-            {
-                colliders = null;
-            }
-            aiData.targets = colliders;
+           
         }
     }
 
@@ -47,7 +57,7 @@ public class TargetDetector : Detector
                 if (Vector2.Distance(target.transform.position, transform.position) < distance)
                 {
                     targeChair = target;
-                    
+                    distance = Vector2.Distance(target.transform.position, transform.position);
                 }
             }
         }
