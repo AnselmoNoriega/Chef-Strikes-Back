@@ -7,10 +7,13 @@ using UnityEngine;
 public class Chair : MonoBehaviour
 {
     public bool seatAvaliable = true;
-    AI ai;
-    SpriteRenderer chairSprite;
-    PolygonCollider2D chairCollider;
 
+    [SerializeField]
+    private Table table;
+    public AI ai;
+
+    private SpriteRenderer chairSprite;
+    private PolygonCollider2D chairCollider;
 
     private void Start()
     {
@@ -29,11 +32,12 @@ public class Chair : MonoBehaviour
             
             ai.transform.position = transform.position;
             
+            table.AddCostumer(this);
+
             seatAvaliable = false;
             chairSprite.enabled = false;
             chairCollider.enabled = false;
         }
-            Debug.Log("9999999999999999999999");
     }
 
     

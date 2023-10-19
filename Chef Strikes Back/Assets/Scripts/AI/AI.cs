@@ -73,6 +73,7 @@ public class AI : MonoBehaviour
     private void Start()
     {
         stateManager.AddState<GoodCustomerState>();
+        stateManager.AddState<CustomerEatingState>();
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
         stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
@@ -177,7 +178,6 @@ public class AI : MonoBehaviour
         if (!aiData.currentTarget.gameObject.GetComponent<Chair>().seatAvaliable) aiData.currentTarget = null;
         if (aiData.currentTarget == null || isSit)
         {
-            Debug.Log("Stopping");
             movementInput = Vector2.zero;
         }
         else
