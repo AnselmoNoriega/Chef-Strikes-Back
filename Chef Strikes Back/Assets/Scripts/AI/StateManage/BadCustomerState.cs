@@ -4,33 +4,31 @@ using UnityEngine;
 
 public class BadCustomerState : StateClass<AI>
 {
-    bool isStand;
 
     public void Enter(AI agent)
     {
         agent.isAngry = true;
-        agent.gameObject.layer = LayerMask.NameToLayer("Enemy");
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        isStand = true;
+        agent.isStand = true;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!isStand && !GameManager.Instance.rageMode)
+        if (!agent.isStand && !GameManager.Instance.rageMode)
         {
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
-            isStand = true;
+            //PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+            agent.isStand = true;
         }
 
         if (agent.isHit)
         {
-            isStand = false;
+            agent.isStand = false;
             agent.isHit = false;
         }
 
-        if (GameManager.Instance.rageMode)
+        if(GameManager.Instance.rageMode) 
         {
             agent.stateManager.ChangeState((int)AIState.Rage);
         }
@@ -45,7 +43,7 @@ public class BadCustomerState : StateClass<AI>
     {
         if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
-            isStand = false;
+            agent.isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
@@ -56,7 +54,7 @@ public class BadCustomerState : StateClass<AI>
         }
         if(collision.transform.tag == "Enemy")
         {
-            isStand=false;
+            agent.isStand = false;
         }
     }
 
@@ -67,6 +65,5 @@ public class BadCustomerState : StateClass<AI>
 
     public void Exit(AI agent)
     {
-
     }
 }

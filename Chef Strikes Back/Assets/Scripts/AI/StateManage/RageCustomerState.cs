@@ -8,8 +8,7 @@ public class RageCustomerState : StateClass<AI>
     {
         GameManager.Instance.AIPool.Add(agent.gameObject);
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
-        agent.aiData.TargetLayerMask = LayerMask.GetMask("Player");
-        agent.aiData.targets = null;
+       
     }
 
     public void Update(AI agent, float dt)

@@ -26,6 +26,11 @@ public class PathRequestManager : MonoBehaviour
         instance.TryProcessNext();
     }
 
+    public static void ClearPath()
+    {
+        instance.pathRequestQueue.Clear();
+    }
+
     void TryProcessNext()
     {
         if (!isProcessingPath && pathRequestQueue.Count > 0)
@@ -34,6 +39,7 @@ public class PathRequestManager : MonoBehaviour
             isProcessingPath = true;
             pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
         }
+        
     }
 
     public void FinishedProcessingPath(Vector2[] path, bool success)

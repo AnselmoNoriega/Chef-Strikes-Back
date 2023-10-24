@@ -48,6 +48,7 @@ public class AI : MonoBehaviour
     public bool Ate = false;
     public bool DoneEating = false;
     public bool isAngry = false;
+    public bool isStand = false;
 
     public bool isHit = false;
     Vector2[] path;
@@ -76,7 +77,7 @@ public class AI : MonoBehaviour
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
         stateManager.AddState<CustomerLeavingState>();
-        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
+        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good :(int)AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
@@ -117,7 +118,7 @@ public class AI : MonoBehaviour
     public IEnumerator FollowPath()
     {
         Vector2 currentWaypoint = path[0];
-        while (true)
+        while (!GameManager.Instance.rageMode)
         {
             if (Vector2.Distance(transform.position, currentWaypoint) <= 0.0f)
             {
@@ -128,9 +129,12 @@ public class AI : MonoBehaviour
                 }
                 currentWaypoint = path[targetIndex];
             }
-
-            transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
-            yield return null;
+            if(!GameManager.Instance.rageMode) 
+            {
+                transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
+                yield return null;
+            }
+           
         }
     }
 
@@ -164,7 +168,6 @@ public class AI : MonoBehaviour
 
     public void FindSeat()
     {
-        if (!aiData.currentTarget.gameObject.GetComponent<Chair>().seatAvaliable) aiData.currentTarget = null;
         if (aiData.currentTarget == null || isSit)
         {
             movementInput = Vector2.zero;

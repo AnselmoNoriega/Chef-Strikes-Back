@@ -9,14 +9,25 @@ public class TargetDetector : Detector
     [SerializeField]
     private LayerMask obstactesLayerMask;
     [SerializeField]
+    private LayerMask playerLayerMask;
+    [SerializeField]
     private bool showGizmos = false;
 
     private List<Transform> colliders;
-
+    Collider2D targetCollider = null;
     public override void Detect(AIData aiData)
     {
         
-        Collider2D targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
+        if (!GameManager.Instance.rageMode)
+        {
+             targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
+        }
+        else
+        {
+            targetCollider = Physics2D.OverlapCircle(transform.position, targetDetectionRange,playerLayerMask);
+        }
+        
+        Debug.Log(aiData.TargetLayerMask);
 
         if (targetCollider != null) 
         {

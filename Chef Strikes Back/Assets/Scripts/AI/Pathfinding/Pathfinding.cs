@@ -1,9 +1,8 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 using UnityEngine.Tilemaps;
-using Unity.VisualScripting;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -45,12 +44,8 @@ public class Pathfinding : MonoBehaviour
 
         Vector2[] waypoints = new Vector2[0];
         bool pathSuccess = false;
-        if(GameManager.Instance.rageMode)
-        {
-            pathSuccess = true;
-            yield break;
-        }
-               
+        
+
 
         Node startNode = grid.NodeFromWorldPoint(startPos, tilemap);
         Node targetNode = grid.NodeFromWorldPoint(targetPos, tilemap);
