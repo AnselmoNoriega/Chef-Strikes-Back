@@ -21,25 +21,33 @@ public class Chair : MonoBehaviour
         chairCollider = GetComponent<PolygonCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void freeChair()
     {
-        if (collision.gameObject.tag == "Enemy" )
-        {
-            ai = collision.gameObject.GetComponent<AI>();
-            ai.movementInput = Vector2.zero;
-            ai.isSit = true;
-            ai.gameObject.layer = LayerMask.NameToLayer("SatAi");
-            
-            ai.transform.position = transform.position;
-            
-            table.AddCostumer(this);
-
-            seatAvaliable = false;
-            chairSprite.enabled = false;
-            chairCollider.enabled = false;
-        }
+        seatAvaliable = true;
+        chairCollider.enabled = true;
+        chairSprite.enabled = true;
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Customer")
+            && !collision.gameObject.GetComponent<AI>().DoneEating
+            && !collision.gameObject.GetComponent<AI>().isAngry)
+        {
+            ai = collision.gameObject.GetComponent<AI>();
+            ai.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            ai.isSit = true;
+            ai.transform.position = transform.position;
+            table.AddCostumer(this);
+            seatAvaliable = false;
+            chairSprite.enabled = false;
+        }
+    }
     
+
+    
+
+
 
 }

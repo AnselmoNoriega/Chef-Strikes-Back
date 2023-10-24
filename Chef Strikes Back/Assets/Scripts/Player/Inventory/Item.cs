@@ -27,11 +27,14 @@ public class Item : MonoBehaviour
     private bool isBeingDrag;
     public bool isPickable;
 
+    public bool isServed;
+
     private void Start()
     {
         handPosition = new Vector2(0, 0.7f);
         isBeingDrag = false;
         isPickable = true;
+        isServed = false;
     }
 
     private void FixedUpdate()

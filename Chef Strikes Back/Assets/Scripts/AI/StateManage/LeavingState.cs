@@ -1,15 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class RageCustomerState : StateClass<AI>
+using UnityEngine.InputSystem.Android;
+public class CustomerLeavingState : StateClass<AI>
 {
     public void Enter(AI agent)
     {
-        GameManager.Instance.AIPool.Add(agent.gameObject);
-        agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
-        agent.aiData.TargetLayerMask = LayerMask.GetMask("Player");
-        agent.aiData.targets = null;
+        Debug.Log("Leaving");
+        agent.DropMoney();
+        agent.OrderBubble.gameObject.SetActive(false);
     }
 
     public void Update(AI agent, float dt)
@@ -17,12 +14,8 @@ public class RageCustomerState : StateClass<AI>
         if (agent.aiData.currentTarget != null)
         {
             agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+            agent.FindSeat();
 
-            if (agent.chasing == false)
-            {
-                agent.chasing = true;
-                agent.StartCoroutine(agent.ChaseAndAttack());
-            }
         }
         else if (agent.aiData.GetTargetsCount() > 0)
         {
@@ -52,3 +45,4 @@ public class RageCustomerState : StateClass<AI>
 
     }
 }
+

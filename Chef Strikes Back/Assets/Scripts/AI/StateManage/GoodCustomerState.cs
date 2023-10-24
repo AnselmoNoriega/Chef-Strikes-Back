@@ -1,33 +1,25 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 public class GoodCustomerState : StateClass<AI>
 {
-    bool IsEat;
     float waitTime;
-    bool readyOrder;
-    private LayerMask seatLayerMask;
-    Vector2 chairPos;
+    float eatingTime;
+    bool isLeaving;
+    Vector3 ExitPos;
 
     public void Enter(AI agent)
     {
-        IsEat = false;
-        readyOrder = false;
+        isLeaving = false;
         waitTime = 15.0f;
-        chairPos = TileManager.Instance.requestChairPos();
-
-        //if (TileManager.Instance.checkChairCount() > 0 && !agent.isSit)
-        //{
-        //    PathRequestManager.RequestPath(agent.transform.position, chairPos, agent.OnPathFound);
-        //}
+        eatingTime = 2.0f;
+        agent.aiData.TargetLayerMask = LayerMask.GetMask("Chair");
+        ExitPos = TileManager.Instance.requestEntrancePos();
     }
 
     public void Update(AI agent, float dt)
     {
+        //walk to the chair
         if (agent.aiData.currentTarget != null)
         {
             agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
@@ -40,27 +32,38 @@ public class GoodCustomerState : StateClass<AI>
         }
 
         agent.OnMovementInput?.Invoke(agent.movementInput);
-
-        if (!IsEat && agent.isSit && !GameManager.Instance.rageMode)
+        //
+        //wait for the food
+        if (!agent.Ate && agent.isSit && !GameManager.Instance.rageMode)
         {
-            readyOrder = true;
             agent.OrderBubble.gameObject.SetActive(true);
             waitTime -= Time.deltaTime;
         }
-
+        //
+        //Time over then chage state
         if (waitTime <= 0)
         {
             agent.OrderBubble.gameObject.SetActive(false);
+            agent.isAngry = true;
             agent.stateManager.ChangeState((int)AIState.Bad);
         }
 
-        if (IsEat & readyOrder)
+        if (agent.Ate && !isLeaving)
         {
-            TileManager.Instance.freeChair(chairPos);
-            agent.isSit = false;
-            readyOrder = false;
-            agent.OrderBubble.gameObject.SetActive(false);
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEntrancePos(), agent.OnPathFound);
+            eatingTime -= Time.deltaTime;
+            if(eatingTime <=  0)
+            {
+                agent.DoneEating = true;
+                agent.OrderBubble.gameObject.SetActive(false);
+                PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
+                agent.DropMoney();
+                isLeaving = true;
+            }
+        }
+
+        if(agent.transform.position == ExitPos && isLeaving)
+        {
+            agent.isExist = true;
         }
     }
 
@@ -76,15 +79,7 @@ public class GoodCustomerState : StateClass<AI>
 
     public void TriggerEnter2D(AI agent, Collider2D collision)
     {
-        var foodItem = collision.gameObject.GetComponent<Item>();
-
-        if (collision.gameObject.transform.tag == "Food" && foodItem && foodItem.isPickable )
-        {
-            IsEat = true;
-            agent.Ate = true;
-            agent.isSit = false;
-            foodItem.DestoyItem();
-        }
+       
     }
 
     public void Exit(AI agent)
@@ -93,35 +88,6 @@ public class GoodCustomerState : StateClass<AI>
     }
 }
 
-public class CustomerEatingState : StateClass<AI>
-{
-    public void Enter(AI agent)
-    {
-        
-    }
 
-    public void Update(AI agent, float dt)
-    {
-        
-    }
 
-    public void FixedUpdate(AI agent)
-    {
 
-    }
-
-    public void CollisionEnter2D(AI agent, Collision2D collision)
-    {
-
-    }
-
-    public void TriggerEnter2D(AI agent, Collider2D collision)
-    {
-        
-    }
-
-    public void Exit(AI agent)
-    {
-
-    }
-}

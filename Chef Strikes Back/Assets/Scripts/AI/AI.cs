@@ -11,7 +11,8 @@ public enum AIState
 {
     Good,
     Bad,
-    Rage
+    Rage,
+    Leaving
 }
 
 public class AI : MonoBehaviour
@@ -20,7 +21,7 @@ public class AI : MonoBehaviour
     private List<SteeringBehaviour> steeringBehaviours;
 
     [SerializeField]
-    private List<Detector> detectors;
+    public List<Detector> detectors;
 
     [SerializeField]
     public AIData aiData;
@@ -40,14 +41,13 @@ public class AI : MonoBehaviour
     [SerializeField]
     private ContextSolver movementDirectionSolver;
 
-
-    [SerializeField] public Player player;
     [SerializeField] public GameObject OrderBubble;
 
     public bool isSit = false;
     public bool isExist = false;
-    public bool isLeaving = false;
     public bool Ate = false;
+    public bool DoneEating = false;
+    public bool isAngry = false;
 
     public bool isHit = false;
     Vector2[] path;
@@ -73,9 +73,9 @@ public class AI : MonoBehaviour
     private void Start()
     {
         stateManager.AddState<GoodCustomerState>();
-        stateManager.AddState<CustomerEatingState>();
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
+        stateManager.AddState<CustomerLeavingState>();
         stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
@@ -83,26 +83,17 @@ public class AI : MonoBehaviour
 
     private void PerformDetection()
     {
-        if(!isSit)
-        {
-            foreach (Detector detect in detectors)
-            {
-                detect.Detect(aiData);
-            }
-        }
         
+        foreach (Detector detect in detectors)
+        {
+            detect.Detect(aiData);
+        }
+       
     }
 
     private void Update()
     {
         stateManager.Update(Time.deltaTime);
-
-        if(Ate)
-        {
-            DropMoney();
-            Ate = false;
-            isLeaving = true;
-        }
 
         if(health <= 0 || isExist)
         {
@@ -141,8 +132,6 @@ public class AI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
             yield return null;
         }
-        isSit = true;
-        if (isLeaving) isExist = true;
     }
 
     public IEnumerator ChaseAndAttack()
@@ -190,7 +179,7 @@ public class AI : MonoBehaviour
         }
     }
 
-    void DropMoney()
+    public void DropMoney()
     {
         GetComponent<LootBag>().InstantiateLoot(transform.position);
     }

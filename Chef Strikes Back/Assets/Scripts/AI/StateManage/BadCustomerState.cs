@@ -8,14 +8,17 @@ public class BadCustomerState : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        agent.isAngry = true;
+        agent.gameObject.layer = LayerMask.NameToLayer("Enemy");
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+        agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         isStand = true;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!isStand)
+        if (!isStand && !GameManager.Instance.rageMode)
         {
             PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
             isStand = true;
@@ -29,7 +32,6 @@ public class BadCustomerState : StateClass<AI>
 
         if (GameManager.Instance.rageMode)
         {
-            PathRequestManager.RequestPath(agent.transform.position, agent.transform.position, agent.OnPathFound);
             agent.stateManager.ChangeState((int)AIState.Rage);
         }
     }
@@ -51,6 +53,10 @@ public class BadCustomerState : StateClass<AI>
             {
                 rage.currentRage += 10;
             }
+        }
+        if(collision.transform.tag == "Enemy")
+        {
+            isStand=false;
         }
     }
 

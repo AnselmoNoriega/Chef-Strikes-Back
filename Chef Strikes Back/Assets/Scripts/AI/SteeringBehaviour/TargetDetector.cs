@@ -7,8 +7,7 @@ public class TargetDetector : Detector
     private float targetDetectionRange = 5;
 
     [SerializeField]
-    private LayerMask obstactesLayerMask, targetLayerMask;
-
+    private LayerMask obstactesLayerMask;
     [SerializeField]
     private bool showGizmos = false;
 
@@ -16,7 +15,8 @@ public class TargetDetector : Detector
 
     public override void Detect(AIData aiData)
     {
-        Collider2D targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, targetLayerMask));
+        
+        Collider2D targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
 
         if (targetCollider != null) 
         {
