@@ -18,7 +18,7 @@ public class BadCustomerState : StateClass<AI>
     {
         if (!agent.isStand && !GameManager.Instance.rageMode)
         {
-            //PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
             agent.isStand = true;
         }
 
@@ -65,5 +65,7 @@ public class BadCustomerState : StateClass<AI>
 
     public void Exit(AI agent)
     {
+        agent.aiData.currentTarget = null;
+        agent.aiData.targets = null;
     }
 }
