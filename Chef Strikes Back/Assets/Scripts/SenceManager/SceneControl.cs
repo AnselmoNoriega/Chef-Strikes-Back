@@ -63,6 +63,17 @@ public class SceneControl : MonoBehaviour
     {
         SceneManager.LoadScene("HelpScene");
     }
+
+    public void switchToSettingsScene()
+    {
+        SceneManager.LoadScene("SettingsScene");
+    }
+
+    public void switchToBookCoverScene()
+    {
+        SceneManager.LoadScene("BookCover");
+    }
+
     public void TogglePause()
     {
         if (GameIsPaused)
