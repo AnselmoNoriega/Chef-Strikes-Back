@@ -19,10 +19,7 @@ public class LootBag : MonoBehaviour
                 possibleItems.Add(item);
             }
         }
-        //if(possibleItems.Count > 1) 
-        //{
-        //    Loot droppedItem = possibleItems[1];
-        //}
+
         return possibleItems[0];
     }
 

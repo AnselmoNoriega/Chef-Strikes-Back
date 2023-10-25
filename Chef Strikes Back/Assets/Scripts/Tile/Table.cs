@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,47 +10,51 @@ public class Table : MonoBehaviour
 {
     [SerializeField]
     private List<Chair> chairs = new List<Chair>();
+
     [SerializeField]
     private Transform platePos;
 
     [SerializeField]
-    List<Item> foods = new List<Item>();   
-    public void AddCostumer(Chair chair)
-    {
-        chairs.Add(chair);
-    }
+    public List<Item> foods = new List<Item>();
 
     private void Update()
     {
-        if (chairs.Count > 0)
+        for (int i = 0; i < chairs.Count; ++i)
         {
-            if (chairs[0].ai.DoneEating)
+            if (chairs[i].ai.DoneEating)
             {
-                chairs[0].freeChair();
-                chairs.RemoveAt(0);
+                Destroy(foods.ElementAt(0).gameObject);
+                foods.RemoveAt(0);
+                chairs[i].FreeChair();
+                chairs.Remove(chairs[i]);
             }
-            if (chairs[0].ai.isAngry)
+            else if (chairs[i].ai.isAngry)
             {
-                chairs[0].freeChair();
-                chairs.RemoveAt(0);
+                chairs[i].FreeChair();
+                chairs.Remove(chairs[i]);
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Food") && chairs.Count > 0)
+        if (collision.CompareTag("Food") && chairs.Count > 0 && !collision.GetComponent<Item>().isServed)
         {
-            if(!collision.GetComponent<Item>().isServed)
+            foods.Add(collision.GetComponent<Item>());
+            foods[foods.Count - 1].LaunchedInTable(platePos);
+            foods[foods.Count - 1].isServed = true;
+            foreach (var chair in chairs)
             {
-                foods.Add(collision.GetComponent<Item>());
-                if (foods.Count > 0)
+                if (!chair.ai.Ate)
                 {
-                    foods[foods.Count - 1].LaunchedInTable(platePos);
+                    chair.ai.Ate = true;
                 }
-                foods[foods.Count - 1].isServed = true;
-                chairs[0].ai.Ate = true;
-            } 
+            }
         }
+    }
+
+    public void AddCostumer(Chair chair)
+    {
+        chairs.Add(chair);
     }
 }
