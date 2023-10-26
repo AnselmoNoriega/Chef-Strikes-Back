@@ -17,7 +17,6 @@ public class AgentMover : MonoBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
 
 

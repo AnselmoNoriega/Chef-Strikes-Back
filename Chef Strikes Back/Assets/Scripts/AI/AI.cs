@@ -77,7 +77,7 @@ public class AI : MonoBehaviour
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
         stateManager.AddState<CustomerLeavingState>();
-        stateManager.ChangeState(Random.value < 0.01f ? (int)AIState.Good : (int)AIState.Bad);
+        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
