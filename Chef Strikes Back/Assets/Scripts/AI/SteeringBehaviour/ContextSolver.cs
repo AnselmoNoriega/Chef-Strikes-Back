@@ -45,6 +45,9 @@ public class ContextSolver : MonoBehaviour
         return resultDirection;
     }
 
+    
+
+
     private void OnDrawGizmos()
     {
         if(Application.isPlaying && showGizmos)

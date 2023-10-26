@@ -10,7 +10,7 @@ public class BadCustomerState : StateClass<AI>
         agent.isAngry = true;
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
-        agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        //agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         agent.isStand = true;
     }
 
@@ -21,6 +21,7 @@ public class BadCustomerState : StateClass<AI>
             PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
             agent.isStand = true;
         }
+        agent.OnMovementInput?.Invoke(agent.movementInput);
 
         if (agent.isHit)
         {

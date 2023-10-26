@@ -39,6 +39,7 @@ public class AgentMover : MonoBehaviour
         rb2d.velocity = oldMovementInput * currentSpeed;
         UpdateAnimation(MovementInput);
     }
+   
 
     private void UpdateAnimation(Vector2 movement)
     {
@@ -68,7 +69,7 @@ public class AgentMover : MonoBehaviour
             anim.Play("AI_Walk_N");
         }
     }
-    /*    public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
+ /*     public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
     {
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
         animator.SetInteger("PosNum", directionIndex);

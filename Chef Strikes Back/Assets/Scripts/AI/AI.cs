@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 using static UnityEngine.GraphicsBuffer;
 
@@ -77,7 +78,7 @@ public class AI : MonoBehaviour
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
         stateManager.AddState<CustomerLeavingState>();
-        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good :(int)AIState.Bad);
+        stateManager.ChangeState(Random.value < 0.01f ? (int)AIState.Good :(int)AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
@@ -120,18 +121,20 @@ public class AI : MonoBehaviour
         Vector2 currentWaypoint = path[0];
         while (!GameManager.Instance.rageMode)
         {
-            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.0f)
+            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.1f)
             {
                 targetIndex++;
                 if (targetIndex >= path.Length)
                 {
+                    movementInput = Vector2.zero; 
                     break;
                 }
                 currentWaypoint = path[targetIndex];
             }
             if(!GameManager.Instance.rageMode) 
             {
-                transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
+                movementInput = (currentWaypoint - (Vector2)transform.position).normalized;
+                
                 yield return null;
             }
            
