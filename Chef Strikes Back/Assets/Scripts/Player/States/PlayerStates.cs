@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
 public enum PlayerStates { Idle, Walking, None }
 public enum PlayerActions { None, Attacking, Throwing }

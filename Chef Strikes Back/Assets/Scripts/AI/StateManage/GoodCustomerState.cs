@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 
 public class GoodCustomerState : StateClass<AI>
 {
