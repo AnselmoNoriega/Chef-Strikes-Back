@@ -888,14 +888,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: table
-      value: 
-      objectReference: {fileID: 558143680}
-    - target: {fileID: 3913419226850297579, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair (2)
@@ -1389,17 +1381,6 @@ Transform:
   m_Father: {fileID: 958065392}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &149367613 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-  m_PrefabInstance: {fileID: 755306903}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &153358824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,6 +2025,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1316632943}
     m_Modifications:
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 823537563}
     - target: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2094,17 +2083,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
---- !u!114 &278357663 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-  m_PrefabInstance: {fileID: 278357662}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &278357664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
@@ -3091,17 +3069,6 @@ Transform:
   m_Father: {fileID: 2132763650}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &548897005 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-  m_PrefabInstance: {fileID: 1318478114}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &558143679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3109,6 +3076,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1316632943}
     m_Modifications:
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1349416604}
     - target: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -3159,17 +3134,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
---- !u!114 &558143680 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-  m_PrefabInstance: {fileID: 558143679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &558143681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
@@ -3330,6 +3294,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1316632943}
     m_Modifications:
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1577028592}
     - target: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -3380,17 +3352,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
---- !u!114 &683381889 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-  m_PrefabInstance: {fileID: 683381888}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &683381890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
@@ -3403,6 +3364,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1316632943}
     m_Modifications:
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1220335087}
     - target: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3453,17 +3422,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
---- !u!114 &697572166 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-  m_PrefabInstance: {fileID: 697572165}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &697572167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
@@ -3634,14 +3592,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: table
-      value: 
-      objectReference: {fileID: 697572166}
-    - target: {fileID: 3913419226850297579, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair (4)
@@ -3705,10 +3655,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1316632943}
     m_Modifications:
-    - target: {fileID: 2826878394204598232, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.size
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1953431307}
     - target: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -3756,10 +3710,6 @@ PrefabInstance:
     - target: {fileID: 2826878394204598237, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_Name
       value: Table
-      objectReference: {fileID: 0}
-    - target: {fileID: 2826878394204598237, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
@@ -4143,10 +4093,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: table
-      value: 
-      objectReference: {fileID: 278357663}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair (5)
@@ -4158,6 +4104,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3913419226850297556, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
   m_PrefabInstance: {fileID: 823537561}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &823537563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+  m_PrefabInstance: {fileID: 823537561}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &849598114
 GameObject:
   m_ObjectHideFlags: 0
@@ -7218,6 +7175,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+--- !u!114 &1220335087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+  m_PrefabInstance: {fileID: 747696040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1229465079 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3760778737797132649, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
@@ -8146,10 +8114,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1316632943}
     m_Modifications:
-    - target: {fileID: 2826878394204598232, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: foods.Array.size
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826878394204598214, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
+      propertyPath: chairs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2076755445}
     - target: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -8205,6 +8181,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2826878394204598233, guid: 9fb3d8fd15155ff46af7a32e628f4e91, type: 3}
   m_PrefabInstance: {fileID: 1318478114}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1349416604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+  m_PrefabInstance: {fileID: 29863827}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!213 &1386228933
 Sprite:
   m_ObjectHideFlags: 0
@@ -11490,14 +11477,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: table
-      value: 
-      objectReference: {fileID: 683381889}
-    - target: {fileID: 3913419226850297579, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair (3)
@@ -11509,6 +11488,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3913419226850297556, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
   m_PrefabInstance: {fileID: 1577028590}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1577028592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+  m_PrefabInstance: {fileID: 1577028590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1639105680
 GameObject:
   m_ObjectHideFlags: 0
@@ -16890,14 +16880,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: table
-      value: 
-      objectReference: {fileID: 149367613}
-    - target: {fileID: 3913419226850297579, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair
@@ -16909,6 +16891,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3913419226850297556, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
   m_PrefabInstance: {fileID: 1953431305}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1953431307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+  m_PrefabInstance: {fileID: 1953431305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1999460284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17105,14 +17098,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: table
-      value: 
-      objectReference: {fileID: 548897005}
-    - target: {fileID: 3913419226850297579, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair (1)
@@ -17124,6 +17109,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3913419226850297556, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
   m_PrefabInstance: {fileID: 2076755443}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2076755445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+  m_PrefabInstance: {fileID: 2076755443}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!60 &2078066955 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}

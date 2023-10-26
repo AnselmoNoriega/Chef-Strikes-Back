@@ -1,12 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
 public enum AIState
 {
@@ -21,11 +16,16 @@ public class AI : MonoBehaviour
     [SerializeField]
     private List<SteeringBehaviour> steeringBehaviours;
 
+
+    private Animator anim;
+
     [SerializeField]
     public List<Detector> detectors;
 
     [SerializeField]
     public AIData aiData;
+
+    public Rigidbody2D rb2d;
 
     [SerializeField]
     private float detectionDelay = 0.05f, attackDelay = 1f;
@@ -53,7 +53,7 @@ public class AI : MonoBehaviour
 
     public bool isHit = false;
     Vector2[] path;
-    int targetIndex;  
+    int targetIndex;
 
     public StateMachine<AI> stateManager;
 
@@ -70,40 +70,46 @@ public class AI : MonoBehaviour
     private void Awake()
     {
         stateManager = new StateMachine<AI>(this);
-    }
+        rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
-    private void Start()
-    {
         stateManager.AddState<GoodCustomerState>();
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
         stateManager.AddState<CustomerLeavingState>();
-        stateManager.ChangeState(Random.value < 0.01f ? (int)AIState.Good :(int)AIState.Bad);
+        stateManager.ChangeState(Random.value < 0.01f ? (int)AIState.Good : (int)AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
 
     private void PerformDetection()
     {
-        
+
         foreach (Detector detect in detectors)
         {
             detect.Detect(aiData);
         }
-       
+
     }
 
     private void Update()
     {
         stateManager.Update(Time.deltaTime);
 
-        if(health <= 0 || isExist)
+        if (health <= 0 || isExist)
         {
             GameManager.Instance.AIPool.Remove(this.gameObject);
             Destroy(gameObject);
         }
+        FaceMovementDirection(anim, rb2d.velocity);
     }
 
+    public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
+    {
+        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
+        animator.SetInteger("PosNum", directionIndex);
+        return directionIndex;
+    }
 
     public void OnPathFound(Vector2[] newPath, bool pathSuccessful)
     {
@@ -126,18 +132,18 @@ public class AI : MonoBehaviour
                 targetIndex++;
                 if (targetIndex >= path.Length)
                 {
-                    movementInput = Vector2.zero; 
+                    movementInput = Vector2.zero;
                     break;
                 }
                 currentWaypoint = path[targetIndex];
             }
-            if(!GameManager.Instance.rageMode) 
+            if (!GameManager.Instance.rageMode)
             {
                 movementInput = (currentWaypoint - (Vector2)transform.position).normalized;
-                
+
                 yield return null;
             }
-           
+
         }
     }
 
@@ -177,11 +183,11 @@ public class AI : MonoBehaviour
         }
         else
         {
-            if(aiData.currentTarget.position != transform.position && !isSit)
+            if (aiData.currentTarget.position != transform.position && !isSit)
             {
                 movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
             }
-            
+
         }
     }
 
