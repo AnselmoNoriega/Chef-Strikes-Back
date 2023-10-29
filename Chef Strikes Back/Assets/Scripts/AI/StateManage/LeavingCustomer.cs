@@ -1,21 +1,26 @@
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
-public class CustomerLeavingState : StateClass<AI>
+
+public class LeavingCustomer : StateClass<AI>
 {
+    Vector3 ExitPos;
+
     public void Enter(AI agent)
     {
-        Debug.Log("Leaving");
-        agent.DropMoney();
-        agent.OrderBubble.gameObject.SetActive(false);
+        ExitPos = TileManager.Instance.requestEntrancePos();
+        PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
     }
 
     public void Update(AI agent, float dt)
     {
+        if (agent.transform.position == ExitPos)
+        {
+            agent.isExist = true;
+        }
+
         if (agent.aiData.currentTarget != null)
         {
             agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
             agent.FindSeat();
-
         }
         else if (agent.aiData.GetTargetsCount() > 0)
         {
@@ -45,4 +50,3 @@ public class CustomerLeavingState : StateClass<AI>
 
     }
 }
-

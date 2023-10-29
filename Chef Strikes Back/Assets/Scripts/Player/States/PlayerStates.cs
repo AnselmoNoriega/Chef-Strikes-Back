@@ -116,7 +116,7 @@ public class PlayerAttacking : StateClass<Player>
 
             if (enemyAI)
             {
-                if (enemyAI.stateManager.CurrentState == (int)AIState.Rage)
+                if (enemyAI.state == AIState.Rage)
                 {
                     enemyAI.health -= Mathf.RoundToInt(player._weapon.Damage);
                 }

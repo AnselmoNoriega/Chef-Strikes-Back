@@ -26,8 +26,6 @@ public class TargetDetector : Detector
         {
             targetCollider = Physics2D.OverlapCircle(transform.position, targetDetectionRange,playerLayerMask);
         }
-        
-        Debug.Log(aiData.TargetLayerMask);
 
         if (targetCollider != null) 
         {

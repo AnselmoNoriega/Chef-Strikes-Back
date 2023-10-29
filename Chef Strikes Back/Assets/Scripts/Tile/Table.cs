@@ -1,9 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Table : MonoBehaviour
@@ -21,14 +17,14 @@ public class Table : MonoBehaviour
     {
         for (int i = 0; i < chairs.Count; ++i)
         {
-            if (chairs[i].ai.DoneEating)
+            if (chairs[i].ai.state == AIState.Leaving)
             {
                 Destroy(foods.ElementAt(0).gameObject);
                 foods.RemoveAt(0);
                 chairs[i].FreeChair();
                 chairs.Remove(chairs[i]);
             }
-            else if (chairs[i].ai.isAngry)
+            else if (chairs[i].ai.state == AIState.Bad)
             {
                 chairs[i].FreeChair();
                 chairs.Remove(chairs[i]);
@@ -45,9 +41,10 @@ public class Table : MonoBehaviour
             foods[foods.Count - 1].isServed = true;
             foreach (var chair in chairs)
             {
-                if (!chair.ai.Ate)
+                if (!chair.ai.eating)
                 {
-                    chair.ai.Ate = true;
+                    chair.ai.eating = true;
+                    chair.ai.OrderBubble.gameObject.SetActive(false);
                 }
             }
         }

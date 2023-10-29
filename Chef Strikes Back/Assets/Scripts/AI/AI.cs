@@ -6,57 +6,50 @@ using UnityEngine.Events;
 public enum AIState
 {
     Good,
+    Hungry,
     Bad,
     Rage,
-    Leaving
+    Leaving,
+    None
 }
 
 public class AI : MonoBehaviour
 {
-    [SerializeField]
+    [Header("AI Behaviour"), SerializeField]
     private List<SteeringBehaviour> steeringBehaviours;
-
-
-    private Animator anim;
-
     [SerializeField]
     public List<Detector> detectors;
-
     [SerializeField]
+    public Vector2 movementInput;
+    [SerializeField]
+    private ContextSolver movementDirectionSolver;
     public AIData aiData;
+    private StateMachine<AI> stateManager;
+    private Vector2[] path;
+    int targetIndex;
 
+    [Space, Header("AI Properties"), SerializeField]
+    public GameObject OrderBubble;
+    private Animator anim;
     public Rigidbody2D rb2d;
 
+    [Space, Header("AI Variables"), SerializeField]
+    private float attackDistance = 0.5f;
     [SerializeField]
     private float detectionDelay = 0.05f, attackDelay = 1f;
 
-    [SerializeField]
-    private float attackDistance = 0.5f;
-
+    [Space, Header("AI Events")]
     public UnityEvent OnAttackPressed;
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
 
-    [SerializeField]
-    public Vector2 movementInput;
-
-    [SerializeField]
-    private ContextSolver movementDirectionSolver;
-
-    [SerializeField] public GameObject OrderBubble;
-
+    [Space, Header("AI Status")]
+    public AIState state;
+    public int health = 10;
     public bool isSit = false;
     public bool isExist = false;
-    public bool Ate = false;
-    public bool DoneEating = false;
-    public bool isAngry = false;
+    public bool eating = false;
     public bool isStand = false;
-
     public bool isHit = false;
-    Vector2[] path;
-    int targetIndex;
-
-    public StateMachine<AI> stateManager;
-
     public bool chasing = false;
 
     public ContextSolver MovementDirectionSolver => movementDirectionSolver;
@@ -64,44 +57,42 @@ public class AI : MonoBehaviour
     public float AttackDistance => attackDistance;
     public float AttackDelay => attackDelay;
 
-    public int health = 10;
-
-
     private void Awake()
     {
-        stateManager = new StateMachine<AI>(this);
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        stateManager = new StateMachine<AI>(this);
+        state = AIState.None;
+
         stateManager.AddState<GoodCustomerState>();
+        stateManager.AddState<HungryCustomer>();
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
-        stateManager.AddState<CustomerLeavingState>();
-        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
-
+        stateManager.AddState<LeavingCustomer>();
+        ChangeState(Random.value < 0.8f ? AIState.Good : AIState.Bad);
+        
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
 
     private void PerformDetection()
     {
-
         foreach (Detector detect in detectors)
         {
             detect.Detect(aiData);
         }
-
     }
 
     private void Update()
     {
         stateManager.Update(Time.deltaTime);
+        FaceMovementDirection(anim, rb2d.velocity);
 
         if (health <= 0 || isExist)
         {
             GameManager.Instance.AIPool.Remove(this.gameObject);
             Destroy(gameObject);
         }
-        FaceMovementDirection(anim, rb2d.velocity);
     }
 
     public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
@@ -143,7 +134,6 @@ public class AI : MonoBehaviour
 
                 yield return null;
             }
-
         }
     }
 
@@ -151,7 +141,6 @@ public class AI : MonoBehaviour
     {
         if (aiData.currentTarget == null)
         {
-            Debug.Log("Stopping");
             movementInput = Vector2.zero;
             chasing = false;
             yield return null;
@@ -175,19 +164,24 @@ public class AI : MonoBehaviour
         }
     }
 
+    public void ChangeState(AIState newState)
+    {
+        if(newState != state)
+        {
+            stateManager.ChangeState((int)newState);
+            state = newState;
+        }
+    }
+
     public void FindSeat()
     {
         if (aiData.currentTarget == null || isSit)
         {
             movementInput = Vector2.zero;
         }
-        else
+        else if (aiData.currentTarget.position != transform.position && !isSit)
         {
-            if (aiData.currentTarget.position != transform.position && !isSit)
-            {
-                movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
-            }
-
+            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
         }
     }
 

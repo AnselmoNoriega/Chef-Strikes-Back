@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -33,11 +29,10 @@ public class Chair : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Customer")
-            && !collision.gameObject.GetComponent<AI>().DoneEating
-            && !collision.gameObject.GetComponent<AI>().isAngry)
+            && collision.gameObject.GetComponent<AI>().state == AIState.Good)
         {
             ai = collision.gameObject.GetComponent<AI>();
-            ai.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            ai.rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             ai.isSit = true;
             ai.transform.position = transform.position;
             table.AddCostumer(this);
