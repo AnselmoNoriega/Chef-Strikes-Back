@@ -1,10 +1,7 @@
 using System;
-using System.Collections;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -36,7 +33,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if(isLaunchingFood)
+        if (isLaunchingFood)
         {
             length.transform.position = transform.localPosition + offset;
             length.value += Time.deltaTime * distanceMultiplier;
@@ -79,7 +76,7 @@ public class Inventory : MonoBehaviour
 
     private void SetEquation2Throw(Vector2 direction)
     {
-        if(direction == Vector2.zero)
+        if (direction == Vector2.zero)
         {
             foodItem.Throw(Vector2.zero, Vector2.zero, 0);
             return;
@@ -89,10 +86,10 @@ public class Inventory : MonoBehaviour
 
         var strength = mousePos * playerForce;
 
-        float velocity = math.sqrt(math.pow(strength.x, 2) + math.pow(strength.y, 2));
-        float distance = math.sqrt(math.pow(mousePos.x, 2) + math.pow(mousePos.y, 2));
-        
-        float acceleration = (math.pow(velocity, 2)) / (2 * distance);
+        float velocity = (float)Math.Sqrt(Math.Pow(strength.x, 2f) + Math.Pow(strength.y, 2f));
+        float distance = (float)Math.Sqrt(Math.Pow(mousePos.x, 2f) + Math.Pow(mousePos.y, 2f));
+
+        float acceleration = (float)(Math.Pow(velocity, 2)) / (2 * distance);
         Vector2 negativeAcceleration = (-acceleration * mousePos / distance);
 
         foodItem.Throw(strength, negativeAcceleration, velocity / acceleration);

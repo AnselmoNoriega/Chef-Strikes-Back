@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-
 public class StateManager 
 {
     public enum AIState
@@ -44,14 +39,18 @@ public class StateManager
 
     public void SwitchState(AIState state)
     {
-        if (currentState is not null)
+        if (currentState != null)
+        {
             currentState.ExitState(ai);
+        }
 
         //currentState = StateCreater(state);
         currentAIState = state;
 
-        if (currentState is not null)
+        if (currentState != null)
+        {
             currentState.EnterState(ai);
+        }
     }
 
     public void Update()

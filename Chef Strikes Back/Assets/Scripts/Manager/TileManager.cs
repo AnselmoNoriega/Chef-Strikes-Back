@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -41,7 +40,12 @@ public class TileManager : MonoBehaviour
             {
                 var tile = tilemap.GetTile<ChairTile>(position);
                 if (tile == null) continue;
-                chairs.TryAdd(tilemap.CellToWorld(position), false); ;
+
+                if (chairs.ContainsKey(tilemap.CellToWorld(position)))
+                {
+                    chairs.Add(tilemap.CellToWorld(position), false);
+                }
+
             }
         }
 

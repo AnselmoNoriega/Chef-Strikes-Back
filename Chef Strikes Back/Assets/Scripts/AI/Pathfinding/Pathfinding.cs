@@ -19,7 +19,7 @@ public class Pathfinding : MonoBehaviour
 
     private void Start()
     {
-        List<Vector3Int> positions = new(50);
+        List<Vector3Int> positions = new List<Vector3Int>(50);
         foreach(var position in tilemap.cellBounds.allPositionsWithin)
         {
             var tile = tilemap.GetTile(position);

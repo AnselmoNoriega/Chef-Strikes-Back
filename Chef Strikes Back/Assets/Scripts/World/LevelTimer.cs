@@ -1,20 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using Object = UnityEngine.Object;
+
 public class LevelTimer : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI textTime;
-    [SerializeField]
-    private Light2D worldLight;
-    private float lightStartValue;
+    [SerializeField] private TextMeshProUGUI textTime;
+    [SerializeField] private float lightStartValue;
+    [SerializeField]    private float elapsTime;
 
-    [SerializeField]
-    private float elapsTime;
+    Object worldLight;
+
     private float elapsTimeStart;
     private TimeSpan timePlaying;
 
@@ -25,7 +21,7 @@ public class LevelTimer : MonoBehaviour
         timePlaying = TimeSpan.FromMinutes(elapsTime);
         elapsTimeStart = elapsTime;
         textTime.text = timePlaying.ToString("mm':'ss'.'ff");
-        lightStartValue = worldLight.falloffIntensity;
+        //lightStartValue = worldLight.falloffIntensity;
     }
 
     // Update is called once per frame
@@ -34,7 +30,7 @@ public class LevelTimer : MonoBehaviour
         if (elapsTime > 0.00f)
         {
             elapsTime -= Time.deltaTime / 60;
-            worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
+            //worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
 
             timePlaying = TimeSpan.FromMinutes(elapsTime);
             textTime.text = timePlaying.ToString("mm':'ss'.'ff");

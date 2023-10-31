@@ -38,7 +38,7 @@ public class Grid : MonoBehaviour
 
     public void CreateNodeList(List<Vector3Int> position, Tilemap tilemap)
     {
-        Vector2Int max = new(tilemap.cellBounds.xMax, tilemap.cellBounds.yMax);
+        Vector2Int max = new Vector2Int(tilemap.cellBounds.xMax, tilemap.cellBounds.yMax);
         offset.x = tilemap.cellBounds.xMin;
         offset.y = tilemap.cellBounds.yMin;
         gridSize.x = max.x - offset.x;
