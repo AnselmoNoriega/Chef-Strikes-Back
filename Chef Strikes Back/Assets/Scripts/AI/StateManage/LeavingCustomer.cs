@@ -6,7 +6,7 @@ public class LeavingCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        ExitPos = TileManager.Instance.requestEntrancePos();
+        ExitPos = TileManager.Instance.RequestEntrancePos();
         PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
     }
 

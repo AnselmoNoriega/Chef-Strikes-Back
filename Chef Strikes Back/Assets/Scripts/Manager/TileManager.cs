@@ -15,7 +15,7 @@ public class TileManager : MonoBehaviour
         Instance = this;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         Instance = null;
     }
@@ -23,7 +23,8 @@ public class TileManager : MonoBehaviour
     private void Start()
     {
         entrance = new List<Vector2>();
-        foreach (var tilemap in grid.GetComponentsInChildren<Tilemap>())
+        var tileMaps = grid.GetComponentsInChildren<Tilemap>();
+        foreach (var tilemap in tileMaps)
         {
             foreach (var position in tilemap.cellBounds.allPositionsWithin)
             {
@@ -34,7 +35,7 @@ public class TileManager : MonoBehaviour
         }
 
         chairs = new Dictionary<Vector2, bool>();
-        foreach (var tilemap in grid.GetComponentsInChildren<Tilemap>())
+        foreach (var tilemap in tileMaps)
         {
             foreach (var position in tilemap.cellBounds.allPositionsWithin)
             {
@@ -45,7 +46,6 @@ public class TileManager : MonoBehaviour
                 {
                     chairs.Add(tilemap.CellToWorld(position), false);
                 }
-
             }
         }
 
@@ -62,7 +62,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public Vector2 requestEntrancePos()
+    public Vector2 RequestEntrancePos()
     {
         foreach (var item in entrance)
         {
@@ -73,13 +73,13 @@ public class TileManager : MonoBehaviour
         return new Vector2(int.MaxValue, int.MaxValue);
     }
 
-    public Vector2 requestEmptyPos()
+    public Vector2 RequestEmptyPos()
     {
         int random = UnityEngine.Random.Range(0, checkWalkableCount());
         return emptySpot[random];
     }
 
-    public Vector2 requestChairPos()
+    public Vector2 RequestChairPos()
     {
         foreach (var item in chairs)
         {
@@ -93,11 +93,11 @@ public class TileManager : MonoBehaviour
         return new Vector2(int.MaxValue, int.MaxValue);
     }
 
-    public void freeChair(Vector2 pos)
+    public void FreeChair(Vector2 pos)
     {
-        foreach(var item in chairs)
+        foreach (var item in chairs)
         {
-            if(pos == item.Key)
+            if (pos == item.Key)
             {
                 chairs[item.Key] = false;
                 return;
@@ -111,14 +111,18 @@ public class TileManager : MonoBehaviour
         int count = 0;
         foreach (var item in chairs)
         {
-            if (!item.Value) count++;
+            count = item.Value ? ++count : count;
         }
 
-        if (count > 0) return count;
+        if (count > 0)
+        {
+            return count;
+        }
+
         return 0;
     }
 
-    
+
 
     public int checkWalkableCount()
     {

@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
         if (spawnTime > 5 && rageMode == false)
         {
-            Vector2 spawnPos = TileManager.Instance.requestEntrancePos();
+            Vector2 spawnPos = TileManager.Instance.RequestEntrancePos();
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
             spawnTime = 0;
         }

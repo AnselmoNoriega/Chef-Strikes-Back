@@ -5,7 +5,7 @@ public class BadCustomerState : StateClass<AI>
     public void Enter(AI agent)
     {
         agent.GetComponent<SpriteRenderer>().color = Color.red;
-        PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+        PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.RequestEmptyPos(), agent.OnPathFound);
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         agent.isStand = true;
     }
@@ -14,7 +14,7 @@ public class BadCustomerState : StateClass<AI>
     {
         if (!agent.isStand && !GameManager.Instance.rageMode)
         {
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.RequestEmptyPos(), agent.OnPathFound);
             agent.isStand = true;
         }
         agent.OnMovementInput?.Invoke(agent.movementInput);
