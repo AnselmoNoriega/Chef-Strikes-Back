@@ -59,6 +59,7 @@ public class StateMachine<AgentType> where AgentType : class
         _stateIndex = index;
     }
 
+   
     public int CurrentState { get { return _stateIndex; } }
 }
 
