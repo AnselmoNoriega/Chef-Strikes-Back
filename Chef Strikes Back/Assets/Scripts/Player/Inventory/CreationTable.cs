@@ -35,7 +35,7 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem != null && IsAcceptedType(recivedItem.type))
+        if (recivedItem != null && IsAcceptedType(recivedItem.type) && recivedItem.isPickable)
         {
             if (!count[(int)recivedItem.type])
             {
