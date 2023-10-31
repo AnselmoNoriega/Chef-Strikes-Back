@@ -7,24 +7,32 @@ public class SceneControl : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public Text pausingText;
-    [SerializeField]
-    private InputActionReference keyPause;
+
+    [SerializeField] private InputActionReference _keyPause;
+
+    private GameLoader _gameLoader;
+
+    private void Start()
+    {
+        _gameLoader = ServiceLocator.Get<GameLoader>();
+        _gameLoader.CallOnComplete(Initialize);
+    }
+
+    private void Initialize()
+    {
+        Debug.Log($"{nameof(Initialize)}");
+    }
 
     private void OnEnable()
     {
-        keyPause.action.Enable();
-        keyPause.action.performed += OnClicked;
+        _keyPause.action.Enable();
+        _keyPause.action.performed += OnClicked;
     }
 
     private void OnDisable()
     {
-        keyPause.action.Disable();
-        keyPause.action.performed -= OnClicked;
-    }
-
-    void Update()
-    {
-        
+        _keyPause.action.Disable();
+        _keyPause.action.performed -= OnClicked;
     }
 
     private void OnClicked(InputAction.CallbackContext input)
@@ -77,9 +85,13 @@ public class SceneControl : MonoBehaviour
     public void TogglePause()
     {
         if (GameIsPaused)
+        {
             Resume();
+        }
         else
+        {
             Pause();
+        }
     }
     public void Resume()
     {
@@ -91,9 +103,7 @@ public class SceneControl : MonoBehaviour
     {
         UnityEngine.Debug.Log(GameIsPaused);
         Time.timeScale = 0f;
-        
+
         GameIsPaused = true;
     }
-
-
 }
