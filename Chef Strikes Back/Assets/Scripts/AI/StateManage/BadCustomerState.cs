@@ -6,7 +6,7 @@ public class BadCustomerState : StateClass<AI>
     {
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
-        agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         agent.isStand = true;
     }
 

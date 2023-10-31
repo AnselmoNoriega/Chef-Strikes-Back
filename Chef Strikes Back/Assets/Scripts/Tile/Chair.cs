@@ -6,6 +6,9 @@ public class Chair : MonoBehaviour
     public bool seatAvaliable = true;
 
     [SerializeField]
+    private GameObject SpawnPointForBadAI = null;
+
+    [SerializeField]
     private Table table;
     public AI ai;
 
@@ -20,6 +23,8 @@ public class Chair : MonoBehaviour
 
     public void FreeChair()
     {
+        ai.transform.position = SpawnPointForBadAI.transform.position;
+        ai = null;
         seatAvaliable = true;
         chairCollider.enabled = true;
         chairSprite.enabled = true;

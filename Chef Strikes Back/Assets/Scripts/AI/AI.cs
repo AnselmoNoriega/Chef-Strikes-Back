@@ -88,6 +88,14 @@ public class AI : MonoBehaviour
         stateManager.Update(Time.deltaTime);
         FaceMovementDirection(anim, rb2d.velocity);
 
+        if(!GameManager.Instance.rageMode)
+        {
+            if(!aiData.currentTarget.GetComponent<Chair>().seatAvaliable)
+            {
+                aiData.currentTarget = null;
+            }
+        }
+
         if (health <= 0 || isExist)
         {
             GameManager.Instance.AIPool.Remove(this.gameObject);
