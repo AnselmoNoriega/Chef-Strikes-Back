@@ -15,28 +15,25 @@ public enum AIState
 
 public class AI : MonoBehaviour
 {
-    [Header("AI Behaviour"), SerializeField]
-    private List<SteeringBehaviour> steeringBehaviours;
-    [SerializeField]
-    public List<Detector> detectors;
-    [SerializeField]
-    public Vector2 movementInput;
-    [SerializeField]
-    private ContextSolver movementDirectionSolver;
+    [Header("AI Behaviour")]
+    [SerializeField] private List<SteeringBehaviour> steeringBehaviours;
+    [SerializeField] public List<Detector> detectors;
+    [SerializeField] public Vector2 movementInput;
+    [SerializeField] private ContextSolver movementDirectionSolver;
     public AIData aiData;
     private StateMachine<AI> stateManager;
     private Vector2[] path;
     int targetIndex;
 
-    [Space, Header("AI Properties"), SerializeField]
-    public GameObject OrderBubble;
-    private Animator anim;
+    [Space, Header("AI Properties")]
+    [SerializeField] private Animator anim;
     public Rigidbody2D rb2d;
+    public GameObject OrderBubble;
+    public Transform eatingSlider;
 
-    [Space, Header("AI Variables"), SerializeField]
-    private float attackDistance = 0.5f;
-    [SerializeField]
-    private float detectionDelay = 0.05f, attackDelay = 1f;
+    [Space, Header("AI Variables")]
+    [SerializeField] private float attackDistance = 0.5f;
+    [SerializeField] private float detectionDelay = 0.05f, attackDelay = 1f;
 
     [Space, Header("AI Events")]
     public UnityEvent OnAttackPressed;
@@ -59,9 +56,6 @@ public class AI : MonoBehaviour
 
     private void Awake()
     {
-        rb2d = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-
         stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
@@ -71,7 +65,7 @@ public class AI : MonoBehaviour
         stateManager.AddState<RageCustomerState>();
         stateManager.AddState<LeavingCustomer>();
         ChangeState(Random.value < 0.8f ? AIState.Good : AIState.Bad);
-        
+
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
 
@@ -88,9 +82,9 @@ public class AI : MonoBehaviour
         stateManager.Update(Time.deltaTime);
         FaceMovementDirection(anim, rb2d.velocity);
 
-        if(!GameManager.Instance.rageMode && state != AIState.Bad && !isSit)
+        if (!GameManager.Instance.rageMode && state != AIState.Bad && !isSit)
         {
-            if(!aiData.currentTarget.GetComponent<Chair>().seatAvaliable)
+            if (!aiData.currentTarget.GetComponent<Chair>().seatAvaliable)
             {
                 aiData.currentTarget = null;
             }
@@ -174,7 +168,7 @@ public class AI : MonoBehaviour
 
     public void ChangeState(AIState newState)
     {
-        if(newState != state)
+        if (newState != state)
         {
             stateManager.ChangeState((int)newState);
             state = newState;
