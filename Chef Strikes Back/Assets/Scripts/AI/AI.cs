@@ -168,11 +168,8 @@ public class AI : MonoBehaviour
 
     public void ChangeState(AIState newState)
     {
-        if (newState != state)
-        {
-            stateManager.ChangeState((int)newState);
-            state = newState;
-        }
+        stateManager.ChangeState((int)newState);
+        state = newState;
     }
 
     public void FindSeat()

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class HungryCustomer : StateClass<AI>
 {
-    private float waitingTime;
+    private float waitingTime = 15.0f;
     private float eatingTime = 2.0f;
+    private float timer;
     private Vector3 scale;
 
     public void Enter(AI agent)
@@ -11,27 +12,32 @@ public class HungryCustomer : StateClass<AI>
         scale = agent.eatingSlider.localScale;
         scale.x = 1;
         agent.eatingSlider.localScale = scale;
-        waitingTime = 15.0f;
+        agent.eatingSlider.transform.parent.gameObject.SetActive(true);
 
-        agent.OrderBubble.gameObject.SetActive(true);
+        if (agent.eating)
+        {
+            agent.eatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+            timer = eatingTime;
+        }
+        else
+        {
+            agent.eatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+            agent.OrderBubble.gameObject.SetActive(true);
+            timer = waitingTime;
+        }
     }
 
     public void Update(AI agent, float dt)
     {
-        waitingTime -= Time.deltaTime;
+        scale.x -= Time.deltaTime / timer;
+        agent.eatingSlider.localScale = scale;
 
-        if (agent.eating)
+        if (scale.x <= 0 && agent.eating)
         {
-            scale.x -= Time.deltaTime / eatingTime;
-            agent.eatingSlider.localScale = scale;
-
-            if (scale.x <= 0)
-            {
-                agent.DropMoney();
-                agent.ChangeState(AIState.Leaving);
-            }
+            agent.DropMoney();
+            agent.ChangeState(AIState.Leaving);
         }
-        else if (waitingTime <= 0)
+        else if (scale.x <= 0)
         {
             agent.ChangeState(AIState.Bad);
         }

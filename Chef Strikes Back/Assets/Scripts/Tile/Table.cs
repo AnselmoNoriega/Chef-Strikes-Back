@@ -44,9 +44,7 @@ public class Table : MonoBehaviour
                 if (!chair.ai.eating)
                 {
                     chair.ai.eating = true;
-                    chair.ai.OrderBubble.gameObject.SetActive(false);
-                    chair.ai.eatingSlider.transform.parent.gameObject.SetActive(true);
-                    chair.ai.OrderBubble.gameObject.SetActive(false);
+                    chair.ai.ChangeState(AIState.Hungry);
                 }
             }
         }
