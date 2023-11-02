@@ -15,12 +15,8 @@ public class Pathfinding : MonoBehaviour
     {
         requestManager = GetComponent<PathRequestManager>();
         grid = GetComponent<Grid>();
-    }
-
-    private void Start()
-    {
         List<Vector3Int> positions = new(50);
-        foreach(var position in tilemap.cellBounds.allPositionsWithin)
+        foreach (var position in tilemap.cellBounds.allPositionsWithin)
         {
             var tile = tilemap.GetTile(position);
             if (tile == null || tile is NonWalkableTile)

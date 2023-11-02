@@ -6,6 +6,7 @@ public class LeavingCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         ExitPos = TileManager.Instance.requestEntrancePos();
         PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
     }
@@ -20,7 +21,6 @@ public class LeavingCustomer : StateClass<AI>
         if (agent.aiData.currentTarget != null)
         {
             agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
-            agent.FindSeat();
         }
         else if (agent.aiData.GetTargetsCount() > 0)
         {
