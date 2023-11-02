@@ -102,7 +102,7 @@ public class PlayerAttacking : StateClass<Player>
         var rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
         var attackDirection = (mousePos - rayOrigin).normalized;
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, attackDirection, player._weapon.Range); 
+        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, attackDirection, player._weapon.Range); 
         PlayerHelper.FaceMovementDirection(player.animator, attackDirection);
 
         foreach (RaycastHit2D hit in hits)
