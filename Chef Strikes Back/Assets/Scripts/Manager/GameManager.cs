@@ -12,11 +12,11 @@ public class GameManager : MonoBehaviour
     public List<GameObject> AIPool;
     public SceneControl sc;
     public int money = 0;
-    private float spawnTime = 0;
+    [SerializeField]private float spawnTime;
     public float rageValue = 0.0f;
     public bool rageMode = false;
     public Text moneycounting;
-    
+    float count = 0;
 
     private void Awake()
     {
@@ -25,14 +25,15 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        spawnTime += Time.deltaTime;
+        
+        count += Time.deltaTime;
         rageValue = player.currentRage;
 
-        if (spawnTime > 5 && rageMode == false)
+        if (count > spawnTime && rageMode == false)
         {
             Vector2 spawnPos = TileManager.Instance.requestEntrancePos();
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
-            spawnTime = 0;
+            count = 0;
         }
 
         if (rageMode && AIPool.Count == 0)
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
         else if (rageValue >= 100)
         {
             rageMode = true;
-            spawnTime = 0;
+            count = 0;
         }
 
 
