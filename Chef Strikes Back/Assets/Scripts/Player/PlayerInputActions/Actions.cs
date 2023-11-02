@@ -16,7 +16,7 @@ public class Actions : MonoBehaviour
     private Vector3 offset;
 
     [Space, Header("Player Attack")]
-    [SerializeField] 
+    [SerializeField]
     private Player player;
 
 
@@ -90,7 +90,10 @@ public class Actions : MonoBehaviour
 
     public void DropItem()
     {
-        inventory.ThrowFood(Vector2.zero);
+        if (inventory.GetFoodItem() != null)
+        {
+            inventory.ThrowFood(Vector2.zero);
+        }
         ready2Throw = false;
         isCarryingItem = false;
         player.ChangeAction(PlayerActions.None);
