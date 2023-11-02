@@ -16,11 +16,12 @@ public class GameManager : MonoBehaviour
     public float rageValue = 0.0f;
     public bool rageMode = false;
     public Text moneycounting;
-    float count = 0;
+    float count;
 
     private void Awake()
     {
         Instance = this;
+        count = spawnTime;
     }
 
     private void Update()
