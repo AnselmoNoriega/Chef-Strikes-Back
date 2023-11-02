@@ -54,7 +54,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        agent.eatingSlider.transform.parent.gameObject.SetActive(true);
+        agent.eatingSlider.transform.parent.gameObject.SetActive(false);
         agent.OrderBubble.gameObject.SetActive(false);
     }
 }
