@@ -23,7 +23,7 @@ public class LootBag : MonoBehaviour
         return possibleItems[0];
     }
 
-    public void InstantiateLoot(Vector3 spawnPosition)
+    public void InstantiateLoot(Vector2 spawnPosition)
     {
         Loot droppedItem = GetDroppedItem();
         if(droppedItem != null) 

@@ -8,13 +8,20 @@ public class Table : MonoBehaviour
     private List<Chair> chairs = new List<Chair>();
 
     [SerializeField]
-    private Transform platePos;
+    public Transform platePos;
+    [SerializeField]
+    public SpriteRenderer plateSprite;
 
     [SerializeField]
     public List<Item> foods = new List<Item>();
 
     private void Update()
     {
+        if (plateSprite.enabled && chairs.Count == 0)
+        {
+            plateSprite.enabled = false;
+        }
+
         for (int i = 0; i < chairs.Count; ++i)
         {
             if (chairs[i].ai.state == AIState.Leaving)

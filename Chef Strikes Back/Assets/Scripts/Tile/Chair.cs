@@ -43,6 +43,7 @@ public class Chair : MonoBehaviour
             table.AddCostumer(this);
             seatAvaliable = false;
             chairSprite.enabled = false;
+            table.plateSprite.enabled = true;
         }
     }
 }
