@@ -125,6 +125,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftJoystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""ebbcf876-4c79-4168-87d5-d9882f0eb261"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -314,6 +323,17 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""LeftTrigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1976494-6ece-41f5-b476-cd6e9d36cd2c"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -333,6 +353,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
         m_Player_RightTrigger = m_Player.FindAction("RightTrigger", throwIfNotFound: true);
         m_Player_LeftTrigger = m_Player.FindAction("LeftTrigger", throwIfNotFound: true);
+        m_Player_LeftJoystick = m_Player.FindAction("LeftJoystick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,6 +424,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Esc;
     private readonly InputAction m_Player_RightTrigger;
     private readonly InputAction m_Player_LeftTrigger;
+    private readonly InputAction m_Player_LeftJoystick;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -418,6 +440,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @Esc => m_Wrapper.m_Player_Esc;
         public InputAction @RightTrigger => m_Wrapper.m_Player_RightTrigger;
         public InputAction @LeftTrigger => m_Wrapper.m_Player_LeftTrigger;
+        public InputAction @LeftJoystick => m_Wrapper.m_Player_LeftJoystick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -460,6 +483,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LeftTrigger.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftTrigger;
                 @LeftTrigger.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftTrigger;
                 @LeftTrigger.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftTrigger;
+                @LeftJoystick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftJoystick;
+                @LeftJoystick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftJoystick;
+                @LeftJoystick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftJoystick;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -497,6 +523,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LeftTrigger.started += instance.OnLeftTrigger;
                 @LeftTrigger.performed += instance.OnLeftTrigger;
                 @LeftTrigger.canceled += instance.OnLeftTrigger;
+                @LeftJoystick.started += instance.OnLeftJoystick;
+                @LeftJoystick.performed += instance.OnLeftJoystick;
+                @LeftJoystick.canceled += instance.OnLeftJoystick;
             }
         }
     }
@@ -514,5 +543,6 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnEsc(InputAction.CallbackContext context);
         void OnRightTrigger(InputAction.CallbackContext context);
         void OnLeftTrigger(InputAction.CallbackContext context);
+        void OnLeftJoystick(InputAction.CallbackContext context);
     }
 }

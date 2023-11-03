@@ -24,8 +24,10 @@ public class Inventory : MonoBehaviour
     private GameObject pointer;
     private Vector3 offsetPointer;
 
+    private Vector3 pointingDirection;
+
     private bool isLaunchingFood;
-    private InputAction targetMouse;
+    private InputAction targetAngle;
 
     private void Start()
     {
@@ -36,7 +38,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
-        if(isLaunchingFood)
+        if (isLaunchingFood)
         {
             length.transform.position = transform.localPosition + offset;
             length.value += Time.deltaTime * distanceMultiplier;
@@ -57,10 +59,10 @@ public class Inventory : MonoBehaviour
         return foodItem;
     }
 
-    public void PrepareToThrowFood(InputAction mouse)
+    public void PrepareToThrowFood(InputAction pos)
     {
         pointer.SetActive(true);
-        targetMouse = mouse;
+        targetAngle = pos;
         isLaunchingFood = true;
         length.gameObject.SetActive(true);
         length.value = 0.0f;
@@ -72,14 +74,14 @@ public class Inventory : MonoBehaviour
         SetEquation2Throw(direction);
         foodItem.transform.parent = null;
         foodItem = null;
-        targetMouse = null;
+        targetAngle = null;
         isLaunchingFood = false;
         length.gameObject.SetActive(false);
     }
 
     private void SetEquation2Throw(Vector2 direction)
     {
-        if(direction == Vector2.zero)
+        if (direction == Vector2.zero)
         {
             foodItem.Throw(Vector2.zero, Vector2.zero, 0);
             return;
@@ -91,7 +93,7 @@ public class Inventory : MonoBehaviour
 
         float velocity = math.sqrt(math.pow(strength.x, 2) + math.pow(strength.y, 2));
         float distance = math.sqrt(math.pow(mousePos.x, 2) + math.pow(mousePos.y, 2));
-        
+
         float acceleration = (math.pow(velocity, 2)) / (2 * distance);
         Vector2 negativeAcceleration = (-acceleration * mousePos / distance);
 
@@ -100,9 +102,17 @@ public class Inventory : MonoBehaviour
 
     private void PointerMovement()
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(targetMouse.ReadValue<Vector2>());
-        var dir = (mousePos - (transform.position + offsetPointer));
-        var angle = (float)Math.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
+        if (targetAngle.ReadValue<Vector2>().magnitude > 10.0f)
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(targetAngle.ReadValue<Vector2>());
+            pointingDirection = (mousePos - (transform.position + offsetPointer));
+        }
+        else if(targetAngle.ReadValue<Vector2>().magnitude > 0.0f)
+        {
+            pointingDirection = targetAngle.ReadValue<Vector2>();
+        }
+
+        var angle = (float)Math.Atan2(-pointingDirection.x, pointingDirection.y) * Mathf.Rad2Deg;
         pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
         pointer.transform.localScale = new Vector3(0.5f, length.value, 1.0f);
     }

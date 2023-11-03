@@ -62,6 +62,26 @@ public class Actions : MonoBehaviour
         }
     }
 
+    public void GrabItem()
+    {
+        if (!isCarryingItem && !GameManager.Instance.rageMode)
+        {
+            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + player.lookingDirection, 1);
+
+            foreach (var hit in hits)
+            {
+                Item newItem;
+
+                if ((newItem = hit.GetComponent<Item>()) && newItem.isPickable)
+                {
+                    inventory.AddItem(newItem);
+                    isCarryingItem = true;
+                    return;
+                }
+            }
+        }
+    }
+
     public void PrepareToThrow(InputAction mouse)
     {
         if (inventory.GetFoodItem() != null)
@@ -73,14 +93,19 @@ public class Actions : MonoBehaviour
         }
     }
 
-    public void ThrowItem(InputAction mouse)
+    public void ThrowItem(InputAction pos)
     {
         if (inventory.GetFoodItem() != null && ready2Throw)
         {
-            var mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-            var dir = (mousePos - (transform.position + offset));
-            dir.z = 0;
-            dir.Normalize();
+            var dir = pos.ReadValue<Vector2>();
+
+            if (dir.magnitude >= 10.0f)
+            {
+                var mousePos = Camera.main.ScreenToWorldPoint(pos.ReadValue<Vector2>());
+                dir = (mousePos - (transform.position + offset));
+                dir.Normalize();
+            }
+
             inventory.ThrowFood(dir);
             ready2Throw = false;
             isCarryingItem = false;

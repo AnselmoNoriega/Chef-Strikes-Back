@@ -11,6 +11,7 @@ public class PlayerInputs : MonoBehaviour
     private InputAction leftMouse;
     private InputAction rightTrigger;
     private InputAction mouse;
+    private InputAction rightJoystick;
 
     [SerializeField]
     private Actions action;
@@ -27,12 +28,14 @@ public class PlayerInputs : MonoBehaviour
         mouse = inputManager.Player.MouseLocation;
         leftTrigger = inputManager.Player.LeftTrigger;
         rightTrigger = inputManager.Player.RightTrigger;
+        rightJoystick = inputManager.Player.LeftJoystick;
 
         rightMouse.Enable();
         leftMouse.Enable();
         mouse.Enable();
         leftTrigger.Enable();
         rightTrigger.Enable();
+        rightJoystick.Enable();
 
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
@@ -80,13 +83,13 @@ public class PlayerInputs : MonoBehaviour
     private void RightTgrClick(InputAction.CallbackContext input)
     {
         action.Attacking(Vector2.zero);
-        action.ThrowItem(mouse); 
+        action.ThrowItem(rightJoystick); 
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
-        action.PrepareToThrow(mouse);
-        action.GrabItem(mouse);
+        action.PrepareToThrow(rightJoystick);
+        action.GrabItem();
     }
 
     private void RightClickRelease(InputAction.CallbackContext input)
