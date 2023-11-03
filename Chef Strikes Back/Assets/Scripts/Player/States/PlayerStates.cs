@@ -63,7 +63,7 @@ public class PlayerAttacking : StateClass<Player>
     {
         timer = 0.1f;
         agent.rb.velocity = Vector2.zero;
-        Attack(agent.attackDir, agent);
+        Attack(agent.lookingDirection, agent);
         agent.animator.SetBool("IsAttacking", true);
     }
 
@@ -97,13 +97,10 @@ public class PlayerAttacking : StateClass<Player>
 
     }
 
-    public void Attack(Vector2 mousePos, Player player)
+    public void Attack(Vector2 angle, Player player)
     {
-        var rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-        var attackDirection = (mousePos - rayOrigin).normalized;
-
-        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, attackDirection, player._weapon.Range); 
-        PlayerHelper.FaceMovementDirection(player.animator, attackDirection);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, angle, player._weapon.Range); 
+        PlayerHelper.FaceMovementDirection(player.animator, angle);
 
         foreach (RaycastHit2D hit in hits)
         {

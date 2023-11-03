@@ -99,11 +99,15 @@ public class Actions : MonoBehaviour
         player.ChangeAction(PlayerActions.None);
     }
 
-    public void Attacking(InputAction mouse)
+    public void Attacking(Vector2 anglePos)
     {
         if (player.playerAction != PlayerActions.Attacking && !ready2Throw)
         {
-            player.attackDir = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
+            if (anglePos != Vector2.zero)
+            {
+                Vector3 rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
+                player.lookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
+            }
             player.ChangeAction(PlayerActions.Attacking);
         }
     }

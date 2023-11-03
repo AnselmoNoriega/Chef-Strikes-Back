@@ -18,7 +18,7 @@ public class PlayerWalking : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        if(agent.playerMode == PlayerStage.Normal && agent.playerAction != PlayerActions.None)
+        if (agent.playerMode == PlayerStage.Normal && agent.playerAction != PlayerActions.None)
         {
             agent.ChangeState(PlayerStates.Idle);
             return;
@@ -35,6 +35,7 @@ public class PlayerWalking : StateClass<Player>
         else
         {
             currentDirection = PlayerHelper.FaceMovementDirection(agent.animator, moveDirection);
+            agent.lookingDirection = moveDirection;
         }
     }
 

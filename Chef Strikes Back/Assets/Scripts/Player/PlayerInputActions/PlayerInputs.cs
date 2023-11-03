@@ -7,11 +7,10 @@ public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
     private InputAction rightMouse;
+    private InputAction leftTrigger;
     private InputAction leftMouse;
-    private InputAction shiftKey;
+    private InputAction rightTrigger;
     private InputAction mouse;
-    private InputAction keyQ;
-    private InputAction keyE;
 
     [SerializeField]
     private Actions action;
@@ -26,25 +25,22 @@ public class PlayerInputs : MonoBehaviour
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
-        shiftKey = inputManager.Player.ShiftKey;
-        keyE = inputManager.Player.KeyE;
-        keyQ = inputManager.Player.KeyQ;
+        leftTrigger = inputManager.Player.LeftTrigger;
+        rightTrigger = inputManager.Player.RightTrigger;
 
         rightMouse.Enable();
         leftMouse.Enable();
-        shiftKey.Enable();
         mouse.Enable();
-        keyE.Enable();
-        keyQ.Enable();
+        leftTrigger.Enable();
+        rightTrigger.Enable();
 
-        shiftKey.started += KeyShiftPressed;
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
-        keyE.performed += KeyEPressed;
-        keyQ.performed += KeyQPressed;
+        leftTrigger.performed += LeftTgrClick;
+        rightTrigger.performed += RightTgrClick;
 
         rightMouse.canceled += RightClickRelease;
-        shiftKey.canceled += KeyShiftReleased;
+        leftTrigger.canceled += RightClickRelease;
     }
 
     private void Update()
@@ -56,24 +52,38 @@ public class PlayerInputs : MonoBehaviour
     {
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
-        keyE.performed -= KeyEPressed;
+        rightTrigger.performed -= RightTgrClick;
+        leftTrigger.performed -= LeftTgrClick;
 
         rightMouse.canceled -= RightClickRelease;
-        shiftKey.canceled -= KeyShiftReleased;
+        leftTrigger.canceled -= RightClickRelease;
 
         leftMouse.Disable();
         rightMouse.Disable();
-        keyE.Disable();
         mouse.Disable();
+        leftTrigger.Disable();
+        rightTrigger.Disable();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        action.Attacking(mouse);
+        action.Attacking(mouse.ReadValue<Vector2>());
         action.ThrowItem(mouse);
     }
 
     private void RightClick(InputAction.CallbackContext input)
+    {
+        action.PrepareToThrow(mouse);
+        action.GrabItem(mouse);
+    }
+
+    private void RightTgrClick(InputAction.CallbackContext input)
+    {
+        action.Attacking(Vector2.zero);
+        action.ThrowItem(mouse); 
+    }
+
+    private void LeftTgrClick(InputAction.CallbackContext input)
     {
         action.PrepareToThrow(mouse);
         action.GrabItem(mouse);
@@ -85,25 +95,5 @@ public class PlayerInputs : MonoBehaviour
         {
             action.DropItem();
         }
-    }
-
-    private void KeyEPressed(InputAction.CallbackContext input)
-    {
-        Debug.Log("E key pressed");
-    }
-
-    private void KeyShiftPressed(InputAction.CallbackContext input)
-    {
-
-    }
-
-    private void KeyQPressed(InputAction.CallbackContext input)
-    {
-        Debug.Log("Q key pressed");
-    }
-
-    private void KeyShiftReleased(InputAction.CallbackContext input)
-    {
-
     }
 }

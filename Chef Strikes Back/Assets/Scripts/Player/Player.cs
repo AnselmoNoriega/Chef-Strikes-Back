@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private int money;
 
     [HideInInspector, Space, Header("Attack Info")]
-    public Vector2 attackDir;
+    public Vector2 lookingDirection;
 
     [Space, Header("MaxStats Info")]
     public float maxHealth;
