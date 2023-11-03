@@ -9,7 +9,7 @@ public class Actions : MonoBehaviour
     private Inventory inventory;
     [SerializeField]
     private float throwForce;
-    private bool ready2Throw;
+    public bool ready2Throw;
     private bool isCarryingItem;
 
     [Space, Header("Player Throw")]
@@ -101,7 +101,7 @@ public class Actions : MonoBehaviour
 
     public void Attacking(InputAction mouse)
     {
-        if (player.playerAction != PlayerActions.Attacking)
+        if (player.playerAction != PlayerActions.Attacking && !ready2Throw)
         {
             player.attackDir = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
             player.ChangeAction(PlayerActions.Attacking);

@@ -33,7 +33,7 @@ public class PlayerInputs : MonoBehaviour
         rightMouse.Enable();
         leftMouse.Enable();
         shiftKey.Enable();
-        mouse.Enable(); 
+        mouse.Enable();
         keyE.Enable();
         keyQ.Enable();
 
@@ -49,7 +49,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     private void OnDisable()
@@ -70,6 +70,7 @@ public class PlayerInputs : MonoBehaviour
     private void LeftClick(InputAction.CallbackContext input)
     {
         action.Attacking(mouse);
+        action.ThrowItem(mouse);
     }
 
     private void RightClick(InputAction.CallbackContext input)
@@ -80,7 +81,10 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse);
+        if (action.ready2Throw)
+        {
+            action.DropItem();
+        }
     }
 
     private void KeyEPressed(InputAction.CallbackContext input)
