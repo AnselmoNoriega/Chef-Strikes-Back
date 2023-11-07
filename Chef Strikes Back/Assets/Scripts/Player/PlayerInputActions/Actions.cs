@@ -46,7 +46,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (item.Count > 0 && !isCarryingItem && !GameManager.Instance.rageMode)
+        if (item.Count > 0 && !isCarryingItem && !ServiceLocator.Get<GameManager>().rageMode)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
@@ -64,7 +64,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem()
     {
-        if (!isCarryingItem && !GameManager.Instance.rageMode)
+        if (!isCarryingItem && !ServiceLocator.Get<GameManager>().rageMode)
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + player.lookingDirection, 1);
 

@@ -15,10 +15,11 @@ public class TargetDetector : Detector
 
     private List<Transform> colliders;
     Collider2D targetCollider = null;
+
     public override void Detect(AIData aiData)
     {
         
-        if (!GameManager.Instance.rageMode)
+        if (!ServiceLocator.Get<GameManager>().rageMode)
         {
              targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
         }

@@ -49,8 +49,9 @@ public class Player : MonoBehaviour
     public GameObject vignette;
 
     private InputControls inputManager;
+    private bool _initialized = false;
 
-    public void Awake()
+    public void Initialize()
     {
         stateMachine = new StateMachine<Player>(this);
         actionState = new StateMachine<Player>(this);
@@ -59,20 +60,7 @@ public class Player : MonoBehaviour
         inputManager = new InputControls();
         _weapon = new Weapon(0);
         move = inputManager.Player.Move;
-    }
 
-    private void OnEnable()
-    {
-        move.Enable();
-    }
-
-    private void OnDisable()
-    {
-        move.Disable();
-    }
-
-    private void Start()
-    {
         AddStates();
         stateMachine.ChangeState(0);
         actionState.ChangeState(0);
@@ -85,10 +73,26 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         rageBar.maxValue = MaxRage;
         currentRage = 0;
+        _initialized = true;
+    }
+
+    private void OnEnable()
+    {
+        move?.Enable();
+    }
+
+    private void OnDisable()
+    {
+        move?.Disable();
     }
 
     public void Update()
     {
+        if (!_initialized)
+        {
+            return;
+        }
+
         rageBar.value = currentRage;
         healthBar.value = currentHealth / maxHealth;
 
@@ -109,6 +113,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!_initialized)
+        {
+            return;
+        }
+
         stateMachine.FixedUpdate();
         actionState.FixedUpdate();
     }
@@ -172,7 +181,7 @@ public class Player : MonoBehaviour
     {
         if(collision.tag == "Loot")
         {
-            GameManager.Instance.money += 10;
+            ServiceLocator.Get<GameManager>().money += 10;
             collision.gameObject.SetActive(false);
         }
     }

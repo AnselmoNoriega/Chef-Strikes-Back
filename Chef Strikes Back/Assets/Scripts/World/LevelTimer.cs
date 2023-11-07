@@ -18,9 +18,9 @@ public class LevelTimer : MonoBehaviour
     private float elapsTimeStart;
     private TimeSpan timePlaying;
 
-    //kingston - 9/10
     [SerializeField] SceneControl sceneControl;
-    void Start()
+
+    public void Initialize()
     {
         timePlaying = TimeSpan.FromMinutes(elapsTime);
         elapsTimeStart = elapsTime;

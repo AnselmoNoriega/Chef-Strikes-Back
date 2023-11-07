@@ -22,11 +22,6 @@ public class SceneControl : MonoBehaviour
         keyPause.action.performed -= OnClicked;
     }
 
-    void Update()
-    {
-        
-    }
-
     private void OnClicked(InputAction.CallbackContext input)
     {
         if (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "MainScene2")

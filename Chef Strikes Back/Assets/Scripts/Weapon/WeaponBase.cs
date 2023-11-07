@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
 {
-    
     public Vector2 PointerPosition { get; set; }
     [SerializeField] Player player;
     
@@ -48,7 +47,7 @@ public class WeaponBase : MonoBehaviour
             return;
         IsAttacking = true;
         attackBlocked = true;
-        GameManager.Instance.dealDamage(10);
+        ServiceLocator.Get<GameManager>().dealDamage(10);
         StartCoroutine(DelayAttack());
     }
 

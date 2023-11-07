@@ -7,7 +7,7 @@ public class LeavingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        ExitPos = TileManager.Instance.requestEntrancePos();
+        ExitPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
         PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
     }
 

@@ -1,27 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TileManager : MonoBehaviour
 {
-    public static TileManager Instance;
     [SerializeField] Grid grid;
     private List<Vector2> entrance;
     private Dictionary<Vector2, bool> chairs;
     private List<Vector2> emptySpot;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-    private void OnDisable()
-    {
-        Instance = null;
-    }
-
-    private void Start()
+    
+    public void Initialize()
     {
         entrance = new List<Vector2>();
         foreach (var tilemap in grid.GetComponentsInChildren<Tilemap>())

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
     public GameObject AIPrefabs;
     [SerializeField]
     private Player player;
@@ -18,9 +17,8 @@ public class GameManager : MonoBehaviour
     public Text moneycounting;
     float count;
 
-    private void Awake()
+    public void Initialize()
     {
-        Instance = this;
         count = spawnTime;
     }
 
@@ -32,7 +30,7 @@ public class GameManager : MonoBehaviour
 
         if (count > spawnTime && rageMode == false)
         {
-            Vector2 spawnPos = TileManager.Instance.requestEntrancePos();
+            Vector2 spawnPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
             count = 0;
         }

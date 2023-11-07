@@ -5,16 +5,16 @@ public class BadCustomerState : StateClass<AI>
     public void Enter(AI agent)
     {
         agent.GetComponent<SpriteRenderer>().color = Color.red;
-        PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+        PathRequestManager.RequestPath(agent.transform.position, ServiceLocator.Get<TileManager>().requestEmptyPos(), agent.OnPathFound);
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         agent.isStand = true;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!agent.isStand && !GameManager.Instance.rageMode)
+        if (!agent.isStand && !agent._gameManager.rageMode)
         {
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
+            PathRequestManager.RequestPath(agent.transform.position, ServiceLocator.Get<TileManager>().requestEmptyPos(), agent.OnPathFound);
             agent.isStand = true;
         }
         agent.OnMovementInput?.Invoke(agent.movementInput);
@@ -25,7 +25,7 @@ public class BadCustomerState : StateClass<AI>
             agent.isHit = false;
         }
 
-        if(GameManager.Instance.rageMode) 
+        if(agent._gameManager.rageMode) 
         {
             agent.ChangeState(AIState.Rage);
         }

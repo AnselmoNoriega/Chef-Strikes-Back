@@ -49,6 +49,8 @@ public class AI : MonoBehaviour
     public bool isHit = false;
     public bool chasing = false;
 
+    [HideInInspector] public GameManager _gameManager;
+
     public ContextSolver MovementDirectionSolver => movementDirectionSolver;
     public List<SteeringBehaviour> SteeringBehaviours => steeringBehaviours;
     public float AttackDistance => attackDistance;
@@ -56,6 +58,7 @@ public class AI : MonoBehaviour
 
     private void Awake()
     {
+        _gameManager = ServiceLocator.Get<GameManager>();
         stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
@@ -82,7 +85,7 @@ public class AI : MonoBehaviour
         stateManager.Update(Time.deltaTime);
         FaceMovementDirection(anim, rb2d.velocity);
 
-        if (!GameManager.Instance.rageMode && state != AIState.Bad && !isSit)
+        if (!_gameManager.rageMode && state != AIState.Bad && !isSit)
         {
             if (!aiData.currentTarget.GetComponent<Chair>().seatAvaliable)
             {
@@ -92,7 +95,7 @@ public class AI : MonoBehaviour
 
         if (health <= 0 || isExist)
         {
-            GameManager.Instance.AIPool.Remove(this.gameObject);
+            _gameManager.AIPool.Remove(this.gameObject);
             Destroy(gameObject);
         }
     }
@@ -118,7 +121,7 @@ public class AI : MonoBehaviour
     public IEnumerator FollowPath()
     {
         Vector2 currentWaypoint = path[0];
-        while (!GameManager.Instance.rageMode)
+        while (!_gameManager.rageMode)
         {
             if (Vector2.Distance(transform.position, currentWaypoint) <= 0.1f)
             {
@@ -130,7 +133,7 @@ public class AI : MonoBehaviour
                 }
                 currentWaypoint = path[targetIndex];
             }
-            if (!GameManager.Instance.rageMode)
+            if (!_gameManager.rageMode)
             {
                 movementInput = (currentWaypoint - (Vector2)transform.position).normalized;
 

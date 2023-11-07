@@ -171,14 +171,20 @@ public class PlayerThrowing : StateClass<Player>
 
 public class NormalMode : StateClass<Player>
 {
+    GameManager _gameManager;
+
     public void Enter(Player agent)
     {
-
+        _gameManager = ServiceLocator.Get<GameManager>();
+        if(_gameManager is null)
+        {
+            Debug.Log("<color=cyan><b>GAME MANAGER NOT FOUND</b></color>");
+        }
     }
 
     public void Update(Player agent, float dt)
     {
-        if(GameManager.Instance.rageMode)
+        if(_gameManager.rageMode)
         {
             agent.ChangeMood(PlayerStage.Rage);
         }
@@ -207,15 +213,18 @@ public class NormalMode : StateClass<Player>
 
 public class RageMode : StateClass<Player>
 {
+    GameManager _gameManager;
+
     public void Enter(Player agent)
     {
+        _gameManager = ServiceLocator.Get<GameManager>();
         agent.vignette.SetActive(true);
         agent.actions.DropItem();
     }
 
     public void Update(Player agent, float dt)
     {
-        if (!GameManager.Instance.rageMode)
+        if (!_gameManager.rageMode)
         {
             agent.ChangeMood(PlayerStage.Normal);
         }
