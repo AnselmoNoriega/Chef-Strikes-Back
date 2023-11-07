@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7994801624321871188}
   - component: {fileID: 7994801624321871189}
-  - component: {fileID: 7994801624321871191}
   m_Layer: 0
   m_Name: GameLoader
   m_TagString: Untagged
@@ -45,25 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596d7269392ed5640aab11f9a45ad966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 3455199093096613857, guid: 976320af1210dc141928ec2c601ec02d,
-    type: 3}
-  sceneIndexToLoad: 1
-  _moduleComponents:
-  - {fileID: 7994801624321871191}
---- !u!114 &7994801624321871191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7994801624321871194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d9083993a7f78438e632fad33eede1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectsToPool:
-  - name: Bullet
-    prefab: {fileID: 2299985948843884215, guid: a023f4e6d25c8de43824318c2ebc425d,
-      type: 3}
-    poolSize: 100
+  _gameManager: {fileID: 3455199093096613857, guid: 976320af1210dc141928ec2c601ec02d, type: 3}
+  sceneIndexToLoad: 0
+  _moduleComponents: []

@@ -19,7 +19,7 @@ public class TargetDetector : Detector
     public override void Detect(AIData aiData)
     {
         
-        if (!ServiceLocator.Get<GameManager>().rageMode)
+        if (!ServiceLocator.Get<GameLoopManager>().rageMode)
         {
              targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
         }

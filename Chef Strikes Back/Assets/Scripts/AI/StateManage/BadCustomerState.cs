@@ -12,7 +12,7 @@ public class BadCustomerState : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        if (!agent.isStand && !agent._gameManager.rageMode)
+        if (!agent.isStand && !agent._gameLoopManager.rageMode)
         {
             PathRequestManager.RequestPath(agent.transform.position, ServiceLocator.Get<TileManager>().requestEmptyPos(), agent.OnPathFound);
             agent.isStand = true;
@@ -25,7 +25,7 @@ public class BadCustomerState : StateClass<AI>
             agent.isHit = false;
         }
 
-        if(agent._gameManager.rageMode) 
+        if(agent._gameLoopManager.rageMode) 
         {
             agent.ChangeState(AIState.Rage);
         }

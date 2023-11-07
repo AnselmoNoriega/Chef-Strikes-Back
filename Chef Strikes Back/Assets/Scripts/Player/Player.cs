@@ -56,10 +56,7 @@ public class Player : MonoBehaviour
         stateMachine = new StateMachine<Player>(this);
         actionState = new StateMachine<Player>(this);
         moodState = new StateMachine<Player>(this);
-        inputManager = new InputControls();
-        inputManager = new InputControls();
         _weapon = new Weapon(0);
-        move = inputManager.Player.Move;
 
         AddStates();
         stateMachine.ChangeState(0);
@@ -78,6 +75,8 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
+        inputManager = new InputControls();
+        move = inputManager.Player.Move;
         move?.Enable();
     }
 
@@ -181,7 +180,7 @@ public class Player : MonoBehaviour
     {
         if(collision.tag == "Loot")
         {
-            ServiceLocator.Get<GameManager>().money += 10;
+            ServiceLocator.Get<GameLoopManager>().money += 10;
             collision.gameObject.SetActive(false);
         }
     }
