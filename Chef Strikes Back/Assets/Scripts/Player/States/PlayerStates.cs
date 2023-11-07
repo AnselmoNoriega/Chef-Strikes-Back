@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Audio;
 public enum PlayerStates { Idle, Walking, None }
 public enum PlayerActions { None, Attacking, Throwing }
 public enum PlayerStage { Normal, Rage, None }
@@ -63,7 +63,9 @@ public class PlayerAttacking : StateClass<Player>
     {
         timer = 0.1f;
         agent.rb.velocity = Vector2.zero;
+        agent.source.clip = agent.clipMiss;
         Attack(agent.lookingDirection, agent);
+        agent.source.Play();
         agent.animator.SetBool("IsAttacking", true);
     }
 
@@ -115,6 +117,8 @@ public class PlayerAttacking : StateClass<Player>
             {
                 if (enemyAI.state == AIState.Rage)
                 {
+                    //sounds when attacking enemies on rage mode
+                    player.source.clip = player.clipHit;
                     enemyAI.health -= Mathf.RoundToInt(player._weapon.Damage);
                 }
             }

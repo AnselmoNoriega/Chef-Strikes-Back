@@ -16,10 +16,10 @@ public class SoundTest : MonoBehaviour
             //Audiocontroller.Play();
         }
 
-        if (Input.GetMouseButtonDown(0))
+       /* if (Input.GetMouseButtonDown(0))
         {
             Audiocontroller.Play();
-        }
+        }*/
 
         if (Input.GetKeyDown(KeyCode.W))
         {

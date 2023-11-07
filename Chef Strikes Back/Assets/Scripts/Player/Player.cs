@@ -4,7 +4,12 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [Header("Counts Info")]
+    [Header("Sounds")]
+    public AudioSource source;
+    public AudioClip clipMiss;
+    public AudioClip clipHit;
+
+    [Space, Header("Counts Info")]
     public float currentHealth;
     public float currentRage;
     private int money;
