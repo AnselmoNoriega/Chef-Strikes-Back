@@ -41,7 +41,7 @@ public class Table : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Food") && chairs.Count > 0 && !collision.GetComponent<Item>().isServed)
+        if (collision.CompareTag("Food") && chairs.Count > 0 && !collision.GetComponent<Item>().isServed && collision.GetComponent<Item>().isPickable)
         {
             foods.Add(collision.GetComponent<Item>());
             foods[foods.Count - 1].LaunchedInTable(platePos);
