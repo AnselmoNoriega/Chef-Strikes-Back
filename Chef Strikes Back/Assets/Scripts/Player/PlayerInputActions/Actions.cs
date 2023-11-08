@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -66,18 +68,26 @@ public class Actions : MonoBehaviour
     {
         if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().rageMode)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + player.lookingDirection, 1);
+            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3), 0.4f);
+            float distance = 1000;
+            Item newItem = null;
+            float tempDis;
 
             foreach (var hit in hits)
             {
-                Item newItem;
+                tempDis = math.abs(hit.transform.position.magnitude - transform.position.magnitude);
 
-                if ((newItem = hit.GetComponent<Item>()) && newItem.isPickable)
+                if (tempDis < distance && hit.GetComponent<Item>() && hit.GetComponent<Item>().isPickable)
                 {
-                    inventory.AddItem(newItem);
-                    isCarryingItem = true;
-                    return;
+                    distance = tempDis;
+                    newItem = hit.GetComponent<Item>();
                 }
+            }
+
+            if (newItem != null)
+            {
+                inventory.AddItem(newItem);
+                isCarryingItem = true;
             }
         }
     }
@@ -135,6 +145,11 @@ public class Actions : MonoBehaviour
             }
             player.ChangeAction(PlayerActions.Attacking);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection/3), 0.4f);
     }
 
 }

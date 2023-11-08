@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,12 +41,7 @@ public class PlayerInputs : MonoBehaviour
         rightTrigger.performed += RightTgrClick;
 
         rightMouse.canceled += RightClickRelease;
-        leftTrigger.canceled += RightClickRelease;
-    }
-
-    private void Update()
-    {
-
+        leftTrigger.canceled += LeftTgrRelease;
     }
 
     private void OnDisable()
@@ -59,7 +52,7 @@ public class PlayerInputs : MonoBehaviour
         leftTrigger.performed -= LeftTgrClick;
 
         rightMouse.canceled -= RightClickRelease;
-        leftTrigger.canceled -= RightClickRelease;
+        leftTrigger.canceled -= LeftTgrRelease;
 
         leftMouse.Disable();
         rightMouse.Disable();
@@ -71,7 +64,6 @@ public class PlayerInputs : MonoBehaviour
     private void LeftClick(InputAction.CallbackContext input)
     {
         action.Attacking(mouse.ReadValue<Vector2>());
-        action.ThrowItem(mouse);
     }
 
     private void RightClick(InputAction.CallbackContext input)
@@ -83,7 +75,6 @@ public class PlayerInputs : MonoBehaviour
     private void RightTgrClick(InputAction.CallbackContext input)
     {
         action.Attacking(Vector2.zero);
-        action.ThrowItem(rightJoystick); 
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
@@ -91,12 +82,13 @@ public class PlayerInputs : MonoBehaviour
         action.PrepareToThrow(rightJoystick);
         action.GrabItem();
     }
+    private void LeftTgrRelease(InputAction.CallbackContext input)
+    {
+        action.ThrowItem(rightJoystick);
+    }
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        if (action.ready2Throw)
-        {
-            action.DropItem();
-        }
+        action.ThrowItem(mouse); 
     }
 }
