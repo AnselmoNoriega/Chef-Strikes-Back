@@ -72,6 +72,7 @@ public class Inventory : MonoBehaviour
     {
         pointer.SetActive(false);
         SetEquation2Throw(direction);
+        foodItem.GetComponent<CircleCollider2D>().enabled = true;
         foodItem.transform.parent = null;
         foodItem = null;
         targetAngle = null;

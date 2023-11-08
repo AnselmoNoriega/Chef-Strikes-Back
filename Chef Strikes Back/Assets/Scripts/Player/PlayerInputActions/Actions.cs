@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -58,6 +59,7 @@ public class Actions : MonoBehaviour
                 {
                     inventory.AddItem(item[i]);
                     isCarryingItem = true;
+                    item[i].GetComponent<CircleCollider2D>().enabled = false;
                     return;
                 }
             }
@@ -88,6 +90,7 @@ public class Actions : MonoBehaviour
             {
                 inventory.AddItem(newItem);
                 isCarryingItem = true;
+                newItem.GetComponent<CircleCollider2D>().enabled = false;
             }
         }
     }
