@@ -13,8 +13,7 @@ public class Bounciness : MonoBehaviour
         {
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
-            player.source.clip = player.clipShove;
-            player.source.Play();
+            
             var rage = collision.gameObject.GetComponent<Player>();
             rage.currentRage += 10;
             player.source.clip = player.clipRageFilling;
