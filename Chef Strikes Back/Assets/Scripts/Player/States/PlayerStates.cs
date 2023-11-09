@@ -58,6 +58,7 @@ public class PlayerNone : StateClass<Player>
 public class PlayerAttacking : StateClass<Player>
 {
     float timer;
+    Vector2 offset = new Vector2(0.0f, 0.35f);
 
     public void Enter(Player agent)
     {
@@ -99,17 +100,17 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Attack(Vector2 angle, Player player)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(player.transform.position, angle, player._weapon.Range); 
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3) + offset, 0.4f); 
         PlayerHelper.FaceMovementDirection(player.animator, angle);
 
-        foreach (RaycastHit2D hit in hits)
+        foreach (var hit in hits)
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.CompareTag("Player"))
             {
                 continue;
             }
 
-            var enemyAI = hit.collider.GetComponent<AI>();
+            var enemyAI = hit.GetComponent<AI>();
 
             if (enemyAI)
             {
@@ -119,7 +120,7 @@ public class PlayerAttacking : StateClass<Player>
                 }
             }
 
-            var foodPile = hit.collider.GetComponent<FoodPile>();
+            var foodPile = hit.GetComponent<FoodPile>();
 
             if (foodPile != null)
             {
