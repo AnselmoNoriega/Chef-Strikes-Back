@@ -15,6 +15,7 @@ public enum AIState
 
 public class AI : MonoBehaviour
 {
+    
     [Header("AI Behaviour")]
     [SerializeField] private List<SteeringBehaviour> steeringBehaviours;
     [SerializeField] public List<Detector> detectors;
@@ -24,6 +25,7 @@ public class AI : MonoBehaviour
     private StateMachine<AI> stateManager;
     private Vector2[] path;
     int targetIndex;
+    
 
     [Space, Header("AI Properties")]
     [SerializeField] private Animator anim;
@@ -213,10 +215,13 @@ public class AI : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         stateManager.CollisionEnter2D(collision);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         stateManager.TriggerEnter2D(collision);
     }
+
+    
 }

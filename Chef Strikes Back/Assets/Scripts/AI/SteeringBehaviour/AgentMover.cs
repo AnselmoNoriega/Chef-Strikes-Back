@@ -3,6 +3,8 @@ using UnityEngine;
 public class AgentMover : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    public AudioSource source;
+    public AudioClip shove;
 
     [SerializeField]
     [Range(0, 3)]
@@ -17,8 +19,13 @@ public class AgentMover : MonoBehaviour
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        
     }
 
+    private void Start()
+    {
+        source.clip = shove;
+    }
 
     private void FixedUpdate()
     {
@@ -36,5 +43,15 @@ public class AgentMover : MonoBehaviour
 
     }
 
-    
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            source.clip = shove;
+            source.Play();
+        }
+           
+    }
+
 }

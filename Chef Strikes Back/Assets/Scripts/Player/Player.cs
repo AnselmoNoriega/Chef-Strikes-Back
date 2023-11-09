@@ -8,6 +8,14 @@ public class Player : MonoBehaviour
     public AudioSource source;
     public AudioClip clipMiss;
     public AudioClip clipHit;
+    public AudioClip clipThrow;
+    public AudioClip clipCharge;
+    public AudioClip clipEnterRage;
+    public AudioClip clipMoney;
+    public AudioClip clipShove;
+    public AudioClip clipRageFilling;
+    public AudioClip clipPause;
+    public AudioClip clipResume;
 
     [Space, Header("Counts Info")]
     public float currentHealth;
@@ -131,6 +139,8 @@ public class Player : MonoBehaviour
     public void collectMoney(int amount)
     {
         money += amount;
+        source.clip = clipMoney;
+        source.Play();
     }
 
     public void ChangeState(PlayerStates state)

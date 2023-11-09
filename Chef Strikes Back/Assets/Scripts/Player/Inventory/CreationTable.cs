@@ -15,6 +15,8 @@ public class CreationTable : MonoBehaviour
     private List<List<GameObject>> waitList;
     [SerializeField]
     private List<ItemType> acceptedTypes;
+    public AudioSource source;
+    public AudioClip foodDone;
 
     [Space, Header("Storage Objects")]
     [SerializeField]
@@ -104,6 +106,8 @@ public class CreationTable : MonoBehaviour
             Destroy(items[i]);
         }
 
+        source.clip = foodDone;
+        source.Play();
         Instantiate(burger, transform.position, Quaternion.identity);
     }
 

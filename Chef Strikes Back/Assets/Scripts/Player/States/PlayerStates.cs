@@ -58,6 +58,7 @@ public class PlayerNone : StateClass<Player>
 public class PlayerAttacking : StateClass<Player>
 {
     float timer;
+    
 
     public void Enter(Player agent)
     {
@@ -136,10 +137,12 @@ public class PlayerAttacking : StateClass<Player>
 public class PlayerThrowing : StateClass<Player>
 {
     private Vector3 offset = new Vector3(0, 0.35f, 0);
-
+ 
     public void Enter(Player agent)
     {
         agent.rb.velocity = Vector2.zero;
+        agent.source.clip = agent.clipCharge;
+        agent.source.Play();
     }
 
     public void Update(Player agent, float dt)
@@ -156,7 +159,8 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Exit(Player agent)
     {
-
+        agent.source.clip = agent.clipThrow;
+        agent.source.Play();
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
@@ -215,6 +219,8 @@ public class RageMode : StateClass<Player>
     {
         agent.vignette.SetActive(true);
         agent.actions.DropItem();
+        agent.source.clip = agent.clipEnterRage;
+        agent.source.Play();
     }
 
     public void Update(Player agent, float dt)

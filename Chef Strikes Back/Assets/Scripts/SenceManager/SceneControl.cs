@@ -9,6 +9,7 @@ public class SceneControl : MonoBehaviour
     public Text pausingText;
     [SerializeField]
     private InputActionReference keyPause;
+    public Player player;
 
     private void OnEnable()
     {
@@ -23,6 +24,11 @@ public class SceneControl : MonoBehaviour
     }
 
     void Update()
+    {
+        
+    }
+
+    private void Start()
     {
         
     }
@@ -77,12 +83,17 @@ public class SceneControl : MonoBehaviour
     public void TogglePause()
     {
         if (GameIsPaused)
+            
             Resume();
         else
+            
             Pause();
     }
     public void Resume()
     {
+        //Play
+        player.source.clip = player.clipResume;
+        player.source.Play();
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
@@ -91,7 +102,8 @@ public class SceneControl : MonoBehaviour
     {
         UnityEngine.Debug.Log(GameIsPaused);
         Time.timeScale = 0f;
-        
+        player.source.clip = player.clipPause;
+        player.source.Play();
         GameIsPaused = true;
     }
 

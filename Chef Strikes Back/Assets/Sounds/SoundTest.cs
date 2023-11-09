@@ -7,20 +7,16 @@ public class SoundTest : MonoBehaviour
     public AudioSource Audiocontroller;
     public AudioSource BackgroundMusic;
     public AudioSource Footsteps;
+
     void Update()
     {
         
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //Audiocontroller.Play();
-        }
+        // If you want to stop the winding up sound when the right mouse button is not held down,
+        // you can add this condition
+        
 
-       /* if (Input.GetMouseButtonDown(0))
-        {
-            Audiocontroller.Play();
-        }*/
-
+        // The rest of your code for other inputs (W, A, S, D) remains unchanged
         if (Input.GetKeyDown(KeyCode.W))
         {
             Footsteps.Play();
