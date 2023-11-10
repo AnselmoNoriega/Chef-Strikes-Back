@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
         _timeManger.Initialize();   
         ServiceLocator.Register<LevelTimer>(_timeManger);
         _audioManager.Initialize();   
-        ServiceLocator.Register<LevelTimer>(_audioManager);
+        ServiceLocator.Register<AudioMamager>(_audioManager);
 
         _player.Initialize();
     }
