@@ -31,6 +31,7 @@ public class PlayerWalking : StateClass<Player>
         if (agent.move.ReadValue<Vector2>() == Vector2.zero)
         {
             agent.ChangeState(PlayerStates.Idle);
+            FaceDirectionForIdel(agent);
         }
         else
         {
@@ -50,7 +51,21 @@ public class PlayerWalking : StateClass<Player>
             agent.rb.AddForce(((moveDirection * rageSpeed) - agent.rb.velocity) * acceleration);
         }
     }
+    private void FaceDirectionForIdel(Player agent)
+    {
+        Vector2 IdelDirection;
 
+        if (Mathf.Abs(agent.rb.velocity.x) > Mathf.Abs(agent.rb.velocity.y))
+        {
+            IdelDirection = new Vector2(Mathf.Sign(agent.rb.velocity.x), 0);
+        }
+        else
+        {
+            IdelDirection = new Vector2(0, Mathf.Sign(agent.rb.velocity.y));
+        }
+        agent.lookingDirection = IdelDirection;
+        PlayerHelper.FaceMovementDirection(agent.animator, IdelDirection);
+    }
     public void Exit(Player agent)
     {
 
