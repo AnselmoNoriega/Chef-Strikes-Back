@@ -1,12 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private TileManager _tileManager = null;
-    [SerializeField] private GameLoopManager _gameLoopManager = null;
-    [SerializeField] private LevelTimer _timeManger = null;
-    [SerializeField] private Player _player = null;
-
+    private static bool isLoaded = true;
+    [SerializeField] private TileManager _tileManager;
+    [SerializeField] private GameLoopManager _gameLoopManager;
+    [SerializeField] private LevelTimer _timeManger;
+    [SerializeField] private Player _player;
+    [SerializeField] private AudioMamager _audioManager;
     GameLoader _loader;
 
     private void Start()
@@ -17,13 +19,21 @@ public class LevelManager : MonoBehaviour
 
     private void Init()
     {
+        _player.Initialize();
+        if (!isLoaded)
+        {
+            return;
+        }
+
         _tileManager.Initialize();
         ServiceLocator.Register<TileManager>(_tileManager);
         _gameLoopManager.Initialize();
         ServiceLocator.Register<GameLoopManager>(_gameLoopManager);
-        _timeManger.Initialize();   
+        _timeManger.Initialize();
         ServiceLocator.Register<LevelTimer>(_timeManger);
+        _audioManager.Initialize();
+        ServiceLocator.Register<AudioMamager>(_audioManager);
 
-        _player.Initialize();
+        isLoaded = false;
     }
 }

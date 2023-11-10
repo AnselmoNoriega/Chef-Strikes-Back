@@ -102,6 +102,7 @@ public class PlayerAttacking : StateClass<Player>
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3) + offset, 0.4f); 
         PlayerHelper.FaceMovementDirection(player.animator, angle);
+        ServiceLocator.Get<AudioMamager>().PlaySource("attack");
 
         foreach (var hit in hits)
         {

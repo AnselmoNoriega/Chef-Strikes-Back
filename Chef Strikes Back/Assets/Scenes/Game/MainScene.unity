@@ -1303,6 +1303,17 @@ Transform:
   m_Father: {fileID: 1877918052}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &72171971 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2927658305788182967, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+  m_PrefabInstance: {fileID: 2927658305668911198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6707d6076b5bc3843ac756e4d43ab70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &73621695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,6 +2058,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &199827423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+  m_PrefabInstance: {fileID: 2927658305668911198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c006ba567dfa1d48be12487efc96e3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &230375197
 GameObject:
   m_ObjectHideFlags: 0
@@ -5471,6 +5493,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &905427861 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+  m_PrefabInstance: {fileID: 2927658305668911198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9aa6108c8fc5dc43bb47f3561b40ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &925751379
 GameObject:
   m_ObjectHideFlags: 0
@@ -8261,6 +8294,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3913419226850297556, guid: 7c737349272825844898f66632c40e48, type: 3}
   m_PrefabInstance: {fileID: 1124609851}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1137293741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+  m_PrefabInstance: {fileID: 2927658305668911198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489507a675b2d9a4d8c1811953c49628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!213 &1138703576
 Sprite:
   m_ObjectHideFlags: 0
@@ -20387,9 +20431,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 749857914491321574, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_Name
-      value: TimerManager
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[0].Name
+      value: attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f4090e0b5e3d9fe4f90ed1ae63495661, type: 3}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: textTime
@@ -20524,6 +20588,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7994801624321871189, guid: d7aecdf4ac82a104ebc6c8a34cf2a04d, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1656972438}
+    - target: {fileID: 7994801624321871189, guid: d7aecdf4ac82a104ebc6c8a34cf2a04d, type: 3}
+      propertyPath: _timeManger
+      value: 
+      objectReference: {fileID: 199827423}
+    - target: {fileID: 7994801624321871189, guid: d7aecdf4ac82a104ebc6c8a34cf2a04d, type: 3}
+      propertyPath: _tileManager
+      value: 
+      objectReference: {fileID: 72171971}
+    - target: {fileID: 7994801624321871189, guid: d7aecdf4ac82a104ebc6c8a34cf2a04d, type: 3}
+      propertyPath: _audioManager
+      value: 
+      objectReference: {fileID: 905427861}
+    - target: {fileID: 7994801624321871189, guid: d7aecdf4ac82a104ebc6c8a34cf2a04d, type: 3}
+      propertyPath: _gameLoopManager
+      value: 
+      objectReference: {fileID: 1137293741}
     - target: {fileID: 7994801624321871194, guid: d7aecdf4ac82a104ebc6c8a34cf2a04d, type: 3}
       propertyPath: m_Name
       value: GameLoader

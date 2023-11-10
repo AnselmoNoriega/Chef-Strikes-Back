@@ -29,7 +29,7 @@ public class TileManager : MonoBehaviour
             {
                 var tile = tilemap.GetTile<ChairTile>(position);
                 if (tile == null) continue;
-                chairs.TryAdd(tilemap.CellToWorld(position), false); ;
+                chairs.TryAdd(tilemap.CellToWorld(position), false);
             }
         }
 
@@ -41,7 +41,7 @@ public class TileManager : MonoBehaviour
             {
                 var tile = tilemap.GetTile<WalkableTile>(position);
                 if (tile == null) continue;
-                emptySpot.Add(tilemap.CellToWorld(position)); ;
+                emptySpot.Add(tilemap.CellToWorld(position));
             }
         }
     }

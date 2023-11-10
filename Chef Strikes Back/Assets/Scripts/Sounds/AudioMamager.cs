@@ -4,21 +4,29 @@ using UnityEngine.Audio;
 public class AudioMamager : MonoBehaviour
 {
     public Sounds[] sounds;
-    void Awake()
+    public void Initialize()
     {
         foreach (Sounds s in sounds)
         {
-            s.Source = gameObject.AddComponent<AudioSource>();
-            s.Source.clip = s.clip;
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
 
-            s.Source.volume = s.Volume;
-            s.Source.pitch = s.Pitch;
-            s.Source.loop = s.loop;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
         }
     }
+
     public void PlaySource(string name)
     {
-        Sounds s = Array.Find(sounds, sound => sound.Name == name);
-        s.Source.Play();
+        Debug.Log(this);
+        return;
+        foreach (var s in sounds)
+        {
+            if (s.name == name)
+            {
+                s.source.Play();
+            }
+        }
     }
 }
