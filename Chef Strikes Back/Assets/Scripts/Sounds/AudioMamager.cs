@@ -19,8 +19,6 @@ public class AudioMamager : MonoBehaviour
 
     public void PlaySource(string name)
     {
-        Debug.Log(this);
-        return;
         foreach (var s in sounds)
         {
             if (s.name == name)
