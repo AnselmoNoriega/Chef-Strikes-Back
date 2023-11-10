@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
-public class AudioMamager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds;
     public void Initialize()

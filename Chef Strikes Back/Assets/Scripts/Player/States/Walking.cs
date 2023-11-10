@@ -37,6 +37,7 @@ public class PlayerWalking : StateClass<Player>
         {
             currentDirection = PlayerHelper.FaceMovementDirection(agent.animator, moveDirection);
             agent.lookingDirection = moveDirection;
+            ServiceLocator.Get<AudioManager>().PlaySource("walk");
         }
     }
 

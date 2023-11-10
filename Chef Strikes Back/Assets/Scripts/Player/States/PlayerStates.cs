@@ -102,7 +102,6 @@ public class PlayerAttacking : StateClass<Player>
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3) + offset, 0.4f); 
         PlayerHelper.FaceMovementDirection(player.animator, angle);
-        ServiceLocator.Get<AudioMamager>().PlaySource("attack");
 
         foreach (var hit in hits)
         {
@@ -112,20 +111,28 @@ public class PlayerAttacking : StateClass<Player>
             }
 
             var enemyAI = hit.GetComponent<AI>();
-
             if (enemyAI)
             {
                 if (enemyAI.state == AIState.Rage)
                 {
+                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.health -= Mathf.RoundToInt(player._weapon.Damage);
                 }
             }
 
             var foodPile = hit.GetComponent<FoodPile>();
+            if (hit.CompareTag("FoodEnemy"))
+            { 
+            ServiceLocator.Get<AudioManager>().PlaySource("cut");
+                if (foodPile != null)
+                {
+                    foodPile.Hit(1);
+                }
+            }
 
-            if (foodPile != null)
+            if (!hit.CompareTag("Player") && !enemyAI && !hit.CompareTag("FoodEnemy"))
             {
-                foodPile.Hit(1);
+                ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
             }
         }
     }
