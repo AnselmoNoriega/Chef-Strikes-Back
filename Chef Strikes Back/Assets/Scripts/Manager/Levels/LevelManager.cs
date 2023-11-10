@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
-    private static bool isLoaded = true;
     [SerializeField] private TileManager _tileManager;
     [SerializeField] private GameLoopManager _gameLoopManager;
     [SerializeField] private LevelTimer _timeManger;
@@ -19,12 +18,6 @@ public class LevelManager : MonoBehaviour
 
     private void Init()
     {
-        _player.Initialize();
-        if (!isLoaded)
-        {
-            return;
-        }
-
         _tileManager.Initialize();
         ServiceLocator.Register<TileManager>(_tileManager);
         _gameLoopManager.Initialize();
@@ -34,6 +27,6 @@ public class LevelManager : MonoBehaviour
         _audioManager.Initialize();
         ServiceLocator.Register<AudioMamager>(_audioManager);
 
-        isLoaded = false;
+        _player.Initialize();
     }
 }
