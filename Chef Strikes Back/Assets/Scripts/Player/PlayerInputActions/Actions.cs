@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Actions : MonoBehaviour
 {
@@ -49,9 +50,13 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (item.Count > 0 && !isCarryingItem && !ServiceLocator.Get<GameLoopManager>().rageMode)
+        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().rageMode)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
+
+            Vector3 pos = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
+            player.lookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
+            PlayerHelper.FaceMovementDirection(player.animator, player.lookingDirection);
 
             for (int i = 0; i < item.Count; i++)
             {
@@ -60,6 +65,22 @@ public class Actions : MonoBehaviour
                     inventory.AddItem(item[i]);
                     isCarryingItem = true;
                     item[i].GetComponent<CircleCollider2D>().enabled = false;
+                    return;
+                }
+            }
+
+            Ray ray = Camera.main.ScreenPointToRay(mouse.ReadValue<Vector2>());
+            RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(ray);
+
+            foreach (var hit in hits)
+            {
+                var foodPile = hit.collider.GetComponent<FoodPile>();
+                if (foodPile)
+                {
+                    var newItem = foodPile.Hit();
+                    inventory.AddItem(newItem.GetComponent<Item>());
+                    isCarryingItem = true;
+                    newItem.GetComponent<CircleCollider2D>().enabled = false;
                     return;
                 }
             }
@@ -73,6 +94,7 @@ public class Actions : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3), 0.4f);
             float distance = 1000;
             Item newItem = null;
+            FoodPile foodPile = null;
             float tempDis;
 
             foreach (var hit in hits)
@@ -84,6 +106,10 @@ public class Actions : MonoBehaviour
                     distance = tempDis;
                     newItem = hit.GetComponent<Item>();
                 }
+                else if(hit.GetComponent<FoodPile>())
+                {
+                    foodPile = hit.GetComponent<FoodPile>();
+                }
             }
 
             if (newItem != null)
@@ -91,6 +117,13 @@ public class Actions : MonoBehaviour
                 inventory.AddItem(newItem);
                 isCarryingItem = true;
                 newItem.GetComponent<CircleCollider2D>().enabled = false;
+            }
+            else if(foodPile != null)
+            {
+                var newFoodPileItem = foodPile.Hit();
+                inventory.AddItem(newFoodPileItem.GetComponent<Item>());
+                isCarryingItem = true;
+                newFoodPileItem.GetComponent<CircleCollider2D>().enabled = false;
             }
         }
     }
@@ -139,6 +172,11 @@ public class Actions : MonoBehaviour
 
     public void Attacking(Vector2 anglePos)
     {
+        if (!ServiceLocator.Get<GameLoopManager>().rageMode)
+        {
+            return;
+        }
+
         if (player.playerAction != PlayerActions.Attacking && !ready2Throw)
         {
             if (anglePos != Vector2.zero)
@@ -152,9 +190,9 @@ public class Actions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection/3), 0.4f);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection / 3), 0.4f);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection/3) + (Vector2)offset, 0.4f);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection / 3) + (Vector2)offset, 0.4f);
     }
 
 }

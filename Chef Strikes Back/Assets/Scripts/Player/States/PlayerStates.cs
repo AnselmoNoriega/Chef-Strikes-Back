@@ -120,16 +120,6 @@ public class PlayerAttacking : StateClass<Player>
                 }
             }
 
-            var foodPile = hit.GetComponent<FoodPile>();
-            if (hit.CompareTag("FoodEnemy"))
-            { 
-            ServiceLocator.Get<AudioManager>().PlaySource("cut");
-                if (foodPile != null)
-                {
-                    foodPile.Hit(1);
-                }
-            }
-
             if (!hit.CompareTag("Player") && !enemyAI && !hit.CompareTag("FoodEnemy"))
             {
                 ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
