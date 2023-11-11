@@ -7,9 +7,10 @@ public class PlayerInputs : MonoBehaviour
     private InputAction rightMouse;
     private InputAction leftTrigger;
     private InputAction leftMouse;
-    private InputAction rightTrigger;
     private InputAction mouse;
     private InputAction rightJoystick;
+    private InputAction leftButton;
+    private InputAction lowerButton;
 
     [SerializeField]
     private Actions action;
@@ -24,21 +25,26 @@ public class PlayerInputs : MonoBehaviour
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
+         
         leftTrigger = inputManager.Player.LeftTrigger;
-        rightTrigger = inputManager.Player.RightTrigger;
-        rightJoystick = inputManager.Player.LeftJoystick;
+        leftButton = inputManager.Player.LeftButton;
+        rightJoystick = inputManager.Player.RightJoystick;
+        lowerButton = inputManager.Player.LowerButton;
 
         rightMouse.Enable();
         leftMouse.Enable();
         mouse.Enable();
+
         leftTrigger.Enable();
-        rightTrigger.Enable();
+        leftButton.Enable();
         rightJoystick.Enable();
+        lowerButton.Enable();
 
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
         leftTrigger.performed += LeftTgrClick;
-        rightTrigger.performed += RightTgrClick;
+        leftButton.performed += LeftbuttonDown;
+        lowerButton.performed += LowerButtonDown;
 
         rightMouse.canceled += RightClickRelease;
         leftTrigger.canceled += LeftTgrRelease;
@@ -48,8 +54,9 @@ public class PlayerInputs : MonoBehaviour
     {
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
-        rightTrigger.performed -= RightTgrClick;
+        leftButton.performed -= LeftbuttonDown;
         leftTrigger.performed -= LeftTgrClick;
+        lowerButton.performed -= LowerButtonDown;
 
         rightMouse.canceled -= RightClickRelease;
         leftTrigger.canceled -= LeftTgrRelease;
@@ -57,8 +64,10 @@ public class PlayerInputs : MonoBehaviour
         leftMouse.Disable();
         rightMouse.Disable();
         mouse.Disable();
+
         leftTrigger.Disable();
-        rightTrigger.Disable();
+        leftButton.Disable();
+        lowerButton.Disable();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
@@ -72,7 +81,7 @@ public class PlayerInputs : MonoBehaviour
         action.GrabItem(mouse);
     }
 
-    private void RightTgrClick(InputAction.CallbackContext input)
+    private void LeftbuttonDown(InputAction.CallbackContext input)
     {
         action.Attacking(Vector2.zero);
     }
@@ -80,8 +89,13 @@ public class PlayerInputs : MonoBehaviour
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
         action.PrepareToThrow(rightJoystick);
+    }
+
+    private void LowerButtonDown(InputAction.CallbackContext input)
+    {
         action.GrabItem();
     }
+
     private void LeftTgrRelease(InputAction.CallbackContext input)
     {
         action.ThrowItem(rightJoystick);

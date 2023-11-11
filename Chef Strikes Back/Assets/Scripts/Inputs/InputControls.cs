@@ -134,6 +134,33 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightJoystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""c1ea6b0b-5c9d-4687-8226-9b3cf7632468"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""9affea42-cff2-4b99-90d2-b14a45a427f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LowerButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""40e46c94-7317-456f-828a-51726ef483cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -334,6 +361,39 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""LeftJoystick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ce47aea-ce2e-44bf-b6e3-e4722799897c"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightJoystick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""968b3449-8604-4699-a5e8-9c2c4c3fa030"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88965f83-be98-43a6-8e99-5d8e2a28c1b7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LowerButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -354,6 +414,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_RightTrigger = m_Player.FindAction("RightTrigger", throwIfNotFound: true);
         m_Player_LeftTrigger = m_Player.FindAction("LeftTrigger", throwIfNotFound: true);
         m_Player_LeftJoystick = m_Player.FindAction("LeftJoystick", throwIfNotFound: true);
+        m_Player_RightJoystick = m_Player.FindAction("RightJoystick", throwIfNotFound: true);
+        m_Player_LeftButton = m_Player.FindAction("LeftButton", throwIfNotFound: true);
+        m_Player_LowerButton = m_Player.FindAction("LowerButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,6 +488,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RightTrigger;
     private readonly InputAction m_Player_LeftTrigger;
     private readonly InputAction m_Player_LeftJoystick;
+    private readonly InputAction m_Player_RightJoystick;
+    private readonly InputAction m_Player_LeftButton;
+    private readonly InputAction m_Player_LowerButton;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -441,6 +507,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @RightTrigger => m_Wrapper.m_Player_RightTrigger;
         public InputAction @LeftTrigger => m_Wrapper.m_Player_LeftTrigger;
         public InputAction @LeftJoystick => m_Wrapper.m_Player_LeftJoystick;
+        public InputAction @RightJoystick => m_Wrapper.m_Player_RightJoystick;
+        public InputAction @LeftButton => m_Wrapper.m_Player_LeftButton;
+        public InputAction @LowerButton => m_Wrapper.m_Player_LowerButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -486,6 +555,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LeftJoystick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftJoystick;
                 @LeftJoystick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftJoystick;
                 @LeftJoystick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftJoystick;
+                @RightJoystick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightJoystick;
+                @RightJoystick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightJoystick;
+                @RightJoystick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightJoystick;
+                @LeftButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftButton;
+                @LeftButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftButton;
+                @LeftButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftButton;
+                @LowerButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLowerButton;
+                @LowerButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLowerButton;
+                @LowerButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLowerButton;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -526,6 +604,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LeftJoystick.started += instance.OnLeftJoystick;
                 @LeftJoystick.performed += instance.OnLeftJoystick;
                 @LeftJoystick.canceled += instance.OnLeftJoystick;
+                @RightJoystick.started += instance.OnRightJoystick;
+                @RightJoystick.performed += instance.OnRightJoystick;
+                @RightJoystick.canceled += instance.OnRightJoystick;
+                @LeftButton.started += instance.OnLeftButton;
+                @LeftButton.performed += instance.OnLeftButton;
+                @LeftButton.canceled += instance.OnLeftButton;
+                @LowerButton.started += instance.OnLowerButton;
+                @LowerButton.performed += instance.OnLowerButton;
+                @LowerButton.canceled += instance.OnLowerButton;
             }
         }
     }
@@ -544,5 +631,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnRightTrigger(InputAction.CallbackContext context);
         void OnLeftTrigger(InputAction.CallbackContext context);
         void OnLeftJoystick(InputAction.CallbackContext context);
+        void OnRightJoystick(InputAction.CallbackContext context);
+        void OnLeftButton(InputAction.CallbackContext context);
+        void OnLowerButton(InputAction.CallbackContext context);
     }
 }
