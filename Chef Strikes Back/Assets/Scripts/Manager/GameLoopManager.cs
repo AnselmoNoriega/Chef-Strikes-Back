@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class GameLoopManager : MonoBehaviour
 {
@@ -14,8 +13,8 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField]private float spawnTime;
     public float rageValue = 0.0f;
     public bool rageMode = false;
-    public Text moneycounting;
-    float count;
+    public TextMeshProUGUI moneycounting;
+    private float count;
 
     public void Initialize()
     {
@@ -47,7 +46,7 @@ public class GameLoopManager : MonoBehaviour
         }
 
 
-        moneycounting.text = "X " + money.ToString();
+        moneycounting.text = "$ " + money.ToString();
 
         if (money >= 100)
         {

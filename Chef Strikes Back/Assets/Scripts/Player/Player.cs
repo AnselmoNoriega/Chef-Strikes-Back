@@ -179,6 +179,13 @@ public class Player : MonoBehaviour
         moodState.AddState<RageMode>();
     }
 
+    public void AssignCanvasInfo(Slider hSlider, Slider rSlider, GameObject redVignette)
+    {
+        healthBar = hSlider;
+        rageBar = rSlider;
+        vignette = redVignette;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Loot")
