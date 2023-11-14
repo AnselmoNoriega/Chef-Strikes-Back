@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TargetDetector : Detector
 {
@@ -12,6 +13,9 @@ public class TargetDetector : Detector
     private LayerMask playerLayerMask;
     [SerializeField]
     private bool showGizmos = false;
+
+    [SerializeField]
+    Collider2D ExitPoint;
 
     private List<Transform> colliders;
     Collider2D targetCollider = null;
@@ -58,17 +62,31 @@ public class TargetDetector : Detector
 
     public Collider2D getClosestObject(Collider2D[] targetCollider)
     {
-        float distance = 1000;
+        //float distance = 1000;
+        var random = Random.Range(0, targetCollider.Length);
         Collider2D targeChair = null;
-        foreach(var target in targetCollider)
+        //foreach(var target in targetCollider)
+        //{
+        //    if(target.gameObject.GetComponent<Chair>().seatAvaliable)
+        //    {
+        //        if (Vector2.Distance(target.transform.position, transform.position) < distance)
+        //        {
+        //            targeChair = target;
+        //            distance = Vector2.Distance(target.transform.position, transform.position);
+        //        }
+        //    }
+        //}
+
+        for(int i = 0; i < random; i++)
         {
-            if(target.gameObject.GetComponent<Chair>().seatAvaliable)
+            if (targetCollider[i].gameObject.GetComponent<Chair>().seatAvaliable)
             {
-                if (Vector2.Distance(target.transform.position, transform.position) < distance)
-                {
-                    targeChair = target;
-                    distance = Vector2.Distance(target.transform.position, transform.position);
-                }
+                targeChair = targetCollider[i];
+                ++i;
+            }
+            else
+            {
+                getClosestObject(targetCollider);
             }
         }
         return targeChair;

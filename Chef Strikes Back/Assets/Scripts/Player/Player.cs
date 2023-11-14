@@ -108,6 +108,8 @@ public class Player : MonoBehaviour
         stateMachine.Update(Time.deltaTime);
         actionState.Update(Time.deltaTime);
         moodState.Update(Time.deltaTime);
+
+        
     }
 
     private void FixedUpdate()
@@ -134,6 +136,7 @@ public class Player : MonoBehaviour
     public void collectMoney(int amount)
     {
         money += amount;
+        ServiceLocator.Get<AudioManager>().PlaySource("money");
     }
 
     public void ChangeState(PlayerStates state)

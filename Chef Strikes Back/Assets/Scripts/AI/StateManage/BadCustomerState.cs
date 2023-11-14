@@ -49,7 +49,7 @@ public class BadCustomerState : StateClass<AI>
                 rage.currentRage += 10;
             }
         }
-        if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle")
+        if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle" || collision.transform.tag == "Chair")
         {
             agent.isStand = false;
         }
