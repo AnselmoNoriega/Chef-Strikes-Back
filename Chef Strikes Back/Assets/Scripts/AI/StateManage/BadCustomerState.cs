@@ -47,6 +47,8 @@ public class BadCustomerState : StateClass<AI>
             if (rage)
             {
                 rage.currentRage += 10;
+                ServiceLocator.Get<AudioManager>().PlaySource("ragebar_filling");
+
             }
         }
         if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle" || collision.transform.tag == "Chair")

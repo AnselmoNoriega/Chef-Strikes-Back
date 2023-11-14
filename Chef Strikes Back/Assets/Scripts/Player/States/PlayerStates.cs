@@ -135,6 +135,7 @@ public class PlayerThrowing : StateClass<Player>
     public void Enter(Player agent)
     {
         agent.rb.velocity = Vector2.zero;
+        //ServiceLocator.Get<AudioManager>().PlaySource("charge");
     }
 
     public void Update(Player agent, float dt)
@@ -151,7 +152,7 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Exit(Player agent)
     {
-
+        ServiceLocator.Get<AudioManager>().PlaySource("throw");
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
@@ -219,6 +220,7 @@ public class RageMode : StateClass<Player>
         _gameManager = ServiceLocator.Get<GameLoopManager>();
         agent.vignette.SetActive(true);
         agent.actions.DropItem();
+        ServiceLocator.Get<AudioManager>().PlaySource("enter_rage");
     }
 
     public void Update(Player agent, float dt)
