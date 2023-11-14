@@ -28,7 +28,7 @@ public class PlayerInputs : MonoBehaviour
          
         leftTrigger = inputManager.Player.LeftTrigger;
         leftButton = inputManager.Player.LeftButton;
-        rightJoystick = inputManager.Player.RightJoystick;
+        rightJoystick = inputManager.Player.LeftJoystick;
         lowerButton = inputManager.Player.LowerButton;
 
         rightMouse.Enable();
@@ -73,17 +73,18 @@ public class PlayerInputs : MonoBehaviour
     private void LeftClick(InputAction.CallbackContext input)
     {
         action.Attacking(mouse.ReadValue<Vector2>());
+        action.GrabItem(mouse);
     }
 
     private void RightClick(InputAction.CallbackContext input)
     {
         action.PrepareToThrow(mouse);
-        action.GrabItem(mouse);
     }
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
         action.Attacking(Vector2.zero);
+        action.GrabItem();
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
@@ -93,7 +94,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void LowerButtonDown(InputAction.CallbackContext input)
     {
-        action.GrabItem();
+
     }
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
