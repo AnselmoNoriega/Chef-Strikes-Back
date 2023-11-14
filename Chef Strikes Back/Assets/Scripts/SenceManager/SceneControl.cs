@@ -79,6 +79,8 @@ public class SceneControl : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1f;
+        Debug.Log("paused");
+        ServiceLocator.Get<AudioManager>().PlaySource("resume");
         GameIsPaused = false;
     }
 
@@ -86,7 +88,8 @@ public class SceneControl : MonoBehaviour
     {
         UnityEngine.Debug.Log(GameIsPaused);
         Time.timeScale = 0f;
-        
+        Debug.Log("resume");
+        ServiceLocator.Get<AudioManager>().PlaySource("pause");
         GameIsPaused = true;
     }
 

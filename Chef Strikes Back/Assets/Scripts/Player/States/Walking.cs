@@ -18,6 +18,8 @@ public class PlayerWalking : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
+        
+
         if (agent.playerMode == PlayerStage.Normal && agent.playerAction != PlayerActions.None)
         {
             agent.ChangeState(PlayerStates.Idle);
