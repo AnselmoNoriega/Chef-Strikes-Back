@@ -61,7 +61,7 @@ public class Actions : MonoBehaviour
                 {
                     inventory.AddItem(item[i]);
                     isCarryingItem = true;
-                    item[i].GetComponent<CircleCollider2D>().enabled = false;
+                    item[i].CollidersState(false);
                     return;
                 }
             }
@@ -78,7 +78,7 @@ public class Actions : MonoBehaviour
                     inventory.AddItem(newItem.GetComponent<Item>());
                     isCarryingItem = true;
                     ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
-                    newItem.GetComponent<CircleCollider2D>().enabled = false;
+                    newItem.GetComponent<Item>().CollidersState(false);
                     return;
                 }
             }
@@ -114,7 +114,7 @@ public class Actions : MonoBehaviour
             {
                 inventory.AddItem(newItem);
                 isCarryingItem = true;
-                newItem.GetComponent<CircleCollider2D>().enabled = false;
+                newItem.CollidersState(false);
             }
             else if(foodPile != null)
             {
@@ -122,7 +122,7 @@ public class Actions : MonoBehaviour
                 inventory.AddItem(newFoodPileItem.GetComponent<Item>());
                 isCarryingItem = true;
                 ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
-                newFoodPileItem.GetComponent<CircleCollider2D>().enabled = false;
+                newFoodPileItem.GetComponent<Item>().CollidersState(false);
             }
         }
     }

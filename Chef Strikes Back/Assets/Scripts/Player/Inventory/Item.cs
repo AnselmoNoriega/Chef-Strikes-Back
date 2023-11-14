@@ -3,17 +3,18 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public Rigidbody2D rb;
+    [SerializeField] public Collider2D tgrCollider;
+    [SerializeField] public Collider2D childCollider;
     public ItemType type;
 
-    [SerializeField]
-    private float timereduction;
+    [SerializeField] private float timereduction;
 
     private float time;
     private Vector2 acceleration;
     private Vector2 handPosition;
 
-    [Space, Header("Movment in table"), SerializeField]
-    private float magnetSmoodTime;
+    [Space, Header("Movement in table")]
+    [SerializeField] private float magnetSmoodTime;
     private Transform magnetPos;
     private bool isBeingDrag;
     public bool isPickable;
@@ -86,6 +87,12 @@ public class Item : MonoBehaviour
             transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
             isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
         }
+    }
+
+    public void CollidersState(bool state)
+    {
+        tgrCollider.enabled = state;
+        childCollider.enabled = state;
     }
 
     public void DestoyItem()
