@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelTimer _timeManger = null;
     [SerializeField] private Player _player = null;
     [SerializeField] private AudioManager _audioManager = null;
+    [SerializeField] private CanvasManager _canvasManager = null;
 
     GameLoader _loader;
 
@@ -18,15 +19,19 @@ public class LevelManager : MonoBehaviour
 
     private void Init()
     {
-        _tileManager.Initialize();
         ServiceLocator.Register<TileManager>(_tileManager);
-        _gameLoopManager.Initialize();
         ServiceLocator.Register<GameLoopManager>(_gameLoopManager);
-        _timeManger.Initialize();   
         ServiceLocator.Register<LevelTimer>(_timeManger);
-        _audioManager.Initialize();   
         ServiceLocator.Register<AudioManager>(_audioManager);
+        ServiceLocator.Register<CanvasManager>(_canvasManager);
+        ServiceLocator.Register<Player>(_player);
 
+        _tileManager.Initialize();
+        _gameLoopManager.Initialize();
+        _timeManger.Initialize();   
+        _audioManager.Initialize();   
+        _canvasManager.Initialize();   
         _player.Initialize();
+
     }
 }

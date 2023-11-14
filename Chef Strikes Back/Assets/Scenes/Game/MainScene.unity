@@ -3849,25 +3849,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 518438058, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-      propertyPath: worldLight
-      value: 
-      objectReference: {fileID: 387362748}
-    - target: {fileID: 518438058, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-      propertyPath: sceneControl
-      value: 
-      objectReference: {fileID: 7418929117601166086}
-    - target: {fileID: 1759315121, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 475
+    - target: {fileID: 3197204653695937667, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1759315122, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-      propertyPath: m_fontSize
-      value: 43
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759315122, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 43
+    - target: {fileID: 3197204653695937667, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3760778737797132649, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
       propertyPath: m_Pivot.x
@@ -3957,16 +3945,31 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1447570368}
-    - target: {fileID: 3760778737797132650, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-      propertyPath: m_SortingOrder
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 3760778737797132654, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
       propertyPath: m_Name
-      value: GlobalCanvas
+      value: CanvasManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905631837811621970, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905631837811621970, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+--- !u!114 &569395608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8940225680136060892, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+  m_PrefabInstance: {fileID: 569395607}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94da3ee0a0b0d6748bb53a48f7db3630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &577589901
 GameObject:
   m_ObjectHideFlags: 0
@@ -13597,17 +13600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1592899951 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4446341932170803868, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-  m_PrefabInstance: {fileID: 1846026829}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1632732714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20619,7 +20611,7 @@ PrefabInstance:
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: moneycounting
       value: 
-      objectReference: {fileID: 1592899951}
+      objectReference: {fileID: 0}
     - target: {fileID: 2927658305788182965, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.501889
@@ -20636,6 +20628,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1656972438}
+    - target: {fileID: 2927658306438362226, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _canvasManager
+      value: 
+      objectReference: {fileID: 569395608}
     - target: {fileID: 2927658306438362227, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.91
