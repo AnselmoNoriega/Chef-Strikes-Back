@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905427859}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.094886, y: 0.58260715, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,11 +45,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: 
+  - name: miss_attack
     source: {fileID: 0}
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+    clip: {fileID: 8300000, guid: bcfbc183c1843d94cb4cbf62c51c54f4, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: hit_attack
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ca6775c4c36af8c4586e7f28f7694bac, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: throw
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 19e9558503a9677439a92c4dcb5b07bb, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: charge
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f4ae96344ed20e041946cc83611800f4, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: walk
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9f928b92e373e9e4d8fbaae856828485, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: enter_rage
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 83090992697a15e4abd0f4b113af5a81, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: money
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7abb8ed7992f984499e74c4c39cce0bf, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: shove
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b312f6cd14c60d44ba976b72b35e80e1, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: ragebar_filling
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b57192eff4bf6874f97110d823bb3f4e, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: pause
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 29caba3691d7ea54cb8c490222b1bdbc, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: resume
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 79300139e927db6429fe4a8f8942ab45, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: food_hit
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 516a385893633ef4da75b711a23ff41d, type: 3}
+    volume: 1
+    pitch: 1.46
     loop: 0
 --- !u!1 &749857914491321574
 GameObject:
@@ -85,7 +151,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 322.161, y: 237.55571}
+  m_AnchoredPosition: {x: -8.54, y: 2.38}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1586224115833489991
@@ -166,7 +232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2927658305319933894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6333525, y: 1.4089813, z: -0.038136575}
+  m_LocalPosition: {x: -13.728238, y: 1.9915885, z: -0.038136575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -190,7 +256,7 @@ MonoBehaviour:
   AIPool: []
   sc: {fileID: 5644264936419189592}
   money: 0
-  spawnTime: 2
+  spawnTime: 15
   rageValue: 0
   rageMode: 0
   moneycounting: {fileID: 0}
@@ -219,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2927658305788182966}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4070034, y: -0.9847503, z: 1.2079623}
+  m_LocalPosition: {x: -14.501889, y: -0.40214312, z: 1.2079623}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -264,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2927658306438362229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8151138, y: -0.98260725, z: 0.08215742}
+  m_LocalPosition: {x: -12.91, y: -0.4, z: 0.08215742}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,6 +354,7 @@ MonoBehaviour:
   _timeManger: {fileID: 1586224115833489991}
   _player: {fileID: 0}
   _audioManager: {fileID: 905427861}
+  _canvasManager: {fileID: 0}
 --- !u!1001 &888666160215077697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -305,11 +372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7418929118511228622, guid: cea7595a664508242bfb3d8e8ce210b1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.0415401
+      value: -14.136426
       objectReference: {fileID: 0}
     - target: {fileID: 7418929118511228622, guid: cea7595a664508242bfb3d8e8ce210b1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3319423
+      value: 1.9145495
       objectReference: {fileID: 0}
     - target: {fileID: 7418929118511228622, guid: cea7595a664508242bfb3d8e8ce210b1, type: 3}
       propertyPath: m_LocalPosition.z
