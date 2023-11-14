@@ -75,6 +75,7 @@ public class Item : MonoBehaviour
     public void LaunchedInTable(Transform table)
     {
         magnetPos = table;
+        rb.isKinematic = true;
     }
 
     public void DraggingFood()
