@@ -80,6 +80,7 @@ public class Actions : MonoBehaviour
                     var newItem = foodPile.Hit();
                     inventory.AddItem(newItem.GetComponent<Item>());
                     isCarryingItem = true;
+                    ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
                     newItem.GetComponent<CircleCollider2D>().enabled = false;
                     return;
                 }
@@ -123,6 +124,7 @@ public class Actions : MonoBehaviour
                 var newFoodPileItem = foodPile.Hit();
                 inventory.AddItem(newFoodPileItem.GetComponent<Item>());
                 isCarryingItem = true;
+                ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
                 newFoodPileItem.GetComponent<CircleCollider2D>().enabled = false;
             }
         }
@@ -136,7 +138,6 @@ public class Actions : MonoBehaviour
             inventory.PrepareToThrowFood(mouse);
             ready2Throw = true;
             player.ChangeAction(PlayerActions.Throwing);
-            ServiceLocator.Get<AudioManager>().PlaySource("charge");
         }
     }
 
@@ -151,7 +152,7 @@ public class Actions : MonoBehaviour
                 var mousePos = Camera.main.ScreenToWorldPoint(pos.ReadValue<Vector2>());
                 dir = (mousePos - (transform.position + offset));
                 dir.Normalize();
-                ServiceLocator.Get<AudioManager>().PlaySource("throw");
+                ServiceLocator.Get<AudioManager>().PlaySource("charge");
             }
 
             inventory.ThrowFood(dir);

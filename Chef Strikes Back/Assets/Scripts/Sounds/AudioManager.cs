@@ -50,4 +50,10 @@ public class AudioManager : MonoBehaviour
         Debug.LogError($"Sound with name {name} not found!");
         return false;
     }
+
+    private void Start()
+    {
+        ServiceLocator.Get<AudioManager>().PlaySource("Background");
+
+    }
 }
