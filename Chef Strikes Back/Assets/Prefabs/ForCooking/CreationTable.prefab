@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7949611368052100238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019, y: -0.085, z: 0}
+  m_LocalPosition: {x: -0.012, y: 0.505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,7 +83,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49677002, y: 0.21899225}
+    pivot: {x: 0.49677002, y: 0.09625324}
     oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1.7066667, y: 1.7066667}
     adaptiveTilingThreshold: 0.5
@@ -92,10 +92,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.6429224, y: 0.31581628}
-      - {x: 0.016221788, y: 0.6386335}
-      - {x: -0.6302781, y: 0.31655842}
-      - {x: 0.0041723046, y: 0.0046416223}
+    - - {x: 0.6361923, y: 0.4773397}
+      - {x: 0.02295197, y: 0.79791355}
+      - {x: -0.6280347, y: 0.47808185}
+      - {x: 0.0019289108, y: 0.15719151}
 --- !u!114 &7949611368931973794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7949611368931973793}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -185,7 +185,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49677002, y: 0.21899225}
+    pivot: {x: 0.49677002, y: 0.09625324}
     oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1.7066667, y: 1.7066667}
     adaptiveTilingThreshold: 0.5
@@ -194,7 +194,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.6265397, y: 0.04567115}
-      - {x: 0.0044867294, y: -0.26984218}
-      - {x: 0.64000005, y: 0.04118433}
-      - {x: 0.012433823, y: 0.36605194}
+    - - {x: -0.6512168, y: 0.19597766}
+      - {x: 0.0067301234, y: -0.121779054}
+      - {x: 0.6489735, y: 0.198221}
+      - {x: 0.014677217, y: 0.50738496}
