@@ -13,7 +13,7 @@ public class PlayerWalking : StateClass<Player>
 
     public void Enter(Player agent)
     {
-
+        ServiceLocator.Get<AudioManager>().PlaySource("walk");
     }
 
     public void Update(Player agent, float dt)
@@ -33,13 +33,18 @@ public class PlayerWalking : StateClass<Player>
         if (agent.move.ReadValue<Vector2>() == Vector2.zero)
         {
             agent.ChangeState(PlayerStates.Idle);
-            FaceDirectionForIdel(agent);
+            FaceDirectionForIdle(agent);
+            ServiceLocator.Get<AudioManager>().StopSource("walk");
+
         }
         else
         {
+            if (!ServiceLocator.Get<AudioManager>().IsPlaying("walk")) 
+            {
+                ServiceLocator.Get<AudioManager>().PlaySource("walk"); 
+            }
             currentDirection = PlayerHelper.FaceMovementDirection(agent.animator, moveDirection);
             agent.lookingDirection = moveDirection;
-            ServiceLocator.Get<AudioManager>().PlaySource("walk");
         }
     }
 
@@ -54,24 +59,23 @@ public class PlayerWalking : StateClass<Player>
             agent.rb.AddForce(((moveDirection * rageSpeed) - agent.rb.velocity) * acceleration);
         }
     }
-    private void FaceDirectionForIdel(Player agent)
+    private void FaceDirectionForIdle(Player agent)
     {
-        Vector2 IdelDirection;
+        Vector2 IdleDirection;
 
         if (Mathf.Abs(agent.rb.velocity.x) > Mathf.Abs(agent.rb.velocity.y))
         {
-            IdelDirection = new Vector2(Mathf.Sign(agent.rb.velocity.x), 0);
+            IdleDirection = new Vector2(Mathf.Sign(agent.rb.velocity.x), 0);
         }
         else
         {
-            IdelDirection = new Vector2(0, Mathf.Sign(agent.rb.velocity.y));
+            IdleDirection = new Vector2(0, Mathf.Sign(agent.rb.velocity.y));
         }
-        agent.lookingDirection = IdelDirection;
-        PlayerHelper.FaceMovementDirection(agent.animator, IdelDirection);
+        agent.lookingDirection = IdleDirection;
+        PlayerHelper.FaceMovementDirection(agent.animator, IdleDirection);
     }
     public void Exit(Player agent)
     {
-
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
