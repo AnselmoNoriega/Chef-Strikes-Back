@@ -13,9 +13,10 @@ public class LeavingCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        if (agent.transform.position == ExitPos)
+        if (Vector2.Distance(agent.transform.position, ExitPos) <= 0.5f)
         {
             agent.isExist = true;
+            
         }
 
         if (agent.aiData.currentTarget != null)
