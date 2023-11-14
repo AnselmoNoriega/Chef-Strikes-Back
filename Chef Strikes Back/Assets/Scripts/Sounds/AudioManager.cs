@@ -24,7 +24,32 @@ public class AudioManager : MonoBehaviour
             if (s.name == name)
             {
                 s.source.Play();
+                break;
             }
         }
+    }
+
+    public void StopSource(string name)
+    {
+        foreach (var s in sounds)
+        {
+            if (s.name == name)
+            {
+                s.source.Stop();
+                break;
+            }
+        }
+    }
+    public bool IsPlaying(string name)
+    {
+        foreach (var s in sounds)
+        {
+            if (s.name == name)
+            {
+                return s.source.isPlaying;
+            }
+        }
+        Debug.LogError($"Sound with name {name} not found!");
+        return false;
     }
 }
