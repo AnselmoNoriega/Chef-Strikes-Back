@@ -261,6 +261,7 @@ MonoBehaviour:
   isStand: 0
   isHit: 0
   chasing: 0
+  isLeaving: 0
   _gameLoopManager: {fileID: 0}
 --- !u!114 &6545289986373070950
 MonoBehaviour:
@@ -544,7 +545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
-  agentColliderSize: 0.2
+  agentColliderSize: 0.3
   showGizmo: 1
 --- !u!1 &5089939973314833384
 GameObject:
@@ -888,6 +889,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   showGizmos: 1
+  ExitPoint: {fileID: 0}
 --- !u!1 &7107044509351231680
 GameObject:
   m_ObjectHideFlags: 0

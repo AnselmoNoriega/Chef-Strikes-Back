@@ -48,6 +48,7 @@ public class AI : MonoBehaviour
     public bool isStand = false;
     public bool isHit = false;
     public bool chasing = false;
+    public bool isLeaving = false;
 
     [HideInInspector] public GameLoopManager _gameLoopManager;
 

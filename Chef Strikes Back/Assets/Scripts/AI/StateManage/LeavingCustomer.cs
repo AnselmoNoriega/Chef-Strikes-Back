@@ -8,11 +8,15 @@ public class LeavingCustomer : StateClass<AI>
     {
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         ExitPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
-        PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
     }
 
     public void Update(AI agent, float dt)
     {
+        if(agent.isLeaving)
+        {
+            PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
+            agent.isLeaving = false;
+        }
         if (Vector2.Distance(agent.transform.position, ExitPos) <= 0.5f)
         {
             agent.isExist = true;

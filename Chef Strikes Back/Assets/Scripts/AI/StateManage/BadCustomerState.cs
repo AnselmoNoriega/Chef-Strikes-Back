@@ -6,17 +6,17 @@ public class BadCustomerState : StateClass<AI>
     {
         ServiceLocator.Get<Player>().currentRage += 3;
         agent.GetComponent<SpriteRenderer>().color = Color.red;
-        PathRequestManager.RequestPath(agent.transform.position, ServiceLocator.Get<TileManager>().requestEmptyPos(), agent.OnPathFound);
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
         agent.isStand = true;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!agent.isStand && !agent._gameLoopManager.rageMode)
+        if (!agent.isStand && !agent._gameLoopManager.rageMode || agent.isLeaving)
         {
             PathRequestManager.RequestPath(agent.transform.position, ServiceLocator.Get<TileManager>().requestEmptyPos(), agent.OnPathFound);
             agent.isStand = true;
+            agent.isLeaving = false;
         }
         agent.OnMovementInput?.Invoke(agent.movementInput);
 

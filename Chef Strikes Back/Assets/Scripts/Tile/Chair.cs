@@ -24,6 +24,7 @@ public class Chair : MonoBehaviour
     public void FreeChair()
     {
         ai.transform.position = SpawnPointForBadAI.transform.position;
+        ai.isLeaving = true;
         ai = null;
         seatAvaliable = true;
         chairCollider.enabled = true;
