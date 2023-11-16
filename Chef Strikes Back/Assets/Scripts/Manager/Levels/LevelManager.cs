@@ -19,19 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private void Init()
     {
-        ServiceLocator.Register<TileManager>(_tileManager);
-        ServiceLocator.Register<GameLoopManager>(_gameLoopManager);
-        ServiceLocator.Register<LevelTimer>(_timeManger);
-        ServiceLocator.Register<AudioManager>(_audioManager);
-        ServiceLocator.Register<CanvasManager>(_canvasManager);
-        ServiceLocator.Register<Player>(_player);
-
-        _tileManager.Initialize();
-        _gameLoopManager.Initialize();
-        _timeManger.Initialize();   
-        _audioManager.Initialize();   
-        _canvasManager.Initialize();   
-        _player.Initialize();
+        
 
     }
 }

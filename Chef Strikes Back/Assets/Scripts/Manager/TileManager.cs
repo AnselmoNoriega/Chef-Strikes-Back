@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileManager : MonoBehaviour
+public class TileManager : Manager
 {
     [SerializeField] Grid grid;
     private List<Vector2> entrance;
     private Dictionary<Vector2, bool> chairs;
     private List<Vector2> emptySpot;
-    
-    public void Initialize()
+
+    public override void OnStart()
     {
+
         entrance = new List<Vector2>();
         foreach (var tilemap in grid.GetComponentsInChildren<Tilemap>())
         {

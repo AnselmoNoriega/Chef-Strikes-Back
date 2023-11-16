@@ -5,7 +5,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-public class LevelTimer : MonoBehaviour
+public class LevelTimer : Manager
 {
     [SerializeField]
     private TextMeshProUGUI textTime;
@@ -20,7 +20,7 @@ public class LevelTimer : MonoBehaviour
 
     [SerializeField] SceneControl sceneControl;
 
-    public void Initialize()
+    public override void OnStart()
     {
         timePlaying = TimeSpan.FromMinutes(elapsTime);
         elapsTimeStart = elapsTime;

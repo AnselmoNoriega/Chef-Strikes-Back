@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameLoopManager : MonoBehaviour
+public class GameLoopManager : Manager
 {
     public GameObject AIPrefabs;
     [SerializeField]
@@ -16,7 +16,7 @@ public class GameLoopManager : MonoBehaviour
     public TextMeshProUGUI moneycounting;
     private float count;
 
-    public void Initialize()
+    public override void OnStart()
     {
         count = spawnTime;
     }

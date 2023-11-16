@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Manager
 {
     [Header("Counts Info")]
     public float currentHealth;
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     private InputControls inputManager;
     private bool _initialized = false;
 
-    public void Initialize()
+    public override void OnStart()
     {
         stateMachine = new StateMachine<Player>(this);
         actionState = new StateMachine<Player>(this);

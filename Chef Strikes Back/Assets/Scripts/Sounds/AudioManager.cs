@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
-public class AudioManager : MonoBehaviour
+public class AudioManager : Manager
 {
     public Sounds[] sounds;
-    public void Initialize()
+    public override void OnStart()
     {
         foreach (Sounds s in sounds)
         {
