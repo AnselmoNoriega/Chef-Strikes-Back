@@ -64,7 +64,7 @@ public class TargetDetector : Detector
     {
         //float distance = 1000;
         var random = Random.Range(0, targetCollider.Length);
-        Collider2D targeChair = null;
+        Collider2D targetChair = null;
         //foreach(var target in targetCollider)
         //{
         //    if(target.gameObject.GetComponent<Chair>().seatAvaliable)
@@ -77,19 +77,16 @@ public class TargetDetector : Detector
         //    }
         //}
 
-        for(int i = 0; i < random; i++)
+        targetChair = targetCollider[random];
+        if(targetChair.gameObject.GetComponent<Chair>().seatAvaliable)
         {
-            if (targetCollider[i].gameObject.GetComponent<Chair>().seatAvaliable)
-            {
-                targeChair = targetCollider[i];
-                ++i;
-            }
-            else
-            {
-                getClosestObject(targetCollider);
-            }
+            return targetChair;
         }
-        return targeChair;
+        else
+        {
+            return getClosestObject(targetCollider);
+        }
+        
 
     }
 

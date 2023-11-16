@@ -53,7 +53,6 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        ServiceLocator.Get<AudioManager>().PlaySource("Background");
-
+        //ServiceLocator.Get<AudioManager>().PlaySource("Background");
     }
 }
