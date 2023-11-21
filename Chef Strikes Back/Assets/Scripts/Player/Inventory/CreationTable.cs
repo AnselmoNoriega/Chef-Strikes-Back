@@ -14,25 +14,26 @@ public class CreationTable : MonoBehaviour
 
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
+    [SerializeField] private Vector2 _pizzaOffset;
 
     [Space, Header("Storage Objects")]
-    [SerializeField] private GameObject burger;
-    [SerializeField] private Transform magnet;
+    [SerializeField] private GameObject _burger;
+    [SerializeField] private Transform _magnet;
 
-    private Dictionary<FoodType, bool> count = new();
-    private Dictionary<FoodType, GameObject> items = new();
-    private Dictionary<FoodType, List<GameObject>> waitList = new();
+    private Dictionary<FoodType, bool> _count = new();
+    private Dictionary<FoodType, GameObject> _items = new();
+    private Dictionary<FoodType, List<GameObject>> _waitList = new();
     private readonly Dictionary<FoodType, bool> _acceptedFoodByType = new();
 
     private void Start()
     {
-        waitList = new();
+        _waitList = new();
         foreach (var foodType in _acceptedFoodTypes)
         {
-            waitList.Add(foodType.Food, new List<GameObject>());
-            count.Add(foodType.Food, false);
+            _waitList.Add(foodType.Food, new List<GameObject>());
+            _count.Add(foodType.Food, false);
             _acceptedFoodByType.Add(foodType.Food, foodType.IsAllowed);
-            items.Add(foodType.Food, null);
+            _items.Add(foodType.Food, null);
         }
     }
 
@@ -42,16 +43,16 @@ public class CreationTable : MonoBehaviour
 
         if (recivedItem && IsAcceptedType(recivedItem.type) && recivedItem.isPickable)
         {
-            if (!count[recivedItem.type])
+            if (!_count[recivedItem.type])
             {
-                items[recivedItem.type] = recivedItem.gameObject;
-                count[recivedItem.type] = true;
-                recivedItem.LaunchedInTable(magnet);
+                _items[recivedItem.type] = recivedItem.gameObject;
+                _count[recivedItem.type] = true;
+                recivedItem.LaunchedInTable(_magnet);
                 recivedItem.isPickable = false;
             }
-            else if (count[recivedItem.type] && !waitList[recivedItem.type].Contains(recivedItem.gameObject))
+            else if (_count[recivedItem.type] && !_waitList[recivedItem.type].Contains(recivedItem.gameObject))
             {
-                waitList[recivedItem.type].Add(recivedItem.gameObject);
+                _waitList[recivedItem.type].Add(recivedItem.gameObject);
             }
 
             if (!ItemIsMissing())
@@ -75,7 +76,7 @@ public class CreationTable : MonoBehaviour
 
         if (recivedItem)
         {
-            waitList[recivedItem.type].Remove(recivedItem.gameObject);
+            _waitList[recivedItem.type].Remove(recivedItem.gameObject);
         }
     }
 
@@ -83,7 +84,7 @@ public class CreationTable : MonoBehaviour
     {
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
-            if (items[_acceptedFoodTypes[i].Food] == null)
+            if (_items[_acceptedFoodTypes[i].Food] == null)
             {
                 return true;
             }
@@ -98,21 +99,21 @@ public class CreationTable : MonoBehaviour
 
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
-            Destroy(items[_acceptedFoodTypes[i].Food]);
+            Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 
-        Instantiate(burger, transform.position, Quaternion.identity);
+        Instantiate(_burger, (Vector2)transform.position + _pizzaOffset, Quaternion.identity);
     }
 
     private void CheckAvailability(FoodType foodtype)
     {
-        if (items[foodtype] == null && waitList[foodtype].Count > 0)
+        if (_items[foodtype] == null && _waitList[foodtype].Count > 0)
         {
-            items[foodtype] = waitList[foodtype][0];
-            waitList[foodtype].RemoveAt(0);
-            count[foodtype] = true;
-            var foodItem = items[foodtype].GetComponent<Item>();
-            foodItem.LaunchedInTable(magnet);
+            _items[foodtype] = _waitList[foodtype][0];
+            _waitList[foodtype].RemoveAt(0);
+            _count[foodtype] = true;
+            var foodItem = _items[foodtype].GetComponent<Item>();
+            foodItem.LaunchedInTable(_magnet);
             foodItem.isPickable = false;
         }
     }

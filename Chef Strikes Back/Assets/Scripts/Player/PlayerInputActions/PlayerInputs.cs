@@ -73,12 +73,12 @@ public class PlayerInputs : MonoBehaviour
     private void LeftClick(InputAction.CallbackContext input)
     {
         action.Attacking(mouse.ReadValue<Vector2>());
-        action.GrabItem(mouse);
     }
 
     private void RightClick(InputAction.CallbackContext input)
     {
         action.PrepareToThrow(mouse);
+        action.GrabItem(mouse);
     }
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
