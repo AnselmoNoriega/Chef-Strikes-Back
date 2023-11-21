@@ -106,12 +106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e819211317e904ab41b74d49efa83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 000000
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  acceptedTypes: 000000000100000002000000
+  _acceptedFoodTypes:
+  - Food: 0
+    IsAllowed: 1
+  - Food: 1
+    IsAllowed: 1
+  - Food: 2
+    IsAllowed: 1
   burger: {fileID: 7360178021079257609, guid: 3b0146762f99960418ab2565375bfa1c, type: 3}
   magnet: {fileID: 7949611368052100239}

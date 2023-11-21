@@ -5,7 +5,7 @@ public class Item : MonoBehaviour
     public Rigidbody2D rb;
     [SerializeField] public Collider2D tgrCollider;
     [SerializeField] public Collider2D childCollider;
-    public ItemType type;
+    public FoodType type;
 
     [SerializeField] private float timereduction;
 
@@ -102,7 +102,7 @@ public class Item : MonoBehaviour
 
 }
 
-public enum ItemType
+public enum FoodType
 {
     BurgerBun,
     Meat,
