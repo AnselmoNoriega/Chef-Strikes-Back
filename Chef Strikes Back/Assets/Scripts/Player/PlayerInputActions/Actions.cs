@@ -8,8 +8,7 @@ public class Actions : MonoBehaviour
     [Header("Inventory Actions")]
     public List<Item> item;
     private Inventory inventory;
-    [SerializeField]
-    private float throwForce;
+    [SerializeField] private float throwForce;
     public bool ready2Throw;
     private bool isCarryingItem;
 
@@ -17,8 +16,10 @@ public class Actions : MonoBehaviour
     private Vector3 offset;
 
     [Space, Header("Player Attack")]
-    [SerializeField]
-    private Player player;
+    [SerializeField] private Player player;
+    
+    [Space, Header("Player Grab")]
+    [SerializeField] private float grabDistance;
 
 
     private void Start()
@@ -72,7 +73,7 @@ public class Actions : MonoBehaviour
             foreach (var hit in hits)
             {
                 var foodPile = hit.collider.GetComponent<FoodPile>();
-                if (foodPile)
+                if (foodPile && (foodPile.transform.position - transform.position).magnitude < grabDistance)
                 {
                     var newItem = foodPile.Hit();
                     inventory.AddItem(newItem.GetComponent<Item>());
