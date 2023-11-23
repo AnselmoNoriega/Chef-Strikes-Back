@@ -99,6 +99,7 @@ public class CreationTable : MonoBehaviour
 
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
+            _count[_acceptedFoodTypes[i].Food] = false;
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 

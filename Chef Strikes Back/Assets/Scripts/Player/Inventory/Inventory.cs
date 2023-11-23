@@ -6,20 +6,13 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField]
-    private Item foodItem;
-    [SerializeField]
-    private Item weaponItem;
-    [SerializeField]
-    private float playerForce;
-    [SerializeField]
-    private float distanceMultiplier;
-    [SerializeField]
-    private Slider length;
-    [SerializeField]
-    private Vector3 offset;
-    [SerializeField]
-    private GameObject pointer;
+    [SerializeField] private Item foodItem;
+    [SerializeField] private Item weaponItem;
+    [SerializeField] private float playerForce;
+    [SerializeField] private float distanceMultiplier;
+    [SerializeField] private Slider length;
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private GameObject pointer;
     private Vector3 offsetPointer;
 
     private Vector3 pointingDirection;
@@ -80,6 +73,7 @@ public class Inventory : MonoBehaviour
 
     private void SetEquation2Throw(Vector2 direction)
     {
+        direction = pointer.transform.up.normalized;
         if (direction == Vector2.zero)
         {
             foodItem.Throw(Vector2.zero, Vector2.zero, 0);
