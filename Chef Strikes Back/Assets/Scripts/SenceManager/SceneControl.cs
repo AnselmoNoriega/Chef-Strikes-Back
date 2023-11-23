@@ -36,11 +36,11 @@ public class SceneControl : MonoBehaviour
 
     public void switchToGameOverScene()
     {
-        SceneManager.LoadScene("LoseScene");
+        SceneManager.LoadScene("EndLevel");
     }
     public void switchToWinScene()
     {
-        SceneManager.LoadScene("WinScene");
+        SceneManager.LoadScene("EndLevel");
     }
     public void switchToCreditScene()
     {

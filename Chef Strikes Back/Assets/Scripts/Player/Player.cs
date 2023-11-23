@@ -17,29 +17,22 @@ public class Player : MonoBehaviour
     public float MaxRage;
 
 
-    [Space, Header("World Info"), SerializeField]
-    private SceneControl sceneControl;
+    [Space, Header("World Info")] 
+    [SerializeField] private SceneControl sceneControl;
     public Weapon _weapon;
-    [SerializeField]
-    private Slider rageBar;
-    [SerializeField]
-    private Slider healthBar;
+    [SerializeField] private Slider rageBar;
+    [SerializeField] private Slider healthBar;
 
     [Space, Header("State Info")]
     public PlayerStates playerState;
     public PlayerActions playerAction;
     public PlayerStage playerMode;
 
-    [HideInInspector]
-    public Actions actions;
-    [HideInInspector] 
-    public Animator animator;
-    [HideInInspector] 
-    public InputAction move;
-    [HideInInspector] 
-    public Rigidbody2D rb;
-    [HideInInspector]
-    public InputAction mouse;
+    [HideInInspector] public Actions actions;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public InputAction move;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public InputAction mouse;
 
     private StateMachine<Player> stateMachine;
     private StateMachine<Player> actionState;
@@ -190,6 +183,7 @@ public class Player : MonoBehaviour
     {
         if(collision.tag == "Loot")
         {
+            ServiceLocator.Get<GameManager>().Score += 4;
             ServiceLocator.Get<GameLoopManager>().money += 10;
             collision.gameObject.SetActive(false);
         }
