@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioManager _audioManager = null;
     [SerializeField] private CanvasManager _canvasManager = null;
 
+
     GameLoader _loader;
 
     private void Start()
