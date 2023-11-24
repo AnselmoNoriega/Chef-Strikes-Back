@@ -1,6 +1,17 @@
-/*using UnityEngine;
+using UnityEngine;
 
 public class Indicator : MonoBehaviour
+{
+    [SerializeField] private GameObject _indicator;
+    [SerializeField] private GameObject _cam;
+    [SerializeField] private SpriteRenderer _indicatorRender;
+
+    private void Update()
+    {
+        Vector2 IndicatorToCam = _indicator.transform.position - _cam.transform.position;
+    }
+}
+/* public class Indicator : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private float offScreenBound = 10f;
@@ -53,9 +64,10 @@ public class Indicator : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
-*/
 
-using System.Collections.Generic;
+
+*/
+/*using System.Collections.Generic;
 using UnityEngine;
 
 public class Indicator : MonoBehaviour
@@ -94,4 +106,4 @@ public class Indicator : MonoBehaviour
         }
     }
 
-}
+}*/
