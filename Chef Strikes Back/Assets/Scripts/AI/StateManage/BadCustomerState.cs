@@ -4,6 +4,7 @@ public class BadCustomerState : StateClass<AI>
 {
     public void Enter(AI agent)
     {
+        ServiceLocator.Get<GameManager>().Score -= 2;
         ServiceLocator.Get<Player>().currentRage += 10;
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;

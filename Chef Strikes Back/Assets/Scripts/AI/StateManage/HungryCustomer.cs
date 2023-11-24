@@ -43,7 +43,6 @@ public class HungryCustomer : StateClass<AI>
         else if (scale.x <= 0)
         {
             agent.ChangeState(AIState.Bad);
-            ServiceLocator.Get<GameManager>().Score -= 2;
         }
     }
 

@@ -217,6 +217,7 @@ public class RageMode : StateClass<Player>
 
     public void Enter(Player agent)
     {
+        ServiceLocator.Get<GameLoopManager>().RageModeEneter();
         _gameManager = ServiceLocator.Get<GameLoopManager>();
         agent.vignette.SetActive(true);
         agent.actions.DropItem();

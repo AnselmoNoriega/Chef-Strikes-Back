@@ -41,8 +41,6 @@ public class LevelTimer : MonoBehaviour
         }
         else if (elapsTime < 0)
         {
-            // scene switching when time is up.
-            // kingston 9/10
             sceneControl.switchToGameOverScene();
         }
     }

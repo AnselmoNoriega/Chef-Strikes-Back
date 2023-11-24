@@ -96,7 +96,7 @@ public class AI : MonoBehaviour
 
         if (health <= 0 || isExist)
         {
-            ServiceLocator.Get<GameManager>().Score -= 4;
+            ServiceLocator.Get<GameLoopManager>().CanTakePoints();
             _gameLoopManager.AIPool.Remove(this.gameObject);
             Destroy(gameObject);
         }

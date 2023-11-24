@@ -5,14 +5,14 @@ using TMPro;
 public class GameLoopManager : MonoBehaviour
 {
     public GameObject AIPrefabs;
-    [SerializeField]
-    private Player player;
+    [SerializeField] private Player player;
     public List<GameObject> AIPool;
     public SceneControl sc;
     public int money = 0;
-    [SerializeField]private float spawnTime;
+    [SerializeField] private float spawnTime;
     public float rageValue = 0.0f;
     public bool rageMode = false;
+    private int timesInRageMode = 0;
     public TextMeshProUGUI moneycounting;
     private float count;
 
@@ -57,5 +57,18 @@ public class GameLoopManager : MonoBehaviour
     public void dealDamage(float damage)
     {
         player.TakeDamage(damage);
+    }
+
+    public void RageModeEneter()
+    {
+        ++timesInRageMode;
+    }
+
+    public void CanTakePoints()
+    {
+        if (timesInRageMode >= 3)
+        {
+            ServiceLocator.Get<GameManager>().Score -= 4;
+        }
     }
 }
