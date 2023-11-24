@@ -103,7 +103,7 @@ public class CreationTable : MonoBehaviour
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 
-        ServiceLocator.Get<GameManager>().Score += 2;
+        ServiceLocator.Get<GameManager>().Score += 5;
         Instantiate(_burger, (Vector2)transform.position + _pizzaOffset, Quaternion.identity);
     }
 
