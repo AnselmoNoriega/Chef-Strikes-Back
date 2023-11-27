@@ -1,6 +1,9 @@
 using UnityEngine;
 using System;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using System.Diagnostics.Contracts;
+
 public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds;
@@ -10,11 +13,11 @@ public class AudioManager : MonoBehaviour
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+        BGMforScenes();
     }
 
     public void PlaySource(string name)
@@ -51,8 +54,15 @@ public class AudioManager : MonoBehaviour
         return false;
     }
 
-    private void Start()
+    private void BGMforScenes()
     {
-        //ServiceLocator.Get<AudioManager>().PlaySource("Background");
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "MainScene":
+                PlaySource("BGM");
+                break;
+
+                default: break;
+        }
     }
 }

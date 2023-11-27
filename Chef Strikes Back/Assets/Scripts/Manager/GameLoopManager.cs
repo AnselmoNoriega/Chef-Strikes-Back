@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameLoopManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameLoopManager : MonoBehaviour
     public void Initialize()
     {
         count = spawnTime;
+
     }
 
     private void Update()
@@ -45,7 +47,6 @@ public class GameLoopManager : MonoBehaviour
             count = 0;
         }
 
-
         moneycounting.text = "$ " + money.ToString();
 
         if (money >= 100)
@@ -71,4 +72,5 @@ public class GameLoopManager : MonoBehaviour
             ServiceLocator.Get<GameManager>().Score -= 2;
         }
     }
+
 }

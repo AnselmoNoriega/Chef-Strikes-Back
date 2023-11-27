@@ -27,10 +27,10 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Register<CanvasManager>(_canvasManager);
         ServiceLocator.Register<Player>(_player);
 
+        _audioManager.Initialize();
         _tileManager.Initialize();
         _gameLoopManager.Initialize();
         _timeManger.Initialize();   
-        _audioManager.Initialize();   
         _canvasManager.Initialize();   
         _player.Initialize();
 
