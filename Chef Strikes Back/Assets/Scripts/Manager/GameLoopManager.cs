@@ -69,7 +69,7 @@ public class GameLoopManager : MonoBehaviour
     {
         if (timesInRageMode >= 3)
         {
-            ServiceLocator.Get<GameManager>().Score -= 2;
+            ServiceLocator.Get<GameManager>().Score -= 4;
         }
     }
 

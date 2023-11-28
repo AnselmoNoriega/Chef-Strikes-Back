@@ -43,6 +43,7 @@ public class Table : MonoBehaviour
     {
         if (collision.CompareTag("Food") && chairs.Count > 0 && !collision.GetComponent<Item>().isServed && collision.GetComponent<Item>().isPickable)
         {
+            ServiceLocator.Get<GameManager>().Score += 5;
             foods.Add(collision.GetComponent<Item>());
             foods[foods.Count - 1].LaunchedInTable(platePos);
             foods[foods.Count - 1].isServed = true;

@@ -10,6 +10,7 @@ public class ScoreSystem : MonoBehaviour
     private void Awake()
     {
         var score = ServiceLocator.Get<GameManager>().Score;
+        Debug.Log(score);
         int starNum = 0;
 
         while (score > 9 && starNum < 5)

@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
     {
         if(collision.tag == "Loot")
         {
-            ServiceLocator.Get<GameManager>().Score += 4;
+            ServiceLocator.Get<GameManager>().Score += 3;
             ServiceLocator.Get<GameLoopManager>().money += 10;
             collision.gameObject.SetActive(false);
         }
