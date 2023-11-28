@@ -30,7 +30,7 @@ public class Indicator : MonoBehaviour
          
             Vector2 indicatorPos;
 
-            if(IsInConner())
+            if(IsInCorner())
             {
                 indicatorPos = Camera.main.WorldToScreenPoint(new Vector2(Camera.main.transform.position.x + LeftRightPos(dir.x), Camera.main.transform.position.y + TopBotPos(dir.y)));
             }
@@ -46,8 +46,7 @@ public class Indicator : MonoBehaviour
             image.rectTransform.position = indicatorPos;
 
             //float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            //Debug.Log(dir.x + "    " + dir.y);
-            //image.rectTransform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
+            //image.rectTransform.rotation = Quaternion.Euler(0f, 0f, rot);
         }
         else
         {
@@ -60,7 +59,7 @@ public class Indicator : MonoBehaviour
         return transform.position.x > Camera.main.transform.position.x + width || transform.position.x < Camera.main.transform.position.x - width
             || transform.position.y > Camera.main.transform.position.y + height || transform.position.y < Camera.main.transform.position.y - height;
     }
-    private bool IsInConner()
+    private bool IsInCorner()
     {
         return (transform.position.x > Camera.main.transform.position.x + width && transform.position.y > Camera.main.transform.position.y + height)
             || (transform.position.x > Camera.main.transform.position.x + width && transform.position.y < Camera.main.transform.position.y - height)

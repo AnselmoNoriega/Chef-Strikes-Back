@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 608885465}
-  - component: {fileID: 608885466}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -155,21 +154,6 @@ Transform:
   m_Father: {fileID: 1468039805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &608885466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608885463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6d1862d8bca6e4a8cb44193b4ed230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenshotFileName: screenshot.png
-  screenshotPath: 
-  displayImage: {fileID: 1073974796}
 --- !u!1 &678675358
 GameObject:
   m_ObjectHideFlags: 0
