@@ -1,109 +1,80 @@
+using MyBox;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Indicator : MonoBehaviour
 {
-    [SerializeField] private GameObject _indicator;
-    [SerializeField] private GameObject _cam;
-    [SerializeField] private SpriteRenderer _indicatorRender;
+    [SerializeField] private Image image;
+    private float width;
+    private float height;
 
+    private float diffScreen;
+
+    private void Awake()
+    {
+        width = Camera.main.orthographicSize * Camera.main.aspect;
+        height = Camera.main.orthographicSize;
+
+        diffScreen = width / height;
+    }
     private void Update()
     {
-        Vector2 IndicatorToCam = _indicator.transform.position - _cam.transform.position;
-    }
-}
-/* public class Indicator : MonoBehaviour
-{
-    [SerializeField] private GameObject target;
-    [SerializeField] private float offScreenBound = 10f;
-    [SerializeField] private Camera camera;
-    [SerializeField] private float viewportMarginMin = 0.1f;
-    [SerializeField] private float viewportMarginMax = 0.9f;
-    [SerializeField] private SpriteRenderer indicator;
-
-    void Update()
-    {
-        Debug.LogWarning("Debuging");
-        if (target == null || camera == null)
+        if (IsOutOfScreen())
         {
-            Debug.LogWarning("Indicato missing references.");
-            return;
-        }
+            image.enabled = true;
+            var dir = transform.position - Camera.main.transform.position;
+            dir.z = 0;
+            dir = dir.normalized; 
+         
+            Vector2 indicatorPos;
 
-        if (!ShouldDisplayIndicator())
-        {
-            //gameObject.SetActive(false);
-            indicator.enabled = false;
-            return;
-        }
-
-        indicator.enabled = false;
-        //gameObject.SetActive(true);
-        PositionAndRotateIndicator();
-    }
-
-    private bool ShouldDisplayIndicator()
-    {
-        Vector3 targetDirection = target.transform.position - transform.position;
-        if (targetDirection.magnitude > offScreenBound) return false;
-
-        Vector3 targetViewPoint = camera.WorldToViewportPoint(target.transform.position);
-        return targetViewPoint.z <= 0 || targetViewPoint.x <= viewportMarginMin || targetViewPoint.x >= viewportMarginMax
-            || targetViewPoint.y <= viewportMarginMin || targetViewPoint.y >= viewportMarginMax;
-    }
-
-    private void PositionAndRotateIndicator()
-    {
-        Vector3 targetViewPoint = camera.WorldToViewportPoint(target.transform.position);
-        Vector3 screenEdge = camera.ViewportToWorldPoint(new Vector3(Mathf.Clamp(targetViewPoint.x, viewportMarginMin, viewportMarginMax),
-                                                                    Mathf.Clamp(targetViewPoint.y, viewportMarginMin, viewportMarginMax),
-                                                                    camera.nearClipPlane));
-        transform.position = new Vector3(screenEdge.x, screenEdge.y, 0);
-
-        Vector3 direction = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-}
-
-
-*/
-/*using System.Collections.Generic;
-using UnityEngine;
-
-public class Indicator : MonoBehaviour
-{
-    public GameObject indicator;
-    public GameObject Target;
-    Renderer rd;
-
-    private void Start()
-    {
-        rd = GetComponent<Renderer>();
-    }
-
-    private void Update()
-    {
-        if (!rd.isVisible)
-        {
-            if (!indicator.activeSelf)
+            if(IsInConner())
             {
-                indicator.SetActive(true);
+                indicatorPos = Camera.main.WorldToScreenPoint(new Vector2(Camera.main.transform.position.x + LeftRightPos(dir.x), Camera.main.transform.position.y + TopBotPos(dir.y)));
             }
-            Vector2 Direction = Target.transform.position - transform.position;
-            RaycastHit2D ray = Physics2D.Raycast(transform.position,Direction);
-
-            if (ray.collider != null)
+            else if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y) * diffScreen)
             {
-                indicator.transform.position = ray.point;
+                indicatorPos = Camera.main.WorldToScreenPoint(new Vector2(Camera.main.transform.position.x + LeftRightPos(dir.x), transform.position.y));
             }
+            else
+            {
+                indicatorPos = Camera.main.WorldToScreenPoint(new Vector2(transform.position.x, Camera.main.transform.position.y + TopBotPos(dir.y)));
+            }
+
+            image.rectTransform.position = indicatorPos;
+
+            //float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            //Debug.Log(dir.x + "    " + dir.y);
+            //image.rectTransform.rotation = Quaternion.AngleAxis(rot, Vector3.forward);
         }
         else
         {
-            if (indicator.activeSelf)
-            {
-                indicator.SetActive(false);
-            }
+            image.enabled = false;
         }
     }
 
-}*/
+    private bool IsOutOfScreen()
+    {
+        return transform.position.x > Camera.main.transform.position.x + width || transform.position.x < Camera.main.transform.position.x - width
+            || transform.position.y > Camera.main.transform.position.y + height || transform.position.y < Camera.main.transform.position.y - height;
+    }
+    private bool IsInConner()
+    {
+        return (transform.position.x > Camera.main.transform.position.x + width && transform.position.y > Camera.main.transform.position.y + height)
+            || (transform.position.x > Camera.main.transform.position.x + width && transform.position.y < Camera.main.transform.position.y - height)
+            || (transform.position.x < Camera.main.transform.position.x - width && transform.position.y > Camera.main.transform.position.y + height)
+            || (transform.position.x < Camera.main.transform.position.x - width && transform.position.y < Camera.main.transform.position.y - height);
+    }
+
+    private float LeftRightPos(float direction)
+    {
+        return (direction >= 0 ? -0.2f + width : 0.2f -width);
+    }
+
+    private float TopBotPos(float direction)
+    {
+        return (direction >= 0 ? -0.2f + height : 0.2f - height);
+    }
+} 
