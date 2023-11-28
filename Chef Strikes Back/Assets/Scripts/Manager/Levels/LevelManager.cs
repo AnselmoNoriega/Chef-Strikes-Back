@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Player _player = null;
     [SerializeField] private AudioManager _audioManager = null;
     [SerializeField] private CanvasManager _canvasManager = null;
+    [SerializeField] private ChairFinder _chairFinder = null;
 
 
     GameLoader _loader;
@@ -26,6 +27,7 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Register<AudioManager>(_audioManager);
         ServiceLocator.Register<CanvasManager>(_canvasManager);
         ServiceLocator.Register<Player>(_player);
+        ServiceLocator.Register<ChairFinder>(_chairFinder);
 
         _audioManager.Initialize();
         _tileManager.Initialize();

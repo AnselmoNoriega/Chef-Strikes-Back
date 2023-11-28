@@ -4,9 +4,12 @@ using UnityEngine;
 public class AIData : MonoBehaviour
 {
     public List<Transform> targets = null;
+    public List<Transform> closeList = null;
     public Collider2D[] obstacles = null;
 
+    public Transform TargetChair;
     public Transform currentTarget;
+
 
     [SerializeField]
     public LayerMask TargetLayerMask;

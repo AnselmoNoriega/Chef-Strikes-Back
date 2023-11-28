@@ -22,45 +22,20 @@ public class TargetDetector : Detector
 
     public override void Detect(AIData aiData)
     {
-        
-        if (!ServiceLocator.Get<GameLoopManager>().rageMode)
-        {
-             targetCollider = getClosestObject(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
-        }
-        else
-        {
-            targetCollider = Physics2D.OverlapCircle(transform.position, targetDetectionRange,playerLayerMask);
-        }
 
-        if (targetCollider != null) 
+        if (!ServiceLocator.Get<GameLoopManager>().rageMode && aiData.targets.Count <= 0 || !aiData.TargetChair.GetComponent<Chair>().seatAvaliable)
         {
-            Vector2 direction = (targetCollider.transform.position - transform.position).normalized;
-
-            for(int i = 0; i < targetDetectionRange;++i)
+            targetCollider = getRandomChair(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
+            aiData.TargetChair = targetCollider.transform;
+            if (targetCollider != null && !ServiceLocator.Get<GameLoopManager>().rageMode)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, i, obstactesLayerMask);
-                
-                if (hit.collider != null )
-                {
-                    colliders = new List<Transform>() { targetCollider.transform };
-                }
-                else
-                {
-                    colliders = null;
-                }
-
-                if(colliders != null)
-                {
-                    aiData.targets = colliders;
-                    break;
-                }
-                
+                Vector2 direction = (targetCollider.transform.position - transform.position).normalized;
+                aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextMove(this.transform, aiData);
             }
-           
         }
     }
 
-    public Collider2D getClosestObject(Collider2D[] targetCollider)
+    public Collider2D getRandomChair(Collider2D[] targetCollider)
     {
         //float distance = 1000;
         var random = Random.Range(0, targetCollider.Length);
@@ -84,7 +59,7 @@ public class TargetDetector : Detector
         }
         else
         {
-            return getClosestObject(targetCollider);
+            return getRandomChair(targetCollider);
         }
         
 

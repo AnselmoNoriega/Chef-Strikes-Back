@@ -183,7 +183,7 @@ public class AI : MonoBehaviour
         {
             movementInput = Vector2.zero;
         }
-        else if (aiData.currentTarget.position != transform.position && !isSit)
+        else if (aiData.TargetChair.position != transform.position && !isSit)
         {
             movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
         }
