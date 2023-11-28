@@ -149,7 +149,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets: []
+  closeList: []
   obstacles: []
+  TargetChair: {fileID: 0}
   currentTarget: {fileID: 0}
   TargetLayerMask:
     serializedVersion: 2
@@ -293,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed96920baf1e93d478fc0a087e6bc344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1567169437809526574}
+  image: {fileID: 4996913246588421570}
 --- !u!95 &-1032899175772524887
 Animator:
   serializedVersion: 4
@@ -1073,7 +1075,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f2746d3b2ea903147a4ff4960d0a049f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 50855087ff617294e99d1887375148a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1150,8 +1152,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -6.75}
+  m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &696726715854908924
 CanvasRenderer:
@@ -1181,7 +1183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 50855087ff617294e99d1887375148a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f2746d3b2ea903147a4ff4960d0a049f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
