@@ -20,6 +20,7 @@ public class AI : MonoBehaviour
     [SerializeField] public List<Detector> detectors;
     [SerializeField] public Vector2 movementInput;
     [SerializeField] private ContextSolver movementDirectionSolver;
+    [HideInInspector] public Indicator _indicator;
     public AIData aiData;
     private StateMachine<AI> stateManager;
     private Vector2[] path;
@@ -59,6 +60,7 @@ public class AI : MonoBehaviour
 
     private void Awake()
     {
+        _indicator = GetComponent<Indicator>();
         _gameLoopManager = ServiceLocator.Get<GameLoopManager>();
         stateManager = new StateMachine<AI>(this);
         state = AIState.None;

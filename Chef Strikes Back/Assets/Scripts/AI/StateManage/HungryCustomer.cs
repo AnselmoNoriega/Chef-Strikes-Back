@@ -21,6 +21,7 @@ public class HungryCustomer : StateClass<AI>
         }
         else
         {
+            agent._indicator.SetIndicator(true, IndicatorImage.Pizza);
             agent.eatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
             agent.OrderBubble.gameObject.SetActive(true);
             timer = waitingTime;
@@ -63,6 +64,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
+        agent._indicator.SetIndicator(false, IndicatorImage.Pizza);
         agent.eatingSlider.transform.parent.gameObject.SetActive(false);
         agent.OrderBubble.gameObject.SetActive(false);
     }
