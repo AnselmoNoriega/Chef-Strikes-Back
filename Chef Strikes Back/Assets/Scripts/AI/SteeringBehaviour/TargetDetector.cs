@@ -22,15 +22,16 @@ public class TargetDetector : Detector
 
     public override void Detect(AIData aiData)
     {
-        
-        if (aiData.TargetChair == null || !ServiceLocator.Get<GameLoopManager>().rageMode && aiData.targets.Count <= 0 || !aiData.TargetChair.GetComponent<Chair>().seatAvaliable)
+        if(aiData.TargetChair == null || !aiData.TargetChair.GetComponent<Chair>().seatAvaliable)
         {
-            aiData.targets = null;
-            targetCollider = getRandomChair(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
-            aiData.TargetChair = targetCollider.transform;
-            if (targetCollider != null)
+            if (!ServiceLocator.Get<GameLoopManager>().rageMode)
             {
-                aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextMove(this.transform, aiData);
+                targetCollider = getRandomChair(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
+                aiData.TargetChair = targetCollider.transform;
+                if (targetCollider != null)
+                {
+                    aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextMove(this.transform, aiData);
+                }
             }
         }
         else if(ServiceLocator.Get<GameLoopManager>().rageMode)
