@@ -7,6 +7,8 @@ public class AIData : MonoBehaviour
     public List<Transform> closeList = null;
     public Collider2D[] obstacles = null;
 
+    public AIState state;
+
     public Transform TargetChair;
     public Transform currentTarget;
 

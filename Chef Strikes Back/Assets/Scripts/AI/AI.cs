@@ -75,10 +75,14 @@ public class AI : MonoBehaviour
 
     private void PerformDetection()
     {
-        foreach (Detector detect in detectors)
+        if(!isSit)
         {
-            detect.Detect(aiData);
+            foreach (Detector detect in detectors)
+            {
+                detect.Detect(aiData);
+            }
         }
+        
     }
 
     private void Update()
@@ -176,11 +180,12 @@ public class AI : MonoBehaviour
     {
         stateManager.ChangeState((int)newState);
         state = newState;
+        aiData.state = newState;
     }
 
     public void FindSeat()
     {
-        if (aiData.currentTarget == null || isSit)
+        if (aiData.TargetChair == null || isSit)
         {
             movementInput = Vector2.zero;
         }
@@ -189,6 +194,8 @@ public class AI : MonoBehaviour
             movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
         }
     }
+
+
 
     public void DropMoney()
     {

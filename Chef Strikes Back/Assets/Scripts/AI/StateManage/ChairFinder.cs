@@ -30,7 +30,6 @@ public class ChairFinder : MonoBehaviour
         {
             if(closeList.Count == 0) 
             {
-                currentPos = openList[0];
                 openList.Remove(currentPos);
                 closeList.Add(currentPos);
             }
