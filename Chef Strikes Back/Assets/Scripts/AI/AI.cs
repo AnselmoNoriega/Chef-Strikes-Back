@@ -88,8 +88,9 @@ public class AI : MonoBehaviour
 
         if (!_gameLoopManager.rageMode && state != AIState.Bad && !isSit)
         {
-            if (!aiData.currentTarget.GetComponent<Chair>().seatAvaliable)
+            if (!aiData.TargetChair.GetComponent<Chair>().seatAvaliable)
             {
+                aiData.TargetChair = null;
                 aiData.currentTarget = null;
             }
         }
