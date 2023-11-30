@@ -93,14 +93,6 @@ public class AI : MonoBehaviour
         stateManager.Update(Time.deltaTime);
         FaceMovementDirection(anim, rb2d.velocity);
 
-        if (!_gameLoopManager.rageMode && state != AIState.Bad && !isSit)
-        {
-            if (!aiData.TargetChair.GetComponent<Chair>().seatAvaliable)
-            {
-                aiData.TargetChair = null;
-                aiData.currentTarget = null;
-            }
-        }
 
         if (health <= 0 || isExist)
         {
