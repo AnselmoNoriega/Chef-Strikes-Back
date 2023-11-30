@@ -45,8 +45,8 @@ public class Indicator : MonoBehaviour
 
             image.rectTransform.position = indicatorPos;
 
-            //float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            //image.rectTransform.rotation = Quaternion.Euler(0f, 0f, rot);
+            float rot = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
+            image.rectTransform.rotation = Quaternion.Euler(0f, 0f, rot);
         }
         else
         {
