@@ -31,6 +31,16 @@ public class Chair : MonoBehaviour
         chairSprite.enabled = true;
     }
 
+    public bool IsAIsFood(Item item)
+    {
+        if(ai && (int)item.type == ai.ChoiceIndex)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -43,6 +53,7 @@ public class Chair : MonoBehaviour
             ai.rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             ai.isSit = true;
             ai.transform.position = transform.position;
+            ai.ChoiceIndex = Random.Range(0, 2);
             table.AddCostumer(this);
             seatAvaliable = false;
             chairSprite.enabled = false;

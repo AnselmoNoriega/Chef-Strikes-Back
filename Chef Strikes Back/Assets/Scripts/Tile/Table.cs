@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    [SerializeField]
-    private List<Chair> chairs = new List<Chair>();
+    [SerializeField] private List<Chair> chairs = new List<Chair>();
+    private Dictionary<int, List<AI>> _aiSitting;
 
-    [SerializeField]
     public Transform platePos;
-    [SerializeField]
     public SpriteRenderer plateSprite;
 
-    [SerializeField]
     public List<Item> foods = new List<Item>();
+
+    private void Awake()
+    {
+        _aiSitting = new();
+
+        for(int i = 0; i < 2; ++i)
+        {
+            _aiSitting.Add(i, new List<AI>());
+        }
+    }
 
     private void Update()
     {
@@ -26,6 +33,7 @@ public class Table : MonoBehaviour
         {
             if (chairs[i].ai.state == AIState.Leaving)
             {
+                _aiSitting[chairs[i].ai.ChoiceIndex].Remove(chairs[i].ai);
                 Destroy(foods.ElementAt(0).gameObject);
                 foods.RemoveAt(0);
                 chairs[i].FreeChair();
@@ -33,6 +41,7 @@ public class Table : MonoBehaviour
             }
             else if (chairs[i].ai.state == AIState.Bad)
             {
+                _aiSitting[chairs[i].ai.ChoiceIndex].Remove(chairs[i].ai);
                 chairs[i].FreeChair();
                 chairs.Remove(chairs[i]);
             }
@@ -41,18 +50,26 @@ public class Table : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Food") && chairs.Count > 0 && !collision.GetComponent<Item>().isServed && collision.GetComponent<Item>().isPickable)
+        if (collision.tag == "Food" && !collision.GetComponent<Item>().isServed && collision.GetComponent<Item>().isPickable)
         {
-            ServiceLocator.Get<GameManager>().Score += 5;
-            foods.Add(collision.GetComponent<Item>());
-            foods[foods.Count - 1].LaunchedInTable(platePos);
-            foods[foods.Count - 1].isServed = true;
+            bool hasFoodForCustomer = false;
             foreach (var chair in chairs)
             {
-                if (!chair.ai.eating)
+                hasFoodForCustomer |= chair.IsAIsFood(collision.GetComponent<Item>());
+            }
+            if (hasFoodForCustomer)
+            {
+                ServiceLocator.Get<GameManager>().Score += 5;
+                foods.Add(collision.GetComponent<Item>());
+                foods[foods.Count - 1].LaunchedInTable(platePos);
+                foods[foods.Count - 1].isServed = true;
+                foreach (var chair in chairs)
                 {
-                    chair.ai.eating = true;
-                    chair.ai.ChangeState(AIState.Hungry);
+                    if (!chair.ai.eating)
+                    {
+                        chair.ai.eating = true;
+                        chair.ai.ChangeState(AIState.Hungry);
+                    }
                 }
             }
         }
@@ -61,5 +78,6 @@ public class Table : MonoBehaviour
     public void AddCostumer(Chair chair)
     {
         chairs.Add(chair);
+        _aiSitting[chair.ai.ChoiceIndex].Add(chair.ai);
     }
 }
