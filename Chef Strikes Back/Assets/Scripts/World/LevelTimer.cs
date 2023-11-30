@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -31,6 +28,7 @@ public class LevelTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SpawnTimeChangeBasedOnTimer();
         if (elapsTime > 0.00f)
         {
             elapsTime -= Time.deltaTime / 60;
@@ -43,5 +41,24 @@ public class LevelTimer : MonoBehaviour
         {
             sceneControl.switchToGameOverScene();
         }
+    }
+
+    private void SpawnTimeChangeBasedOnTimer()
+    {
+        if (elapsTime <= 5f && elapsTime > 4.5f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
+        else if (elapsTime <= 4.5f && elapsTime > 3.5f)
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
+        else if (elapsTime <= 3.5f && elapsTime > 3f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
+        else if (elapsTime <= 3f && elapsTime > 1.5f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
+        else if (elapsTime <= 1.5f && elapsTime > 1.16f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
+        else if (elapsTime <= 1.16f && elapsTime > .16f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
+        else if (elapsTime <= 0.16f && elapsTime > 0f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(100000);
+
     }
 }

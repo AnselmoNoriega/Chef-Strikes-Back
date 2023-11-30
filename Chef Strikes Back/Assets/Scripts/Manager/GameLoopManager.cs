@@ -73,4 +73,9 @@ public class GameLoopManager : MonoBehaviour
         }
     }
 
+    public void ChangeSpawnTime(int time)
+    { 
+        spawnTime= time; 
+    }
+
 }
