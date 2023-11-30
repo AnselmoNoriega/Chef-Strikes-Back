@@ -31,6 +31,7 @@ public class AI : MonoBehaviour
     public Rigidbody2D rb2d;
     public GameObject OrderBubble;
     public Transform eatingSlider;
+    [HideInInspector] public int ChoiceIndex;
 
     [Space, Header("AI Variables")]
     [SerializeField] private float attackDistance = 0.5f;

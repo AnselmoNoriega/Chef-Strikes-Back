@@ -104,8 +104,9 @@ public class Item : MonoBehaviour
 
 public enum FoodType
 {
-    BurgerBun,
-    Meat,
-    Lettuce,
-    Burger
+    Pizza,
+    Spaghetti,
+    Dough,
+    Tomatoe,
+    Cheese,
 }

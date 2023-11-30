@@ -74,7 +74,7 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem)
+        if (recivedItem && _waitList.ContainsKey(recivedItem.type))
         {
             _waitList[recivedItem.type].Remove(recivedItem.gameObject);
         }
