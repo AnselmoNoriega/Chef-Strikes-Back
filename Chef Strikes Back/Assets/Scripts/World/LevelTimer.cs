@@ -45,20 +45,23 @@ public class LevelTimer : MonoBehaviour
 
     private void SpawnTimeChangeBasedOnTimer()
     {
-        if (elapsTime <= 5f && elapsTime > 4.5f) 
-            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
-        else if (elapsTime <= 4.5f && elapsTime > 3.5f)
+        if (elapsTime <= 5f && elapsTime > 4.9f) 
             ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
+        else if (elapsTime <= 4.9f && elapsTime > 4.5f)
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(15);
+        else if (elapsTime <= 4.5f && elapsTime > 3f)
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
         else if (elapsTime <= 3.5f && elapsTime > 3f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
+        else if (elapsTime <= 3f && elapsTime > 2.5f) 
             ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
-        else if (elapsTime <= 3f && elapsTime > 1.5f) 
+        else if (elapsTime <= 2.5f && elapsTime > 2f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
+        else if (elapsTime <= 2f && elapsTime > 1.5f) 
+            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(10);
+        else if (elapsTime <= 1.5 && elapsTime > 0.5f) 
             ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
-        else if (elapsTime <= 1.5f && elapsTime > 1.16f) 
-            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
-        else if (elapsTime <= 1.16f && elapsTime > .16f) 
-            ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(5);
-        else if (elapsTime <= 0.16f && elapsTime > 0f) 
+        else if (elapsTime <= 0.5f && elapsTime > 0f)
             ServiceLocator.Get<GameLoopManager>().ChangeSpawnTime(100000);
-
     }
 }
