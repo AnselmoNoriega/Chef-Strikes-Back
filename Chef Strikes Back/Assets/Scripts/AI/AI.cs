@@ -29,7 +29,7 @@ public class AI : MonoBehaviour
     [Space, Header("AI Properties")]
     [SerializeField] private Animator anim;
     public Rigidbody2D rb2d;
-    public GameObject OrderBubble;
+    public List<GameObject> OrderBubble;
     public Transform eatingSlider;
     [HideInInspector] public int ChoiceIndex;
 
