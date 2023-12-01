@@ -39,7 +39,7 @@ public class LevelTimer : MonoBehaviour
         }
         else if (elapsTime < 0)
         {
-            sceneControl.switchToGameOverScene();
+            sceneControl.switchToWinScene();
         }
     }
 

@@ -49,10 +49,10 @@ public class GameLoopManager : MonoBehaviour
 
         moneycounting.text = "$ " + money.ToString();
 
-        if (money >= 100)
+        /*if (money >= 100)
         {
             sc.switchToWinScene();
-        }
+        }*/
     }
 
     public void dealDamage(float damage)

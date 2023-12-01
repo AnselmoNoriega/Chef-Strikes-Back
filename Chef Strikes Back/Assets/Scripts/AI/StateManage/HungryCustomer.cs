@@ -24,13 +24,14 @@ public class HungryCustomer : StateClass<AI>
             if (agent.ChoiceIndex == 0)
             {
                 agent._indicator.SetIndicator(true, IndicatorImage.Pizza);
+                agent.OrderBubble[0].gameObject.SetActive(true);
             }
             else
             {
                 agent._indicator.SetIndicator(true, IndicatorImage.Spaguetti);
+                agent.OrderBubble[1].gameObject.SetActive(true);
             }
             agent.eatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-            agent.OrderBubble.gameObject.SetActive(true);
             timer = waitingTime;
         }
     }
@@ -74,12 +75,13 @@ public class HungryCustomer : StateClass<AI>
         if (agent.ChoiceIndex == 0)
         {
             agent._indicator.SetIndicator(false, IndicatorImage.Pizza);
+            agent.OrderBubble[0].gameObject.SetActive(false);
         }
         else
         {
             agent._indicator.SetIndicator(false, IndicatorImage.Spaguetti);
+            agent.OrderBubble[1].gameObject.SetActive(false);
         }
         agent.eatingSlider.transform.parent.gameObject.SetActive(false);
-        agent.OrderBubble.gameObject.SetActive(false);
     }
 }
