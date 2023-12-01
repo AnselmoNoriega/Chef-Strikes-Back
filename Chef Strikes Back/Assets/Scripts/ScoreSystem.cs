@@ -23,6 +23,7 @@ public class ScoreSystem : MonoBehaviour
         if (score - 5 >= 0 && starNum < 5)
         {
             Instantiate(_halfStar, _gridParent);
+            ++starNum;
         }
 
         for(int i = starNum; i < 5; ++i)
