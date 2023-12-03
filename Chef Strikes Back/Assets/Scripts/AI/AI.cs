@@ -47,7 +47,6 @@ public class AI : MonoBehaviour
     public bool isSit = false;
     public bool isExist = false;
     public bool eating = false;
-    public bool isStand = false;
     public bool isHit = false;
     public bool chasing = false;
     public bool isLeaving = false;
@@ -78,12 +77,9 @@ public class AI : MonoBehaviour
 
     private void PerformDetection()
     {
-        if(!isSit)
+        foreach (Detector detect in detectors)
         {
-            foreach (Detector detect in detectors)
-            {
-                detect.Detect(aiData);
-            }
+            detect.Detect(aiData);
         }
         
     }
@@ -93,6 +89,7 @@ public class AI : MonoBehaviour
         stateManager.Update(Time.deltaTime);
         FaceMovementDirection(anim, rb2d.velocity);
 
+        
 
         if (health <= 0 || isExist)
         {
@@ -180,11 +177,23 @@ public class AI : MonoBehaviour
 
     public void FindSeat()
     {
-        if (aiData.TargetChair == null || isSit)
+        if (aiData.Target == null || isSit)
         {
             movementInput = Vector2.zero;
         }
-        else if (aiData.TargetChair.position != transform.position && !isSit)
+        else if (aiData.Target.position != transform.position && !isSit)
+        {
+            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+        }
+    }
+
+    public void FindStandPoint()
+    {
+        if(aiData.Target == null)
+        {
+            movementInput = Vector2.zero;
+        }
+        else if (!aiData.isStand)
         {
             movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
         }

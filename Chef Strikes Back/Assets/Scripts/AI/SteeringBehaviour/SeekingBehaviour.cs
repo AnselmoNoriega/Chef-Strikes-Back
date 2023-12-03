@@ -23,6 +23,11 @@ public class SeekingBehaviour : SteeringBehaviour
         {
             if (aiData.targets == null || aiData.targets.Count <= 0)
             {
+                if(aiData.state == AIState.Bad)
+                {
+                    aiData.isStand = true;
+                    aiData.Target = null;
+                }
                 aiData.currentTarget = null;
                 return (danger, interest);
             }
@@ -41,7 +46,7 @@ public class SeekingBehaviour : SteeringBehaviour
         {
             reachedLastTarget = true;
             aiData.targets.Remove(aiData.currentTarget);
-            aiData.closeList.Add(aiData.currentTarget);
+            //aiData.closeList.Add(aiData.currentTarget);
             return (danger, interest);
         }
 

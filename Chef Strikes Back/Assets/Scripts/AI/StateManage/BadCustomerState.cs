@@ -7,23 +7,30 @@ public class BadCustomerState : StateClass<AI>
         ServiceLocator.Get<GameManager>().Score -= 3;
         ServiceLocator.Get<Player>().currentRage += 10;
         agent.GetComponent<SpriteRenderer>().color = Color.red;
-        agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        agent.isStand = true;
+        agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
+        agent.aiData.Target = null;
+        agent.aiData.currentTarget = null;
+        agent.aiData.isStand = false;
+        agent.isSit = false;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!agent.isStand && !agent._gameLoopManager.rageMode || agent.isLeaving)
+        if (agent.aiData.currentTarget != null)
         {
-            PathRequestManager.RequestPath(agent.transform.position, ServiceLocator.Get<TileManager>().requestEmptyPos(), agent.OnPathFound);
-            agent.isStand = true;
-            agent.isLeaving = false;
+            agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+            agent.FindStandPoint();
         }
+        else if (agent.aiData.GetTargetsCount() > 0)
+        {
+            agent.aiData.currentTarget = agent.aiData.targets[0];
+        }
+
         agent.OnMovementInput?.Invoke(agent.movementInput);
 
         if (agent.isHit)
         {
-            agent.isStand = false;
+            agent.aiData.isStand = false;
             agent.isHit = false;
         }
 
@@ -42,7 +49,7 @@ public class BadCustomerState : StateClass<AI>
     {
         if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
-            agent.isStand = false;
+            agent.aiData.isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
@@ -55,7 +62,7 @@ public class BadCustomerState : StateClass<AI>
         }
         if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle" || collision.transform.tag == "Chair")
         {
-            agent.isStand = false;
+            agent.aiData.isStand = false;
         }
     }
 

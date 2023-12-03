@@ -8,8 +8,9 @@ public class AIData : MonoBehaviour
     public Collider2D[] obstacles = null;
 
     public AIState state;
+    public bool isStand;
 
-    public Transform TargetChair;
+    public Transform Target;
     public Transform currentTarget;
 
 

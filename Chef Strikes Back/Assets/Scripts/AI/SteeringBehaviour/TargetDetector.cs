@@ -22,21 +22,34 @@ public class TargetDetector : Detector
 
     public override void Detect(AIData aiData)
     {
-        if(aiData.TargetChair == null || !aiData.TargetChair.GetComponent<Chair>().seatAvaliable)
+
+        if(aiData.state == AIState.Good)
         {
-            if (!ServiceLocator.Get<GameLoopManager>().rageMode)
+            if (aiData.Target == null || !aiData.Target.GetComponent<Chair>().seatAvaliable)
             {
                 targetCollider = getRandomChair(Physics2D.OverlapCircleAll(transform.position, targetDetectionRange, aiData.TargetLayerMask));
-                aiData.TargetChair = targetCollider.transform;
+                aiData.Target = targetCollider.transform;
                 if (targetCollider != null)
                 {
                     aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextMove(this.transform, aiData);
                 }
             }
         }
-        else if(ServiceLocator.Get<GameLoopManager>().rageMode)
+        else if(aiData.state == AIState.Bad)
         {
-
+            if(aiData.Target == null && !aiData.isStand)
+            {
+                aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextLocate(this.transform, aiData);
+            }
+        }
+        else if(aiData.state == AIState.Rage)
+        {
+            targetCollider = Physics2D.OverlapCircle(transform.position, targetDetectionRange, playerLayerMask);
+            if(targetCollider != null) 
+            {
+                colliders = new List<Transform> { targetCollider.transform };
+            }
+            aiData.targets = colliders;
         }
 
     }
@@ -46,18 +59,6 @@ public class TargetDetector : Detector
         //float distance = 1000;
         var random = Random.Range(0, targetCollider.Length);
         Collider2D targetChair = null;
-        //foreach(var target in targetCollider)
-        //{
-        //    if(target.gameObject.GetComponent<Chair>().seatAvaliable)
-        //    {
-        //        if (Vector2.Distance(target.transform.position, transform.position) < distance)
-        //        {
-        //            targeChair = target;
-        //            distance = Vector2.Distance(target.transform.position, transform.position);
-        //        }
-        //    }
-        //}
-
         targetChair = targetCollider[random];
         if(targetChair.gameObject.GetComponent<Chair>().seatAvaliable)
         {
