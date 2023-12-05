@@ -19,6 +19,18 @@ static public class ServiceLocator
         return (T)target;
     }
 
+    static public void Unregister<T>()
+    {
+        if (Contains<T>())
+        {
+            m_systems.Remove(typeof(T));
+        }
+        else
+        {
+            Debug.Log($"Couldn't Find registered system of type {typeof(T)} to remove");
+        }
+    }
+
     static public T Get<T>()
     {
         object ret = null;
