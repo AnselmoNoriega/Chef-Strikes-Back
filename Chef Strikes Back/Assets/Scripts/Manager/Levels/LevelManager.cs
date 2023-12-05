@@ -37,4 +37,14 @@ public class LevelManager : MonoBehaviour
         _player.Initialize();
 
     }
+    private void OnDestroy()
+    {
+        ServiceLocator.Unregister<TileManager>();
+        ServiceLocator.Unregister<GameLoopManager>();
+        ServiceLocator.Unregister<LevelTimer>();
+        ServiceLocator.Unregister<AudioManager>();
+        ServiceLocator.Unregister<CanvasManager>();
+        ServiceLocator.Unregister<Player>();
+        ServiceLocator.Unregister<ChairFinder>();
+    }
 }

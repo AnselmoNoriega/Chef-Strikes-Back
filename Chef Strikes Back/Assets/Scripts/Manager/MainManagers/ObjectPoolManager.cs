@@ -105,4 +105,9 @@ public class ObjectPoolManager : MonoBehaviour , IGameModule
         Debug.LogError("Object Pool Depleted: No Unused Objects To Return");
         return null;
     }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.Unregister<ObjectPoolManager>();
+    }
 }
