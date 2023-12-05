@@ -15,21 +15,20 @@ public class GameLoopManager : MonoBehaviour
     public bool rageMode = false;
     private int timesInRageMode = 0;
     public TextMeshProUGUI moneycounting;
-    private float count;
+    private float count = 0;
 
     public void Initialize()
     {
-        count = spawnTime;
-
+        Vector2 spawnPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
+        Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
     }
 
     private void Update()
     {
-
         count += Time.deltaTime;
         rageValue = player.currentRage;
 
-        if (count > spawnTime && rageMode == false)
+        if (count >= spawnTime && rageMode == false)
         {
             Vector2 spawnPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
@@ -48,11 +47,6 @@ public class GameLoopManager : MonoBehaviour
         }
 
         moneycounting.text = "$ " + money.ToString();
-
-        /*if (money >= 100)
-        {
-            sc.switchToWinScene();
-        }*/
     }
 
     public void dealDamage(float damage)

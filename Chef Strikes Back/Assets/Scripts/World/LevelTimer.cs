@@ -40,15 +40,14 @@ public class LevelTimer : MonoBehaviour
     void Update()
     {
         SpawnTimeChangeBasedOnTimer();
-        if (elapsedTime > 0.00f)
-        {
-            elapsedTime -= Time.deltaTime / 60;
-            worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
 
-            timePlaying = TimeSpan.FromMinutes(elapsedTime);
-            textTime.text = timePlaying.ToString("mm':'ss'.'ff");
-        }
-        else if (elapsedTime < 0)
+        elapsedTime -= Time.deltaTime / 60;
+        worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
+
+        timePlaying = TimeSpan.FromMinutes(elapsedTime);
+        textTime.text = timePlaying.ToString("mm':'ss'.'ff");
+
+        if (elapsedTime < 0)
         {
             sceneControl.switchToWinScene();
         }
@@ -58,21 +57,17 @@ public class LevelTimer : MonoBehaviour
     {
         var loopManager = ServiceLocator.Get<GameLoopManager>();
 
-        if (elapsedTime <= 5f && elapsedTime > 4.9f) 
+        if (elapsedTime <= 3f && elapsedTime > 3.8f)
             loopManager.ChangeSpawnTime(5);
-        else if (elapsedTime <= 4.9f && elapsedTime > 4.5f)
+        else if (elapsedTime <= 3.8f && elapsedTime > 3.5f)
             loopManager.ChangeSpawnTime(15);
-        else if (elapsedTime <= 4.5f && elapsedTime > 3f)
+        else if (elapsedTime <= 3.5f && elapsedTime > 3f)
             loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 3.5f && elapsedTime > 3f) 
-            loopManager.ChangeSpawnTime(5);
-        else if (elapsedTime <= 3f && elapsedTime > 2.5f) 
+        else if (elapsedTime <= 3f && elapsedTime > 2.5f)
             loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 2.5f && elapsedTime > 2f) 
+        else if (elapsedTime <= 2.5f && elapsedTime > 1.5f)
             loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 2f && elapsedTime > 1.5f) 
-            loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 1.5 && elapsedTime > 0.5f) 
+        else if (elapsedTime <= 1.5 && elapsedTime > 0.5f)
             loopManager.ChangeSpawnTime(5);
         else if (elapsedTime <= 0.5f && elapsedTime > 0f)
             loopManager.ChangeSpawnTime(int.MaxValue);

@@ -117,6 +117,92 @@ MonoBehaviour:
     volume: 1
     pitch: 1.46
     loop: 0
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+--- !u!1 &2019793188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2019793189}
+  - component: {fileID: 2019793190}
+  m_Layer: 0
+  m_Name: A*
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2019793189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019793188}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.1618705, y: -10.182081, z: -103.157616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2927658305141393036}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2019793190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019793188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ab073f296b493498474e3e2c384e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPointPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyCheckPoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyStandPoint:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &749857914491321574
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,8 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textTime: {fileID: 2927658306861489531}
   worldLight: {fileID: 0}
-  elapsTime: 5
+  elapsedTime: 3
   sceneControl: {fileID: 5644264936419189592}
+  _phases: []
 --- !u!1 &2927658305141393039
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,6 +292,7 @@ Transform:
   - {fileID: 7452940348090702917}
   - {fileID: 905427860}
   - {fileID: 2058666068260628640}
+  - {fileID: 2019793189}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -356,6 +444,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _audioManager: {fileID: 905427861}
   _canvasManager: {fileID: 6103272858610034197}
+  _chairFinder: {fileID: 2019793190}
 --- !u!1001 &888666160215077697
 PrefabInstance:
   m_ObjectHideFlags: 0
