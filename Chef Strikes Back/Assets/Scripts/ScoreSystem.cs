@@ -9,7 +9,7 @@ public class ScoreSystem : MonoBehaviour
 
     private void Awake()
     {
-        var score = ServiceLocator.Get<GameManager>().Score;
+        var score = ServiceLocator.Get<GameManager>().GetScore();
         Debug.Log(score);
         int starNum = 0;
 

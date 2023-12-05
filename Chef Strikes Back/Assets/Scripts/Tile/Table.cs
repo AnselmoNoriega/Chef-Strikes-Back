@@ -59,7 +59,7 @@ public class Table : MonoBehaviour
             }
             if (hasFoodForCustomer)
             {
-                ServiceLocator.Get<GameManager>().Score += 5;
+                ServiceLocator.Get<GameManager>().FoodMade();
                 foods.Add(collision.GetComponent<Item>());
                 foods[foods.Count - 1].LaunchedInTable(platePos);
                 foods[foods.Count - 1].isServed = true;

@@ -25,7 +25,7 @@ public class GameLoopManager : MonoBehaviour
 
     private void Update()
     {
-        
+
         count += Time.deltaTime;
         rageValue = player.currentRage;
 
@@ -67,15 +67,12 @@ public class GameLoopManager : MonoBehaviour
 
     public void CanTakePoints()
     {
-        if (timesInRageMode >= 3)
-        {
-            ServiceLocator.Get<GameManager>().Score -= 4;
-        }
+        ServiceLocator.Get<GameManager>().KillScoreUpdate();
     }
 
     public void ChangeSpawnTime(int time)
-    { 
-        spawnTime= time; 
+    {
+        spawnTime = time;
     }
 
 }
