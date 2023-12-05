@@ -43,13 +43,13 @@ public class SceneControl : MonoBehaviour
     {
         SceneManager.LoadScene("EndLevel");
     }
-    public void switchToCreditScene()
+    public void switchToCreditsScene()
     {
-        SceneManager.LoadScene("CreditScene");
+        SceneManager.LoadScene("CreditsScene");
     }
-    public void switchToFrontScene()
+    public void switchToMainMenu()
     {
-        SceneManager.LoadScene("FrontScene");
+        SceneManager.LoadScene("MainMenu");
     }
     public void switchToGameScene()
     {
@@ -65,9 +65,9 @@ public class SceneControl : MonoBehaviour
         SceneManager.LoadScene("SettingsScene");
     }
 
-    public void switchToBookCoverScene()
+    public void switchToTitleScreen()
     {
-        SceneManager.LoadScene("BookCover");
+        SceneManager.LoadScene("TitleScreen");
     }
     public void quitGame()
     {

@@ -18,7 +18,7 @@ public class PressAnyKey : MonoBehaviour
     {
         if (Input.anyKey)
         {
-            SceneManager.LoadScene("FrontScene");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
