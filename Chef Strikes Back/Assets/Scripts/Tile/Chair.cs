@@ -46,8 +46,7 @@ public class Chair : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Customer")
             && collision.gameObject.GetComponent<AI>().state == AIState.Good
-            && this.seatAvaliable)
-            
+            && seatAvaliable)
         {
             ai = collision.gameObject.GetComponent<AI>();
             ai.rb2d.constraints = RigidbodyConstraints2D.FreezeAll;

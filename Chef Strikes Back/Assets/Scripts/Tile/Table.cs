@@ -55,9 +55,9 @@ public class Table : MonoBehaviour
             bool hasFoodForCustomer = false;
             foreach (var chair in chairs)
             {
-                hasFoodForCustomer |= chair.IsAIsFood(collision.GetComponent<Item>());
+                hasFoodForCustomer |= !chair.ai.eating;
             }
-            if (hasFoodForCustomer)
+            if (chairs.Count > 0 && hasFoodForCustomer)
             {
                 ServiceLocator.Get<GameManager>().FoodMade();
                 foods.Add(collision.GetComponent<Item>());
@@ -65,10 +65,11 @@ public class Table : MonoBehaviour
                 foods[foods.Count - 1].isServed = true;
                 foreach (var chair in chairs)
                 {
-                    if (!chair.ai.eating)
+                    if (!chair.ai.eating && chair.IsAIsFood(collision.GetComponent<Item>()))
                     {
                         chair.ai.eating = true;
                         chair.ai.ChangeState(AIState.Hungry);
+                        return;
                     }
                 }
             }

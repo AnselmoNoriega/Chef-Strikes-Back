@@ -34,7 +34,6 @@ public class LevelTimer : MonoBehaviour
         elapsTimeStart = elapsedTime;
         textTime.text = timePlaying.ToString("mm':'ss'.'ff");
         lightStartValue = worldLight.falloffIntensity;
-        _currentPhase = _phases[0];
     }
 
     // Update is called once per frame
