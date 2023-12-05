@@ -14,6 +14,7 @@ public class Indicator : MonoBehaviour
     [SerializeField] private List<Image> _image;
     [SerializeField] private Image _arrow;
     [SerializeField] private Vector2 _arrowOffset;
+    [SerializeField] private Vector2 _offsetOutOfScreen;
     private float width;
     private float height;
 
@@ -80,7 +81,7 @@ public class Indicator : MonoBehaviour
     private bool IsOutOfScreen()
     {
         return transform.position.x > Camera.main.transform.position.x + width || transform.position.x < Camera.main.transform.position.x - width
-            || transform.position.y > Camera.main.transform.position.y + height || transform.position.y < Camera.main.transform.position.y - height;
+            || transform.position.y + _offsetOutOfScreen.y > Camera.main.transform.position.y + height || transform.position.y < Camera.main.transform.position.y - height;
     }
     private bool IsInCorner()
     {
