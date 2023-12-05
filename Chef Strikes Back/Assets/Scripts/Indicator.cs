@@ -14,7 +14,7 @@ public class Indicator : MonoBehaviour
     [SerializeField] private List<Image> _image;
     [SerializeField] private Image _arrow;
     [SerializeField] private Vector2 _arrowOffset;
-    [SerializeField] private Vector2 _offsetOutOfScreen;
+    [SerializeField] private Vector3 _offsetOutOfScreen;
     private float width;
     private float height;
 
@@ -46,7 +46,7 @@ public class Indicator : MonoBehaviour
                 _image[_index].enabled = true;
                 _arrow.enabled = true;
             }
-            var dir = transform.position - Camera.main.transform.position;
+            var dir = transform.position + _offsetOutOfScreen - Camera.main.transform.position;
             dir.z = 0;
             dir = dir.normalized;
 
@@ -58,7 +58,7 @@ public class Indicator : MonoBehaviour
             }
             else if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y) * diffScreen)
             {
-                indicatorPos = Camera.main.WorldToScreenPoint(new Vector2(Camera.main.transform.position.x + LeftRightPos(dir.x), transform.position.y));
+                indicatorPos = Camera.main.WorldToScreenPoint(new Vector2(Camera.main.transform.position.x + LeftRightPos(dir.x), transform.position.y + 0.5f));
             }
             else
             {
@@ -85,9 +85,9 @@ public class Indicator : MonoBehaviour
     }
     private bool IsInCorner()
     {
-        return (transform.position.x > Camera.main.transform.position.x + width && transform.position.y > Camera.main.transform.position.y + height)
+        return (transform.position.x > Camera.main.transform.position.x + width && transform.position.y + _offsetOutOfScreen.y > Camera.main.transform.position.y + height)
             || (transform.position.x > Camera.main.transform.position.x + width && transform.position.y < Camera.main.transform.position.y - height)
-            || (transform.position.x < Camera.main.transform.position.x - width && transform.position.y > Camera.main.transform.position.y + height)
+            || (transform.position.x < Camera.main.transform.position.x - width && transform.position.y + _offsetOutOfScreen.y > Camera.main.transform.position.y + height)
             || (transform.position.x < Camera.main.transform.position.x - width && transform.position.y < Camera.main.transform.position.y - height);
     }
 
