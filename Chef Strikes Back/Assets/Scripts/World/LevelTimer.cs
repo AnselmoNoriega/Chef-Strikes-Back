@@ -45,7 +45,7 @@ public class LevelTimer : MonoBehaviour
         worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
 
         timePlaying = TimeSpan.FromMinutes(elapsedTime);
-        textTime.text = timePlaying.ToString("mm':'ss'.'ff");
+        textTime.text = timePlaying.ToString("mm':'ss");
 
         if (elapsedTime < 0)
         {
