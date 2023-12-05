@@ -69,6 +69,10 @@ public class SceneControl : MonoBehaviour
     {
         SceneManager.LoadScene("BookCover");
     }
+    public void quitGame()
+    {
+        Application.Quit();
+    }
 
     public void TogglePause()
     {
