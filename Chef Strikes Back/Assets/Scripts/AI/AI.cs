@@ -199,6 +199,18 @@ public class AI : MonoBehaviour
         }
     }
 
+    public void ExitRestaurant()
+    {
+        if (aiData.Target == null)
+        {
+            movementInput = Vector2.zero;
+        }
+        else if (!isExist)
+        {
+            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+        }
+    }
+
 
 
     public void DropMoney()

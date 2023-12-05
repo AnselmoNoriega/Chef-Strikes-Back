@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 public class LeavingCustomer : StateClass<AI>
 {
@@ -7,32 +8,24 @@ public class LeavingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         agent.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-        ExitPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
+        agent.aiData.currentTarget = null;
+        agent.aiData.Target = null;
     }
 
     public void Update(AI agent, float dt)
     {
-        if(agent.isLeaving)
-        {
-            PathRequestManager.RequestPath(agent.transform.position, ExitPos, agent.OnPathFound);
-            agent.isLeaving = false;
-        }
-        if (Vector2.Distance(agent.transform.position, ExitPos) <= 0.5f)
-        {
-            agent.isExist = true;
-            
-        }
-
         if (agent.aiData.currentTarget != null)
         {
             agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+            agent.ExitRestaurant();
         }
         else if (agent.aiData.GetTargetsCount() > 0)
         {
             agent.aiData.currentTarget = agent.aiData.targets[0];
         }
-
         agent.OnMovementInput?.Invoke(agent.movementInput);
+
+        if(agent.aiData.currentTarget == null) { agent.isExist = true; }
     }
 
     public void FixedUpdate(AI agent)

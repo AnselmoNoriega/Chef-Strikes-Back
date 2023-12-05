@@ -14,9 +14,6 @@ public class TargetDetector : Detector
     [SerializeField]
     private bool showGizmos = false;
 
-    [SerializeField]
-    Collider2D ExitPoint;
-
     private List<Transform> colliders;
     Collider2D targetCollider = null;
 
@@ -40,6 +37,17 @@ public class TargetDetector : Detector
             if(aiData.Target == null && !aiData.isStand)
             {
                 aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextLocate(this.transform, aiData);
+            }
+        }
+        else if(aiData.state == AIState.Leaving)
+        {
+            if (aiData.Target == null)
+            {
+                aiData.currentTarget = null;
+                GameObject ExitPoint = new GameObject("NullTarget");
+                ExitPoint.transform.position = ServiceLocator.Get<TileManager>().requestEntrancePos();
+                aiData.Target = ExitPoint.transform;
+                aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextMove(this.transform, aiData);
             }
         }
         else if(aiData.state == AIState.Rage)

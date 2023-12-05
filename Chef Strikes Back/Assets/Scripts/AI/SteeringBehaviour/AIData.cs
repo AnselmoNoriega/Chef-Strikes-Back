@@ -13,7 +13,6 @@ public class AIData : MonoBehaviour
     public Transform Target;
     public Transform currentTarget;
 
-
     [SerializeField]
     public LayerMask TargetLayerMask;
 
