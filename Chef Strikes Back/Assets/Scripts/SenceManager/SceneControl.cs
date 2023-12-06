@@ -13,14 +13,20 @@ public class SceneControl : MonoBehaviour
 
     private void OnEnable()
     {
-        keyPause.action.Enable();
-        keyPause.action.performed += OnClicked;
+        if (keyPause)
+        {
+            keyPause.action.Enable();
+            keyPause.action.performed += OnClicked;
+        }
     }
 
     private void OnDisable()
     {
-        keyPause.action.Disable();
-        keyPause.action.performed -= OnClicked;
+        if (keyPause)
+        {
+            keyPause.action.Disable();
+            keyPause.action.performed -= OnClicked;
+        }
     }
 
     private void OnClicked(InputAction.CallbackContext input)
@@ -35,40 +41,16 @@ public class SceneControl : MonoBehaviour
         }
     }
 
-    public void switchToGameOverScene()
+    public void GoToEndScene()
     {
         SceneManager.LoadScene("EndLevel");
     }
-    public void switchToWinScene()
+
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene("EndLevel");
-    }
-    public void switchToCreditsScene()
-    {
-        SceneManager.LoadScene("CreditsScene");
-    }
-    public void switchToMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-    public void switchToGameScene()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-    public void switchToHelpScene()
-    {
-        SceneManager.LoadScene("HelpScene");
+        SceneManager.LoadScene(sceneName);
     }
 
-    public void switchToSettingsScene()
-    {
-        SceneManager.LoadScene("SettingsScene");
-    }
-
-    public void switchToTitleScreen()
-    {
-        SceneManager.LoadScene("TitleScreen");
-    }
     public void quitGame()
     {
         Application.Quit();

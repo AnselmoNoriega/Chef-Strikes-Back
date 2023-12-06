@@ -49,7 +49,7 @@ public class LevelTimer : MonoBehaviour
 
         if (elapsedTime < 0)
         {
-            sceneControl.switchToWinScene();
+            sceneControl.GoToEndScene();
         }
     }
 

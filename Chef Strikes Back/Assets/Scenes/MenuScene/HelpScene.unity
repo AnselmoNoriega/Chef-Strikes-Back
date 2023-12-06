@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausingText: {fileID: 0}
+  keyPause: {fileID: 0}
 --- !u!4 &42232867
 Transform:
   m_ObjectHideFlags: 0
@@ -652,14 +653,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 42232866}
         m_TargetAssemblyTypeName: SceneControl, Assembly-CSharp
-        m_MethodName: switchToFrontScene
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1599442136
@@ -967,14 +968,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 42232866}
         m_TargetAssemblyTypeName: SceneControl, Assembly-CSharp
-        m_MethodName: switchToGameScene
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1953065580

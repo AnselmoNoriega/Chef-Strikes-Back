@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
 
         if (money >= 100)
         {
-            sceneControl.switchToWinScene();
+            sceneControl.GoToEndScene();
         }
 
         stateMachine.Update(Time.deltaTime);
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            sceneControl.switchToGameOverScene();
+            sceneControl.GoToEndScene();
         }
     }
 
