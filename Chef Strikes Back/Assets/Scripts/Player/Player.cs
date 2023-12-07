@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
 
     [Space, Header("Rage Info")]
     public GameObject vignette;
+    public GameObject _healthBar;
 
     private InputControls inputManager;
     private bool _initialized = false;

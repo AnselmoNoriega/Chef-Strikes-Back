@@ -220,6 +220,7 @@ public class RageMode : StateClass<Player>
         ServiceLocator.Get<GameLoopManager>().RageModeEneter();
         _gameManager = ServiceLocator.Get<GameLoopManager>();
         agent.vignette.SetActive(true);
+        agent._healthBar.SetActive(true);
         agent.actions.DropItem();
         ServiceLocator.Get<AudioManager>().PlaySource("enter_rage");
     }
@@ -240,6 +241,7 @@ public class RageMode : StateClass<Player>
     public void Exit(Player agent)
     {
         agent.vignette.SetActive(false);
+        agent._healthBar.SetActive(true);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
