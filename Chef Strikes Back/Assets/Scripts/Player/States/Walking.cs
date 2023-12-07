@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class PlayerWalking : StateClass<Player>
 {
+    //player moving speed
     private float moveSpeed = 2.3f;
+    //Player Rage move speed
     private float rageSpeed = 3.0f;
     private float acceleration = 100.0f;
     private Vector2 movementAngle = new Vector2(2.0f, 1.0f);
