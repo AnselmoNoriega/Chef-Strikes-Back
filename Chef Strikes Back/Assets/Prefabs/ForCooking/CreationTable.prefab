@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7949611368052100239}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Magnet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7949611368052100238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.019, y: -0.085, z: 0}
+  m_LocalPosition: {x: -0.012, y: 0.505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 7949611368931973804}
   - component: {fileID: 7949611368931973795}
   - component: {fileID: 7949611368931973794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CreationTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 7949611368931973793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2350001, y: -0.329, z: 0.17310667}
-  m_LocalScale: {x: 2.0460224, y: 2.0460224, z: 2.0460224}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7949611368052100239}
@@ -81,19 +81,19 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.49677002, y: 0.25}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.7066667, y: 1.7066667}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.6216228, y: -0.082346044}
-      - {x: 0.04646951, y: 0.21508822}
-      - {x: -0.53615695, y: -0.08309108}
-      - {x: 0.046746105, y: -0.36532718}
+    - - {x: 0.6361923, y: 0.4773397}
+      - {x: 0.02295197, y: 0.79791355}
+      - {x: -0.6280347, y: 0.47808185}
+      - {x: 0.0019289108, y: 0.15719151}
 --- !u!114 &7949611368931973794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,12 +106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e819211317e904ab41b74d49efa83d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 000000
-  items:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  acceptedTypes: 000000000100000002000000
-  burger: {fileID: 7360178021079257609, guid: 3b0146762f99960418ab2565375bfa1c, type: 3}
-  magnet: {fileID: 7949611368052100239}
+  _acceptedFoodTypes:
+  - Food: 0
+    IsAllowed: 1
+  - Food: 1
+    IsAllowed: 1
+  - Food: 2
+    IsAllowed: 1
+  _pizzaOffset: {x: 0, y: 0}
+  _burger: {fileID: 7360178021079257609, guid: 3b0146762f99960418ab2565375bfa1c, type: 3}
+  _magnet: {fileID: 7949611368052100239}

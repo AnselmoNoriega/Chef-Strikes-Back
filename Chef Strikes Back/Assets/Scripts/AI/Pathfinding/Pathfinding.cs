@@ -1,7 +1,7 @@
-using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Pathfinding : MonoBehaviour
@@ -15,12 +15,8 @@ public class Pathfinding : MonoBehaviour
     {
         requestManager = GetComponent<PathRequestManager>();
         grid = GetComponent<Grid>();
-    }
-
-    private void Start()
-    {
         List<Vector3Int> positions = new(50);
-        foreach(var position in tilemap.cellBounds.allPositionsWithin)
+        foreach (var position in tilemap.cellBounds.allPositionsWithin)
         {
             var tile = tilemap.GetTile(position);
             if (tile == null || tile is NonWalkableTile)
@@ -44,6 +40,8 @@ public class Pathfinding : MonoBehaviour
 
         Vector2[] waypoints = new Vector2[0];
         bool pathSuccess = false;
+        
+
 
         Node startNode = grid.NodeFromWorldPoint(startPos, tilemap);
         Node targetNode = grid.NodeFromWorldPoint(targetPos, tilemap);

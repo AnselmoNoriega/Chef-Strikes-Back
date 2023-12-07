@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -14,16 +12,26 @@ public class LevelTimer : MonoBehaviour
     private float lightStartValue;
 
     [SerializeField]
-    private float elapsTime;
+    private float elapsedTime;
     private float elapsTimeStart;
     private TimeSpan timePlaying;
 
-    //kingston - 9/10
     [SerializeField] SceneControl sceneControl;
-    void Start()
+
+    [Serializable]
+    public struct PhaseDefinition
     {
-        timePlaying = TimeSpan.FromMinutes(elapsTime);
-        elapsTimeStart = elapsTime;
+        public int StartTime;
+        public int EndTime;
+        public int SpawnTime;
+    }
+    private PhaseDefinition _currentPhase;
+    [SerializeField] private List<PhaseDefinition> _phases = new();
+
+    public void Initialize()
+    {
+        timePlaying = TimeSpan.FromMinutes(elapsedTime);
+        elapsTimeStart = elapsedTime;
         textTime.text = timePlaying.ToString("mm':'ss'.'ff");
         lightStartValue = worldLight.falloffIntensity;
     }
@@ -31,19 +39,37 @@ public class LevelTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (elapsTime > 0.00f)
-        {
-            elapsTime -= Time.deltaTime / 60;
-            worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
+        SpawnTimeChangeBasedOnTimer();
 
-            timePlaying = TimeSpan.FromMinutes(elapsTime);
-            textTime.text = timePlaying.ToString("mm':'ss'.'ff");
-        }
-        else if (elapsTime < 0)
+        elapsedTime -= Time.deltaTime / 60;
+        worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
+
+        timePlaying = TimeSpan.FromMinutes(elapsedTime);
+        textTime.text = timePlaying.ToString("mm':'ss");
+
+        if (elapsedTime < 0)
         {
-            // scene switching when time is up.
-            // kingston 9/10
-            sceneControl.switchToGameOverScene();
+            sceneControl.GoToEndScene();
         }
+    }
+
+    private void SpawnTimeChangeBasedOnTimer()
+    {
+        var loopManager = ServiceLocator.Get<GameLoopManager>();
+
+        if (elapsedTime <= 3f && elapsedTime > 3.8f)
+            loopManager.ChangeSpawnTime(5);
+        else if (elapsedTime <= 3.8f && elapsedTime > 3.5f)
+            loopManager.ChangeSpawnTime(15);
+        else if (elapsedTime <= 3.5f && elapsedTime > 3f)
+            loopManager.ChangeSpawnTime(10);
+        else if (elapsedTime <= 3f && elapsedTime > 2.5f)
+            loopManager.ChangeSpawnTime(10);
+        else if (elapsedTime <= 2.5f && elapsedTime > 1.5f)
+            loopManager.ChangeSpawnTime(10);
+        else if (elapsedTime <= 1.5 && elapsedTime > 0.5f)
+            loopManager.ChangeSpawnTime(5);
+        else if (elapsedTime <= 0.5f && elapsedTime > 0f)
+            loopManager.ChangeSpawnTime(int.MaxValue);
     }
 }

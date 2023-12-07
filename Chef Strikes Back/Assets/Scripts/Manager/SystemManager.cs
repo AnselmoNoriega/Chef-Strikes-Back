@@ -45,18 +45,16 @@ public class SystemManager : MonoBehaviour
 
     public T Get<T>() where T : Manager
     {
-        Type type = typeof(T);
-
         foreach (Manager manager in managers)
-            if (manager.GetType() == type)
-                return manager as T;
+            if (manager is T value)
+                return value;
 
         T item = FindObjectOfType<T>();
         if (item != null) return item;
 
-        Debug.LogWarning("Fallback - Instatiated a new manager of type: " + type.Name);
+        Debug.LogWarning("Fallback - Instatiated a new manager of type: " + typeof(T).Name);
 
-        item = new GameObject(type.Name).AddComponent<T>();
+        item = new GameObject(typeof(T).Name).AddComponent<T>();
         item.transform.SetParent(transform);
         return item;
     }

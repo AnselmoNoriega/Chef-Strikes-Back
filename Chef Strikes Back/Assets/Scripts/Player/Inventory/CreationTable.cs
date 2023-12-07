@@ -1,33 +1,39 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.UI.Image;
-using UnityEngine.UIElements;
 
 public class CreationTable : MonoBehaviour
 {
+    [Serializable]
+    public struct AllowedFood
+    {
+        public FoodType Food;
+        public bool IsAllowed;
+    }
+
     [Header("Storage Info")]
-    [SerializeField]
-    private bool[] count;
-    [SerializeField]
-    private List<GameObject> items;
-    private List<List<GameObject>> waitList;
-    [SerializeField]
-    private List<ItemType> acceptedTypes;
+    [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
+    [SerializeField] private Vector2 _pizzaOffset;
 
     [Space, Header("Storage Objects")]
-    [SerializeField]
-    private GameObject burger;
-    [SerializeField]
-    private Transform magnet;
+    [SerializeField] private GameObject _burger;
+    [SerializeField] private Transform _magnet;
+
+    private Dictionary<FoodType, bool> _count = new();
+    private Dictionary<FoodType, GameObject> _items = new();
+    private Dictionary<FoodType, List<GameObject>> _waitList = new();
+    private readonly Dictionary<FoodType, bool> _acceptedFoodByType = new();
 
     private void Start()
     {
-        waitList = new List<List<GameObject>>();
-        for (int i = 0; i <= items.Count; ++i)
+        _waitList = new();
+        foreach (var foodType in _acceptedFoodTypes)
         {
-            waitList.Add(new List<GameObject>());
+            _waitList.Add(foodType.Food, new List<GameObject>());
+            _count.Add(foodType.Food, false);
+            _acceptedFoodByType.Add(foodType.Food, foodType.IsAllowed);
+            _items.Add(foodType.Food, null);
         }
     }
 
@@ -35,18 +41,18 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem != null && IsAcceptedType(recivedItem.type))
+        if (recivedItem && IsAcceptedType(recivedItem.type) && recivedItem.isPickable)
         {
-            if (!count[(int)recivedItem.type])
+            if (!_count[recivedItem.type])
             {
-                items[(int)recivedItem.type] = recivedItem.gameObject;
-                count[(int)recivedItem.type] = true;
-                recivedItem.LaunchedInTable(magnet);
+                _items[recivedItem.type] = recivedItem.gameObject;
+                _count[recivedItem.type] = true;
+                recivedItem.LaunchedInTable(_magnet);
                 recivedItem.isPickable = false;
             }
-            else if (!items.Contains(recivedItem.gameObject) && !waitList[(int)recivedItem.type].Contains(recivedItem.gameObject))
+            else if (_count[recivedItem.type] && !_waitList[recivedItem.type].Contains(recivedItem.gameObject))
             {
-                waitList[(int)recivedItem.type].Add(recivedItem.gameObject);
+                _waitList[recivedItem.type].Add(recivedItem.gameObject);
             }
 
             if (!ItemIsMissing())
@@ -58,9 +64,9 @@ public class CreationTable : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
-            CheckAvailability(i);
+            CheckAvailability(_acceptedFoodTypes[i].Food);
         }
     }
 
@@ -68,68 +74,57 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem != null)
+        if (recivedItem && _waitList.ContainsKey(recivedItem.type))
         {
-            if (recivedItem.gameObject == items[(int)recivedItem.type])
-            {
-                items[(int)recivedItem.type] = null;
-                count[(int)recivedItem.type] = false;
-                recivedItem.LaunchedInTable(null);
-            }
-            else
-            {
-                waitList[(int)recivedItem.type].Remove(recivedItem.gameObject);
-            }
+            _waitList[recivedItem.type].Remove(recivedItem.gameObject);
         }
     }
 
     private bool ItemIsMissing()
     {
-        bool itemMissing = false;
-
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
-            itemMissing |= items[i] == null;
+            if (_items[_acceptedFoodTypes[i].Food] == null)
+            {
+                return true;
+            }
         }
 
-        return itemMissing;
+        return false;
     }
 
     private IEnumerator GiveMeBurger()
     {
         yield return new WaitForSeconds(1);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
-            Destroy(items[i]);
+            _count[_acceptedFoodTypes[i].Food] = false;
+            Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 
-        Instantiate(burger, transform.position, Quaternion.identity);
+        Instantiate(_burger, (Vector2)transform.position + _pizzaOffset, Quaternion.identity);
     }
 
-    private void CheckAvailability(int num)
+    private void CheckAvailability(FoodType foodtype)
     {
-        if (items[num] == null && waitList[num].Count > 0)
+        if (_items[foodtype] == null && _waitList[foodtype].Count > 0)
         {
-            items[num] = waitList[num][0];
-            waitList[num].RemoveAt(0);
-            count[num] = true;
-            var foodItem = items[num].GetComponent<Item>();
-            foodItem.LaunchedInTable(magnet);
+            _items[foodtype] = _waitList[foodtype][0];
+            _waitList[foodtype].RemoveAt(0);
+            _count[foodtype] = true;
+            var foodItem = _items[foodtype].GetComponent<Item>();
+            foodItem.LaunchedInTable(_magnet);
             foodItem.isPickable = false;
         }
     }
 
-    private bool IsAcceptedType(ItemType type)
+    private bool IsAcceptedType(FoodType type)
     {
-        foreach(var acceptedType in acceptedTypes)
+        if (_acceptedFoodByType.ContainsKey(type))
         {
-            if(acceptedType == type)
-            {
-                return true;
-            }
+            return _acceptedFoodByType[type];
         }
-
         return false;
     }
 }

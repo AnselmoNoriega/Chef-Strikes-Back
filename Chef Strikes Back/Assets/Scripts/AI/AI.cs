@@ -1,81 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
 public enum AIState
 {
     Good,
+    Hungry,
     Bad,
-    Rage
+    Rage,
+    Leaving,
+    None
 }
 
 public class AI : MonoBehaviour
 {
-    [SerializeField]
-    private List<SteeringBehaviour> steeringBehaviours;
-
-    [SerializeField]
-    private List<Detector> detectors;
-
-    [SerializeField]
+    [Header("AI Behaviour")]
+    [SerializeField] private List<SteeringBehaviour> steeringBehaviours;
+    [SerializeField] public List<Detector> detectors;
+    [SerializeField] public Vector2 movementInput;
+    [SerializeField] private ContextSolver movementDirectionSolver;
+    [HideInInspector] public Indicator _indicator;
     public AIData aiData;
+    private StateMachine<AI> stateManager;
+    private Vector2[] path;
+    int targetIndex;
 
-    [SerializeField]
-    private float detectionDelay = 0.05f, attackDelay = 1f;
+    [Space, Header("AI Properties")]
+    [SerializeField] private Animator anim;
+    public Rigidbody2D rb2d;
+    public List<GameObject> OrderBubble;
+    public Transform eatingSlider;
+    [HideInInspector] public int ChoiceIndex;
 
-    [SerializeField]
-    private float attackDistance = 0.5f;
+    [Space, Header("AI Variables")]
+    [SerializeField] private float attackDistance = 0.5f;
+    [SerializeField] private float detectionDelay = 0.05f, attackDelay = 1f;
 
+    [Space, Header("AI Events")]
     public UnityEvent OnAttackPressed;
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
 
-    [SerializeField]
-    public Vector2 movementInput;
-
-    [SerializeField]
-    private ContextSolver movementDirectionSolver;
-
-
-    [SerializeField] public Player player;
-    [SerializeField] public GameObject OrderBubble;
-
+    [Space, Header("AI Status")]
+    public AIState state;
+    public int health = 10;
     public bool isSit = false;
     public bool isExist = false;
-    public bool isLeaving = false;
-    public bool Ate = false;
-
+    public bool eating = false;
     public bool isHit = false;
-    Vector2[] path;
-    int targetIndex;  
-
-    public StateMachine<AI> stateManager;
-
     public bool chasing = false;
+    public bool isLeaving = false;
+
+    [HideInInspector] public GameLoopManager _gameLoopManager;
 
     public ContextSolver MovementDirectionSolver => movementDirectionSolver;
     public List<SteeringBehaviour> SteeringBehaviours => steeringBehaviours;
     public float AttackDistance => attackDistance;
     public float AttackDelay => attackDelay;
 
-    public int health = 10;
-
-
     private void Awake()
     {
+        _indicator = GetComponent<Indicator>();
+        _gameLoopManager = ServiceLocator.Get<GameLoopManager>();
         stateManager = new StateMachine<AI>(this);
-    }
+        state = AIState.None;
 
-    private void Start()
-    {
         stateManager.AddState<GoodCustomerState>();
+        stateManager.AddState<HungryCustomer>();
         stateManager.AddState<BadCustomerState>();
         stateManager.AddState<RageCustomerState>();
-        stateManager.ChangeState(Random.value < 0.8f ? (int)AIState.Good : (int)AIState.Bad);
+        stateManager.AddState<LeavingCustomer>();
+        ChangeState(Random.value < 1.0f ? AIState.Good : AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
@@ -86,25 +81,30 @@ public class AI : MonoBehaviour
         {
             detect.Detect(aiData);
         }
+        
     }
 
     private void Update()
     {
         stateManager.Update(Time.deltaTime);
+        FaceMovementDirection(anim, rb2d.velocity);
 
-        if(Ate)
-        {
-            DropMoney();
-            Ate = false;
-            isLeaving = true;
-        }
+        
 
-        if(health <= 0 || isExist)
+        if (health <= 0 || isExist)
         {
+            ServiceLocator.Get<GameLoopManager>().CanTakePoints();
+            _gameLoopManager.AIPool.Remove(this.gameObject);
             Destroy(gameObject);
         }
     }
 
+    public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
+    {
+        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
+        animator.SetInteger("PosNum", directionIndex);
+        return directionIndex;
+    }
 
     public void OnPathFound(Vector2[] newPath, bool pathSuccessful)
     {
@@ -120,30 +120,31 @@ public class AI : MonoBehaviour
     public IEnumerator FollowPath()
     {
         Vector2 currentWaypoint = path[0];
-        while (true)
+        while (!_gameLoopManager.rageMode)
         {
-            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.0f)
+            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.1f)
             {
                 targetIndex++;
                 if (targetIndex >= path.Length)
                 {
+                    movementInput = Vector2.zero;
                     break;
                 }
                 currentWaypoint = path[targetIndex];
             }
+            if (!_gameLoopManager.rageMode)
+            {
+                movementInput = (currentWaypoint - (Vector2)transform.position).normalized;
 
-            transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, 1.0f * Time.deltaTime);
-            yield return null;
+                yield return null;
+            }
         }
-        isSit = true;
-        if (isLeaving) isExist = true;
     }
 
     public IEnumerator ChaseAndAttack()
     {
         if (aiData.currentTarget == null)
         {
-            Debug.Log("Stopping");
             movementInput = Vector2.zero;
             chasing = false;
             yield return null;
@@ -167,7 +168,52 @@ public class AI : MonoBehaviour
         }
     }
 
-    void DropMoney()
+    public void ChangeState(AIState newState)
+    {
+        stateManager.ChangeState((int)newState);
+        state = newState;
+        aiData.state = newState;
+    }
+
+    public void FindSeat()
+    {
+        if (aiData.Target == null || isSit)
+        {
+            movementInput = Vector2.zero;
+        }
+        else if (aiData.Target.position != transform.position && !isSit)
+        {
+            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+        }
+    }
+
+    public void FindStandPoint()
+    {
+        if(aiData.Target == null)
+        {
+            movementInput = Vector2.zero;
+        }
+        else if (!aiData.isStand)
+        {
+            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+        }
+    }
+
+    public void ExitRestaurant()
+    {
+        if (aiData.Target == null)
+        {
+            movementInput = Vector2.zero;
+        }
+        else if (!isExist)
+        {
+            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
+        }
+    }
+
+
+
+    public void DropMoney()
     {
         GetComponent<LootBag>().InstantiateLoot(transform.position);
     }

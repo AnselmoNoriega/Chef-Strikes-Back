@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AgentMover : MonoBehaviour
@@ -7,7 +5,10 @@ public class AgentMover : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [SerializeField]
-    private float maxSpeed = 1.0f, acceleration = 50, deacceleration = 100;
+    [Range(0, 3)]
+    private float maxSpeed = 1.0f;
+    [SerializeField]
+    private float acceleration = 50, deacceleration = 100;
     [SerializeField]
     private float currentSpeed = 0;
     private Vector2 oldMovementInput;
@@ -31,10 +32,9 @@ public class AgentMover : MonoBehaviour
             currentSpeed -= deacceleration * maxSpeed * Time.deltaTime;
         }
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        Vector3 velocity = oldMovementInput * currentSpeed;
-        
-        transform.position += velocity;
+        rb2d.velocity = oldMovementInput * currentSpeed;
 
-        
     }
+
+    
 }

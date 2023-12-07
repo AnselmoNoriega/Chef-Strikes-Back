@@ -19,40 +19,46 @@ public class SeekingBehaviour : SteeringBehaviour
 
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData aiData)
     {
-        if(reachedLastTarget)
+        if (reachedLastTarget)
         {
-            if(aiData.targets == null || aiData.targets.Count <= 0) 
+            if (aiData.targets == null || aiData.targets.Count <= 0)
             {
+                if(aiData.state == AIState.Bad)
+                {
+                    aiData.isStand = true;
+                    aiData.Target = null;
+                }
                 aiData.currentTarget = null;
                 return (danger, interest);
             }
             else
             {
                 reachedLastTarget = false;
-                aiData.currentTarget = aiData.targets.OrderBy
-                    (target => Vector2.Distance(target.position, transform.position)).First();
+                aiData.currentTarget =
+                    aiData.targets[0];
             }
         }
 
-        if(aiData.currentTarget != null && aiData.targets != null && aiData.targets.Contains(aiData.currentTarget))
+        if (aiData.currentTarget != null && aiData.targets != null && aiData.targets.Contains(aiData.currentTarget))
             targetPositionCached = aiData.currentTarget.position;
 
-        if(Vector2.Distance(transform.position, targetPositionCached) < targetRechedThreshold)
+        if (Vector2.Distance(transform.position, targetPositionCached) < targetRechedThreshold)
         {
             reachedLastTarget = true;
-            aiData.currentTarget = null;
+            aiData.targets.Remove(aiData.currentTarget);
+            //aiData.closeList.Add(aiData.currentTarget);
             return (danger, interest);
         }
 
         Vector2 directionToTarget = (targetPositionCached - (Vector2)transform.position);
-        for(int i =0; i < interest.Length; i++)
+        for (int i = 0; i < interest.Length; i++)
         {
             float result = Vector2.Dot(directionToTarget.normalized, Directions.eightDirections[i]);
 
-            if(result >0)
+            if (result > 0)
             {
                 float valueToPutIn = result;
-                if(valueToPutIn > interest[i])
+                if (valueToPutIn > interest[i])
                 {
                     interest[i] = valueToPutIn;
                 }
@@ -68,19 +74,19 @@ public class SeekingBehaviour : SteeringBehaviour
 
         Gizmos.DrawSphere(targetPositionCached, 0.2f);
 
-        if(Application.isPlaying && interestsTemp != null) 
+        if (Application.isPlaying && interestsTemp != null)
         {
-            if(interestsTemp != null)
+            if (interestsTemp != null)
             {
                 Gizmos.color = Color.green;
-                for(int i =0;i<interestsTemp.Length;i++)
+                for (int i = 0; i < interestsTemp.Length; i++)
                 {
                     Gizmos.DrawRay(transform.position, Directions.eightDirections[i] * interestsTemp[i]);
                 }
-                if(reachedLastTarget == false) 
+                if (reachedLastTarget == false)
                 {
-                    Gizmos.color= Color.red;
-                    Gizmos.DrawSphere(targetPositionCached, 0.1f);
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawSphere(targetPositionCached, 0.2f);
                 }
             }
         }

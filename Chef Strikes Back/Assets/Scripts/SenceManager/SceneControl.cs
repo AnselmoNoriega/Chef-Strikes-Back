@@ -1,53 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+using Newtonsoft.Json.Bson;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class SceneControl : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public Text pausingText;
-    private void Start()
-    {
+    [SerializeField]
+    private InputActionReference keyPause;
 
-    }
-    void Update()
+    private void OnEnable()
     {
-        if (SceneManager.GetActiveScene().name == "MainScene") 
+        if (keyPause)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                TogglePause();
-            }
-        if (GameIsPaused) {pausingText.enabled = true;}
-        if (!GameIsPaused) { pausingText.enabled=false; }
+            keyPause.action.Enable();
+            keyPause.action.performed += OnClicked;
         }
     }
-    public void switchToGameOverScene()
+
+    private void OnDisable()
     {
-        SceneManager.LoadScene("LoseScene");
+        if (keyPause)
+        {
+            keyPause.action.Disable();
+            keyPause.action.performed -= OnClicked;
+        }
     }
-    public void switchToWinScene()
+
+    private void OnClicked(InputAction.CallbackContext input)
     {
-        SceneManager.LoadScene("WinScene");
+        if (SceneManager.GetActiveScene().name == "MainScene" || SceneManager.GetActiveScene().name == "MainScene2")
+        {
+            TogglePause();
+
+            if (GameIsPaused) { pausingText.enabled = true; }
+
+            if (!GameIsPaused) { pausingText.enabled = false; }
+        }
     }
-    public void switchToCreditScene()
+
+    public void GoToEndScene()
     {
-        SceneManager.LoadScene("CreditScene");
+        SceneManager.LoadScene("EndLevel");
     }
-    public void switchToFrontScene()
+
+    public void ChangeScene(string sceneName)
     {
-        SceneManager.LoadScene("FrontScene");
+        SceneManager.LoadScene(sceneName);
     }
-    public void switchToGameScene()
+
+    public void quitGame()
     {
-        SceneManager.LoadScene("MainScene");
+        Application.Quit();
     }
-    public void switchToHelpScene()
-    {
-        SceneManager.LoadScene("HelpScene");
-    }
+
     public void TogglePause()
     {
         if (GameIsPaused)
@@ -58,14 +66,34 @@ public class SceneControl : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1f;
+        Debug.Log("paused");
+        ServiceLocator.Get<AudioManager>().PlaySource("resume");
         GameIsPaused = false;
     }
 
     public void Pause()
     {
+        UnityEngine.Debug.Log(GameIsPaused);
         Time.timeScale = 0f;
+        Debug.Log("resume");
+        ServiceLocator.Get<AudioManager>().PlaySource("pause");
         GameIsPaused = true;
     }
 
+    public bool GetSceneName(string name)
+    {
+        if (!string.IsNullOrEmpty(name))
+        {
+            if (name == SceneManager.GetActiveScene().name)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
+    }
 
 }

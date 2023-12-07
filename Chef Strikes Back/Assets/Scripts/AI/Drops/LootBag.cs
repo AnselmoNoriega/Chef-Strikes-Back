@@ -19,14 +19,11 @@ public class LootBag : MonoBehaviour
                 possibleItems.Add(item);
             }
         }
-        if(possibleItems.Count > 1) 
-        {
-            Loot droppedItem = possibleItems[1];
-        }
+
         return possibleItems[0];
     }
 
-    public void InstantiateLoot(Vector3 spawnPosition)
+    public void InstantiateLoot(Vector2 spawnPosition)
     {
         Loot droppedItem = GetDroppedItem();
         if(droppedItem != null) 

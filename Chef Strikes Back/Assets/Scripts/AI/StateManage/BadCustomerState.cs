@@ -1,36 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BadCustomerState : StateClass<AI>
 {
-    bool isStand;
-
     public void Enter(AI agent)
     {
+        ServiceLocator.Get<GameManager>().EnterRageModeScore();
+        ServiceLocator.Get<Player>().currentRage += 10;
         agent.GetComponent<SpriteRenderer>().color = Color.red;
-        PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
-        isStand = true;
+        agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
+        agent.aiData.Target = null;
+        agent.aiData.currentTarget = null;
+        agent.aiData.isStand = false;
+        agent.isSit = false;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!isStand)
+        if (agent.aiData.currentTarget != null)
         {
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEmptyPos(), agent.OnPathFound);
-            isStand = true;
+            agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+            agent.FindStandPoint();
         }
+        else if (agent.aiData.GetTargetsCount() > 0)
+        {
+            agent.aiData.currentTarget = agent.aiData.targets[0];
+        }
+
+        agent.OnMovementInput?.Invoke(agent.movementInput);
 
         if (agent.isHit)
         {
-            isStand = false;
+            agent.aiData.isStand = false;
             agent.isHit = false;
         }
 
-        if (GameManager.Instance.rageMode)
+        if(agent._gameLoopManager.rageMode) 
         {
-            PathRequestManager.RequestPath(agent.transform.position, agent.transform.position, agent.OnPathFound);
-            agent.stateManager.ChangeState((int)AIState.Rage);
+            agent.ChangeState(AIState.Rage);
         }
     }
 
@@ -43,15 +49,20 @@ public class BadCustomerState : StateClass<AI>
     {
         if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
-            isStand = false;
+            agent.aiData.isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
             if (rage)
             {
-                GameManager.Instance.RageValue += 10;
                 rage.currentRage += 10;
+                ServiceLocator.Get<AudioManager>().PlaySource("ragebar_filling");
+
             }
+        }
+        if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle" || collision.transform.tag == "Chair")
+        {
+            agent.aiData.isStand = false;
         }
     }
 
@@ -62,6 +73,7 @@ public class BadCustomerState : StateClass<AI>
 
     public void Exit(AI agent)
     {
-
+        agent.aiData.currentTarget = null;
+        agent.aiData.targets = null;
     }
 }

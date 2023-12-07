@@ -1,8 +1,7 @@
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
-public enum PlayerStates { Idle, Walking, Attacking, Throwing, None }
+public enum PlayerStates { Idle, Walking, None }
+public enum PlayerActions { None, Attacking, Throwing }
 public enum PlayerStage { Normal, Rage, None }
 //------------------------------------------------------------------------------------------------
 
@@ -41,15 +40,31 @@ public class PlayerIdle : StateClass<Player>
     }
 }
 
+public class PlayerNone : StateClass<Player>
+{
+    public void Enter(Player agent) { }
+
+    public void Update(Player agent, float dt) { }
+
+    public void FixedUpdate(Player agent) { }
+
+    public void Exit(Player agent) { }
+
+    public void CollisionEnter2D(Player agent, Collision2D collision) { }
+
+    public void TriggerEnter2D(Player agent, Collider2D collision) { }
+}
+
 public class PlayerAttacking : StateClass<Player>
 {
     float timer;
+    Vector2 offset = new Vector2(0.0f, 0.35f);
 
     public void Enter(Player agent)
     {
-        timer = 0.5f;
+        timer = 0.1f;
         agent.rb.velocity = Vector2.zero;
-        Attack(agent.attackDir, agent);
+        Attack(agent.lookingDirection, agent);
         agent.animator.SetBool("IsAttacking", true);
     }
 
@@ -59,7 +74,7 @@ public class PlayerAttacking : StateClass<Player>
 
         if(timer <= 0.0f) 
         {
-            agent.ChangeState(PlayerStates.Idle);
+            agent.ChangeAction(PlayerActions.None);
         }
     }
 
@@ -83,36 +98,31 @@ public class PlayerAttacking : StateClass<Player>
 
     }
 
-    public void Attack(Vector2 mousePos, Player player)
+    public void Attack(Vector2 angle, Player player)
     {
-        var rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-        var attackDirection = (mousePos - rayOrigin).normalized;
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3) + offset, 0.4f); 
+        PlayerHelper.FaceMovementDirection(player.animator, angle);
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, attackDirection, player._weapon.Range); 
-        PlayerHelper.FaceMovementDirection(player.animator, attackDirection);
-
-        foreach (RaycastHit2D hit in hits)
+        foreach (var hit in hits)
         {
-            if (hit.collider.CompareTag("Player"))
+            if (hit.CompareTag("Player"))
             {
                 continue;
             }
 
-            var enemyAI = hit.collider.GetComponent<AI>();
-
+            var enemyAI = hit.GetComponent<AI>();
             if (enemyAI)
             {
-                if (enemyAI.stateManager.CurrentState == (int)AIState.Rage)
+                if (enemyAI.state == AIState.Rage)
                 {
+                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.health -= Mathf.RoundToInt(player._weapon.Damage);
                 }
             }
 
-            var foodPile = hit.collider.GetComponent<FoodPile>();
-
-            if (foodPile != null)
+            if (!hit.CompareTag("Player") && !enemyAI && !hit.CompareTag("FoodEnemy"))
             {
-                foodPile.Hit(1);
+                ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
             }
         }
     }
@@ -125,6 +135,7 @@ public class PlayerThrowing : StateClass<Player>
     public void Enter(Player agent)
     {
         agent.rb.velocity = Vector2.zero;
+        //ServiceLocator.Get<AudioManager>().PlaySource("charge");
     }
 
     public void Update(Player agent, float dt)
@@ -141,7 +152,7 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Exit(Player agent)
     {
-
+        ServiceLocator.Get<AudioManager>().PlaySource("throw");
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
@@ -160,14 +171,20 @@ public class PlayerThrowing : StateClass<Player>
 
 public class NormalMode : StateClass<Player>
 {
+    GameLoopManager _gameManager;
+
     public void Enter(Player agent)
     {
-
+        _gameManager = ServiceLocator.Get<GameLoopManager>();
+        if(_gameManager is null)
+        {
+            Debug.Log("<color=cyan><b>GAME MANAGER NOT FOUND</b></color>");
+        }
     }
 
     public void Update(Player agent, float dt)
     {
-        if(GameManager.Instance.rageMode)
+        if(_gameManager.rageMode)
         {
             agent.ChangeMood(PlayerStage.Rage);
         }
@@ -196,14 +213,21 @@ public class NormalMode : StateClass<Player>
 
 public class RageMode : StateClass<Player>
 {
+    GameLoopManager _gameManager;
+
     public void Enter(Player agent)
     {
+        ServiceLocator.Get<GameLoopManager>().RageModeEneter();
+        _gameManager = ServiceLocator.Get<GameLoopManager>();
         agent.vignette.SetActive(true);
+        agent._healthBar.SetActive(true);
+        agent.actions.DropItem();
+        ServiceLocator.Get<AudioManager>().PlaySource("enter_rage");
     }
 
     public void Update(Player agent, float dt)
     {
-        if (!GameManager.Instance.rageMode)
+        if (!_gameManager.rageMode)
         {
             agent.ChangeMood(PlayerStage.Normal);
         }
@@ -217,6 +241,7 @@ public class RageMode : StateClass<Player>
     public void Exit(Player agent)
     {
         agent.vignette.SetActive(false);
+        agent._healthBar.SetActive(true);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

@@ -13,21 +13,20 @@ public class Agent : MonoBehaviour
     public Vector2 PointerInput { get => pointerInput; set => pointerInput = value; }
     public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
 
+    private void Awake()
+    {
+        agentMover = GetComponent<AgentMover>();
+        weapon = GetComponentInChildren<WeaponBase>();
+    }
+
     private void Update()
     {
         agentMover.MovementInput = MovementInput;
-        //weapon.PointerPosition = pointerInput;
     }
 
 
     public void PerformAttack()
     {
         weapon.Attack();
-    }
-
-    private void Awake()
-    {
-        agentMover = GetComponent<AgentMover>();
-        weapon = GetComponentInChildren<WeaponBase>();
     }
 }

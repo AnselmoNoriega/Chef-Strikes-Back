@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,11 +5,12 @@ public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
     private InputAction rightMouse;
+    private InputAction leftTrigger;
     private InputAction leftMouse;
-    private InputAction shiftKey;
     private InputAction mouse;
-    private InputAction keyQ;
-    private InputAction keyE;
+    private InputAction rightJoystick;
+    private InputAction leftButton;
+    private InputAction lowerButton;
 
     [SerializeField]
     private Actions action;
@@ -26,50 +25,54 @@ public class PlayerInputs : MonoBehaviour
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
-        shiftKey = inputManager.Player.ShiftKey;
-        keyE = inputManager.Player.KeyE;
-        keyQ = inputManager.Player.KeyQ;
+         
+        leftTrigger = inputManager.Player.LeftTrigger;
+        leftButton = inputManager.Player.LeftButton;
+        rightJoystick = inputManager.Player.LeftJoystick;
+        lowerButton = inputManager.Player.LowerButton;
 
         rightMouse.Enable();
         leftMouse.Enable();
-        shiftKey.Enable();
-        mouse.Enable(); 
-        keyE.Enable();
-        keyQ.Enable();
+        mouse.Enable();
 
-        shiftKey.started += KeyShiftPressed;
+        leftTrigger.Enable();
+        leftButton.Enable();
+        rightJoystick.Enable();
+        lowerButton.Enable();
+
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
-        keyE.performed += KeyEPressed;
-        keyQ.performed += KeyQPressed;
+        leftTrigger.performed += LeftTgrClick;
+        leftButton.performed += LeftbuttonDown;
+        lowerButton.performed += LowerButtonDown;
 
         rightMouse.canceled += RightClickRelease;
-        shiftKey.canceled += KeyShiftReleased;
-    }
-
-    private void Update()
-    {
-        
+        leftTrigger.canceled += LeftTgrRelease;
     }
 
     private void OnDisable()
     {
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
-        keyE.performed -= KeyEPressed;
+        leftButton.performed -= LeftbuttonDown;
+        leftTrigger.performed -= LeftTgrClick;
+        lowerButton.performed -= LowerButtonDown;
 
         rightMouse.canceled -= RightClickRelease;
-        shiftKey.canceled -= KeyShiftReleased;
+        leftTrigger.canceled -= LeftTgrRelease;
 
         leftMouse.Disable();
         rightMouse.Disable();
-        keyE.Disable();
         mouse.Disable();
+
+        leftTrigger.Disable();
+        leftButton.Disable();
+        lowerButton.Disable();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        action.Attacking(mouse);
+        action.Attacking(mouse.ReadValue<Vector2>());
     }
 
     private void RightClick(InputAction.CallbackContext input)
@@ -78,28 +81,29 @@ public class PlayerInputs : MonoBehaviour
         action.GrabItem(mouse);
     }
 
+    private void LeftbuttonDown(InputAction.CallbackContext input)
+    {
+        action.Attacking(Vector2.zero);
+        action.GrabItem();
+    }
+
+    private void LeftTgrClick(InputAction.CallbackContext input)
+    {
+        action.PrepareToThrow(rightJoystick);
+    }
+
+    private void LowerButtonDown(InputAction.CallbackContext input)
+    {
+
+    }
+
+    private void LeftTgrRelease(InputAction.CallbackContext input)
+    {
+        action.ThrowItem(rightJoystick);
+    }
+
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse);
-    }
-
-    private void KeyEPressed(InputAction.CallbackContext input)
-    {
-        Debug.Log("E key pressed");
-    }
-
-    private void KeyShiftPressed(InputAction.CallbackContext input)
-    {
-
-    }
-
-    private void KeyQPressed(InputAction.CallbackContext input)
-    {
-        Debug.Log("Q key pressed");
-    }
-
-    private void KeyShiftReleased(InputAction.CallbackContext input)
-    {
-
+        action.ThrowItem(mouse); 
     }
 }

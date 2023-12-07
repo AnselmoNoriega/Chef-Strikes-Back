@@ -1,38 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class Item : MonoBehaviour
 {
-    public Collider2D myCollider;
     public Rigidbody2D rb;
-    public ItemType type;
+    [SerializeField] public Collider2D tgrCollider;
+    [SerializeField] public Collider2D childCollider;
+    public FoodType type;
 
-    [SerializeField]
-    private float timereduction;
+    [SerializeField] private float timereduction;
 
     private float time;
     private Vector2 acceleration;
     private Vector2 handPosition;
 
-    [Space, Header("Movment in table"), SerializeField]
-    private float magnetSmoodTime;
+    [Space, Header("Movement in table")]
+    [SerializeField] private float magnetSmoodTime;
     private Transform magnetPos;
     private bool isBeingDrag;
     public bool isPickable;
+
+    public bool isServed;
 
     private void Start()
     {
         handPosition = new Vector2(0, 0.7f);
         isBeingDrag = false;
         isPickable = true;
+        isServed = false;
     }
 
     private void FixedUpdate()
@@ -61,13 +55,13 @@ public class Item : MonoBehaviour
         this.time = time * timereduction;
         rb.velocity = velocity;
         this.acceleration = acceleration;
+        isPickable = true;
     }
 
     private void Checktime()
     {
         if (time <= 0)
         {
-            myCollider.enabled = true;
             rb.velocity = Vector2.zero;
             rb.rotation = 0;
             rb.angularVelocity = 0;
@@ -82,6 +76,7 @@ public class Item : MonoBehaviour
     public void LaunchedInTable(Transform table)
     {
         magnetPos = table;
+        rb.isKinematic = true;
     }
 
     public void DraggingFood()
@@ -94,6 +89,12 @@ public class Item : MonoBehaviour
         }
     }
 
+    public void CollidersState(bool state)
+    {
+        tgrCollider.enabled = state;
+        childCollider.enabled = state;
+    }
+
     public void DestoyItem()
     {
         Destroy(gameObject);
@@ -101,10 +102,11 @@ public class Item : MonoBehaviour
 
 }
 
-public enum ItemType
+public enum FoodType
 {
-    BurgerBun,
-    Meat,
-    Lettuce,
-    Burger
+    Pizza,
+    Spaghetti,
+    Dough,
+    Tomatoe,
+    Cheese,
 }

@@ -31,11 +31,21 @@ public class StateMachine<AgentType> where AgentType : class
 
     public void Update(float deltaTime)
     {
+        if(_currentState is null)
+        {
+            return;
+        }
+
         _currentState.Update(mAgent, deltaTime);
     }
 
     public void FixedUpdate()
     {
+        if (_currentState is null)
+        {
+            return;
+        }
+
         _currentState.FixedUpdate(mAgent);
     }
 

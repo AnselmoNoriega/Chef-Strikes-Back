@@ -1,50 +1,29 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GoodCustomerState : StateClass<AI>
 {
-    bool IsEat;
-    float waitTime;
-    bool readyOrder;
-    private LayerMask seatLayerMask;
-
     public void Enter(AI agent)
     {
-        IsEat = false;
-        readyOrder = false;
-        waitTime = 30.0f;
-
-        if (TileManager.Instance.checkChairCount() > 0 && !agent.isSit)
-        {
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestChairPos(), agent.OnPathFound);
-        }
+        agent.aiData.TargetLayerMask = LayerMask.GetMask("Chair");
     }
 
     public void Update(AI agent, float dt)
     {
-        if (!IsEat && agent.isSit && !GameManager.Instance.rageMode)
+        if (agent.aiData.currentTarget != null)
         {
-            readyOrder = true;
-            agent.OrderBubble.gameObject.SetActive(true);
-            waitTime -= Time.deltaTime;
+            agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
+            agent.FindSeat();
+        }
+        else if (agent.aiData.GetTargetsCount() > 0)
+        {
+            agent.aiData.currentTarget = agent.aiData.targets[0];
         }
 
-        if (waitTime <= 0)
-        {
-            agent.OrderBubble.gameObject.SetActive(false);
-            agent.stateManager.ChangeState((int)AIState.Bad);
-        }
+        agent.OnMovementInput?.Invoke(agent.movementInput);
 
-        if (IsEat & readyOrder)
+        if (!agent.eating && agent.isSit && !agent._gameLoopManager.rageMode)
         {
-            agent.isSit = false;
-            readyOrder = false;
-            agent.OrderBubble.gameObject.SetActive(false);
-            PathRequestManager.RequestPath(agent.transform.position, TileManager.Instance.requestEntrancePos(), agent.OnPathFound);
+            agent.ChangeState(AIState.Hungry);
         }
     }
 
@@ -60,13 +39,7 @@ public class GoodCustomerState : StateClass<AI>
 
     public void TriggerEnter2D(AI agent, Collider2D collision)
     {
-        if (collision.gameObject.transform.tag == "Food")
-        {
-            IsEat = true;
-            agent.Ate = true;
-            agent.isSit = false;
-            collision.gameObject.transform.parent.GetComponent<Item>().DestoyItem();
-        }
+       
     }
 
     public void Exit(AI agent)
@@ -74,3 +47,7 @@ public class GoodCustomerState : StateClass<AI>
 
     }
 }
+
+
+
+
