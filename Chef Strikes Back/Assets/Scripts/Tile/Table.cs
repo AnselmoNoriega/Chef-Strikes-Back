@@ -16,7 +16,7 @@ public class Table : MonoBehaviour
     {
         _aiSitting = new();
 
-        for(int i = 0; i < 2; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             _aiSitting.Add(i, new List<AI>());
         }
@@ -50,28 +50,27 @@ public class Table : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Food" && !collision.GetComponent<Item>().isServed && collision.GetComponent<Item>().isPickable)
+        var newItem = collision.GetComponent<Item>();
+        if (newItem && !newItem.isServed && newItem.isPickable)
         {
-            bool hasFoodForCustomer = false;
+            AI tempAI = null;
             foreach (var chair in chairs)
             {
-                hasFoodForCustomer |= !chair.ai.eating;
+                if (!chair.ai.eating && chair.IsAIsFood(newItem))
+                {
+                    tempAI = chair.ai;
+                    break;
+                }
             }
-            if (chairs.Count > 0 && hasFoodForCustomer)
+
+            if (tempAI)
             {
                 ServiceLocator.Get<GameManager>().FoodMade();
-                foods.Add(collision.GetComponent<Item>());
+                foods.Add(newItem);
                 foods[foods.Count - 1].LaunchedInTable(platePos);
                 foods[foods.Count - 1].isServed = true;
-                foreach (var chair in chairs)
-                {
-                    if (!chair.ai.eating && chair.IsAIsFood(collision.GetComponent<Item>()))
-                    {
-                        chair.ai.eating = true;
-                        chair.ai.ChangeState(AIState.Hungry);
-                        return;
-                    }
-                }
+                tempAI.eating = true;
+                tempAI.ChangeState(AIState.Hungry);
             }
         }
     }
