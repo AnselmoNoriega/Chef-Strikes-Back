@@ -65,7 +65,7 @@ public class Table : MonoBehaviour
 
             if (tempAI)
             {
-                ServiceLocator.Get<GameManager>().FoodMade();
+                ServiceLocator.Get<GameManager>().FoodGiven();
                 foods.Add(newItem);
                 foods[foods.Count - 1].LaunchedInTable(platePos);
                 foods[foods.Count - 1].isServed = true;
