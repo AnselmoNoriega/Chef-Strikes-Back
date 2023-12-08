@@ -47,7 +47,7 @@ public class WeaponBase : MonoBehaviour
             return;
         IsAttacking = true;
         attackBlocked = true;
-        ServiceLocator.Get<GameLoopManager>().dealDamage(10);
+        ServiceLocator.Get<Player>().TakeDamage(10);
         StartCoroutine(DelayAttack());
     }
 

@@ -1,82 +1,77 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     [Header("Counts Info")]
-    public float currentHealth;
-    public float currentRage;
-    private int money;
+    private int _currentHealth;
+    private int _currentRage;
+    private int _money;
 
     [HideInInspector, Space, Header("Attack Info")]
-    public Vector2 lookingDirection;
+    public Vector2 LookingDirection;
 
     [Space, Header("MaxStats Info")]
-    public float maxHealth;
-    public float MaxRage;
-
+    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxRage;
 
     [Space, Header("World Info")] 
-    [SerializeField] private SceneControl sceneControl;
     public Weapon _weapon;
-    [SerializeField] private Slider rageBar;
-    [SerializeField] private Slider healthBar;
 
     [Space, Header("State Info")]
-    public PlayerStates playerState;
-    public PlayerActions playerAction;
-    public PlayerStage playerMode;
+    public PlayerStates PlayerState;
+    public PlayerActions PlayerAction;
+    public PlayerStage PlayerMode;
 
-    [HideInInspector] public Actions actions;
-    [HideInInspector] public Animator animator;
-    [HideInInspector] public InputAction move;
-    [HideInInspector] public Rigidbody2D rb;
-    [HideInInspector] public InputAction mouse;
+    [HideInInspector] public Actions Actions;
+    [HideInInspector] public Animator Animator;
+    [HideInInspector] public InputAction Move;
+    [HideInInspector] public Rigidbody2D Rb;
+    [HideInInspector] public InputAction Mouse;
 
-    private StateMachine<Player> stateMachine;
-    private StateMachine<Player> actionState;
-    private StateMachine<Player> moodState;
+    private StateMachine<Player> _stateMachine;
+    private StateMachine<Player> _actionState;
+    private StateMachine<Player> _moodState;
 
-    [Space, Header("Rage Info")]
-    public GameObject vignette;
-    public GameObject _healthBar;
-
-    private InputControls inputManager;
+    private InputControls _inputManager;
     private bool _initialized = false;
 
     public void Initialize()
     {
-        stateMachine = new StateMachine<Player>(this);
-        actionState = new StateMachine<Player>(this);
-        moodState = new StateMachine<Player>(this);
+        _stateMachine = new StateMachine<Player>(this);
+        _actionState = new StateMachine<Player>(this);
+        _moodState = new StateMachine<Player>(this);
         _weapon = new Weapon(0);
 
         AddStates();
-        stateMachine.ChangeState(0);
-        actionState.ChangeState(0);
-        moodState.ChangeState(0);
+        _stateMachine.ChangeState(0);
+        _actionState.ChangeState(0);
+        _moodState.ChangeState(0);
 
-        actions = GetComponent<Actions>();
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        Actions = GetComponent<Actions>();
+        Animator = GetComponent<Animator>();
+        Rb = GetComponent<Rigidbody2D>();
 
-        currentHealth = maxHealth;
-        rageBar.maxValue = MaxRage;
-        currentRage = 0;
+        _currentHealth = _maxHealth;
+        ServiceLocator.Get<CanvasManager>().SetMaxHealth(_maxHealth);
+        _currentRage = 0;
+        ServiceLocator.Get<CanvasManager>().SetMaxRage(_maxRage);
+
         _initialized = true;
     }
 
     private void OnEnable()
     {
-        inputManager = new InputControls();
-        move = inputManager.Player.Move;
-        move?.Enable();
+        _inputManager = new InputControls();
+        Move = _inputManager.Player.Move;
+        Move?.Enable();
     }
 
     private void OnDisable()
     {
-        move?.Disable();
+        Move?.Disable();
     }
 
     public void Update()
@@ -86,24 +81,14 @@ public class Player : MonoBehaviour
             return;
         }
 
-        rageBar.value = currentRage;
-        healthBar.value = currentHealth / maxHealth;
-
-        if (move.ReadValue<Vector2>() != Vector2.zero && playerState == PlayerStates.Idle)
+        if (Move.ReadValue<Vector2>() != Vector2.zero && PlayerState == PlayerStates.Idle)
         {
             ChangeState(PlayerStates.Walking);
         }
 
-        if (money >= 100)
-        {
-            sceneControl.GoToEndScene();
-        }
-
-        stateMachine.Update(Time.deltaTime);
-        actionState.Update(Time.deltaTime);
-        moodState.Update(Time.deltaTime);
-
-        
+        _stateMachine.Update(Time.deltaTime);
+        _actionState.Update(Time.deltaTime);
+        _moodState.Update(Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -113,80 +98,89 @@ public class Player : MonoBehaviour
             return;
         }
 
-        stateMachine.FixedUpdate();
-        actionState.FixedUpdate();
-    }
-
-    public void TakeDamage(float damageAmount)
-    {
-        currentHealth -= damageAmount;
-
-        if (currentHealth <= 0)
-        {
-            sceneControl.GoToEndScene();
-        }
-    }
-
-    public void collectMoney(int amount)
-    {
-        money += amount;
-        ServiceLocator.Get<AudioManager>().PlaySource("money");
+        _stateMachine.FixedUpdate();
+        _actionState.FixedUpdate();
     }
 
     public void ChangeState(PlayerStates state)
     {
-        if (playerState != state)
+        if (PlayerState != state)
         {
-            playerState = state;
-            stateMachine.ChangeState((int)state);
+            PlayerState = state;
+            _stateMachine.ChangeState((int)state);
         }
     }
 
     public void ChangeAction(PlayerActions state)
     {
-        if (playerAction != state)
+        if (PlayerAction != state)
         {
-            playerAction = state;
-            actionState.ChangeState((int)state);
+            PlayerAction = state;
+            _actionState.ChangeState((int)state);
         }
     }
 
     public void ChangeMood(PlayerStage state)
     {
-        if (playerMode != state)
-        {
-            playerMode = state;
-            moodState.ChangeState((int)state);
+        if (PlayerMode != state)
+        {   
+            PlayerMode = state;
+            _moodState.ChangeState((int)state);
         }
     }
 
     private void AddStates()
     {
-        stateMachine.AddState<PlayerIdle>();
-        stateMachine.AddState<PlayerWalking>();
-
-        actionState.AddState<PlayerNone>();
-        actionState.AddState<PlayerAttacking>();
-        actionState.AddState<PlayerThrowing>();
-
-        moodState.AddState<NormalMode>();
-        moodState.AddState<RageMode>();
+        _stateMachine.AddState<PlayerIdle>();
+        _stateMachine.AddState<PlayerWalking>();
+        
+        _actionState.AddState<PlayerNone>();
+        _actionState.AddState<PlayerAttacking>();
+        _actionState.AddState<PlayerThrowing>();
+        
+        _moodState.AddState<NormalMode>();
+        _moodState.AddState<RageMode>();
     }
 
-    public void AssignCanvasInfo(Slider hSlider, Slider rSlider, GameObject redVignette)
+    public void TakeDamage(int amt)
     {
-        healthBar = hSlider;
-        rageBar = rSlider;
-        vignette = redVignette;
+        _currentHealth -= amt;
+        if(_currentHealth <= 0)
+        {
+            ServiceLocator.Get<SceneControl>().GoToEndScene();
+            return;
+        }
+
+        ServiceLocator.Get<CanvasManager>().AddTooHealthSlider(-amt);
+    }
+
+    public void ExitRageMode()
+    {
+        _currentRage = 0;
+        ChangeMood(PlayerStage.Normal);
+        ServiceLocator.Get<CanvasManager>().ChangeRageSliderValue(0);
+    }
+
+    public void TakeRage(int amt)
+    {
+        _currentRage += amt;
+        if(_currentRage >= _maxRage)
+        {
+            ServiceLocator.Get<GameLoopManager>().SetRageMode(true);
+            ChangeMood(PlayerStage.Rage);
+        }
+        ServiceLocator.Get<CanvasManager>().AddTooRageSlider(amt);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Loot")
         {
+            _money += 10;
             ServiceLocator.Get<GameManager>().MoneyGrabed();
-            ServiceLocator.Get<GameLoopManager>().money += 10;
-            collision.gameObject.SetActive(false);
+            ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
+            ServiceLocator.Get<AudioManager>().PlaySource("money");
+            Destroy(collision.gameObject);
         }
     }
 }

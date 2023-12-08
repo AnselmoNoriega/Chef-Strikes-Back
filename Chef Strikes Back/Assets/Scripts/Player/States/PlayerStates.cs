@@ -21,7 +21,7 @@ public class PlayerIdle : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        agent.rb.AddForce((- agent.rb.velocity) * acceleration);
+        agent.Rb.AddForce((- agent.Rb.velocity) * acceleration);
     }
 
     public void Exit(Player agent)
@@ -63,9 +63,9 @@ public class PlayerAttacking : StateClass<Player>
     public void Enter(Player agent)
     {
         timer = 0.1f;
-        agent.rb.velocity = Vector2.zero;
-        Attack(agent.lookingDirection, agent);
-        agent.animator.SetBool("IsAttacking", true);
+        agent.Rb.velocity = Vector2.zero;
+        Attack(agent.LookingDirection, agent);
+        agent.Animator.SetBool("IsAttacking", true);
     }
 
     public void Update(Player agent, float dt)
@@ -85,7 +85,7 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Exit(Player agent)
     {
-        agent.animator.SetBool("IsAttacking", false);
+        agent.Animator.SetBool("IsAttacking", false);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
@@ -100,8 +100,8 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Attack(Vector2 angle, Player player)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3) + offset, 0.4f); 
-        PlayerHelper.FaceMovementDirection(player.animator, angle);
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.LookingDirection / 3) + offset, 0.4f); 
+        PlayerHelper.FaceMovementDirection(player.Animator, angle);
 
         foreach (var hit in hits)
         {
@@ -134,15 +134,15 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Enter(Player agent)
     {
-        agent.rb.velocity = Vector2.zero;
+        agent.Rb.velocity = Vector2.zero;
         //ServiceLocator.Get<AudioManager>().PlaySource("charge");
     }
 
     public void Update(Player agent, float dt)
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(agent.mouse.ReadValue<Vector2>());
+        var mousePos = Camera.main.ScreenToWorldPoint(agent.Mouse.ReadValue<Vector2>());
         var dir = (mousePos - (agent.transform.position + offset));
-        PlayerHelper.FaceMovementDirection(agent.animator, dir);
+        PlayerHelper.FaceMovementDirection(agent.Animator, dir);
     }
 
     public void FixedUpdate(Player agent)
@@ -184,10 +184,7 @@ public class NormalMode : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        if(_gameManager.rageMode)
-        {
-            agent.ChangeMood(PlayerStage.Rage);
-        }
+
     }
 
     public void FixedUpdate(Player agent)
@@ -217,20 +214,15 @@ public class RageMode : StateClass<Player>
 
     public void Enter(Player agent)
     {
-        ServiceLocator.Get<GameLoopManager>().RageModeEneter();
         _gameManager = ServiceLocator.Get<GameLoopManager>();
-        agent.vignette.SetActive(true);
-        agent._healthBar.SetActive(true);
-        agent.actions.DropItem();
+        agent.Actions.DropItem();
+        ServiceLocator.Get<CanvasManager>().RageModeChange(true);
         ServiceLocator.Get<AudioManager>().PlaySource("enter_rage");
     }
 
     public void Update(Player agent, float dt)
     {
-        if (!_gameManager.rageMode)
-        {
-            agent.ChangeMood(PlayerStage.Normal);
-        }
+
     }
 
     public void FixedUpdate(Player agent)
@@ -240,8 +232,7 @@ public class RageMode : StateClass<Player>
 
     public void Exit(Player agent)
     {
-        agent.vignette.SetActive(false);
-        agent._healthBar.SetActive(true);
+        ServiceLocator.Get<CanvasManager>().RageModeChange(false);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

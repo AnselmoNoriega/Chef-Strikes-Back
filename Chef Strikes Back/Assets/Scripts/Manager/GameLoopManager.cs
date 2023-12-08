@@ -5,63 +5,46 @@ using UnityEngine.SceneManagement;
 
 public class GameLoopManager : MonoBehaviour
 {
-    public GameObject AIPrefabs;
-    [SerializeField] private Player player;
-    public List<GameObject> AIPool;
-    public SceneControl sc;
-    public int money = 0;
     [SerializeField] private float spawnTime;
-    public float rageValue = 0.0f;
-    public bool rageMode = false;
-    private int timesInRageMode = 0;
-    public TextMeshProUGUI moneycounting;
-    private float count = 0;
+    [SerializeField] private GameObject AIPrefabs;
+
+    private List<GameObject> _AIPool = new();
+    private Player _player;
+    private bool _isInRageMode = false;
+    private float _countToSpawn = 0;
 
     public void Initialize()
+    {
+        _player = ServiceLocator.Get<Player>();
+        SpawnCustomer();
+    }
+
+    private void Update()
+    {
+        _countToSpawn += Time.deltaTime;
+
+        if (_countToSpawn >= spawnTime && _isInRageMode == false)
+        {
+            SpawnCustomer();
+            _countToSpawn = 0;
+        }
+
+        if (_isInRageMode && _AIPool.Count == 0)
+        {
+            _player.ExitRageMode();
+            _isInRageMode = false;
+        }
+    }
+
+    private void SpawnCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
         Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
     }
 
-    private void Update()
+    public void SetRageMode(bool isRageMode)
     {
-        count += Time.deltaTime;
-        rageValue = player.currentRage;
-
-        if (count >= spawnTime && rageMode == false)
-        {
-            Vector2 spawnPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
-            Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
-            count = 0;
-        }
-
-        if (rageMode && AIPool.Count == 0)
-        {
-            player.currentRage = 0;
-            rageMode = false;
-        }
-        else if (rageValue >= 100)
-        {
-            rageMode = true;
-            count = 0;
-        }
-
-        moneycounting.text = "$ " + money.ToString();
-    }
-
-    public void dealDamage(float damage)
-    {
-        player.TakeDamage(damage);
-    }
-
-    public void RageModeEneter()
-    {
-        ++timesInRageMode;
-    }
-
-    public void CanTakePoints()
-    {
-        ServiceLocator.Get<GameManager>().KillScoreUpdate();
+        _isInRageMode = isRageMode;
     }
 
     public void ChangeSpawnTime(int time)
@@ -69,4 +52,18 @@ public class GameLoopManager : MonoBehaviour
         spawnTime = time;
     }
 
+    public bool IsInRageMode()
+    {
+        return _isInRageMode;
+    }
+
+    public void RemoveAI(GameObject ai)
+    {
+        _AIPool.Remove(ai);
+    }
+
+    public void AddBadAI(GameObject ai)
+    {
+        _AIPool.Add(ai);
+    }
 }

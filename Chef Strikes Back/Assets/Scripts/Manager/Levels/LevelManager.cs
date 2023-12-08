@@ -32,8 +32,7 @@ public class LevelManager : MonoBehaviour
         _audioManager.Initialize();
         _tileManager.Initialize();
         _gameLoopManager.Initialize();
-        _timeManger.Initialize();   
-        _canvasManager.Initialize();   
+        _timeManger.Initialize();  
         _player.Initialize();
 
     }

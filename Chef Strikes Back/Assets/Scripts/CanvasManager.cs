@@ -8,10 +8,48 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] public Slider _healthSlider;
     [SerializeField] public Slider _rageSlider;
     [SerializeField] public GameObject _rageVignette;
+    [SerializeField] public GameObject _healthBar;
 
-    public void Initialize()
+    public void SetMaxHealth(int amt)
     {
-        ServiceLocator.Get<GameLoopManager>().moneycounting = _incomeText;
-        ServiceLocator.Get<Player>().AssignCanvasInfo(_healthSlider, _rageSlider, _rageVignette);
+        _healthSlider.maxValue = amt;
+        _healthSlider.value = amt;
+    }
+
+    public void SetMaxRage(int amt)
+    {
+        _rageSlider.maxValue = amt;
+        _rageSlider.value = 0;
+    }
+
+    public void RageModeChange(bool active)
+    {
+        _healthBar.SetActive(active);
+        _rageVignette.SetActive(active);
+    }
+
+    public void AddTooHealthSlider(int amt)
+    {
+        _healthSlider.value += amt;
+    }
+
+    public void ChangeHealthSliderValue(int amt)
+    {
+        _healthSlider.value = amt;
+    }
+
+    public void AddTooRageSlider(int amt)
+    {
+        _rageSlider.value += amt;
+    }
+
+    public void ChangeRageSliderValue(int amt)
+    {
+        _rageSlider.value = amt;
+    }
+
+    public void ChangeMoneyValue(int amt)
+    {
+        _incomeText.text = amt.ToString();
     }
 }

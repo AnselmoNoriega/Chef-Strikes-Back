@@ -553,30 +553,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b20c124d29183e45ba7d95b4f06480a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: -20
-  currentRage: 0
-  lookingDirection: {x: 0, y: 0}
-  maxHealth: 100
-  MaxRage: 100
-  sceneControl: {fileID: 0}
-  rageBar: {fileID: 0}
-  healthBar: {fileID: 0}
-  playerState: 0
-  playerAction: 0
-  playerMode: 0
-  actions: {fileID: 0}
-  animator: {fileID: 0}
-  move:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: efc22e8a-399d-45fb-8f52-51c2e1535f8c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  rb: {fileID: 0}
-  mouse:
+  LookingDirection: {x: 0, y: 0}
+  _maxHealth: 100
+  _maxRage: 100
+  PlayerState: 0
+  PlayerAction: 0
+  PlayerMode: 0
+  Actions: {fileID: 0}
+  Animator: {fileID: 0}
+  Move:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
@@ -585,7 +570,16 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  vignette: {fileID: 0}
+  Rb: {fileID: 0}
+  Mouse:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +615,7 @@ MonoBehaviour:
   throwForce: 1
   ready2Throw: 0
   player: {fileID: -7746550428048061511}
-  grabDistance: 0
+  grabDistance: 1
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
