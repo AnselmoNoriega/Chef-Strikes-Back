@@ -50,6 +50,6 @@ public class CanvasManager : MonoBehaviour
 
     public void ChangeMoneyValue(int amt)
     {
-        _incomeText.text = amt.ToString();
+        _incomeText.text = "$ " + amt.ToString();
     }
 }
