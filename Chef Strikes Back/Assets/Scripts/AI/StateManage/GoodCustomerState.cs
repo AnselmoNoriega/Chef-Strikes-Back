@@ -21,7 +21,7 @@ public class GoodCustomerState : StateClass<AI>
 
         agent.OnMovementInput?.Invoke(agent.movementInput);
 
-        if (!agent.eating && agent.isSit && !agent._gameLoopManager.rageMode)
+        if (!agent.eating && agent.isSit && !agent._gameLoopManager.IsInRageMode())
         {
             agent.ChangeState(AIState.Hungry);
         }

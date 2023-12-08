@@ -38,7 +38,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        if (!ServiceLocator.Get<GameLoopManager>().rageMode)
+        if (!ServiceLocator.Get<GameLoopManager>().IsInRageMode())
         {
             scale.x -= Time.deltaTime / timer;
             agent.eatingSlider.localScale = scale;

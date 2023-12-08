@@ -4,8 +4,9 @@ public class BadCustomerState : StateClass<AI>
 {
     public void Enter(AI agent)
     {
+        agent._gameLoopManager.AddBadAI(agent.gameObject);
         ServiceLocator.Get<GameManager>().EnterRageModeScore();
-        ServiceLocator.Get<Player>().currentRage += 10;
+        ServiceLocator.Get<Player>().TakeRage(10);
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
         agent.aiData.Target = null;
@@ -34,7 +35,7 @@ public class BadCustomerState : StateClass<AI>
             agent.isHit = false;
         }
 
-        if(agent._gameLoopManager.rageMode) 
+        if(agent._gameLoopManager.IsInRageMode()) 
         {
             agent.ChangeState(AIState.Rage);
         }
@@ -55,9 +56,8 @@ public class BadCustomerState : StateClass<AI>
             var rage = collision.gameObject.GetComponent<Player>();
             if (rage)
             {
-                rage.currentRage += 10;
+                rage.TakeRage(10);
                 ServiceLocator.Get<AudioManager>().PlaySource("ragebar_filling");
-
             }
         }
         if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle" || collision.transform.tag == "Chair")

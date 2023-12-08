@@ -89,12 +89,10 @@ public class AI : MonoBehaviour
         stateManager.Update(Time.deltaTime);
         FaceMovementDirection(anim, rb2d.velocity);
 
-        
-
         if (health <= 0 || isExist)
         {
-            ServiceLocator.Get<GameLoopManager>().CanTakePoints();
-            _gameLoopManager.AIPool.Remove(this.gameObject);
+            ServiceLocator.Get<GameManager>().KillScoreUpdate();
+            _gameLoopManager.RemoveAI(gameObject);
             Destroy(gameObject);
         }
     }
@@ -120,7 +118,7 @@ public class AI : MonoBehaviour
     public IEnumerator FollowPath()
     {
         Vector2 currentWaypoint = path[0];
-        while (!_gameLoopManager.rageMode)
+        while (!_gameLoopManager.IsInRageMode())
         {
             if (Vector2.Distance(transform.position, currentWaypoint) <= 0.1f)
             {
@@ -132,7 +130,7 @@ public class AI : MonoBehaviour
                 }
                 currentWaypoint = path[targetIndex];
             }
-            if (!_gameLoopManager.rageMode)
+            if (!_gameLoopManager.IsInRageMode())
             {
                 movementInput = (currentWaypoint - (Vector2)transform.position).normalized;
 

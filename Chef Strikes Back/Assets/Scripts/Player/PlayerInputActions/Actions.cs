@@ -48,13 +48,13 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().rageMode)
+        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().IsInRageMode())
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
             Vector3 pos = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-            player.lookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
-            PlayerHelper.FaceMovementDirection(player.animator, player.lookingDirection);
+            player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
+            PlayerHelper.FaceMovementDirection(player.Animator, player.LookingDirection);
 
             for (int i = 0; i < item.Count; i++)
             {
@@ -88,9 +88,9 @@ public class Actions : MonoBehaviour
 
     public void GrabItem()
     {
-        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().rageMode)
+        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().IsInRageMode())
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.lookingDirection / 3), 0.4f);
+            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.LookingDirection / 3), 0.4f);
             float distance = 1000;
             Item newItem = null;
             FoodPile foodPile = null;
@@ -132,7 +132,7 @@ public class Actions : MonoBehaviour
     {
         if (inventory.GetFoodItem() != null)
         {
-            player.mouse = mouse;
+            player.Mouse = mouse;
             inventory.PrepareToThrowFood(mouse);
             ready2Throw = true;
             player.ChangeAction(PlayerActions.Throwing);
@@ -173,17 +173,17 @@ public class Actions : MonoBehaviour
 
     public void Attacking(Vector2 anglePos)
     {
-        if (!ServiceLocator.Get<GameLoopManager>().rageMode)
+        if (!ServiceLocator.Get<GameLoopManager>().IsInRageMode())
         {
             return;
         }
 
-        if (player.playerAction != PlayerActions.Attacking && !ready2Throw)
+        if (player.PlayerAction != PlayerActions.Attacking && !ready2Throw)
         {
             if (anglePos != Vector2.zero)
             {
                 Vector3 rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-                player.lookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
+                player.LookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
             }
             player.ChangeAction(PlayerActions.Attacking);
         }
@@ -191,9 +191,9 @@ public class Actions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection / 3), 0.4f);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3), 0.4f);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.lookingDirection / 3) + (Vector2)offset, 0.4f);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3) + (Vector2)offset, 0.4f);
     }
 
 }

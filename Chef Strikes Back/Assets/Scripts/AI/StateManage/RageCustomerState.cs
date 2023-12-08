@@ -4,7 +4,6 @@ public class RageCustomerState : StateClass<AI>
 {
     public void Enter(AI agent)
     {
-        agent._gameLoopManager.AIPool.Add(agent.gameObject);
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
         agent.aiData.currentTarget = null;
         agent.aiData.targets = null;
