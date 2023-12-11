@@ -10,7 +10,6 @@ public class BadCustomerState : StateClass<AI>
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
         agent.aiData.Target = null;
-        agent.aiData.currentTarget = null;
         agent.aiData.isStand = false;
         agent.isSit = false;
     }
