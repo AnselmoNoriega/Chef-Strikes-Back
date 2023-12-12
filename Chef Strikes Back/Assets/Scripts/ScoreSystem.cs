@@ -11,6 +11,7 @@ public class ScoreSystem : MonoBehaviour
     {
         var score = ServiceLocator.Get<GameManager>().GetScore();
         ServiceLocator.Get<GameManager>().ResetScore();
+        Debug.Log(score);
 
         int starNum = 0;
 
