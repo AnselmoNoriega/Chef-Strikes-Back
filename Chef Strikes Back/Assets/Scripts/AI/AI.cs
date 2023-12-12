@@ -191,7 +191,7 @@ public class AI : MonoBehaviour
         {
             movementInput = Vector2.zero;
         }
-        else if (!aiData.isStand)
+        else 
         {
             movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
         }

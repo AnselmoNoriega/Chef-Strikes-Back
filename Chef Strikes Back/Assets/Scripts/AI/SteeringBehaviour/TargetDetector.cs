@@ -34,9 +34,11 @@ public class TargetDetector : Detector
         }
         else if(aiData.state == AIState.Bad)
         {
-            if(aiData.Target == null && !aiData.isStand)
+            if(!aiData.isStand)
             {
+                aiData.Target = null;
                 aiData.targets = ServiceLocator.Get<ChairFinder>().CheckNextLocate(this.transform, aiData);
+                aiData.isStand = true;
             }
         }
         else if(aiData.state == AIState.Leaving)
