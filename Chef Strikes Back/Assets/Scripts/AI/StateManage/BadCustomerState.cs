@@ -10,7 +10,6 @@ public class BadCustomerState : StateClass<AI>
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
         agent.aiData.Target = null;
-        agent.aiData.currentTarget = null;
         agent.aiData.isStand = false;
         agent.isSit = false;
     }
@@ -52,7 +51,7 @@ public class BadCustomerState : StateClass<AI>
         {
             agent.aiData.isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
+            rb.AddForce(-rb.velocity.normalized * 60, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
             if (rage)
             {

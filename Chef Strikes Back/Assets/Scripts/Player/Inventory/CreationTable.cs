@@ -14,7 +14,7 @@ public class CreationTable : MonoBehaviour
 
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
-    [SerializeField] private Vector2 _pizzaOffset;
+    [SerializeField] private Transform _foodOffset;
 
     [Space, Header("Storage Objects")]
     [SerializeField] private GameObject _burger;
@@ -103,7 +103,7 @@ public class CreationTable : MonoBehaviour
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 
-        Instantiate(_burger, (Vector2)transform.position + _pizzaOffset, Quaternion.identity);
+        Instantiate(_burger, _foodOffset.position, Quaternion.identity);
     }
 
     private void CheckAvailability(FoodType foodtype)

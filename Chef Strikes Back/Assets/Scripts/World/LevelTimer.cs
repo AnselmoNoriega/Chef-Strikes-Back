@@ -58,17 +58,17 @@ public class LevelTimer : MonoBehaviour
         var loopManager = ServiceLocator.Get<GameLoopManager>();
 
         if (elapsedTime <= 3f && elapsedTime > 3.8f)
-            loopManager.ChangeSpawnTime(5);
+            loopManager.ChangeSpawnTime(10);
         else if (elapsedTime <= 3.8f && elapsedTime > 3.5f)
             loopManager.ChangeSpawnTime(15);
         else if (elapsedTime <= 3.5f && elapsedTime > 3f)
-            loopManager.ChangeSpawnTime(10);
+            loopManager.ChangeSpawnTime(8);
         else if (elapsedTime <= 3f && elapsedTime > 2.5f)
             loopManager.ChangeSpawnTime(10);
         else if (elapsedTime <= 2.5f && elapsedTime > 1.5f)
-            loopManager.ChangeSpawnTime(10);
+            loopManager.ChangeSpawnTime(8);
         else if (elapsedTime <= 1.5 && elapsedTime > 0.5f)
-            loopManager.ChangeSpawnTime(5);
+            loopManager.ChangeSpawnTime(10);
         else if (elapsedTime <= 0.5f && elapsedTime > 0f)
             loopManager.ChangeSpawnTime(int.MaxValue);
     }

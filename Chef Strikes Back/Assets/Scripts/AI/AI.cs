@@ -35,7 +35,7 @@ public class AI : MonoBehaviour
 
     [Space, Header("AI Variables")]
     [SerializeField] private float attackDistance = 0.5f;
-    [SerializeField] private float detectionDelay = 0.05f, attackDelay = 1f;
+    [SerializeField] private float detectionDelay = 30.0f, attackDelay = 1f;
 
     [Space, Header("AI Events")]
     public UnityEvent OnAttackPressed;
@@ -191,7 +191,7 @@ public class AI : MonoBehaviour
         {
             movementInput = Vector2.zero;
         }
-        else if (!aiData.isStand)
+        else 
         {
             movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
         }

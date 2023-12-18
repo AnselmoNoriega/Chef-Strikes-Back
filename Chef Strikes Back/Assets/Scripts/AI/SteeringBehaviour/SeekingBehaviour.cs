@@ -25,7 +25,6 @@ public class SeekingBehaviour : SteeringBehaviour
             {
                 if(aiData.state == AIState.Bad)
                 {
-                    aiData.isStand = true;
                     aiData.Target = null;
                 }
                 aiData.currentTarget = null;

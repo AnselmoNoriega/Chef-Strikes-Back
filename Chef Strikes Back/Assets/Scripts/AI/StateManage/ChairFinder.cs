@@ -61,8 +61,7 @@ public class ChairFinder : MonoBehaviour
         List<Transform> closeList = new List<Transform>();
         Transform currentPos = aiPos;
         Transform checkpoint = currentPos;
-        aiData.Target = null;
-        aiData.closeList = closeList;
+        aiData.currentTarget = null;
         foreach (var checkpt in enemyCheckPoint)
         {
             openList.Add(checkpt);
@@ -92,10 +91,11 @@ public class ChairFinder : MonoBehaviour
         {
 
             float DistanceCheck = Vector2.Distance(currentPos.position, aiData.Target.position);
-            List<Transform> neighbour = GetNeighbour(currentPos, openList);
+            List<Transform> neighbour = new List<Transform>();
+            neighbour =  GetNeighbour(currentPos, openList);
             foreach (var checkpt in neighbour)
             {
-                if (closeList.Contains(checkpt) || aiData.closeList.Contains(checkpt))
+                if (closeList.Contains(checkpt))
                 {
                     continue;
                 }
@@ -120,7 +120,6 @@ public class ChairFinder : MonoBehaviour
 
         }
         closeList.Add(aiData.Target);
-
         return closeList;
     }
     List<Transform> GetNeighbour(Transform currentPos, List<Transform> list)

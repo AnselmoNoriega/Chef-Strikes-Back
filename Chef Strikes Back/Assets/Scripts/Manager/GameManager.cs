@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         _score += _grabMoneyPoints;
     }
 
-    public void FoodMade()
+    public void FoodGiven()
     {
         _score += _foodMadePoints;
     }

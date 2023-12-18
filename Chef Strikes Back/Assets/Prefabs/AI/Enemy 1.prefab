@@ -66,7 +66,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 0f4285f78f7f3f848810e4eb89d0195d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &34484012071288455
 SpriteRenderer:
@@ -305,7 +305,7 @@ MonoBehaviour:
   - {fileID: 1567169437809526574}
   _arrow: {fileID: 4996913246588421570}
   _arrowOffset: {x: 0.45, y: 0.45}
-  _offsetOutOfScreen: {x: 0, y: 1.5, z: 0}
+  _offsetOutOfScreen: {x: 0, y: 1.25, z: 0}
 --- !u!95 &-1032899175772524887
 Animator:
   serializedVersion: 4
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 2
-  agentColliderSize: 0.3
+  agentColliderSize: 0.25
   showGizmo: 1
 --- !u!1 &2895648848159499705
 GameObject:
