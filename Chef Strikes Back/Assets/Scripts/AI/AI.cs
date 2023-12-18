@@ -26,28 +26,17 @@ public class AI : MonoBehaviour
     public Transform eatingSlider;
     [HideInInspector] public int ChoiceIndex;
 
-    [Space, Header("AI Variables")]
-    [SerializeField] private float attackDistance = 0.5f;
-    [SerializeField] private float detectionDelay = 30.0f, attackDelay = 1f;
-
-    [Space, Header("AI Events")]
-    public UnityEvent OnAttackPressed;
-    public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
-
     [Space, Header("AI Status")]
     public AIState state;
-    public int health = 10;
-    public bool isSit = false;
-    public bool isExist = false;
-    public bool eating = false;
-    public bool isHit = false;
-    public bool chasing = false;
-    public bool isLeaving = false;
+    [HideInInspector] public int health = 10;
+    [HideInInspector] public bool isSit = false;
+    [HideInInspector] public bool isExist = false;
+    [HideInInspector] public bool eating = false;
+    [HideInInspector] public bool isHit = false;
+    [HideInInspector] public bool chasing = false;
+    [HideInInspector] public bool isLeaving = false;
 
     [HideInInspector] public GameLoopManager _gameLoopManager;
-
-    public float AttackDistance => attackDistance;
-    public float AttackDelay => attackDelay;
 
     private void Awake()
     {
@@ -62,8 +51,6 @@ public class AI : MonoBehaviour
         stateManager.AddState<RageCustomerState>();
         stateManager.AddState<LeavingCustomer>();
         ChangeState(Random.value < 1.0f ? AIState.Good : AIState.Bad);
-
-        InvokeRepeating("PerformDetection", 0, detectionDelay);
     }
 
     private void Update()

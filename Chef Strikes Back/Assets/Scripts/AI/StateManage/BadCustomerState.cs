@@ -14,8 +14,6 @@ public class BadCustomerState : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-
-
         if(agent._gameLoopManager.IsInRageMode()) 
         {
             agent.ChangeState(AIState.Rage);
