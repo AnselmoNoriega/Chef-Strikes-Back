@@ -16,15 +16,8 @@ public enum AIState
 public class AI : MonoBehaviour
 {
     [Header("AI Behaviour")]
-    [SerializeField] private List<SteeringBehaviour> steeringBehaviours;
-    [SerializeField] public List<Detector> detectors;
-    [SerializeField] public Vector2 movementInput;
-    [SerializeField] private ContextSolver movementDirectionSolver;
     [HideInInspector] public Indicator _indicator;
-    public AIData aiData;
     private StateMachine<AI> stateManager;
-    private Vector2[] path;
-    int targetIndex;
 
     [Space, Header("AI Properties")]
     [SerializeField] private Animator anim;
@@ -53,8 +46,6 @@ public class AI : MonoBehaviour
 
     [HideInInspector] public GameLoopManager _gameLoopManager;
 
-    public ContextSolver MovementDirectionSolver => movementDirectionSolver;
-    public List<SteeringBehaviour> SteeringBehaviours => steeringBehaviours;
     public float AttackDistance => attackDistance;
     public float AttackDelay => attackDelay;
 
@@ -73,15 +64,6 @@ public class AI : MonoBehaviour
         ChangeState(Random.value < 1.0f ? AIState.Good : AIState.Bad);
 
         InvokeRepeating("PerformDetection", 0, detectionDelay);
-    }
-
-    private void PerformDetection()
-    {
-        foreach (Detector detect in detectors)
-        {
-            detect.Detect(aiData);
-        }
-        
     }
 
     private void Update()
@@ -104,137 +86,15 @@ public class AI : MonoBehaviour
         return directionIndex;
     }
 
-    public void OnPathFound(Vector2[] newPath, bool pathSuccessful)
-    {
-        if (pathSuccessful)
-        {
-            path = newPath;
-            targetIndex = 0;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
-        }
-    }
-
-    public IEnumerator FollowPath()
-    {
-        Vector2 currentWaypoint = path[0];
-        while (!_gameLoopManager.IsInRageMode())
-        {
-            if (Vector2.Distance(transform.position, currentWaypoint) <= 0.1f)
-            {
-                targetIndex++;
-                if (targetIndex >= path.Length)
-                {
-                    movementInput = Vector2.zero;
-                    break;
-                }
-                currentWaypoint = path[targetIndex];
-            }
-            if (!_gameLoopManager.IsInRageMode())
-            {
-                movementInput = (currentWaypoint - (Vector2)transform.position).normalized;
-
-                yield return null;
-            }
-        }
-    }
-
-    public IEnumerator ChaseAndAttack()
-    {
-        if (aiData.currentTarget == null)
-        {
-            movementInput = Vector2.zero;
-            chasing = false;
-            yield return null;
-        }
-        else
-        {
-            float distance = Vector2.Distance(aiData.currentTarget.position, transform.position);
-            if (distance < AttackDistance)
-            {
-                movementInput = Vector2.zero;
-                OnAttackPressed?.Invoke();
-                yield return new WaitForSeconds(AttackDelay);
-                StartCoroutine(ChaseAndAttack());
-            }
-            else
-            {
-                movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
-                yield return new WaitForSeconds(AttackDelay);
-                StartCoroutine(ChaseAndAttack());
-            }
-        }
-    }
-
     public void ChangeState(AIState newState)
     {
         stateManager.ChangeState((int)newState);
         state = newState;
-        aiData.state = newState;
     }
-
-    public void FindSeat()
-    {
-        if (aiData.Target == null || isSit)
-        {
-            movementInput = Vector2.zero;
-        }
-        else if (aiData.Target.position != transform.position && !isSit)
-        {
-            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
-        }
-    }
-
-    public void FindStandPoint()
-    {
-        if(aiData.Target == null)
-        {
-            movementInput = Vector2.zero;
-        }
-        else 
-        {
-            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
-        }
-    }
-
-    public void ExitRestaurant()
-    {
-        if (aiData.Target == null)
-        {
-            movementInput = Vector2.zero;
-        }
-        else if (!isExist)
-        {
-            movementInput = MovementDirectionSolver.GetDirectionToMove(SteeringBehaviours, aiData);
-        }
-    }
-
-
 
     public void DropMoney()
     {
         GetComponent<LootBag>().InstantiateLoot(transform.position);
-    }
-
-    public void OnDrawGizmos()
-    {
-        if (path != null)
-        {
-            for (int i = targetIndex; i < path.Length; i++)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawCube(path[i], new Vector2(0.2f, 0.2f));
-
-                if (i == targetIndex)
-                {
-                    Gizmos.DrawLine(transform.position, path[i]);
-                }
-                else
-                {
-                    Gizmos.DrawLine(path[i - 1], path[i]);
-                }
-            }
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

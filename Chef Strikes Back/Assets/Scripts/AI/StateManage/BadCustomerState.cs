@@ -9,30 +9,12 @@ public class BadCustomerState : StateClass<AI>
         ServiceLocator.Get<Player>().TakeRage(10);
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
-        agent.aiData.Target = null;
-        agent.aiData.isStand = false;
         agent.isSit = false;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (agent.aiData.currentTarget != null)
-        {
-            agent.OnPointerInput?.Invoke(agent.aiData.currentTarget.position);
-            agent.FindStandPoint();
-        }
-        else if (agent.aiData.GetTargetsCount() > 0)
-        {
-            agent.aiData.currentTarget = agent.aiData.targets[0];
-        }
 
-        agent.OnMovementInput?.Invoke(agent.movementInput);
-
-        if (agent.isHit)
-        {
-            agent.aiData.isStand = false;
-            agent.isHit = false;
-        }
 
         if(agent._gameLoopManager.IsInRageMode()) 
         {
@@ -49,7 +31,6 @@ public class BadCustomerState : StateClass<AI>
     {
         if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
         {
-            agent.aiData.isStand = false;
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity.normalized * 60, ForceMode2D.Impulse);
             var rage = collision.gameObject.GetComponent<Player>();
@@ -58,10 +39,6 @@ public class BadCustomerState : StateClass<AI>
                 rage.TakeRage(10);
                 ServiceLocator.Get<AudioManager>().PlaySource("ragebar_filling");
             }
-        }
-        if(collision.transform.tag == "Enemy" || collision.transform.tag == "Obstacle" || collision.transform.tag == "Chair")
-        {
-            agent.aiData.isStand = false;
         }
     }
 
@@ -72,7 +49,6 @@ public class BadCustomerState : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        agent.aiData.currentTarget = null;
-        agent.aiData.targets = null;
+
     }
 }
