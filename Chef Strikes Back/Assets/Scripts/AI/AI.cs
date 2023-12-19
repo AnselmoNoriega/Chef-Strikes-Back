@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using Pathfinding;
 
 public enum AIState
 {
@@ -17,48 +16,50 @@ public class AI : MonoBehaviour
 {
     [Header("AI Behaviour")]
     [HideInInspector] public Indicator _indicator;
-    private StateMachine<AI> stateManager;
-
+    private StateMachine<AI> _stateManager;
+    
     [Space, Header("AI Properties")]
-    [SerializeField] private Animator anim;
-    public Rigidbody2D rb2d;
+    [SerializeField] private Animator _anim;
+    public Rigidbody2D Rb2d;
     public List<GameObject> OrderBubble;
-    public Transform eatingSlider;
+    public Transform EatingSlider;
     [HideInInspector] public int ChoiceIndex;
 
-    [Space, Header("AI Status")]
+    [Space, Header("AI Info")]
     public AIState state;
-    [HideInInspector] public int health = 10;
-    [HideInInspector] public bool isSit = false;
-    [HideInInspector] public bool isExist = false;
-    [HideInInspector] public bool eating = false;
-    [HideInInspector] public bool isHit = false;
-    [HideInInspector] public bool chasing = false;
-    [HideInInspector] public bool isLeaving = false;
+    public int Health = 0;
+    public int Speed = 0;
+    public float NextWaypointDistance = 0;
+    [HideInInspector] public bool IsEating = false;
+
+    [Space, Header("AI Path Finding")]
+    [HideInInspector] public Path Path;
+    [HideInInspector] public Seeker Seeker;
 
     [HideInInspector] public GameLoopManager _gameLoopManager;
 
     private void Awake()
     {
         _indicator = GetComponent<Indicator>();
+        Seeker = GetComponent<Seeker>();
         _gameLoopManager = ServiceLocator.Get<GameLoopManager>();
-        stateManager = new StateMachine<AI>(this);
+        _stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
-        stateManager.AddState<GoodCustomerState>();
-        stateManager.AddState<HungryCustomer>();
-        stateManager.AddState<BadCustomerState>();
-        stateManager.AddState<RageCustomerState>();
-        stateManager.AddState<LeavingCustomer>();
+        _stateManager.AddState<GoodCustomerState>();
+        _stateManager.AddState<HungryCustomer>();
+        _stateManager.AddState<BadCustomerState>();
+        _stateManager.AddState<RageCustomerState>();
+        _stateManager.AddState<LeavingCustomer>();
         ChangeState(Random.value < 1.0f ? AIState.Good : AIState.Bad);
     }
 
     private void Update()
     {
-        stateManager.Update(Time.deltaTime);
-        FaceMovementDirection(anim, rb2d.velocity);
+        _stateManager.Update(Time.deltaTime);
+        FaceMovementDirection(_anim, Rb2d.velocity);
 
-        if (health <= 0 || isExist)
+        if (Health <= 0)
         {
             ServiceLocator.Get<GameManager>().KillScoreUpdate();
             _gameLoopManager.RemoveAI(gameObject);
@@ -73,24 +74,24 @@ public class AI : MonoBehaviour
         return directionIndex;
     }
 
-    public void ChangeState(AIState newState)
-    {
-        stateManager.ChangeState((int)newState);
-        state = newState;
-    }
-
     public void DropMoney()
     {
         GetComponent<LootBag>().InstantiateLoot(transform.position);
     }
 
+    public void ChangeState(AIState newState)
+    {
+        _stateManager.ChangeState((int)newState);
+        state = newState;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        stateManager.CollisionEnter2D(collision);
+        _stateManager.CollisionEnter2D(collision);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        stateManager.TriggerEnter2D(collision);
+        _stateManager.TriggerEnter2D(collision);
     }
 }

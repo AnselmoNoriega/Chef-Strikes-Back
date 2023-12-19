@@ -56,7 +56,7 @@ public class Table : MonoBehaviour
             AI tempAI = null;
             foreach (var chair in chairs)
             {
-                if (!chair.ai.eating && chair.IsAIsFood(newItem))
+                if (!chair.ai.IsEating && chair.IsAIsFood(newItem))
                 {
                     tempAI = chair.ai;
                     break;
@@ -69,7 +69,7 @@ public class Table : MonoBehaviour
                 foods.Add(newItem);
                 foods[foods.Count - 1].LaunchedInTable(platePos);
                 foods[foods.Count - 1].isServed = true;
-                tempAI.eating = true;
+                tempAI.IsEating = true;
                 tempAI.ChangeState(AIState.Hungry);
             }
         }

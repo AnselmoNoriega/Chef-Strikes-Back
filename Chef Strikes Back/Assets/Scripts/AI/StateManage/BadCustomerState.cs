@@ -9,7 +9,6 @@ public class BadCustomerState : StateClass<AI>
         ServiceLocator.Get<Player>().TakeRage(10);
         agent.GetComponent<SpriteRenderer>().color = Color.red;
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
-        agent.isSit = false;
     }
 
     public void Update(AI agent, float dt)

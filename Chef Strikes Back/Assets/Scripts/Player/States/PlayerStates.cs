@@ -116,7 +116,7 @@ public class PlayerAttacking : StateClass<Player>
                 if (enemyAI.state == AIState.Rage)
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
-                    enemyAI.health -= Mathf.RoundToInt(player._weapon.Damage);
+                    enemyAI.Health -= Mathf.RoundToInt(player._weapon.Damage);
                 }
             }
 

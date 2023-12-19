@@ -24,7 +24,6 @@ public class Chair : MonoBehaviour
     public void FreeChair()
     {
         ai.transform.position = SpawnPointForBadAI.transform.position;
-        ai.isLeaving = true;
         ai = null;
         seatAvaliable = true;
         chairCollider.enabled = true;
@@ -49,8 +48,7 @@ public class Chair : MonoBehaviour
             && seatAvaliable)
         {
             ai = collision.gameObject.GetComponent<AI>();
-            ai.rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
-            ai.isSit = true;
+            ai.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             ai.transform.position = transform.position;
             ai.ChoiceIndex = Random.Range(0, 2);
             table.AddCostumer(this);

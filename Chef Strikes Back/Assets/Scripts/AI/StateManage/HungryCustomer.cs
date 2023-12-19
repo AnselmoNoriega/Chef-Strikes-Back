@@ -9,14 +9,14 @@ public class HungryCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        scale = agent.eatingSlider.localScale;
+        scale = agent.EatingSlider.localScale;
         scale.x = 1;
-        agent.eatingSlider.localScale = scale;
-        agent.eatingSlider.transform.parent.gameObject.SetActive(true);
+        agent.EatingSlider.localScale = scale;
+        agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
-        if (agent.eating)
+        if (agent.IsEating)
         {
-            agent.eatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
+            agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
             timer = eatingTime;
         }
         else
@@ -31,7 +31,7 @@ public class HungryCustomer : StateClass<AI>
                 agent._indicator.SetIndicator(true, IndicatorImage.Spaguetti);
                 agent.OrderBubble[1].gameObject.SetActive(true);
             }
-            agent.eatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+            agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
             timer = waitingTime;
         }
     }
@@ -41,10 +41,10 @@ public class HungryCustomer : StateClass<AI>
         if (!ServiceLocator.Get<GameLoopManager>().IsInRageMode())
         {
             scale.x -= Time.deltaTime / timer;
-            agent.eatingSlider.localScale = scale;
+            agent.EatingSlider.localScale = scale;
         }
 
-        if (scale.x <= 0 && agent.eating)
+        if (scale.x <= 0 && agent.IsEating)
         {
             agent.DropMoney();
             agent.ChangeState(AIState.Leaving);
@@ -82,6 +82,6 @@ public class HungryCustomer : StateClass<AI>
             agent._indicator.SetIndicator(false, IndicatorImage.Spaguetti);
             agent.OrderBubble[1].gameObject.SetActive(false);
         }
-        agent.eatingSlider.transform.parent.gameObject.SetActive(false);
+        agent.EatingSlider.transform.parent.gameObject.SetActive(false);
     }
 }
