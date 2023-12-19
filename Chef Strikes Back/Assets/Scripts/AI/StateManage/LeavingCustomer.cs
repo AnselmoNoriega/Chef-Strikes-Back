@@ -3,7 +3,7 @@ using Pathfinding;
 
 public class LeavingCustomer : StateClass<AI>
 {
-    private int _countDown = 0;
+    private float _countDown = 0;
     private int _currentWaypoint = 0;
     private Vector2 _exitPosition = Vector2.zero;
     private AI _agent = null;
@@ -11,13 +11,18 @@ public class LeavingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
-        _countDown = 3;
+        _countDown = Time.time;
         _exitPosition = ServiceLocator.Get<AIManager>().ExitPosition();
         agent.Seeker.StartPath(agent.Rb2d.position, _exitPosition, PathCompleted);
     }
 
     public void Update(AI agent, float dt)
     {
+        if(agent.Path == null)
+        {
+            return;
+        }
+
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
             agent.DestroyAI();
@@ -34,15 +39,11 @@ public class LeavingCustomer : StateClass<AI>
             ++_currentWaypoint;
         }
 
-        if (_countDown <= 0)
+        if (Time.time - _countDown >= 0.5f)
         {
-            agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position);
+            agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
             _currentWaypoint = 0;
-            _countDown = 3;
-        }
-        else
-        {
-            --_countDown;
+            _countDown = Time.time;
         }
     }
 

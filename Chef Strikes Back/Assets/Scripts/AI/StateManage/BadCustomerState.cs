@@ -3,7 +3,7 @@ using Pathfinding;
 
 public class BadCustomerState : StateClass<AI>
 {
-    private int _countDown = 0;
+    private float _countDown = 0;
     private int _currentWaypoint = 0;
     private Vector2 _randomPosition = Vector2.zero;
     private AI _agent = null;
@@ -16,7 +16,7 @@ public class BadCustomerState : StateClass<AI>
         ServiceLocator.Get<Player>().TakeRage(10);
         agent.GetComponent<SpriteRenderer>().color = Color.red;
 
-        _countDown = 3;
+        _countDown = Time.time;
         _randomPosition = ServiceLocator.Get<AIManager>().GiveMeRandomPoint();
         agent.Seeker.StartPath(agent.Rb2d.position, _randomPosition, PathCompleted);
     }
@@ -26,6 +26,11 @@ public class BadCustomerState : StateClass<AI>
         if (agent._gameLoopManager.IsInRageMode())
         {
             agent.ChangeState(AIState.Rage);
+            return;
+        }
+
+        if (agent.Path == null || _currentWaypoint >= agent.Path.vectorPath.Count)
+        {
             return;
         }
 
@@ -39,14 +44,11 @@ public class BadCustomerState : StateClass<AI>
             ++_currentWaypoint;
         }
 
-        if (_countDown <= 0)
+        if (Time.time - _countDown >= 0.5f)
         {
-            agent.Seeker.StartPath(agent.Rb2d.position, _randomPosition);
+            agent.Seeker.StartPath(agent.Rb2d.position, _randomPosition, PathCompleted);
             _countDown = 3;
-        }
-        else
-        {
-            --_countDown;
+            _countDown = Time.time;
         }
     }
 

@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    [SerializeField] private List<Chair> Chairs;
-    [SerializeField] private List<Transform> RandomSpots;
+    [SerializeField] private List<Chair> Chairs = new();
+    [SerializeField] private List<Transform> RandomSpots = new();
 
-    [SerializeField] private Transform _exitPoint;
+    private List<Chair> _availableChairs = new();
+
+    [SerializeField] private Transform _exitPoint = null;
+
+    private void Awake()
+    {
+        foreach(var chair in Chairs)
+        {
+            _availableChairs.Add(chair);
+        }
+    }
 
     public Chair GiveMeChair()
     {
-        return Chairs[Random.Range(0, Chairs.Count)];
+        return _availableChairs[Random.Range(0, Chairs.Count)];
     }
 
     public Vector2 GiveMeRandomPoint()

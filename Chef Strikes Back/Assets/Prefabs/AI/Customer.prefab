@@ -56,7 +56,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 7
-  m_LinearDrag: 1.5
+  m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 0f4285f78f7f3f848810e4eb89d0195d, type: 2}
@@ -198,8 +198,8 @@ MonoBehaviour:
   ChoiceIndex: 0
   state: 0
   Health: 10
-  Speed: 10
-  NextWaypointDistance: 0.5
+  Speed: 15
+  NextWaypointDistance: 0.1
   IsEating: 0
   Seeker: {fileID: 0}
   SelectedChair: {fileID: 0}

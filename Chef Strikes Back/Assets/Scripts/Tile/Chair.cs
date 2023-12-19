@@ -26,7 +26,7 @@ public class Chair : MonoBehaviour
 
     public void FreeChair()
     {
-        Customer.Rb2d.constraints = RigidbodyConstraints2D.None;
+        Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         Customer.transform.position = SpawnPointForBadAI.transform.position;
         Customer = null;
         seatAvaliable = true;
