@@ -10,8 +10,6 @@ public class Table : MonoBehaviour
     public Transform platePos;
     public SpriteRenderer plateSprite;
 
-    public List<Item> foods = new List<Item>();
-
     private void Awake()
     {
         _aiSitting = new();
@@ -22,29 +20,22 @@ public class Table : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void AddCostumer(Chair chair)
     {
+        chairs.Add(chair);
+        _aiSitting[chair.Customer.ChoiceIndex].Add(chair.Customer);
+    }
+
+    public void FreeTable(Chair chair)
+    {
+        _aiSitting[chair.Customer.ChoiceIndex].Remove(chair.Customer);
+        chair.FinishFood();
+        chair.FreeChair();
+        chairs.Remove(chair);
+
         if (plateSprite.enabled && chairs.Count == 0)
         {
             plateSprite.enabled = false;
-        }
-
-        for (int i = 0; i < chairs.Count; ++i)
-        {
-            if (chairs[i].ai.state == AIState.Leaving)
-            {
-                _aiSitting[chairs[i].ai.ChoiceIndex].Remove(chairs[i].ai);
-                Destroy(foods.ElementAt(0).gameObject);
-                foods.RemoveAt(0);
-                chairs[i].FreeChair();
-                chairs.Remove(chairs[i]);
-            }
-            else if (chairs[i].ai.state == AIState.Bad)
-            {
-                _aiSitting[chairs[i].ai.ChoiceIndex].Remove(chairs[i].ai);
-                chairs[i].FreeChair();
-                chairs.Remove(chairs[i]);
-            }
         }
     }
 
@@ -53,31 +44,21 @@ public class Table : MonoBehaviour
         var newItem = collision.GetComponent<Item>();
         if (newItem && !newItem.isServed && newItem.isPickable)
         {
-            AI tempAI = null;
             foreach (var chair in chairs)
             {
-                if (!chair.ai.IsEating && chair.IsAIsFood(newItem))
+                if (!chair.Customer.IsEating && chair.IsAIsFood(newItem))
                 {
-                    tempAI = chair.ai;
-                    break;
+                    ServiceLocator.Get<GameManager>().FoodGiven();
+
+                    newItem.LaunchedInTable(platePos);
+                    newItem.isServed = true;
+                    chair.Food = newItem;
+
+                    chair.Customer.IsEating = true;
+                    chair.Customer.ChangeState(AIState.Hungry);
+                    return;
                 }
             }
-
-            if (tempAI)
-            {
-                ServiceLocator.Get<GameManager>().FoodGiven();
-                foods.Add(newItem);
-                foods[foods.Count - 1].LaunchedInTable(platePos);
-                foods[foods.Count - 1].isServed = true;
-                tempAI.IsEating = true;
-                tempAI.ChangeState(AIState.Hungry);
-            }
         }
-    }
-
-    public void AddCostumer(Chair chair)
-    {
-        chairs.Add(chair);
-        _aiSitting[chair.ai.ChoiceIndex].Add(chair.ai);
     }
 }

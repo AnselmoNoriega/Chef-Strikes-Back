@@ -3,15 +3,16 @@ using Pathfinding;
 
 public class GoodCustomerState : StateClass<AI>
 {
-    private int _countDown = 0;
+    private float _countDown = 0;
     private int _currentWaypoint = 0;
-    private AI _agent = null;
+    private AI _agent;
 
     public void Enter(AI agent)
     {
-        _countDown = 3;
         _agent = agent;
-        agent.Seeker.StartPath(agent.Rb2d.position, ServiceLocator.Get<AIManager>().GiveMeChair());
+        _countDown = Time.time;
+        agent.SelectedChair = ServiceLocator.Get<AIManager>().GiveMeChair();
+        agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
     }
 
     public void Update(AI agent, float dt)
@@ -21,8 +22,14 @@ public class GoodCustomerState : StateClass<AI>
 
     public void FixedUpdate(AI agent)
     {
+        if (agent.Path == null)
+        {
+            return;
+        }
+        
         if (_currentWaypoint >= agent.Path.vectorPath.Count && !agent._gameLoopManager.IsInRageMode())
         {
+            agent.SelectedChair.SitOnChair(agent);
             agent.ChangeState(AIState.Hungry);
             return;
         }
@@ -37,14 +44,11 @@ public class GoodCustomerState : StateClass<AI>
             ++_currentWaypoint;
         }
 
-        if(_countDown <= 0)
+        if( Time.time - _countDown >= 0.5f)
         {
-            agent.Seeker.StartPath(agent.Rb2d.position, ServiceLocator.Get<AIManager>().GiveMeChair());
-            _countDown = 3;
-        }
-        else
-        {
-            --_countDown;
+            agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
+            _currentWaypoint = 0;
+            _countDown = Time.time;
         }
     }
 
@@ -63,12 +67,12 @@ public class GoodCustomerState : StateClass<AI>
 
     }
 
-    private void PathFinished(Path p)
+    private void PathCompleted(Path p)
     {
-        if(!p.error)
+        if (!p.error)
         {
+            _agent.Path = p;
             _currentWaypoint = 0;
-            _agent.ChangeState(AIState.Hungry);
         }
     }
 }

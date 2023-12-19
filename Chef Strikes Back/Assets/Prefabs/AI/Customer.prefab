@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6545289986373070951}
   - component: {fileID: 4617263295547057938}
   - component: {fileID: -1032899175772524887}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: Customer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -189,18 +189,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _indicator: {fileID: 0}
-  _anim: {fileID: 0}
-  Rb2d: {fileID: 0}
+  _anim: {fileID: -1032899175772524887}
+  Rb2d: {fileID: 34484012071288450}
   OrderBubble:
   - {fileID: 1268310554165276681}
   - {fileID: 2895648848159499705}
-  EatingSlider: {fileID: 0}
+  EatingSlider: {fileID: 6104358329182333462}
   ChoiceIndex: 0
   state: 0
   Health: 10
-  Speed: 400
+  Speed: 10
   NextWaypointDistance: 0.5
   IsEating: 0
+  Seeker: {fileID: 0}
+  SelectedChair: {fileID: 0}
   _gameLoopManager: {fileID: 0}
 --- !u!114 &4617263295547057938
 MonoBehaviour:

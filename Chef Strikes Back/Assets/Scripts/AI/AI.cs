@@ -35,6 +35,7 @@ public class AI : MonoBehaviour
     [Space, Header("AI Path Finding")]
     [HideInInspector] public Path Path;
     [HideInInspector] public Seeker Seeker;
+    [HideInInspector] public Chair SelectedChair;
 
     [HideInInspector] public GameLoopManager _gameLoopManager;
 
@@ -57,21 +58,31 @@ public class AI : MonoBehaviour
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
-        FaceMovementDirection(_anim, Rb2d.velocity);
+        FaceDirection(_anim, Rb2d.velocity);
 
         if (Health <= 0)
         {
             ServiceLocator.Get<GameManager>().KillScoreUpdate();
-            _gameLoopManager.RemoveAI(gameObject);
-            Destroy(gameObject);
+            DestroyAI();
         }
     }
 
-    public static int FaceMovementDirection(Animator animator, Vector2 lookDirection)
+    private void FixedUpdate()
+    {
+        _stateManager.FixedUpdate();
+    }
+
+    public int FaceDirection(Animator animator, Vector2 lookDirection)
     {
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
         animator.SetInteger("PosNum", directionIndex);
         return directionIndex;
+    }
+
+    public void DestroyAI()
+    {
+        _gameLoopManager.RemoveAI(gameObject);
+        Destroy(gameObject);
     }
 
     public void DropMoney()

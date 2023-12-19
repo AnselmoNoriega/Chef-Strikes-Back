@@ -1,21 +1,52 @@
 using UnityEngine;
+using Pathfinding;
 
 public class BadCustomerState : StateClass<AI>
 {
+    private int _countDown = 0;
+    private int _currentWaypoint = 0;
+    private Vector2 _randomPosition = Vector2.zero;
+    private AI _agent = null;
+
     public void Enter(AI agent)
     {
+        _agent = agent;
         agent._gameLoopManager.AddBadAI(agent.gameObject);
         ServiceLocator.Get<GameManager>().EnterRageModeScore();
         ServiceLocator.Get<Player>().TakeRage(10);
         agent.GetComponent<SpriteRenderer>().color = Color.red;
-        agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;
+
+        _countDown = 3;
+        _randomPosition = ServiceLocator.Get<AIManager>().GiveMeRandomPoint();
+        agent.Seeker.StartPath(agent.Rb2d.position, _randomPosition, PathCompleted);
     }
 
     public void Update(AI agent, float dt)
     {
-        if(agent._gameLoopManager.IsInRageMode()) 
+        if (agent._gameLoopManager.IsInRageMode())
         {
             agent.ChangeState(AIState.Rage);
+            return;
+        }
+
+        var direction = ((Vector2)agent.Path.vectorPath[_currentWaypoint] - agent.Rb2d.position).normalized;
+        agent.Rb2d.AddForce(direction * agent.Speed);
+
+        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
+
+        if (distance < agent.NextWaypointDistance)
+        {
+            ++_currentWaypoint;
+        }
+
+        if (_countDown <= 0)
+        {
+            agent.Seeker.StartPath(agent.Rb2d.position, _randomPosition);
+            _countDown = 3;
+        }
+        else
+        {
+            --_countDown;
         }
     }
 
@@ -47,5 +78,14 @@ public class BadCustomerState : StateClass<AI>
     public void Exit(AI agent)
     {
 
+    }
+
+    private void PathCompleted(Path p)
+    {
+        if (!p.error)
+        {
+            _agent.Path = p;
+            _currentWaypoint = 0;
+        }
     }
 }

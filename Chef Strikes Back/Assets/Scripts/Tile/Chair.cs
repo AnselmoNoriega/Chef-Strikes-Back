@@ -5,34 +5,46 @@ public class Chair : MonoBehaviour
 {
     public bool seatAvaliable = true;
 
-    [SerializeField]
-    private GameObject SpawnPointForBadAI = null;
+    [SerializeField] private GameObject SpawnPointForBadAI = null;
 
-    [SerializeField]
-    private Table table;
-    public AI ai;
+    [SerializeField] private Table table;
+    public AI Customer;
 
     private SpriteRenderer chairSprite;
-    private PolygonCollider2D chairCollider;
+
+    public Item Food = null;
 
     private void Start()
     {
         chairSprite = GetComponent<SpriteRenderer>();
-        chairCollider = GetComponent<PolygonCollider2D>();
+    }
+
+    public void FreeTableSpace()
+    {
+        table.FreeTable(this);
     }
 
     public void FreeChair()
     {
-        ai.transform.position = SpawnPointForBadAI.transform.position;
-        ai = null;
+        Customer.Rb2d.constraints = RigidbodyConstraints2D.None;
+        Customer.transform.position = SpawnPointForBadAI.transform.position;
+        Customer = null;
         seatAvaliable = true;
-        chairCollider.enabled = true;
         chairSprite.enabled = true;
+    }
+
+    public void FinishFood()
+    {
+        if (Food)
+        {
+            Destroy(Food.gameObject);
+            Food = null;
+        }
     }
 
     public bool IsAIsFood(Item item)
     {
-        if(ai && (int)item.type == ai.ChoiceIndex)
+        if (Customer && (int)item.type == Customer.ChoiceIndex)
         {
             return true;
         }
@@ -41,20 +53,19 @@ public class Chair : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void SitOnChair(AI ai)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Customer")
-            && collision.gameObject.GetComponent<AI>().state == AIState.Good
-            && seatAvaliable)
+        if (seatAvaliable)
         {
-            ai = collision.gameObject.GetComponent<AI>();
-            ai.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
-            ai.transform.position = transform.position;
-            ai.ChoiceIndex = Random.Range(0, 2);
-            table.AddCostumer(this);
             seatAvaliable = false;
             chairSprite.enabled = false;
             table.plateSprite.enabled = true;
+
+            Customer = ai;
+            Customer.ChoiceIndex = Random.Range(0, 2);
+            Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
+            Customer.transform.position = transform.position;
+            table.AddCostumer(this);
         }
     }
 }

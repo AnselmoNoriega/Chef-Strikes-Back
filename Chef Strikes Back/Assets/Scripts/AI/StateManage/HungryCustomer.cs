@@ -83,5 +83,6 @@ public class HungryCustomer : StateClass<AI>
             agent.OrderBubble[1].gameObject.SetActive(false);
         }
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
+        agent.SelectedChair.FreeTableSpace();
     }
 }

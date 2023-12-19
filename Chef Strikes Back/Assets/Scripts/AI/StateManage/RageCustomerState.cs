@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class RageCustomerState : StateClass<AI>
 {
+    private int _countDown = 0;
+    private int _currentWaypoint = 0;
+    private AI _agent = null;
+
     public void Enter(AI agent)
     {
         agent.gameObject.GetComponent<Rigidbody2D>().constraints &= RigidbodyConstraints2D.FreezeRotation;

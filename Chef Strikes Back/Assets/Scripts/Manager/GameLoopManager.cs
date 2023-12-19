@@ -38,7 +38,7 @@ public class GameLoopManager : MonoBehaviour
 
     private void SpawnCustomer()
     {
-        Vector2 spawnPos = ServiceLocator.Get<TileManager>().requestEntrancePos();
+        Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
         Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
     }
 
