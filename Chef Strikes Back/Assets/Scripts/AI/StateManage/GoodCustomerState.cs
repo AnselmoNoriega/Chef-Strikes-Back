@@ -17,7 +17,7 @@ public class GoodCustomerState : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        
+
     }
 
     public void FixedUpdate(AI agent)
@@ -26,7 +26,7 @@ public class GoodCustomerState : StateClass<AI>
         {
             return;
         }
-        
+
         if (_currentWaypoint >= agent.Path.vectorPath.Count && !agent._gameLoopManager.IsInRageMode())
         {
             agent.SelectedChair.SitOnChair(agent);
@@ -39,12 +39,12 @@ public class GoodCustomerState : StateClass<AI>
 
         var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
 
-        if(distance < agent.NextWaypointDistance)
+        if (distance < agent.NextWaypointDistance)
         {
             ++_currentWaypoint;
         }
 
-        if( Time.time - _countDown >= 0.5f)
+        if (Time.time - _countDown >= 0.5f)
         {
             agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
             _currentWaypoint = 0;
@@ -59,7 +59,7 @@ public class GoodCustomerState : StateClass<AI>
 
     public void TriggerEnter2D(AI agent, Collider2D collision)
     {
-       
+
     }
 
     public void Exit(AI agent)

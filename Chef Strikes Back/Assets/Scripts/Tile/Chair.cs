@@ -22,6 +22,7 @@ public class Chair : MonoBehaviour
     public void FreeTableSpace()
     {
         table.FreeTable(this);
+        ServiceLocator.Get<AIManager>().AddAvailableChair(this);
     }
 
     public void FreeChair()

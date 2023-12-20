@@ -7,21 +7,18 @@ public class AIManager : MonoBehaviour
     [SerializeField] private List<Chair> Chairs = new();
     [SerializeField] private List<Transform> RandomSpots = new();
 
-    private List<Chair> _availableChairs = new();
-
     [SerializeField] private Transform _exitPoint = null;
-
-    private void Awake()
-    {
-        foreach(var chair in Chairs)
-        {
-            _availableChairs.Add(chair);
-        }
-    }
 
     public Chair GiveMeChair()
     {
-        return _availableChairs[Random.Range(0, Chairs.Count)];
+        var chair = Chairs[Random.Range(0, Chairs.Count)];
+        Chairs.Remove(chair);
+        return chair;
+    }
+
+    public void AddAvailableChair(Chair chair)
+    {
+        Chairs.Add(chair);
     }
 
     public Vector2 GiveMeRandomPoint()

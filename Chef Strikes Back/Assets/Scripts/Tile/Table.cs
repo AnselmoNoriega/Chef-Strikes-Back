@@ -54,7 +54,6 @@ public class Table : MonoBehaviour
                     newItem.isServed = true;
                     chair.Food = newItem;
 
-                    chair.Customer.IsEating = true;
                     chair.Customer.ChangeState(AIState.Hungry);
                     return;
                 }

@@ -18,6 +18,10 @@ public class LeavingCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
+    }
+
+    public void FixedUpdate(AI agent)
+    {
         if(agent.Path == null)
         {
             return;
@@ -41,14 +45,10 @@ public class LeavingCustomer : StateClass<AI>
 
         if (Time.time - _countDown >= 0.5f)
         {
-            agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
+            agent.Seeker.StartPath(agent.Rb2d.position, _exitPosition, PathCompleted);
             _currentWaypoint = 0;
             _countDown = Time.time;
         }
-    }
-
-    public void FixedUpdate(AI agent)
-    {
 
     }
 

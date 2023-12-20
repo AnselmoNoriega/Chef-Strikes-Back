@@ -23,6 +23,10 @@ public class BadCustomerState : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
+    }
+
+    public void FixedUpdate(AI agent)
+    {
         if (agent._gameLoopManager.IsInRageMode())
         {
             agent.ChangeState(AIState.Rage);
@@ -50,10 +54,6 @@ public class BadCustomerState : StateClass<AI>
             _countDown = 3;
             _countDown = Time.time;
         }
-    }
-
-    public void FixedUpdate(AI agent)
-    {
 
     }
 
