@@ -46,7 +46,7 @@ public class Table : MonoBehaviour
         {
             foreach (var chair in chairs)
             {
-                if (!chair.Customer.IsEating && chair.IsAIsFood(newItem))
+                if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
                     ServiceLocator.Get<GameManager>().FoodGiven();
 
@@ -54,7 +54,7 @@ public class Table : MonoBehaviour
                     newItem.isServed = true;
                     chair.Food = newItem;
 
-                    chair.Customer.ChangeState(AIState.Hungry);
+                    chair.Customer.ChangeState(AIState.Eating);
                     return;
                 }
             }

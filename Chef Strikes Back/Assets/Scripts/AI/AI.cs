@@ -6,6 +6,7 @@ public enum AIState
 {
     Good,
     Hungry,
+    Eating,
     Bad,
     Rage,
     Leaving,
@@ -30,7 +31,6 @@ public class AI : MonoBehaviour
     public int Health = 0;
     public int Speed = 0;
     public float NextWaypointDistance = 0;
-    [HideInInspector] public bool IsEating = false;
 
     [Space, Header("AI Path Finding")]
     [HideInInspector] public Path Path;
@@ -49,6 +49,7 @@ public class AI : MonoBehaviour
 
         _stateManager.AddState<GoodCustomerState>();
         _stateManager.AddState<HungryCustomer>();
+        _stateManager.AddState<EatingCustomer>();
         _stateManager.AddState<BadCustomerState>();
         _stateManager.AddState<RageCustomerState>();
         _stateManager.AddState<LeavingCustomer>();

@@ -3,9 +3,8 @@ using UnityEngine;
 public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime = 25.0f;
-    private float eatingTime = 2.0f;
-    private float timer;
-    private Vector3 scale;
+    private float timer = 0;
+    private Vector3 scale = Vector3.zero;
 
     public void Enter(AI agent)
     {
@@ -14,26 +13,11 @@ public class HungryCustomer : StateClass<AI>
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
-        if (agent.IsEating)
-        {
-            agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
-            timer = eatingTime;
-        }
-        else
-        {
-            if (agent.ChoiceIndex == 0)
-            {
-                agent._indicator.SetIndicator(true, IndicatorImage.Pizza);
-                agent.OrderBubble[0].gameObject.SetActive(true);
-            }
-            else
-            {
-                agent._indicator.SetIndicator(true, IndicatorImage.Spaguetti);
-                agent.OrderBubble[1].gameObject.SetActive(true);
-            }
-            agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-            timer = waitingTime;
-        }
+        agent._indicator.SetIndicator(true, (IndicatorImage)agent.ChoiceIndex);
+        agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
+
+        agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
+        timer = waitingTime;
     }
 
     public void Update(AI agent, float dt)
@@ -44,13 +28,9 @@ public class HungryCustomer : StateClass<AI>
             agent.EatingSlider.localScale = scale;
         }
 
-        if (scale.x <= 0 && agent.IsEating)
+        if (scale.x <= 0)
         {
-            agent.DropMoney();
-            agent.ChangeState(AIState.Leaving);
-        }
-        else if (scale.x <= 0)
-        {
+            agent.SelectedChair.FreeTableSpace();
             agent.ChangeState(AIState.Bad);
         }
     }
@@ -72,22 +52,9 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.ChoiceIndex == 0)
-        {
-            agent._indicator.SetIndicator(false, IndicatorImage.Pizza);
-            agent.OrderBubble[0].gameObject.SetActive(false);
-        }
-        else
-        {
-            agent._indicator.SetIndicator(false, IndicatorImage.Spaguetti);
-            agent.OrderBubble[1].gameObject.SetActive(false);
-        }
-        agent.EatingSlider.transform.parent.gameObject.SetActive(false);
+        agent._indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
+        agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 
-        if (agent.IsEating)
-        {
-            agent.SelectedChair.FreeTableSpace();
-        }
-        agent.IsEating = true;
+        agent.EatingSlider.transform.parent.gameObject.SetActive(false);
     }
 }
