@@ -118,6 +118,7 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.Health -= Mathf.RoundToInt(player._weapon.Damage);
+                    return;
                 }
             }
 

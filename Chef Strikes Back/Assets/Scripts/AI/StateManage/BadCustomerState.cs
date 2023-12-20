@@ -59,16 +59,12 @@ public class BadCustomerState : StateClass<AI>
 
     public void CollisionEnter2D(AI agent, Collision2D collision)
     {
-        if (collision.transform.tag == "Player" || collision.transform.tag == "Food")
+        if (collision.transform.tag == "Player")
         {
-            var rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            rb.AddForce(-rb.velocity.normalized * 60, ForceMode2D.Impulse);
-            var rage = collision.gameObject.GetComponent<Player>();
-            if (rage)
-            {
-                rage.TakeRage(10);
-                ServiceLocator.Get<AudioManager>().PlaySource("ragebar_filling");
-            }
+            var player = collision.gameObject.GetComponent<Player>();
+            player.Rb.AddForce(-player.Rb.velocity.normalized * 60, ForceMode2D.Impulse);
+            player.TakeRage(10);
+            ServiceLocator.Get<AudioManager>().PlaySource("ragebar_filling");
         }
     }
 
