@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Actions : MonoBehaviour
 {
     [Header("Inventory Actions")]
-    public List<Item> item;
     private Inventory inventory;
     [SerializeField] private float throwForce;
     public bool ready2Throw;
@@ -30,22 +29,6 @@ public class Actions : MonoBehaviour
         offset = new Vector3(0, 0.35f, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 9)
-        {
-            item.Add(collision.GetComponent<Item>());
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 9)
-        {
-            item.Remove(collision.GetComponent<Item>());
-        }
-    }
-
     public void GrabItem(InputAction mouse)
     {
         if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().IsInRageMode())
@@ -56,24 +39,21 @@ public class Actions : MonoBehaviour
             player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
             PlayerHelper.FaceMovementDirection(player.Animator, player.LookingDirection);
 
-            for (int i = 0; i < item.Count; i++)
-            {
-                if (item[i] && item[i].GetComponent<Collider2D>().OverlapPoint(mousePos) && item[i].isPickable)
-                {
-                    inventory.AddItem(item[i]);
-                    isCarryingItem = true;
-                    item[i].CollidersState(false);
-                    return;
-                }
-            }
-
-            Ray ray = Camera.main.ScreenPointToRay(mouse.ReadValue<Vector2>());
-            RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(ray);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
 
             foreach (var hit in hits)
             {
-                var foodPile = hit.collider.GetComponent<FoodPile>();
-                if (foodPile && (foodPile.transform.position - transform.position).magnitude < grabDistance)
+                var myItem = hit.GetComponent<Item>();
+                if (myItem && myItem.isPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < grabDistance)
+                {
+                    inventory.AddItem(myItem);
+                    isCarryingItem = true;
+                    myItem.CollidersState(false);
+                    return;
+                }
+
+                var foodPile = hit.GetComponent<FoodPile>();
+                if (foodPile && Vector2.Distance(foodPile.transform.position, transform.position) < grabDistance)
                 {
                     var newItem = foodPile.Hit();
                     inventory.AddItem(newItem.GetComponent<Item>());

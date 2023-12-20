@@ -21,7 +21,7 @@ public class PlayerIdle : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        agent.Rb.AddForce((- agent.Rb.velocity) * acceleration);
+        agent.Rb.AddForce((-agent.Rb.velocity) * acceleration);
     }
 
     public void Exit(Player agent)
@@ -58,7 +58,6 @@ public class PlayerNone : StateClass<Player>
 public class PlayerAttacking : StateClass<Player>
 {
     float timer;
-    Vector2 offset = new Vector2(0.0f, 0.35f);
 
     public void Enter(Player agent)
     {
@@ -72,7 +71,7 @@ public class PlayerAttacking : StateClass<Player>
     {
         timer -= dt;
 
-        if(timer <= 0.0f) 
+        if (timer <= 0.0f)
         {
             agent.ChangeAction(PlayerActions.None);
         }
@@ -100,7 +99,7 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Attack(Vector2 angle, Player player)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.LookingDirection / 3) + offset, 0.4f); 
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, 0.4f);
         PlayerHelper.FaceMovementDirection(player.Animator, angle);
 
         foreach (var hit in hits)
@@ -113,17 +112,16 @@ public class PlayerAttacking : StateClass<Player>
             var enemyAI = hit.GetComponent<AI>();
             if (enemyAI)
             {
-                if (enemyAI.state == AIState.Rage)
+                Vector2 dirToCollider = (enemyAI.gameObject.transform.position - player.gameObject.transform.position).normalized;
+                float angleToCollider = Vector2.Angle(angle, dirToCollider);
+                if (angleToCollider <= 45.0f && (enemyAI.state == AIState.Rage || enemyAI.state == AIState.Attacking))
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.Health -= Mathf.RoundToInt(player._weapon.Damage);
                 }
             }
 
-            if (!hit.CompareTag("Player") && !enemyAI && !hit.CompareTag("FoodEnemy"))
-            {
-                ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
-            }
+            ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
         }
     }
 }
@@ -176,7 +174,7 @@ public class NormalMode : StateClass<Player>
     public void Enter(Player agent)
     {
         _gameManager = ServiceLocator.Get<GameLoopManager>();
-        if(_gameManager is null)
+        if (_gameManager is null)
         {
             Debug.Log("<color=cyan><b>GAME MANAGER NOT FOUND</b></color>");
         }
