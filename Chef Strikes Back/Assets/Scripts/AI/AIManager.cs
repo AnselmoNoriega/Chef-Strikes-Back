@@ -4,26 +4,39 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    [SerializeField] private List<Chair> Chairs = new();
-    [SerializeField] private List<Transform> RandomSpots = new();
+    [SerializeField] private List<Chair> _chairs = new();
+    [SerializeField] private List<Transform> _randomSpots = new();
+    private List<Transform> _emptyRandomSpots = new();
 
     [SerializeField] private Transform _exitPoint = null;
 
+    private void Awake()
+    {
+        ResetRandomSpots();
+    }
+
     public Chair GiveMeChair()
     {
-        var chair = Chairs[Random.Range(0, Chairs.Count)];
-        Chairs.Remove(chair);
+        var chair = _chairs[Random.Range(0, _chairs.Count)];
+        _chairs.Remove(chair);
         return chair;
     }
 
     public void AddAvailableChair(Chair chair)
     {
-        Chairs.Add(chair);
+        _chairs.Add(chair);
     }
 
     public Vector2 GiveMeRandomPoint()
     {
-        return RandomSpots[Random.Range(0, RandomSpots.Count)].position;
+        if (_emptyRandomSpots.Count > 0)
+        {
+            var spot = _emptyRandomSpots[Random.Range(0, _emptyRandomSpots.Count)];
+            _emptyRandomSpots.Remove(spot);
+            return spot.position;
+        }
+
+        return _randomSpots[Random.Range(0, _randomSpots.Count)].position;
     }
 
     public Vector2 ExitPosition()
@@ -31,4 +44,13 @@ public class AIManager : MonoBehaviour
         return _exitPoint.position;
     }
 
+    public void ResetRandomSpots()
+    {
+        _emptyRandomSpots.Clear();
+
+        foreach (var spot in _randomSpots)
+        {
+            _emptyRandomSpots.Add(spot);
+        }
+    }
 }

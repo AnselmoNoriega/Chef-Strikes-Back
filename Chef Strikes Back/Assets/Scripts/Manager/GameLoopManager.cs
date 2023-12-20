@@ -31,6 +31,7 @@ public class GameLoopManager : MonoBehaviour
 
         if (_isInRageMode && _AIPool.Count == 0)
         {
+            ServiceLocator.Get<AIManager>().ResetRandomSpots();
             _player.ExitRageMode();
             _isInRageMode = false;
         }

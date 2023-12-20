@@ -224,15 +224,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba7a1fbf979e214ba6890754d735e6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Chairs:
+  _chairs:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  RandomSpots:
-  - {fileID: 0}
+  _randomSpots: []
   _exitPoint: {fileID: 1840867465630466503}
 --- !u!1 &749857914491321574
 GameObject:
