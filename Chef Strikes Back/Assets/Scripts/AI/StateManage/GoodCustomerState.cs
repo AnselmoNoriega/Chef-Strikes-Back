@@ -27,7 +27,7 @@ public class GoodCustomerState : StateClass<AI>
             return;
         }
 
-        if (_currentWaypoint >= agent.Path.vectorPath.Count && !agent._gameLoopManager.IsInRageMode())
+        if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
             agent.SelectedChair.SitOnChair(agent);
             agent.ChangeState(AIState.Hungry);

@@ -9,6 +9,7 @@ public enum AIState
     Eating,
     Bad,
     Rage,
+    Attacking,
     Leaving,
     None
 }
@@ -52,6 +53,7 @@ public class AI : MonoBehaviour
         _stateManager.AddState<EatingCustomer>();
         _stateManager.AddState<BadCustomerState>();
         _stateManager.AddState<RageCustomerState>();
+        _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
         ChangeState(Random.value < 1.0f ? AIState.Good : AIState.Bad);
     }
