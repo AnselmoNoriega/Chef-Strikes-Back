@@ -124,7 +124,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.36}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.50645995, y: 0.32921502}
@@ -136,10 +136,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.0062155724, y: -0.43188328}
-      - {x: -0.65864706, y: -0.09945166}
-      - {x: -0.0031080246, y: 0.22365624}
-      - {x: 0.6368922, y: -0.10566735}
+    - - {x: -0.010402441, y: -0.18868631}
+      - {x: -0.8250017, y: 0.22295535}
+      - {x: -0.012230396, y: 0.6357706}
+      - {x: 0.80078757, y: 0.22299886}
 --- !u!60 &2826878394204598215
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -184,7 +184,6 @@ MonoBehaviour:
   chairs: []
   platePos: {fileID: 8896559214048582816}
   plateSprite: {fileID: 123078431039835726}
-  foods: []
 --- !u!1 &6387184632411257130
 GameObject:
   m_ObjectHideFlags: 0

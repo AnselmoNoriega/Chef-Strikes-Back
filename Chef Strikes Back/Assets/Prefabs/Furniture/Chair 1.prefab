@@ -121,7 +121,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.15}
@@ -133,10 +133,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.00017294288, y: -0.11550474}
-      - {x: -0.22353882, y: -0.035413146}
-      - {x: -0.0008877516, y: 0.06005472}
-      - {x: 0.22122699, y: -0.037580013}
+    - - {x: -0.0006429851, y: 0.06750703}
+      - {x: -0.23766881, y: 0.1797384}
+      - {x: -0.0021908283, y: 0.30496043}
+      - {x: 0.21264452, y: 0.18301511}
 --- !u!114 &3913419226850297557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,4 +152,5 @@ MonoBehaviour:
   seatAvaliable: 1
   SpawnPointForBadAI: {fileID: 0}
   table: {fileID: 0}
-  ai: {fileID: 0}
+  Customer: {fileID: 0}
+  Food: {fileID: 0}
