@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 34484012071288450}
   - component: {fileID: 34484012071288455}
   - component: {fileID: 6545289984769141785}
-  - component: {fileID: 7195322852576344900}
   - component: {fileID: 1126184412891325970}
   - component: {fileID: 6545289986373070950}
   - component: {fileID: 6545289986373070951}
@@ -131,25 +130,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007558018, y: 0.093938716}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.10107269
---- !u!70 &7195322852576344900
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34484012071288454}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0023691356, y: 0.3319646}
-  m_Size: {x: 0.31811315, y: 0.4791975}
-  m_Direction: 0
+  m_Radius: 0.08660247
 --- !u!114 &1126184412891325970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,8 +758,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004970446, y: -0.1424861}
-  m_Size: {x: 0.3111231, y: 0.4764464}
+  m_Offset: {x: 0, y: -0.2}
+  m_Size: {x: 0.3, y: 0.5}
   m_Direction: 0
 --- !u!114 &6797668000266321248
 MonoBehaviour:
