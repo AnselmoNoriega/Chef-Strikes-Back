@@ -75,11 +75,14 @@ public class AI : MonoBehaviour
         _stateManager.FixedUpdate();
     }
 
-    public int FaceDirection(Animator animator, Vector2 lookDirection)
+    public void FaceDirection(Animator animator, Vector2 lookDirection)
     {
+        if(lookDirection.magnitude <= 0.1)
+        {
+            return;
+        }
         int directionIndex = Mathf.FloorToInt((Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
         animator.SetInteger("PosNum", directionIndex);
-        return directionIndex;
     }
 
     public void DestroyAI()
