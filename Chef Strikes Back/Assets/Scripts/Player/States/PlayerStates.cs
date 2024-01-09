@@ -104,11 +104,6 @@ public class PlayerAttacking : StateClass<Player>
 
         foreach (var hit in hits)
         {
-            if (hit.CompareTag("Player"))
-            {
-                continue;
-            }
-
             var enemyAI = hit.GetComponent<AI>();
             if (enemyAI)
             {
