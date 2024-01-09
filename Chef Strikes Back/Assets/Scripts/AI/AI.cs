@@ -17,7 +17,7 @@ public enum AIState
 public class AI : MonoBehaviour
 {
     [Header("AI Behaviour")]
-    [HideInInspector] public Indicator _indicator;
+    [HideInInspector] public Indicator Indicator;
     private StateMachine<AI> _stateManager;
     
     [Space, Header("AI Properties")]
@@ -33,16 +33,14 @@ public class AI : MonoBehaviour
     public int Speed = 0;
     public float NextWaypointDistance = 0;
 
-    [Space, Header("AI Path Finding")]
-    [HideInInspector] public Path Path;
-    [HideInInspector] public Seeker Seeker;
-    [HideInInspector] public Chair SelectedChair;
-
-    [HideInInspector] public GameLoopManager _gameLoopManager;
+    public Path Path { get; set; }
+    public Seeker Seeker { get; set; }
+    public Chair SelectedChair { get; set; }
+    public GameLoopManager _gameLoopManager { get; set; }
 
     private void Awake()
     {
-        _indicator = GetComponent<Indicator>();
+        Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
         _gameLoopManager = ServiceLocator.Get<GameLoopManager>();
         _stateManager = new StateMachine<AI>(this);

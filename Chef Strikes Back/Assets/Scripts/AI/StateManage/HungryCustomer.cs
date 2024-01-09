@@ -13,7 +13,7 @@ public class HungryCustomer : StateClass<AI>
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
-        agent._indicator.SetIndicator(true, (IndicatorImage)agent.ChoiceIndex);
+        agent.Indicator.SetIndicator(true, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
@@ -52,7 +52,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        agent._indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
+        agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
