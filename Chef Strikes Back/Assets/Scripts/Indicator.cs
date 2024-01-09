@@ -115,6 +115,7 @@ public class Indicator : MonoBehaviour
         _image[_index].enabled = active;
         _arrow.enabled = active;
         _isHungry = active;
+        _imageMaskTransform.GetComponent<Image>().enabled = true;
     }
 
     public void UpdateTimerIndicator(float timePersentage)
