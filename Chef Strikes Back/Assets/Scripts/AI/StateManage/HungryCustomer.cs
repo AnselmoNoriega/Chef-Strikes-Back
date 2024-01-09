@@ -26,6 +26,7 @@ public class HungryCustomer : StateClass<AI>
         {
             scale.x -= Time.deltaTime / timer;
             agent.EatingSlider.localScale = scale;
+            agent.Indicator.UpdateTimerIndicator(scale.x);
         }
 
         if (scale.x <= 0)

@@ -15,8 +15,12 @@ public class Indicator : MonoBehaviour
     [SerializeField] private Image _arrow;
     [SerializeField] private Vector2 _arrowOffset;
     [SerializeField] private Vector3 _offsetOutOfScreen;
+    [SerializeField] private RectTransform _timerTranform;
+    [SerializeField] private RectTransform _imageMaskTransform;
     private float width;
     private float height;
+
+    private Vector2 _newTimerSize;
 
     private int _index = 0;
     private bool _isHungry = false;
@@ -36,6 +40,7 @@ public class Indicator : MonoBehaviour
         _ai = GetComponent<AI>();
 
         diffScreen = width / height;
+        _newTimerSize.x = _imageMaskTransform.sizeDelta.x;
     }
     private void Update()
     {
@@ -45,6 +50,7 @@ public class Indicator : MonoBehaviour
             {
                 _image[_index].enabled = true;
                 _arrow.enabled = true;
+                _imageMaskTransform.GetComponent<Image>().enabled = true;
             }
             var dir = transform.position + _offsetOutOfScreen - Camera.main.transform.position;
             dir.z = 0;
@@ -70,11 +76,13 @@ public class Indicator : MonoBehaviour
             float rot = Mathf.Atan2(-dir.x, dir.y) * Mathf.Rad2Deg;
             _arrow.rectTransform.rotation = Quaternion.Euler(0f, 0f, rot);
             _image[_index].rectTransform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            _timerTranform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
         else
         {
             _image[_index].enabled = false;
             _arrow.enabled = false;
+            _imageMaskTransform.GetComponent<Image>().enabled = false;
         }
     }
 
@@ -107,5 +115,11 @@ public class Indicator : MonoBehaviour
         _image[_index].enabled = active;
         _arrow.enabled = active;
         _isHungry = active;
+    }
+
+    public void UpdateTimerIndicator(float timePersentage)
+    {
+        _newTimerSize.y = 108 * (1 - timePersentage);
+        _imageMaskTransform.sizeDelta = _newTimerSize;
     }
 }
