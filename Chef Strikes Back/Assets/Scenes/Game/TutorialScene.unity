@@ -2149,14 +2149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489507a675b2d9a4d8c1811953c49628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 0
   AIPrefabs: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
-  player: {fileID: 0}
-  AIPool: []
-  sc: {fileID: 7418929117601166086}
-  money: 0
-  rageValue: 0
-  rageMode: 0
-  moneycounting: {fileID: 1746922557}
 --- !u!4 &357500826
 Transform:
   m_ObjectHideFlags: 0
@@ -2333,7 +2327,6 @@ MonoBehaviour:
   target: {fileID: 0}
   foodItem: {fileID: 7360178021079257609, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
   throwStrength: 2
-  startHealth: 2
 --- !u!212 &527163539
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2866,7 +2859,6 @@ MonoBehaviour:
   target: {fileID: 0}
   foodItem: {fileID: 7360178021079257609, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
   throwStrength: 2
-  startHealth: 2
 --- !u!212 &851398646
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2919,17 +2911,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &856727856 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3760778737114030102, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-  m_PrefabInstance: {fileID: 1130302221}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &899669395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4635,6 +4616,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2164134964748869865, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3760778737797132649, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4731,19 +4716,20 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4298698907547059078, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905631837811621970, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905631837811621970, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
---- !u!114 &1136535326 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1136535326, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
-  m_PrefabInstance: {fileID: 1130302221}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1139026997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5389,87 +5375,95 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: 0.123919666
+      value: -0.114407
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: 0.5660105
+      value: 0.512298
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -0.043544933
+      value: -0.2533961
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 0.763496
+      value: 0.34589607
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
-      value: -0.6451272
+      value: -0.18391678
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
-      value: 0.068296894
+      value: 0.25961232
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
-      value: -0.07881986
+      value: -0.3026488
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
-      value: -0.58819324
+      value: 0.12533858
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
-      value: 0.1970256
+      value: -0.46457648
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
-      value: -0.25537246
+      value: -0.05106783
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
-      value: 0.5168605
+      value: -0.08342391
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].y
-      value: -0.63432586
+      value: -0.5264929
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].x
-      value: 0.83217925
+      value: 0.16879272
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[6].y
-      value: -0.25648436
+      value: -0.23787612
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[7].x
-      value: 0.59519947
+      value: 0.33913687
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[7].y
-      value: 0.020618737
+      value: -0.038209278
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].x
-      value: 0.47823068
+      value: 0.34299418
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].y
-      value: 0.15872252
+      value: 0.058970638
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[9].x
-      value: 0.26639372
+      value: 0.12749995
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[9].y
-      value: 0.3985054
+      value: 0.30246913
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[10].x
+      value: 0.09679382
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689412848132947797, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[10].y
+      value: 0.2578297
       objectReference: {fileID: 0}
     - target: {fileID: 5689412848132947799, guid: 0d5e947118749af4794cfe30921da9aa, type: 3}
       propertyPath: m_RootOrder
@@ -6059,7 +6053,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.13999999, y: 0.39599997, z: 0}
+  m_ChunkCullingBounds: {x: 0.13999999, y: 0.29999995, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -7779,7 +7773,6 @@ MonoBehaviour:
   target: {fileID: 0}
   foodItem: {fileID: 7360178021079257609, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
   throwStrength: 2
-  startHealth: 2
 --- !u!212 &1758475750
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12617,11 +12610,11 @@ PrefabInstance:
     - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: rageBar
       value: 
-      objectReference: {fileID: 856727856}
+      objectReference: {fileID: 0}
     - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 1136535326}
+      objectReference: {fileID: 0}
     - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: sceneControl
       value: 

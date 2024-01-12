@@ -124,10 +124,12 @@ public class PlayerAttacking : StateClass<Player>
 public class PlayerThrowing : StateClass<Player>
 {
     private Vector3 offset = new Vector3(0, 0.35f, 0);
+    float _timer;
 
     public void Enter(Player agent)
     {
         agent.Rb.velocity = Vector2.zero;
+        _timer = 0;
     }
 
     public void Update(Player agent, float dt)
@@ -135,6 +137,12 @@ public class PlayerThrowing : StateClass<Player>
         var mousePos = Camera.main.ScreenToWorldPoint(agent.Mouse.ReadValue<Vector2>());
         var dir = (mousePos - (agent.transform.position + offset));
         PlayerHelper.FaceMovementDirection(agent.Animator, dir);
+
+        if (_timer <= 5)
+        {
+            _timer += 4 * Time.deltaTime;
+        }
+        agent.ThrowLookingDir = dir.normalized * _timer;
     }
 
     public void FixedUpdate(Player agent)
@@ -145,6 +153,7 @@ public class PlayerThrowing : StateClass<Player>
     public void Exit(Player agent)
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
+        agent.ThrowLookingDir = Vector2.zero;
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     [HideInInspector, Space, Header("Attack Info")]
     public Vector2 LookingDirection;
 
+    [HideInInspector, Space, Header("Throw Info")]
+    public Vector2 ThrowLookingDir = Vector2.zero;
+
     [Space, Header("MaxStats Info")]
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _maxRage;
