@@ -109,10 +109,10 @@ public class PlayerAttacking : StateClass<Player>
             {
                 Vector2 dirToCollider = (enemyAI.gameObject.transform.position - player.gameObject.transform.position).normalized;
                 float angleToCollider = Vector2.Angle(angle, dirToCollider);
-                if (angleToCollider <= 45.0f && (enemyAI.state == AIState.Rage || enemyAI.state == AIState.Attacking))
+                if (angleToCollider <= 45.0f)
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
-                    enemyAI.Health -= Mathf.RoundToInt(player._weapon.Damage);
+                    enemyAI.Damage((int)player._weapon.Damage);
                     return;
                 }
             }
@@ -129,7 +129,6 @@ public class PlayerThrowing : StateClass<Player>
     public void Enter(Player agent)
     {
         agent.Rb.velocity = Vector2.zero;
-        //ServiceLocator.Get<AudioManager>().PlaySource("charge");
     }
 
     public void Update(Player agent, float dt)

@@ -29,9 +29,10 @@ public class AI : MonoBehaviour
 
     [Space, Header("AI Info")]
     public AIState state;
-    public int Health = 0;
     public int Speed = 0;
     public float NextWaypointDistance = 0;
+    [SerializeField] private int _health = 0;
+    [SerializeField] private int _hitsToGetMad = 0;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -60,12 +61,6 @@ public class AI : MonoBehaviour
     {
         _stateManager.Update(Time.deltaTime);
         FaceDirection(_anim, Rb2d.velocity);
-
-        if (Health <= 0)
-        {
-            ServiceLocator.Get<GameManager>().KillScoreUpdate();
-            DestroyAI();
-        }
     }
 
     private void FixedUpdate()
@@ -92,6 +87,29 @@ public class AI : MonoBehaviour
     public void DropMoney()
     {
         GetComponent<LootBag>().InstantiateLoot(transform.position);
+    }
+
+    public void Damage(int amt)
+    {
+        if(state == AIState.Rage || state == AIState.Attacking)
+        {
+            _health -= amt;
+
+            if (_health <= 0)
+            {
+                ServiceLocator.Get<GameManager>().KillScoreUpdate();
+                DestroyAI();
+            }
+        }
+        else
+        {
+            --_hitsToGetMad;
+
+            if(_hitsToGetMad <= 0)
+            {
+                ChangeState(AIState.Rage);
+            }
+        }
     }
 
     public void ChangeState(AIState newState)
