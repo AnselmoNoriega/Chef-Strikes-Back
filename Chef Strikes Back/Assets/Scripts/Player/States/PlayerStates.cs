@@ -2,7 +2,6 @@ using UnityEngine;
 
 public enum PlayerStates { Idle, Walking, None }
 public enum PlayerActions { None, Attacking, Throwing }
-public enum PlayerStage { Normal, Rage, None }
 //------------------------------------------------------------------------------------------------
 
 public class PlayerIdle : StateClass<Player>
@@ -146,88 +145,6 @@ public class PlayerThrowing : StateClass<Player>
     public void Exit(Player agent)
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
-    }
-
-    public void CollisionEnter2D(Player agent, Collision2D collision)
-    {
-
-    }
-
-    public void TriggerEnter2D(Player agent, Collider2D collision)
-    {
-
-    }
-}
-
-
-//------------------------------------------------------------------------------------------------
-
-public class NormalMode : StateClass<Player>
-{
-    GameLoopManager _gameManager;
-
-    public void Enter(Player agent)
-    {
-        _gameManager = ServiceLocator.Get<GameLoopManager>();
-        if (_gameManager is null)
-        {
-            Debug.Log("<color=cyan><b>GAME MANAGER NOT FOUND</b></color>");
-        }
-
-        ServiceLocator.Get<CanvasManager>().RageModeChange(true);
-    }
-
-    public void Update(Player agent, float dt)
-    {
-
-    }
-
-    public void FixedUpdate(Player agent)
-    {
-
-    }
-
-    public void Exit(Player agent)
-    {
-
-    }
-
-    public void CollisionEnter2D(Player agent, Collision2D collision)
-    {
-
-    }
-
-    public void TriggerEnter2D(Player agent, Collider2D collision)
-    {
-
-    }
-}
-
-public class RageMode : StateClass<Player>
-{
-    GameLoopManager _gameManager;
-
-    public void Enter(Player agent)
-    {
-        _gameManager = ServiceLocator.Get<GameLoopManager>();
-        agent.Actions.DropItem();
-        ServiceLocator.Get<CanvasManager>().RageModeChange(true);
-        ServiceLocator.Get<AudioManager>().PlaySource("enter_rage");
-    }
-
-    public void Update(Player agent, float dt)
-    {
-
-    }
-
-    public void FixedUpdate(Player agent)
-    {
-
-    }
-
-    public void Exit(Player agent)
-    {
-        ServiceLocator.Get<CanvasManager>().RageModeChange(false);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class PlayerWalking : StateClass<Player>
 {
-    //player moving speed
     private float moveSpeed = 2.3f;
-    //Player Rage move speed
-    private float rageSpeed = 3.0f;
     private float acceleration = 100.0f;
     private Vector2 movementAngle = new Vector2(2.0f, 1.0f);
 
@@ -20,9 +17,7 @@ public class PlayerWalking : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        
-
-        if (agent.PlayerMode == PlayerStage.Normal && agent.PlayerAction != PlayerActions.None)
+        if (agent.PlayerAction != PlayerActions.None)
         {
             agent.ChangeState(PlayerStates.Idle);
             return;
@@ -41,9 +36,9 @@ public class PlayerWalking : StateClass<Player>
         }
         else
         {
-            if (!ServiceLocator.Get<AudioManager>().IsPlaying("walk")) 
+            if (!ServiceLocator.Get<AudioManager>().IsPlaying("walk"))
             {
-                ServiceLocator.Get<AudioManager>().PlaySource("walk"); 
+                ServiceLocator.Get<AudioManager>().PlaySource("walk");
             }
             currentDirection = PlayerHelper.FaceMovementDirection(agent.Animator, moveDirection);
             agent.LookingDirection = moveDirection;
@@ -52,14 +47,7 @@ public class PlayerWalking : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        if (agent.PlayerMode != PlayerStage.Rage)
-        {
-            agent.Rb.AddForce(((moveDirection * moveSpeed) - agent.Rb.velocity) * acceleration);
-        }
-        else
-        {
-            agent.Rb.AddForce(((moveDirection * rageSpeed) - agent.Rb.velocity) * acceleration);
-        }
+        agent.Rb.AddForce(((moveDirection * moveSpeed) - agent.Rb.velocity) * acceleration);
     }
     private void FaceDirectionForIdle(Player agent)
     {
