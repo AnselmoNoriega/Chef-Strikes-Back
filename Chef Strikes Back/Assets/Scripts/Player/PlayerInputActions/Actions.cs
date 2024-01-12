@@ -153,11 +153,6 @@ public class Actions : MonoBehaviour
 
     public void Attacking(Vector2 anglePos)
     {
-        if (!ServiceLocator.Get<GameLoopManager>().IsInRageMode())
-        {
-            return;
-        }
-
         if (player.PlayerAction != PlayerActions.Attacking && !ready2Throw)
         {
             if (anglePos != Vector2.zero)

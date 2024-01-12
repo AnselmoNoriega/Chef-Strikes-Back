@@ -4,13 +4,15 @@ using UnityEngine.InputSystem;
 public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
-    private InputAction rightMouse;
+
     private InputAction leftTrigger;
-    private InputAction leftMouse;
-    private InputAction mouse;
+    private InputAction rightTrigger;
     private InputAction rightJoystick;
     private InputAction leftButton;
-    private InputAction lowerButton;
+
+    private InputAction leftMouse;
+    private InputAction rightMouse;
+    private InputAction mouse;
 
     [SerializeField]
     private Actions action;
@@ -27,24 +29,23 @@ public class PlayerInputs : MonoBehaviour
         mouse = inputManager.Player.MouseLocation;
          
         leftTrigger = inputManager.Player.LeftTrigger;
+        rightTrigger = inputManager.Player.RightTrigger;
         leftButton = inputManager.Player.LeftButton;
         rightJoystick = inputManager.Player.LeftJoystick;
-        lowerButton = inputManager.Player.LowerButton;
 
         rightMouse.Enable();
         leftMouse.Enable();
         mouse.Enable();
 
         leftTrigger.Enable();
+        rightTrigger.Enable();
         leftButton.Enable();
         rightJoystick.Enable();
-        lowerButton.Enable();
 
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
         leftTrigger.performed += LeftTgrClick;
         leftButton.performed += LeftbuttonDown;
-        lowerButton.performed += LowerButtonDown;
 
         rightMouse.canceled += RightClickRelease;
         leftTrigger.canceled += LeftTgrRelease;
@@ -56,7 +57,6 @@ public class PlayerInputs : MonoBehaviour
         rightMouse.performed -= RightClick;
         leftButton.performed -= LeftbuttonDown;
         leftTrigger.performed -= LeftTgrClick;
-        lowerButton.performed -= LowerButtonDown;
 
         rightMouse.canceled -= RightClickRelease;
         leftTrigger.canceled -= LeftTgrRelease;
@@ -66,8 +66,8 @@ public class PlayerInputs : MonoBehaviour
         mouse.Disable();
 
         leftTrigger.Disable();
+        rightTrigger.Disable();
         leftButton.Disable();
-        lowerButton.Disable();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
@@ -84,17 +84,12 @@ public class PlayerInputs : MonoBehaviour
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
         action.Attacking(Vector2.zero);
-        action.GrabItem();
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
         action.PrepareToThrow(rightJoystick);
-    }
-
-    private void LowerButtonDown(InputAction.CallbackContext input)
-    {
-
+        action.GrabItem();
     }
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
