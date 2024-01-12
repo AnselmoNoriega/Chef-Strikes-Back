@@ -32,7 +32,7 @@ public class HungryCustomer : StateClass<AI>
         if (scale.x <= 0)
         {
             agent.SelectedChair.FreeTableSpace();
-            agent.ChangeState(AIState.Bad);
+            agent.ChangeState(AIState.Rage);
         }
     }
 
