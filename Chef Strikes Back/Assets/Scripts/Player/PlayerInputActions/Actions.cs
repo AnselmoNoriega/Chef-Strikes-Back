@@ -31,7 +31,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().IsInRageMode())
+        if (!isCarryingItem )
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
@@ -68,7 +68,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem()
     {
-        if (!isCarryingItem && !ServiceLocator.Get<GameLoopManager>().IsInRageMode())
+        if (!isCarryingItem )
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.LookingDirection / 3), 0.4f);
             float distance = 1000;

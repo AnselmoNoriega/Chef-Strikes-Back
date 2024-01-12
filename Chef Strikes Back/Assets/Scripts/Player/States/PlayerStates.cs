@@ -174,6 +174,8 @@ public class NormalMode : StateClass<Player>
         {
             Debug.Log("<color=cyan><b>GAME MANAGER NOT FOUND</b></color>");
         }
+
+        ServiceLocator.Get<CanvasManager>().RageModeChange(true);
     }
 
     public void Update(Player agent, float dt)

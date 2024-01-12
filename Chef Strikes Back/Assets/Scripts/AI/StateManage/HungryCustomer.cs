@@ -22,12 +22,11 @@ public class HungryCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        if (!ServiceLocator.Get<GameLoopManager>().IsInRageMode())
-        {
-            scale.x -= Time.deltaTime / timer;
-            agent.EatingSlider.localScale = scale;
-            agent.Indicator.UpdateTimerIndicator(scale.x);
-        }
+        
+        scale.x -= Time.deltaTime / timer;
+        agent.EatingSlider.localScale = scale;
+        agent.Indicator.UpdateTimerIndicator(scale.x);
+        
 
         if (scale.x <= 0)
         {

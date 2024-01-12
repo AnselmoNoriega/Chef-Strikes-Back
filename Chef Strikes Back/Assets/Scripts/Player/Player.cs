@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     [Header("Counts Info")]
     private int _currentHealth;
-    private int _currentRage;
+    //private int _currentRage;
     private int _money;
 
     [HideInInspector, Space, Header("Attack Info")]
@@ -56,7 +56,6 @@ public class Player : MonoBehaviour
 
         _currentHealth = _maxHealth;
         ServiceLocator.Get<CanvasManager>().SetMaxHealth(_maxHealth);
-        _currentRage = 0;
         ServiceLocator.Get<CanvasManager>().SetMaxRage(_maxRage);
 
         _initialized = true;
@@ -154,23 +153,9 @@ public class Player : MonoBehaviour
         ServiceLocator.Get<CanvasManager>().AddTooHealthSlider(-amt);
     }
 
-    public void ExitRageMode()
-    {
-        _currentRage = 0;
-        ChangeMood(PlayerStage.Normal);
-        ServiceLocator.Get<CanvasManager>().ChangeRageSliderValue(0);
-    }
+    
 
-    public void TakeRage(int amt)
-    {
-        _currentRage += amt;
-        if(_currentRage >= _maxRage)
-        {
-            ServiceLocator.Get<GameLoopManager>().SetRageMode(true);
-            ChangeMood(PlayerStage.Rage);
-        }
-        ServiceLocator.Get<CanvasManager>().AddTooRageSlider(amt);
-    }
+   
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -10,7 +10,6 @@ public class GameLoopManager : MonoBehaviour
 
     private List<GameObject> _AIPool = new();
     private Player _player;
-    private bool _isInRageMode = false;
     private float _countToSpawn = 0;
 
     public void Initialize()
@@ -23,18 +22,13 @@ public class GameLoopManager : MonoBehaviour
     {
         _countToSpawn += Time.deltaTime;
 
-        if (_countToSpawn >= spawnTime && _isInRageMode == false)
+        if (_countToSpawn >= spawnTime)
         {
             SpawnCustomer();
             _countToSpawn = 0;
         }
 
-        if (_isInRageMode && _AIPool.Count == 0)
-        {
-            ServiceLocator.Get<AIManager>().ResetRandomSpots();
-            _player.ExitRageMode();
-            _isInRageMode = false;
-        }
+        
     }
 
     private void SpawnCustomer()
@@ -43,20 +37,12 @@ public class GameLoopManager : MonoBehaviour
         Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
     }
 
-    public void SetRageMode(bool isRageMode)
-    {
-        _isInRageMode = isRageMode;
-    }
 
     public void ChangeSpawnTime(int time)
     {
         spawnTime = time;
     }
 
-    public bool IsInRageMode()
-    {
-        return _isInRageMode;
-    }
 
     public void RemoveAI(GameObject ai)
     {

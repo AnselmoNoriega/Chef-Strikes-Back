@@ -10,8 +10,7 @@ public class Bounciness : MonoBehaviour
         {
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
             rb.AddForce(-rb.velocity * 100, ForceMode2D.Impulse);
-            var rage = collision.gameObject.GetComponent<Player>();
-            rage.TakeRage(10);
+            
         }
     }
 }
