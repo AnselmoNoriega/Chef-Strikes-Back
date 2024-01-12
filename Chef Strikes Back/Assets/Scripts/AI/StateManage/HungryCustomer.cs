@@ -51,7 +51,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (scale.x <= 0)
+        if (agent.state != AIState.Eating)
         {
             agent.SelectedChair.FreeTableSpace();
         }
