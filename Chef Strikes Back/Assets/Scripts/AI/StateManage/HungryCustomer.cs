@@ -28,6 +28,7 @@ public class HungryCustomer : StateClass<AI>
 
         if (scale.x >= waitingTime)
         {
+            agent.SelectedChair.FreeTableSpace();
             agent.ChangeState(AIState.Rage);
         }
     }
@@ -49,11 +50,6 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.state == AIState.Rage)
-        {
-            agent.SelectedChair.FreeTableSpace();
-        }
-
         agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 
