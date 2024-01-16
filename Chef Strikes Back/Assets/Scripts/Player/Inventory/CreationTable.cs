@@ -19,6 +19,7 @@ public class CreationTable : MonoBehaviour
     [Space, Header("Storage Objects")]
     [SerializeField] private GameObject _burger;
     [SerializeField] private Transform _magnet;
+    [SerializeField] private Dictionary<FoodType, GameObject> _foodImages;
 
     private Dictionary<FoodType, bool> _count = new();
     private Dictionary<FoodType, GameObject> _items = new();
@@ -49,6 +50,7 @@ public class CreationTable : MonoBehaviour
                 _count[recivedItem.type] = true;
                 recivedItem.LaunchedInTable(_magnet);
                 recivedItem.isPickable = false;
+                //_foodImages[recivedItem.type].SetActive(true);
             }
             else if (_count[recivedItem.type] && !_waitList[recivedItem.type].Contains(recivedItem.gameObject))
             {
@@ -100,6 +102,7 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             _count[_acceptedFoodTypes[i].Food] = false;
+            //_foodImages[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 
