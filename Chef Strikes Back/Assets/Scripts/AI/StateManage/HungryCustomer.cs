@@ -26,7 +26,6 @@ public class HungryCustomer : StateClass<AI>
         scale.x -= Time.deltaTime / timer;
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
-        
 
         if (scale.x <= 0)
         {
@@ -51,7 +50,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.state != AIState.Eating)
+        if (agent.state == AIState.Rage)
         {
             agent.SelectedChair.FreeTableSpace();
         }
