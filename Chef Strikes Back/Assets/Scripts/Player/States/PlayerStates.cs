@@ -126,7 +126,7 @@ public class PlayerThrowing : StateClass<Player>
     private Vector3 offset = new Vector3(0, 0.35f, 0);
     float _timer;
     float _throwMultiplier = 1.0f;
-    float _maxTimer = 3.0f;
+    float _maxTimer = 1.5f;
 
     public void Enter(Player agent)
     {
