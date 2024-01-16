@@ -9,7 +9,7 @@ public class HungryCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         scale = agent.EatingSlider.localScale;
-        scale.x = 1;
+        scale.x = 0;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
@@ -22,13 +22,13 @@ public class HungryCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        
-        scale.x -= Time.deltaTime / timer;
+        scale.x += Time.deltaTime / timer;
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
-        if (scale.x <= 0)
+        if (scale.x >= 1.0f)
         {
+            agent.SelectedChair.FreeTableSpace();
             agent.ChangeState(AIState.Rage);
         }
     }
@@ -50,11 +50,6 @@ public class HungryCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.state == AIState.Rage)
-        {
-            agent.SelectedChair.FreeTableSpace();
-        }
-
         agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 

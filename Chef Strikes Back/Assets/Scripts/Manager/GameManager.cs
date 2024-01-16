@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _grabMoneyPoints;
     [SerializeField] private int _foodMadePoints;
 
+    private int _money;
+
     private int _score = 0;
 
     public void EnterRageModeScore()
@@ -39,5 +41,16 @@ public class GameManager : MonoBehaviour
     public void ResetScore()
     {
         _score = 0;
+    }
+
+    public void AddMoney(int amt)
+    {
+        _money += amt;
+        ServiceLocator.Get<SaveSystem>().Save<int>(_money, "money.doNotOpen");
+    }
+
+    public int GetMoneyAmt()
+    {
+        return _money;
     }
 }

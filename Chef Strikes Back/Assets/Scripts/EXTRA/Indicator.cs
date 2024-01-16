@@ -120,7 +120,7 @@ public class Indicator : MonoBehaviour
 
     public void UpdateTimerIndicator(float timePersentage)
     {
-        _newTimerSize.y = 108 * (1 - timePersentage);
+        _newTimerSize.y = 108 * timePersentage;
         _imageMaskTransform.sizeDelta = _newTimerSize;
     }
 }
