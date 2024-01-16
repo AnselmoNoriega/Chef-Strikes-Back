@@ -26,7 +26,7 @@ public class HungryCustomer : StateClass<AI>
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
-        if (scale.x >= waitingTime)
+        if (scale.x >= 1.0f)
         {
             agent.SelectedChair.FreeTableSpace();
             agent.ChangeState(AIState.Rage);

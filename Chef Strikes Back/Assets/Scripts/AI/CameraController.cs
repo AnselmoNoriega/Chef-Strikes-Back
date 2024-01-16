@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] Transform playerPos;
     [SerializeField] Transform lightPos;
 
-    [SerializeField]private float followSpeed = 0.05f;
+    [SerializeField]private float followSpeed = 0.2f;
     [SerializeField]private float zoomSpeed = 1500.0f;
 
     private InputControls inputManager;
