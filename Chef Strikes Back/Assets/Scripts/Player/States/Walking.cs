@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerWalking : StateClass<Player>
 {
     private float moveSpeed = 2.3f;
-    private float throwMoveSpeed = 0.2f;
+    private float throwMoveSpeed = 0.8f;
     private float acceleration = 100.0f;
     private Vector2 movementAngle = new Vector2(2.0f, 1.0f);
 
