@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     public void switchToGameScene()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LevelSelect");
     }
 
 

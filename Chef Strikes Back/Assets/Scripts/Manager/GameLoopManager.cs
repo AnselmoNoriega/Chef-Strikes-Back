@@ -27,8 +27,6 @@ public class GameLoopManager : MonoBehaviour
             SpawnCustomer();
             _countToSpawn = 0;
         }
-
-        
     }
 
     private void SpawnCustomer()
