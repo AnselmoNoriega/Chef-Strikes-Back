@@ -15,6 +15,7 @@ public class RageCustomerState : StateClass<AI>
         _countDown = Time.time;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
         agent.GetComponent<SpriteRenderer>().color = Color.red;
+        agent.Speed = 1;
     }
 
     public void Update(AI agent, float dt)

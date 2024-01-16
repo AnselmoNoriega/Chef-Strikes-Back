@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerWalking : StateClass<Player>
 {
     private float moveSpeed = 2.3f;
+    private float throwMoveSpeed = 0.2f;
     private float acceleration = 100.0f;
     private Vector2 movementAngle = new Vector2(2.0f, 1.0f);
 
@@ -17,7 +18,7 @@ public class PlayerWalking : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        if (agent.PlayerAction != PlayerActions.None)
+        if (agent.PlayerAction != PlayerActions.None && agent.PlayerAction != PlayerActions.Throwing)
         {
             agent.ChangeState(PlayerStates.Idle);
             return;
@@ -47,7 +48,14 @@ public class PlayerWalking : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        agent.Rb.AddForce(((moveDirection * moveSpeed) - agent.Rb.velocity) * acceleration);
+        if (agent.PlayerAction == PlayerActions.Throwing)
+        {
+            agent.Rb.AddForce(((moveDirection * (throwMoveSpeed)) - agent.Rb.velocity) * acceleration);
+        }
+        else
+        {
+            agent.Rb.AddForce(((moveDirection * moveSpeed) - agent.Rb.velocity) * acceleration);
+        }
     }
     private void FaceDirectionForIdle(Player agent)
     {

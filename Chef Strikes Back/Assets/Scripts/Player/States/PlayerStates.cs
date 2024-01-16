@@ -125,6 +125,8 @@ public class PlayerThrowing : StateClass<Player>
 {
     private Vector3 offset = new Vector3(0, 0.35f, 0);
     float _timer;
+    float _throwMultiplier = 1.0f;
+    float _maxTimer = 3.0f;
 
     public void Enter(Player agent)
     {
@@ -138,9 +140,9 @@ public class PlayerThrowing : StateClass<Player>
         var dir = (mousePos - (agent.transform.position + offset));
         PlayerHelper.FaceMovementDirection(agent.Animator, dir);
 
-        if (_timer <= 5)
+        if (_timer <= _maxTimer)
         {
-            _timer += 4 * Time.deltaTime;
+            _timer += _throwMultiplier * Time.deltaTime;
         }
         agent.ThrowLookingDir = dir.normalized * _timer;
     }

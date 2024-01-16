@@ -108,6 +108,10 @@ public class AI : MonoBehaviour
             if(_hitsToGetMad <= 0)
             {
                 ChangeState(AIState.Rage);
+                if(state == AIState.Hungry || state == AIState.Eating)
+                {
+                    SelectedChair.FreeTableSpace();
+                }
             }
         }
     }
