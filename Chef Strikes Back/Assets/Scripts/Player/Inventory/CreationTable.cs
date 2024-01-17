@@ -11,6 +11,12 @@ public class CreationTable : MonoBehaviour
         public FoodType Food;
         public bool IsAllowed;
     }
+    [Serializable]
+    public struct FoodImages
+    {
+        public FoodType Type;
+        public GameObject Object;
+    }
 
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
@@ -19,12 +25,13 @@ public class CreationTable : MonoBehaviour
     [Space, Header("Storage Objects")]
     [SerializeField] private GameObject _burger;
     [SerializeField] private Transform _magnet;
-    [SerializeField] private Dictionary<FoodType, GameObject> _foodImages;
+    [SerializeField] private List<FoodImages> _foodImagesInspector;
 
     private Dictionary<FoodType, bool> _count = new();
     private Dictionary<FoodType, GameObject> _items = new();
     private Dictionary<FoodType, List<GameObject>> _waitList = new();
-    private readonly Dictionary<FoodType, bool> _acceptedFoodByType = new();
+    private Dictionary<FoodType, bool> _acceptedFoodByType = new();
+    private Dictionary<FoodType, GameObject> _foodSprites = new();
 
     private void Start()
     {
@@ -35,6 +42,11 @@ public class CreationTable : MonoBehaviour
             _count.Add(foodType.Food, false);
             _acceptedFoodByType.Add(foodType.Food, foodType.IsAllowed);
             _items.Add(foodType.Food, null);
+        }
+
+        foreach(var foodSprite in _foodImagesInspector)
+        {
+            _foodSprites.Add(foodSprite.Type, foodSprite.Object);
         }
     }
 
@@ -50,7 +62,7 @@ public class CreationTable : MonoBehaviour
                 _count[recivedItem.type] = true;
                 recivedItem.LaunchedInTable(_magnet);
                 recivedItem.isPickable = false;
-                //_foodImages[recivedItem.type].SetActive(true);
+                StartCoroutine(IngredientSpriteActive(recivedItem));
             }
             else if (_count[recivedItem.type] && !_waitList[recivedItem.type].Contains(recivedItem.gameObject))
             {
@@ -102,11 +114,19 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             _count[_acceptedFoodTypes[i].Food] = false;
-            //_foodImages[_acceptedFoodTypes[i].Food].SetActive(false);
+            _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
 
         Instantiate(_burger, _foodOffset.position, Quaternion.identity);
+    }
+
+    private IEnumerator IngredientSpriteActive(Item item)
+    {
+        yield return new WaitForSeconds(0.2f);
+
+        _foodSprites[item.type].SetActive(true);
+        item.gameObject.SetActive(false);
     }
 
     private void CheckAvailability(FoodType foodtype)
