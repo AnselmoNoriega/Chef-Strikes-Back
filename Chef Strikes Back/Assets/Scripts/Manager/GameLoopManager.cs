@@ -13,25 +13,34 @@ public class GameLoopManager : MonoBehaviour
     private Player _player;
     private float _countToSpawn = 0;
 
-    private float _badAiSpawntimer;
-    private float _copSpawntimer;
+    private float _badAiSpawntimer = 0.0f;
+    private float _copSpawntimer = 0.0f;
+
+    private int _badAiCount = 1;
+    private int _copCount = 0;
+
+    private float _badAiTime2Spawn = 2;
+    private float _copTime2Spawn = 0;
+
     public void Initialize()
     {
         _player = ServiceLocator.Get<Player>();
         SpawnCustomer();
-        
+
     }
 
     private void Update()
     {
         _countToSpawn += Time.deltaTime;
 
+        SpawnBadAIWithinTime();
+        SpawnTheCopWithinTime();
+
         if (_countToSpawn >= spawnTime)
         {
             SpawnCustomer();
             _countToSpawn = 0;
         }
-        WantedSystem();
     }
 
     private void SpawnCustomer()
@@ -41,13 +50,13 @@ public class GameLoopManager : MonoBehaviour
     }
     private void SpawnBadCustomer()
     {
-        Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
+        Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
         GameObject customer = Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
         customer.GetComponent<AI>().ChangeState(AIState.Rage);
     }
     private void SpawnCops()
     {
-        Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
+        Vector2 spawnPos = ServiceLocator.Get<AIManager>().CopEnterPosition();
         Instantiate(CopsPrefabs, spawnPos, Quaternion.identity);
     }
 
@@ -67,101 +76,61 @@ public class GameLoopManager : MonoBehaviour
     {
         _AIPool.Add(ai);
     }
-    private void WantedSystem()
+
+    public void WantedSystem()
     {
         var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
-        if (Killscount <= 4)
-        {
-            //Starts = 0;
-        }
-        else if (Killscount <= 10)
-        {
-            //Stars = 1;
-            _badAiSpawntimer = 5.0f;
-            _badAiSpawntimer -= Time.deltaTime;
-            if (_badAiSpawntimer <= 0)
-            {
-                //Spawn 1 BadAi
-                SpawnBadCustomer();
-                _badAiSpawntimer = 5.0f;
-            }
-        }
-        else if (Killscount <= 20)
-        {
-            //star 2
-            _badAiSpawntimer = 3.0f;
-            _badAiSpawntimer -= Time.deltaTime;
-            if (_badAiSpawntimer <= 0)
-            {
-                //Spawn 2 BadAi
-                SpawnBadCustomer();
-                SpawnBadCustomer();
-                _badAiSpawntimer = 3.0f;
-            }
 
-        }
-        else if (Killscount <= 30)
+        if (Killscount == 5)
         {
-            //Stars = 3;
-            _badAiSpawntimer = 3.0f;
-            _copSpawntimer = 5.0f;
-            _badAiSpawntimer -= Time.deltaTime;
-            _copSpawntimer -= Time.deltaTime;
-            if (_badAiSpawntimer <= 0)
-            {
-                //Spawn 2 BadAi
-                SpawnBadCustomer();
-                SpawnBadCustomer();
-                _badAiSpawntimer = 3.0f;
-            }
-            if (_copSpawntimer <= 0)
-            {
-                SpawnCops();
-                _copSpawntimer = 5.0f;
-            }
+            _badAiTime2Spawn = 5.0f;
+            _badAiCount = 1;
         }
-        else if (Killscount <= 50)
+        else if (Killscount == 10)
         {
-            //Stars = 4;
-            _badAiSpawntimer = 3.0f;
-            _copSpawntimer = 3.0f;
-            _badAiSpawntimer -= Time.deltaTime;
-            _copSpawntimer -= Time.deltaTime;
-            if (_badAiSpawntimer <= 0)
-            {
-                //Spawn 2 BadAi
-                SpawnBadCustomer();
-                SpawnBadCustomer();
-                _badAiSpawntimer = 3.0f;
-            }
-            if (_copSpawntimer <= 0)
-            {
-                SpawnCops();
-                _copSpawntimer = 3.0f;
-            }
+            _badAiTime2Spawn = 3.0f;
+            _badAiCount = 2;
         }
-        else if (Killscount >= 50)
+        else if (Killscount == 20)
         {
-            //Stars = 5;
-            _badAiSpawntimer = 3.0f;
-            _copSpawntimer = 3.0f;
-            _badAiSpawntimer -= Time.deltaTime;
-            _copSpawntimer -= Time.deltaTime;
-            if (_badAiSpawntimer <= 0)
-            {
-                //Spawn 3 BadAi
-                SpawnBadCustomer();
-                SpawnBadCustomer();
-                SpawnBadCustomer();
-                _badAiSpawntimer = 3.0f;
-            }
-            if (_copSpawntimer <= 0)
-            {
-                SpawnCops();
-                SpawnCops();
-                _copSpawntimer = 5.0f;
-            }
+            _copTime2Spawn = 5.0f;
+            _copCount = 1;
         }
-
+        else if (Killscount == 30)
+        {
+            _copTime2Spawn = 3.0f;
+            _copCount = 2;
+        }
+        else if (Killscount == 50)
+        {
+            _badAiTime2Spawn = 2.0f;
+            _badAiCount = 3;
+        }
     }
+
+    private void SpawnBadAIWithinTime()
+    {
+        _badAiSpawntimer -= Time.deltaTime;
+        if (_badAiSpawntimer <= 0)
+        {
+            for (int i = 0; i < _badAiCount; ++i)
+            {
+                SpawnBadCustomer();
+            }
+            _badAiSpawntimer = _badAiTime2Spawn;
+        }
+    }
+    private void SpawnTheCopWithinTime()
+    {
+        _copSpawntimer -= Time.deltaTime;
+        if (_copSpawntimer <= 0)
+        {
+            for (int i = 0; i < _copCount; ++i)
+            {
+                SpawnCops();
+            }
+            _copSpawntimer = _copTime2Spawn;
+        }
+    }
+
 }

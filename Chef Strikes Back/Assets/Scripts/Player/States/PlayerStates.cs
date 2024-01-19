@@ -113,14 +113,12 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<AI>().Damage((int)player._weapon.Damage);
-                    ServiceLocator.Get<Player>().Killscount++;
                     return;
                 }
                 else if(angleToCollider <= 45.0f && hit.GetComponent<Cops>())
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<Cops>().Damage((int)player._weapon.Damage);
-                    ServiceLocator.Get<Player>().Killscount++;
                     return;
                 }
             }

@@ -9,6 +9,8 @@ public class AIManager : MonoBehaviour
     private List<Transform> _emptyRandomSpots = new();
 
     [SerializeField] private Transform _exitPoint = null;
+    [SerializeField] private Transform _copStartPoint = null;
+    [SerializeField] private Transform _badAiPoint = null;
 
     private void Awake()
     {
@@ -42,6 +44,16 @@ public class AIManager : MonoBehaviour
     public Vector2 ExitPosition()
     {
         return _exitPoint.position;
+    }
+
+    public Vector2 CopEnterPosition()
+    {
+        return _copStartPoint.position;
+    }
+
+    public Vector2 BadAiEnterPosition()
+    {
+        return _badAiPoint.position;
     }
 
     public void ResetRandomSpots()
