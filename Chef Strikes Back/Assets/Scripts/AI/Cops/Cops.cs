@@ -20,12 +20,13 @@ public class Cops : MonoBehaviour
     public Rigidbody2D Rb2d;
     public Transform ReloadSlider;
     public GameObject bulletPrefab;
+    public Transform gunPos;
 
     [Space, Header("Cops Info")]
-    public float attackRange = 1.5f;
+    public float attackRange = 3.5f;
     public int Speed = 0;
     public float NextWaypointDistance = 0;
-    
+    public float reloadCountDown = 0;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -56,4 +57,12 @@ public class Cops : MonoBehaviour
         _stateManager.ChangeState((int)newState);
         state = newState;
     }
+
+    public void Shoot()
+    {
+        Instantiate(bulletPrefab, gunPos.transform.position, Quaternion.identity);
+        Debug.Log("Shoot");
+    }
+
+    
 }

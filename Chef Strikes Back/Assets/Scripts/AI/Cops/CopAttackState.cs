@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CopAttackState : StateClass<Cops>
 {
-    private float _countDown = 0;
+    private float _reloadTime = 3.0f;
     private bool _hasShot = false;
     private Transform _playerPos = null;
 
-    private float ReloadTime = 2.5f;
+    private float ReloadTime = 5.0f;
     private Vector3 scale = Vector3.zero;
     public void Enter(Cops agent)
     {
         _hasShot = false;
-        _countDown = Time.time;
+        _reloadTime = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;
 
         scale = agent.ReloadSlider.localScale;
@@ -22,7 +22,7 @@ public class CopAttackState : StateClass<Cops>
     }
     public void Update(Cops agent, float dt)
     {
-        if (Vector2.Distance(agent.transform.position, _playerPos.position) > agent.attackRange)
+        if (Vector2.Distance(agent.transform.position, _playerPos.position) >= agent.attackRange)
         {
             agent.ChanageState(CopState.Chasing);
         }
@@ -32,7 +32,8 @@ public class CopAttackState : StateClass<Cops>
         }
         else
         {
-            Shoot(agent);
+            agent.Shoot();
+            _hasShot = true;
         }
     }
     public void FixedUpdate(Cops agent)
@@ -42,7 +43,7 @@ public class CopAttackState : StateClass<Cops>
 
     public void Exit(Cops agent)
     {
-        
+        agent.reloadCountDown = 0;
     }
 
 
@@ -57,19 +58,22 @@ public class CopAttackState : StateClass<Cops>
 
     public void Reload(Cops agent)
     {
-        agent.ReloadSlider.transform.parent.gameObject.SetActive(true);
-        scale.x += Time.deltaTime / ReloadTime;
-        agent.ReloadSlider.localScale = scale;
+        //agent.ReloadSlider.transform.parent.gameObject.SetActive(true);
+        //scale.x += Time.deltaTime / ReloadTime;
+        //agent.ReloadSlider.localScale = scale;
 
-        if (scale.x >= 1.0f)
+        //if (scale.x >= 1.0f)
+        //{
+        //    _hasShot = false;
+        //}
+        agent.reloadCountDown += Time.deltaTime;
+        if(agent.reloadCountDown > ReloadTime)
         {
             _hasShot = false;
+            agent.reloadCountDown = 0;
+            Debug.Log(agent.reloadCountDown);
         }
     }
 
-    public void Shoot(Cops agent)
-    {
-        Debug.Log("Shoot");
-        
-    }
+    
 }

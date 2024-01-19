@@ -17,7 +17,7 @@ public class GameLoopManager : MonoBehaviour
     {
         _player = ServiceLocator.Get<Player>();
         SpawnCustomer();
-        //SpawnCops();
+        ///SpawnCops();
     }
 
     private void Update()
@@ -26,8 +26,8 @@ public class GameLoopManager : MonoBehaviour
 
         if (_countToSpawn >= spawnTime)
         {
-            SpawnCustomer();
-            //SpawnCops();
+            //SpawnCustomer();
+            SpawnCops();
             _countToSpawn = 0;
         }
     }

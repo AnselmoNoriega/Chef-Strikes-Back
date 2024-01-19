@@ -5,22 +5,25 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     Rigidbody2D Rb2D;
-    float direction;
-    float speed;
+    Vector2 direction;
+    private float _speed;
+
 
     private void Awake()
     {
         Rb2D = GetComponent<Rigidbody2D>();
+        SetDirection();
+        _speed = 5.0f;
     }
 
     private void FixedUpdate()
     {
-        
+        Rb2D.AddForce(direction * _speed);
     }
 
-    public void SetDirection(float dir)
+    void SetDirection()
     {
-        direction = dir;
+       direction = ((Vector2)ServiceLocator.Get<Player>().transform.position - (Vector2)transform.position).normalized;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

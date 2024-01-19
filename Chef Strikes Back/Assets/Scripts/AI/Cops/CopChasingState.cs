@@ -15,13 +15,13 @@ public class CopChasingState : StateClass<Cops>
         _countDown = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.Speed = 200;
     }
     public void Update(Cops agent, float dt)
     {
     }
     public void Exit(Cops agent)
     {
+        agent.Rb2d.velocity = Vector2.zero;
     }
     public void FixedUpdate(Cops agent)
     {
