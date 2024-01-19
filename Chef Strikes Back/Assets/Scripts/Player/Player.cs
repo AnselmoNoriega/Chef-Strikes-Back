@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector, Space, Header("Attack Info")]
     public Vector2 LookingDirection;
+    public int Killscount;
 
     [HideInInspector, Space, Header("Throw Info")]
     public Vector2 ThrowLookingDir = Vector2.zero;
@@ -147,5 +148,9 @@ public class Player : MonoBehaviour
             ServiceLocator.Get<AudioManager>().PlaySource("money");
             Destroy(collision.gameObject);
         }
+    }
+    public int GetKillsCount()
+    {
+        return Killscount;
     }
 }

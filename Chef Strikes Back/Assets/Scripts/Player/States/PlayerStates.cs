@@ -112,6 +112,7 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.Damage((int)player._weapon.Damage);
+                    ServiceLocator.Get<Player>().Killscount++;
                     return;
                 }
             }

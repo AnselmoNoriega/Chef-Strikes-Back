@@ -74,33 +74,5 @@ public class LevelTimer : MonoBehaviour
             loopManager.ChangeSpawnTime(int.MaxValue);
     }
 
-    private void WantedSystem() 
-    {
-        int killscount=0;
-        int Stars = 0;
-        if (killscount <= 4)
-        {
-        }
-        else if (killscount <= 10)
-        {
-            Stars = 1;
-        }
-        else if (killscount <= 20)
-        {
-            Stars = 2;
-        }
-        else if (killscount <= 30)
-        {
-            Stars = 3;
-        }
-        else if (killscount <= 50)
-        {
-            Stars = 4;
-        }
-        else if (killscount >= 50)
-        {
-            Stars = 5;
-        }
 
-    }
 }
