@@ -54,7 +54,7 @@ public class AI : MonoBehaviour
         _stateManager.AddState<RageCustomerState>();
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
-        ChangeState(Random.value < 1.0f ? AIState.Good : AIState.Bad);
+        ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
     }
 
     private void Update()
