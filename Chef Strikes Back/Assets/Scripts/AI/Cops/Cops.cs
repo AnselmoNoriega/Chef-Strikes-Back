@@ -34,7 +34,7 @@ public class Cops : MonoBehaviour
     {
         _stateManager = new StateMachine<Cops>(this);
         state = CopState.None;
-
+        Seeker = GetComponent<Seeker>();
         _stateManager.AddState<CopChasingState>();
         _stateManager.AddState<CopAttackState>();
         ChanageState(CopState.Chasing);

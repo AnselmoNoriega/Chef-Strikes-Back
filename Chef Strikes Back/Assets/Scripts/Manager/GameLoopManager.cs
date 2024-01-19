@@ -7,6 +7,7 @@ public class GameLoopManager : MonoBehaviour
 {
     [SerializeField] private float spawnTime;
     [SerializeField] private GameObject AIPrefabs;
+    [SerializeField] private GameObject CopsPrefabs;
 
     private List<GameObject> _AIPool = new();
     private Player _player;
@@ -15,7 +16,8 @@ public class GameLoopManager : MonoBehaviour
     public void Initialize()
     {
         _player = ServiceLocator.Get<Player>();
-        SpawnCustomer();
+        //SpawnCustomer();
+        SpawnCops();
     }
 
     private void Update()
@@ -24,7 +26,8 @@ public class GameLoopManager : MonoBehaviour
 
         if (_countToSpawn >= spawnTime)
         {
-            SpawnCustomer();
+            //SpawnCustomer();
+            SpawnCops();
             _countToSpawn = 0;
         }
     }
@@ -33,6 +36,12 @@ public class GameLoopManager : MonoBehaviour
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
         Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
+    }
+
+    private void SpawnCops()
+    {
+        Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
+        Instantiate(CopsPrefabs, spawnPos, Quaternion.identity);
     }
 
 

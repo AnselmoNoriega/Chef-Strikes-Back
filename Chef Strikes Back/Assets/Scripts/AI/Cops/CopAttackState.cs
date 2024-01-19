@@ -30,6 +30,10 @@ public class CopAttackState : StateClass<Cops>
         {
             Reload(agent);
         }
+        else
+        {
+            Shoot(agent);
+        }
     }
     public void FixedUpdate(Cops agent)
     {
@@ -61,5 +65,11 @@ public class CopAttackState : StateClass<Cops>
         {
             _hasShot = false;
         }
+    }
+
+    public void Shoot(Cops agent)
+    {
+        Debug.Log("Shoot");
+        
     }
 }
