@@ -143,6 +143,7 @@ public class Player : MonoBehaviour
         if(collision.tag == "Loot")
         {
             _money += 10;
+            ServiceLocator.Get<GameManager>().AddMoney(10);
             ServiceLocator.Get<GameManager>().MoneyGrabed();
             ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
             ServiceLocator.Get<AudioManager>().PlaySource("money");

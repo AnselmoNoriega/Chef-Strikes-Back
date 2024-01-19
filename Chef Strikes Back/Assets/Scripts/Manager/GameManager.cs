@@ -46,7 +46,13 @@ public class GameManager : MonoBehaviour
     public void AddMoney(int amt)
     {
         _money += amt;
-        ServiceLocator.Get<SaveSystem>().Save<int>(_money, "money.doNotOpen");
+    }
+
+    public void SaveMoney()
+    {
+        int moneyBank = ServiceLocator.Get<GameManager>().GetMoneyAmt();
+        int totalMoney = moneyBank + _money;
+        ServiceLocator.Get<SaveSystem>().Save<int>(totalMoney, "money.doNotOpen");
     }
 
     public int GetMoneyAmt()
