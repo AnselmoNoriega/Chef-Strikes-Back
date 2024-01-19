@@ -15,16 +15,21 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject pointer;
     private Vector3 offsetPointer;
 
+    private SpriteRenderer _pointerImage;
+
     private Vector3 pointingDirection;
+    private Vector2 _pointerSize;
 
     private bool isLaunchingFood;
     private InputAction targetAngle;
 
     private void Start()
     {
+        _pointerSize = new Vector2(1.0f, 0.27f);
         isLaunchingFood = false;
         length.value = 0.0f;
         offsetPointer = new Vector3(0, 0.35f, 0);
+        _pointerImage = pointer.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -107,6 +112,7 @@ public class Inventory : MonoBehaviour
 
         var angle = (float)Math.Atan2(-pointingDirection.x, pointingDirection.y) * Mathf.Rad2Deg;
         pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
-        pointer.transform.localScale = new Vector3(0.5f, length.value, 1.0f);
+        _pointerSize.y = math.min(1.0f, math.max(length.value / 5, 0.27f));
+        _pointerImage.size = _pointerSize;
     }
 }

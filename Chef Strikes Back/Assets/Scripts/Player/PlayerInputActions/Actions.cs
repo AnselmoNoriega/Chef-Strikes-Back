@@ -166,9 +166,8 @@ public class Actions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3), 0.4f);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3), 0.5f);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3) + (Vector2)offset, 0.4f);
     }
 
 }
