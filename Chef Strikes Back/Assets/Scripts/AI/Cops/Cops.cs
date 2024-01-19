@@ -47,7 +47,6 @@ public class Cops : MonoBehaviour
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
-        Debug.Log(_health);
     }
 
     private void FixedUpdate()

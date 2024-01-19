@@ -16,10 +16,10 @@ public class GameLoopManager : MonoBehaviour
     private float _badAiSpawntimer = 0.0f;
     private float _copSpawntimer = 0.0f;
 
-    private int _badAiCount = 1;
+    private int _badAiCount = 0;
     private int _copCount = 0;
 
-    private float _badAiTime2Spawn = 2;
+    private float _badAiTime2Spawn = 0;
     private float _copTime2Spawn = 0;
 
     public AIState AiStandState = AIState.Good;
@@ -52,7 +52,7 @@ public class GameLoopManager : MonoBehaviour
     private void SpawnBadCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
-        AiStandState = AIState.Bad;
+        AiStandState = AIState.Rage;
         Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
         AiStandState = AIState.Good;
     }

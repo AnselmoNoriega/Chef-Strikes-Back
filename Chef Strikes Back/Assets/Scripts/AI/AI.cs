@@ -113,6 +113,10 @@ public class AI : MonoBehaviour
                 {
                     SelectedChair.FreeTableSpace();
                 }
+                else if(state == AIState.Good)
+                {
+                    ServiceLocator.Get<AIManager>().AddAvailableChair(SelectedChair);
+                }
                 ChangeState(AIState.Rage);
             }
         }
