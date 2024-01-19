@@ -12,6 +12,7 @@ public class CopChasingState : StateClass<Cops>
     public void Enter(Cops agent)
     {
         _cop = agent;
+        agent.reloadCountDown = 0;
         _countDown = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);

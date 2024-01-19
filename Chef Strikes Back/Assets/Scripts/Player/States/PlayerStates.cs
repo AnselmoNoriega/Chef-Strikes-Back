@@ -103,15 +103,23 @@ public class PlayerAttacking : StateClass<Player>
 
         foreach (var hit in hits)
         {
-            var enemyAI = hit.GetComponent<AI>();
-            if (enemyAI)
+            if (hit.tag == "Cops" || hit.tag == "Enemy")
             {
-                Vector2 dirToCollider = (enemyAI.gameObject.transform.position - player.gameObject.transform.position).normalized;
+                var enemyAI = hit.gameObject;
+                Vector2 dirToCollider = (enemyAI.transform.position - player.gameObject.transform.position).normalized;
                 float angleToCollider = Vector2.Angle(angle, dirToCollider);
-                if (angleToCollider <= 45.0f)
+
+                if (angleToCollider <= 45.0f && hit.GetComponent<AI>())
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
-                    enemyAI.Damage((int)player._weapon.Damage);
+                    enemyAI.GetComponent<AI>().Damage((int)player._weapon.Damage);
+                    ServiceLocator.Get<Player>().Killscount++;
+                    return;
+                }
+                else if(angleToCollider <= 45.0f && hit.GetComponent<Cops>())
+                {
+                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
+                    enemyAI.GetComponent<Cops>().Damage((int)player._weapon.Damage);
                     ServiceLocator.Get<Player>().Killscount++;
                     return;
                 }

@@ -28,6 +28,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.transform.tag == "Player")
+        {
+            ServiceLocator.Get<Player>().TakeDamage(10);
+            Destroy(gameObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.transform.tag == "Floor")
+        {
+            Destroy(gameObject);
+        }
     }
 }

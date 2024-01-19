@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3558800788078056687}
   m_Layer: 6
   m_Name: Cops
-  m_TagString: Enemy
+  m_TagString: Cops
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
   ReloadSlider: {fileID: 0}
   bulletPrefab: {fileID: 6170349750736654560, guid: 036b46ac6bffa054fa18dd65dd673486, type: 3}
   gunPos: {fileID: 565191934343276641}
-  attackRange: 1.5
-  Speed: 30
+  attackRange: 2.8
+  Speed: 20
   NextWaypointDistance: 0.1
   reloadCountDown: 0
 --- !u!114 &3558800788078056687

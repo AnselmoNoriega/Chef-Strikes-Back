@@ -23,10 +23,11 @@ public class Cops : MonoBehaviour
     public Transform gunPos;
 
     [Space, Header("Cops Info")]
-    public float attackRange = 3.5f;
+    public float attackRange = 5.0f;
     public int Speed = 0;
     public float NextWaypointDistance = 0;
     public float reloadCountDown = 0;
+    private float _health;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -39,12 +40,14 @@ public class Cops : MonoBehaviour
         _stateManager.AddState<CopChasingState>();
         _stateManager.AddState<CopAttackState>();
         ChanageState(CopState.Chasing);
+        _health = 20.0f;
         
     }
 
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
+        Debug.Log(_health);
     }
 
     private void FixedUpdate()
@@ -56,6 +59,18 @@ public class Cops : MonoBehaviour
     {
         _stateManager.ChangeState((int)newState);
         state = newState;
+    }
+
+    
+
+    public void Damage(int amt)
+    {
+        _health -= amt;
+
+        if (_health <= 0)
+        {
+          Destroy(gameObject);
+        }
     }
 
     public void Shoot()

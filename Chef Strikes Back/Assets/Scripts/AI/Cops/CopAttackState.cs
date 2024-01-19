@@ -8,7 +8,6 @@ public class CopAttackState : StateClass<Cops>
     private bool _hasShot = false;
     private Transform _playerPos = null;
 
-    private float ReloadTime = 5.0f;
     private Vector3 scale = Vector3.zero;
     public void Enter(Cops agent)
     {
@@ -67,7 +66,7 @@ public class CopAttackState : StateClass<Cops>
         //    _hasShot = false;
         //}
         agent.reloadCountDown += Time.deltaTime;
-        if(agent.reloadCountDown > ReloadTime)
+        if(agent.reloadCountDown > _reloadTime)
         {
             _hasShot = false;
             agent.reloadCountDown = 0;
