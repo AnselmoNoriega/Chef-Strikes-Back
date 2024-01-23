@@ -20,7 +20,18 @@ public class RageCustomerState : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
+        if (_currentWaypoint >= agent.Path.vectorPath.Count)
+        {
+            agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
+            _currentWaypoint = 0;
+            return;
+        }
 
+        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
+        if (distance < agent.NextWaypointDistance + 0.2f)
+        {
+            ++_currentWaypoint;
+        }
     }
 
     public void FixedUpdate(AI agent)
@@ -44,13 +55,6 @@ public class RageCustomerState : StateClass<AI>
 
         var direction = ((Vector2)agent.Path.vectorPath[_currentWaypoint] - agent.Rb2d.position).normalized;
         agent.Rb2d.AddForce(direction * agent.Speed);
-
-        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-
-        if (distance < agent.NextWaypointDistance + 0.5f)
-        {
-            ++_currentWaypoint;
-        }
 
         if (Time.time - _countDown >= 0.5f)
         {
