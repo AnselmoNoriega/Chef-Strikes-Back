@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _enterToRageModePoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
-    [SerializeField] private int _foodMadePoints;
 
     private int _money;
 
@@ -28,9 +27,24 @@ public class GameManager : MonoBehaviour
         _score += _grabMoneyPoints;
     }
 
-    public void FoodGiven()
+    public void FoodGiven(float time)
     {
-        _score += _foodMadePoints;
+        if (time >= 20.0f)
+        {
+            _score += 5;
+        }
+        else if (time >= 15.0f)
+        {
+            _score += 4;
+        }
+        else if (time >= 5.0f)
+        {
+            _score += 3;
+        }
+        else if (time >= 0.1f)
+        {
+            _score += 2;
+        }
     }
 
     public int GetScore()

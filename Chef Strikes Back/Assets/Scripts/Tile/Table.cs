@@ -48,8 +48,6 @@ public class Table : MonoBehaviour
             {
                 if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
-                    ServiceLocator.Get<GameManager>().FoodGiven();
-
                     newItem.LaunchedInTable(platePos);
                     newItem.isServed = true;
                     chair.Food = newItem;
