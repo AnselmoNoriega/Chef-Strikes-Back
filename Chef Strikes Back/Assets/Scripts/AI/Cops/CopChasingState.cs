@@ -19,6 +19,7 @@ public class CopChasingState : StateClass<Cops>
     }
     public void Update(Cops agent, float dt)
     {
+        agent.SliderParenObj.SetActive(false);
     }
     public void Exit(Cops agent)
     {

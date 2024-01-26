@@ -18,6 +18,7 @@ public class Cops : MonoBehaviour
 
     [Space, Header("Cops Properties")]
     public Rigidbody2D Rb2d;
+    public GameObject SliderParenObj;
     public Transform ReloadSlider;
     public GameObject bulletPrefab;
     public Transform gunPos;
@@ -77,7 +78,6 @@ public class Cops : MonoBehaviour
     public void Shoot()
     {
         Instantiate(bulletPrefab, gunPos.transform.position, Quaternion.identity);
-        Debug.Log("Shoot");
     }
 
     

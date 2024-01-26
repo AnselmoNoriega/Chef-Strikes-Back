@@ -11,16 +11,14 @@ public class CopAttackState : StateClass<Cops>
     private Vector3 scale = Vector3.zero;
     public void Enter(Cops agent)
     {
-        _hasShot = false;
-        _reloadTime = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;
 
         scale = agent.ReloadSlider.localScale;
-        scale.x = 0;
         agent.ReloadSlider.localScale = scale;
     }
     public void Update(Cops agent, float dt)
     {
+        
         if (Vector2.Distance(agent.transform.position, _playerPos.position) >= agent.attackRange)
         {
             agent.ChanageState(CopState.Chasing);
@@ -32,6 +30,7 @@ public class CopAttackState : StateClass<Cops>
         else
         {
             agent.Shoot();
+            scale.x = 0;
             _hasShot = true;
         }
     }
@@ -42,6 +41,7 @@ public class CopAttackState : StateClass<Cops>
 
     public void Exit(Cops agent)
     {
+        agent.SliderParenObj.SetActive(false);
         agent.reloadCountDown = 0;
     }
 
@@ -57,20 +57,14 @@ public class CopAttackState : StateClass<Cops>
 
     public void Reload(Cops agent)
     {
-        //agent.ReloadSlider.transform.parent.gameObject.SetActive(true);
-        //scale.x += Time.deltaTime / ReloadTime;
-        //agent.ReloadSlider.localScale = scale;
+        agent.SliderParenObj.SetActive(true);
+        scale.x += Time.deltaTime / _reloadTime;
+        agent.ReloadSlider.localScale = scale;
 
-        //if (scale.x >= 1.0f)
-        //{
-        //    _hasShot = false;
-        //}
-        agent.reloadCountDown += Time.deltaTime;
-        if(agent.reloadCountDown > _reloadTime)
+        if(scale.x > 1)
         {
             _hasShot = false;
-            agent.reloadCountDown = 0;
-            Debug.Log(agent.reloadCountDown);
+            agent.SliderParenObj.SetActive(false);
         }
     }
 
