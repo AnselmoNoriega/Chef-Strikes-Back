@@ -85,25 +85,25 @@ public class GameLoopManager : MonoBehaviour
     {
         var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
 
-        if (Killscount == 5)
+        if (Killscount == 2)
         {
             _badAiTime2Spawn = 5.0f;
             _badAiCount = 1;
             _stars = 1;
         }
-        else if (Killscount == 10)
+        else if (Killscount == 6)
         {
             _badAiTime2Spawn = 3.0f;
             _badAiCount = 2;
             _stars = 2;
         }
-        else if (Killscount == 20)
+        else if (Killscount == 15)
         {
             _copTime2Spawn = 5.0f;
             _copCount = 1;
             _stars = 3;
         }
-        else if (Killscount == 30)
+        else if (Killscount == 25)
         {
             _copTime2Spawn = 3.0f;
             _copCount = 2;
