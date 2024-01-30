@@ -135,7 +135,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 30
-  m_LinearDrag: 0
+  m_LinearDrag: 3
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -181,6 +181,7 @@ MonoBehaviour:
   Speed: 20
   NextWaypointDistance: 0.1
   reloadCountDown: 0
+  isHit: 0
 --- !u!114 &3558800788078056687
 MonoBehaviour:
   m_ObjectHideFlags: 0

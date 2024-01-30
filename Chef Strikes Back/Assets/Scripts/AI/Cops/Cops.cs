@@ -30,6 +30,7 @@ public class Cops : MonoBehaviour
     public float reloadCountDown = 0;
     private float _health;
     public bool isHit;
+    public float knockbackForce = 50.0f;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
