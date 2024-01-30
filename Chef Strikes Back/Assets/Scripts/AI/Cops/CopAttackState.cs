@@ -7,7 +7,6 @@ public class CopAttackState : StateClass<Cops>
     private float _reloadTime = 3.0f;
     private bool _hasShot = false;
     private Transform _playerPos = null;
-    private float stunTime = 1.0f;
 
     private Vector3 scale = Vector3.zero;
     public void Enter(Cops agent)
@@ -24,19 +23,15 @@ public class CopAttackState : StateClass<Cops>
         {
             agent.ChanageState(CopState.Chasing);
         }
-        if(_hasShot && !agent.isHit)
+        if(_hasShot)
         {
             Reload(agent);
         }
-        else if(!agent.isHit)
+        else
         {
             agent.Shoot();
             scale.x = 0;
             _hasShot = true;
-        }
-        else
-        {
-            agent.StartCoroutine(Stun(agent));
         }
     }
     public void FixedUpdate(Cops agent)
@@ -60,7 +55,7 @@ public class CopAttackState : StateClass<Cops>
        
     }
 
-    private void Reload(Cops agent)
+    public void Reload(Cops agent)
     {
         agent.SliderParenObj.SetActive(true);
         scale.x += Time.deltaTime / _reloadTime;
@@ -73,12 +68,5 @@ public class CopAttackState : StateClass<Cops>
         }
     }
 
-    private IEnumerator Stun(Cops agent)
-    {
-        yield return new WaitForSeconds(stunTime);
-        agent.isHit = false;
-
-        agent.Rb2d.velocity = Vector2.zero;
-    }
     
 }

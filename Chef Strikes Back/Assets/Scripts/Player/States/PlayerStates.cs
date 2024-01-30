@@ -119,9 +119,6 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<Cops>().Damage((int)player._weapon.Damage);
-
-                    enemyAI.GetComponent<Cops>().Rb2d.AddForce(dirToCollider * 10.5f,ForceMode2D.Impulse);
-                    enemyAI.GetComponent<Cops>().isHit = true;
                     return;
                 }
             }
