@@ -29,12 +29,14 @@ public class Cops : MonoBehaviour
     public float NextWaypointDistance = 0;
     public float reloadCountDown = 0;
     private float _health;
+    public bool isHit;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
 
     private void Awake()
     {
+        isHit = false;
         _stateManager = new StateMachine<Cops>(this);
         state = CopState.None;
         Seeker = GetComponent<Seeker>();
