@@ -98,7 +98,8 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Attack(Vector2 angle, Player player)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, 0.5f);
+        
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, player.GetComponent<Actions>().PlayerAttackRange);
         PlayerHelper.FaceMovementDirection(player.Animator, angle);
 
         foreach (var hit in hits)
@@ -113,6 +114,7 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<AI>().Damage((int)player._weapon.Damage);
+                    enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * enemyAI.GetComponent<AI>().knockbackForce, ForceMode2D.Impulse);
                     return;
                 }
                 else if(angleToCollider <= 45.0f && hit.GetComponent<Cops>())

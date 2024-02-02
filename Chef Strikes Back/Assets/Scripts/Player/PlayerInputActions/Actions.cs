@@ -16,6 +16,7 @@ public class Actions : MonoBehaviour
 
     [Space, Header("Player Attack")]
     [SerializeField] private Player player;
+    public float PlayerAttackRange;
     
     [Space, Header("Player Grab")]
     [SerializeField] private float grabDistance;
@@ -166,7 +167,7 @@ public class Actions : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3), 0.5f);
+        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3), PlayerAttackRange);
         Gizmos.color = Color.blue;
     }
 

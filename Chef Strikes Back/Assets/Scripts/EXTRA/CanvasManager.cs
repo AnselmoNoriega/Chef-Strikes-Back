@@ -8,6 +8,9 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private GameObject _healthBar;
     [SerializeField] private GameObject[] _wantedStars;
+    [Header ("UI Transparent")]
+    [SerializeField] private Image[] _uiTransparentObject;
+    [SerializeField] private float _transparentfloat;
                       
     public void SetMaxHealth(int amt)
     {
@@ -53,4 +56,24 @@ public class CanvasManager : MonoBehaviour
                 break;
         }
     }
+
+    public void UITransparent()
+    {
+        for (int i = 0; i < _uiTransparentObject.Length; i++)
+        {
+            var color = _uiTransparentObject[i].color;
+            color.a = _transparentfloat;
+            _uiTransparentObject[i].color = color;
+        }
+    }
+    public void UIUnTransparent()
+    {
+        for (int i = 0; i < _uiTransparentObject.Length; i++)
+        {
+            var color = _uiTransparentObject[i].color;
+            color.a = 1.0f;
+            _uiTransparentObject[i].color = color;
+        }
+    }
+
 }

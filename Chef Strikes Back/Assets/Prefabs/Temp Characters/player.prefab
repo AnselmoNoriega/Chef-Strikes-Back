@@ -554,6 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LookingDirection: {x: 0, y: 0}
+  Killscount: 0
   ThrowLookingDir: {x: 0, y: 0}
   _maxHealth: 100
   _maxRage: 100
@@ -614,6 +615,7 @@ MonoBehaviour:
   throwForce: 1
   ready2Throw: 0
   player: {fileID: -7746550428048061511}
+  PlayerAttackRange: 0.5
   grabDistance: 1
 --- !u!114 &323981142111727875
 MonoBehaviour:

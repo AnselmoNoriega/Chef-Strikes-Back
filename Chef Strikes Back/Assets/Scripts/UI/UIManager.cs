@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _screens;
-    [SerializeField] private StatefulObject _statefulObj;
+    [SerializeField] private StatefulObject _screens;
 
     public void SetScreenActive(string screenName)
     {
-        _statefulObj.SetState(screenName);
+        _screens.SetState(screenName);
     }
 }
