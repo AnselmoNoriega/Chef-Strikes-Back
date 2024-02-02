@@ -98,7 +98,8 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Attack(Vector2 angle, Player player)
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, 0.5f);
+        
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, player.GetComponent<Actions>().PlayerAttackRange);
         PlayerHelper.FaceMovementDirection(player.Animator, angle);
 
         foreach (var hit in hits)

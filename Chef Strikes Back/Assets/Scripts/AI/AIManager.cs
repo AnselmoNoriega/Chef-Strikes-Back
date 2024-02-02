@@ -6,9 +6,9 @@ public class AIManager : MonoBehaviour
 {
     [SerializeField] private List<Chair> _chairs = new();
 
-    [SerializeField] private Transform[] _exitPoint = null;
-    [SerializeField] private Transform[] _copStartPoint = null;
-    [SerializeField] private Transform[] _badAiPoint = null;
+    [SerializeField] private Transform _exitPoint = null;
+    [SerializeField] private Transform _copStartPoint = null;
+    [SerializeField] private Transform _badAiPoint = null;
 
     public Chair GiveMeChair()
     {
@@ -24,16 +24,16 @@ public class AIManager : MonoBehaviour
 
     public Vector2 ExitPosition()
     {
-        return _exitPoint[Random.Range(0, _exitPoint.Length)].position;
+        return _exitPoint.position;
     }
 
     public Vector2 CopEnterPosition()
     {
-        return _copStartPoint[Random.Range(0, _copStartPoint.Length)].position;
+        return _copStartPoint.position;
     }
 
     public Vector2 BadAiEnterPosition()
     {
-        return _badAiPoint[Random.Range(0, _badAiPoint.Length)].position;
+        return _badAiPoint.position;
     }
 }
