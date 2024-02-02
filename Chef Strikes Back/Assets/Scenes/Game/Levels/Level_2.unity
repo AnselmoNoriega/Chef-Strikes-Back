@@ -16362,62 +16362,6 @@ PrefabInstance:
       propertyPath: worldLight
       value: 
       objectReference: {fileID: 387362748}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[1].Time
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[2].Time
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[3].Time
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[4].Time
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[5].Time
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[0].SpawningTime
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[1].SpawningTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[2].SpawningTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[3].SpawningTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[4].SpawningTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[5].SpawningTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1840867465630466503, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.849
-      objectReference: {fileID: 0}
-    - target: {fileID: 1840867465630466503, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.378
-      objectReference: {fileID: 0}
     - target: {fileID: 2058666068260628643, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_Camera
       value: 
@@ -16470,14 +16414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager's Group
       objectReference: {fileID: 0}
-    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: CopsPrefabs
-      value: 
-      objectReference: {fileID: 4629491789166812219, guid: 0537e4e458f663d48aacd6674a852ff5, type: 3}
-    - target: {fileID: 2927658305668911201, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: data.dataString
-      value: UEsDBBQAAAgIAACAn+ssL6w7kgIAAFkFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMFy4jAM/RXG54VJIAmwt11KaQ9tmWV3euFiYkE8BDtjOwXa4d9XchKSzeYS50l60pPkfDGpbAGp02ZlpHjRAtj3AXu2+gTOyJRA9m3Qej3BhR+02shPaJzfpXAZOXHv84s7qREPKazh+aEOOTknwSigZzJDa6nkXpvTUhxgoa2zaN/z3AKajHZEoxD6GrALvoZRjPgVT+NpgKdPPM2DwQ2PKSgHpuMajmZT9ArDaR0SjsazySwM42kdWQWWKs35qQBBctr4+SiiGsMmeFx9B4kPUii79g9GY0qv81zauljmroXvyoIXtkTN6CAkxy74CsPRBIEM5CFzJKUb/rbfWyCU5Bl+fZAG21nxsp+66vGJ22NV6QfPS8oUhUmlpmJ9+c9hGHrz3ujTU5M4DCiJy2R6/MWvKbeu0/wu/NCp3XfszPMj3+XwnoF61SujSyXQ6ExJoaWF8UP7ede2yCA9tnhVag8si3YEQTPr0WQWhbNkkiyHQTM8EnTzvbgscnna+UlEFbDJte//nBjA4KyesXq/S7bmRZRK+mPhNz90l642PEpjHZpqyYpq3enSkCtb+gaStNIttFHg4VpBAYrn7rpGGtcfaM/WSduzPHK6Z3Xy2tZcn16Ih1v/IOiZ1vp8n5zN9PkFbPZWulyqLhlZXrFRC61UtXC2Z6W4TWn2PIVW7KGU4t9FY9GUx3E8HQu+myRJwofzKJ6M40jEieCcT4H5TZQKhfJ8XVVa9wfHplpyhVtHjPT/GawML/zyC8PPK/l50t0CpdrrTWoA1FtFca8cDGbBmyqWQmKLNuCcVH7i7GvLcp0eQWzvObde6vLiDN+2LFtWyA/tCNmyhf/RbBnB99VeG/iQcKbkDdmN3f4CUEsDBBQAAAgIAACAn+uK8lz6bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSiXmiqampuVFKYpKxmZlZoq6liamxkalJiqlZSmJionmqUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACAn+ssL6w7kgIAAFkFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACAn+uK8lz6bQAAAHgAAAAJACQAAAAAAAAAAAAAAN8CAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAlwMAAAAA
-      objectReference: {fileID: 0}
     - target: {fileID: 2927658305788182967, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: grid
       value: 
@@ -16486,34 +16422,6 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1656972438}
-    - target: {fileID: 6986262478406361815, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986262478406361815, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 7166301340058278970, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.61
-      objectReference: {fileID: 0}
-    - target: {fileID: 7166301340058278970, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833289850327767451, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7833289850327767451, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _chairs.Array.size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _chairs.Array.data[0]
       value: 
@@ -16546,22 +16454,6 @@ PrefabInstance:
       propertyPath: _chairs.Array.data[7]
       value: 
       objectReference: {fileID: 1196607981}
-    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _randomSpots.Array.data[0]
-      value: 
-      objectReference: {fileID: 1878451200}
-    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _randomSpots.Array.data[1]
-      value: 
-      objectReference: {fileID: 2117899610}
-    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _randomSpots.Array.data[2]
-      value: 
-      objectReference: {fileID: 1540712199}
-    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _randomSpots.Array.data[3]
-      value: 
-      objectReference: {fileID: 900785501}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
 --- !u!1 &2927658305668911199 stripped
