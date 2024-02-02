@@ -114,6 +114,7 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<AI>().Damage((int)player._weapon.Damage);
+                    enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * enemyAI.GetComponent<AI>().knockbackForce, ForceMode2D.Impulse);
                     return;
                 }
                 else if(angleToCollider <= 45.0f && hit.GetComponent<Cops>())

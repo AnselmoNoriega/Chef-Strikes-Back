@@ -30,6 +30,7 @@ public class AI : MonoBehaviour
     [Space, Header("AI Info")]
     public AIState state;
     public int Speed = 0;
+    public float knockbackForce = 0.0f;
     public float NextWaypointDistance = 0;
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
