@@ -45,7 +45,7 @@ public class Actions : MonoBehaviour
             foreach (var hit in hits)
             {
                 var myItem = hit.GetComponent<Item>();
-                if (myItem && myItem.isPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < grabDistance)
+                if (myItem && myItem.IsPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < grabDistance)
                 {
                     inventory.AddItem(myItem);
                     isCarryingItem = true;
@@ -81,7 +81,7 @@ public class Actions : MonoBehaviour
             {
                 tempDis = math.abs(hit.transform.position.magnitude - transform.position.magnitude);
 
-                if (tempDis < distance && hit.GetComponent<Item>() && hit.GetComponent<Item>().isPickable)
+                if (tempDis < distance && hit.GetComponent<Item>() && hit.GetComponent<Item>().IsPickable)
                 {
                     distance = tempDis;
                     newItem = hit.GetComponent<Item>();

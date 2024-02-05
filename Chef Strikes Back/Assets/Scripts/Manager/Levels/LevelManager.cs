@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
 
     GameLoader _loader;
 
-    private void Start()
+    private void Awake()
     {
         _loader = ServiceLocator.Get<GameLoader>();
         _loader.CallOnComplete(Init);

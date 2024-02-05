@@ -45,7 +45,7 @@ public class Chair : MonoBehaviour
 
     public bool IsAIsFood(Item item)
     {
-        if (Customer && (int)item.type == Customer.ChoiceIndex)
+        if (Customer && (int)item.Type == Customer.ChoiceIndex)
         {
             return true;
         }

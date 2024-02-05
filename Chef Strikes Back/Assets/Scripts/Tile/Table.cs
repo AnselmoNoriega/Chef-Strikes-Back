@@ -42,14 +42,14 @@ public class Table : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var newItem = collision.GetComponent<Item>();
-        if (newItem && !newItem.isServed && newItem.isPickable)
+        if (newItem && !newItem.IsServed && newItem.IsPickable)
         {
             foreach (var chair in chairs)
             {
                 if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
                     newItem.LaunchedInTable(platePos);
-                    newItem.isServed = true;
+                    newItem.IsServed = true;
                     chair.Food = newItem;
 
                     chair.Customer.ChangeState(AIState.Eating);

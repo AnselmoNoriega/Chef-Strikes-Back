@@ -45,7 +45,7 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item item)
     {
         foodItem = item;
-        item.isPickable = false;
+        item.IsPickable = false;
         item.transform.SetParent(transform);
         item.transform.localPosition = new Vector2(0, 0.7f);
     }

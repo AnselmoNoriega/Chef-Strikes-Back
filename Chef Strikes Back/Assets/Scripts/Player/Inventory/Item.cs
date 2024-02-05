@@ -1,32 +1,39 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Item : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    [Header("Item Components")]
+    [SerializeField] private Rigidbody2D _rb;
     [SerializeField] public Collider2D tgrCollider;
     [SerializeField] public Collider2D childCollider;
-    public FoodType type;
+    private Transform _playerTransform;
+    private Light2D _light;
 
-    [SerializeField] private float timereduction;
+    [Space, Header("Item Info")]
+    public FoodType Type;
+    public bool IsServed;
+    public bool IsPickable;
 
-    private float time;
-    private Vector2 acceleration;
-    private Vector2 handPosition;
+    [Space, Header("Throw Info")]
+    [SerializeField] private float _timeReduction;
+    private float _time;
+    private Vector2 _acceleration;
+    private Vector2 _handPosition;
 
     [Space, Header("Movement in table")]
-    [SerializeField] private float magnetSmoodTime;
-    private Transform magnetPos;
-    private bool isBeingDrag;
-    public bool isPickable;
-
-    public bool isServed;
+    [SerializeField] private float _magnetSmoodTime;
+    private Transform _magnetPos;
+    private bool _isBeingDrag;
 
     private void Start()
     {
-        handPosition = new Vector2(0, 0.7f);
-        isBeingDrag = false;
-        isPickable = true;
-        isServed = false;
+        _playerTransform = ServiceLocator.Get<Player>().transform;
+        _light = GetComponent<Light2D>();
+        _handPosition = new Vector2(0, 0.7f);
+        _isBeingDrag = false;
+        IsPickable = true;
+        IsServed = false;
     }
 
     private void FixedUpdate()
@@ -34,13 +41,13 @@ public class Item : MonoBehaviour
 
         if (transform.parent != null)
         {
-            transform.localPosition = handPosition;
+            transform.localPosition = _handPosition;
         }
 
-        if (time >= 0)
+        if (_time >= 0)
         {
-            rb.velocity += acceleration * Time.deltaTime;
-            time -= Time.deltaTime;
+            _rb.velocity += _acceleration * Time.deltaTime;
+            _time -= Time.deltaTime;
 
             Checktime();
         }
@@ -52,41 +59,41 @@ public class Item : MonoBehaviour
 
     public void Throw(Vector2 velocity, Vector2 acceleration, float time)
     {
-        this.time = time * timereduction;
-        rb.velocity = velocity;
-        this.acceleration = acceleration;
-        isPickable = true;
+        _time = time * _timeReduction;
+        _rb.velocity = velocity;
+        _acceleration = acceleration;
+        IsPickable = true;
     }
 
     private void Checktime()
     {
-        if (time <= 0)
+        if (_time <= 0)
         {
-            rb.velocity = Vector2.zero;
-            rb.rotation = 0;
-            rb.angularVelocity = 0;
+            _rb.velocity = Vector2.zero;
+            _rb.rotation = 0;
+            _rb.angularVelocity = 0;
         }
     }
 
     private void MagnetToTable()
     {
-        isBeingDrag = magnetPos != null;
+        _isBeingDrag = _magnetPos != null;
     }
 
     public void LaunchedInTable(Transform table)
     {
-        magnetPos = table;
-        rb.isKinematic = true;
-        rb.freezeRotation = true;
+        _magnetPos = table;
+        _rb.isKinematic = true;
+        _rb.freezeRotation = true;
     }
 
     public void DraggingFood()
     {
-        if (isBeingDrag)
+        if (_isBeingDrag)
         {
-            var temp = rb.velocity;
-            transform.position = Vector2.SmoothDamp(transform.position, magnetPos.position, ref temp, magnetSmoodTime);
-            isBeingDrag = .2 <= Vector3.Distance(transform.position, magnetPos.position);
+            var temp = _rb.velocity;
+            transform.position = Vector2.SmoothDamp(transform.position, _magnetPos.position, ref temp, _magnetSmoodTime);
+            _isBeingDrag = .2 <= Vector3.Distance(transform.position, _magnetPos.position);
         }
     }
 
@@ -101,6 +108,19 @@ public class Item : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+    private void OnMouseOver()
+    {
+        if(Vector2.Distance(_playerTransform.position, transform.position) <= 1)
+        {
+            _light.enabled = true;
+        }
+    }
+
+    private void OnMouseExit()
+    {
+        _light.enabled = false;
+    }
 }
 
 public enum FoodType
