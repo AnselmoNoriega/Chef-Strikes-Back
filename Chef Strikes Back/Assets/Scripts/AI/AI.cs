@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Pathfinding;
 
@@ -35,6 +36,10 @@ public class AI : MonoBehaviour
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
 
+    [Space, Header("AI's got hit animation")]
+    [SerializeField] private SpriteRenderer _BadAISprite;
+    [SerializeField] private SpriteRenderer _GoodAISprite;
+    [SerializeField] private int _FlashingTime;
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
     public Chair SelectedChair { get; set; }
@@ -103,6 +108,7 @@ public class AI : MonoBehaviour
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
                 DestroyAI();
             }
+            StartCoroutine(SpriteFlashing());
         }
         else
         {
@@ -120,6 +126,7 @@ public class AI : MonoBehaviour
                 }
                 ChangeState(AIState.Rage);
             }
+            StartCoroutine(SpriteFlashing());
         }
     }
 
@@ -137,5 +144,32 @@ public class AI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _stateManager.TriggerEnter2D(collision);
+    }
+    private IEnumerator SpriteFlashing()
+    {
+        if (state==AIState.Hungry||state==AIState.Eating)
+        {
+            for (int i = 0; i < _FlashingTime; i++)
+            {
+                _GoodAISprite.color = Color.black;
+                yield return new WaitForSeconds(0.1f);
+                _GoodAISprite.color = Color.green;
+                yield return new WaitForSeconds(0.1f);
+                _GoodAISprite.color = new Color(255, 255, 255, 255);
+            }
+        }
+        else if (state == AIState.Rage || state == AIState.Attacking)
+        {
+            for (int i = 0; i < _FlashingTime; i++)
+            {
+                _BadAISprite.color = Color.black;
+                yield return new WaitForSeconds(0.1f);
+                _BadAISprite.color = Color.green;
+                yield return new WaitForSeconds(0.1f);
+                _BadAISprite.color = Color.red;
+            }
+        }
+  
+
     }
 }
