@@ -15795,9 +15795,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2927658305668911199}
     - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: playerImage
+      value: 
+      objectReference: {fileID: 1846026830}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: sceneControl
       value: 
       objectReference: {fileID: 7418929117601166086}
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: _FlashingTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 219068449830899588, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -15896,6 +15904,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+--- !u!212 &1846026830 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6355847347339370375, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+  m_PrefabInstance: {fileID: 1846026829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852254339
 GameObject:
   m_ObjectHideFlags: 0

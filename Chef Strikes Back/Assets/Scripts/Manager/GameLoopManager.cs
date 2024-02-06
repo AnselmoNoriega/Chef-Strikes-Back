@@ -94,36 +94,6 @@ public class GameLoopManager : MonoBehaviour
     public void WantedSystem()
     {
         var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
-/*        if (Killscount == 2)
-        {
-            _badAiTime2Spawn = 5.0f;
-            _badAiCount = 1;
-            _stars = 1;
-        }
-        else if (Killscount == 6)
-        {
-            _badAiTime2Spawn = 3.0f;
-            _badAiCount = 2;
-            _stars = 2;
-        }
-        else if (Killscount == 15)
-        {
-            _copTime2Spawn = 5.0f;
-            _copCount = 1;
-            _stars = 3;
-        }
-        else if (Killscount == 25)
-        {
-            _copTime2Spawn = 3.0f;
-            _copCount = 2;
-            _stars = 4;
-        }
-        else if (Killscount == 50)
-        {
-            _badAiTime2Spawn = 2.0f;
-            _badAiCount = 3;
-            _stars = 5;
-        }*/
 
         for (int i = _wantedSystemTimer.Count; i < 0; i++) 
         {

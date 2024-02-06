@@ -199,9 +199,13 @@ MonoBehaviour:
   ChoiceIndex: 0
   state: 0
   Speed: 62
+  knockbackForce: 0
   NextWaypointDistance: 0.1
   _health: 10
   _hitsToGetMad: 3
+  _BadAISprite: {fileID: 34484012071288455}
+  _GoodAISprite: {fileID: 34484012071288455}
+  _FlashingTime: 1
 --- !u!114 &4617263295547057938
 MonoBehaviour:
   m_ObjectHideFlags: 0

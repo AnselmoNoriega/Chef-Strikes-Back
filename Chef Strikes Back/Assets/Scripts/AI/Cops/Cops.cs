@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Pathfinding;
 
@@ -32,6 +32,9 @@ public class Cops : MonoBehaviour
     public bool isHit;
     public float knockbackForce = 150.0f;
 
+    [Space, Header("Cop's Got hit Animation")]
+    [SerializeField] private int _flashingTime;
+    [SerializeField] private SpriteRenderer _copsprite;
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
 
@@ -76,12 +79,25 @@ public class Cops : MonoBehaviour
             ServiceLocator.Get<GameLoopManager>().WantedSystem();
             Destroy(gameObject);
         }
+        StartCoroutine(SpriteFlashing());
     }
 
     public void Shoot()
     {
         Instantiate(bulletPrefab, gunPos.transform.position, Quaternion.identity);
     }
+    private IEnumerator SpriteFlashing()
+    {    
+        for (int i = 0; i < _flashingTime; i++)
+        {
+            _copsprite.color = Color.black;
+            yield return new WaitForSeconds(0.1f);
+            _copsprite.color = Color.green;
+            yield return new WaitForSeconds(0.1f);
+            _copsprite.color = new Color(61, 100, 255, 255);
+        }
+    }
 
-    
+
+
 }
