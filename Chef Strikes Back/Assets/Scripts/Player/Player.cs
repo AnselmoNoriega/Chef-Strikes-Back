@@ -171,7 +171,8 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             playerImage.color = Color.black;
             yield return new WaitForSeconds(0.1f);
-            playerImage.color = new Color(223, 106, 226, 225);
+
+            playerImage.color = new Color(0.8735808f, 0.4141153f, 0.8867924f, 1.0f);
         }
         
     }
