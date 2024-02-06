@@ -3,11 +3,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public struct WantedSpawner
+{
+    public float KillCount;
+    public int Stars;
+    public float BadAiSpawnTimer;
+    public float CopAiSpawnTimer;
+    public int CopSpwanCount;
+    public int BadAiSpwanCount;
+}
 public class GameLoopManager : MonoBehaviour
 {
     [SerializeField] private float spawnTime;
     [SerializeField] private GameObject AIPrefabs;
     [SerializeField] private GameObject CopsPrefabs;
+    [SerializeField] private List<WantedSpawner> _wantedSystemTimer;
 
     private List<GameObject> _AIPool = new();
     private Player _player;
@@ -40,7 +51,6 @@ public class GameLoopManager : MonoBehaviour
 
         SpawnBadAIWithinTime();
         SpawnTheCopWithinTime();
-        WantedStarSpawn();
 
         if (_countToSpawn >= spawnTime)
         {
@@ -90,42 +100,48 @@ public class GameLoopManager : MonoBehaviour
     public void WantedSystem()
     {
         var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
-
-        if (Killscount == 1)
-        {
-            _badAiTime2Spawn = 0.0f;
-            _badAiCount = 0;
-            _stars = 1;
-        }
-        else if (Killscount == 5)
+/*        if (Killscount == 2)
         {
             _badAiTime2Spawn = 5.0f;
             _badAiCount = 1;
+            _stars = 1;
+        }
+        else if (Killscount == 6)
+        {
+            _badAiTime2Spawn = 3.0f;
+            _badAiCount = 2;
             _stars = 2;
         }
         else if (Killscount == 15)
         {
-            _badAiTime2Spawn = 5.0f;
-            _badAiCount = 1;
-            _copTime2Spawn = 10.0f;
+            _copTime2Spawn = 5.0f;
             _copCount = 1;
             _stars = 3;
         }
         else if (Killscount == 25)
         {
-            _badAiTime2Spawn = 3.0f;
-            _badAiCount = 1;
-            _copTime2Spawn = 5.0f;
-            _copCount = 1;
+            _copTime2Spawn = 3.0f;
+            _copCount = 2;
             _stars = 4;
         }
         else if (Killscount == 50)
         {
-            _badAiTime2Spawn = 3.0f;
-            _badAiCount = 2;
-            _copTime2Spawn = 5.0f;
-            _copCount = 1;
+            _badAiTime2Spawn = 2.0f;
+            _badAiCount = 3;
             _stars = 5;
+        }*/
+
+        for (int i = _wantedSystemTimer.Count; i < 0; i++) 
+        {
+            if (Killscount >= _wantedSystemTimer[i].KillCount)
+            {
+                _copSpawntimer = _wantedSystemTimer[i].CopAiSpawnTimer;
+                _badAiSpawntimer = _wantedSystemTimer[i].BadAiSpawnTimer;
+                _stars = _wantedSystemTimer[i].Stars;
+                _badAiCount = _wantedSystemTimer[i].BadAiSpwanCount;
+                _copCount = _wantedSystemTimer[i].CopSpwanCount;
+                WantedStarSpawn();
+            }
         }
     }
 
@@ -153,6 +169,7 @@ public class GameLoopManager : MonoBehaviour
             _copSpawntimer = _copTime2Spawn;
         }
     }
+
     private void WantedStarSpawn()
     {
         ServiceLocator.Get<CanvasManager>().ActivateStars(_stars);

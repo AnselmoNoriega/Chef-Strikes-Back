@@ -103,6 +103,11 @@ public class Item : MonoBehaviour
         childCollider.enabled = state;
     }
 
+    public void ActivateLight(bool active)
+    {
+        _light.enabled = active;
+    }
+
     public void DestoyItem()
     {
         Destroy(gameObject);
@@ -113,13 +118,13 @@ public class Item : MonoBehaviour
     {
         if(Vector2.Distance(_playerTransform.position, transform.position) <= 1)
         {
-            _light.enabled = true;
+            ActivateLight(true);
         }
     }
 
     private void OnMouseExit()
     {
-        _light.enabled = false;
+        ActivateLight(false);
     }
 }
 
