@@ -21,7 +21,6 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] private List<WantedSpawner> _wantedSystemTimer;
 
     private List<GameObject> _AIPool = new();
-    private Player _player;
     private float _countToSpawn = 0;
 
     private float _badAiSpawntimer = 0.0f;
@@ -40,7 +39,6 @@ public class GameLoopManager : MonoBehaviour
 
     public void Initialize()
     {
-        _player = ServiceLocator.Get<Player>();
         _aiManager = ServiceLocator.Get<AIManager>();
         SpawnCustomer();
     }
@@ -145,5 +143,8 @@ public class GameLoopManager : MonoBehaviour
         ServiceLocator.Get<CanvasManager>().ActivateStars(_stars);
     }
 
-
+    public void ActiveateController()
+    {
+        ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().SetControllerActive();
+    }
 }

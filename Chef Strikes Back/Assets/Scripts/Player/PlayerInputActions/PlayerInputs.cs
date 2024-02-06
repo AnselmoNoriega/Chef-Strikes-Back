@@ -8,15 +8,16 @@ public class PlayerInputs : MonoBehaviour
     private InputAction leftTrigger;
     private InputAction rightJoystick;
     private InputAction leftButton;
+    private InputAction pauseKeyboard;
 
     private InputAction leftMouse;
     private InputAction rightMouse;
     private InputAction mouse;
-
-    private InputAction pauseKeyboard;
     private InputAction pauseController;
 
     [SerializeField] private Actions action;
+
+    private bool _isUsingController = false;
 
     private void Awake()
     {
@@ -36,25 +37,15 @@ public class PlayerInputs : MonoBehaviour
         pauseKeyboard = inputManager.Player.Esc;
         pauseController = inputManager.Player.PauseController;
 
-        rightMouse.Enable();
-        leftMouse.Enable();
-        mouse.Enable();
+        EnableKeyboard();
 
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
         rightMouse.canceled += RightClickRelease;
 
-        //Controller
-        leftTrigger.Enable();
-        leftButton.Enable();
-        rightJoystick.Enable();
-
         leftTrigger.performed += LeftTgrClick;
         leftButton.performed += LeftbuttonDown;
         leftTrigger.canceled += LeftTgrRelease;
-
-        pauseKeyboard.Enable();
-        pauseController.Enable();
 
         pauseKeyboard.performed += TogglePauseMenu;
         pauseController.performed += TogglePauseMenu;
@@ -66,19 +57,9 @@ public class PlayerInputs : MonoBehaviour
         rightMouse.performed -= RightClick;
         rightMouse.canceled -= RightClickRelease;
 
-        leftMouse.Disable();
-        rightMouse.Disable();
-        mouse.Disable();
-
         leftButton.performed -= LeftbuttonDown;
         leftTrigger.performed -= LeftTgrClick;
         leftTrigger.canceled -= LeftTgrRelease;
-
-        leftTrigger.Disable();
-        leftButton.Disable();
-
-        pauseKeyboard.Disable();
-        pauseController.Disable();
 
         pauseKeyboard.performed -= TogglePauseMenu;
         pauseController.performed -= TogglePauseMenu;
@@ -86,7 +67,10 @@ public class PlayerInputs : MonoBehaviour
 
     private void Update()
     {
-        action.Check4CloseItems();
+        if (_isUsingController)
+        {
+            action.Check4CloseItems();
+        }
     }
 
     private void LeftClick(InputAction.CallbackContext input)
@@ -135,13 +119,51 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
-    private void SetKeyboardActive(bool active)
+    public void SetControllerActive()
     {
-
+        if (!_isUsingController)
+        {
+            EnableController();
+            DisableKeyboard();
+            _isUsingController = true;
+        }
+        else
+        {
+            EnableKeyboard();
+            DisableController();
+            _isUsingController = false;
+        }
     }
 
-    private void SetControllerActive(bool active)
+    private void EnableKeyboard()
     {
+        rightMouse.Enable();
+        leftMouse.Enable();
+        mouse.Enable();
+        pauseKeyboard.Enable();
+    }
 
+    private void EnableController()
+    {
+        leftTrigger.Enable();
+        leftButton.Enable();
+        rightJoystick.Enable();
+        pauseController.Enable();
+    }
+
+    private void DisableKeyboard()
+    {
+        rightMouse.Disable();
+        leftMouse.Disable();
+        mouse.Disable();
+        pauseKeyboard.Disable();
+    }
+
+    private void DisableController()
+    {
+        leftTrigger.Disable();
+        leftButton.Disable();
+        rightJoystick.Disable();
+        pauseController.Disable();
     }
 }
