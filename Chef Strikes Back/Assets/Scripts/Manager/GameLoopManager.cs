@@ -3,11 +3,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
+public struct WantedSpawner
+{
+    public float KillCount;
+    public int Stars;
+    public float BadAiSpawnTimer;
+    public float CopAiSpawnTimer;
+    public int CopSpwanCount;
+    public int BadAiSpwanCount;
+}
 public class GameLoopManager : MonoBehaviour
 {
     [SerializeField] private float spawnTime;
     [SerializeField] private GameObject AIPrefabs;
     [SerializeField] private GameObject CopsPrefabs;
+    [SerializeField] private List<WantedSpawner> _wantedSystemTimer;
 
     private List<GameObject> _AIPool = new();
     private Player _player;
@@ -37,7 +48,6 @@ public class GameLoopManager : MonoBehaviour
 
         SpawnBadAIWithinTime();
         SpawnTheCopWithinTime();
-        WantedStarSpawn();
 
         if (_countToSpawn >= spawnTime)
         {
@@ -84,8 +94,7 @@ public class GameLoopManager : MonoBehaviour
     public void WantedSystem()
     {
         var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
-
-        if (Killscount == 2)
+/*        if (Killscount == 2)
         {
             _badAiTime2Spawn = 5.0f;
             _badAiCount = 1;
@@ -114,6 +123,19 @@ public class GameLoopManager : MonoBehaviour
             _badAiTime2Spawn = 2.0f;
             _badAiCount = 3;
             _stars = 5;
+        }*/
+
+        for (int i = _wantedSystemTimer.Count; i < 0; i++) 
+        {
+            if (Killscount >= _wantedSystemTimer[i].KillCount)
+            {
+                _copSpawntimer = _wantedSystemTimer[i].CopAiSpawnTimer;
+                _badAiSpawntimer = _wantedSystemTimer[i].BadAiSpawnTimer;
+                _stars = _wantedSystemTimer[i].Stars;
+                _badAiCount = _wantedSystemTimer[i].BadAiSpwanCount;
+                _copCount = _wantedSystemTimer[i].CopSpwanCount;
+                WantedStarSpawn();
+            }
         }
     }
 
@@ -141,6 +163,7 @@ public class GameLoopManager : MonoBehaviour
             _copSpawntimer = _copTime2Spawn;
         }
     }
+
     private void WantedStarSpawn()
     {
         ServiceLocator.Get<CanvasManager>().ActivateStars(_stars);
