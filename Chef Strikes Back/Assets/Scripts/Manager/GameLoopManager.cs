@@ -36,9 +36,12 @@ public class GameLoopManager : MonoBehaviour
 
     public AIState AiStandState = AIState.Good;
 
+    private AIManager _aiManager;
+
     public void Initialize()
     {
         _player = ServiceLocator.Get<Player>();
+        _aiManager = ServiceLocator.Get<AIManager>();
         SpawnCustomer();
     }
 
@@ -58,8 +61,11 @@ public class GameLoopManager : MonoBehaviour
 
     private void SpawnCustomer()
     {
-        Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
-        Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
+        if (_aiManager.GetAvailableChairsCount() > 0)
+        {
+            Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
+            Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
+        }
     }
     private void SpawnBadCustomer()
     {

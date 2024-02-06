@@ -4,9 +4,8 @@ using UnityEngine.InputSystem;
 public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
-
+    //HELLO MARC
     private InputAction leftTrigger;
-    private InputAction rightTrigger;
     private InputAction rightJoystick;
     private InputAction leftButton;
 
@@ -29,7 +28,6 @@ public class PlayerInputs : MonoBehaviour
         mouse = inputManager.Player.MouseLocation;
          
         leftTrigger = inputManager.Player.LeftTrigger;
-        rightTrigger = inputManager.Player.RightTrigger;
         leftButton = inputManager.Player.LeftButton;
         rightJoystick = inputManager.Player.LeftJoystick;
 
@@ -37,37 +35,41 @@ public class PlayerInputs : MonoBehaviour
         leftMouse.Enable();
         mouse.Enable();
 
+        rightMouse.performed += RightClick;
+        leftMouse.performed += LeftClick;
+        rightMouse.canceled += RightClickRelease;
+
+        //Controller
         leftTrigger.Enable();
-        rightTrigger.Enable();
         leftButton.Enable();
         rightJoystick.Enable();
 
-        rightMouse.performed += RightClick;
-        leftMouse.performed += LeftClick;
         leftTrigger.performed += LeftTgrClick;
         leftButton.performed += LeftbuttonDown;
-
-        rightMouse.canceled += RightClickRelease;
         leftTrigger.canceled += LeftTgrRelease;
     }
-
+    
     private void OnDisable()
     {
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
-        leftButton.performed -= LeftbuttonDown;
-        leftTrigger.performed -= LeftTgrClick;
-
         rightMouse.canceled -= RightClickRelease;
-        leftTrigger.canceled -= LeftTgrRelease;
 
         leftMouse.Disable();
         rightMouse.Disable();
         mouse.Disable();
 
+        leftButton.performed -= LeftbuttonDown;
+        leftTrigger.performed -= LeftTgrClick;
+        leftTrigger.canceled -= LeftTgrRelease;
+
         leftTrigger.Disable();
-        rightTrigger.Disable();
         leftButton.Disable();
+    }
+
+    private void Update()
+    {
+        action.Check4CloseItems();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
@@ -100,5 +102,15 @@ public class PlayerInputs : MonoBehaviour
     private void RightClickRelease(InputAction.CallbackContext input)
     {
         action.ThrowItem(mouse); 
+    }
+
+    private void SetKeyboardActive(bool active)
+    {
+
+    }
+
+    private void SetControllerActive(bool active)
+    {
+
     }
 }

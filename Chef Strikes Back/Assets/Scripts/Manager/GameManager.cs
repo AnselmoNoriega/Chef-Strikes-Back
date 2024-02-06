@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int _enterToRageModePoints;
+    [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
 
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     public void EnterRageModeScore()
     {
-        _score += _enterToRageModePoints;
+        _score += _customerMadPoints;
     }
 
     public void KillScoreUpdate()
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         }
         else if (time >= 15.0f)
         {
-            _score += 4;
+            _score += 3;
         }
         else if (time >= 5.0f)
         {
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         }
         else if (time >= 0.1f)
         {
-            _score += 2;
+            _score += 3;
         }
     }
 
