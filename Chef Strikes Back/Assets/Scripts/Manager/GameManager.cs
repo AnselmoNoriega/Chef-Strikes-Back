@@ -10,24 +10,24 @@ public class GameManager : MonoBehaviour
 
     private int _money;
 
-    private int _score = 0;
+    [SerializeField] private int _score = 0;
 
     public void EnterRageModeScore()
     {
         _score += _customerMadPoints;
-        Debug.Log("RageMode points: " + _customerMadPoints);
+        Debug.Log("Rage " + _customerMadPoints);
     }
 
     public void KillScoreUpdate()
     {
         _score += _killPoints;
-        Debug.Log("Kill points: " + _customerMadPoints);
+        Debug.Log("Kill " + _killPoints);
     }
 
     public void MoneyGrabed()
     {
         _score += _grabMoneyPoints;
-        Debug.Log("Money points: " + _customerMadPoints);
+        Debug.Log("MoneyGrabed " + _grabMoneyPoints);
     }
 
     public void FoodGiven(float time)
@@ -35,18 +35,22 @@ public class GameManager : MonoBehaviour
         if (time >= 20.0f)
         {
             _score += 5;
+            Debug.Log("FoodGiven " + 5);
         }
         else if (time >= 15.0f)
         {
             _score += 3;
+            Debug.Log("FoodGiven " + 3);
         }
         else if (time >= 5.0f)
         {
             _score += 3;
+            Debug.Log("FoodGiven " + 3);
         }
         else if (time >= 0.1f)
         {
             _score += 3;
+            Debug.Log("FoodGiven " + 3);
         }
     }
 

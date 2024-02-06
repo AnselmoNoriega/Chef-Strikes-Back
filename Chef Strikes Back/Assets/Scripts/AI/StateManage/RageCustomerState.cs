@@ -10,6 +10,7 @@ public class RageCustomerState : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        ServiceLocator.Get<GameManager>().EnterRageModeScore();
         _agent = agent;
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
