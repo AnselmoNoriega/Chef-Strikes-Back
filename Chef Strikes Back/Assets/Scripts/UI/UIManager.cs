@@ -10,4 +10,9 @@ public class UIManager : MonoBehaviour
     {
         _screens.SetState(screenName);
     }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
 }

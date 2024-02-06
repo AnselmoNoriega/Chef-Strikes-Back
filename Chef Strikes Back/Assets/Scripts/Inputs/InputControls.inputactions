@@ -139,6 +139,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PauseController",
+                    "type": "Button",
+                    "id": "6bcc9a36-7101-4b21-84ac-1c08d70e8ed6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -370,6 +379,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LowerButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e6f8f6f-7e0e-49cb-b0a0-8af5a16174e6",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PauseController",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
