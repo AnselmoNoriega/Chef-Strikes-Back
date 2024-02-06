@@ -48,6 +48,7 @@ public class Table : MonoBehaviour
             {
                 if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
+                    ServiceLocator.Get<GameManager>().FoodGiven(25 * chair.Customer.EatingSlider.localScale.x);
                     newItem.LaunchedInTable(platePos);
                     newItem.IsServed = true;
                     chair.Food = newItem;

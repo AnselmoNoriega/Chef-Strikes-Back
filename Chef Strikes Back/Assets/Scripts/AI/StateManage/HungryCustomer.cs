@@ -65,8 +65,6 @@ public class HungryCustomer : StateClass<AI>
         agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 
-        ServiceLocator.Get<GameManager>().FoodGiven(25 * scale.x);
-
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
     }
 }

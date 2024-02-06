@@ -16616,6 +16616,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[0].Time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[1].Time
       value: 10
       objectReference: {fileID: 0}
@@ -16625,23 +16629,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[3].Time
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[4].Time
-      value: 90
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[5].Time
-      value: 120
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[6].Time
-      value: 150
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[1].SpawningTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[2].SpawningTime
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[3].SpawningTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[4].SpawningTime
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[5].SpawningTime
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[6].SpawningTime
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1840867465630466503, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16765,15 +16789,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[0].BadAiSpawnTimer
-      value: 454564580
-      objectReference: {fileID: 0}
-    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _wantedSystemTimer.Array.data[0].BadAiSpwanCount
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[0].BadAiSpwanCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[0].CopAiSpawnTimer
-      value: 45345344
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpawnTimer
@@ -16785,7 +16809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[1].CopAiSpawnTimer
-      value: 416513150
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpawnTimer
