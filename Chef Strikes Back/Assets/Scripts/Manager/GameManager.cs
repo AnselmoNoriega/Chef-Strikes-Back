@@ -15,16 +15,19 @@ public class GameManager : MonoBehaviour
     public void EnterRageModeScore()
     {
         _score += _customerMadPoints;
+        Debug.Log("RageMode points: " + _customerMadPoints);
     }
 
     public void KillScoreUpdate()
     {
         _score += _killPoints;
+        Debug.Log("Kill points: " + _customerMadPoints);
     }
 
     public void MoneyGrabed()
     {
         _score += _grabMoneyPoints;
+        Debug.Log("Money points: " + _customerMadPoints);
     }
 
     public void FoodGiven(float time)
