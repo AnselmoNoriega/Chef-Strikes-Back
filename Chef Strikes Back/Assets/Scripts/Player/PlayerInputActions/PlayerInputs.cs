@@ -53,6 +53,9 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnDisable()
     {
+        DisableKeyboard();
+        DisableController();
+
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
         rightMouse.canceled -= RightClickRelease;
