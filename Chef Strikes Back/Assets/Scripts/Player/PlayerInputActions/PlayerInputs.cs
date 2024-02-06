@@ -39,7 +39,6 @@ public class PlayerInputs : MonoBehaviour
         leftMouse.performed += LeftClick;
         rightMouse.canceled += RightClickRelease;
 
-
         //Controller
         leftTrigger.Enable();
         leftButton.Enable();
@@ -49,7 +48,7 @@ public class PlayerInputs : MonoBehaviour
         leftButton.performed += LeftbuttonDown;
         leftTrigger.canceled += LeftTgrRelease;
     }
-
+    
     private void OnDisable()
     {
         leftMouse.performed -= LeftClick;
@@ -103,5 +102,15 @@ public class PlayerInputs : MonoBehaviour
     private void RightClickRelease(InputAction.CallbackContext input)
     {
         action.ThrowItem(mouse); 
+    }
+
+    private void SetKeyboardActive(bool active)
+    {
+
+    }
+
+    private void SetControllerActive(bool active)
+    {
+
     }
 }
