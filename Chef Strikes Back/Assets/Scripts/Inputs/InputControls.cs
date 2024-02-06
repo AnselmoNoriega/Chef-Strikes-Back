@@ -161,6 +161,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseController"",
+                    ""type"": ""Button"",
+                    ""id"": ""6bcc9a36-7101-4b21-84ac-1c08d70e8ed6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -394,6 +403,17 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""LowerButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e6f8f6f-7e0e-49cb-b0a0-8af5a16174e6"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -417,6 +437,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_RightJoystick = m_Player.FindAction("RightJoystick", throwIfNotFound: true);
         m_Player_LeftButton = m_Player.FindAction("LeftButton", throwIfNotFound: true);
         m_Player_LowerButton = m_Player.FindAction("LowerButton", throwIfNotFound: true);
+        m_Player_PauseController = m_Player.FindAction("PauseController", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -491,6 +512,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RightJoystick;
     private readonly InputAction m_Player_LeftButton;
     private readonly InputAction m_Player_LowerButton;
+    private readonly InputAction m_Player_PauseController;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -510,6 +532,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @RightJoystick => m_Wrapper.m_Player_RightJoystick;
         public InputAction @LeftButton => m_Wrapper.m_Player_LeftButton;
         public InputAction @LowerButton => m_Wrapper.m_Player_LowerButton;
+        public InputAction @PauseController => m_Wrapper.m_Player_PauseController;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -564,6 +587,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LowerButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLowerButton;
                 @LowerButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLowerButton;
                 @LowerButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLowerButton;
+                @PauseController.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseController;
+                @PauseController.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseController;
+                @PauseController.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseController;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -613,6 +639,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @LowerButton.started += instance.OnLowerButton;
                 @LowerButton.performed += instance.OnLowerButton;
                 @LowerButton.canceled += instance.OnLowerButton;
+                @PauseController.started += instance.OnPauseController;
+                @PauseController.performed += instance.OnPauseController;
+                @PauseController.canceled += instance.OnPauseController;
             }
         }
     }
@@ -634,5 +663,6 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnRightJoystick(InputAction.CallbackContext context);
         void OnLeftButton(InputAction.CallbackContext context);
         void OnLowerButton(InputAction.CallbackContext context);
+        void OnPauseController(InputAction.CallbackContext context);
     }
 }

@@ -13,8 +13,10 @@ public class PlayerInputs : MonoBehaviour
     private InputAction rightMouse;
     private InputAction mouse;
 
-    [SerializeField]
-    private Actions action;
+    private InputAction pauseKeyboard;
+    private InputAction pauseController;
+
+    [SerializeField] private Actions action;
 
     private void Awake()
     {
@@ -26,10 +28,13 @@ public class PlayerInputs : MonoBehaviour
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
-         
+
         leftTrigger = inputManager.Player.LeftTrigger;
         leftButton = inputManager.Player.LeftButton;
         rightJoystick = inputManager.Player.LeftJoystick;
+
+        pauseKeyboard = inputManager.Player.Esc;
+        pauseController = inputManager.Player.PauseController;
 
         rightMouse.Enable();
         leftMouse.Enable();
@@ -47,8 +52,14 @@ public class PlayerInputs : MonoBehaviour
         leftTrigger.performed += LeftTgrClick;
         leftButton.performed += LeftbuttonDown;
         leftTrigger.canceled += LeftTgrRelease;
+
+        pauseKeyboard.Enable();
+        pauseController.Enable();
+
+        pauseKeyboard.performed += TogglePauseMenu;
+        pauseController.performed += TogglePauseMenu;
     }
-    
+
     private void OnDisable()
     {
         leftMouse.performed -= LeftClick;
@@ -65,6 +76,12 @@ public class PlayerInputs : MonoBehaviour
 
         leftTrigger.Disable();
         leftButton.Disable();
+
+        pauseKeyboard.Disable();
+        pauseController.Disable();
+
+        pauseKeyboard.performed -= TogglePauseMenu;
+        pauseController.performed -= TogglePauseMenu;
     }
 
     private void Update()
@@ -101,7 +118,21 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse); 
+        action.ThrowItem(mouse);
+    }
+
+    private void TogglePauseMenu(InputAction.CallbackContext input)
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            ServiceLocator.Get<StatefulObject>().SetState("Root - Pause Menu");
+        }
+        else
+        {
+            Time.timeScale = 1;
+            ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
+        }
     }
 
     private void SetKeyboardActive(bool active)
