@@ -17,6 +17,11 @@ public class AIManager : MonoBehaviour
         return chair;
     }
 
+    public int GetAvailableChairsCount()
+    {
+        return _chairs.Count;
+    }
+
     public void AddAvailableChair(Chair chair)
     {
         _chairs.Add(chair);
