@@ -18241,6 +18241,118 @@ PrefabInstance:
       propertyPath: CopsPrefabs
       value: 
       objectReference: {fileID: 4629491789166812219, guid: 0537e4e458f663d48aacd6674a852ff5, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[0].Stars
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].Stars
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].Stars
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].Stars
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].Stars
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[0].KillCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].KillCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].KillCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].KillCount
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].KillCount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].CopSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].CopSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].CopSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[0].BadAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[0].CopAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpawnTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].CopAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpawnTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].CopAiSpawnTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].BadAiSpawnTimer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].BadAiSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].CopAiSpawnTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].BadAiSpawnTimer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].BadAiSpwanCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].CopAiSpawnTimer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2927658305668911201, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: data.dataString
       value: UEsDBBQAAAgIAACAn+vovx/NkgIAAFYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMFy2jAQ/RVG5+KxjW2gt5YQkkMSprSTCxdhLViDkTySHCAZ/r27ssEuZZhBvLf7dvdp7S8mla0gd9osjBQvWgD7PmDPVh/AGZkTyL4NuqgnOPGdViv5CdfgdylcQUHcx/ziTmrEI0q76vxQu5KCszAI6TOaIFsrudXmMBc7mGnrLPJbXlpAymhHMgqhrwE74c8wSRE/4ykeh3j6xNM0HFzwmINyYHqhcRCNkiQKs7hNiYLJJEvjBqDM4SiYhmmC33g+DCdeplZ5yQ8VCBquU4tGQeJ7zq5iURD7BIUGtLFhQMq5Lktp27aZO1fenxmvbI3TY4CQHP3wvUbBCIEC5K5wNFQ//W27tUAoDWr4+UEaNLbRZT914/aB233T5Qcva6qURFljSKP68l/AMPL01ujD07VwFFIRV8h8/4ufc25d7xr68EOvd+/WkZd7vinhvQD1qhdG10og6UxNqbWF+KH7e5ttVkC+7/Cm1Tuwrjr7w9b1653TDBc//mlWysPGm580wKrU3vIpBYPB63nGhv0i2VYCUerij4XffNffuJZ4lMY6pNopFbW30bWhUDb3ntE0tZtpo8DDbdMVKF668xJl3P0d3nG9snfMI6eHrC3ectdn5y7Fw118GN5RS328XZYt9PEFbPFWu1Kqvhgxr2jUTCvV7Ji9YylvVZstz6EbdldL8e9usWTM0zQdx4JvRlmW8eE0SUdxmog0E5zzMTC/fFLhoLxcNp22/uC1qU5c4aKRIr18BgvDK7/vwvDjQn4edL9BqbZ6lRsA9dZI3DoHg1Xw4RRzIdGiFTgnlb9x9rVmpc73INa3mms/6vzkDF93KmtWyQ/tCFmzmX/LrBnBt21eGviQcKTiV7ELu/wFUEsDBBQAAAgIAACAn+uK8lz6bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSiXmiqampuVFKYpKxmZlZoq6liamxkalJiqlZSmJionmqUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACAn+vovx/NkgIAAFYFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACAn+uK8lz6bQAAAHgAAAAJACQAAAAAAAAAAAAAAN8CAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAlwMAAAAA
