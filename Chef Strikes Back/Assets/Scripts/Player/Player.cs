@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
         _currentHealth -= amt;
         if(_currentHealth <= 0)
         {
-            ServiceLocator.Get<SceneControl>().GoToEndScene();
+            ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
         StartCoroutine(SpriteFlashing());
