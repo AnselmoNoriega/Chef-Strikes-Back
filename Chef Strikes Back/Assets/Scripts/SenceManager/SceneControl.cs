@@ -1,8 +1,5 @@
-using Newtonsoft.Json.Bson;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SceneControl : MonoBehaviour
 {
@@ -13,6 +10,7 @@ public class SceneControl : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(sceneName);
     }
 

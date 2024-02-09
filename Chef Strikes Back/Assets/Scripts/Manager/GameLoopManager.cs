@@ -99,16 +99,17 @@ public class GameLoopManager : MonoBehaviour
     {
         var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
 
-        for (int i = _wantedSystemTimer.Count; i < 0; i++) 
+        for (int i = _wantedSystemTimer.Count - 1; i >= 0; --i) 
         {
             if (Killscount >= _wantedSystemTimer[i].KillCount)
             {
-                _copSpawntimer = _wantedSystemTimer[i].CopAiSpawnTimer;
-                _badAiSpawntimer = _wantedSystemTimer[i].BadAiSpawnTimer;
+                _copTime2Spawn = _wantedSystemTimer[i].CopAiSpawnTimer;
+                _badAiTime2Spawn = _wantedSystemTimer[i].BadAiSpawnTimer;
                 _stars = _wantedSystemTimer[i].Stars;
                 _badAiCount = _wantedSystemTimer[i].BadAiSpwanCount;
                 _copCount = _wantedSystemTimer[i].CopSpwanCount;
                 WantedStarSpawn();
+                return;
             }
         }
     }

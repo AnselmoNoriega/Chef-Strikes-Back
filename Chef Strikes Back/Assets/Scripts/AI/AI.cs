@@ -153,7 +153,7 @@ public class AI : MonoBehaviour
             {
                 _GoodAISprite.color = Color.black;
                 yield return new WaitForSeconds(0.1f);
-                _GoodAISprite.color = Color.green;
+                _GoodAISprite.color = Color.red;
                 yield return new WaitForSeconds(0.1f);
                 _GoodAISprite.color = new Color(255, 255, 255, 255);
             }
@@ -164,7 +164,7 @@ public class AI : MonoBehaviour
             {
                 _BadAISprite.color = Color.black;
                 yield return new WaitForSeconds(0.1f);
-                _BadAISprite.color = Color.green;
+                _BadAISprite.color = new Color(0.61f, 0.0f, 0.0f, 1.0f);
                 yield return new WaitForSeconds(0.1f);
                 _BadAISprite.color = Color.red;
             }

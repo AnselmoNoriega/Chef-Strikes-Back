@@ -156,6 +156,7 @@ public class Player : MonoBehaviour
         
         
     }
+
     public int GetKillsCount()
     {
         return Killscount;
