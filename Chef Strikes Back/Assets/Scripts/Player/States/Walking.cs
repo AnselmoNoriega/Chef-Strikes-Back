@@ -14,6 +14,7 @@ public class PlayerWalking : StateClass<Player>
     public void Enter(Player agent)
     {
         ServiceLocator.Get<AudioManager>().PlaySource("walk");
+        ServiceLocator.Get<CanvasManager>().UITransparent();
     }
 
     public void Update(Player agent, float dt)
@@ -74,6 +75,7 @@ public class PlayerWalking : StateClass<Player>
     }
     public void Exit(Player agent)
     {
+        ServiceLocator.Get<CanvasManager>().UIUnTransparent();
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

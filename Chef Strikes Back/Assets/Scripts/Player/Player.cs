@@ -1,7 +1,9 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
@@ -38,7 +40,9 @@ public class Player : MonoBehaviour
 
     private InputControls _inputManager;
     private bool _initialized = false;
-
+    [Space, Header("Player Got Hit Animation")]
+    [SerializeField] SpriteRenderer playerImage;
+    [SerializeField]private int _FlashingTime;
     public void Initialize()
     {
         _stateMachine = new StateMachine<Player>(this);
@@ -131,10 +135,10 @@ public class Player : MonoBehaviour
         _currentHealth -= amt;
         if(_currentHealth <= 0)
         {
-            ServiceLocator.Get<SceneControl>().GoToEndScene();
+            ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
-
+        StartCoroutine(SpriteFlashing());
         ServiceLocator.Get<CanvasManager>().AddTooHealthSlider(-amt);
     }
 
@@ -149,9 +153,28 @@ public class Player : MonoBehaviour
             ServiceLocator.Get<AudioManager>().PlaySource("money");
             Destroy(collision.gameObject);
         }
+        
+        
     }
+
     public int GetKillsCount()
     {
         return Killscount;
+    }
+
+
+    private IEnumerator SpriteFlashing()
+    {
+        
+        for(int i = 0; i < _FlashingTime;i++)
+        {
+            playerImage.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            playerImage.color = Color.black;
+            yield return new WaitForSeconds(0.1f);
+
+            playerImage.color = new Color(0.8735808f, 0.4141153f, 0.8867924f, 1.0f);
+        }
+        
     }
 }

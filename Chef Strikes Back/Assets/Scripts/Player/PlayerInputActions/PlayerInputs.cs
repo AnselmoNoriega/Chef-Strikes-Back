@@ -4,18 +4,20 @@ using UnityEngine.InputSystem;
 public class PlayerInputs : MonoBehaviour
 {
     private InputControls inputManager;
-
+    //HELLO MARC
     private InputAction leftTrigger;
-    private InputAction rightTrigger;
     private InputAction rightJoystick;
     private InputAction leftButton;
+    private InputAction pauseKeyboard;
 
     private InputAction leftMouse;
     private InputAction rightMouse;
     private InputAction mouse;
+    private InputAction pauseController;
 
-    [SerializeField]
-    private Actions action;
+    [SerializeField] private Actions action;
+
+    private bool _isUsingController = false;
 
     private void Awake()
     {
@@ -27,47 +29,51 @@ public class PlayerInputs : MonoBehaviour
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
-         
+
         leftTrigger = inputManager.Player.LeftTrigger;
-        rightTrigger = inputManager.Player.RightTrigger;
         leftButton = inputManager.Player.LeftButton;
         rightJoystick = inputManager.Player.LeftJoystick;
 
-        rightMouse.Enable();
-        leftMouse.Enable();
-        mouse.Enable();
+        pauseKeyboard = inputManager.Player.Esc;
+        pauseController = inputManager.Player.PauseController;
 
-        leftTrigger.Enable();
-        rightTrigger.Enable();
-        leftButton.Enable();
-        rightJoystick.Enable();
+        EnableKeyboard();
 
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
+        rightMouse.canceled += RightClickRelease;
+
         leftTrigger.performed += LeftTgrClick;
         leftButton.performed += LeftbuttonDown;
-
-        rightMouse.canceled += RightClickRelease;
         leftTrigger.canceled += LeftTgrRelease;
+
+        pauseKeyboard.performed += TogglePauseMenu;
+        pauseController.performed += TogglePauseMenu;
     }
 
     private void OnDisable()
     {
+        DisableKeyboard();
+        DisableController();
+
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
+        rightMouse.canceled -= RightClickRelease;
+
         leftButton.performed -= LeftbuttonDown;
         leftTrigger.performed -= LeftTgrClick;
-
-        rightMouse.canceled -= RightClickRelease;
         leftTrigger.canceled -= LeftTgrRelease;
 
-        leftMouse.Disable();
-        rightMouse.Disable();
-        mouse.Disable();
+        pauseKeyboard.performed -= TogglePauseMenu;
+        pauseController.performed -= TogglePauseMenu;
+    }
 
-        leftTrigger.Disable();
-        rightTrigger.Disable();
-        leftButton.Disable();
+    private void Update()
+    {
+        if (_isUsingController)
+        {
+            action.Check4CloseItems();
+        }
     }
 
     private void LeftClick(InputAction.CallbackContext input)
@@ -99,6 +105,68 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse); 
+        action.ThrowItem(mouse);
+    }
+
+    private void TogglePauseMenu(InputAction.CallbackContext input)
+    {
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0;
+            ServiceLocator.Get<StatefulObject>().SetState("Root - Pause Menu");
+        }
+        else
+        {
+            Time.timeScale = 1;
+            ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
+        }
+    }
+
+    public void SetControllerActive()
+    {
+        if (!_isUsingController)
+        {
+            EnableController();
+            DisableKeyboard();
+            _isUsingController = true;
+        }
+        else
+        {
+            EnableKeyboard();
+            DisableController();
+            _isUsingController = false;
+        }
+    }
+
+    private void EnableKeyboard()
+    {
+        rightMouse.Enable();
+        leftMouse.Enable();
+        mouse.Enable();
+        pauseKeyboard.Enable();
+    }
+
+    private void EnableController()
+    {
+        leftTrigger.Enable();
+        leftButton.Enable();
+        rightJoystick.Enable();
+        pauseController.Enable();
+    }
+
+    private void DisableKeyboard()
+    {
+        rightMouse.Disable();
+        leftMouse.Disable();
+        mouse.Disable();
+        pauseKeyboard.Disable();
+    }
+
+    private void DisableController()
+    {
+        leftTrigger.Disable();
+        leftButton.Disable();
+        rightJoystick.Disable();
+        pauseController.Disable();
     }
 }

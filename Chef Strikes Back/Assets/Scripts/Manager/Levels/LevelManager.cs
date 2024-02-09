@@ -10,10 +10,11 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private CanvasManager _canvasManager = null;
     [SerializeField] private AIManager _AIManager = null;
     [SerializeField] private SceneControl _sceneControl = null;
+    [SerializeField] private StatefulObject _statefulObject = null;
 
     GameLoader _loader;
 
-    private void Start()
+    private void Awake()
     {
         _loader = ServiceLocator.Get<GameLoader>();
         _loader.CallOnComplete(Init);
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Register<Player>(_player);
         ServiceLocator.Register<AIManager>(_AIManager);
         ServiceLocator.Register<SceneControl>(_sceneControl);
+        ServiceLocator.Register<StatefulObject>(_statefulObject);
 
         _audioManager.Initialize();
         _tileManager.Initialize();
@@ -46,5 +48,6 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Unregister<CanvasManager>();
         ServiceLocator.Unregister<Player>();
         ServiceLocator.Unregister<AIManager>();
+        ServiceLocator.Unregister<StatefulObject>();
     }
 }

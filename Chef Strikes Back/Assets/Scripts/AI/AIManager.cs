@@ -5,17 +5,10 @@ using UnityEngine;
 public class AIManager : MonoBehaviour
 {
     [SerializeField] private List<Chair> _chairs = new();
-    [SerializeField] private List<Transform> _randomSpots = new();
-    private List<Transform> _emptyRandomSpots = new();
 
     [SerializeField] private Transform _exitPoint = null;
     [SerializeField] private Transform _copStartPoint = null;
     [SerializeField] private Transform _badAiPoint = null;
-
-    private void Awake()
-    {
-        ResetRandomSpots();
-    }
 
     public Chair GiveMeChair()
     {
@@ -24,21 +17,14 @@ public class AIManager : MonoBehaviour
         return chair;
     }
 
+    public int GetAvailableChairsCount()
+    {
+        return _chairs.Count;
+    }
+
     public void AddAvailableChair(Chair chair)
     {
         _chairs.Add(chair);
-    }
-
-    public Vector2 GiveMeRandomPoint()
-    {
-        if (_emptyRandomSpots.Count > 0)
-        {
-            var spot = _emptyRandomSpots[Random.Range(0, _emptyRandomSpots.Count)];
-            _emptyRandomSpots.Remove(spot);
-            return spot.position;
-        }
-
-        return _randomSpots[Random.Range(0, _randomSpots.Count)].position;
     }
 
     public Vector2 ExitPosition()
@@ -54,15 +40,5 @@ public class AIManager : MonoBehaviour
     public Vector2 BadAiEnterPosition()
     {
         return _badAiPoint.position;
-    }
-
-    public void ResetRandomSpots()
-    {
-        _emptyRandomSpots.Clear();
-
-        foreach (var spot in _randomSpots)
-        {
-            _emptyRandomSpots.Add(spot);
-        }
     }
 }

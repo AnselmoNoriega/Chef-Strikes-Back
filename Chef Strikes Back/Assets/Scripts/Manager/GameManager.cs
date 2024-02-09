@@ -4,27 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int _enterToRageModePoints;
+    [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
 
     private int _money;
 
-    private int _score = 0;
+    [SerializeField] private int _score = 0;
 
     public void EnterRageModeScore()
     {
-        _score += _enterToRageModePoints;
+        _score += _customerMadPoints;
+        Debug.Log("Rage " + _customerMadPoints);
     }
 
     public void KillScoreUpdate()
     {
         _score += _killPoints;
+        Debug.Log("Kill " + _killPoints);
     }
 
     public void MoneyGrabed()
     {
         _score += _grabMoneyPoints;
+        Debug.Log("MoneyGrabed " + _grabMoneyPoints);
     }
 
     public void FoodGiven(float time)
@@ -32,18 +35,22 @@ public class GameManager : MonoBehaviour
         if (time >= 20.0f)
         {
             _score += 5;
+            Debug.Log("FoodGiven " + 5);
         }
         else if (time >= 15.0f)
         {
-            _score += 4;
+            _score += 3;
+            Debug.Log("FoodGiven " + 3);
         }
         else if (time >= 5.0f)
         {
             _score += 3;
+            Debug.Log("FoodGiven " + 3);
         }
         else if (time >= 0.1f)
         {
-            _score += 2;
+            _score += 3;
+            Debug.Log("FoodGiven " + 3);
         }
     }
 

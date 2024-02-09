@@ -2,24 +2,29 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Rendering.Universal;
+
+[Serializable]
+public struct SpawningTimer
+{
+    public float Time;
+    public int SpawningTime;
+}
+
 public class LevelTimer : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI textTime;
-    [SerializeField]
-    private Light2D worldLight;
+    [SerializeField] private TextMeshProUGUI textTime;
+    [SerializeField] private Light2D worldLight;
     private float lightStartValue;
 
-    [SerializeField]
-    private float elapsedTime;
+    [SerializeField] private float elapsedTime;
     private float elapsTimeStart;
     private TimeSpan timePlaying;
 
-    [SerializeField] SceneControl sceneControl;
+    [SerializeField] private SceneControl sceneControl;
 
-    [Serializable]
+    [SerializeField] private List<SpawningTimer> _spawningTimes;
+
     public struct PhaseDefinition
     {
         public int StartTime;
@@ -57,23 +62,19 @@ public class LevelTimer : MonoBehaviour
 
     private void SpawnTimeChangeBasedOnTimer()
     {
-        var loopManager = ServiceLocator.Get<GameLoopManager>();
-
-        if (elapsedTime <= 3f && elapsedTime > 3.8f)
-            loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 3.8f && elapsedTime > 3.5f)
-            loopManager.ChangeSpawnTime(15);
-        else if (elapsedTime <= 3.5f && elapsedTime > 3f)
-            loopManager.ChangeSpawnTime(8);
-        else if (elapsedTime <= 3f && elapsedTime > 2.5f)
-            loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 2.5f && elapsedTime > 1.5f)
-            loopManager.ChangeSpawnTime(8);
-        else if (elapsedTime <= 1.5 && elapsedTime > 0.5f)
-            loopManager.ChangeSpawnTime(10);
-        else if (elapsedTime <= 0.5f && elapsedTime > 0f)
-            loopManager.ChangeSpawnTime(int.MaxValue);
+        float time;
+        for (int i = 0; i < _spawningTimes.Count; i++)
+        {
+            time = (elapsTimeStart * 60) - _spawningTimes[_spawningTimes.Count - 1 - i].Time;
+            if (time >= (elapsedTime * 60))
+            {
+                var loopManager = ServiceLocator.Get<GameLoopManager>();
+                loopManager.ChangeSpawnTime(_spawningTimes[_spawningTimes.Count - 1 - i].SpawningTime);
+                return;
+            }
+        }
     }
 
-
+    //60-0>59.999
+    //60 - 5 > 54.999 
 }

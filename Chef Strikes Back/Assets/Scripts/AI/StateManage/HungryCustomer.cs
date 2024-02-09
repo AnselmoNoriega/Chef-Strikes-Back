@@ -17,12 +17,24 @@ public class HungryCustomer : StateClass<AI>
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-        timer = waitingTime;
+        timer = 0.0f;
     }
 
     public void Update(AI agent, float dt)
     {
-        scale.x += Time.deltaTime / timer;
+        timer += Time.deltaTime / waitingTime;
+        if (timer >= 0.8f / 2)
+        {
+            scale.x += (Time.deltaTime / waitingTime) / 2;
+        }
+        if (timer >= 0.6f / 2)
+        {
+            scale.x += (Time.deltaTime / waitingTime) / 1.5f;
+        }
+        else
+        {
+            scale.x += (Time.deltaTime / waitingTime) * 2;
+        }
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
@@ -52,8 +64,6 @@ public class HungryCustomer : StateClass<AI>
     {
         agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
-
-        ServiceLocator.Get<GameManager>().FoodGiven(25 * scale.x);
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
     }

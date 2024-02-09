@@ -10,6 +10,7 @@ public class LeavingCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        agent.GetComponent<Collider2D>().enabled = false;
         _agent = agent;
         _countDown = Time.time;
         _exitPosition = ServiceLocator.Get<AIManager>().ExitPosition();

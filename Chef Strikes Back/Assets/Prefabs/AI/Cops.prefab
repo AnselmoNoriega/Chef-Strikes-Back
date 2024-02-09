@@ -135,7 +135,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 30
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -178,9 +178,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6170349750736654560, guid: 036b46ac6bffa054fa18dd65dd673486, type: 3}
   gunPos: {fileID: 565191934343276641}
   attackRange: 2.8
-  Speed: 20
+  Speed: 150
   NextWaypointDistance: 0.1
   reloadCountDown: 0
+  isHit: 0
+  knockbackForce: 900
 --- !u!114 &3558800788078056687
 MonoBehaviour:
   m_ObjectHideFlags: 0

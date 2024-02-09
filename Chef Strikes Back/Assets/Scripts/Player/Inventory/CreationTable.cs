@@ -54,19 +54,19 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem && IsAcceptedType(recivedItem.type) && recivedItem.isPickable)
+        if (recivedItem && IsAcceptedType(recivedItem.Type) && recivedItem.IsPickable)
         {
-            if (!_count[recivedItem.type])
+            if (!_count[recivedItem.Type])
             {
-                _items[recivedItem.type] = recivedItem.gameObject;
-                _count[recivedItem.type] = true;
+                _items[recivedItem.Type] = recivedItem.gameObject;
+                _count[recivedItem.Type] = true;
                 recivedItem.LaunchedInTable(_magnet);
-                recivedItem.isPickable = false;
+                recivedItem.IsPickable = false;
                 StartCoroutine(IngredientSpriteActive(recivedItem));
             }
-            else if (_count[recivedItem.type] && !_waitList[recivedItem.type].Contains(recivedItem.gameObject))
+            else if (_count[recivedItem.Type] && !_waitList[recivedItem.Type].Contains(recivedItem.gameObject))
             {
-                _waitList[recivedItem.type].Add(recivedItem.gameObject);
+                _waitList[recivedItem.Type].Add(recivedItem.gameObject);
             }
 
             if (!ItemIsMissing())
@@ -88,9 +88,9 @@ public class CreationTable : MonoBehaviour
     {
         Item recivedItem = collision.GetComponent<Item>();
 
-        if (recivedItem && _waitList.ContainsKey(recivedItem.type))
+        if (recivedItem && _waitList.ContainsKey(recivedItem.Type))
         {
-            _waitList[recivedItem.type].Remove(recivedItem.gameObject);
+            _waitList[recivedItem.Type].Remove(recivedItem.gameObject);
         }
     }
 
@@ -125,7 +125,7 @@ public class CreationTable : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f);
 
-        _foodSprites[item.type].SetActive(true);
+        _foodSprites[item.Type].SetActive(true);
         item.gameObject.SetActive(false);
     }
 
@@ -138,7 +138,7 @@ public class CreationTable : MonoBehaviour
             _count[foodtype] = true;
             var foodItem = _items[foodtype].GetComponent<Item>();
             foodItem.LaunchedInTable(_magnet);
-            foodItem.isPickable = false;
+            foodItem.IsPickable = false;
         }
     }
 
