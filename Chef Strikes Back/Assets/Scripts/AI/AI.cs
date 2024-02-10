@@ -107,8 +107,8 @@ public class AI : MonoBehaviour
                 ServiceLocator.Get<Player>().Killscount++;
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
                 DestroyAI();
-            }
-            StartCoroutine(SpriteFlashing());
+            }/*
+            StartCoroutine(SpriteFlashing());*/
         }
         else
         {
@@ -151,14 +151,12 @@ public class AI : MonoBehaviour
         {
             for (int i = 0; i < _FlashingTime; i++)
             {
-                _GoodAISprite.color = Color.black;
-                yield return new WaitForSeconds(0.1f);
                 _GoodAISprite.color = Color.red;
                 yield return new WaitForSeconds(0.1f);
                 _GoodAISprite.color = new Color(255, 255, 255, 255);
             }
-        }
-        else if (state == AIState.Rage || state == AIState.Attacking)
+       }
+/*        else if (state == AIState.Rage || state == AIState.Attacking)
         {
             for (int i = 0; i < _FlashingTime; i++)
             {
@@ -168,8 +166,6 @@ public class AI : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
                 _BadAISprite.color = Color.red;
             }
-        }
-  
-
+        }*/
     }
 }

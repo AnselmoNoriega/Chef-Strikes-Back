@@ -90,9 +90,7 @@ public class Cops : MonoBehaviour
     {    
         for (int i = 0; i < _flashingTime; i++)
         {
-            _copsprite.color = Color.black;
-            yield return new WaitForSeconds(0.1f);
-            _copsprite.color = Color.green;
+            _copsprite.color = Color.red;
             yield return new WaitForSeconds(0.1f);
             _copsprite.color = new Color(61, 100, 255, 255);
         }
