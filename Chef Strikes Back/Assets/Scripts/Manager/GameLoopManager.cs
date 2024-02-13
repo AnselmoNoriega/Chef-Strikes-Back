@@ -36,10 +36,10 @@ public class GameLoopManager : MonoBehaviour
     public AIState AiStandState = AIState.Good;
 
     private AIManager _aiManager;
-
     public void Initialize()
     {
         _aiManager = ServiceLocator.Get<AIManager>();
+        ServiceLocator.Get<GameManager>()._lastScenePlayed = SceneManager.GetActiveScene().name;
         SpawnCustomer();
     }
 
@@ -49,7 +49,7 @@ public class GameLoopManager : MonoBehaviour
 
         SpawnBadAIWithinTime();
         SpawnTheCopWithinTime();
-
+        
         if (_countToSpawn >= spawnTime)
         {
             SpawnCustomer();

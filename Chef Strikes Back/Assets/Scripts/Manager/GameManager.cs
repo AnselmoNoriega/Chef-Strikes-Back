@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,11 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
-
+    public string _lastScenePlayed;
     private int _money;
 
     [SerializeField] private int _score = 0;
-
     public void EnterRageModeScore()
     {
         _score += _customerMadPoints;
@@ -79,5 +79,9 @@ public class GameManager : MonoBehaviour
     public int GetMoneyAmt()
     {
         return _money;
+    }
+    public string GetRepalyScene()
+    {
+        return _lastScenePlayed;
     }
 }

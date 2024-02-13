@@ -133,6 +133,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
+        
         if(_currentHealth <= 0)
         {
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
