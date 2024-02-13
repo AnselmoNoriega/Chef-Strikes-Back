@@ -76,44 +76,63 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (!isCarryingItem)
+        if (isCarryingItem)
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
+            return;
+        }
 
-            Vector3 pos = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-            player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
-            PlayerHelper.FaceMovementDirection(player.Animator, player.LookingDirection);
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
-            Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
+        Vector3 pos = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
+        player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
+        PlayerHelper.FaceMovementDirection(player.Animator, player.LookingDirection);
 
-            FoodPile foodPile = null;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
 
-            foreach (var hit in hits)
+        FoodPile foodPile = null;
+        Item lastItem = null;
+
+        foreach (var hit in hits)
+        {
+            var myItem = hit.GetComponent<Item>();
+            if (myItem && myItem.IsPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < grabDistance)
             {
-                var myItem = hit.GetComponent<Item>();
-                if (myItem && myItem.IsPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < grabDistance)
+                if ((int)myItem.Type <= 1)
                 {
                     inventory.AddItem(myItem);
                     isCarryingItem = true;
                     myItem.CollidersState(false);
                     return;
                 }
-
-                if (hit.GetComponent<FoodPile>())
+                else
                 {
-                    foodPile = hit.GetComponent<FoodPile>();
+                    lastItem = myItem;
+                    continue;
                 }
             }
 
-            if (foodPile != null && Vector2.Distance(foodPile.transform.position, transform.position) < grabDistance)
+            if (hit.GetComponent<FoodPile>())
             {
-                var newItem = foodPile.Hit();
-                inventory.AddItem(newItem.GetComponent<Item>());
-                isCarryingItem = true;
-                ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
-                newItem.GetComponent<Item>().CollidersState(false);
-                return;
+                foodPile = hit.GetComponent<FoodPile>();
             }
+        }
+
+        if (lastItem)
+        {
+            inventory.AddItem(lastItem);
+            isCarryingItem = true;
+            lastItem.CollidersState(false);
+            return;
+        }
+
+        if (foodPile && Vector2.Distance(foodPile.transform.position, transform.position) < grabDistance)
+        {
+            var newItem = foodPile.Hit();
+            inventory.AddItem(newItem.GetComponent<Item>());
+            isCarryingItem = true;
+            ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
+            newItem.GetComponent<Item>().CollidersState(false);
+            return;
         }
     }
 
