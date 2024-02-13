@@ -120,6 +120,10 @@ public class Item : MonoBehaviour
         {
             ActivateLight(true);
         }
+        else
+        {
+            ActivateLight(false);
+        }
     }
 
     private void OnMouseExit()
