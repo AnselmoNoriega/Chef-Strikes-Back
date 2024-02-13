@@ -14,6 +14,19 @@ public class FoodPile : MonoBehaviour
         _playerTransform = ServiceLocator.Get<Player>().transform;
     }
 
+    private void Update()
+    {
+        if (Vector2.Distance(_playerTransform.position, transform.position) <= 1.0f)
+        {
+            var distance = Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position);
+            ActivateLight(distance <= 1.0f);
+        }
+        else
+        {
+            ActivateLight(false);
+        }
+    }
+
     public GameObject Hit()
     {
         ServiceLocator.Get<AudioManager>().PlaySource("cut");
@@ -22,24 +35,10 @@ public class FoodPile : MonoBehaviour
 
     public void ActivateLight(bool active)
     {
-        _light.enabled = active;
-    }
-
-    private void OnMouseOver()
-    {
-        if (Vector2.Distance(_playerTransform.position, transform.position) <= 1)
+        if (active != _light.enabled)
         {
-            ActivateLight(true);
+            _light.enabled = active;
         }
-        else
-        {
-            ActivateLight(false);
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        ActivateLight(false);
     }
 
 }
