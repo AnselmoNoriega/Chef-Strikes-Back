@@ -151,6 +151,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seatAvaliable: 1
   SpawnPointForBadAI: {fileID: 0}
+  _foodPercentages:
+  - TypeOfFood: 0
+    FoodPerecentage: 50
+  - TypeOfFood: 1
+    FoodPerecentage: 50
   table: {fileID: 0}
   Customer: {fileID: 0}
   Food: {fileID: 0}

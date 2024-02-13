@@ -1,11 +1,18 @@
 using UnityEngine;
 
+[System.Serializable]
+struct FoodPercentage
+{
+    public FoodType TypeOfFood;
+    public int FoodPerecentage;
+}
 
 public class Chair : MonoBehaviour
 {
     public bool seatAvaliable = true;
 
     [SerializeField] private GameObject SpawnPointForBadAI = null;
+    [SerializeField] private FoodPercentage[] _foodPercentages;
 
     [SerializeField] private Table table;
     public AI Customer;
@@ -63,10 +70,27 @@ public class Chair : MonoBehaviour
             table.plateSprite.enabled = true;
 
             Customer = ai;
-            Customer.ChoiceIndex = Random.Range(0, 2);
+            Customer.ChoiceIndex = GiveFoodChoice();
             Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             Customer.transform.position = transform.position;
             table.AddCostumer(this);
         }
+    }
+
+    private int GiveFoodChoice()
+    {
+        var randValue = Random.Range(0, 100);
+        int percentageValue = 0;
+
+        for(int i = 0; i < 100; ++i)
+        {
+            if(_foodPercentages[i].FoodPerecentage + percentageValue > randValue)
+            {
+                return (int)_foodPercentages[i].TypeOfFood;
+            }
+            percentageValue += _foodPercentages[i].FoodPerecentage;
+        }
+
+        return 0;
     }
 }
