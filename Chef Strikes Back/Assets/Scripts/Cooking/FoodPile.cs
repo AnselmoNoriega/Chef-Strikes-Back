@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 public class FoodPile : MonoBehaviour
 {
     [SerializeField] private GameObject _foodItem;
+    [SerializeField] private float _lightDistance;
 
     private Light2D _light;
     private Transform _playerTransform;
@@ -16,10 +17,10 @@ public class FoodPile : MonoBehaviour
 
     private void Update()
     {
-        if (Vector2.Distance(_playerTransform.position, transform.position) <= 1.0f)
+
+        if (Vector2.Distance(_playerTransform.position, transform.position) <= _lightDistance)
         {
-            var distance = Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.position);
-            ActivateLight(distance <= 1.0f);
+            CheckObj();
         }
         else
         {
@@ -39,6 +40,24 @@ public class FoodPile : MonoBehaviour
         {
             _light.enabled = active;
         }
+    }
+
+    private void CheckObj()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
+
+        foreach (var hit in hits)
+        {
+            var foodPile = hit.GetComponent<FoodPile>();
+            if (foodPile == this)
+            {
+                ActivateLight(true);
+                return;
+            }
+        }
+
+        ActivateLight(false);
     }
 
 }

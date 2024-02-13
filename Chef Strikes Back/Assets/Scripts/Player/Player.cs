@@ -166,7 +166,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpriteFlashing()
     {
-        
         for(int i = 0; i < _FlashingTime;i++)
         {
             playerImage.color = Color.red;
