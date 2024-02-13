@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 956538742652072032}
   - component: {fileID: 956538742652072037}
   - component: {fileID: 956538742652072038}
-  - component: {fileID: 956538742652072039}
+  - component: {fileID: 8657082440216985374}
   - component: {fileID: 956538742652072036}
   m_Layer: 13
   m_Name: DoughEnemy
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _foodItem: {fileID: 7360178021079257609, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
---- !u!58 &956538742652072039
-CircleCollider2D:
+--- !u!70 &8657082440216985374
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,12 +110,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.35, y: 0.78}
+  m_Direction: 1
 --- !u!114 &956538742652072036
 MonoBehaviour:
   m_ObjectHideFlags: 0
