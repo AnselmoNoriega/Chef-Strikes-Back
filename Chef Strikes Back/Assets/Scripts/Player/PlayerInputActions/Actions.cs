@@ -17,7 +17,7 @@ public class Actions : MonoBehaviour
     [Space, Header("Player Attack")]
     [SerializeField] private Player player;
     public float PlayerAttackRange;
-    
+
     [Space, Header("Player Grab")]
     [SerializeField] private float grabDistance;
     private Item _selectedItem = null;
@@ -53,7 +53,7 @@ public class Actions : MonoBehaviour
 
             if (newItem != null && _selectedItem != newItem)
             {
-                if(_selectedItem != null)
+                if (_selectedItem != null)
                 {
                     _selectedItem.ActivateLight(false);
                     _selectedItem = null;
@@ -61,13 +61,13 @@ public class Actions : MonoBehaviour
                 newItem.ActivateLight(true);
                 _selectedItem = newItem;
             }
-            else if(newItem == null && _selectedItem != null)
+            else if (newItem == null && _selectedItem != null)
             {
                 _selectedItem.ActivateLight(false);
                 _selectedItem = null;
             }
         }
-        else if(_selectedItem != null)
+        else if (_selectedItem != null)
         {
             _selectedItem.ActivateLight(false);
             _selectedItem = null;
@@ -76,7 +76,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (!isCarryingItem )
+        if (!isCarryingItem)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
@@ -85,6 +85,8 @@ public class Actions : MonoBehaviour
             PlayerHelper.FaceMovementDirection(player.Animator, player.LookingDirection);
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
+
+            FoodPile foodPile = null;
 
             foreach (var hit in hits)
             {
@@ -97,23 +99,27 @@ public class Actions : MonoBehaviour
                     return;
                 }
 
-                var foodPile = hit.GetComponent<FoodPile>();
-                if (foodPile && Vector2.Distance(foodPile.transform.position, transform.position) < grabDistance)
+                if (hit.GetComponent<FoodPile>())
                 {
-                    var newItem = foodPile.Hit();
-                    inventory.AddItem(newItem.GetComponent<Item>());
-                    isCarryingItem = true;
-                    ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
-                    newItem.GetComponent<Item>().CollidersState(false);
-                    return;
+                    foodPile = hit.GetComponent<FoodPile>();
                 }
+            }
+
+            if (foodPile != null && Vector2.Distance(foodPile.transform.position, transform.position) < grabDistance)
+            {
+                var newItem = foodPile.Hit();
+                inventory.AddItem(newItem.GetComponent<Item>());
+                isCarryingItem = true;
+                ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
+                newItem.GetComponent<Item>().CollidersState(false);
+                return;
             }
         }
     }
 
     public void GrabItem()
     {
-        if (!isCarryingItem )
+        if (!isCarryingItem)
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.LookingDirection / 3), 0.4f);
             float distance = 1000;
@@ -130,7 +136,7 @@ public class Actions : MonoBehaviour
                     distance = tempDis;
                     newItem = hit.GetComponent<Item>();
                 }
-                else if(hit.GetComponent<FoodPile>())
+                else if (hit.GetComponent<FoodPile>())
                 {
                     foodPile = hit.GetComponent<FoodPile>();
                 }
@@ -142,7 +148,7 @@ public class Actions : MonoBehaviour
                 isCarryingItem = true;
                 newItem.CollidersState(false);
             }
-            else if(foodPile != null)
+            else if (foodPile != null)
             {
                 var newFoodPileItem = foodPile.Hit();
                 inventory.AddItem(newFoodPileItem.GetComponent<Item>());
