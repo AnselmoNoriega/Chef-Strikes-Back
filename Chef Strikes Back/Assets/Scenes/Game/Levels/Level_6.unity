@@ -2022,6 +2022,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 501023696}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -7502,6 +7510,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2053553769}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -7622,6 +7638,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 1879106478}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -7853,6 +7885,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 97530380}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -8501,6 +8549,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 1148079934}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -10318,11 +10382,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 374691918177725815, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.027
+      value: 0.55
       objectReference: {fileID: 0}
     - target: {fileID: 374691918177725815, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.156
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 7949611368931973793, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
       propertyPath: m_Name
@@ -15471,6 +15535,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 737982698}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2

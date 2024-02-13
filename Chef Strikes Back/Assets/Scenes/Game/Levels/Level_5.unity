@@ -1137,7 +1137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73621695}
   m_LocalRotation: {x: -0, y: -0, z: 0.99651814, w: -0.08337668}
-  m_LocalPosition: {x: 0.1, y: 2.81, z: 0}
+  m_LocalPosition: {x: 4.25, y: 5.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2812,6 +2812,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 682670467}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -3119,11 +3135,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 956538742652072032, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.82
+      value: 1.647
       objectReference: {fileID: 0}
     - target: {fileID: 956538742652072032, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.09
+      value: 2.023
       objectReference: {fileID: 0}
     - target: {fileID: 956538742652072032, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3163,19 +3179,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657082440216985374, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_Size.x
-      value: 1.76
+      value: 2.0957675
       objectReference: {fileID: 0}
     - target: {fileID: 8657082440216985374, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_Size.y
-      value: 0.92
+      value: 1.2461747
       objectReference: {fileID: 0}
     - target: {fileID: 8657082440216985374, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_Offset.x
-      value: -0.01
+      value: -0.08194879
       objectReference: {fileID: 0}
     - target: {fileID: 8657082440216985374, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_Offset.y
-      value: 0.01
+      value: -0.15308471
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
@@ -4439,6 +4455,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 1224198774}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -7302,6 +7326,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 20450599}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
       propertyPath: m_Name
       value: Chair_02_1
@@ -7668,6 +7700,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2053553769}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -7788,6 +7828,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 1879106478}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -7988,6 +8044,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 97530380}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -8520,6 +8592,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 459114730}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
       propertyPath: m_Name
       value: Chair_02_1
@@ -10899,6 +10987,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 45628720}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 8152765c185fd9543bc004a705895281, type: 3}
       propertyPath: m_Name
       value: Chair_02_2
@@ -15715,6 +15819,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2003492294}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 8152765c185fd9543bc004a705895281, type: 3}
       propertyPath: m_Name
       value: Chair_02_2
@@ -16606,6 +16718,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2074581098}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -16763,7 +16891,7 @@ PrefabInstance:
       objectReference: {fileID: 387362748}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.size
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[1].Time
@@ -16775,23 +16903,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[3].Time
-      value: 60
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[4].Time
-      value: 90
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[5].Time
-      value: 120
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[6].Time
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[7].Time
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[8].Time
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[9].Time
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-      propertyPath: _spawningTimes.Array.data[6].SpawningTime
+      propertyPath: _spawningTimes.Array.data[10].Time
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[2].SpawningTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[4].SpawningTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[5].SpawningTime
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[6].SpawningTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[7].SpawningTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[8].SpawningTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[9].SpawningTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[10].SpawningTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1840867465630466503, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16927,7 +17099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpwanCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[1].CopAiSpawnTimer
@@ -16939,7 +17111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpwanCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].CopAiSpawnTimer
