@@ -39,7 +39,7 @@ public class GameLoopManager : MonoBehaviour
     public void Initialize()
     {
         _aiManager = ServiceLocator.Get<AIManager>();
-        ServiceLocator.Get<GameManager>()._lastScenePlayed = SceneManager.GetActiveScene().name;
+        ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
         SpawnCustomer();
     }
 
