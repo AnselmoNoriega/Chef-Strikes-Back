@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HungryCustomer : StateClass<AI>
 {
-    private float waitingTime = 25.0f;
+    private float waitingTime = 30.0f;
     private float timer = 0;
     private Vector3 scale = Vector3.zero;
 
