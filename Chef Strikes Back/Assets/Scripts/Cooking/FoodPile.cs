@@ -3,12 +3,10 @@ using UnityEngine.Rendering.Universal;
 
 public class FoodPile : MonoBehaviour
 {
-    [SerializeField] private Transform target;
-    [SerializeField] private GameObject foodItem;
-    [SerializeField] private float throwStrength;
+    [SerializeField] private GameObject _foodItem;
 
-    [SerializeField] private Light2D _light;
-    [SerializeField] private Transform _playerTransform;
+    private Light2D _light;
+    private Transform _playerTransform;
 
     private void Start()
     {
@@ -19,7 +17,7 @@ public class FoodPile : MonoBehaviour
     public GameObject Hit()
     {
         ServiceLocator.Get<AudioManager>().PlaySource("cut");
-        return Instantiate(foodItem, transform.position, Quaternion.identity);
+        return Instantiate(_foodItem, transform.position, Quaternion.identity);
     }
 
     public void ActivateLight(bool active)
