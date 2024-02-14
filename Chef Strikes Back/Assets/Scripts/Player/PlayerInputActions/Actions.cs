@@ -39,12 +39,12 @@ public class Actions : MonoBehaviour
             if (mouse == null)
             {
                 var center = (Vector2)player.transform.position + (player.LookingDirection / 3);
-                hits = Physics2D.OverlapCircleAll(center, 0.4f);
+                hits = Physics2D.OverlapCircleAll(center, 0.4f, 1);
             }
             else
             {
                 Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-                hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
+                hits = Physics2D.OverlapCircleAll(mousePos, 0.01f, 1);
             }
 
             Check4ItemRayCast(hits);
@@ -76,11 +76,13 @@ public class Actions : MonoBehaviour
             {
                 distance = tempDis;
                 newItem = hit.GetComponent<Light2D>();
+                break;
             }
             else if (tempDis < distance && hit.GetComponent<FoodPile>())
             {
                 distance = tempDis;
                 newItem = hit.GetComponent<Light2D>();
+                break;
             }
         }
 
