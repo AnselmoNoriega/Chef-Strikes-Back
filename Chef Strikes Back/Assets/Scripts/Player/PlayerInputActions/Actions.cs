@@ -58,12 +58,18 @@ public class Actions : MonoBehaviour
 
     private void Check4ItemRayCast(Collider2D[] hits)
     {
-        float distance = 1000;
+        float distance = 1.0f;
         Light2D newItem = null;
         float tempDis;
 
         foreach (var hit in hits)
         {
+            float dis2Obj = Vector2.Distance(hit.gameObject.transform.position, transform.position);
+            if(dis2Obj > grabDistance)
+            {
+                continue;
+            }
+
             tempDis = math.abs(hit.transform.position.magnitude - transform.position.magnitude);
 
             if (tempDis < distance && hit.GetComponent<Item>() && hit.GetComponent<Item>().IsPickable)
