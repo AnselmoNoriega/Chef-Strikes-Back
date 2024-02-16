@@ -16314,17 +16314,6 @@ PrefabInstance:
       objectReference: {fileID: 1733833531}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
---- !u!114 &2927658305668911199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
-  m_PrefabInstance: {fileID: 2927658305668911198}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489507a675b2d9a4d8c1811953c49628, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5305535897999343058 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 347040052569133387, guid: d540b2665d5bfbc43b0d16ff275da69f, type: 3}
@@ -16367,7 +16356,15 @@ PrefabInstance:
     - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2927658305668911199}
+      objectReference: {fileID: 1997346417}
+    - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActiveateController
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5294378158075083118, guid: dd4b2f39849980b489fa075844713829, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
