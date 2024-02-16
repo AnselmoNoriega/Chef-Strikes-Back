@@ -40,6 +40,7 @@ public class HungryCustomer : StateClass<AI>
 
         if (scale.x >= 1.0f)
         {
+            ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
             agent.ChangeState(AIState.Rage);
         }

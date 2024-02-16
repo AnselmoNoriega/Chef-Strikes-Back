@@ -7,16 +7,9 @@ public class RageCustomerState : StateClass<AI>
     private int _currentWaypoint = 0;
     private Transform _playerPos = null;
     private AI _agent = null;
-    private bool _firstTimeAngry = true;
 
     public void Enter(AI agent)
     {
-        if(_firstTimeAngry)
-        {
-            ServiceLocator.Get<GameManager>().EnterRageModeScore();
-            _firstTimeAngry = false;
-        }
-
         _agent = agent;
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
