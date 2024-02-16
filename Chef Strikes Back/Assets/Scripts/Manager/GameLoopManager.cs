@@ -15,6 +15,7 @@ public struct WantedSpawner
 }
 public class GameLoopManager : MonoBehaviour
 {
+    public float RageTimer;
     [SerializeField] private float spawnTime;
     [SerializeField] private GameObject AIPrefabs;
     [SerializeField] private GameObject CopsPrefabs;

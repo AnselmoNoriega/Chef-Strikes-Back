@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489507a675b2d9a4d8c1811953c49628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RageTimer: 30
   spawnTime: 5
   AIPrefabs: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
   CopsPrefabs: {fileID: 4629491789166812219, guid: 0537e4e458f663d48aacd6674a852ff5, type: 3}
@@ -401,28 +402,28 @@ MonoBehaviour:
     BadAiSpwanCount: 0
   - KillCount: 5
     Stars: 2
+    BadAiSpawnTimer: 1
+    CopAiSpawnTimer: 1
+    CopSpwanCount: 0
+    BadAiSpwanCount: 0
+  - KillCount: 15
+    Stars: 3
+    BadAiSpawnTimer: 1
+    CopAiSpawnTimer: 1
+    CopSpwanCount: 0
+    BadAiSpwanCount: 0
+  - KillCount: 25
+    Stars: 4
+    BadAiSpawnTimer: 10
+    CopAiSpawnTimer: 1
+    CopSpwanCount: 0
+    BadAiSpwanCount: 1
+  - KillCount: 50
+    Stars: 5
     BadAiSpawnTimer: 5
     CopAiSpawnTimer: 1
     CopSpwanCount: 0
     BadAiSpwanCount: 1
-  - KillCount: 15
-    Stars: 3
-    BadAiSpawnTimer: 5
-    CopAiSpawnTimer: 10
-    CopSpwanCount: 1
-    BadAiSpwanCount: 1
-  - KillCount: 25
-    Stars: 4
-    BadAiSpawnTimer: 3
-    CopAiSpawnTimer: 5
-    CopSpwanCount: 1
-    BadAiSpwanCount: 1
-  - KillCount: 50
-    Stars: 5
-    BadAiSpawnTimer: 3
-    CopAiSpawnTimer: 5
-    CopSpwanCount: 1
-    BadAiSpwanCount: 2
   AiStandState: 0
 --- !u!1 &2927658305788182966
 GameObject:
