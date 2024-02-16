@@ -117,6 +117,7 @@ public class AI : MonoBehaviour
 
             if (_hitsToGetMad <= 0)
             {
+                ServiceLocator.Get<GameManager>().EnterRageModeScore();
                 if (state == AIState.Hungry || state == AIState.Eating)
                 {
                     SelectedChair.FreeTableSpace();
