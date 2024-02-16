@@ -23,10 +23,7 @@ public class PlayerInputs : MonoBehaviour
     {
         inputManager = new InputControls();
         SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
-    }
 
-    private void OnEnable()
-    {
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
@@ -52,7 +49,7 @@ public class PlayerInputs : MonoBehaviour
         pauseController.performed += TogglePauseMenu;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         DisableKeyboard();
         DisableController();
