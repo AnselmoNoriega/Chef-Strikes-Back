@@ -15552,6 +15552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screens: {fileID: 592392311}
+  _moneyText: {fileID: 0}
 --- !u!1 &2012302337
 GameObject:
   m_ObjectHideFlags: 0
@@ -16159,11 +16160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2273120689214740680, guid: 917e237362e21204d818162dbe98a876, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8
+      value: -3.504
       objectReference: {fileID: 0}
     - target: {fileID: 2273120689214740680, guid: 917e237362e21204d818162dbe98a876, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.56
+      value: -1.263
       objectReference: {fileID: 0}
     - target: {fileID: 2273120689214740680, guid: 917e237362e21204d818162dbe98a876, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16269,6 +16270,58 @@ PrefabInstance:
     - target: {fileID: 2927658305141393039, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_Name
       value: Manager's Group
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].CopSpwanCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].CopSpwanCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].CopSpwanCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpwanCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpwanCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[2].CopAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].BadAiSpawnTimer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[3].CopAiSpawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].BadAiSpawnTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].BadAiSpwanCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _wantedSystemTimer.Array.data[4].CopAiSpawnTimer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305788182967, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: grid
