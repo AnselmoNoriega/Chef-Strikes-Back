@@ -1546,6 +1546,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6455135ecdf366640b539f73569191d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &107689837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+  m_PrefabInstance: {fileID: 107689834}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &110656421
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,9 +3456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1387458671}
-  foodItem: {fileID: 7360178021079257609, guid: cb9081477af5329429df20108069dc4d, type: 3}
-  throwStrength: 2
+  _foodItem: {fileID: 0}
+  _lightDistance: 0
 --- !u!212 &527163539
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3549,6 +3559,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _screens: {fileID: 107689836}
+  _moneyText: {fileID: 0}
+  _usingControllerButton: {fileID: 107689837}
 --- !u!114 &531067170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5257,9 +5269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1387458671}
-  foodItem: {fileID: 7360178021079257609, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
-  throwStrength: 2
+  _foodItem: {fileID: 0}
+  _lightDistance: 0
 --- !u!212 &851398646
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10996,9 +11007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1387458671}
-  foodItem: {fileID: 7360178021079257609, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
-  throwStrength: 2
+  _foodItem: {fileID: 0}
+  _lightDistance: 0
 --- !u!212 &1758475750
 SpriteRenderer:
   m_ObjectHideFlags: 0

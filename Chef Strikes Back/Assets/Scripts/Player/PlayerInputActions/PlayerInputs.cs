@@ -22,6 +22,7 @@ public class PlayerInputs : MonoBehaviour
     private void Awake()
     {
         inputManager = new InputControls();
+        SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
     }
 
     private void OnEnable()
@@ -126,20 +127,19 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
-    public void SetControllerActive()
+    public void SetControllerActive(bool active)
     {
-        if (!_isUsingController)
+        if (active)
         {
             EnableController();
             DisableKeyboard();
-            _isUsingController = true;
         }
         else
         {
             EnableKeyboard();
             DisableController();
-            _isUsingController = false;
         }
+        _isUsingController = active;
     }
 
     private void EnableKeyboard()

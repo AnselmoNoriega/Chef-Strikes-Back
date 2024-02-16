@@ -28,7 +28,7 @@ public class RageCustomerState : StateClass<AI>
         }
 
         var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-        if (distance < agent.NextWaypointDistance + 0.2f)
+        if (distance < agent.NextWaypointDistance)
         {
             ++_currentWaypoint;
         }

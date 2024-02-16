@@ -15553,6 +15553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screens: {fileID: 592392311}
   _moneyText: {fileID: 0}
+  _usingControllerButton: {fileID: 5343818208350621989}
 --- !u!1 &2012302337
 GameObject:
   m_ObjectHideFlags: 0
@@ -16521,6 +16522,17 @@ PrefabInstance:
       objectReference: {fileID: 1997346417}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd4b2f39849980b489fa075844713829, type: 3}
+--- !u!114 &5343818208350621989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+  m_PrefabInstance: {fileID: 5343818208350621988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7418929117601166086 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5644264936419189592, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}

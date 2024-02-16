@@ -143,9 +143,4 @@ public class GameLoopManager : MonoBehaviour
     {
         ServiceLocator.Get<CanvasManager>().ActivateStars(_stars);
     }
-
-    public void ActiveateController()
-    {
-        ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().SetControllerActive();
-    }
 }

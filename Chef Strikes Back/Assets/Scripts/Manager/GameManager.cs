@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
 
+    private bool _isUsingController = false;
+
     [SerializeField] private int _score = 0;
     private string _lastScenePlayed;
     private int _money = 0;
@@ -89,5 +91,20 @@ public class GameManager : MonoBehaviour
     public string GetRepalyScene()
     {
         return _lastScenePlayed;
+    }
+
+    public void ToggleController()
+    {
+        _isUsingController = !_isUsingController;
+        var characterInputs = ServiceLocator.Get<Player>();
+        if (characterInputs)
+        {
+            characterInputs.GetComponent<PlayerInputs>().SetControllerActive(_isUsingController);
+        }
+    }
+
+    public bool GetControllerOption()
+    {
+        return _isUsingController;
     }
 }
