@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 708874540804505616}
   - component: {fileID: 708874540804505619}
   - component: {fileID: 708874540804505623}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: TomatoEnemy
   m_TagString: FoodEnemy
   m_Icon: {fileID: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _foodItem: {fileID: 7360178021079257609, guid: cb9081477af5329429df20108069dc4d, type: 3}
+  _lightDistance: 0.7
 --- !u!58 &708874540804505619
 CircleCollider2D:
   m_ObjectHideFlags: 0

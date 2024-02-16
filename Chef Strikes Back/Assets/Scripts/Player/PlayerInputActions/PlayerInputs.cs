@@ -72,7 +72,11 @@ public class PlayerInputs : MonoBehaviour
     {
         if (_isUsingController)
         {
-            action.Check4CloseItems();
+            action.Check4CloseItems(null);
+        }
+        else
+        {
+            action.Check4CloseItems(mouse);
         }
     }
 

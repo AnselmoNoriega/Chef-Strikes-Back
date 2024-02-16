@@ -7,8 +7,6 @@ public class Item : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] public Collider2D tgrCollider;
     [SerializeField] public Collider2D childCollider;
-    private Transform _playerTransform;
-    private Light2D _light;
 
     [Space, Header("Item Info")]
     public FoodType Type;
@@ -28,8 +26,6 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        _playerTransform = ServiceLocator.Get<Player>().transform;
-        _light = GetComponent<Light2D>();
         _handPosition = new Vector2(0, 0.7f);
         _isBeingDrag = false;
         IsPickable = true;
@@ -101,34 +97,6 @@ public class Item : MonoBehaviour
     {
         tgrCollider.enabled = state;
         childCollider.enabled = state;
-    }
-
-    public void ActivateLight(bool active)
-    {
-        _light.enabled = active;
-    }
-
-    public void DestoyItem()
-    {
-        Destroy(gameObject);
-    }
-
-
-    private void OnMouseOver()
-    {
-        if(Vector2.Distance(_playerTransform.position, transform.position) <= 1)
-        {
-            ActivateLight(true);
-        }
-        else
-        {
-            ActivateLight(false);
-        }
-    }
-
-    private void OnMouseExit()
-    {
-        ActivateLight(false);
     }
 }
 

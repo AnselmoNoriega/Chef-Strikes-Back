@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,9 +9,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
 
-    private int _money;
-
     [SerializeField] private int _score = 0;
+    private string _lastScenePlayed;
+    private int _money = 0;
+
+    public void LoadGameStats()
+    {
+        _money = ServiceLocator.Get<SaveSystem>().Load<int>("money.doNotOpen");
+    }
 
     public void EnterRageModeScore()
     {
@@ -64,20 +70,24 @@ public class GameManager : MonoBehaviour
         _score = 0;
     }
 
-    public void AddMoney(int amt)
+    public void SaveMoney(int earnings)
     {
-        _money += amt;
+        _money += earnings;
+        ServiceLocator.Get<SaveSystem>().Save<int>(_money, "money.doNotOpen");
     }
 
-    public void SaveMoney()
-    {
-        int moneyBank = ServiceLocator.Get<GameManager>().GetMoneyAmt();
-        int totalMoney = moneyBank + _money;
-        ServiceLocator.Get<SaveSystem>().Save<int>(totalMoney, "money.doNotOpen");
-    }
-
-    public int GetMoneyAmt()
+    public int GetMoney()
     {
         return _money;
+    }
+
+    public void SetThisLevelSceneName(string name)
+    {
+        _lastScenePlayed = name;
+    }
+
+    public string GetRepalyScene()
+    {
+        return _lastScenePlayed;
     }
 }

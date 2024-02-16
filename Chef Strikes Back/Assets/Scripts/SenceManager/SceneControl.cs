@@ -35,4 +35,8 @@ public class SceneControl : MonoBehaviour
         return false;
     }
 
+    public void Replay()
+    {
+        SceneManager.LoadScene(ServiceLocator.Get<GameManager>().GetRepalyScene());
+    }
 }

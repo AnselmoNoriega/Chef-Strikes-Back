@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 956538742652072038}
   - component: {fileID: 8657082440216985374}
   - component: {fileID: 956538742652072036}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DoughEnemy
   m_TagString: FoodEnemy
   m_Icon: {fileID: 0}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _foodItem: {fileID: 7360178021079257609, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
+  _lightDistance: 0.7
 --- !u!70 &8657082440216985374
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

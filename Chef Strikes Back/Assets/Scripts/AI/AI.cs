@@ -20,7 +20,7 @@ public class AI : MonoBehaviour
     [Header("AI Behaviour")]
     [HideInInspector] public Indicator Indicator;
     private StateMachine<AI> _stateManager;
-    
+
     [Space, Header("AI Properties")]
     [SerializeField] private Animator _anim;
     public Rigidbody2D Rb2d;
@@ -76,7 +76,7 @@ public class AI : MonoBehaviour
 
     public void FaceDirection(Animator animator, Vector2 lookDirection)
     {
-        if(lookDirection.magnitude <= 0.1)
+        if (lookDirection.magnitude <= 0.1)
         {
             return;
         }
@@ -97,7 +97,7 @@ public class AI : MonoBehaviour
 
     public void Damage(int amt)
     {
-        if(state == AIState.Rage || state == AIState.Attacking)
+        if (state == AIState.Rage || state == AIState.Attacking)
         {
             _health -= amt;
 
@@ -113,20 +113,20 @@ public class AI : MonoBehaviour
         else
         {
             --_hitsToGetMad;
+            StartCoroutine(SpriteFlashing());
 
-            if(_hitsToGetMad <= 0)
+            if (_hitsToGetMad <= 0)
             {
-                if(state == AIState.Hungry || state == AIState.Eating)
+                if (state == AIState.Hungry || state == AIState.Eating)
                 {
                     SelectedChair.FreeTableSpace();
                 }
-                else if(state == AIState.Good)
+                else if (state == AIState.Good)
                 {
                     ServiceLocator.Get<AIManager>().AddAvailableChair(SelectedChair);
                 }
                 ChangeState(AIState.Rage);
             }
-            StartCoroutine(SpriteFlashing());
         }
     }
 
@@ -147,25 +147,11 @@ public class AI : MonoBehaviour
     }
     private IEnumerator SpriteFlashing()
     {
-        if (state==AIState.Hungry||state==AIState.Eating)
+        for (int i = 0; i < _FlashingTime; i++)
         {
-            for (int i = 0; i < _FlashingTime; i++)
-            {
-                _GoodAISprite.color = Color.red;
-                yield return new WaitForSeconds(0.1f);
-                _GoodAISprite.color = new Color(255, 255, 255, 255);
-            }
-       }
-/*        else if (state == AIState.Rage || state == AIState.Attacking)
-        {
-            for (int i = 0; i < _FlashingTime; i++)
-            {
-                _BadAISprite.color = Color.black;
-                yield return new WaitForSeconds(0.1f);
-                _BadAISprite.color = new Color(0.61f, 0.0f, 0.0f, 1.0f);
-                yield return new WaitForSeconds(0.1f);
-                _BadAISprite.color = Color.red;
-            }
-        }*/
+            _GoodAISprite.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            _GoodAISprite.color = new Color(255, 255, 255, 255);
+        }
     }
 }

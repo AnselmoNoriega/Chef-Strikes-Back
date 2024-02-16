@@ -55,7 +55,7 @@ public class LevelTimer : MonoBehaviour
 
         if (elapsedTime < 0)
         {
-            ServiceLocator.Get<GameManager>().SaveMoney();
+            ServiceLocator.Get<GameManager>().SaveMoney(ServiceLocator.Get<Player>().GetDailyEarnings());
             sceneControl.GoToEndScene();
         }
     }

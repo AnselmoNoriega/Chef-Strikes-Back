@@ -139,6 +139,7 @@ public class CreationTable : MonoBehaviour
             var foodItem = _items[foodtype].GetComponent<Item>();
             foodItem.LaunchedInTable(_magnet);
             foodItem.IsPickable = false;
+            StartCoroutine(IngredientSpriteActive(foodItem));
         }
     }
 
