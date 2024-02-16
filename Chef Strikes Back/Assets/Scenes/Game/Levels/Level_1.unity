@@ -16220,6 +16220,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetScreenActive
       objectReference: {fileID: 0}
+    - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 216260637}
+    - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActiveateController
+      objectReference: {fileID: 0}
+    - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5294378158075083118, guid: dd4b2f39849980b489fa075844713829, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5

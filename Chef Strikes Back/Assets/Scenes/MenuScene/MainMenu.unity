@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _screens: {fileID: 798983372}
   _moneyText: {fileID: 872552628}
+  _usingControllerButton: {fileID: 3808576382923733737}
 --- !u!1001 &1054840324904827664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -778,6 +779,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 798983371}
     m_Modifications:
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2023291836}
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActiveateController
+      objectReference: {fileID: 0}
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 830250409520441933, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -958,6 +987,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1164935665970675693, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
   m_PrefabInstance: {fileID: 3808576382923733734}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3808576382923733737 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 180270707963630520, guid: c75f380edaca9164f83c307d6d1f8c6e, type: 3}
+  m_PrefabInstance: {fileID: 3808576382923733734}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5130774590254424012
 PrefabInstance:
   m_ObjectHideFlags: 0
