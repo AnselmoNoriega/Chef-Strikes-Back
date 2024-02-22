@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,11 +42,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.19}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -139,7 +139,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e4eb075df0b534a9ed26cc75071694
+      internalID: 1743301161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcb19bbbb26690841a5d58d5bda4cd36
+      internalID: 1821868494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50eea61f3ba74e04a98f762f1fae1434
+      internalID: 1883347425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c913a29fa3fbb6c4e81a59cb24ccb7c9
+      internalID: 979926354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7409c95a2419fba45a58a2c4572c5dc4
+      internalID: -241827243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5910be437900bbc498cc33b1d6623a90
+      internalID: 300238710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c858bd45bdf1a6e4e8ae681a31c491cf
+      internalID: -574914686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackLeft_Walking_Anim_SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 0
+        width: 159.25
+        height: 168
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 461143fc51d7d0c488261d698cf938f4
+      internalID: 97925129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +318,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BackLeft_Walking_Anim_SpriteSheet_4: -241827243
+      BackLeft_Walking_Anim_SpriteSheet_0: 1743301161
+      BackLeft_Walking_Anim_SpriteSheet_7: 97925129
+      BackLeft_Walking_Anim_SpriteSheet_1: 1821868494
+      BackLeft_Walking_Anim_SpriteSheet_3: 979926354
+      BackLeft_Walking_Anim_SpriteSheet_2: 1883347425
+      BackLeft_Walking_Anim_SpriteSheet_6: -574914686
+      BackLeft_Walking_Anim_SpriteSheet_5: 300238710
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
