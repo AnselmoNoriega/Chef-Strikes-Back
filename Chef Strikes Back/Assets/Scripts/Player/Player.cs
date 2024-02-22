@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
         {
             playerImage.color = Color.red;
             yield return new WaitForSeconds(0.1f);
-            playerImage.color = new Color(0.8735808f, 0.4141153f, 0.8867924f, 1.0f);
+            playerImage.color = Color.white;
         }
         
     }
