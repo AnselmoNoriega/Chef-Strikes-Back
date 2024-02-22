@@ -18,7 +18,11 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _usingControllerButton.isOn = ServiceLocator.Get<GameManager>().GetControllerOption();
+        var gm = ServiceLocator.Get<GameManager>();
+        if (gm)
+        {
+            _usingControllerButton.isOn = gm.GetControllerOption();
+        }
     }
 
     public void SetScreenActive(string screenName)

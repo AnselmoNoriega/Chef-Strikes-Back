@@ -1,7 +1,9 @@
+using TMPro;
 using UnityEngine;
 
 public class ScoreSystem : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _textScore;
     [SerializeField] private Transform _gridParent;
     [SerializeField] private GameObject _star;
     [SerializeField] private GameObject _halfStar;
@@ -10,8 +12,8 @@ public class ScoreSystem : MonoBehaviour
     private void Awake()
     {
         var score = ServiceLocator.Get<GameManager>().GetScore();
+        _textScore.text = "Score: " + score.ToString();
         ServiceLocator.Get<GameManager>().ResetScore();
-        Debug.Log(score);
 
         int starNum = 0;
 
