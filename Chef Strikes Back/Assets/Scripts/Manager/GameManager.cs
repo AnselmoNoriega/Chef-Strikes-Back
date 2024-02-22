@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private bool _isUsingController = false;
 
     [SerializeField] private int _score = 0;
+    private int _levelKillCount = 0;
+
     private string _lastScenePlayed;
     private int _money = 0;
 
@@ -65,6 +67,16 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return _score;
+    }
+
+    public int GetKillCount()
+    {
+        return _levelKillCount;
+    }
+
+    public void SetKillCount(int amt)
+    {
+        _levelKillCount = amt;
     }
 
     public void ResetScore()

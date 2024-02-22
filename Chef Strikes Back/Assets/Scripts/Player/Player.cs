@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector, Space, Header("Attack Info")]
     public Vector2 LookingDirection;
-    public int Killscount;
+    private int _killscount;
 
     [HideInInspector, Space, Header("Throw Info")]
     public Vector2 ThrowLookingDir = Vector2.zero;
@@ -136,6 +136,7 @@ public class Player : MonoBehaviour
         
         if(_currentHealth <= 0)
         {
+            ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
@@ -153,13 +154,16 @@ public class Player : MonoBehaviour
             ServiceLocator.Get<AudioManager>().PlaySource("money");
             Destroy(collision.gameObject);
         }
-        
-        
     }
 
-    public int GetKillsCount()
+    public int GetKillsCount(int add = 0)
     {
-        return Killscount;
+        return _killscount += add;
+    }
+
+    public void AddKillCount()
+    {
+        ++_killscount;
     }
 
     public int GetDailyEarnings()

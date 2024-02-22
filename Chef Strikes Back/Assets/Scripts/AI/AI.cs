@@ -104,7 +104,7 @@ public class AI : MonoBehaviour
             if (_health <= 0)
             {
                 ServiceLocator.Get<GameManager>().KillScoreUpdate();
-                ServiceLocator.Get<Player>().Killscount++;
+                ServiceLocator.Get<Player>().AddKillCount();
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
                 DestroyAI();
             }/*

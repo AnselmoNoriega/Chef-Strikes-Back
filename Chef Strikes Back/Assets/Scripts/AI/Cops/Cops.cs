@@ -75,7 +75,7 @@ public class Cops : MonoBehaviour
 
         if (_health <= 0)
         {
-            ServiceLocator.Get<Player>().Killscount++;
+            ServiceLocator.Get<Player>().AddKillCount();
             ServiceLocator.Get<GameLoopManager>().WantedSystem();
             Destroy(gameObject);
         }

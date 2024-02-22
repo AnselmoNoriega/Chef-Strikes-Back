@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ScoreSystem : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _textScore;
+    [SerializeField] private TextMeshProUGUI _textStats;
     [SerializeField] private Transform _gridParent;
     [SerializeField] private GameObject _star;
     [SerializeField] private GameObject _halfStar;
@@ -12,7 +12,7 @@ public class ScoreSystem : MonoBehaviour
     private void Awake()
     {
         var score = ServiceLocator.Get<GameManager>().GetScore();
-        _textScore.text = "Score: " + score.ToString();
+        _textStats.text = "Score: " + score.ToString() + "\nKill Count: " + ServiceLocator.Get<GameManager>().GetKillCount();
         ServiceLocator.Get<GameManager>().ResetScore();
 
         int starNum = 0;

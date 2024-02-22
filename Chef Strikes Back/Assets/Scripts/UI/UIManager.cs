@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
         var gm = ServiceLocator.Get<GameManager>();
         if (gm)
         {
-            _usingControllerButton.isOn = gm.GetControllerOption();
+            //_usingControllerButton.isOn = gm.GetControllerOption();
         }
     }
 
