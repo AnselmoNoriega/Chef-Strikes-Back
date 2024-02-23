@@ -15,6 +15,7 @@ public struct WantedSpawner
 }
 public class GameLoopManager : MonoBehaviour
 {
+    public float RageTimer;
     [SerializeField] private float spawnTime;
     [SerializeField] private GameObject AIPrefabs;
     [SerializeField] private GameObject CopsPrefabs;
@@ -36,10 +37,10 @@ public class GameLoopManager : MonoBehaviour
     public AIState AiStandState = AIState.Good;
 
     private AIManager _aiManager;
-
     public void Initialize()
     {
         _aiManager = ServiceLocator.Get<AIManager>();
+        ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
         SpawnCustomer();
     }
 
@@ -49,7 +50,7 @@ public class GameLoopManager : MonoBehaviour
 
         SpawnBadAIWithinTime();
         SpawnTheCopWithinTime();
-
+        
         if (_countToSpawn >= spawnTime)
         {
             SpawnCustomer();
@@ -142,10 +143,5 @@ public class GameLoopManager : MonoBehaviour
     private void WantedStarSpawn()
     {
         ServiceLocator.Get<CanvasManager>().ActivateStars(_stars);
-    }
-
-    public void ActiveateController()
-    {
-        ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().SetControllerActive();
     }
 }

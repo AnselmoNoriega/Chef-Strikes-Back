@@ -22,10 +22,7 @@ public class PlayerInputs : MonoBehaviour
     private void Awake()
     {
         inputManager = new InputControls();
-    }
 
-    private void OnEnable()
-    {
         rightMouse = inputManager.Player.MouseRightClick;
         leftMouse = inputManager.Player.MouseLeftClick;
         mouse = inputManager.Player.MouseLocation;
@@ -37,7 +34,7 @@ public class PlayerInputs : MonoBehaviour
         pauseKeyboard = inputManager.Player.Esc;
         pauseController = inputManager.Player.PauseController;
 
-        EnableKeyboard();
+        SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
 
         rightMouse.performed += RightClick;
         leftMouse.performed += LeftClick;
@@ -51,7 +48,7 @@ public class PlayerInputs : MonoBehaviour
         pauseController.performed += TogglePauseMenu;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         DisableKeyboard();
         DisableController();
@@ -72,7 +69,11 @@ public class PlayerInputs : MonoBehaviour
     {
         if (_isUsingController)
         {
-            action.Check4CloseItems();
+            action.Check4CloseItems(null);
+        }
+        else
+        {
+            action.Check4CloseItems(mouse);
         }
     }
 
@@ -122,51 +123,63 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
-    public void SetControllerActive()
+    public void SetControllerActive(bool active)
     {
-        if (!_isUsingController)
+        if (active)
         {
             EnableController();
             DisableKeyboard();
-            _isUsingController = true;
         }
         else
         {
             EnableKeyboard();
             DisableController();
-            _isUsingController = false;
         }
+        _isUsingController = active;
     }
 
     private void EnableKeyboard()
     {
-        rightMouse.Enable();
-        leftMouse.Enable();
-        mouse.Enable();
-        pauseKeyboard.Enable();
+        if (inputManager != null)
+        {
+            rightMouse.Enable();
+            leftMouse.Enable();
+            mouse.Enable();
+            pauseKeyboard.Enable();
+        }
     }
 
     private void EnableController()
     {
-        leftTrigger.Enable();
-        leftButton.Enable();
-        rightJoystick.Enable();
-        pauseController.Enable();
+        if (inputManager != null)
+        {
+            leftTrigger.Enable();
+            leftButton.Enable();
+            rightJoystick.Enable();
+            pauseController.Enable();
+        }
     }
 
     private void DisableKeyboard()
     {
-        rightMouse.Disable();
-        leftMouse.Disable();
-        mouse.Disable();
-        pauseKeyboard.Disable();
+        if (inputManager != null)
+        {
+            rightMouse.Disable();
+            leftMouse.Disable();
+            mouse.Disable();
+            pauseKeyboard.Disable();
+        }
     }
 
     private void DisableController()
     {
-        leftTrigger.Disable();
-        leftButton.Disable();
-        rightJoystick.Disable();
-        pauseController.Disable();
+
+        if (inputManager != null)
+        {
+            leftTrigger.Disable();
+            leftButton.Disable();
+            rightJoystick.Disable();
+            pauseController.Disable();
+        }
     }
 }

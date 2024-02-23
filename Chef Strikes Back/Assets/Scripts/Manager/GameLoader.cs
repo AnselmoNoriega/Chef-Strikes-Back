@@ -96,6 +96,9 @@ public class GameLoader : AsyncLoader
     private void OnComplete()
     {
         Debug.Log("GameLoader Completed");
+
+        ServiceLocator.Get<GameManager>().LoadGameStats();
+
         StartCoroutine(LoadInitialScene(_sceneIndex));
     }
 

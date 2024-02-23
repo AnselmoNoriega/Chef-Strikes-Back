@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class HungryCustomer : StateClass<AI>
 {
-    private float waitingTime = 25.0f;
+    private float waitingTime;
     private float timer = 0;
     private Vector3 scale = Vector3.zero;
 
     public void Enter(AI agent)
     {
+        waitingTime = ServiceLocator.Get<GameLoopManager>().RageTimer;
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
         agent.EatingSlider.localScale = scale;
@@ -40,6 +41,7 @@ public class HungryCustomer : StateClass<AI>
 
         if (scale.x >= 1.0f)
         {
+            ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
             agent.ChangeState(AIState.Rage);
         }

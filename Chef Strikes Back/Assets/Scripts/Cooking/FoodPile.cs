@@ -1,17 +1,15 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class FoodPile : MonoBehaviour
 {
-    [SerializeField]
-    private Transform target;
-    [SerializeField]
-    private GameObject foodItem;
-    [SerializeField]
-    private float throwStrength;
+    [SerializeField] private GameObject _foodItem;
+    [SerializeField] private float _lightDistance;
 
     public GameObject Hit()
     {
         ServiceLocator.Get<AudioManager>().PlaySource("cut");
-        return Instantiate(foodItem, transform.position, Quaternion.identity);
+        return Instantiate(_foodItem, transform.position, Quaternion.identity);
     }
+
 }

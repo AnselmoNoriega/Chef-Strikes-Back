@@ -7,16 +7,9 @@ public class RageCustomerState : StateClass<AI>
     private int _currentWaypoint = 0;
     private Transform _playerPos = null;
     private AI _agent = null;
-    private bool _firstTimeAngry = true;
 
     public void Enter(AI agent)
     {
-        if(_firstTimeAngry)
-        {
-            ServiceLocator.Get<GameManager>().EnterRageModeScore();
-            _firstTimeAngry = false;
-        }
-
         _agent = agent;
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
@@ -35,7 +28,7 @@ public class RageCustomerState : StateClass<AI>
         }
 
         var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-        if (distance < agent.NextWaypointDistance + 0.2f)
+        if (distance < agent.NextWaypointDistance)
         {
             ++_currentWaypoint;
         }

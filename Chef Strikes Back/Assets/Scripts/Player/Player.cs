@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     [HideInInspector, Space, Header("Attack Info")]
     public Vector2 LookingDirection;
-    public int Killscount;
+    private int _killscount;
 
     [HideInInspector, Space, Header("Throw Info")]
     public Vector2 ThrowLookingDir = Vector2.zero;
@@ -133,8 +133,10 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
+        
         if(_currentHealth <= 0)
         {
+            ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
@@ -147,33 +149,35 @@ public class Player : MonoBehaviour
         if(collision.tag == "Loot")
         {
             _money += 10;
-            ServiceLocator.Get<GameManager>().AddMoney(10);
             ServiceLocator.Get<GameManager>().MoneyGrabed();
             ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
             ServiceLocator.Get<AudioManager>().PlaySource("money");
             Destroy(collision.gameObject);
         }
-        
-        
     }
 
-    public int GetKillsCount()
+    public int GetKillsCount(int add = 0)
     {
-        return Killscount;
+        return _killscount += add;
     }
 
+    public void AddKillCount()
+    {
+        ++_killscount;
+    }
+
+    public int GetDailyEarnings()
+    {
+        return _money;
+    }
 
     private IEnumerator SpriteFlashing()
     {
-        
         for(int i = 0; i < _FlashingTime;i++)
         {
             playerImage.color = Color.red;
             yield return new WaitForSeconds(0.1f);
-            playerImage.color = Color.black;
-            yield return new WaitForSeconds(0.1f);
-
-            playerImage.color = new Color(0.8735808f, 0.4141153f, 0.8867924f, 1.0f);
+            playerImage.color = Color.white;
         }
         
     }

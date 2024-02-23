@@ -457,8 +457,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1609916735, guid: 53d31054728c6e4499fa74dd0b811a97, type: 3}
-  m_Color: {r: 0.87358075, g: 0.4141153, b: 0.8867924, a: 1}
+  m_Sprite: {fileID: 741703309, guid: f4f2972f48da80846bbf5d8618befc76, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -581,8 +581,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  playerImage: {fileID: 0}
-  _FlashingTime: 0
+  playerImage: {fileID: 6355847347339370375}
+  _FlashingTime: 1
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ MonoBehaviour:
   ready2Throw: 0
   player: {fileID: -7746550428048061511}
   PlayerAttackRange: 0.5
-  grabDistance: 1
+  grabDistance: 1.2
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
