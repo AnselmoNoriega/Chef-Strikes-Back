@@ -13,6 +13,7 @@ public class PlayerWalking : StateClass<Player>
 
     public void Enter(Player agent)
     {
+        agent.GetComponent<Animator>().SetBool("isWalking", true);
         ServiceLocator.Get<AudioManager>().PlaySource("walk");
         ServiceLocator.Get<CanvasManager>().UITransparent();
     }
@@ -75,6 +76,7 @@ public class PlayerWalking : StateClass<Player>
     }
     public void Exit(Player agent)
     {
+        agent.GetComponent<Animator>().SetBool("isWalking", false);
         ServiceLocator.Get<CanvasManager>().UIUnTransparent();
     }
 
