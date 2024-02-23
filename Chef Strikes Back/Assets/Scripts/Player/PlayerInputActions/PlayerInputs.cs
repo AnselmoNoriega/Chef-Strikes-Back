@@ -50,8 +50,14 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnDestroy()
     {
-        DisableKeyboard();
-        DisableController();
+        if (_isUsingController)
+        {
+            DisableController();
+        }
+        else
+        {
+            DisableKeyboard();
+        }
 
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
