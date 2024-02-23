@@ -16288,11 +16288,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[4].SpawningTime
-      value: 6
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[5].SpawningTime
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[6].SpawningTime
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1840867465630466503, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16400,7 +16404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].CopSpwanCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[3].CopSpwanCount
@@ -16420,7 +16424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpawnTimer
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[1].BadAiSpwanCount
@@ -16432,7 +16436,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpawnTimer
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].BadAiSpwanCount
@@ -16440,11 +16444,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[2].CopAiSpawnTimer
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[3].BadAiSpawnTimer
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[3].BadAiSpwanCount
