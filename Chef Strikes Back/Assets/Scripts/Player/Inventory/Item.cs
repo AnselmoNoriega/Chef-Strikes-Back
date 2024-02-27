@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] public Collider2D tgrCollider;
     [SerializeField] public Collider2D childCollider;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     [Space, Header("Item Info")]
     public FoodType Type;
@@ -98,6 +99,12 @@ public class Item : MonoBehaviour
         tgrCollider.enabled = state;
         childCollider.enabled = state;
     }
+
+    public SpriteRenderer GetHighlight()
+    {
+        return _spriteRenderer;
+    }
+
 }
 
 public enum FoodType

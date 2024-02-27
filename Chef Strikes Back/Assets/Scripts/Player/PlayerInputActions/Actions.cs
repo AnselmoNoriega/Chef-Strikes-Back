@@ -20,7 +20,7 @@ public class Actions : MonoBehaviour
 
     [Space, Header("Player Grab")]
     [SerializeField] private float grabDistance;
-    private Light2D _selectedItem = null;
+    private SpriteRenderer _selectedItem = null;
 
     private void Start()
     {
@@ -59,7 +59,7 @@ public class Actions : MonoBehaviour
     private void Check4ItemRayCast(Collider2D[] hits)
     {
         float distance = 1.0f;
-        Light2D newItem = null;
+        SpriteRenderer newItem = null;
         float tempDis;
 
         foreach (var hit in hits)
@@ -75,13 +75,13 @@ public class Actions : MonoBehaviour
             if (tempDis < distance && hit.GetComponent<Item>() && hit.GetComponent<Item>().IsPickable)
             {
                 distance = tempDis;
-                newItem = hit.GetComponent<Light2D>();
+                newItem = hit.GetComponent<Item>().GetHighlight();
                 break;
             }
             else if (tempDis < distance && hit.GetComponent<FoodPile>())
             {
                 distance = tempDis;
-                newItem = hit.GetComponent<Light2D>();
+                newItem = hit.GetComponent<FoodPile>().GetOutline();
                 break;
             }
         }
