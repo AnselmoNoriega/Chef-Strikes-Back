@@ -17,7 +17,6 @@ public class Item : MonoBehaviour
     [SerializeField] private float _timeReduction;
     private float _time;
     private Vector2 _acceleration;
-    private Vector2 _handPosition;
 
     [Space, Header("Movement in table")]
     [SerializeField] private float _magnetSmoodTime;
@@ -26,20 +25,21 @@ public class Item : MonoBehaviour
 
     private void Start()
     {
-        _handPosition = new Vector2(0, 0.7f);
         _isBeingDrag = false;
         IsPickable = true;
         IsServed = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-
         if (transform.parent != null)
         {
-            transform.localPosition = _handPosition;
+            transform.localPosition = Vector2.zero;
         }
+    }
 
+    private void FixedUpdate()
+    {
         if (_time >= 0)
         {
             _rb.velocity += _acceleration * Time.deltaTime;
