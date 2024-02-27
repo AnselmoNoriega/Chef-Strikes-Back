@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerInputs : MonoBehaviour
     private InputAction pauseController;
 
     [SerializeField] private Actions action;
+    [SerializeField] private GameObject _PauseFirst;
 
     private bool _isUsingController = false;
 
@@ -126,6 +128,8 @@ public class PlayerInputs : MonoBehaviour
         {
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
+            if (_PauseFirst == null) return;
+            EventSystem.current.SetSelectedGameObject(_PauseFirst);
         }
     }
 

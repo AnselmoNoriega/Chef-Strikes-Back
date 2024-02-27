@@ -2706,6 +2706,12 @@ MonoBehaviour:
   _screens: {fileID: 1532895753}
   _moneyText: {fileID: 0}
   _usingControllerButton: {fileID: 1532895754}
+  _MainMenuSeclectFirst: {fileID: 0}
+  _LevelSelectFirst: {fileID: 0}
+  _SettingSelectFirst: {fileID: 1532895757}
+  _CreditSelectFirst: {fileID: 0}
+  _PauseSelectFirst: {fileID: 1532895755}
+  _HowToPlaySelectFirst: {fileID: 1532895756}
 --- !u!114 &429950810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10309,12 +10315,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
   m_PrefabInstance: {fileID: 1532895751}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1532895757}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1532895755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8176229124863584840, guid: dd4b2f39849980b489fa075844713829, type: 3}
+  m_PrefabInstance: {fileID: 1532895751}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1532895756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7515746919940059816, guid: dd4b2f39849980b489fa075844713829, type: 3}
+  m_PrefabInstance: {fileID: 1532895751}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1532895757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2947817740382061171, guid: dd4b2f39849980b489fa075844713829, type: 3}
+  m_PrefabInstance: {fileID: 1532895751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540712198
 GameObject:
   m_ObjectHideFlags: 0
@@ -15138,6 +15159,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 323981142111727875, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: _PauseFirst
+      value: 
+      objectReference: {fileID: 1532895755}
     - target: {fileID: 3855817667393855648, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: grabDistance
       value: 1
@@ -15458,7 +15483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1532895755}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1903156957
