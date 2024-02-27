@@ -21,6 +21,7 @@ public class CreationTable : MonoBehaviour
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
     [SerializeField] private Transform _foodOffset;
+    private int _spawnFoodOffset = 20;
 
     [Space, Header("Storage Objects")]
     [SerializeField] private GameObject _burger;
@@ -117,8 +118,12 @@ public class CreationTable : MonoBehaviour
             _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
-
-        Instantiate(_burger, _foodOffset.position, Quaternion.identity);
+        Debug.Log(_spawnFoodOffset);
+        Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-_spawnFoodOffset, _spawnFoodOffset), UnityEngine.Random.Range(-_spawnFoodOffset, _spawnFoodOffset));
+        Debug.Log(randomOffset);
+        randomOffset /= 100;
+        Debug.Log(randomOffset);
+        Instantiate(_burger, (Vector2)_foodOffset.position + randomOffset, Quaternion.identity);
     }
 
     private IEnumerator IngredientSpriteActive(Item item)
