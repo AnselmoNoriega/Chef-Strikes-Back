@@ -626,13 +626,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387b79cec2272f24180e5130c281e351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodItem: {fileID: 0}
-  weaponItem: {fileID: 0}
-  playerForce: 6
-  distanceMultiplier: 8
-  length: {fileID: 632234214026588238}
-  offset: {x: -0.2, y: 1.1, z: 0}
-  pointer: {fileID: 231826271109957594}
+  _foodItem: {fileID: 0}
+  _weaponItem: {fileID: 0}
+  _playerForce: 6
+  _distanceMultiplier: 8
+  _length: {fileID: 632234214026588238}
+  _offset: {x: -0.2, y: 1.1, z: 0}
+  _pointer: {fileID: 231826271109957594}
+  _foodPosition: {fileID: 578931868531884403}
 --- !u!114 &3855817667393855648
 MonoBehaviour:
   m_ObjectHideFlags: 0
