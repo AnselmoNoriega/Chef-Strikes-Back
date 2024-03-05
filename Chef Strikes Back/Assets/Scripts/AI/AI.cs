@@ -107,6 +107,7 @@ public class AI : MonoBehaviour
                 ServiceLocator.Get<GameManager>().KillScoreUpdate();
                 ServiceLocator.Get<Player>().AddKillCount();
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
+
                 DestroyAI();
             }/*
             StartCoroutine(SpriteFlashing());*/

@@ -1,6 +1,5 @@
 using UnityEngine;
 using Pathfinding;
-using Unity.VisualScripting;
 
 public class FoodLockCustomer : StateClass<AI>
 {
@@ -23,11 +22,13 @@ public class FoodLockCustomer : StateClass<AI>
             _lockCombiner = false;
             _combiner.isLocked = false;
             ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
+            agent.Rb2d.mass = 30;
             agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
         }
-        if(_combiner.isLocked && ServiceLocator.Get<AIManager>().GetUnLockedTable() == 0)
+        if(_combiner.isLocked)
         {
-            agent.ChangeState(AIState.Rage);
+            if (ServiceLocator.Get<AIManager>().GetUnLockedTable() == 0) agent.ChangeState(AIState.Rage);
+            else _combiner = ServiceLocator.Get<AIManager>().GiveMeCreationTable();
         }
     }
 
@@ -48,6 +49,7 @@ public class FoodLockCustomer : StateClass<AI>
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
             _lockCombiner = true;
+            agent.Rb2d.mass = 10000000;
             if (!_combiner.CheckLock()) ServiceLocator.Get<AIManager>().Lock(_combiner);
             return;
         }
