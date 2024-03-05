@@ -20,7 +20,7 @@ public class PlayerIdle : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        agent.Rb.AddForce((-agent.Rb.velocity) * acceleration);
+        agent.Rb.AddForce((-agent.Rb.velocity + agent.FloorSpeed) * acceleration);
     }
 
     public void Exit(Player agent)

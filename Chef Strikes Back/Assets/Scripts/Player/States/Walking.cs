@@ -52,11 +52,11 @@ public class PlayerWalking : StateClass<Player>
     {
         if (agent.PlayerAction == PlayerActions.Throwing)
         {
-            agent.Rb.AddForce(((moveDirection * (throwMoveSpeed)) - agent.Rb.velocity) * acceleration);
+            agent.Rb.AddForce(((moveDirection * (throwMoveSpeed)) + agent.FloorSpeed - agent.Rb.velocity) * acceleration);
         }
         else
         {
-            agent.Rb.AddForce(((moveDirection * moveSpeed) - agent.Rb.velocity) * acceleration);
+            agent.Rb.AddForce(((moveDirection * moveSpeed) + agent.FloorSpeed - agent.Rb.velocity) * acceleration);
         }
     }
     private void FaceDirectionForIdle(Player agent)

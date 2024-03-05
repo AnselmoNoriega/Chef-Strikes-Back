@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpeedyTile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float _speedUpParameter;
+    private Vector2 _SpeedDirection = new Vector2(0.894427f, 0.447214f);
 
-    // Update is called once per frame
-    void Update()
+    public void EnterTreadmill()
     {
-        
+        ServiceLocator.Get<Player>().FloorSpeed = _SpeedDirection * _speedUpParameter;
     }
 }
