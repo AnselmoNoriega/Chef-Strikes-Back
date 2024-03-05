@@ -86,7 +86,6 @@ public class AI : MonoBehaviour
 
     public void DestroyAI()
     {
-        _gameLoopManager.RemoveAI(gameObject);
         Destroy(gameObject);
     }
 

@@ -10,6 +10,8 @@ public class AIManager : MonoBehaviour
     [SerializeField] private Transform[] _copStartPoint;
     [SerializeField] private Transform[] _badAiPoint;
 
+    private List<Transform> _goodCustomers;
+
     public Chair GiveMeChair()
     {
         var chair = _chairs[Random.Range(0, _chairs.Count)];
@@ -40,5 +42,25 @@ public class AIManager : MonoBehaviour
     public Vector2 BadAiEnterPosition()
     {
         return _badAiPoint[Random.Range(0, _badAiPoint.Length)].position;
+    }
+
+    public void AddNewCustomer(Transform customerPos)
+    {
+        _goodCustomers.Add(customerPos);
+    }
+
+    public void RemoveCustomer(Transform customerPos)
+    {
+        _goodCustomers.Remove(customerPos);
+    }
+
+    public Transform GetRandomCustomer()
+    {
+        if (_goodCustomers.Count > 0)
+        {
+            return _goodCustomers[Random.Range(0, _goodCustomers.Count)];
+        }
+
+        return null;
     }
 }
