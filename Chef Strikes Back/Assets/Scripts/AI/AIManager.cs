@@ -5,6 +5,7 @@ using UnityEngine;
 public class AIManager : MonoBehaviour
 {
     [SerializeField] private List<Chair> _chairs = new();
+    [SerializeField] private List<CreationTable> _combiner = new();
 
     [SerializeField] private Transform[] _exitPoint;
     [SerializeField] private Transform[] _copStartPoint;
@@ -62,5 +63,26 @@ public class AIManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    public CreationTable GiveMeCreationTable()
+    {
+        var combiner = _combiner[Random.Range(0, _combiner.Count)];
+        _combiner.Remove(combiner);
+        return combiner;
+    }
+    public void Lock(CreationTable combiner)
+    {
+        combiner.isLocked = true;
+    }
+
+    public int GetUnLockedTable()
+    {
+        return _combiner.Count;
+    }
+
+    public void UnLockTable(CreationTable combiner)
+    {
+        _combiner.Add(combiner);
     }
 }
