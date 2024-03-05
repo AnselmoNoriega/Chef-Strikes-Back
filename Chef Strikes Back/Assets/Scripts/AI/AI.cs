@@ -12,6 +12,7 @@ public enum AIState
     Rage,
     Attacking,
     Leaving,
+    FoodLockCustomer,
     None
 }
 
@@ -60,6 +61,7 @@ public class AI : MonoBehaviour
         _stateManager.AddState<RageCustomerState>();
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
+        _stateManager.AddState<FoodLockCustomer>();
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
     }
 
@@ -105,6 +107,7 @@ public class AI : MonoBehaviour
                 ServiceLocator.Get<GameManager>().KillScoreUpdate();
                 ServiceLocator.Get<Player>().AddKillCount();
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
+
                 DestroyAI();
             }/*
             StartCoroutine(SpriteFlashing());*/

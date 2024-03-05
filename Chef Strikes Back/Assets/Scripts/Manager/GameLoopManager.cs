@@ -53,7 +53,7 @@ public class GameLoopManager : MonoBehaviour
         
         if (_countToSpawn >= spawnTime)
         {
-            SpawnCustomer();
+            //SpawnCustomer();
             _countToSpawn = 0;
         }
     }
@@ -66,6 +66,8 @@ public class GameLoopManager : MonoBehaviour
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
         }
     }
+
+    
     private void SpawnBadCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
