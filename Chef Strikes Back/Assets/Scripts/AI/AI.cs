@@ -34,6 +34,7 @@ public class AI : MonoBehaviour
     public int Speed = 0;
     public float knockbackForce = 0.0f;
     public float NextWaypointDistance = 0;
+    public bool isAnnoyed = false;
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
 

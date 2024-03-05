@@ -11,7 +11,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] private Transform[] _copStartPoint;
     [SerializeField] private Transform[] _badAiPoint;
 
-    private List<Transform> _goodCustomers;
+    private List<AI> _goodCustomers;
 
     public Chair GiveMeChair()
     {
@@ -45,23 +45,24 @@ public class AIManager : MonoBehaviour
         return _badAiPoint[Random.Range(0, _badAiPoint.Length)].position;
     }
 
-    public void AddNewCustomer(Transform customerPos)
+    public void AddHungryCustomer(AI customerPos)
     {
         _goodCustomers.Add(customerPos);
     }
 
-    public void RemoveCustomer(Transform customerPos)
+    public void RemoveCustomer(AI customerPos)
     {
         _goodCustomers.Remove(customerPos);
     }
 
-    public Transform GetRandomCustomer()
+    public AI GetRandomCustomer()
     {
         if (_goodCustomers.Count > 0)
         {
-            return _goodCustomers[Random.Range(0, _goodCustomers.Count)];
+            var customer = _goodCustomers[Random.Range(0, _goodCustomers.Count)];
+            RemoveCustomer(customer);
+            return customer;
         }
-
         return null;
     }
 

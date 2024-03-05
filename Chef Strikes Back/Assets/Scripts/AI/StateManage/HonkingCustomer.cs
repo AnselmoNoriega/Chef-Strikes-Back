@@ -3,7 +3,7 @@ using Pathfinding;
 
 public class HonkingCustomer : StateClass<AI>
 {
-    private Transform _customer;
+    private AI _customer;
     private int _currentWaypoint = 0;
     private AI _agent;
 
@@ -11,14 +11,19 @@ public class HonkingCustomer : StateClass<AI>
     {
         _agent = agent;
         _customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
-        agent.Seeker.StartPath(agent.Rb2d.position, _customer.position , PathCompleted);
+        agent.Seeker.StartPath(agent.Rb2d.position, _customer.transform.position , PathCompleted);
     }
     public void Update(AI agent, float dt)
     {
+        if(Vector2.Distance(agent.transform.position, _customer.transform.position) < 1.0f)
+        {
+            _customer.isAnnoyed = true;
+        }
     }
 
     public void Exit(AI agent)
     {
+        _customer.isAnnoyed = false;
     }
 
     public void FixedUpdate(AI agent)

@@ -4,11 +4,13 @@ public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime;
     private float timer = 0;
+
     private Vector3 scale = Vector3.zero;
 
     public void Enter(AI agent)
     {
         waitingTime = ServiceLocator.Get<GameLoopManager>().RageTimer;
+        ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
         agent.EatingSlider.localScale = scale;
@@ -23,19 +25,23 @@ public class HungryCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        timer += Time.deltaTime / waitingTime;
-        if (timer >= 0.8f / 2)
+        if(!agent.isAnnoyed)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 2;
+            timer += Time.deltaTime / waitingTime;
+            if (timer >= 0.8f / 2)
+            {
+                scale.x += (Time.deltaTime / waitingTime) / 2;
+            }
+            if (timer >= 0.6f / 2)
+            {
+                scale.x += (Time.deltaTime / waitingTime) / 1.5f;
+            }
+            else
+            {
+                scale.x += (Time.deltaTime / waitingTime) * 2;
+            }
         }
-        if (timer >= 0.6f / 2)
-        {
-            scale.x += (Time.deltaTime / waitingTime) / 1.5f;
-        }
-        else
-        {
-            scale.x += (Time.deltaTime / waitingTime) * 2;
-        }
+        
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
@@ -68,5 +74,6 @@ public class HungryCustomer : StateClass<AI>
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
+        ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
     }
 }
