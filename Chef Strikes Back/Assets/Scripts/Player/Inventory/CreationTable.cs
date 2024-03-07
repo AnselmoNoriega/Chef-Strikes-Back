@@ -35,7 +35,7 @@ public class CreationTable : MonoBehaviour
     private Dictionary<FoodType, GameObject> _foodSprites = new();
 
     [Header("TableStat")]
-    public bool isLocked = false;
+    public bool IsLocked = false;
     [SerializeField] Transform standPoint;
 
     private void Start()
@@ -57,7 +57,10 @@ public class CreationTable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isLocked) return;
+        if (IsLocked)
+        {
+            return;
+        }
 
         Item recivedItem = collision.GetComponent<Item>();
 
@@ -166,11 +169,5 @@ public class CreationTable : MonoBehaviour
     public Vector3 CombinerPos()
     {
         return standPoint.position;
-    }
-
-    public bool CheckLock()
-    {
-        if (isLocked) return true;
-        return false;
     }
 }

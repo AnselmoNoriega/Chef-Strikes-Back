@@ -3,54 +3,56 @@ using Pathfinding;
 
 public class FoodLockCustomer : StateClass<AI>
 {
-    CreationTable _combiner;
+    private float _countDown = 0;
+    private CreationTable _combiner;
     private int _currentWaypoint = 0;
     private AI _agent;
-    private bool _lockCombiner = false;
 
     public void Enter(AI agent)
     {
         _agent = agent;
+        _countDown = Time.time;
         _combiner = ServiceLocator.Get<AIManager>().GiveMeCreationTable();
+        if (_combiner == null)
+        {
+            agent.ChangeState(AIState.Rage);
+            return;
+        }
         agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
+        agent.GetComponent<SpriteRenderer>().color = Color.red;
     }
 
     public void Update(AI agent, float dt)
     {
-        if (Vector2.Distance(agent.transform.transform.position, _combiner.transform.position) > 1.0f && _lockCombiner)
+        if (Vector2.Distance(agent.transform.transform.position, _combiner.transform.position) > 1.0f && _combiner.IsLocked)
         {
-            _lockCombiner = false;
-            _combiner.isLocked = false;
-            ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
+            _combiner.IsLocked = false;
             agent.Rb2d.mass = 30;
             agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
-        }
-        if(_combiner.isLocked)
-        {
-            if (ServiceLocator.Get<AIManager>().GetUnLockedTable() == 0) agent.ChangeState(AIState.Rage);
-            else _combiner = ServiceLocator.Get<AIManager>().GiveMeCreationTable();
         }
     }
 
     public void Exit(AI agent)
     {
-        _lockCombiner = false;
-        _combiner.isLocked = false;
-        ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
+        if (_combiner != null)
+        {
+            _combiner.IsLocked = false;
+            ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
+            _combiner = null;
+        }
     }
 
     public void FixedUpdate(AI agent)
     {
-        if (agent.Path == null || _lockCombiner)
+        if (agent.Path == null || _combiner.IsLocked)
         {
             return;
         }
-        
+
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
-            _lockCombiner = true;
+            _combiner.IsLocked = true;
             agent.Rb2d.mass = 10000000;
-            if (!_combiner.CheckLock()) ServiceLocator.Get<AIManager>().Lock(_combiner);
             return;
         }
 
@@ -64,10 +66,16 @@ public class FoodLockCustomer : StateClass<AI>
             ++_currentWaypoint;
         }
 
+        if (Time.time - _countDown >= 0.5f)
+        {
+            agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
+            _currentWaypoint = 0;
+            _countDown = Time.time;
+        }
     }
     public void CollisionEnter2D(AI agent, Collision2D collision)
     {
-   
+
     }
 
     public void TriggerEnter2D(AI agent, Collider2D collision)

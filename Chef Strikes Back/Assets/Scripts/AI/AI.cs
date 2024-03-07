@@ -8,11 +8,11 @@ public enum AIState
     Good,
     Hungry,
     Eating,
-    Bad,
     Rage,
+    FoodLockCustomer,
+    HonkingCustomer,
     Attacking,
     Leaving,
-    FoodLockCustomer,
     None
 }
 
@@ -34,7 +34,7 @@ public class AI : MonoBehaviour
     public int Speed = 0;
     public float knockbackForce = 0.0f;
     public float NextWaypointDistance = 0;
-    public bool isAnnoyed = false;
+    public bool IsAnnoyed = false;
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
 
@@ -58,11 +58,13 @@ public class AI : MonoBehaviour
         _stateManager.AddState<GoodCustomerState>();
         _stateManager.AddState<HungryCustomer>();
         _stateManager.AddState<EatingCustomer>();
-        _stateManager.AddState<BadCustomerState>();
+
         _stateManager.AddState<RageCustomerState>();
+        _stateManager.AddState<FoodLockCustomer>();
+        _stateManager.AddState<HonkingCustomer>();
+
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
-        _stateManager.AddState<FoodLockCustomer>();
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
     }
 
@@ -99,7 +101,7 @@ public class AI : MonoBehaviour
 
     public void Damage(int amt)
     {
-        if (state == AIState.Rage || state == AIState.Attacking)
+        if ((int)state >= 3 && (int)state <= 6)
         {
             _health -= amt;
 

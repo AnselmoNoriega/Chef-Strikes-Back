@@ -3,6 +3,7 @@ using Pathfinding;
 
 public class HonkingCustomer : StateClass<AI>
 {
+    private float _countDown = 0;
     private AI _customer;
     private int _currentWaypoint = 0;
     private AI _agent;
@@ -10,30 +11,35 @@ public class HonkingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _countDown = Time.time;
         _customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
+        if( _customer == null )
+        {
+            agent.ChangeState(AIState.Rage);
+            return;
+        }
         agent.Seeker.StartPath(agent.Rb2d.position, _customer.transform.position , PathCompleted);
+        agent.GetComponent<SpriteRenderer>().color = Color.red;
     }
     public void Update(AI agent, float dt)
     {
-        if(Vector2.Distance(agent.transform.position, _customer.transform.position) < 1.0f)
+        if(!_customer.IsAnnoyed && Vector2.Distance(agent.transform.position, _customer.transform.position) < 1.0f)
         {
-            _customer.isAnnoyed = true;
+            _customer.IsAnnoyed = true;
         }
     }
 
     public void Exit(AI agent)
     {
-        _customer.isAnnoyed = false;
+        if (_customer != null)
+        {
+            _customer.IsAnnoyed = false;
+        }
     }
 
     public void FixedUpdate(AI agent)
     {
-        if (agent.Path == null)
-        {
-            return;
-        }
-
-        if (_currentWaypoint >= agent.Path.vectorPath.Count)
+        if (agent.Path == null || _currentWaypoint >= agent.Path.vectorPath.Count)
         {
             return;
         }
@@ -46,6 +52,13 @@ public class HonkingCustomer : StateClass<AI>
         if (distance < agent.NextWaypointDistance)
         {
             ++_currentWaypoint;
+        }
+
+        if (Time.time - _countDown >= 0.5f)
+        {
+            agent.Seeker.StartPath(agent.Rb2d.position, _customer.transform.position, PathCompleted);
+            _currentWaypoint = 0;
+            _countDown = Time.time;
         }
     }
 

@@ -4,6 +4,7 @@ public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime;
     private float timer = 0;
+    private float angerMultiplier = 2;
 
     private Vector3 scale = Vector3.zero;
 
@@ -25,23 +26,20 @@ public class HungryCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        if(!agent.isAnnoyed)
+        timer += (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
+        if (timer >= 0.8f / 2)
         {
-            timer += Time.deltaTime / waitingTime;
-            if (timer >= 0.8f / 2)
-            {
-                scale.x += (Time.deltaTime / waitingTime) / 2;
-            }
-            if (timer >= 0.6f / 2)
-            {
-                scale.x += (Time.deltaTime / waitingTime) / 1.5f;
-            }
-            else
-            {
-                scale.x += (Time.deltaTime / waitingTime) * 2;
-            }
+            scale.x += (Time.deltaTime / waitingTime) / 2;
         }
-        
+        if (timer >= 0.6f / 2)
+        {
+            scale.x += (Time.deltaTime / waitingTime) / 1.5f;
+        }
+        else
+        {
+            scale.x += (Time.deltaTime / waitingTime) * 2;
+        }
+
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
@@ -49,7 +47,9 @@ public class HungryCustomer : StateClass<AI>
         {
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
-            agent.ChangeState(AIState.Rage);
+
+            int value = Random.Range(0, 100) % 3;
+            agent.ChangeState((AIState)(value + 3));
         }
     }
 

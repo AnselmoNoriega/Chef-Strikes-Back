@@ -11,7 +11,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] private Transform[] _copStartPoint;
     [SerializeField] private Transform[] _badAiPoint;
 
-    private List<AI> _goodCustomers;
+    private List<AI> _goodCustomers = new();
 
     public Chair GiveMeChair()
     {
@@ -68,18 +68,14 @@ public class AIManager : MonoBehaviour
 
     public CreationTable GiveMeCreationTable()
     {
-        var combiner = _combiner[Random.Range(0, _combiner.Count)];
-        _combiner.Remove(combiner);
-        return combiner;
-    }
-    public void Lock(CreationTable combiner)
-    {
-        combiner.isLocked = true;
-    }
+        if (_combiner.Count > 0)
+        {
+            var combiner = _combiner[Random.Range(0, _combiner.Count)];
+            _combiner.Remove(combiner);
+            return combiner;
+        }
 
-    public int GetUnLockedTable()
-    {
-        return _combiner.Count;
+        return null;
     }
 
     public void UnLockTable(CreationTable combiner)

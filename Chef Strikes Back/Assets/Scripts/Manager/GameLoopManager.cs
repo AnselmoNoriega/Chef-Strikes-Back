@@ -53,7 +53,7 @@ public class GameLoopManager : MonoBehaviour
         
         if (_countToSpawn >= spawnTime)
         {
-            //SpawnCustomer();
+            SpawnCustomer();
             _countToSpawn = 0;
         }
     }
