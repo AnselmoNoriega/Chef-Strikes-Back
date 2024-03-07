@@ -186,5 +186,24 @@ public class Player : MonoBehaviour
     private void CheckFloorType()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.28999f);
+
+        foreach(Collider2D hit in hits)
+        {
+            var floor = hit.GetComponent<SpeedyTile>();
+            if(floor && floor.GetSpeed() != FloorSpeed)
+            {
+                FloorSpeed = floor.GetSpeed();
+                return;
+            }
+            else if(floor)
+            {
+                return;
+            }
+        }
+
+        if(FloorSpeed != Vector2.zero)
+        {
+            FloorSpeed = Vector2.zero;
+        }
     }
 }

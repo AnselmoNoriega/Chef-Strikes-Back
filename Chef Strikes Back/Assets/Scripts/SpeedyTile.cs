@@ -5,8 +5,8 @@ public class SpeedyTile : MonoBehaviour
     [SerializeField] private float _speedUpParameter;
     private Vector2 _SpeedDirection = new Vector2(0.894427f, 0.447214f);
 
-    public void EnterTreadmill()
+    public Vector2 GetSpeed()
     {
-        ServiceLocator.Get<Player>().FloorSpeed = _SpeedDirection * _speedUpParameter;
+        return _SpeedDirection * _speedUpParameter;
     }
 }
