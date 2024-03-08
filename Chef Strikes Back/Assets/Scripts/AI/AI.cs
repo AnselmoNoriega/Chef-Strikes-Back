@@ -91,8 +91,11 @@ public class AI : MonoBehaviour
 
     public void DestroyAI()
     {
+        ChangeState(AIState.Rage);
         Destroy(gameObject);
     }
+
+    
 
     public void Damage(int amt)
     {

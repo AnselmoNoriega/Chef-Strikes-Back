@@ -40,6 +40,7 @@ public class FoodLockCustomer : StateClass<AI>
             ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
             _combiner = null;
         }
+        Debug.Log("DIE");
     }
 
     public void FixedUpdate(AI agent)
