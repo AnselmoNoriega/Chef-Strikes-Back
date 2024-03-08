@@ -1273,37 +1273,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &94920306
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 94920307}
-  m_Layer: 0
-  m_Name: Spawnpoint_Chair_1 (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &94920307
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94920306}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4039998, y: 0.2700001, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 819078809}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &100852363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,7 +1854,7 @@ Transform:
   - {fileID: 2032271087}
   - {fileID: 1848881952}
   m_Father: {fileID: 1185272558}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &320328329
 GameObject:
@@ -2480,6 +2449,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+--- !u!114 &324600513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7949611368931973794, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+  m_PrefabInstance: {fileID: 324600512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e819211317e904ab41b74d49efa83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &348890580
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,7 +2634,7 @@ Transform:
   - {fileID: 208165291}
   - {fileID: 359603175}
   m_Father: {fileID: 1185272558}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &387362746
 GameObject:
@@ -2767,37 +2747,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!1 &469297898
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 469297899}
-  m_Layer: 0
-  m_Name: Spawnpoint_Chair_1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &469297899
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469297898}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4220004, y: 0.011000097, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 706758341}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &509187329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3908,37 +3857,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &567727571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 567727572}
-  m_Layer: 0
-  m_Name: Spawnpoint_Chair_1
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &567727572
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567727571}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.904, y: -1.323, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 706758341}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &609190356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4221,39 +4139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &706758340
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 706758341}
-  m_Layer: 0
-  m_Name: Container - Table & Chair Set
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &706758341
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706758340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.52, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 567727572}
-  - {fileID: 469297899}
-  m_Father: {fileID: 1185272558}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &715848332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4769,7 +4654,7 @@ Transform:
   - {fileID: 1868350999}
   - {fileID: 1638847859}
   m_Father: {fileID: 1185272558}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &795115841
 PrefabInstance:
@@ -4852,39 +4737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99876e4433029034bbe8c2872fa2a215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &819078808
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 819078809}
-  m_Layer: 0
-  m_Name: Container - Table & Chair Set (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &819078809
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 819078808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.08, y: 1.47, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1460347484}
-  - {fileID: 94920307}
-  m_Father: {fileID: 1185272558}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &900785500
 GameObject:
   m_ObjectHideFlags: 0
@@ -6295,7 +6147,7 @@ Transform:
   - {fileID: 1391690757}
   - {fileID: 609474799}
   m_Father: {fileID: 1185272558}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068478776
 GameObject:
@@ -6926,7 +6778,7 @@ Transform:
   - {fileID: 509187330}
   - {fileID: 1244056163}
   m_Father: {fileID: 1185272558}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1185272557
 GameObject:
@@ -6956,10 +6808,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 706758341}
   - {fileID: 375556370}
   - {fileID: 1068191598}
-  - {fileID: 819078809}
   - {fileID: 230594320}
   - {fileID: 1175423521}
   - {fileID: 778170746}
@@ -7805,37 +7655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1460347483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1460347484}
-  m_Layer: 0
-  m_Name: Spawnpoint_Chair_1 (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1460347484
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1460347483}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.886, y: -1.064, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 819078809}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1493717911
 GameObject:
   m_ObjectHideFlags: 0
@@ -9540,6 +9359,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+--- !u!114 &1575051546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7949611368931973794, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+  m_PrefabInstance: {fileID: 1575051545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e819211317e904ab41b74d49efa83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1625180509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15725,6 +15555,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _combiner.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _chairs.Array.data[0]
       value: 
       objectReference: {fileID: 208165292}
@@ -15772,6 +15606,14 @@ PrefabInstance:
       propertyPath: _chairs.Array.data[11]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _combiner.Array.data[0]
+      value: 
+      objectReference: {fileID: 324600513}
+    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _combiner.Array.data[1]
+      value: 
+      objectReference: {fileID: 1575051546}
     - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _randomSpots.Array.data[0]
       value: 

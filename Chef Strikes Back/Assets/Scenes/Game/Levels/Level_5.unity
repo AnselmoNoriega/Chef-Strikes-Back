@@ -2680,6 +2680,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+--- !u!114 &324600513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7949611368931973794, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+  m_PrefabInstance: {fileID: 324600512}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e819211317e904ab41b74d49efa83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &348890580
 GameObject:
   m_ObjectHideFlags: 0
@@ -10823,6 +10834,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+--- !u!114 &1575051546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7949611368931973794, guid: 08c42b2f6589f8d46b2c81332e6b4d51, type: 3}
+  m_PrefabInstance: {fileID: 1575051545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0e819211317e904ab41b74d49efa83d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1580543088
 GameObject:
   m_ObjectHideFlags: 0
@@ -17064,6 +17086,10 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _combiner.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _chairs.Array.data[0]
       value: 
       objectReference: {fileID: 1396789946}
@@ -17111,6 +17137,14 @@ PrefabInstance:
       propertyPath: _chairs.Array.data[11]
       value: 
       objectReference: {fileID: 739808137}
+    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _combiner.Array.data[0]
+      value: 
+      objectReference: {fileID: 324600513}
+    - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _combiner.Array.data[1]
+      value: 
+      objectReference: {fileID: 1575051546}
     - target: {fileID: 8379834759369314628, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _randomSpots.Array.data[0]
       value: 
