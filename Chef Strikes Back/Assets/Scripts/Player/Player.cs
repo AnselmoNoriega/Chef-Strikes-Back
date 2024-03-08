@@ -1,8 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour
@@ -24,6 +22,7 @@ public class Player : MonoBehaviour
 
     [Space, Header("World Info")] 
     public Weapon _weapon;
+    public Vector2 FloorSpeed;
 
     [Space, Header("State Info")]
     public PlayerStates PlayerState;
@@ -86,6 +85,8 @@ public class Player : MonoBehaviour
         {
             ChangeState(PlayerStates.Walking);
         }
+
+        CheckFloorType();
 
         _stateMachine.Update(Time.deltaTime);
         _actionState.Update(Time.deltaTime);
@@ -180,5 +181,29 @@ public class Player : MonoBehaviour
             playerImage.color = Color.white;
         }
         
+    }
+
+    private void CheckFloorType()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.28999f);
+
+        foreach(Collider2D hit in hits)
+        {
+            var floor = hit.GetComponent<SpeedyTile>();
+            if(floor && floor.GetSpeed() != FloorSpeed)
+            {
+                FloorSpeed = floor.GetSpeed();
+                return;
+            }
+            else if(floor)
+            {
+                return;
+            }
+        }
+
+        if(FloorSpeed != Vector2.zero)
+        {
+            FloorSpeed = Vector2.zero;
+        }
     }
 }

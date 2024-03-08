@@ -34,6 +34,10 @@ public class CreationTable : MonoBehaviour
     private Dictionary<FoodType, bool> _acceptedFoodByType = new();
     private Dictionary<FoodType, GameObject> _foodSprites = new();
 
+    [Header("TableStat")]
+    public bool IsLocked = false;
+    [SerializeField] Transform standPoint;
+
     private void Start()
     {
         _waitList = new();
@@ -53,6 +57,11 @@ public class CreationTable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (IsLocked)
+        {
+            return;
+        }
+
         Item recivedItem = collision.GetComponent<Item>();
 
         if (recivedItem && IsAcceptedType(recivedItem.Type) && recivedItem.IsPickable)
@@ -155,5 +164,10 @@ public class CreationTable : MonoBehaviour
             return _acceptedFoodByType[type];
         }
         return false;
+    }
+
+    public Vector3 CombinerPos()
+    {
+        return standPoint.position;
     }
 }

@@ -13,6 +13,7 @@ public struct WantedSpawner
     public int CopSpwanCount;
     public int BadAiSpwanCount;
 }
+
 public class GameLoopManager : MonoBehaviour
 {
     public float RageTimer;
@@ -21,7 +22,6 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] private GameObject CopsPrefabs;
     [SerializeField] private List<WantedSpawner> _wantedSystemTimer;
 
-    private List<GameObject> _AIPool = new();
     private float _countToSpawn = 0;
 
     private float _badAiSpawntimer = 0.0f;
@@ -66,6 +66,8 @@ public class GameLoopManager : MonoBehaviour
             Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
         }
     }
+
+    
     private void SpawnBadCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
@@ -83,17 +85,6 @@ public class GameLoopManager : MonoBehaviour
     public void ChangeSpawnTime(int time)
     {
         spawnTime = time;
-    }
-
-
-    public void RemoveAI(GameObject ai)
-    {
-        _AIPool.Remove(ai);
-    }
-
-    public void AddBadAI(GameObject ai)
-    {
-        _AIPool.Add(ai);
     }
 
     public void WantedSystem()
