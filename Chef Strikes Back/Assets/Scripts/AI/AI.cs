@@ -94,11 +94,6 @@ public class AI : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void DropMoney()
-    {
-        GetComponent<LootBag>().InstantiateLoot(transform.position);
-    }
-
     public void Damage(int amt)
     {
         if ((int)state >= 3 && (int)state <= 6)

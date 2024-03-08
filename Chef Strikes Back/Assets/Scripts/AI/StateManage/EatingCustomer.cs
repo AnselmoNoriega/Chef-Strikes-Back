@@ -24,7 +24,7 @@ public class EatingCustomer : StateClass<AI>
 
         if (scale.x <= 0)
         {
-            agent.DropMoney();
+            ServiceLocator.Get<Player>().MakeETransfer();
             agent.ChangeState(AIState.Leaving);
         }
     }

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _maxRage;
 
-    [Space, Header("World Info")] 
+    [Space, Header("World Info")]
     public Weapon _weapon;
     public Vector2 FloorSpeed;
 
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     private bool _initialized = false;
     [Space, Header("Player Got Hit Animation")]
     [SerializeField] SpriteRenderer playerImage;
-    [SerializeField]private int _FlashingTime;
+    [SerializeField] private int _FlashingTime;
     public void Initialize()
     {
         _stateMachine = new StateMachine<Player>(this);
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
     {
         _stateMachine.AddState<PlayerIdle>();
         _stateMachine.AddState<PlayerWalking>();
-        
+
         _actionState.AddState<PlayerNone>();
         _actionState.AddState<PlayerAttacking>();
         _actionState.AddState<PlayerThrowing>();
@@ -134,8 +134,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
-        
-        if(_currentHealth <= 0)
+
+        if (_currentHealth <= 0)
         {
             ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
@@ -145,16 +145,12 @@ public class Player : MonoBehaviour
         ServiceLocator.Get<CanvasManager>().AddTooHealthSlider(-amt);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void MakeETransfer()
     {
-        if(collision.tag == "Loot")
-        {
-            _money += 10;
-            ServiceLocator.Get<GameManager>().MoneyGrabed();
-            ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
-            ServiceLocator.Get<AudioManager>().PlaySource("money");
-            Destroy(collision.gameObject);
-        }
+        _money += 10;
+        ServiceLocator.Get<GameManager>().MoneyGrabed();
+        ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
+        ServiceLocator.Get<AudioManager>().PlaySource("money");
     }
 
     public int GetKillsCount(int add = 0)
@@ -174,34 +170,34 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpriteFlashing()
     {
-        for(int i = 0; i < _FlashingTime;i++)
+        for (int i = 0; i < _FlashingTime; i++)
         {
             playerImage.color = Color.red;
             yield return new WaitForSeconds(0.1f);
             playerImage.color = Color.white;
         }
-        
+
     }
 
     private void CheckFloorType()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.28999f);
 
-        foreach(Collider2D hit in hits)
+        foreach (Collider2D hit in hits)
         {
             var floor = hit.GetComponent<SpeedyTile>();
-            if(floor && floor.GetSpeed() != FloorSpeed)
+            if (floor && floor.GetSpeed() != FloorSpeed)
             {
                 FloorSpeed = floor.GetSpeed();
                 return;
             }
-            else if(floor)
+            else if (floor)
             {
                 return;
             }
         }
 
-        if(FloorSpeed != Vector2.zero)
+        if (FloorSpeed != Vector2.zero)
         {
             FloorSpeed = Vector2.zero;
         }

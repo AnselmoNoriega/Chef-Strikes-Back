@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 34484012071288455}
   - component: {fileID: 6545289984769141785}
   - component: {fileID: 1126184412891325970}
-  - component: {fileID: 6545289986373070950}
   - component: {fileID: 6545289986373070951}
   - component: {fileID: 4617263295547057938}
   - component: {fileID: -1032899175772524887}
@@ -161,22 +160,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &6545289986373070950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34484012071288454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ca5ccd57e94fd4f8e065a6ad4f023e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  droppedItemPrefab: {fileID: 3882173757826383342, guid: 72be69c6ee3de4f42ae4b301865d3e8c, type: 3}
-  lootList:
-  - {fileID: 11400000, guid: 4286ee906cf22dd41a84a7038f6043ec, type: 2}
-  - {fileID: 11400000, guid: 5075579380f21774d8fd7d69b0190b27, type: 2}
 --- !u!114 &6545289986373070951
 MonoBehaviour:
   m_ObjectHideFlags: 0
