@@ -438,7 +438,7 @@ Transform:
   m_GameObject: {fileID: 6355847347339370371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.54, y: -1.28, z: 0}
-  m_LocalScale: {x: 0.49, y: 0.49, z: 0.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1237283022793716927}
@@ -553,9 +553,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15}
+  m_Offset: {x: 0, y: 0.06}
   serializedVersion: 2
-  m_Radius: 0.28999045
+  m_Radius: 0.15
 --- !u!114 &-7746550428048061511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +572,7 @@ MonoBehaviour:
   ThrowLookingDir: {x: 0, y: 0}
   _maxHealth: 100
   _maxRage: 100
+  FloorSpeed: {x: 0, y: 0}
   PlayerState: 0
   PlayerAction: 0
   Actions: {fileID: 0}
@@ -632,8 +633,8 @@ MonoBehaviour:
   throwForce: 1
   ready2Throw: 0
   player: {fileID: -7746550428048061511}
-  PlayerAttackRange: 0.5
-  grabDistance: 1.2
+  PlayerAttackRange: 1
+  grabDistance: 1
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
