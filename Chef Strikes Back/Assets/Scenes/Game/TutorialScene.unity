@@ -2149,8 +2149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489507a675b2d9a4d8c1811953c49628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RageTimer: 0
   spawnTime: 0
   AIPrefabs: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
+  CopsPrefabs: {fileID: 0}
+  _wantedSystemTimer: []
+  AiStandState: 0
 --- !u!4 &357500826
 Transform:
   m_ObjectHideFlags: 0
@@ -2324,9 +2328,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  foodItem: {fileID: 7360178021079257609, guid: 00b20025ca8a3a54cbad9b699d8ba515, type: 3}
-  throwStrength: 2
+  _foodItem: {fileID: 0}
+  _lightDistance: 0
+  _spriteRenderer: {fileID: 0}
 --- !u!212 &527163539
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2856,9 +2860,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  foodItem: {fileID: 7360178021079257609, guid: 5e251cd406bab584687b36f1a7dc6295, type: 3}
-  throwStrength: 2
+  _foodItem: {fileID: 0}
+  _lightDistance: 0
+  _spriteRenderer: {fileID: 0}
 --- !u!212 &851398646
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4620,6 +4624,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3197204653695937667, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197204653695937667, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3760778737797132649, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4727,6 +4739,10 @@ PrefabInstance:
     - target: {fileID: 4905631837811621970, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6367118125721254512, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11354c8cc60489e4c9ecbdb8b24b1610, type: 3}
@@ -5530,7 +5546,7 @@ GameObject:
   - component: {fileID: 1493717915}
   - component: {fileID: 1493717914}
   - component: {fileID: 1493717913}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ground (Layer 0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7770,9 +7786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371e7abb0c8615c4daa7de5585d3cd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  foodItem: {fileID: 7360178021079257609, guid: 1b3297e89e96ae040897adfb46439931, type: 3}
-  throwStrength: 2
+  _foodItem: {fileID: 0}
+  _lightDistance: 0
+  _spriteRenderer: {fileID: 0}
 --- !u!212 &1758475750
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12970,5 +12986,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c22ee8d9c36f654f97a0bfbf9cc8bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausingText: {fileID: 1748596686}
-  keyPause: {fileID: 0}
