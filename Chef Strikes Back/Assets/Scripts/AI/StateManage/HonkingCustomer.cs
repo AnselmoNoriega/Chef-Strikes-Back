@@ -19,7 +19,7 @@ public class HonkingCustomer : StateClass<AI>
             return;
         }
         agent.Seeker.StartPath(agent.Rb2d.position, _customer.transform.position , PathCompleted);
-        agent.GetComponent<SpriteRenderer>().color = Color.red;
+        agent.GetComponent<SpriteRenderer>().color = Color.green;
     }
     public void Update(AI agent, float dt)
     {

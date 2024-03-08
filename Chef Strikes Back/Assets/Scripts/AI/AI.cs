@@ -110,8 +110,7 @@ public class AI : MonoBehaviour
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
 
                 DestroyAI();
-            }/*
-            StartCoroutine(SpriteFlashing());*/
+            }
         }
         else
         {
