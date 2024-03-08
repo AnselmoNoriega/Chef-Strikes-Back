@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        _pointerSize = new Vector2(1.0f, 0.27f);
+        _pointerSize = new Vector2(0.32f, 0.27f);
         _isLaunchingFood = false;
         _length.value = 0.0f;
         _offsetPointer = new Vector3(0, 0.35f, 0);
