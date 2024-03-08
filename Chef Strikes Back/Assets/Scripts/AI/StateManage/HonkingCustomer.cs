@@ -23,7 +23,11 @@ public class HonkingCustomer : StateClass<AI>
     }
     public void Update(AI agent, float dt)
     {
-        if(!_customer.IsAnnoyed && Vector2.Distance(agent.transform.position, _customer.transform.position) < 1.0f)
+        if(_customer.state != AIState.Hungry)
+        {
+            agent.ChangeState(AIState.HonkingCustomer);
+        }
+        else if(!_customer.IsAnnoyed && Vector2.Distance(agent.transform.position, _customer.transform.position) < 1.0f)
         {
             _customer.IsAnnoyed = true;
         }
