@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6545289986373070951}
   - component: {fileID: 4617263295547057938}
   - component: {fileID: -1032899175772524887}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Customer
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -201,6 +201,7 @@ MonoBehaviour:
   Speed: 62
   knockbackForce: 0
   NextWaypointDistance: 0.1
+  IsAnnoyed: 0
   _health: 10
   _hitsToGetMad: 3
   _BadAISprite: {fileID: 34484012071288455}
