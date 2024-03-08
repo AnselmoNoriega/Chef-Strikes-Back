@@ -25,6 +25,7 @@ public class AI : MonoBehaviour
     [Space, Header("AI Properties")]
     [SerializeField] private Animator _anim;
     public Rigidbody2D Rb2d;
+    public Collider2D TorsoCollider;
     public List<GameObject> OrderBubble;
     public Transform EatingSlider;
     [HideInInspector] public int ChoiceIndex;
