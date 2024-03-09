@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2826878394204598234}
   - component: {fileID: 2826878394204598215}
   - component: {fileID: 2826878394204598214}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: b3bbe347377be6742b4962f27054d033, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e35f385d46a9f2488d90057ef314e70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,8 +127,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: -0.36}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50645995, y: 0.32921502}
-    oldSize: {x: 1.8, y: 1.6}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.38, y: 0.93}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -156,8 +156,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50645995, y: 0.32921502}
-    oldSize: {x: 1.8, y: 1.6}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.38, y: 0.93}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4260190419365193963}
   - component: {fileID: 123078431039835726}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: FoodImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8896559214048582816}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: MagnetPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
