@@ -135,13 +135,15 @@ public class PlayerAttacking : StateClass<Player>
 public class PlayerThrowing : StateClass<Player>
 {
     private Vector3 offset = new Vector3(0, 0.35f, 0);
-    float _timer;
-    float _throwMultiplier = 1.0f;
-    float _maxTimer = 1.5f;
+    private float _timer;
+    private float _throwMultiplier = 1.0f;
+    private float _maxTimer = 1.5f;
+    private float _throwAnimSpeed = 0.5f;
 
     public void Enter(Player agent)
     {
         agent.Rb.velocity = Vector2.zero;
+        agent.Animator.speed = _throwAnimSpeed;
         _timer = 0;
     }
 
@@ -167,6 +169,7 @@ public class PlayerThrowing : StateClass<Player>
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
         agent.ThrowLookingDir = Vector2.zero;
+        agent.Animator.speed = 1.0f;
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
