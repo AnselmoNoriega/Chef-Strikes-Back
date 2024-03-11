@@ -40,19 +40,18 @@ public class AI : MonoBehaviour
     [SerializeField] private int _hitsToGetMad = 0;
 
     [Space, Header("AI's got hit animation")]
-    [SerializeField] private SpriteRenderer _BadAISprite;
-    [SerializeField] private SpriteRenderer _GoodAISprite;
-    [SerializeField] private int _FlashingTime;
+    [SerializeField] private Color _currentSpriteColor = Color.white;
+    [SerializeField] private SpriteRenderer _goodAISprite;
+    [SerializeField] private int _flashingTime;
+
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
     public Chair SelectedChair { get; set; }
-    public GameLoopManager _gameLoopManager { get; set; }
 
     private void Awake()
     {
         Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
-        _gameLoopManager = ServiceLocator.Get<GameLoopManager>();
         _stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
@@ -116,7 +115,6 @@ public class AI : MonoBehaviour
         else
         {
             --_hitsToGetMad;
-            StartCoroutine(SpriteFlashing());
 
             if (_hitsToGetMad <= 0)
             {
@@ -132,12 +130,30 @@ public class AI : MonoBehaviour
                 ChangeState(AIState.Rage);
             }
         }
+
+        StartCoroutine(SpriteFlashing());
     }
 
     public void ChangeState(AIState newState)
     {
         _stateManager.ChangeState((int)newState);
         state = newState;
+    }
+
+    public void ChangeSpriteColor(Color color)
+    {
+        _currentSpriteColor = color;
+        _goodAISprite.color = color;
+    }
+    
+    private IEnumerator SpriteFlashing()
+    {
+        for (int i = 0; i < _flashingTime; i++)
+        {
+            _goodAISprite.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            _goodAISprite.color = _currentSpriteColor;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -148,14 +164,5 @@ public class AI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _stateManager.TriggerEnter2D(collision);
-    }
-    private IEnumerator SpriteFlashing()
-    {
-        for (int i = 0; i < _FlashingTime; i++)
-        {
-            _GoodAISprite.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            _GoodAISprite.color = new Color(255, 255, 255, 255);
-        }
     }
 }

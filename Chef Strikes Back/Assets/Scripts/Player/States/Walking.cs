@@ -65,6 +65,10 @@ public class PlayerWalking : StateClass<Player>
     }
     private void FaceDirectionForIdle(Player agent)
     {
+        if (_moveDirection.magnitude <= 0.1f)
+        {
+            return;
+        }
         Vector2 IdleDirection;
 
         if (Mathf.Abs(agent.Rb.velocity.x) > Mathf.Abs(agent.Rb.velocity.y))
