@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [HideInInspector, Space, Header("Attack Info")]
     public Vector2 LookingDirection;
     private int _killscount;
-    public float knockbackForce = 0.0f;
+    public float KnockbackForce = 0.0f;
 
     [HideInInspector, Space, Header("Throw Info")]
     public Vector2 ThrowLookingDir = Vector2.zero;

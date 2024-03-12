@@ -4,7 +4,7 @@ public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime;
     private float timer = 0;
-    private float angerMultiplier = 2;
+    private float angerMultiplier = 4;
 
     private Vector3 scale = Vector3.zero;
 
@@ -48,7 +48,7 @@ public class HungryCustomer : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
-            int value = Random.Range(0, 100) % 3;
+            int value = Random.Range(0, 100) % 4;
             agent.ChangeState((AIState)(value + 3));
         }
     }

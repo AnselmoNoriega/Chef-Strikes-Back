@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerInputs : MonoBehaviour
 {
+
     private InputControls inputManager;
     //HELLO MARC
     private InputAction leftTrigger;
