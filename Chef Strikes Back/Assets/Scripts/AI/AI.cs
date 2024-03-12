@@ -113,7 +113,7 @@ public class AI : MonoBehaviour
 
     public void Damage(int amt)
     {
-        if ((int)state >= 3 && (int)state <= 6)
+        if ((int)state >= 3 && (int)state <= 8)
         {
             _health -= amt;
 
