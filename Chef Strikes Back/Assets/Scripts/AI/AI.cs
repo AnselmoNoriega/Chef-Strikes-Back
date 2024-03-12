@@ -48,7 +48,7 @@ public class AI : MonoBehaviour
 
     [Space, Header("Bob Properties")]
     public float ReloadCountDown = 0;
-    public float ShootRange = 0;
+    public float ShootRange = 3;
     public bool IsHit = false;
     public GameObject SliderParenObj; 
     public Transform ReloadSlider;

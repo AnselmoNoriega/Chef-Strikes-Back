@@ -14,6 +14,7 @@ public class BobChasingState : StateClass<AI>
         _countDown = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
+        agent.ChangeSpriteColor(Color.blue);
     }
     public void Update(AI agent, float dt)
     {
@@ -64,12 +65,12 @@ public class BobChasingState : StateClass<AI>
 
     public void TriggerEnter2D(AI agent, Collider2D collision)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public void CollisionEnter2D(AI agent, Collision2D collision)
     {
-        throw new System.NotImplementedException();
+
     }
 
     private void PathCompleted(Path p)
