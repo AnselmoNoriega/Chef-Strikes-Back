@@ -11,6 +11,8 @@ public enum AIState
     Rage,
     FoodLockCustomer,
     HonkingCustomer,
+    BobChase,
+    BobAttack,
     Attacking,
     Leaving,
     None
@@ -33,7 +35,7 @@ public class AI : MonoBehaviour
     [Space, Header("AI Info")]
     public AIState state;
     public int Speed = 0;
-    public float knockbackForce = 0.0f;
+    public float KnockbackForce = 0.0f;
     public float NextWaypointDistance = 0;
     public bool IsAnnoyed = false;
     [SerializeField] private int _health = 0;
@@ -43,6 +45,16 @@ public class AI : MonoBehaviour
     [SerializeField] private Color _currentSpriteColor = Color.white;
     [SerializeField] private SpriteRenderer _goodAISprite;
     [SerializeField] private int _flashingTime;
+
+    [Space, Header("Bob Properties")]
+    public float ReloadCountDown = 0;
+    public float ShootRange = 0;
+    public bool IsHit = false;
+    public GameObject SliderParenObj; 
+    public Transform ReloadSlider;
+    public GameObject BulletPrefab;
+    public Transform GunPos;
+
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -62,7 +74,9 @@ public class AI : MonoBehaviour
         _stateManager.AddState<RageCustomerState>();
         _stateManager.AddState<FoodLockCustomer>();
         _stateManager.AddState<HonkingCustomer>();
+        _stateManager.AddState<BobChasingState>();
 
+        _stateManager.AddState<BobAttackState>();
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
@@ -145,7 +159,12 @@ public class AI : MonoBehaviour
         _currentSpriteColor = color;
         _goodAISprite.color = color;
     }
-    
+
+    public void Shoot()
+    {
+        Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
+    }
+
     private IEnumerator SpriteFlashing()
     {
         for (int i = 0; i < _flashingTime; i++)

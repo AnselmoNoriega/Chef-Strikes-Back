@@ -21,6 +21,7 @@ public class CreationTable : MonoBehaviour
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
     [SerializeField] private Transform _foodOffset;
+    private CircleCollider2D _circleCollider2D;
     private int _spawnFoodOffset = 20;
 
     [Space, Header("Storage Objects")]
@@ -40,6 +41,7 @@ public class CreationTable : MonoBehaviour
 
     private void Start()
     {
+        _circleCollider2D = GetComponent<CircleCollider2D>();
         _waitList = new();
         foreach (var foodType in _acceptedFoodTypes)
         {
@@ -91,6 +93,14 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             CheckAvailability(_acceptedFoodTypes[i].Food);
+        }
+        if (IsLocked)
+        {
+            _circleCollider2D.enabled = true;
+        }
+        else
+        {
+            _circleCollider2D.enabled = false;
         }
     }
 

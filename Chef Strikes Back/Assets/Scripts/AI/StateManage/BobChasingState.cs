@@ -1,37 +1,28 @@
 using UnityEngine;
 using Pathfinding;
 
-public class RageCustomerState : StateClass<AI>
+public class BobChasingState : StateClass<AI>
 {
     private float _countDown = 0;
     private int _currentWaypoint = 0;
     private Transform _playerPos = null;
-    private AI _agent = null;
-
+    private AI _agent;
     public void Enter(AI agent)
     {
         _agent = agent;
-        _playerPos = ServiceLocator.Get<Player>().transform;
+        agent.ReloadCountDown = 0;
         _countDown = Time.time;
+        _playerPos = ServiceLocator.Get<Player>().transform;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.ChangeSpriteColor(Color.magenta);
-        agent.Speed = 100;
     }
-
     public void Update(AI agent, float dt)
     {
-        if (_currentWaypoint >= agent.Path.vectorPath.Count)
-        {
-            agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-            _currentWaypoint = 0;
-            return;
-        }
+        agent.SliderParenObj.SetActive(false);
+    }
 
-        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-        if (distance < agent.NextWaypointDistance + 0.1f)
-        {
-            ++_currentWaypoint;
-        }
+    public void Exit(AI agent)
+    {
+        agent.Rb2d.velocity = Vector2.zero;
     }
 
     public void FixedUpdate(AI agent)
@@ -41,9 +32,9 @@ public class RageCustomerState : StateClass<AI>
             return;
         }
 
-        if (Vector2.Distance(agent.transform.position, _playerPos.position) <= 0.5f)
+        if (Vector2.Distance(agent.transform.position, _playerPos.position) <= agent.ShootRange)
         {
-            agent.ChangeState(AIState.Attacking);
+            agent.ChangeState(AIState.BobAttack);
         }
 
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
@@ -56,6 +47,13 @@ public class RageCustomerState : StateClass<AI>
         var direction = ((Vector2)agent.Path.vectorPath[_currentWaypoint] - agent.Rb2d.position).normalized;
         agent.Rb2d.AddForce(direction * agent.Speed);
 
+        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
+
+        if (distance < agent.NextWaypointDistance)
+        {
+            ++_currentWaypoint;
+        }
+
         if (Time.time - _countDown >= 0.5f)
         {
             agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
@@ -64,19 +62,14 @@ public class RageCustomerState : StateClass<AI>
         }
     }
 
-    public void CollisionEnter2D(AI agent, Collision2D collision)
-    {
-
-    }
-
     public void TriggerEnter2D(AI agent, Collider2D collision)
     {
-
+        throw new System.NotImplementedException();
     }
 
-    public void Exit(AI agent)
+    public void CollisionEnter2D(AI agent, Collision2D collision)
     {
-
+        throw new System.NotImplementedException();
     }
 
     private void PathCompleted(Path p)

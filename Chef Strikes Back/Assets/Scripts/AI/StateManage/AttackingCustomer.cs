@@ -19,7 +19,7 @@ public class AttackingCustomer : StateClass<AI>
             _hasAttacked = true;
             var player = ServiceLocator.Get<Player>();
             Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
-            player.Rb.AddForce(dirToCollider * agent.knockbackForce, ForceMode2D.Impulse);
+            player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
             player.TakeDamage(10);
         }
 
