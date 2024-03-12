@@ -59,6 +59,7 @@ public class PlayerWalking : StateClass<Player>
         else
         {
             moveSpeed = _moveDirection * _moveSpeed;
+            Debug.Log(moveSpeed);
         }
 
         agent.Rb.AddForce((moveSpeed + agent.FloorSpeed - agent.Rb.velocity) * _acceleration);
