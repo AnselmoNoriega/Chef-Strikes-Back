@@ -4,7 +4,7 @@ public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime;
     private float timer = 0;
-    private float angerMultiplier = 2;
+    private float angerMultiplier = 4;
 
     private Vector3 scale = Vector3.zero;
 
