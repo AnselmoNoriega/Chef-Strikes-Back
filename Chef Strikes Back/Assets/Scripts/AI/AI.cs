@@ -80,6 +80,8 @@ public class AI : MonoBehaviour
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+
+
     }
 
     private void Update()
@@ -109,8 +111,6 @@ public class AI : MonoBehaviour
         Destroy(gameObject);
     }
 
-    
-
     public void Damage(int amt)
     {
         if ((int)state >= 3 && (int)state <= 8)
@@ -132,20 +132,26 @@ public class AI : MonoBehaviour
 
             if (_hitsToGetMad <= 0)
             {
-                ServiceLocator.Get<GameManager>().EnterRageModeScore();
-                if (state == AIState.Hungry || state == AIState.Eating)
-                {
-                    SelectedChair.FreeTableSpace();
-                }
-                else if (state == AIState.Good)
-                {
-                    ServiceLocator.Get<AIManager>().AddAvailableChair(SelectedChair);
-                }
-                ChangeState(AIState.Rage);
+                ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
             }
         }
 
         StartCoroutine(SpriteFlashing());
+    }
+
+    public void ZeldasChikens()
+    {
+        ServiceLocator.Get<GameManager>().EnterRageModeScore();
+        if (state == AIState.Hungry || state == AIState.Eating)
+        {
+            SelectedChair.FreeTableSpace();
+        }
+        else if (state == AIState.Good)
+        {
+            ServiceLocator.Get<AIManager>().AddAvailableChair(SelectedChair);
+        }
+
+        ChangeState(AIState.Rage);
     }
 
     public void ChangeState(AIState newState)

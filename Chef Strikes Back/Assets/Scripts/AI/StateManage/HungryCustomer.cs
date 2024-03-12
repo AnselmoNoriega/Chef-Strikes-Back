@@ -48,6 +48,7 @@ public class HungryCustomer : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
+            ServiceLocator.Get<AIManager>().RemoveGoodCustomer(agent);
             int value = Random.Range(0, 100) % 4;
             agent.ChangeState((AIState)(value + 3));
         }

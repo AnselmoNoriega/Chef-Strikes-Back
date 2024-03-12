@@ -11,6 +11,7 @@ public class GoodCustomerState : StateClass<AI>
     {
         _agent = agent;
         _countDown = Time.time;
+        ServiceLocator.Get<AIManager>().AddGoodCustomer(agent);
         agent.SelectedChair = ServiceLocator.Get<AIManager>().GiveMeChair();
         agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
     }
