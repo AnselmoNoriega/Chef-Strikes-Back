@@ -183,6 +183,8 @@ MonoBehaviour:
   reloadCountDown: 0
   isHit: 0
   knockbackForce: 900
+  _flashingTime: 0
+  _copsprite: {fileID: 0}
 --- !u!114 &3558800788078056687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6637486961201344599}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 0.935, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0.941, z: 0}
   m_LocalScale: {x: 0.5125, y: 0.099999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
