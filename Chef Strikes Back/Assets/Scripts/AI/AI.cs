@@ -55,6 +55,8 @@ public class AI : MonoBehaviour
     public GameObject BulletPrefab;
     public Transform GunPos;
 
+    [Space, Header("UI")]
+    public ParticleSystem _moneyUIParticleSystem;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -189,5 +191,10 @@ public class AI : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _stateManager.TriggerEnter2D(collision);
+    }
+
+    public void PlayMoneyUIPopUp()
+    {
+        _moneyUIParticleSystem.Play();
     }
 }
