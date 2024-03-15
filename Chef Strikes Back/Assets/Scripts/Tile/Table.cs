@@ -50,6 +50,7 @@ public class Table : MonoBehaviour
                 {
                     ServiceLocator.Get<GameManager>().FoodGiven(25 * chair.Customer.EatingSlider.localScale.x);
                     newItem.IsServed = true;
+                    newItem.IsPickable = false;
                     chair.Food = newItem;
                     chair.Customer.ChangeState(AIState.Eating);
                     newItem.LaunchedInTable(platePos);

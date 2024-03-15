@@ -26,6 +26,7 @@ public class EatingCustomer : StateClass<AI>
         {
             ServiceLocator.Get<Player>().MakeETransfer();
             agent.ChangeState(AIState.Leaving);
+            agent.PlayMoneyUIPopUp();
         }
     }
 
