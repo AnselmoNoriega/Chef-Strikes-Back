@@ -183,6 +183,8 @@ public class AI : MonoBehaviour
         }
     }
 
+    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _stateManager.CollisionEnter2D(collision);
@@ -197,4 +199,6 @@ public class AI : MonoBehaviour
     {
         _moneyUIParticleSystem.Play();
     }
+
+
 }

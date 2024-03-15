@@ -1,3 +1,4 @@
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class HungryCustomer : StateClass<AI>
@@ -5,6 +6,9 @@ public class HungryCustomer : StateClass<AI>
     private float waitingTime;
     private float timer = 0;
     private float angerMultiplier = 4;
+    private float _flashingTime = 0.0f;
+
+    SpriteRenderer _spriteRenderer;
 
     private Vector3 scale = Vector3.zero;
 
@@ -12,6 +16,7 @@ public class HungryCustomer : StateClass<AI>
     {
         waitingTime = ServiceLocator.Get<GameLoopManager>().RageTimer;
         ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
+        _spriteRenderer = agent.GetComponent<SpriteRenderer>();
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
         agent.EatingSlider.localScale = scale;
@@ -22,6 +27,7 @@ public class HungryCustomer : StateClass<AI>
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
         timer = 0.0f;
+        
     }
 
     public void Update(AI agent, float dt)
@@ -38,6 +44,11 @@ public class HungryCustomer : StateClass<AI>
         else
         {
             scale.x += (Time.deltaTime / waitingTime) * 2;
+        }
+
+        if(agent.IsAnnoyed)
+        {
+            Anselmo();
         }
 
         agent.EatingSlider.localScale = scale;
@@ -77,4 +88,25 @@ public class HungryCustomer : StateClass<AI>
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
         ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
     }
+
+    private void Anselmo()
+    {
+        _flashingTime -= Time.deltaTime;
+        if( _flashingTime <= 0 )
+        {
+            if(_spriteRenderer.color == Color.red )
+            {
+                _spriteRenderer.color = Color.white;
+            }
+            else
+            {
+                _spriteRenderer.color = Color.red;
+            }
+            
+            _flashingTime = 0.5f;
+        }
+        
+        
+    }
+
 }
