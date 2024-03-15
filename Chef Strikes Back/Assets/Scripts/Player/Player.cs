@@ -40,9 +40,17 @@ public class Player : MonoBehaviour
 
     private InputControls _inputManager;
     private bool _initialized = false;
+
     [Space, Header("Player Got Hit Animation")]
     [SerializeField] SpriteRenderer playerImage;
     [SerializeField] private int _flashingTime;
+
+    [Space, Header("Boost Info")]
+    private bool _isInSpeedBoost = false;
+    [SerializeField] private float _maxSpeedTimeBoost = 2.0f;
+    private float _speedBoostTimer;
+    public float SpeedBoost { get; private set; }
+
     public void Initialize()
     {
         _stateMachine = new StateMachine<Player>(this);
@@ -61,6 +69,7 @@ public class Player : MonoBehaviour
         ServiceLocator.Get<CanvasManager>().SetMaxHealth(_maxHealth);
 
         _initialized = true;
+        SpeedBoost = 1.0f;
     }
 
     private void OnEnable()
@@ -85,6 +94,17 @@ public class Player : MonoBehaviour
         if (Move.ReadValue<Vector2>() != Vector2.zero && PlayerState == PlayerStates.Idle)
         {
             ChangeState(PlayerStates.Walking);
+        }
+
+        if(_isInSpeedBoost)
+        {
+            _speedBoostTimer -= Time.deltaTime;
+            if(_speedBoostTimer <= 0.0f)
+            {
+                _isInSpeedBoost = false;
+                SpeedBoost = 1.0f;
+                Animator.speed -= 0.5f;
+            }
         }
 
         CheckFloorType();
@@ -136,8 +156,6 @@ public class Player : MonoBehaviour
     {
         _currentHealth -= amt;
 
-       
-
         if (_currentHealth <= 0)
         {
             ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
@@ -180,6 +198,14 @@ public class Player : MonoBehaviour
             playerImage.color = Color.white;
         }
 
+    }
+
+    public void GiveSpeedBoost()
+    {
+        _isInSpeedBoost = true;
+        _speedBoostTimer = _maxSpeedTimeBoost;
+        SpeedBoost = 1.5f;
+        Animator.speed += 0.5f;
     }
 
     private void CheckFloorType()

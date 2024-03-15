@@ -143,7 +143,7 @@ public class PlayerThrowing : StateClass<Player>
     public void Enter(Player agent)
     {
         agent.Rb.velocity = Vector2.zero;
-        agent.Animator.speed = _throwAnimSpeed;
+        agent.Animator.speed -= _throwAnimSpeed;
         _timer = 0;
     }
 
@@ -169,7 +169,7 @@ public class PlayerThrowing : StateClass<Player>
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
         agent.ThrowLookingDir = Vector2.zero;
-        agent.Animator.speed = 1.0f;
+        agent.Animator.speed += _throwAnimSpeed;
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
