@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private bool _initialized = false;
     [Space, Header("Player Got Hit Animation")]
     [SerializeField] SpriteRenderer playerImage;
-    [SerializeField] private int _FlashingTime;
+    [SerializeField] private int _flashingTime;
     public void Initialize()
     {
         _stateMachine = new StateMachine<Player>(this);
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpriteFlashing()
     {
-        for (int i = 0; i < _FlashingTime; i++)
+        for (int i = 0; i < _flashingTime; i++)
         {
             playerImage.color = Color.red;
             yield return new WaitForSeconds(0.1f);
