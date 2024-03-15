@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,7 +5,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
-
+    
     private bool _isUsingController = false;
 
     [SerializeField] private int _score = 0;
@@ -16,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     private string _lastScenePlayed;
     private int _money = 0;
+
+    //levelLocks
 
     public void LoadGameStats()
     {
@@ -118,5 +117,18 @@ public class GameManager : MonoBehaviour
     public bool GetControllerOption()
     {
         return _isUsingController;
+    }
+
+    //for onClick
+    public bool UnlockLevel(Levels lv)
+    {
+        if (_money >= lv.Price)
+        {
+            lv.IsLock = false;
+            _money -= lv.Price;
+            return true;
+        }
+
+        return false;
     }
 }

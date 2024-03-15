@@ -24,9 +24,9 @@ public class FoodLockCustomer : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
-        if (Vector2.Distance(agent.transform.transform.position, _combiner.transform.position) > 1.0f && _combiner.IsLocked)
+        if (Vector2.Distance(agent.transform.transform.position, _combiner.transform.position) > 1.0f && _combiner.GetIsLocked())
         {
-            _combiner.IsLocked = false;
+            _combiner.Unlock();
             agent.Rb2d.mass = 30;
             agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
         }
@@ -36,7 +36,7 @@ public class FoodLockCustomer : StateClass<AI>
     {
         if (_combiner != null)
         {
-            _combiner.IsLocked = false;
+            _combiner.Unlock();
             ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
             _combiner = null;
         }
@@ -45,14 +45,14 @@ public class FoodLockCustomer : StateClass<AI>
 
     public void FixedUpdate(AI agent)
     {
-        if (agent.Path == null || _combiner.IsLocked)
+        if (agent.Path == null || _combiner.GetIsLocked())
         {
             return;
         }
 
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
-            _combiner.IsLocked = true;
+            _combiner.Lock();
             agent.Rb2d.mass = 10000000;
             return;
         }

@@ -21,6 +21,7 @@ public class CreationTable : MonoBehaviour
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
     [SerializeField] private Transform _foodOffset;
+    private CircleCollider2D _circleCollider2D;
     private int _spawnFoodOffset = 20;
 
     [Space, Header("Storage Objects")]
@@ -35,11 +36,15 @@ public class CreationTable : MonoBehaviour
     private Dictionary<FoodType, GameObject> _foodSprites = new();
 
     [Header("TableStat")]
-    public bool IsLocked = false;
+    private bool _isLocked = false;
     [SerializeField] Transform standPoint;
+
+    [Header("Sprites")]
+    [SerializeField] private SpriteRenderer _lockedRedCross;
 
     private void Start()
     {
+        _circleCollider2D = GetComponent<CircleCollider2D>();
         _waitList = new();
         foreach (var foodType in _acceptedFoodTypes)
         {
@@ -57,7 +62,7 @@ public class CreationTable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (IsLocked)
+        if (_isLocked)
         {
             return;
         }
@@ -91,6 +96,14 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             CheckAvailability(_acceptedFoodTypes[i].Food);
+        }
+        if (_isLocked)
+        {
+            _circleCollider2D.enabled = true;
+        }
+        else
+        {
+            _circleCollider2D.enabled = false;
         }
     }
 
@@ -169,5 +182,22 @@ public class CreationTable : MonoBehaviour
     public Vector3 CombinerPos()
     {
         return standPoint.position;
+    }
+
+    public void Lock()
+    {
+        _lockedRedCross.enabled = true;
+        _isLocked = true;
+    }
+
+    public void Unlock()
+    {
+        _lockedRedCross.enabled = false;
+        _isLocked = false;
+    }
+
+    public bool GetIsLocked()
+    {
+        return _isLocked;
     }
 }
