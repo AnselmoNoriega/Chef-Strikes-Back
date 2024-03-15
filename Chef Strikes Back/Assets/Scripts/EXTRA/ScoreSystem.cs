@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ScoreSystem : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private GameObject _star;
     [SerializeField] private GameObject _halfStar;
     [SerializeField] private GameObject _emptyStar;
+    [SerializeField] private List<int> _extraMoneyForStars;
 
     private void Awake()
     {
@@ -16,7 +18,6 @@ public class ScoreSystem : MonoBehaviour
         ServiceLocator.Get<GameManager>().ResetScore();
 
         int starNum = 0;
-
         while (score > 9 && starNum < 5)
         {
             Instantiate(_star, _gridParent);
@@ -30,9 +31,17 @@ public class ScoreSystem : MonoBehaviour
             ++starNum;
         }
 
-        for(int i = starNum; i < 5; ++i)
+        for (int i = starNum; i < 5; ++i)
         {
             Instantiate(_emptyStar, _gridParent);
         }
+
+        int moneyValue = 0;
+        foreach (var money in _extraMoneyForStars)
+        {
+            moneyValue += money;
+        }
+        
+        ServiceLocator.Get<GameManager>().SaveMoney(moneyValue);
     }
 }
