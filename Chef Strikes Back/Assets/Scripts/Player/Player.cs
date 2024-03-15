@@ -96,10 +96,10 @@ public class Player : MonoBehaviour
             ChangeState(PlayerStates.Walking);
         }
 
-        if(_isInSpeedBoost)
+        if (_isInSpeedBoost)
         {
             _speedBoostTimer -= Time.deltaTime;
-            if(_speedBoostTimer <= 0.0f)
+            if (_speedBoostTimer <= 0.0f)
             {
                 _isInSpeedBoost = false;
                 SpeedBoost = 1.0f;
@@ -202,10 +202,14 @@ public class Player : MonoBehaviour
 
     public void GiveSpeedBoost()
     {
-        _isInSpeedBoost = true;
         _speedBoostTimer = _maxSpeedTimeBoost;
-        SpeedBoost = 1.5f;
-        Animator.speed += 0.5f;
+
+        if (!_isInSpeedBoost)
+        {
+            _isInSpeedBoost = true;
+            SpeedBoost = 1.5f;
+            Animator.speed += 0.5f;
+        }
     }
 
     private void CheckFloorType()
