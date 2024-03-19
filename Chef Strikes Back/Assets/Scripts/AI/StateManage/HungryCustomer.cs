@@ -50,7 +50,7 @@ public class HungryCustomer : StateClass<AI>
         {
             Anselmo();
         }
-        else if(_spriteRenderer.color != Color.white)
+        else if(!agent.IsHit && _spriteRenderer.color != Color.white)
         {
             _spriteRenderer.color = Color.white;
         }
@@ -63,7 +63,7 @@ public class HungryCustomer : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
-            ServiceLocator.Get<AIManager>().RemoveGoodCustomer(agent);
+            
             int value = Random.Range(0, 100) % 4;
             agent.ChangeState((AIState)(value + 3));
         }
