@@ -181,6 +181,7 @@ public class AI : MonoBehaviour
             _goodAISprite.color = Color.red;
             yield return new WaitForSeconds(0.1f);
             _goodAISprite.color = _currentSpriteColor;
+            IsHit = false;
         }
     }
 
