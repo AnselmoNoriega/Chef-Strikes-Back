@@ -50,6 +50,10 @@ public class HungryCustomer : StateClass<AI>
         {
             Anselmo();
         }
+        else if(_spriteRenderer.color != Color.white)
+        {
+            _spriteRenderer.color = Color.white;
+        }
 
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);

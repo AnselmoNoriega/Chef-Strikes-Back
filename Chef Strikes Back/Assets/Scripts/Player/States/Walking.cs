@@ -54,12 +54,11 @@ public class PlayerWalking : StateClass<Player>
 
         if (agent.PlayerAction == PlayerActions.Throwing)
         {
-            moveSpeed = _moveDirection * _throwMoveSpeed;
+            moveSpeed = _moveDirection * _throwMoveSpeed * agent.SpeedBoost;
         }
         else
         {
-            moveSpeed = _moveDirection * _moveSpeed;
-            Debug.Log(moveSpeed);
+            moveSpeed = _moveDirection * _moveSpeed * agent.SpeedBoost;
         }
 
         agent.Rb.AddForce((moveSpeed + agent.FloorSpeed - agent.Rb.velocity) * _acceleration);
