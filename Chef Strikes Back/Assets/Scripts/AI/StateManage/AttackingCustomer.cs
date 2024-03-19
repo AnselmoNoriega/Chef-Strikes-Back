@@ -17,7 +17,10 @@ public class AttackingCustomer : StateClass<AI>
         if (Time.time - _countDown >= 0.25f && !_hasAttacked)
         {
             _hasAttacked = true;
-            ServiceLocator.Get<Player>().TakeDamage(10);
+            var player = ServiceLocator.Get<Player>();
+            Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
+            player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
+            player.TakeDamage(10);
         }
 
         if (Time.time - _countDown >= 1.0f)

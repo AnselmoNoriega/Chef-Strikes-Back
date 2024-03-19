@@ -1,8 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+[System.Serializable]
+public struct Levels
+{
+    public int Price;
+    public Button LevelButtons;
+    public bool IsLock;
+}
 
 public class SceneControl : MonoBehaviour
 {
+    [SerializeField] private List<Levels> _levelLocks;
+
     public void GoToEndScene()
     {
         SceneManager.LoadScene("EndLevel");
@@ -19,6 +31,26 @@ public class SceneControl : MonoBehaviour
         Application.Quit();
     }
 
+    public void Go2Level(int level)
+    {
+        if(_levelLocks[level].IsLock)
+        {
+            //open panel
+        }
+        else
+        {
+            SceneManager.LoadScene("Level_" + level.ToString());
+        }
+    }
+
+    public void UnlockLevel(int level)
+    {
+        if (ServiceLocator.Get<GameManager>().UnlockLevel(_levelLocks[level]))
+        {
+            //close panel
+        }
+    }
+
     public bool GetSceneName(string name)
     {
         if (!string.IsNullOrEmpty(name))
@@ -32,6 +64,7 @@ public class SceneControl : MonoBehaviour
                 return false;
             }
         }
+
         return false;
     }
 

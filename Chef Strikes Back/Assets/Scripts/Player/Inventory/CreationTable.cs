@@ -21,6 +21,8 @@ public class CreationTable : MonoBehaviour
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
     [SerializeField] private Transform _foodOffset;
+    private CircleCollider2D _circleCollider2D;
+    private int _spawnFoodOffset = 20;
 
     [Space, Header("Storage Objects")]
     [SerializeField] private GameObject _burger;
@@ -33,8 +35,16 @@ public class CreationTable : MonoBehaviour
     private Dictionary<FoodType, bool> _acceptedFoodByType = new();
     private Dictionary<FoodType, GameObject> _foodSprites = new();
 
+    [Header("TableStat")]
+    private bool _isLocked = false;
+    [SerializeField] Transform standPoint;
+
+    [Header("Sprites")]
+    [SerializeField] private SpriteRenderer _lockedRedCross;
+
     private void Start()
     {
+        _circleCollider2D = GetComponent<CircleCollider2D>();
         _waitList = new();
         foreach (var foodType in _acceptedFoodTypes)
         {
@@ -52,6 +62,11 @@ public class CreationTable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_isLocked)
+        {
+            return;
+        }
+
         Item recivedItem = collision.GetComponent<Item>();
 
         if (recivedItem && IsAcceptedType(recivedItem.Type) && recivedItem.IsPickable)
@@ -81,6 +96,14 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             CheckAvailability(_acceptedFoodTypes[i].Food);
+        }
+        if (_isLocked)
+        {
+            _circleCollider2D.enabled = true;
+        }
+        else
+        {
+            _circleCollider2D.enabled = false;
         }
     }
 
@@ -117,8 +140,12 @@ public class CreationTable : MonoBehaviour
             _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);
         }
-
-        Instantiate(_burger, _foodOffset.position, Quaternion.identity);
+        Debug.Log(_spawnFoodOffset);
+        Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-_spawnFoodOffset, _spawnFoodOffset), UnityEngine.Random.Range(-_spawnFoodOffset, _spawnFoodOffset));
+        Debug.Log(randomOffset);
+        randomOffset /= 100;
+        Debug.Log(randomOffset);
+        Instantiate(_burger, (Vector2)_foodOffset.position + randomOffset, Quaternion.identity);
     }
 
     private IEnumerator IngredientSpriteActive(Item item)
@@ -150,5 +177,27 @@ public class CreationTable : MonoBehaviour
             return _acceptedFoodByType[type];
         }
         return false;
+    }
+
+    public Vector3 CombinerPos()
+    {
+        return standPoint.position;
+    }
+
+    public void Lock()
+    {
+        _lockedRedCross.enabled = true;
+        _isLocked = true;
+    }
+
+    public void Unlock()
+    {
+        _lockedRedCross.enabled = false;
+        _isLocked = false;
+    }
+
+    public bool GetIsLocked()
+    {
+        return _isLocked;
     }
 }

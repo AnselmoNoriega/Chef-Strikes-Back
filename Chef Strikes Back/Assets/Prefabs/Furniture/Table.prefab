@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 2826878394204598234}
   - component: {fileID: 2826878394204598215}
   - component: {fileID: 2826878394204598214}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: b3bbe347377be6742b4962f27054d033, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1e35f385d46a9f2488d90057ef314e70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,8 +127,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: -0.36}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50645995, y: 0.32921502}
-    oldSize: {x: 1.8, y: 1.6}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.38, y: 0.93}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -136,10 +136,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.010402441, y: -0.18868631}
-      - {x: -0.8250017, y: 0.22295535}
-      - {x: -0.012230396, y: 0.6357706}
-      - {x: 0.80078757, y: 0.22299886}
+    - - {x: -0.0021717548, y: -0.112550676}
+      - {x: -0.64392185, y: 0.21678197}
+      - {x: -0.00399971, y: 0.5555194}
+      - {x: 0.65468895, y: 0.21271014}
 --- !u!60 &2826878394204598215
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -156,8 +156,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.50645995, y: 0.32921502}
-    oldSize: {x: 1.8, y: 1.6}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.38, y: 0.93}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -166,9 +166,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.0069720745, y: -0.14567298}
-      - {x: -0.6450635, y: 0.18781877}
-      - {x: -0.020439148, y: 0.5124944}
-      - {x: 0.63732684, y: 0.18040824}
+      - {x: -0.59567845, y: 0.14666414}
+      - {x: 0.0042533875, y: 0.4404741}
+      - {x: 0.5920569, y: 0.1433692}
 --- !u!114 &2826878394204598214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4260190419365193963}
   - component: {fileID: 123078431039835726}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: FoodImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 876b4c4249d752b43a4e9a35663b1605, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69399c4be93f70540a839fd8624db1db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8896559214048582816}
-  m_Layer: 11
+  m_Layer: 6
   m_Name: MagnetPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

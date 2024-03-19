@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerInputs : MonoBehaviour
 {
+
     private InputControls inputManager;
     //HELLO MARC
     private InputAction leftTrigger;
@@ -16,6 +18,7 @@ public class PlayerInputs : MonoBehaviour
     private InputAction pauseController;
 
     [SerializeField] private Actions action;
+    [SerializeField] private GameObject _PauseFirst;
 
     private bool _isUsingController = false;
 
@@ -50,8 +53,14 @@ public class PlayerInputs : MonoBehaviour
 
     private void OnDestroy()
     {
-        DisableKeyboard();
-        DisableController();
+        if (_isUsingController)
+        {
+            DisableController();
+        }
+        else
+        {
+            DisableKeyboard();
+        }
 
         leftMouse.performed -= LeftClick;
         rightMouse.performed -= RightClick;
@@ -120,6 +129,8 @@ public class PlayerInputs : MonoBehaviour
         {
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
+            if (_PauseFirst == null) return;
+            EventSystem.current.SetSelectedGameObject(_PauseFirst);
         }
     }
 

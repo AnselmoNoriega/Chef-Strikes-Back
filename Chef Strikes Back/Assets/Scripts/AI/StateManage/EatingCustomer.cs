@@ -24,8 +24,10 @@ public class EatingCustomer : StateClass<AI>
 
         if (scale.x <= 0)
         {
-            agent.DropMoney();
+            ServiceLocator.Get<Player>().MakeETransfer();
             agent.ChangeState(AIState.Leaving);
+            agent.PlayMoneyUIPopUp();
+            agent.SelectedChair.FreeTableSpace();
         }
     }
 
@@ -47,6 +49,5 @@ public class EatingCustomer : StateClass<AI>
     public void Exit(AI agent)
     {
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
-        agent.SelectedChair.FreeTableSpace();
     }
 }

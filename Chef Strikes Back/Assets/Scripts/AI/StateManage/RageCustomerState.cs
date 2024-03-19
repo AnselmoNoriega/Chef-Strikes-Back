@@ -14,8 +14,8 @@ public class RageCustomerState : StateClass<AI>
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.GetComponent<SpriteRenderer>().color = Color.red;
-        agent.Speed = 100;
+        agent.ChangeSpriteColor(Color.magenta);
+        agent.Speed = 200;
     }
 
     public void Update(AI agent, float dt)
@@ -28,7 +28,7 @@ public class RageCustomerState : StateClass<AI>
         }
 
         var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-        if (distance < agent.NextWaypointDistance)
+        if (distance < agent.NextWaypointDistance + 0.1f)
         {
             ++_currentWaypoint;
         }

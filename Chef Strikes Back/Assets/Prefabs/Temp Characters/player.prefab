@@ -203,7 +203,7 @@ Transform:
   m_GameObject: {fileID: 231826271109957594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3.56, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6355847347339370374}
@@ -255,7 +255,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1, y: 0.27}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -337,6 +337,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1360914944064318427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578931868531884403}
+  m_Layer: 7
+  m_Name: HandPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &578931868531884403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360914944064318427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.163, y: 0.299, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6355847347339370374}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5458735608316875857
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +418,6 @@ GameObject:
   - component: {fileID: 6355847347339370369}
   - component: {fileID: 6355847347339370427}
   - component: {fileID: 1424630937}
-  - component: {fileID: 5574737848875184831}
   - component: {fileID: -7746550428048061511}
   - component: {fileID: 6143374723223897878}
   - component: {fileID: 3855817667393855648}
@@ -408,11 +438,12 @@ Transform:
   m_GameObject: {fileID: 6355847347339370371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.54, y: -1.28, z: 0}
-  m_LocalScale: {x: 0.49, y: 0.49, z: 0.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1237283022793716927}
   - {fileID: 3100146290728529144}
+  - {fileID: 578931868531884403}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -522,25 +553,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.15}
+  m_Offset: {x: 0, y: 0.06}
   serializedVersion: 2
-  m_Radius: 0.28999045
---- !u!58 &5574737848875184831
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355847347339370371}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.45}
-  serializedVersion: 2
-  m_Radius: 1.2637179
+  m_Radius: 0.15
 --- !u!114 &-7746550428048061511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,10 +569,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LookingDirection: {x: 0, y: 0}
-  Killscount: 0
+  KnockbackForce: 100
   ThrowLookingDir: {x: 0, y: 0}
   _maxHealth: 100
   _maxRage: 100
+  FloorSpeed: {x: 0, y: 0}
   PlayerState: 0
   PlayerAction: 0
   Actions: {fileID: 0}
@@ -582,7 +598,8 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   playerImage: {fileID: 6355847347339370375}
-  _FlashingTime: 1
+  _flashingTime: 2
+  _maxSpeedTimeBoost: 2
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,13 +612,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387b79cec2272f24180e5130c281e351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodItem: {fileID: 0}
-  weaponItem: {fileID: 0}
-  playerForce: 6
-  distanceMultiplier: 8
-  length: {fileID: 632234214026588238}
-  offset: {x: -0.2, y: 1.1, z: 0}
-  pointer: {fileID: 231826271109957594}
+  _foodItem: {fileID: 0}
+  _weaponItem: {fileID: 0}
+  _playerForce: 6
+  _distanceMultiplier: 8
+  _length: {fileID: 632234214026588238}
+  _offset: {x: -0.2, y: 1.1, z: 0}
+  _pointer: {fileID: 231826271109957594}
+  _foodPosition: {fileID: 578931868531884403}
 --- !u!114 &3855817667393855648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,8 +635,8 @@ MonoBehaviour:
   throwForce: 1
   ready2Throw: 0
   player: {fileID: -7746550428048061511}
-  PlayerAttackRange: 0.5
-  grabDistance: 1.2
+  PlayerAttackRange: 1
+  grabDistance: 1
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: {fileID: 3855817667393855648}
+  _PauseFirst: {fileID: 0}
 --- !u!1 &8950749653407707308
 GameObject:
   m_ObjectHideFlags: 0

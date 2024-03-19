@@ -20,7 +20,7 @@ public class PlayerIdle : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        agent.Rb.AddForce((-agent.Rb.velocity) * acceleration);
+        agent.Rb.AddForce((-agent.Rb.velocity + agent.FloorSpeed) * acceleration);
     }
 
     public void Exit(Player agent)
@@ -114,17 +114,11 @@ public class PlayerAttacking : StateClass<Player>
                 {
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<AI>().Damage((int)player._weapon.Damage);
-                    enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * enemyAI.GetComponent<AI>().knockbackForce, ForceMode2D.Impulse);
+                    enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * player.KnockbackForce, ForceMode2D.Impulse);
+                    enemyAI.GetComponent<AI>().IsHit = true;
                     return;
                 }
-                else if(angleToCollider <= 45.0f && hit.GetComponent<Cops>())
-                {
-                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
-                    enemyAI.GetComponent<Cops>().Damage((int)player._weapon.Damage);
-                    enemyAI.GetComponent<Cops>().Rb2d.AddForce(dirToCollider * enemyAI.GetComponent<Cops>().knockbackForce,ForceMode2D.Impulse);
-                    enemyAI.GetComponent<Cops>().isHit = true;
-                    return;
-                }
+                
             }
 
             ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
@@ -135,13 +129,15 @@ public class PlayerAttacking : StateClass<Player>
 public class PlayerThrowing : StateClass<Player>
 {
     private Vector3 offset = new Vector3(0, 0.35f, 0);
-    float _timer;
-    float _throwMultiplier = 1.0f;
-    float _maxTimer = 1.5f;
+    private float _timer;
+    private float _throwMultiplier = 1.0f;
+    private float _maxTimer = 1.5f;
+    private float _throwAnimSpeed = 0.5f;
 
     public void Enter(Player agent)
     {
         agent.Rb.velocity = Vector2.zero;
+        agent.Animator.speed -= _throwAnimSpeed;
         _timer = 0;
     }
 
@@ -167,6 +163,7 @@ public class PlayerThrowing : StateClass<Player>
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
         agent.ThrowLookingDir = Vector2.zero;
+        agent.Animator.speed += _throwAnimSpeed;
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

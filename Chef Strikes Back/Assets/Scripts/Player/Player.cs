@@ -1,8 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour
@@ -14,6 +12,7 @@ public class Player : MonoBehaviour
     [HideInInspector, Space, Header("Attack Info")]
     public Vector2 LookingDirection;
     private int _killscount;
+    public float KnockbackForce = 0.0f;
 
     [HideInInspector, Space, Header("Throw Info")]
     public Vector2 ThrowLookingDir = Vector2.zero;
@@ -22,8 +21,9 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _maxRage;
 
-    [Space, Header("World Info")] 
+    [Space, Header("World Info")]
     public Weapon _weapon;
+    public Vector2 FloorSpeed;
 
     [Space, Header("State Info")]
     public PlayerStates PlayerState;
@@ -40,9 +40,17 @@ public class Player : MonoBehaviour
 
     private InputControls _inputManager;
     private bool _initialized = false;
+
     [Space, Header("Player Got Hit Animation")]
     [SerializeField] SpriteRenderer playerImage;
-    [SerializeField]private int _FlashingTime;
+    [SerializeField] private int _flashingTime;
+
+    [Space, Header("Boost Info")]
+    private bool _isInSpeedBoost = false;
+    [SerializeField] private float _maxSpeedTimeBoost = 2.0f;
+    private float _speedBoostTimer;
+    public float SpeedBoost { get; private set; }
+
     public void Initialize()
     {
         _stateMachine = new StateMachine<Player>(this);
@@ -61,6 +69,7 @@ public class Player : MonoBehaviour
         ServiceLocator.Get<CanvasManager>().SetMaxHealth(_maxHealth);
 
         _initialized = true;
+        SpeedBoost = 1.0f;
     }
 
     private void OnEnable()
@@ -86,6 +95,19 @@ public class Player : MonoBehaviour
         {
             ChangeState(PlayerStates.Walking);
         }
+
+        if (_isInSpeedBoost)
+        {
+            _speedBoostTimer -= Time.deltaTime;
+            if (_speedBoostTimer <= 0.0f)
+            {
+                _isInSpeedBoost = false;
+                SpeedBoost = 1.0f;
+                Animator.speed -= 0.5f;
+            }
+        }
+
+        CheckFloorType();
 
         _stateMachine.Update(Time.deltaTime);
         _actionState.Update(Time.deltaTime);
@@ -124,7 +146,7 @@ public class Player : MonoBehaviour
     {
         _stateMachine.AddState<PlayerIdle>();
         _stateMachine.AddState<PlayerWalking>();
-        
+
         _actionState.AddState<PlayerNone>();
         _actionState.AddState<PlayerAttacking>();
         _actionState.AddState<PlayerThrowing>();
@@ -133,8 +155,8 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
-        
-        if(_currentHealth <= 0)
+
+        if (_currentHealth <= 0)
         {
             ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
@@ -144,16 +166,12 @@ public class Player : MonoBehaviour
         ServiceLocator.Get<CanvasManager>().AddTooHealthSlider(-amt);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void MakeETransfer()
     {
-        if(collision.tag == "Loot")
-        {
-            _money += 10;
-            ServiceLocator.Get<GameManager>().MoneyGrabed();
-            ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
-            ServiceLocator.Get<AudioManager>().PlaySource("money");
-            Destroy(collision.gameObject);
-        }
+        _money += 10;
+        ServiceLocator.Get<GameManager>().MoneyGrabed();
+        ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
+        ServiceLocator.Get<AudioManager>().PlaySource("money");
     }
 
     public int GetKillsCount(int add = 0)
@@ -173,12 +191,49 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpriteFlashing()
     {
-        for(int i = 0; i < _FlashingTime;i++)
+        for (int i = 0; i < _flashingTime; i++)
         {
             playerImage.color = Color.red;
+            Debug.Log("changing color");
             yield return new WaitForSeconds(0.1f);
             playerImage.color = Color.white;
         }
-        
+
+    }
+
+    public void GiveSpeedBoost()
+    {
+        _speedBoostTimer = _maxSpeedTimeBoost;
+
+        if (!_isInSpeedBoost)
+        {
+            _isInSpeedBoost = true;
+            SpeedBoost = 1.5f;
+            Animator.speed += 0.5f;
+        }
+    }
+
+    private void CheckFloorType()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.28999f);
+
+        foreach (Collider2D hit in hits)
+        {
+            var floor = hit.GetComponent<SpeedyTile>();
+            if (floor && floor.GetSpeed() != FloorSpeed)
+            {
+                FloorSpeed = floor.GetSpeed();
+                return;
+            }
+            else if (floor)
+            {
+                return;
+            }
+        }
+
+        if (FloorSpeed != Vector2.zero)
+        {
+            FloorSpeed = Vector2.zero;
+        }
     }
 }
