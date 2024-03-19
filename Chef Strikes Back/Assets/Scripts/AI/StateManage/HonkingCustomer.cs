@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.InputSystem.Android;
 
 public class HonkingCustomer : StateClass<AI>
 {
@@ -31,6 +32,11 @@ public class HonkingCustomer : StateClass<AI>
         {
             _customer.IsAnnoyed = true;
         }
+
+        if(agent.IsHit)
+        {
+            agent.ChangeState(AIState.Attacking);
+        }
     }
 
     public void Exit(AI agent)
@@ -39,6 +45,7 @@ public class HonkingCustomer : StateClass<AI>
         {
             _customer.IsAnnoyed = false;
         }
+        agent.IsHit = false;
     }
 
     public void FixedUpdate(AI agent)
