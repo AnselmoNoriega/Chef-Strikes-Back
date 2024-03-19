@@ -30,6 +30,10 @@ public class FoodLockCustomer : StateClass<AI>
             agent.Rb2d.mass = 30;
             agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
         }
+        if(agent.IsHit)
+        {
+            agent.ChangeState(AIState.Attacking);
+        }
     }
 
     public void Exit(AI agent)
@@ -40,6 +44,7 @@ public class FoodLockCustomer : StateClass<AI>
             ServiceLocator.Get<AIManager>().UnLockTable(_combiner);
             _combiner = null;
         }
+        agent.IsHit = false;
         Debug.Log("DIE");
     }
 

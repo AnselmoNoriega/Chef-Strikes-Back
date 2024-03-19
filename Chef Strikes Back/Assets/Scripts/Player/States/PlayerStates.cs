@@ -115,16 +115,10 @@ public class PlayerAttacking : StateClass<Player>
                     ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
                     enemyAI.GetComponent<AI>().Damage((int)player._weapon.Damage);
                     enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * player.KnockbackForce, ForceMode2D.Impulse);
+                    enemyAI.GetComponent<AI>().IsHit = true;
                     return;
                 }
-                else if(angleToCollider <= 45.0f && hit.GetComponent<Cops>())
-                {
-                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
-                    enemyAI.GetComponent<Cops>().Damage((int)player._weapon.Damage);
-                    enemyAI.GetComponent<Cops>().Rb2d.AddForce(dirToCollider * enemyAI.GetComponent<Cops>().knockbackForce,ForceMode2D.Impulse);
-                    enemyAI.GetComponent<Cops>().isHit = true;
-                    return;
-                }
+                
             }
 
             ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
