@@ -194,6 +194,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < _flashingTime; i++)
         {
             playerImage.color = Color.red;
+            Debug.Log("changing color");
             yield return new WaitForSeconds(0.1f);
             playerImage.color = Color.white;
         }
