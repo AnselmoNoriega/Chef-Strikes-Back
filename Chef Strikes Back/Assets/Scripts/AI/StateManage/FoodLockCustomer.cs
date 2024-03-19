@@ -32,6 +32,7 @@ public class FoodLockCustomer : StateClass<AI>
         }
         if(agent.IsHit)
         {
+            agent.Rb2d.mass = 30;
             agent.ChangeState(AIState.Attacking);
         }
     }
