@@ -34,7 +34,7 @@ public class HonkingCustomer : StateClass<AI>
 
         if(agent.IsHit)
         {
-            agent.ChangeState(AIState.Attacking);
+            agent.ChangeState(AIState.Rage);
         }
     }
 
