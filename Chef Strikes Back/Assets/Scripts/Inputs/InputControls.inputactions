@@ -6,9 +6,18 @@
             "id": "6de257fc-bb65-4cdc-8514-a55ae42faf33",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "MoveKeyboard",
                     "type": "Value",
                     "id": "f4bcae46-7e4b-4f4e-b778-758eeff8f2d6",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MoveStick",
+                    "type": "Value",
+                    "id": "5555933b-a823-4a94-a454-e032a8418c2e",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -158,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveKeyboard",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -169,7 +178,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -180,7 +189,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -191,7 +200,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -202,20 +211,9 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveKeyboard",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "2e44debc-0219-4d7c-8914-ee9771d997d6",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -390,6 +388,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "PauseController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e44debc-0219-4d7c-8914-ee9771d997d6",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveStick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

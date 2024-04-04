@@ -5,83 +5,66 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Properties")]
+    private SpriteRenderer _playerSprite;
+
     [Header("Counts Info")]
     private int _currentHealth;
-    private int _money;
+    public int Money { get; private set; }
 
-    [HideInInspector, Space, Header("Attack Info")]
-    public Vector2 LookingDirection;
+    [Space, Header("Attack Info")]
+    [HideInInspector] public Vector2 LookingDirection;
+    [SerializeField] private float _knockbackForce;
     private int _killscount;
-    public float KnockbackForce = 0.0f;
-
-    [HideInInspector, Space, Header("Throw Info")]
-    public Vector2 ThrowLookingDir = Vector2.zero;
-
-    [Space, Header("MaxStats Info")]
-    [SerializeField] private int _maxHealth;
-    [SerializeField] private int _maxRage;
 
     [Space, Header("World Info")]
-    public Weapon _weapon;
-    public Vector2 FloorSpeed;
+    public PlayerVariables Variables;
+    private Weapon _weapon;
+    private Vector2 _floorSpeed;
 
     [Space, Header("State Info")]
     public PlayerStates PlayerState;
     public PlayerActions PlayerAction;
 
-    [HideInInspector] public Actions Actions;
-    [HideInInspector] public Animator Animator;
-    [HideInInspector] public InputAction Move;
-    [HideInInspector] public Rigidbody2D Rb;
-    [HideInInspector] public InputAction Mouse;
-
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
 
-    private InputControls _inputManager;
+    [Space, Header("Conections")]
+    private CanvasManager _canvasManager;
+    private GameManager _gameManager;
+    private AudioManager _audioManager;
+
     private bool _initialized = false;
-
-    [Space, Header("Player Got Hit Animation")]
-    [SerializeField] SpriteRenderer playerImage;
-    [SerializeField] private int _flashingTime;
-
-    [Space, Header("Boost Info")]
-    private bool _isInSpeedBoost = false;
-    [SerializeField] private float _maxSpeedTimeBoost = 2.0f;
-    private float _speedBoostTimer;
-    public float SpeedBoost { get; private set; }
 
     public void Initialize()
     {
+        _playerSprite = GetComponent<SpriteRenderer>();
+
         _stateMachine = new StateMachine<Player>(this);
         _actionState = new StateMachine<Player>(this);
         _weapon = new Weapon(0);
 
-        AddStates();
+        _stateMachine.AddState<PlayerIdle>();
+        _stateMachine.AddState<PlayerWalking>();
+
+        _actionState.AddState<PlayerNone>();
+        _actionState.AddState<PlayerAttacking>();
+        _actionState.AddState<PlayerThrowing>();
+
         _stateMachine.ChangeState(0);
         _actionState.ChangeState(0);
 
-        Actions = GetComponent<Actions>();
-        Animator = GetComponent<Animator>();
-        Rb = GetComponent<Rigidbody2D>();
-
-        _currentHealth = _maxHealth;
-        ServiceLocator.Get<CanvasManager>().SetMaxHealth(_maxHealth);
+        Variables.Initialize();
 
         _initialized = true;
-        SpeedBoost = 1.0f;
-    }
 
-    private void OnEnable()
-    {
-        _inputManager = new InputControls();
-        Move = _inputManager.Player.Move;
-        Move?.Enable();
-    }
+        _currentHealth = Variables.MaxHealth;
 
-    private void OnDisable()
-    {
-        Move?.Disable();
+        _gameManager = ServiceLocator.Get<GameManager>();
+        _canvasManager = ServiceLocator.Get<CanvasManager>();
+        _audioManager = ServiceLocator.Get<AudioManager>();
+
+        _canvasManager.SetMaxHealth(Variables.MaxHealth);
     }
 
     public void Update()
@@ -91,21 +74,7 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (Move.ReadValue<Vector2>() != Vector2.zero && PlayerState == PlayerStates.Idle)
-        {
-            ChangeState(PlayerStates.Walking);
-        }
-
-        if (_isInSpeedBoost)
-        {
-            _speedBoostTimer -= Time.deltaTime;
-            if (_speedBoostTimer <= 0.0f)
-            {
-                _isInSpeedBoost = false;
-                SpeedBoost = 1.0f;
-                Animator.speed -= 0.5f;
-            }
-        }
+        Variables.SpeedBoostTimer();
 
         CheckFloorType();
 
@@ -142,41 +111,31 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void AddStates()
-    {
-        _stateMachine.AddState<PlayerIdle>();
-        _stateMachine.AddState<PlayerWalking>();
-
-        _actionState.AddState<PlayerNone>();
-        _actionState.AddState<PlayerAttacking>();
-        _actionState.AddState<PlayerThrowing>();
-    }
-
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
 
         if (_currentHealth <= 0)
         {
-            ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
+            ServiceLocator.Get<GameManager>().SetKillCount(_killscount);
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
         StartCoroutine(SpriteFlashing());
-        ServiceLocator.Get<CanvasManager>().AddTooHealthSlider(-amt);
+        _canvasManager.AddTooHealthSlider(-amt);
     }
 
     public void MakeETransfer()
     {
-        _money += 10;
-        ServiceLocator.Get<GameManager>().MoneyGrabed();
-        ServiceLocator.Get<CanvasManager>().ChangeMoneyValue(_money);
-        ServiceLocator.Get<AudioManager>().PlaySource("money");
+        Money += 10;
+        _gameManager.MoneyGrabed();
+        _canvasManager.ChangeMoneyValue(Money);
+        _audioManager.PlaySource("money");
     }
 
-    public int GetKillsCount(int add = 0)
+    public int GetKillsCount()
     {
-        return _killscount += add;
+        return _killscount;
     }
 
     public void AddKillCount()
@@ -184,45 +143,26 @@ public class Player : MonoBehaviour
         ++_killscount;
     }
 
-    public int GetDailyEarnings()
-    {
-        return _money;
-    }
-
     private IEnumerator SpriteFlashing()
     {
-        for (int i = 0; i < _flashingTime; i++)
+        for (int i = 0; i < Variables.FlashingTime; i++)
         {
-            playerImage.color = Color.red;
-            Debug.Log("changing color");
+            _playerSprite.color = Color.red;
             yield return new WaitForSeconds(0.1f);
-            playerImage.color = Color.white;
-        }
-
-    }
-
-    public void GiveSpeedBoost()
-    {
-        _speedBoostTimer = _maxSpeedTimeBoost;
-
-        if (!_isInSpeedBoost)
-        {
-            _isInSpeedBoost = true;
-            SpeedBoost = 1.5f;
-            Animator.speed += 0.5f;
+            _playerSprite.color = Color.white;
         }
     }
 
     private void CheckFloorType()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.28999f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.2f);
 
         foreach (Collider2D hit in hits)
         {
             var floor = hit.GetComponent<SpeedyTile>();
-            if (floor && floor.GetSpeed() != FloorSpeed)
+            if (floor && floor.GetSpeed() != _floorSpeed)
             {
-                FloorSpeed = floor.GetSpeed();
+                _floorSpeed = floor.GetSpeed();
                 return;
             }
             else if (floor)
@@ -231,9 +171,9 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (FloorSpeed != Vector2.zero)
+        if (_floorSpeed != Vector2.zero)
         {
-            FloorSpeed = Vector2.zero;
+            _floorSpeed = Vector2.zero;
         }
     }
 }

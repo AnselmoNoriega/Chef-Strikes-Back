@@ -28,9 +28,18 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
             ""id"": ""6de257fc-bb65-4cdc-8514-a55ae42faf33"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""MoveKeyboard"",
                     ""type"": ""Value"",
                     ""id"": ""f4bcae46-7e4b-4f4e-b778-758eeff8f2d6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MoveStick"",
+                    ""type"": ""Value"",
+                    ""id"": ""5555933b-a823-4a94-a454-e032a8418c2e"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -180,7 +189,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -191,7 +200,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -202,7 +211,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -213,7 +222,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -224,20 +233,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""MoveKeyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2e44debc-0219-4d7c-8914-ee9771d997d6"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -414,6 +412,17 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""PauseController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e44debc-0219-4d7c-8914-ee9771d997d6"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveStick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -525,7 +534,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_MoveKeyboard = m_Player.FindAction("MoveKeyboard", throwIfNotFound: true);
+        m_Player_MoveStick = m_Player.FindAction("MoveStick", throwIfNotFound: true);
         m_Player_MouseLeftClick = m_Player.FindAction("MouseLeftClick", throwIfNotFound: true);
         m_Player_MouseRightClick = m_Player.FindAction("MouseRightClick", throwIfNotFound: true);
         m_Player_KeyE = m_Player.FindAction("KeyE", throwIfNotFound: true);
@@ -604,7 +614,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_MoveKeyboard;
+    private readonly InputAction m_Player_MoveStick;
     private readonly InputAction m_Player_MouseLeftClick;
     private readonly InputAction m_Player_MouseRightClick;
     private readonly InputAction m_Player_KeyE;
@@ -624,7 +635,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     {
         private @InputControls m_Wrapper;
         public PlayerActions(@InputControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @MoveKeyboard => m_Wrapper.m_Player_MoveKeyboard;
+        public InputAction @MoveStick => m_Wrapper.m_Player_MoveStick;
         public InputAction @MouseLeftClick => m_Wrapper.m_Player_MouseLeftClick;
         public InputAction @MouseRightClick => m_Wrapper.m_Player_MouseRightClick;
         public InputAction @KeyE => m_Wrapper.m_Player_KeyE;
@@ -649,9 +661,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @MoveKeyboard.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveKeyboard;
+                @MoveKeyboard.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveKeyboard;
+                @MoveKeyboard.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveKeyboard;
+                @MoveStick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStick;
+                @MoveStick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStick;
+                @MoveStick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStick;
                 @MouseLeftClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseLeftClick;
                 @MouseLeftClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseLeftClick;
                 @MouseLeftClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseLeftClick;
@@ -701,9 +716,12 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
+                @MoveKeyboard.started += instance.OnMoveKeyboard;
+                @MoveKeyboard.performed += instance.OnMoveKeyboard;
+                @MoveKeyboard.canceled += instance.OnMoveKeyboard;
+                @MoveStick.started += instance.OnMoveStick;
+                @MoveStick.performed += instance.OnMoveStick;
+                @MoveStick.canceled += instance.OnMoveStick;
                 @MouseLeftClick.started += instance.OnMouseLeftClick;
                 @MouseLeftClick.performed += instance.OnMouseLeftClick;
                 @MouseLeftClick.canceled += instance.OnMouseLeftClick;
@@ -796,7 +814,8 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
-        void OnMove(InputAction.CallbackContext context);
+        void OnMoveKeyboard(InputAction.CallbackContext context);
+        void OnMoveStick(InputAction.CallbackContext context);
         void OnMouseLeftClick(InputAction.CallbackContext context);
         void OnMouseRightClick(InputAction.CallbackContext context);
         void OnKeyE(InputAction.CallbackContext context);

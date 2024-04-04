@@ -61,7 +61,7 @@ public class PlayerWalking : StateClass<Player>
             moveSpeed = _moveDirection * _moveSpeed * agent.SpeedBoost;
         }
 
-        agent.Rb.AddForce((moveSpeed + agent.FloorSpeed - agent.Rb.velocity) * _acceleration);
+        agent.Rb.AddForce((moveSpeed + agent._floorSpeed - agent.Rb.velocity) * _acceleration);
     }
     private void FaceDirectionForIdle(Player agent)
     {

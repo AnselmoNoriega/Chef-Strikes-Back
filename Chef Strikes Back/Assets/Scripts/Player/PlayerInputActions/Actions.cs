@@ -6,39 +6,39 @@ using UnityEngine.Rendering.Universal;
 public class Actions : MonoBehaviour
 {
     [Header("Inventory Actions")]
-    private Inventory inventory;
-    [SerializeField] private float throwForce;
-    public bool ready2Throw;
-    private bool isCarryingItem;
+    [SerializeField] private float _throwForce;
+    private bool _ready2Throw;
+    private Inventory _inventory;
+    private bool _isCarryingItem;
 
     [Space, Header("Player Throw")]
-    private Vector3 offset;
+    private Vector3 _throwOffset;
 
     [Space, Header("Player Attack")]
-    [SerializeField] private Player player;
-    public float PlayerAttackRange;
+    [SerializeField] private Player _player;
+    private float _playerAttackRange;
 
     [Space, Header("Player Grab")]
-    [SerializeField] private float grabDistance;
+    [SerializeField] private float _grabDistance;
     private SpriteRenderer _selectedItem = null;
 
     private void Start()
     {
-        inventory = GetComponent<Inventory>();
-        ready2Throw = false;
-        isCarryingItem = false;
-        offset = new Vector3(0, 0.35f, 0);
+        _inventory = GetComponent<Inventory>();
+        _ready2Throw = false;
+        _isCarryingItem = false;
+        _throwOffset = new Vector3(0, 0.35f, 0);
     }
 
     public void Check4CloseItems(InputAction mouse)
     {
-        if (!isCarryingItem)
+        if (!_isCarryingItem)
         {
             Collider2D[] hits;
 
             if (mouse == null)
             {
-                var center = (Vector2)player.transform.position + (player.LookingDirection / 3);
+                var center = (Vector2)_player.transform.position + (_player.LookingDirection / 3);
                 hits = Physics2D.OverlapCircleAll(center, 0.4f, 1);
             }
             else
@@ -65,7 +65,7 @@ public class Actions : MonoBehaviour
         foreach (var hit in hits)
         {
             float dis2Obj = Vector2.Distance(hit.gameObject.transform.position, transform.position);
-            if(dis2Obj > grabDistance)
+            if(dis2Obj > _grabDistance)
             {
                 continue;
             }
@@ -104,16 +104,16 @@ public class Actions : MonoBehaviour
 
     public void GrabItem(InputAction mouse)
     {
-        if (isCarryingItem)
+        if (_isCarryingItem)
         {
             return;
         }
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
 
-        Vector3 pos = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-        player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
-        PlayerHelper.FaceMovementDirection(player.Animator, player.LookingDirection);
+        Vector3 pos = new Vector2(_player.transform.position.x, _player.transform.position.y + 0.35f);
+        _player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
+        PlayerHelper.FaceMovementDirection(_player.Variables.PlayerAnimator, _player.LookingDirection);
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
 
@@ -123,12 +123,12 @@ public class Actions : MonoBehaviour
         foreach (var hit in hits)
         {
             var myItem = hit.GetComponent<Item>();
-            if (myItem && myItem.IsPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < grabDistance)
+            if (myItem && myItem.IsPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < _grabDistance)
             {
                 if ((int)myItem.Type <= 1)
                 {
-                    inventory.AddItem(myItem);
-                    isCarryingItem = true;
+                    _inventory.AddItem(myItem);
+                    _isCarryingItem = true;
                     myItem.CollidersState(false);
                     return;
                 }
@@ -147,17 +147,17 @@ public class Actions : MonoBehaviour
 
         if (lastItem)
         {
-            inventory.AddItem(lastItem);
-            isCarryingItem = true;
+            _inventory.AddItem(lastItem);
+            _isCarryingItem = true;
             lastItem.CollidersState(false);
             return;
         }
 
-        if (foodPile && Vector2.Distance(foodPile.transform.position, transform.position) < grabDistance)
+        if (foodPile && Vector2.Distance(foodPile.transform.position, transform.position) < _grabDistance)
         {
             var newItem = foodPile.Hit();
-            inventory.AddItem(newItem.GetComponent<Item>());
-            isCarryingItem = true;
+            _inventory.AddItem(newItem.GetComponent<Item>());
+            _isCarryingItem = true;
             ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
             newItem.GetComponent<Item>().CollidersState(false);
             return;
@@ -166,9 +166,9 @@ public class Actions : MonoBehaviour
 
     public void GrabItem()
     {
-        if (!isCarryingItem)
+        if (!_isCarryingItem)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position + (player.LookingDirection / 3), 0.4f);
+            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)_player.transform.position + (_player.LookingDirection / 3), 0.4f);
             float distance = 1000;
             Item newItem = null;
             FoodPile foodPile = null;
@@ -191,15 +191,15 @@ public class Actions : MonoBehaviour
 
             if (newItem != null)
             {
-                inventory.AddItem(newItem);
-                isCarryingItem = true;
+                _inventory.AddItem(newItem);
+                _isCarryingItem = true;
                 newItem.CollidersState(false);
             }
             else if (foodPile != null)
             {
                 var newFoodPileItem = foodPile.Hit();
-                inventory.AddItem(newFoodPileItem.GetComponent<Item>());
-                isCarryingItem = true;
+                _inventory.AddItem(newFoodPileItem.GetComponent<Item>());
+                _isCarryingItem = true;
                 ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
             }
@@ -208,63 +208,63 @@ public class Actions : MonoBehaviour
 
     public void PrepareToThrow(InputAction mouse)
     {
-        if (inventory.GetFoodItem() != null)
+        if (_inventory.GetFoodItem() != null)
         {
-            player.Mouse = mouse;
-            inventory.PrepareToThrowFood(mouse);
-            ready2Throw = true;
-            player.ChangeAction(PlayerActions.Throwing);
+            _player.Mouse = mouse;
+            _inventory.PrepareToThrowFood(mouse);
+            _ready2Throw = true;
+            _player.ChangeAction(PlayerActions.Throwing);
         }
     }
 
     public void ThrowItem(InputAction pos)
     {
-        if (inventory.GetFoodItem() != null && ready2Throw)
+        if (_inventory.GetFoodItem() != null && _ready2Throw)
         {
             var dir = pos.ReadValue<Vector2>();
 
             if (dir.magnitude >= 10.0f)
             {
                 var mousePos = Camera.main.ScreenToWorldPoint(pos.ReadValue<Vector2>());
-                dir = (mousePos - (transform.position + offset));
+                dir = (mousePos - (transform.position + _throwOffset));
                 dir.Normalize();
                 ServiceLocator.Get<AudioManager>().PlaySource("charge");
             }
 
-            inventory.ThrowFood(dir);
-            ready2Throw = false;
-            isCarryingItem = false;
-            player.ChangeAction(PlayerActions.None);
+            _inventory.ThrowFood(dir);
+            _ready2Throw = false;
+            _isCarryingItem = false;
+            _player.ChangeAction(PlayerActions.None);
         }
     }
 
     public void DropItem()
     {
-        if (inventory.GetFoodItem() != null)
+        if (_inventory.GetFoodItem() != null)
         {
-            inventory.ThrowFood(Vector2.zero);
+            _inventory.ThrowFood(Vector2.zero);
         }
-        ready2Throw = false;
-        isCarryingItem = false;
-        player.ChangeAction(PlayerActions.None);
+        _ready2Throw = false;
+        _isCarryingItem = false;
+        _player.ChangeAction(PlayerActions.None);
     }
 
     public void Attacking(Vector2 anglePos)
     {
-        if (player.PlayerAction != PlayerActions.Attacking && !ready2Throw)
+        if (_player.PlayerAction != PlayerActions.Attacking && !_ready2Throw)
         {
             if (anglePos != Vector2.zero)
             {
-                Vector3 rayOrigin = new Vector2(player.transform.position.x, player.transform.position.y + 0.35f);
-                player.LookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
+                Vector3 rayOrigin = new Vector2(_player.transform.position.x, _player.transform.position.y + 0.35f);
+                _player.LookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
             }
-            player.ChangeAction(PlayerActions.Attacking);
+            _player.ChangeAction(PlayerActions.Attacking);
         }
     }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2)player.transform.position + (player.LookingDirection / 3), PlayerAttackRange);
+        Gizmos.DrawWireSphere((Vector2)_player.transform.position + (_player.LookingDirection / 3), _playerAttackRange);
         Gizmos.color = Color.blue;
     }
 

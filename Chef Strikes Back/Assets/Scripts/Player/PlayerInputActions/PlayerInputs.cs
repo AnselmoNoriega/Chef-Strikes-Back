@@ -1,121 +1,107 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.Playables;
 
 public class PlayerInputs : MonoBehaviour
 {
-
-    private InputControls inputManager;
     //HELLO MARC
-    private InputAction leftTrigger;
-    private InputAction rightJoystick;
-    private InputAction leftButton;
-    private InputAction pauseKeyboard;
+    private InputControls _inputManager;
+    private InputAction _leftTrigger;
+    private InputAction _rightJoystick;
+    private InputAction _leftButton;
+    private InputAction _pauseKeyboard;
+    private InputAction _moveKeyboard;
 
-    private InputAction leftMouse;
-    private InputAction rightMouse;
-    private InputAction mouse;
-    private InputAction pauseController;
+    private InputAction _leftMouse;
+    private InputAction _rightMouse;
+    private InputAction _mouse;
+    private InputAction _pauseController;
+    private InputAction _moveStick;
 
-    [SerializeField] private Actions action;
-    [SerializeField] private GameObject _PauseFirst;
+    [SerializeField] private Actions _action;
+    [SerializeField] private Player _player;
+
+    [SerializeField] private GameObject _pauseFirst;
 
     private bool _isUsingController = false;
 
     private void Awake()
     {
-        inputManager = new InputControls();
+        _inputManager = new InputControls();
 
-        rightMouse = inputManager.Player.MouseRightClick;
-        leftMouse = inputManager.Player.MouseLeftClick;
-        mouse = inputManager.Player.MouseLocation;
+        _rightMouse = _inputManager.Player.MouseRightClick;
+        _leftMouse = _inputManager.Player.MouseLeftClick;
+        _mouse = _inputManager.Player.MouseLocation;
 
-        leftTrigger = inputManager.Player.LeftTrigger;
-        leftButton = inputManager.Player.LeftButton;
-        rightJoystick = inputManager.Player.LeftJoystick;
+        _leftTrigger = _inputManager.Player.LeftTrigger;
+        _leftButton = _inputManager.Player.LeftButton;
+        _rightJoystick = _inputManager.Player.LeftJoystick;
 
-        pauseKeyboard = inputManager.Player.Esc;
-        pauseController = inputManager.Player.PauseController;
+        _pauseKeyboard = _inputManager.Player.Esc;
+        _pauseController = _inputManager.Player.PauseController;
+
+        _moveKeyboard = _inputManager.Player.MoveKeyboard;
+        _moveStick = _inputManager.Player.MoveStick;
 
         SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
 
-        rightMouse.performed += RightClick;
-        leftMouse.performed += LeftClick;
-        rightMouse.canceled += RightClickRelease;
+        _rightMouse.performed += RightClick;
+        _leftMouse.performed += LeftClick;
+        _rightMouse.canceled += RightClickRelease;
 
-        leftTrigger.performed += LeftTgrClick;
-        leftButton.performed += LeftbuttonDown;
-        leftTrigger.canceled += LeftTgrRelease;
+        _leftTrigger.performed += LeftTgrClick;
+        _leftButton.performed += LeftbuttonDown;
+        _leftTrigger.canceled += LeftTgrRelease;
 
-        pauseKeyboard.performed += TogglePauseMenu;
-        pauseController.performed += TogglePauseMenu;
-    }
-
-    private void OnDestroy()
-    {
-        if (_isUsingController)
-        {
-            DisableController();
-        }
-        else
-        {
-            DisableKeyboard();
-        }
-
-        leftMouse.performed -= LeftClick;
-        rightMouse.performed -= RightClick;
-        rightMouse.canceled -= RightClickRelease;
-
-        leftButton.performed -= LeftbuttonDown;
-        leftTrigger.performed -= LeftTgrClick;
-        leftTrigger.canceled -= LeftTgrRelease;
-
-        pauseKeyboard.performed -= TogglePauseMenu;
-        pauseController.performed -= TogglePauseMenu;
+        _pauseKeyboard.performed += TogglePauseMenu;
+        _pauseController.performed += TogglePauseMenu;
     }
 
     private void Update()
     {
         if (_isUsingController)
         {
-            action.Check4CloseItems(null);
+            _action.Check4CloseItems(null);
         }
         else
         {
-            action.Check4CloseItems(mouse);
+            _action.Check4CloseItems(_mouse);
         }
+
+        CheckMovement();
     }
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        action.Attacking(mouse.ReadValue<Vector2>());
+        _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 
     private void RightClick(InputAction.CallbackContext input)
     {
-        action.PrepareToThrow(mouse);
-        action.GrabItem(mouse);
+        _action.PrepareToThrow(_mouse);
+        _action.GrabItem(_mouse);
     }
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
-        action.Attacking(Vector2.zero);
+        _action.Attacking(Vector2.zero);
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
-        action.PrepareToThrow(rightJoystick);
-        action.GrabItem();
+        _action.PrepareToThrow(_rightJoystick);
+        _action.GrabItem();
     }
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
     {
-        action.ThrowItem(rightJoystick);
+        _action.ThrowItem(_rightJoystick);
     }
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        action.ThrowItem(mouse);
+        _action.ThrowItem(_mouse);
     }
 
     private void TogglePauseMenu(InputAction.CallbackContext input)
@@ -129,8 +115,43 @@ public class PlayerInputs : MonoBehaviour
         {
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
-            if (_PauseFirst == null) return;
-            EventSystem.current.SetSelectedGameObject(_PauseFirst);
+            if (_pauseFirst == null) return;
+            EventSystem.current.SetSelectedGameObject(_pauseFirst);
+        }
+    }
+
+    public Vector2 GetMovement()
+    {
+        if(_isUsingController)
+        {
+            return _moveStick.ReadValue<Vector2>();
+        }
+        else
+        {
+            return _moveKeyboard.ReadValue<Vector2>();
+        }
+    }
+
+    public void CheckMovement()
+    {
+        if(_player.PlayerState == PlayerStates.Walking)
+        {
+            return;
+        }
+
+        if (_isUsingController)
+        {
+            if (_moveStick.ReadValue<Vector2>() != Vector2.zero)
+            {
+                _player.ChangeState(PlayerStates.Walking);
+            }
+        }
+        else
+        {
+            if (_moveStick.ReadValue<Vector2>() != Vector2.zero)
+            {
+                _player.ChangeState(PlayerStates.Walking);
+            }
         }
     }
 
@@ -151,46 +172,73 @@ public class PlayerInputs : MonoBehaviour
 
     private void EnableKeyboard()
     {
-        if (inputManager != null)
+        if (_inputManager != null)
         {
-            rightMouse.Enable();
-            leftMouse.Enable();
-            mouse.Enable();
-            pauseKeyboard.Enable();
+            _rightMouse.Enable();
+            _leftMouse.Enable();
+            _mouse.Enable();
+            _pauseKeyboard.Enable();
+            _moveKeyboard.Enable();
         }
     }
 
     private void EnableController()
     {
-        if (inputManager != null)
+        if (_inputManager != null)
         {
-            leftTrigger.Enable();
-            leftButton.Enable();
-            rightJoystick.Enable();
-            pauseController.Enable();
+            _leftTrigger.Enable();
+            _leftButton.Enable();
+            _rightJoystick.Enable();
+            _pauseController.Enable();
+            _moveStick.Enable();
         }
     }
 
     private void DisableKeyboard()
     {
-        if (inputManager != null)
+        if (_inputManager != null)
         {
-            rightMouse.Disable();
-            leftMouse.Disable();
-            mouse.Disable();
-            pauseKeyboard.Disable();
+            _rightMouse.Disable();
+            _leftMouse.Disable();
+            _mouse.Disable();
+            _pauseKeyboard.Disable();
+            _moveKeyboard.Disable();
         }
     }
 
     private void DisableController()
     {
 
-        if (inputManager != null)
+        if (_inputManager != null)
         {
-            leftTrigger.Disable();
-            leftButton.Disable();
-            rightJoystick.Disable();
-            pauseController.Disable();
+            _leftTrigger.Disable();
+            _leftButton.Disable();
+            _rightJoystick.Disable();
+            _pauseController.Disable();
+            _moveStick.Disable();
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (_isUsingController)
+        {
+            DisableController();
+        }
+        else
+        {
+            DisableKeyboard();
+        }
+
+        _leftMouse.performed -= LeftClick;
+        _rightMouse.performed -= RightClick;
+        _rightMouse.canceled -= RightClickRelease;
+
+        _leftButton.performed -= LeftbuttonDown;
+        _leftTrigger.performed -= LeftTgrClick;
+        _leftTrigger.canceled -= LeftTgrRelease;
+
+        _pauseKeyboard.performed -= TogglePauseMenu;
+        _pauseController.performed -= TogglePauseMenu;
     }
 }

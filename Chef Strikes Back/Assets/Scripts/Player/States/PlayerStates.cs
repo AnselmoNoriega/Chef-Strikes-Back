@@ -20,7 +20,7 @@ public class PlayerIdle : StateClass<Player>
 
     public void FixedUpdate(Player agent)
     {
-        agent.Rb.AddForce((-agent.Rb.velocity + agent.FloorSpeed) * acceleration);
+        agent.Rb.AddForce((-agent.Rb.velocity + agent._floorSpeed) * acceleration);
     }
 
     public void Exit(Player agent)
@@ -99,7 +99,7 @@ public class PlayerAttacking : StateClass<Player>
     public void Attack(Vector2 angle, Player player)
     {
         
-        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, player.GetComponent<Actions>().PlayerAttackRange);
+        Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, player.GetComponent<Actions>()._playerAttackRange);
         PlayerHelper.FaceMovementDirection(player.Animator, angle);
 
         foreach (var hit in hits)
