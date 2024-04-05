@@ -5,48 +5,62 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] Transform playerPos;
-    [SerializeField] Transform lightPos;
+    [Header("Camera Variables")]
+    [SerializeField] private float followSpeed;
+    [SerializeField] private float zoomSpeed;
+    private Vector2 _targetPosition;
+    private float _camHeight;
+    private float _camWidth;
 
-    [SerializeField]private float followSpeed = 0.2f;
-    [SerializeField]private float zoomSpeed = 1500.0f;
+    [Space]
+    [SerializeField] Transform _playerTransform;
+    [SerializeField] private PlayerVariables _playerVariables;
 
-    private InputControls inputManager;
-    private InputAction zoom;
-    public PolygonCollider2D boundaryPolygon; 
+    private InputControls _inputManager;
+    private InputAction _zoom;
+    public PolygonCollider2D _boundaryPolygon; 
 
     private void Awake()
     {
-        inputManager = new InputControls();
+        _inputManager = new InputControls();
+        _zoom = _inputManager.Player.Zoom;
+        _zoom.performed += Zoom;
+
+        _camHeight = Camera.main.orthographicSize;
+        _camWidth = Camera.main.aspect * _camHeight;
     }
 
     private void OnEnable()
     {
-        zoom = inputManager.Player.Zoom;
-        zoom.Enable();
+        _zoom.Enable();
     }
 
     private void OnDisable()
     {
-        zoom.Disable();
+        _zoom.Disable();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        var camOffset = ServiceLocator.Get<Player>().Variables.ThrowDirection;
-        Vector2 dz = zoomSpeed * Time.deltaTime * -zoom.ReadValue<Vector2>();
+        _zoom.performed -= Zoom;
+    }
+
+    private void Zoom(InputAction.CallbackContext input)
+    {
+        Vector2 dz = zoomSpeed * Time.deltaTime * (-_zoom.ReadValue<Vector2>());
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
 
-        Vector3 targetPosition = new Vector3(playerPos.position.x + camOffset.x, playerPos.position.y + camOffset.y, lightPos.position.z - 1.0f);
+        _camHeight = Camera.main.orthographicSize;
+        _camWidth = Camera.main.aspect * _camHeight;
+    }
 
-        
-        float halfCamHeight = Camera.main.orthographicSize;
-        float halfCamWidth = Camera.main.aspect * halfCamHeight;
+    void Update()
+    {
+        _targetPosition = (Vector2)_playerTransform.position + _playerVariables.ThrowDirection;
 
-        targetPosition.x = Mathf.Clamp(targetPosition.x, boundaryPolygon.bounds.min.x + halfCamWidth, boundaryPolygon.bounds.max.x - halfCamWidth);
-        targetPosition.y = Mathf.Clamp(targetPosition.y, boundaryPolygon.bounds.min.y + halfCamHeight, boundaryPolygon.bounds.max.y - halfCamHeight);
+        _targetPosition.x = Mathf.Clamp(_targetPosition.x, _boundaryPolygon.bounds.min.x + _camWidth, _boundaryPolygon.bounds.max.x - _camWidth);
+        _targetPosition.y = Mathf.Clamp(_targetPosition.y, _boundaryPolygon.bounds.min.y + _camHeight, _boundaryPolygon.bounds.max.y - _camHeight);
 
-        transform.position = Vector3.Lerp(transform.position, targetPosition, followSpeed);
+        transform.position = Vector3.Lerp(transform.position, _targetPosition, followSpeed);
     }
 }
