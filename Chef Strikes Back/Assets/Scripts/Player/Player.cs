@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -11,15 +12,14 @@ public class Player : MonoBehaviour
     [Header("Counts Info")]
     private int _currentHealth;
     public int Money { get; private set; }
+    public int KillCount { get; private set; }
 
     [Space, Header("Attack Info")]
+    [HideInInspector] public Weapon Weapon;
     [HideInInspector] public Vector2 LookingDirection;
-    [SerializeField] private float _knockbackForce;
-    private int _killscount;
 
     [Space, Header("World Info")]
     public PlayerVariables Variables;
-    private Weapon _weapon;
     private Vector2 _floorSpeed;
 
     [Space, Header("State Info")]
@@ -34,15 +34,19 @@ public class Player : MonoBehaviour
     private GameManager _gameManager;
     private AudioManager _audioManager;
 
+    public Rigidbody2D Rb { get; private set; }
+    public Animator Animator { get; private set; }
+
     private bool _initialized = false;
 
     public void Initialize()
     {
         _playerSprite = GetComponent<SpriteRenderer>();
+        Rb = GetComponent<Rigidbody2D>();
 
         _stateMachine = new StateMachine<Player>(this);
         _actionState = new StateMachine<Player>(this);
-        _weapon = new Weapon(0);
+        Weapon = new Weapon(0);
 
         _stateMachine.AddState<PlayerIdle>();
         _stateMachine.AddState<PlayerWalking>();
@@ -53,8 +57,6 @@ public class Player : MonoBehaviour
 
         _stateMachine.ChangeState(0);
         _actionState.ChangeState(0);
-
-        Variables.Initialize();
 
         _initialized = true;
 
@@ -117,7 +119,7 @@ public class Player : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            ServiceLocator.Get<GameManager>().SetKillCount(_killscount);
+            _gameManager.SetKillCount(KillCount);
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
@@ -133,14 +135,32 @@ public class Player : MonoBehaviour
         _audioManager.PlaySource("money");
     }
 
-    public int GetKillsCount()
+    public void MovePlayer(Vector2 moveDirection)
     {
-        return _killscount;
+        Vector2 moveSpeed = moveDirection * Variables.SpeedBoost;
+
+        if (PlayerAction == PlayerActions.Throwing)
+        {
+            moveSpeed *= Variables.ThrowMoveSpeed;
+        }
+        else
+        {
+            moveSpeed *= Variables.MoveSpeed;
+        }
+
+        moveSpeed += _floorSpeed - Rb.velocity;
+
+        Rb.AddForce(moveSpeed * Variables.PlayerAcceleration);
+    }
+
+    public void StopPlayerMovement()
+    {
+        Rb.AddForce((-Rb.velocity + _floorSpeed) * Variables.PlayerAcceleration);
     }
 
     public void AddKillCount()
     {
-        ++_killscount;
+        ++KillCount;
     }
 
     private IEnumerator SpriteFlashing()

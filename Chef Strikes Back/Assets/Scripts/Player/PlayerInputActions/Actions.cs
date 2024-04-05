@@ -5,18 +5,13 @@ using UnityEngine.Rendering.Universal;
 
 public class Actions : MonoBehaviour
 {
-    [Header("Inventory Actions")]
-    [SerializeField] private float _throwForce;
+    [SerializeField] private Player _player;
+
+    [Space, Header("Inventory Actions")]
+    [SerializeField] private float throwForce;
     private bool _ready2Throw;
     private Inventory _inventory;
     private bool _isCarryingItem;
-
-    [Space, Header("Player Throw")]
-    private Vector3 _throwOffset;
-
-    [Space, Header("Player Attack")]
-    [SerializeField] private Player _player;
-    private float _playerAttackRange;
 
     [Space, Header("Player Grab")]
     [SerializeField] private float _grabDistance;
@@ -27,7 +22,6 @@ public class Actions : MonoBehaviour
         _inventory = GetComponent<Inventory>();
         _ready2Throw = false;
         _isCarryingItem = false;
-        _throwOffset = new Vector3(0, 0.35f, 0);
     }
 
     public void Check4CloseItems(InputAction mouse)
@@ -102,106 +96,30 @@ public class Actions : MonoBehaviour
         }
     }
 
-    public void GrabItem(InputAction mouse)
-    {
-        if (_isCarryingItem)
-        {
-            return;
-        }
-
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>());
-
-        Vector3 pos = new Vector2(_player.transform.position.x, _player.transform.position.y + 0.35f);
-        _player.LookingDirection = (Camera.main.ScreenToWorldPoint(mouse.ReadValue<Vector2>()) - pos).normalized;
-        PlayerHelper.FaceMovementDirection(_player.Variables.PlayerAnimator, _player.LookingDirection);
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(mousePos, 0.01f);
-
-        FoodPile foodPile = null;
-        Item lastItem = null;
-
-        foreach (var hit in hits)
-        {
-            var myItem = hit.GetComponent<Item>();
-            if (myItem && myItem.IsPickable && Vector2.Distance(transform.position, myItem.gameObject.transform.position) < _grabDistance)
-            {
-                if ((int)myItem.Type <= 1)
-                {
-                    _inventory.AddItem(myItem);
-                    _isCarryingItem = true;
-                    myItem.CollidersState(false);
-                    return;
-                }
-                else
-                {
-                    lastItem = myItem;
-                    continue;
-                }
-            }
-
-            if (hit.GetComponent<FoodPile>())
-            {
-                foodPile = hit.GetComponent<FoodPile>();
-            }
-        }
-
-        if (lastItem)
-        {
-            _inventory.AddItem(lastItem);
-            _isCarryingItem = true;
-            lastItem.CollidersState(false);
-            return;
-        }
-
-        if (foodPile && Vector2.Distance(foodPile.transform.position, transform.position) < _grabDistance)
-        {
-            var newItem = foodPile.Hit();
-            _inventory.AddItem(newItem.GetComponent<Item>());
-            _isCarryingItem = true;
-            ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
-            newItem.GetComponent<Item>().CollidersState(false);
-            return;
-        }
-    }
-
     public void GrabItem()
     {
-        if (!_isCarryingItem)
+        if (!_isCarryingItem && _selectedItem)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)_player.transform.position + (_player.LookingDirection / 3), 0.4f);
-            float distance = 1000;
-            Item newItem = null;
-            FoodPile foodPile = null;
-            float tempDis;
+            var parent = _selectedItem.transform.parent;
 
-            foreach (var hit in hits)
+            Item item = parent.GetComponent<Item>();
+            if (item)
             {
-                tempDis = math.abs(hit.transform.position.magnitude - transform.position.magnitude);
-
-                if (tempDis < distance && hit.GetComponent<Item>() && hit.GetComponent<Item>().IsPickable)
-                {
-                    distance = tempDis;
-                    newItem = hit.GetComponent<Item>();
-                }
-                else if (hit.GetComponent<FoodPile>())
-                {
-                    foodPile = hit.GetComponent<FoodPile>();
-                }
-            }
-
-            if (newItem != null)
-            {
-                _inventory.AddItem(newItem);
+                _inventory.AddItem(item);
                 _isCarryingItem = true;
-                newItem.CollidersState(false);
+                item.CollidersState(false);
+                return;
             }
-            else if (foodPile != null)
+
+            FoodPile pile = parent.GetComponent<FoodPile>();
+            if (pile)
             {
-                var newFoodPileItem = foodPile.Hit();
+                var newFoodPileItem = pile.Hit();
                 _inventory.AddItem(newFoodPileItem.GetComponent<Item>());
                 _isCarryingItem = true;
                 ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
+                return;
             }
         }
     }
@@ -210,7 +128,6 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null)
         {
-            _player.Mouse = mouse;
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
             _player.ChangeAction(PlayerActions.Throwing);
@@ -226,7 +143,7 @@ public class Actions : MonoBehaviour
             if (dir.magnitude >= 10.0f)
             {
                 var mousePos = Camera.main.ScreenToWorldPoint(pos.ReadValue<Vector2>());
-                dir = (mousePos - (transform.position + _throwOffset));
+                dir = (mousePos - (transform.position + _player.Variables.HandOffset));
                 dir.Normalize();
                 ServiceLocator.Get<AudioManager>().PlaySource("charge");
             }
@@ -261,11 +178,4 @@ public class Actions : MonoBehaviour
             _player.ChangeAction(PlayerActions.Attacking);
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere((Vector2)_player.transform.position + (_player.LookingDirection / 3), _playerAttackRange);
-        Gizmos.color = Color.blue;
-    }
-
 }

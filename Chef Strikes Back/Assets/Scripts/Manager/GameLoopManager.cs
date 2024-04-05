@@ -89,7 +89,7 @@ public class GameLoopManager : MonoBehaviour
 
     public void WantedSystem()
     {
-        var Killscount = ServiceLocator.Get<Player>().GetKillsCount();
+        var Killscount = ServiceLocator.Get<Player>().KillCount;
 
         for (int i = _wantedSystemTimer.Count - 1; i >= 0; --i) 
         {

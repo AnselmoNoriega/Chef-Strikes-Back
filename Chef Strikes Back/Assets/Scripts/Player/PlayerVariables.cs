@@ -4,6 +4,23 @@ using UnityEngine.InputSystem;
 
 public class PlayerVariables : MonoBehaviour 
 {
+    [Header("Player Walking")]
+    public float PlayerAcceleration;
+    public float MoveSpeed;
+    public float ThrowMoveSpeed;
+
+    [Header("Player Attack")]
+    public float AttackDuration;
+    public float AttackRange;
+    public float KnockbackForce;
+
+    [Header("Player Throw")]
+    public Vector3 HandOffset;
+    public float ThrowMultiplier;
+    public float MaxTimer;
+    public float ThrowAnimSpeed;
+    [HideInInspector] public Vector2 ThrowDirection;
+
     [Space, Header("MaxStats Info")]
     public int MaxHealth;
     public int MaxRage;
@@ -14,23 +31,17 @@ public class PlayerVariables : MonoBehaviour
     [Space, Header("Boost Info")]
     [SerializeField] private float _speedBoostAmount;
     [SerializeField] private float _animSpeedInBoost;
-    private float _speedBoost;
+    public float SpeedBoost { get; private set; }
     private float _boostDuration;
     private bool _isInSpeedBoost;
     private float _speedBoostTimer;
 
-    public Actions Actions { get; set; }
-    public Animator PlayerAnimator { get; set; }
-    public InputAction Move { get; set; }
-    public Rigidbody2D Rb { get; set; }
+    private Animator _animator;
 
-    public void Initialize()
+    private void Awake()
     {
-        Actions = GetComponent<Actions>();
-        PlayerAnimator = GetComponent<Animator>();
-        Rb = GetComponent<Rigidbody2D>();
-
-        _speedBoost = 1.0f;
+        _animator = GetComponent<Animator>();
+        SpeedBoost = 1.0f;
     }
 
     public void SpeedBoostTimer()
@@ -41,8 +52,8 @@ public class PlayerVariables : MonoBehaviour
             if (_speedBoostTimer <= 0.0f)
             {
                 _isInSpeedBoost = false;
-                _speedBoost = 1.0f;
-                PlayerAnimator.speed -= _animSpeedInBoost;
+                SpeedBoost = 1.0f;
+                _animator.speed -= _animSpeedInBoost;
             }
         }
     }
@@ -54,8 +65,8 @@ public class PlayerVariables : MonoBehaviour
         if (!_isInSpeedBoost)
         {
             _isInSpeedBoost = true;
-            _speedBoost = _speedBoostAmount;
-            PlayerAnimator.speed += _animSpeedInBoost;
+            SpeedBoost = _speedBoostAmount;
+            _animator.speed += _animSpeedInBoost;
         }
     }
 }

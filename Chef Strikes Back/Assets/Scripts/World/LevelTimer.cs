@@ -55,7 +55,7 @@ public class LevelTimer : MonoBehaviour
 
         if (elapsedTime < 0)
         {
-            ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().GetKillsCount());
+            ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().KillCount);
             ServiceLocator.Get<GameManager>().SaveMoney(ServiceLocator.Get<Player>().Money);
             sceneControl.GoToEndScene();
         }

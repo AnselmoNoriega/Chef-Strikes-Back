@@ -1,21 +1,35 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerWalking : StateClass<Player>
 {
-    private float _moveSpeed = 2.3f;
-    private float _throwMoveSpeed = 0.8f;
-    private float _acceleration = 100.0f;
-    private Vector2 _movementAngle = new Vector2(2.0f, 1.0f);
-
     private Vector2 _moveDirection;
     private int _direction;
     private int _currentDirection;
 
+    private Animator _animator;
+    private AudioManager _audioManager;
+    private CanvasManager _canvasManager;
+    private PlayerInputs _playerInput;
+    private Rigidbody2D _playerRB;
+
+    private bool _isOnAwake = true;
+
     public void Enter(Player agent)
     {
-        agent.GetComponent<Animator>().SetBool("isWalking", true);
-        ServiceLocator.Get<AudioManager>().PlaySource("walk");
-        ServiceLocator.Get<CanvasManager>().UITransparent();
+        if (_isOnAwake)
+        {
+            _animator = agent.GetComponent<Animator>();
+            _playerInput = agent.GetComponent<PlayerInputs>();
+            _playerRB = agent.GetComponent<Rigidbody2D>();
+            _audioManager = ServiceLocator.Get<AudioManager>();
+            _canvasManager = ServiceLocator.Get<CanvasManager>();
+            _isOnAwake = false;
+        }
+
+        _animator.SetBool("isWalking", true);
+        _audioManager.PlaySource("walk");
+        _canvasManager.UITransparent();
     }
 
     public void Update(Player agent, float dt)
@@ -26,62 +40,30 @@ public class PlayerWalking : StateClass<Player>
             return;
         }
 
-        _moveDirection = (agent.Move.ReadValue<Vector2>() * _movementAngle).normalized;
+        _moveDirection = _playerInput.GetMovement();
 
-        if (_direction != _currentDirection) ChangeDirectionSpeed(agent, _currentDirection);
+        if (_direction != _currentDirection)
+        {
+            ChangeDirectionSpeed(_currentDirection);
+        }
 
-        if (agent.Move.ReadValue<Vector2>() == Vector2.zero)
+        if (_moveDirection == Vector2.zero)
         {
             agent.ChangeState(PlayerStates.Idle);
-            FaceDirectionForIdle(agent);
-            ServiceLocator.Get<AudioManager>().StopSource("walk");
-
+            _audioManager.StopSource("walk");
         }
-        else
+        else if (_moveDirection.magnitude >= 0.1f)
         {
-            if (!ServiceLocator.Get<AudioManager>().IsPlaying("walk"))
-            {
-                ServiceLocator.Get<AudioManager>().PlaySource("walk");
-            }
-            _currentDirection = PlayerHelper.FaceMovementDirection(agent.Animator, _moveDirection);
+            _currentDirection = PlayerHelper.FaceMovementDirection(agent.Variables.PlayerAnimator, _moveDirection);
             agent.LookingDirection = _moveDirection;
         }
     }
 
     public void FixedUpdate(Player agent)
     {
-        Vector2 moveSpeed;
-
-        if (agent.PlayerAction == PlayerActions.Throwing)
-        {
-            moveSpeed = _moveDirection * _throwMoveSpeed * agent.SpeedBoost;
-        }
-        else
-        {
-            moveSpeed = _moveDirection * _moveSpeed * agent.SpeedBoost;
-        }
-
-        agent.Rb.AddForce((moveSpeed + agent._floorSpeed - agent.Rb.velocity) * _acceleration);
+        agent.MovePlayer(_moveDirection);
     }
-    private void FaceDirectionForIdle(Player agent)
-    {
-        if (_moveDirection.magnitude <= 0.1f)
-        {
-            return;
-        }
-        Vector2 IdleDirection;
 
-        if (Mathf.Abs(agent.Rb.velocity.x) > Mathf.Abs(agent.Rb.velocity.y))
-        {
-            IdleDirection = new Vector2(Mathf.Sign(agent.Rb.velocity.x), 0);
-        }
-        else
-        {
-            IdleDirection = new Vector2(0, Mathf.Sign(agent.Rb.velocity.y));
-        }
-        agent.LookingDirection = IdleDirection;
-        PlayerHelper.FaceMovementDirection(agent.Animator, IdleDirection);
-    }
     public void Exit(Player agent)
     {
         agent.GetComponent<Animator>().SetBool("isWalking", false);
@@ -98,9 +80,9 @@ public class PlayerWalking : StateClass<Player>
 
     }
 
-    private void ChangeDirectionSpeed(Player agent, int newDirection)
+    private void ChangeDirectionSpeed(int newDirection)
     {
-        agent.Rb.velocity = _moveDirection * agent.Rb.velocity.magnitude;
+        _playerRB.velocity = _moveDirection * _playerRB.velocity.magnitude;
         _direction = newDirection;
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
+using Unity.VisualScripting;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class PlayerInputs : MonoBehaviour
     [SerializeField] private Player _player;
 
     [SerializeField] private GameObject _pauseFirst;
+
+    private Vector2 _movementAngleOffset = new Vector2(2.0f, 1.0f);
 
     private bool _isUsingController = false;
 
@@ -80,7 +83,7 @@ public class PlayerInputs : MonoBehaviour
     private void RightClick(InputAction.CallbackContext input)
     {
         _action.PrepareToThrow(_mouse);
-        _action.GrabItem(_mouse);
+        _action.GrabItem();
     }
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
@@ -128,7 +131,7 @@ public class PlayerInputs : MonoBehaviour
         }
         else
         {
-            return _moveKeyboard.ReadValue<Vector2>();
+            return (_moveKeyboard.ReadValue<Vector2>() * _movementAngleOffset).normalized;
         }
     }
 
@@ -153,6 +156,11 @@ public class PlayerInputs : MonoBehaviour
                 _player.ChangeState(PlayerStates.Walking);
             }
         }
+    }
+
+    public Vector2 GetMousePos()
+    {
+        return _mouse.ReadValue<Vector2>();
     }
 
     public void SetControllerActive(bool active)
