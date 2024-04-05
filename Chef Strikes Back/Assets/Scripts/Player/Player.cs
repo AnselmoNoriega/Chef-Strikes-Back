@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D Rb { get; private set; }
     public Animator Animator { get; private set; }
-
+    
     private bool _initialized = false;
 
     public void Initialize()

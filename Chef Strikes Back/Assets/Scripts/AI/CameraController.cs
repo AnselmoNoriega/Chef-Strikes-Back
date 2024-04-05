@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var camOffset = ServiceLocator.Get<Player>().ThrowLookingDir;
+        var camOffset = ServiceLocator.Get<Player>().Variables.ThrowDirection;
         Vector2 dz = zoomSpeed * Time.deltaTime * -zoom.ReadValue<Vector2>();
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
 

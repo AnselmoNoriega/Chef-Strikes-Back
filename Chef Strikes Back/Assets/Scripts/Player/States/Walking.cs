@@ -7,7 +7,6 @@ public class PlayerWalking : StateClass<Player>
     private int _direction;
     private int _currentDirection;
 
-    private Animator _animator;
     private AudioManager _audioManager;
     private CanvasManager _canvasManager;
     private PlayerInputs _playerInput;
@@ -19,7 +18,6 @@ public class PlayerWalking : StateClass<Player>
     {
         if (_isOnAwake)
         {
-            _animator = agent.GetComponent<Animator>();
             _playerInput = agent.GetComponent<PlayerInputs>();
             _playerRB = agent.GetComponent<Rigidbody2D>();
             _audioManager = ServiceLocator.Get<AudioManager>();
@@ -27,7 +25,7 @@ public class PlayerWalking : StateClass<Player>
             _isOnAwake = false;
         }
 
-        _animator.SetBool("isWalking", true);
+        agent.Animator.SetBool("isWalking", true);
         _audioManager.PlaySource("walk");
         _canvasManager.UITransparent();
     }
@@ -54,7 +52,7 @@ public class PlayerWalking : StateClass<Player>
         }
         else if (_moveDirection.magnitude >= 0.1f)
         {
-            _currentDirection = PlayerHelper.FaceMovementDirection(agent.Variables.PlayerAnimator, _moveDirection);
+            _currentDirection = PlayerHelper.FaceMovementDirection(agent.Animator, _moveDirection);
             agent.LookingDirection = _moveDirection;
         }
     }

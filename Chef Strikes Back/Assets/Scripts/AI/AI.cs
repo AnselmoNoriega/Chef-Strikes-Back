@@ -82,8 +82,6 @@ public class AI : MonoBehaviour
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
-
-
     }
 
     private void Update()
@@ -123,7 +121,7 @@ public class AI : MonoBehaviour
             {
                 ServiceLocator.Get<GameManager>().KillScoreUpdate();
                 ServiceLocator.Get<Player>().AddKillCount();
-                ServiceLocator.Get<Player>().GiveSpeedBoost();
+                ServiceLocator.Get<Player>().Variables.GiveSpeedBoost();
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
 
                 DestroyAI();
