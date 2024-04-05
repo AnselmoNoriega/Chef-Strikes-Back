@@ -6,31 +6,28 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    [Header("Attachments")]
     [SerializeField] private Item _foodItem;
-    [SerializeField] private Item _weaponItem;
-    [SerializeField] private float _playerForce;
-    [SerializeField] private float _distanceMultiplier;
     [SerializeField] private Slider _length;
-    [SerializeField] private Vector3 _offset;
     [SerializeField] private GameObject _pointer;
     [SerializeField] private Transform _foodPosition;
-    private Vector3 _offsetPointer;
 
+    [Header("Variables")]
+    [SerializeField] private Vector3 _offset;
+    [SerializeField] private float _playerForce;
+    [SerializeField] private float _distanceMultiplier;
+    [SerializeField] private Vector2 _pointerSize;
+
+    private Player _player;
     private SpriteRenderer _pointerImage;
-
-    private Vector3 pointingDirection;
-    private Vector2 _pointerSize;
-
     private bool _isLaunchingFood;
-    private InputAction _targetAngle;
 
-    private void Start()
+    private void Awake()
     {
-        _pointerSize = new Vector2(0.32f, 0.27f);
+        _pointerImage = _pointer.GetComponent<SpriteRenderer>();
+        _player = GetComponent<Player>();
         _isLaunchingFood = false;
         _length.value = 0.0f;
-        _offsetPointer = new Vector3(0, 0.35f, 0);
-        _pointerImage = _pointer.GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -59,7 +56,6 @@ public class Inventory : MonoBehaviour
     public void PrepareToThrowFood(InputAction pos)
     {
         _pointer.SetActive(true);
-        _targetAngle = pos;
         _isLaunchingFood = true;
         _length.gameObject.SetActive(true);
         _length.value = 0.0f;
@@ -72,7 +68,6 @@ public class Inventory : MonoBehaviour
         _foodItem.CollidersState(true);
         _foodItem.transform.parent = null;
         _foodItem = null;
-        _targetAngle = null;
         _isLaunchingFood = false;
         _length.gameObject.SetActive(false);
     }
@@ -101,18 +96,8 @@ public class Inventory : MonoBehaviour
 
     private void PointerMovement()
     {
-        if (_targetAngle.ReadValue<Vector2>().magnitude > 10.0f)
-        {
-            var mousePos = Camera.main.ScreenToWorldPoint(_targetAngle.ReadValue<Vector2>());
-            pointingDirection = (mousePos - (transform.position + _offsetPointer));
-        }
-        else if(_targetAngle.ReadValue<Vector2>().magnitude > 0.0f)
-        {
-            pointingDirection = _targetAngle.ReadValue<Vector2>();
-        }
-
-        var angle = (float)Math.Atan2(-pointingDirection.x, pointingDirection.y) * Mathf.Rad2Deg;
-        _pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, angle);
+        var angle = Math.Atan2(-_player.LookingDirection.x, _player.LookingDirection.y) * Mathf.Rad2Deg;
+        _pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, (float)angle);
         _pointerSize.y = math.min(1.0f, math.max(_length.value / 5, 0.27f));
         _pointerImage.size = _pointerSize;
     }
