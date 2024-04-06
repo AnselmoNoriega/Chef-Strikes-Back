@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [Header("Camera Variables")]
     [SerializeField] private float followSpeed;
     [SerializeField] private float zoomSpeed;
-    private Vector2 _targetPosition;
+    private Vector3 _targetPosition;
     private float _camHeight;
     private float _camWidth;
 
@@ -65,6 +65,7 @@ public class CameraController : MonoBehaviour
 
         _targetPosition.x = Mathf.Clamp(_targetPosition.x, _boundaryPolygon.bounds.min.x + _camWidth, _boundaryPolygon.bounds.max.x - _camWidth);
         _targetPosition.y = Mathf.Clamp(_targetPosition.y, _boundaryPolygon.bounds.min.y + _camHeight, _boundaryPolygon.bounds.max.y - _camHeight);
+        _targetPosition.z = -1.0f;
 
         transform.position = Vector3.Lerp(transform.position, _targetPosition, followSpeed);
     }

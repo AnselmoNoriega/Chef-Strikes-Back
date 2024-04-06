@@ -25,7 +25,7 @@ public class PlayerWalking : StateClass<Player>
             _isOnAwake = false;
         }
 
-        agent.Animator.SetBool("isWalking", true);
+        agent.PlayerAnimator.SetBool("isWalking", true);
         _audioManager.PlaySource("walk");
         _canvasManager.UITransparent();
     }
@@ -52,7 +52,7 @@ public class PlayerWalking : StateClass<Player>
         }
         else if (_moveDirection.magnitude >= 0.1f)
         {
-            _currentDirection = PlayerHelper.FaceMovementDirection(agent.Animator, _moveDirection);
+            _currentDirection = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, _moveDirection);
             agent.LookingDirection = _moveDirection;
         }
     }

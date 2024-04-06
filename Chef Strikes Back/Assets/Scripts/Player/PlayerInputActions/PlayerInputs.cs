@@ -151,7 +151,7 @@ public class PlayerInputs : MonoBehaviour
         }
         else
         {
-            if (_moveStick.ReadValue<Vector2>() != Vector2.zero)
+            if (_moveKeyboard.ReadValue<Vector2>() != Vector2.zero)
             {
                 _player.ChangeState(PlayerStates.Walking);
             }

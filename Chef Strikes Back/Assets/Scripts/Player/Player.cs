@@ -32,13 +32,14 @@ public class Player : MonoBehaviour
     private AudioManager _audioManager;
 
     public Rigidbody2D Rb { get; private set; }
-    public Animator Animator { get; private set; }
+    public Animator PlayerAnimator { get; private set; }
     
     private bool _initialized = false;
 
     public void Initialize()
     {
         _playerSprite = GetComponent<SpriteRenderer>();
+        PlayerAnimator = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody2D>();
 
         _stateMachine = new StateMachine<Player>(this);

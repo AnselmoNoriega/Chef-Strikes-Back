@@ -19,6 +19,7 @@ public class Actions : MonoBehaviour
 
     private void Start()
     {
+        _player = GetComponent<Player>();
         _inventory = GetComponent<Inventory>();
         _ready2Throw = false;
         _isCarryingItem = false;

@@ -64,7 +64,7 @@ public class PlayerAttacking : StateClass<Player>
         _stateDuration = agent.Variables.AttackDuration;
         agent.Rb.velocity = Vector2.zero;
         Attack(agent.LookingDirection, agent);
-        agent.Animator.SetBool("IsAttacking", true);
+        agent.PlayerAnimator.SetBool("IsAttacking", true);
     }
 
     public void Update(Player agent, float dt)
@@ -84,7 +84,7 @@ public class PlayerAttacking : StateClass<Player>
 
     public void Exit(Player agent)
     {
-        agent.Animator.SetBool("IsAttacking", false);
+        agent.PlayerAnimator.SetBool("IsAttacking", false);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
@@ -100,7 +100,7 @@ public class PlayerAttacking : StateClass<Player>
     public void Attack(Vector2 angle, Player player)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll((Vector2)player.transform.position, _variables.AttackRange);
-        PlayerHelper.FaceMovementDirection(player.Animator, angle);
+        PlayerHelper.FaceMovementDirection(player.PlayerAnimator, angle);
 
         foreach (var hit in hits)
         {
@@ -137,7 +137,7 @@ public class PlayerThrowing : StateClass<Player>
         _variables = agent.Variables;
 
         agent.Rb.velocity = Vector2.zero;
-        agent.Animator.speed -= _variables.ThrowAnimSpeed;
+        agent.PlayerAnimator.speed -= _variables.ThrowAnimSpeed;
         _throwStrength = 0.0f;
 
         _playerInputs = agent.GetComponent<PlayerInputs>();
@@ -147,7 +147,7 @@ public class PlayerThrowing : StateClass<Player>
     {
         var mousePos = Camera.main.ScreenToWorldPoint(_playerInputs.GetMousePos());
         var dir = (mousePos - (agent.transform.position + _variables.HandOffset));
-        PlayerHelper.FaceMovementDirection(agent.Animator, dir);
+        PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, dir);
 
         if (_throwStrength <= _variables.MaxTimer)
         {
@@ -166,7 +166,7 @@ public class PlayerThrowing : StateClass<Player>
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
         _variables.ThrowDirection = Vector2.zero;
-        agent.Animator.speed += _variables.ThrowAnimSpeed;
+        agent.PlayerAnimator.speed += _variables.ThrowAnimSpeed;
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
