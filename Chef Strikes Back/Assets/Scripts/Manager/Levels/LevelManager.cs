@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AIManager _AIManager = null;
     [SerializeField] private SceneControl _sceneControl = null;
     [SerializeField] private StatefulObject _statefulObject = null;
+    [SerializeField] private CameraController _cameraController = null;
 
     GameLoader _loader;
 
@@ -46,6 +47,7 @@ public class LevelManager : MonoBehaviour
         _gameLoopManager.Initialize();
         _timeManger.Initialize();  
         _player.Initialize();
+        _cameraController.Initialize();
 
     }
     private void OnDestroy()

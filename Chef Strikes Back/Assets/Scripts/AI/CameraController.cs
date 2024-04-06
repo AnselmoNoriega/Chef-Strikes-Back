@@ -13,14 +13,15 @@ public class CameraController : MonoBehaviour
     private float _camWidth;
 
     [Space]
-    [SerializeField] Transform _playerTransform;
-    [SerializeField] private PlayerVariables _playerVariables;
+    [SerializeField] private PolygonCollider2D _boundaryPolygon; 
+
+    private Transform _playerTransform;
+    private PlayerVariables _playerVariables;
 
     private InputControls _inputManager;
     private InputAction _zoom;
-    public PolygonCollider2D _boundaryPolygon; 
 
-    private void Awake()
+    public void Initialize()
     {
         _inputManager = new InputControls();
         _zoom = _inputManager.Player.Zoom;
@@ -28,6 +29,10 @@ public class CameraController : MonoBehaviour
 
         _camHeight = Camera.main.orthographicSize;
         _camWidth = Camera.main.aspect * _camHeight;
+
+        var player = ServiceLocator.Get<Player>();
+        _playerTransform = player.transform;
+        _playerVariables = player.GetComponent<PlayerVariables>();
     }
 
     private void OnEnable()
