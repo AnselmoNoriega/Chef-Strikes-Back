@@ -5,9 +5,9 @@ using UnityEngine.Rendering.Universal;
 
 public class Actions : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    private Player _player;
 
-    [Space, Header("Inventory Actions")]
+    [Header("Inventory Actions")]
     [SerializeField] private float throwForce;
     private bool _ready2Throw;
     private Inventory _inventory;
