@@ -23,7 +23,6 @@ public class PlayerVariables : MonoBehaviour
 
     [Space, Header("MaxStats Info")]
     public int MaxHealth;
-    public int MaxRage;
 
     [Space, Header("Player Got Hit Animation")]
     public int FlashingTime;

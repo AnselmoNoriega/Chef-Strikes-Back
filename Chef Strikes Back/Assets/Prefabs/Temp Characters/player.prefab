@@ -586,12 +586,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _foodItem: {fileID: 0}
-  _playerForce: 6
-  _distanceMultiplier: 8
   _length: {fileID: 632234214026588238}
-  _offset: {x: -0.2, y: 1.1, z: 0}
   _pointer: {fileID: 231826271109957594}
   _foodPosition: {fileID: 578931868531884403}
+  _offset: {x: -0.2, y: 1.1, z: 0}
+  _playerForce: 6
+  _distanceMultiplier: 8
   _pointerSize: {x: 0.32, y: 0.27}
 --- !u!114 &3855817667393855648
 MonoBehaviour:
@@ -607,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   throwForce: 1
-  _grabDistance: 0
+  _grabDistance: 1
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f0677c467889849a156908c82b3606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _action: {fileID: 0}
-  _player: {fileID: 0}
+  _action: {fileID: 3855817667393855648}
+  _player: {fileID: -7746550428048061511}
   _pauseFirst: {fileID: 0}
 --- !u!114 &137093403580132108
 MonoBehaviour:
@@ -635,22 +635,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1e51326efd51749ae9a45bab5bc624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerAcceleration: 0
-  MoveSpeed: 0
-  ThrowMoveSpeed: 0
-  AttackDuration: 0
-  AttackRange: 0
-  KnockbackForce: 0
-  HandOffset: {x: 0, y: 0, z: 0}
-  ThrowMultiplier: 0
-  MaxTimer: 0
-  ThrowAnimSpeed: 0
+  PlayerAcceleration: 100
+  MoveSpeed: 2.3
+  ThrowMoveSpeed: 0.8
+  AttackDuration: 0.1
+  AttackRange: 1
+  KnockbackForce: 100
+  HandOffset: {x: 0, y: 0.35, z: 0}
+  ThrowMultiplier: 1
+  MaxTimer: 1.5
+  ThrowAnimSpeed: 0.5
   ThrowDirection: {x: 0, y: 0}
-  MaxHealth: 0
-  MaxRage: 0
-  FlashingTime: 0
-  _speedBoostAmount: 0
-  _animSpeedInBoost: 0
+  MaxHealth: 100
+  FlashingTime: 2
+  _speedBoostAmount: 1.5
+  _animSpeedInBoost: 0.5
 --- !u!1 &8950749653407707308
 GameObject:
   m_ObjectHideFlags: 0
