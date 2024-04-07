@@ -27,6 +27,7 @@ public class PlayerInputs : MonoBehaviour
     private Vector2 _movementAngleOffset = new Vector2(2.0f, 1.0f);
 
     private bool _isUsingController = false;
+    private bool _isOnPaused = false;
 
     private void Awake()
     {
@@ -76,45 +77,82 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 
     private void RightClick(InputAction.CallbackContext input)
     {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
         _action.PrepareToThrow(_mouse);
         _action.GrabItem();
     }
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
         _action.Attacking(Vector2.zero);
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
         _action.PrepareToThrow(_rightJoystick);
         _action.GrabItem();
     }
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
     {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
         _action.ThrowItem();
     }
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
         _action.ThrowItem();
     }
 
     private void TogglePauseMenu(InputAction.CallbackContext input)
     {
+        TogglePauseMenu();
+    }
+
+    public void TogglePauseMenu()
+    {
         if (Time.timeScale == 1)
         {
+            _isOnPaused = true;
             Time.timeScale = 0;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Pause Menu");
         }
         else
         {
+            _isOnPaused = false;
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
             if (_pauseFirst)
@@ -138,7 +176,7 @@ public class PlayerInputs : MonoBehaviour
 
     public void CheckMovement()
     {
-        if (_player.PlayerState == PlayerStates.Walking)
+        if (_player.PlayerState == PlayerStates.Walking || _isOnPaused)
         {
             return;
         }

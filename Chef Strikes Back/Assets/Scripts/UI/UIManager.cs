@@ -1,7 +1,7 @@
-using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -82,7 +82,8 @@ public class UIManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
+        var inputs = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>();
+        inputs.TogglePauseMenu();
     }
 
     public void ActiveateController()
