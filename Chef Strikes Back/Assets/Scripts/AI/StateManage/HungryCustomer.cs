@@ -13,7 +13,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        waitingTime = ServiceLocator.Get<GameLoopManager>().RageTimer;
+        waitingTime = ServiceLocator.Get<GameLoopManager>().CustomerFoodWaitingTime;
         ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
         _spriteRenderer = agent.GetComponent<SpriteRenderer>();
         scale = agent.EatingSlider.localScale;

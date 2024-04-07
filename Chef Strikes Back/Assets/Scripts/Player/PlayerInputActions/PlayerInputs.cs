@@ -1,8 +1,7 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
-using UnityEngine.Playables;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -99,12 +98,12 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
     {
-        _action.ThrowItem(_rightJoystick);
+        _action.ThrowItem();
     }
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        _action.ThrowItem(_mouse);
+        _action.ThrowItem();
     }
 
     private void TogglePauseMenu(InputAction.CallbackContext input)
@@ -118,14 +117,16 @@ public class PlayerInputs : MonoBehaviour
         {
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
-            if (_pauseFirst == null) return;
-            EventSystem.current.SetSelectedGameObject(_pauseFirst);
+            if (_pauseFirst)
+            {
+                EventSystem.current.SetSelectedGameObject(_pauseFirst);
+            }
         }
     }
 
     public Vector2 GetMovement()
     {
-        if(_isUsingController)
+        if (_isUsingController)
         {
             return _moveStick.ReadValue<Vector2>();
         }
@@ -137,7 +138,7 @@ public class PlayerInputs : MonoBehaviour
 
     public void CheckMovement()
     {
-        if(_player.PlayerState == PlayerStates.Walking)
+        if (_player.PlayerState == PlayerStates.Walking)
         {
             return;
         }
@@ -158,9 +159,17 @@ public class PlayerInputs : MonoBehaviour
         }
     }
 
-    public Vector2 GetMousePos()
+    public Vector2 GetLookingDir()
     {
-        return _mouse.ReadValue<Vector2>();
+        if (_isUsingController)
+        {
+            return (_moveStick.ReadValue<Vector2>() - (Vector2)_player.Variables.HandOffset).normalized;
+        }
+        else
+        {
+            var mousePos = Camera.main.ScreenToWorldPoint(_mouse.ReadValue<Vector2>());
+            return (mousePos - (transform.position + _player.Variables.HandOffset)).normalized;
+        }
     }
 
     public void SetControllerActive(bool active)

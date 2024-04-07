@@ -16,10 +16,10 @@ public struct WantedSpawner
 
 public class GameLoopManager : MonoBehaviour
 {
-    public float RageTimer;
-    [SerializeField] private float spawnTime;
-    [SerializeField] private GameObject AIPrefabs;
-    [SerializeField] private GameObject CopsPrefabs;
+    public float CustomerFoodWaitingTime;
+    [SerializeField] private float _spawnTime;
+    [SerializeField] private GameObject _customerPrefabs;
+    [SerializeField] private GameObject _copsPrefabs;
     [SerializeField] private List<WantedSpawner> _wantedSystemTimer;
 
     private float _countToSpawn = 0;
@@ -51,7 +51,7 @@ public class GameLoopManager : MonoBehaviour
         SpawnBadAIWithinTime();
         SpawnTheCopWithinTime();
         
-        if (_countToSpawn >= spawnTime)
+        if (_countToSpawn >= _spawnTime)
         {
             SpawnCustomer();
             _countToSpawn = 0;
@@ -63,7 +63,7 @@ public class GameLoopManager : MonoBehaviour
         if (_aiManager.GetAvailableChairsCount() > 0)
         {
             Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
-            Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
+            Instantiate(_customerPrefabs, spawnPos, Quaternion.identity);
         }
     }
 
@@ -72,19 +72,18 @@ public class GameLoopManager : MonoBehaviour
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
         AiStandState = AIState.Rage;
-        Instantiate(AIPrefabs, spawnPos, Quaternion.identity);
+        Instantiate(_customerPrefabs, spawnPos, Quaternion.identity);
         AiStandState = AIState.Good;
     }
     private void SpawnCops()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().CopEnterPosition();
-        Instantiate(CopsPrefabs, spawnPos, Quaternion.identity);
+        Instantiate(_copsPrefabs, spawnPos, Quaternion.identity);
     }
-
 
     public void ChangeSpawnTime(int time)
     {
-        spawnTime = time;
+        _spawnTime = time;
     }
 
     public void WantedSystem()

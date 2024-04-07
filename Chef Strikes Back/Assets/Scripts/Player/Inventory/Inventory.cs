@@ -18,14 +18,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float _distanceMultiplier;
     [SerializeField] private Vector2 _pointerSize;
 
-    private Player _player;
+    private PlayerVariables _playerVar;
     private SpriteRenderer _pointerImage;
     private bool _isLaunchingFood;
 
     private void Awake()
     {
         _pointerImage = _pointer.GetComponent<SpriteRenderer>();
-        _player = GetComponent<Player>();
+        _playerVar = GetComponent<PlayerVariables>();
         _isLaunchingFood = false;
         _length.value = 0.0f;
     }
@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
 
     private void PointerMovement()
     {
-        var angle = Math.Atan2(-_player.LookingDirection.x, _player.LookingDirection.y) * Mathf.Rad2Deg;
+        var angle = Math.Atan2(-_playerVar.ThrowDirection.x, _playerVar.ThrowDirection.y) * Mathf.Rad2Deg;
         _pointer.transform.rotation = Quaternion.Euler(0.0f, 0.0f, (float)angle);
         _pointerSize.y = math.min(1.0f, math.max(_length.value / 5, 0.27f));
         _pointerImage.size = _pointerSize;

@@ -1,7 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.Universal;
 
 public class Actions : MonoBehaviour
 {
@@ -60,7 +59,7 @@ public class Actions : MonoBehaviour
         foreach (var hit in hits)
         {
             float dis2Obj = Vector2.Distance(hit.gameObject.transform.position, transform.position);
-            if(dis2Obj > _grabDistance)
+            if (dis2Obj > _grabDistance)
             {
                 continue;
             }
@@ -135,21 +134,12 @@ public class Actions : MonoBehaviour
         }
     }
 
-    public void ThrowItem(InputAction pos)
+    public void ThrowItem()
     {
         if (_inventory.GetFoodItem() != null && _ready2Throw)
         {
-            var dir = pos.ReadValue<Vector2>();
-
-            if (dir.magnitude >= 10.0f)
-            {
-                var mousePos = Camera.main.ScreenToWorldPoint(pos.ReadValue<Vector2>());
-                dir = (mousePos - (transform.position + _player.Variables.HandOffset));
-                dir.Normalize();
-                ServiceLocator.Get<AudioManager>().PlaySource("charge");
-            }
-
-            _inventory.ThrowFood(dir);
+            ServiceLocator.Get<AudioManager>().PlaySource("charge");
+            _inventory.ThrowFood(_player.Variables.ThrowDirection);
             _ready2Throw = false;
             _isCarryingItem = false;
             _player.ChangeAction(PlayerActions.None);

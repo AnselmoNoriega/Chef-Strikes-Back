@@ -145,8 +145,7 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Update(Player agent, float dt)
     {
-        var mousePos = Camera.main.ScreenToWorldPoint(_playerInputs.GetMousePos());
-        var dir = (mousePos - (agent.transform.position + _variables.HandOffset));
+        var dir = _playerInputs.GetLookingDir();
         PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, dir);
 
         if (_throwStrength <= _variables.MaxTimer)
@@ -154,7 +153,7 @@ public class PlayerThrowing : StateClass<Player>
             _throwStrength += _variables.ThrowMultiplier * Time.deltaTime;
         }
 
-        _variables.ThrowDirection = dir.normalized * _throwStrength;
+        _variables.ThrowDirection = dir * _throwStrength;
     }
 
     public void FixedUpdate(Player agent)
