@@ -131,8 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c82f2a1f2aa1b47a208fd9fde01bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPos: {fileID: 0}
-  lightPos: {fileID: 0}
-  followSpeed: 0.009
-  zoomSpeed: 1500
-  boundaryPolygon: {fileID: 0}
+  _followSpeed: 0.009
+  _zoomSpeed: 1500
+  _boundaryPolygon: {fileID: 0}

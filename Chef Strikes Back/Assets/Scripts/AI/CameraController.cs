@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
     [Header("Camera Variables")]
-    [SerializeField] private float followSpeed;
-    [SerializeField] private float zoomSpeed;
+    [SerializeField] private float _followSpeed;
+    [SerializeField] private float _zoomSpeed;
     private Vector3 _targetPosition;
     private float _camHeight;
     private float _camWidth;
@@ -52,7 +50,7 @@ public class CameraController : MonoBehaviour
 
     private void Zoom(InputAction.CallbackContext input)
     {
-        Vector2 dz = zoomSpeed * Time.deltaTime * (-_zoom.ReadValue<Vector2>());
+        Vector2 dz = _zoomSpeed * Time.deltaTime * (-_zoom.ReadValue<Vector2>());
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
 
         _camHeight = Camera.main.orthographicSize;
@@ -67,6 +65,6 @@ public class CameraController : MonoBehaviour
         _targetPosition.y = Mathf.Clamp(_targetPosition.y, _boundaryPolygon.bounds.min.y + _camHeight, _boundaryPolygon.bounds.max.y - _camHeight);
         _targetPosition.z = -1.0f;
 
-        transform.position = Vector3.Lerp(transform.position, _targetPosition, followSpeed);
+        transform.position = Vector3.Lerp(transform.position, _targetPosition, _followSpeed);
     }
 }
