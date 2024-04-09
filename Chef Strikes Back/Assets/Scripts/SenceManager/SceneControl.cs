@@ -1,13 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class SceneControl : MonoBehaviour
 {
     private GameManager _gameManager;
+    [SerializeField] private List<Button> _buttons;
+    [SerializeField] private GameObject _purchasePanel;
+    [SerializeField] private GameObject _noMoneyText;
+    private int _currentLevelSelected;
 
     private void Start()
     {
+        _gameManager.SetLockedLevels(_buttons);
         _gameManager = ServiceLocator.Get<GameManager>();
     }
 
@@ -31,7 +37,8 @@ public class SceneControl : MonoBehaviour
     {
         if(_gameManager.IsLevelLocked(level))
         {
-            //open panel
+            _currentLevelSelected = level;
+            _purchasePanel.SetActive(true);
         }
         else
         {
@@ -39,11 +46,18 @@ public class SceneControl : MonoBehaviour
         }
     }
 
-    public void UnlockLevel(int level)
+    public void UnlockLevel()
     {
-        if (ServiceLocator.Get<GameManager>().UnlockLevel(level))
+        if (_gameManager.UnlockLevel(_currentLevelSelected))
         {
-            //close panel
+            _purchasePanel.SetActive(false);
+            var colors = _buttons[_currentLevelSelected].colors;
+            colors.normalColor = Color.white;
+            _buttons[_currentLevelSelected].colors = colors;
+        }
+        else
+        {
+            _noMoneyText.SetActive(true);
         }
     }
 

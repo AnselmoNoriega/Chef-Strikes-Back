@@ -142,6 +142,19 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    public void SetLockedLevels(List<Button> buttons)
+    {
+        for(int i = 0; i < _levelsLocked.Count; ++i)
+        {
+            if(_levelsLocked[i].IsLock)
+            {
+                var colors = buttons[i].colors;
+                colors.normalColor = Color.gray;
+                buttons[i].colors = colors;
+            }
+        }
+    }
+
     public bool IsLevelLocked(int lv)
     {
         return _levelsLocked[lv].IsLock;
