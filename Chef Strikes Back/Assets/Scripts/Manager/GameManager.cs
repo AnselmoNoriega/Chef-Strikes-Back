@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
-    
+
     private bool _isUsingController = false;
 
     [SerializeField] private int _score = 0;
@@ -131,6 +131,18 @@ public class GameManager : MonoBehaviour
 
     public bool UnlockLevel(int lv)
     {
+        if (lv == 6)
+        {
+            for (int i = 0; i < 6; ++i)
+            {
+                if(!_levelsLocked[lv].AllStarsAchieved)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
         if (_money >= _levelsLocked[lv].Price)
         {
             _levelsLocked[lv].IsLock = false;
@@ -143,15 +155,20 @@ public class GameManager : MonoBehaviour
 
     public void SetLockedLevels(List<Button> buttons)
     {
-        for(int i = 0; i < _levelsLocked.Count; ++i)
+        for (int i = 0; i < _levelsLocked.Count; ++i)
         {
-            if(_levelsLocked[i].IsLock)
+            if (_levelsLocked[i].IsLock)
             {
                 var colors = buttons[i].colors;
                 colors.normalColor = Color.gray;
                 buttons[i].colors = colors;
             }
         }
+    }
+
+    public void FullStarsForLevel(int lv)
+    {
+        _levelsLocked[lv].AllStarsAchieved = true;
     }
 
     public bool IsLevelLocked(int lv)

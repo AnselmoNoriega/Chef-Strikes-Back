@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct StarsWorth
@@ -23,6 +24,14 @@ public class ScoreSystem : MonoBehaviour
         _textStats.text = "Score: " + score.ToString() + "\nKill Count: " + ServiceLocator.Get<GameManager>().GetKillCount();
         ServiceLocator.Get<GameManager>().ResetScore();
         int starNum = 0;
+
+        if(score >= 50)
+        {
+            var sceneName = ServiceLocator.Get<GameManager>().GetRepalyScene();
+            var level = SceneManager.GetSceneByName(sceneName).buildIndex - 3;
+            ServiceLocator.Get<GameManager>().FullStarsForLevel(level);
+        }
+
         while (score > 9 && starNum < 5)
         {
             Instantiate(_star, _gridParent);
