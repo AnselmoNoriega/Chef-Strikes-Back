@@ -13,8 +13,11 @@ public class SceneControl : MonoBehaviour
 
     private void Start()
     {
-        _gameManager.SetLockedLevels(_buttons);
         _gameManager = ServiceLocator.Get<GameManager>();
+        if (_buttons.Count > 0)
+        {
+            _gameManager.SetLockedLevels(_buttons);
+        }
     }
 
     public void GoToEndScene()
@@ -35,13 +38,14 @@ public class SceneControl : MonoBehaviour
 
     public void Go2Level(int level)
     {
-        if(_gameManager.IsLevelLocked(level))
+        if (_gameManager.IsLevelLocked(level))
         {
             _currentLevelSelected = level;
             _purchasePanel.SetActive(true);
         }
         else
         {
+            Time.timeScale = 1.0f;
             SceneManager.LoadScene("Level_" + level.ToString());
         }
     }

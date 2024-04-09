@@ -44,6 +44,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b43bd2d88167a4296bc9e27af93921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelsLocked:
+  - Price: 0
+    IsLock: 0
+    AllStarsAchieved: 0
+  - Price: 50
+    IsLock: 1
+    AllStarsAchieved: 0
+  - Price: 70
+    IsLock: 1
+    AllStarsAchieved: 0
+  - Price: 140
+    IsLock: 1
+    AllStarsAchieved: 0
+  - Price: 250
+    IsLock: 1
+    AllStarsAchieved: 0
+  - Price: 400
+    IsLock: 1
+    AllStarsAchieved: 0
+  - Price: 2147483647
+    IsLock: 1
+    AllStarsAchieved: 0
   _customerMadPoints: -3
   _killPoints: 0
   _grabMoneyPoints: 1
+  _score: 0

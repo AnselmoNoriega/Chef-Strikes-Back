@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class Levels
 {
     public int Price;
-    public Button LevelButtons;
     public bool IsLock;
     public bool AllStarsAchieved;
 }
