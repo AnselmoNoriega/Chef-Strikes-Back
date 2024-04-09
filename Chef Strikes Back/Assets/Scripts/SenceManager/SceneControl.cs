@@ -1,20 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System.Collections.Generic;
-
-[System.Serializable]
-public struct Levels
-{
-    public int Price;
-    public Button LevelButtons;
-    public bool IsLock;
-    public bool AllStarsAchieved;
-}
 
 public class SceneControl : MonoBehaviour
 {
-    [SerializeField] private List<Levels> _levelLocks;
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = ServiceLocator.Get<GameManager>();
+    }
 
     public void GoToEndScene()
     {
@@ -34,7 +29,7 @@ public class SceneControl : MonoBehaviour
 
     public void Go2Level(int level)
     {
-        if(_levelLocks[level].IsLock)
+        if(_gameManager.IsLevelLocked(level))
         {
             //open panel
         }
@@ -46,7 +41,7 @@ public class SceneControl : MonoBehaviour
 
     public void UnlockLevel(int level)
     {
-        if (ServiceLocator.Get<GameManager>().UnlockLevel(_levelLocks[level - 1 ]))
+        if (ServiceLocator.Get<GameManager>().UnlockLevel(level))
         {
             //close panel
         }

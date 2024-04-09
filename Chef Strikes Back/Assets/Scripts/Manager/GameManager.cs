@@ -1,7 +1,20 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class Levels
+{
+    public int Price;
+    public Button LevelButtons;
+    public bool IsLock;
+    public bool AllStarsAchieved;
+}
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private List<Levels> _levelsLocked = new();
+
     [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
@@ -13,8 +26,6 @@ public class GameManager : MonoBehaviour
 
     private string _lastScenePlayed;
     private int _money = 0;
-
-    //levelLocks
 
     public void LoadGameStats()
     {
@@ -119,16 +130,20 @@ public class GameManager : MonoBehaviour
         return _isUsingController;
     }
 
-    //for onClick
-    public bool UnlockLevel(Levels lv)
+    public bool UnlockLevel(int lv)
     {
-        if (_money >= lv.Price)
+        if (_money >= _levelsLocked[lv].Price)
         {
-            lv.IsLock = false;
-            _money -= lv.Price;
+            _levelsLocked[lv].IsLock = false;
+            _money -= _levelsLocked[lv].Price;
             return true;
         }
 
         return false;
+    }
+
+    public bool IsLevelLocked(int lv)
+    {
+        return _levelsLocked[lv].IsLock;
     }
 }
