@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
     private string _lastScenePlayed;
     private int _money = 0;
 
+    public void LoadLevels()
+    {
+        _levelsLocked = ServiceLocator.Get<SaveSystem>().Load<List<Levels>>("levels.doNotOpen");
+    }
+
     public void LoadGameStats()
     {
         _money = ServiceLocator.Get<SaveSystem>().Load<int>("money.doNotOpen");
@@ -141,12 +146,14 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+            SaveLevels();
             return true;
         }
         if (_money >= _levelsLocked[lv].Price)
         {
             _levelsLocked[lv].IsLock = false;
             _money -= _levelsLocked[lv].Price;
+            SaveLevels();
             return true;
         }
 
@@ -169,10 +176,16 @@ public class GameManager : MonoBehaviour
     public void FullStarsForLevel(int lv)
     {
         _levelsLocked[lv].AllStarsAchieved = true;
+        SaveLevels();
     }
 
     public bool IsLevelLocked(int lv)
     {
         return _levelsLocked[lv].IsLock;
+    }
+
+    private void SaveLevels()
+    {
+        ServiceLocator.Get<SaveSystem>().Save<List<Levels>>(_levelsLocked, "levels.doNotOpen");
     }
 }
