@@ -9,6 +9,7 @@ public struct Levels
     public int Price;
     public Button LevelButtons;
     public bool IsLock;
+    public bool AllStarsAchieved;
 }
 
 public class SceneControl : MonoBehaviour
@@ -45,7 +46,7 @@ public class SceneControl : MonoBehaviour
 
     public void UnlockLevel(int level)
     {
-        if (ServiceLocator.Get<GameManager>().UnlockLevel(_levelLocks[level]))
+        if (ServiceLocator.Get<GameManager>().UnlockLevel(_levelLocks[level - 1 ]))
         {
             //close panel
         }
