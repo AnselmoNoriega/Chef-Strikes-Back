@@ -28,7 +28,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevels()
     {
-        _levelsLocked = ServiceLocator.Get<SaveSystem>().Load<List<Levels>>("levels.doNotOpen");
+        var levelsLoaded = ServiceLocator.Get<SaveSystem>().Load<List<Levels>>("levels.doNotOpen");
+        if (levelsLoaded != null)
+        {
+            _levelsLocked = levelsLoaded;
+        }
     }
 
     public void LoadGameStats()
@@ -140,7 +144,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < 6; ++i)
             {
-                if(!_levelsLocked[lv].AllStarsAchieved)
+                if (!_levelsLocked[lv].AllStarsAchieved)
                 {
                     return false;
                 }
