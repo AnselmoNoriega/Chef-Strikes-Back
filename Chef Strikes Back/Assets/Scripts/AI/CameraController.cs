@@ -66,7 +66,7 @@ public class CameraController : MonoBehaviour
             _targetPosition = position;
             _followPlayer = false;
 
-            Vector2 dz = _zoomSpeed * Time.deltaTime * (-new Vector2(5.0f,5.0f));
+            Vector2 dz = _zoomSpeed * Time.deltaTime * (-new Vector2(5.0f, 5.0f));
             Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
 
             _camHeight = Camera.main.orthographicSize;
@@ -80,10 +80,13 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        foreach (var pos in _narrativePos)
+        if (_narrativePos.Count > 0)
         {
-            Vector3 newpos = pos.transform.position;
-            MoveThePos(newpos);
+            foreach (var pos in _narrativePos)
+            {
+                Vector3 newpos = pos.transform.position;
+                MoveThePos(newpos);
+            }
         }
 
         if (_followPlayer)
