@@ -50,7 +50,7 @@ public class AI : MonoBehaviour
     public float ReloadCountDown = 0;
     public float ShootRange = 3;
     public bool IsHit = false;
-    public GameObject SliderParenObj; 
+    public GameObject SliderParenObj;
     public Transform ReloadSlider;
     public GameObject BulletPrefab;
     public Transform GunPos;
@@ -61,6 +61,11 @@ public class AI : MonoBehaviour
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
     public Chair SelectedChair { get; set; }
+
+    [Space, Header("Particles")]
+    public ParticleSystem BloodParticles;
+    public ParticleSystem HappyParticles;
+    public ParticleSystem AngryParticles;
 
     private void Awake()
     {
@@ -82,6 +87,46 @@ public class AI : MonoBehaviour
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+
+        if (transform.childCount > 0)
+        {
+            Transform firstChild = transform.GetChild(0);
+            BloodParticles = firstChild.GetComponent<ParticleSystem>();
+
+            if (BloodParticles == null)
+                Debug.LogError("No Blood ParticleSystem");
+        }
+        else
+        {
+            Debug.LogError("No first child");
+        }
+
+        // Assign Angry Particles from the second child
+        if (transform.childCount > 1)
+        {
+            Transform secondChild = transform.GetChild(1);
+            AngryParticles = secondChild.GetComponent<ParticleSystem>();
+
+            if (AngryParticles == null)
+                Debug.LogError("No Angry ParticleSystem found");
+        }
+        else
+        {
+            Debug.LogError("No second child");
+        }
+
+        if (transform.childCount > 2)
+        {
+            Transform secondChild = transform.GetChild(2);
+            HappyParticles = secondChild.GetComponent<ParticleSystem>();
+
+            if (HappyParticles == null)
+                Debug.LogError("No Happy ParticleSystem found");
+        }
+        else
+        {
+            Debug.LogError("No third child");
+        }
     }
 
     private void Update()
@@ -113,9 +158,12 @@ public class AI : MonoBehaviour
 
     public void Damage(int amt)
     {
+        BloodParticles.Play();
+
         if ((int)state >= 3 && (int)state <= 8)
         {
             _health -= amt;
+            
 
             if (_health <= 0)
             {
@@ -130,6 +178,7 @@ public class AI : MonoBehaviour
         else
         {
             --_hitsToGetMad;
+            
 
             if (_hitsToGetMad <= 0)
             {
@@ -183,8 +232,6 @@ public class AI : MonoBehaviour
         }
     }
 
-    
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _stateManager.CollisionEnter2D(collision);
@@ -200,5 +247,5 @@ public class AI : MonoBehaviour
         _moneyUIParticleSystem.Play();
     }
 
-
+    
 }

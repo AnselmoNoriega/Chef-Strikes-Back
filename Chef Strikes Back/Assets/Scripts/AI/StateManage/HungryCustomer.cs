@@ -13,6 +13,7 @@ public class HungryCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        
         waitingTime = ServiceLocator.Get<GameLoopManager>().CustomerFoodWaitingTime;
         ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
         _spriteRenderer = agent.GetComponent<SpriteRenderer>();
@@ -59,6 +60,7 @@ public class HungryCustomer : StateClass<AI>
 
         if (scale.x >= 1.0f)
         {
+            agent.AngryParticles.Play();
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
@@ -66,6 +68,8 @@ public class HungryCustomer : StateClass<AI>
             int value = Random.Range(0, 100) % 4;
             agent.ChangeState((AIState)(value + 3));
         }
+
+        
     }
 
     public void FixedUpdate(AI agent)

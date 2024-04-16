@@ -18,6 +18,11 @@ public class CreationTable : MonoBehaviour
         public GameObject Object;
     }
 
+    [Header("Particles")]
+
+    public ParticleSystem IngredientParticles;
+    public ParticleSystem CompleteParticles;
+
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
     [SerializeField] private Transform _foodOffset;
@@ -58,6 +63,13 @@ public class CreationTable : MonoBehaviour
         {
             _foodSprites.Add(foodSprite.Type, foodSprite.Object);
         }
+
+        if (IngredientParticles == null)
+        {
+            IngredientParticles = GetComponent<ParticleSystem>();
+            CompleteParticles = GetComponent<ParticleSystem>();
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,6 +90,8 @@ public class CreationTable : MonoBehaviour
                 recivedItem.LaunchedInTable(_magnet);
                 recivedItem.IsPickable = false;
                 StartCoroutine(IngredientSpriteActive(recivedItem));
+                IngredientParticles.Play();
+                
             }
             else if (_count[recivedItem.Type] && !_waitList[recivedItem.Type].Contains(recivedItem.gameObject))
             {
@@ -136,6 +150,7 @@ public class CreationTable : MonoBehaviour
 
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
+            CompleteParticles.Play();
             _count[_acceptedFoodTypes[i].Food] = false;
             _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);

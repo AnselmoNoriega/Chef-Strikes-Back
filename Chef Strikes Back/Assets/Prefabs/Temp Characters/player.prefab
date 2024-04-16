@@ -109,7 +109,7 @@ RectTransform:
   m_Children:
   - {fileID: 4640885627648078670}
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -207,7 +207,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8462317492019071887
 SpriteRenderer:
@@ -366,7 +366,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4325177426433219011
 GameObject:
@@ -377,6 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4367353946861778790}
+  - component: {fileID: 899982497105419736}
   m_Layer: 7
   m_Name: TrailSpawn
   m_TagString: Untagged
@@ -397,8 +398,30 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &899982497105419736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4325177426433219011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efc8d740f17e92458bc2d9431c1a88b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailSprites:
+  - {fileID: 21300000, guid: 993345913f0c4b041ba5b7da4226c8b8, type: 3}
+  - {fileID: 21300000, guid: 18bd9051b680856459ff81aa3362ed75, type: 3}
+  - {fileID: 21300000, guid: c9f29863d246a5b4d88f949c5b7e3200, type: 3}
+  - {fileID: 21300000, guid: e2b6b9838d50e8c4fb73585e06f2714f, type: 3}
+  - {fileID: 21300000, guid: d9891bd76cf8c1a4a97bd6972a81f8fb, type: 3}
+  spritePrefab: {fileID: 8124000928845714758, guid: 1dae3b9ba95d6f04684deb8ef73e7b23, type: 3}
+  spawnInterval: 0.1
+  fadeDuration: 1
+  spawnLocationController: {fileID: 4325177426433219011}
 --- !u!1 &5458735608316875857
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +477,6 @@ GameObject:
   - component: {fileID: 3855817667393855648}
   - component: {fileID: 323981142111727875}
   - component: {fileID: 137093403580132108}
-  - component: {fileID: 4630009036424699041}
   m_Layer: 7
   m_Name: player
   m_TagString: Player
@@ -474,10 +496,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 4367353946861778790}
   - {fileID: 1237283022793716927}
   - {fileID: 3100146290728529144}
   - {fileID: 578931868531884403}
-  - {fileID: 4367353946861778790}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -682,28 +704,7 @@ MonoBehaviour:
   FlashingTime: 2
   _speedBoostAmount: 1.5
   _animSpeedInBoost: 0.5
---- !u!114 &4630009036424699041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355847347339370371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efc8d740f17e92458bc2d9431c1a88b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trailSprites:
-  - {fileID: 21300000, guid: 993345913f0c4b041ba5b7da4226c8b8, type: 3}
-  - {fileID: 21300000, guid: 18bd9051b680856459ff81aa3362ed75, type: 3}
-  - {fileID: 21300000, guid: c9f29863d246a5b4d88f949c5b7e3200, type: 3}
-  - {fileID: 21300000, guid: e2b6b9838d50e8c4fb73585e06f2714f, type: 3}
-  - {fileID: 21300000, guid: d9891bd76cf8c1a4a97bd6972a81f8fb, type: 3}
-  spritePrefab: {fileID: 8124000928845714758, guid: 1dae3b9ba95d6f04684deb8ef73e7b23, type: 3}
-  spawnInterval: 0.1
-  fadeDuration: 1
-  spawnLocationController: {fileID: 4325177426433219011}
+  trailEffect: {fileID: 899982497105419736}
 --- !u!1 &8950749653407707308
 GameObject:
   m_ObjectHideFlags: 0

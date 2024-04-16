@@ -35,12 +35,29 @@ public class PlayerVariables : MonoBehaviour
     private bool _isInSpeedBoost;
     private float _speedBoostTimer;
 
+    [Header("Effects")]
+    public TrailEffect trailEffect;
+
     private Animator _animator;
+
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         SpeedBoost = 1.0f;
+
+        if (transform.childCount > 0)
+        {
+            Transform firstChild = transform.GetChild(0);
+            trailEffect = firstChild.GetComponent<TrailEffect>();
+
+            if (trailEffect == null)
+                Debug.LogError("No Trail Effect");
+        }
+        else
+        {
+            Debug.LogError("No trail effect child");
+        }
     }
 
     public void SpeedBoostTimer()
@@ -53,6 +70,8 @@ public class PlayerVariables : MonoBehaviour
                 _isInSpeedBoost = false;
                 SpeedBoost = 1.0f;
                 _animator.speed -= _animSpeedInBoost;
+                if (trailEffect != null)
+                    trailEffect.StopTrail(); // Stop the trail effect
             }
         }
     }
@@ -66,6 +85,15 @@ public class PlayerVariables : MonoBehaviour
             _isInSpeedBoost = true;
             SpeedBoost = _speedBoostAmount;
             _animator.speed += _animSpeedInBoost;
+            if (trailEffect != null)
+            {
+                trailEffect.StartTrail(); // Start the trail effect
+                Debug.Log("Trail effect started.");
+            }
+            else
+            {
+                Debug.LogError("TrailEffect not assigned in PlayerVariables.");
+            }
         }
     }
 }

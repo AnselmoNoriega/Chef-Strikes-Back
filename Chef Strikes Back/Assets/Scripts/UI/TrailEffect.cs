@@ -4,53 +4,47 @@ using UnityEngine;
 
 public class TrailEffect : MonoBehaviour
 {
-    public List<Sprite> trailSprites; // List of sprites for the trail
-    public GameObject spritePrefab; // Prefab with SpriteRenderer, no sprite needed
-    public float spawnInterval = 0.1f; // Time between spawns
-    public float fadeDuration = 1.0f; // Duration of fade effect
+    public List<Sprite> trailSprites;
+    public GameObject spritePrefab;
+    public float spawnInterval = 0.1f;
+    public float fadeDuration = 1.0f;
 
     private List<GameObject> pooledSprites = new List<GameObject>();
     private float timer = 0f;
+    private bool isActive = false;  // To track the active state of trail effects
 
     public GameObject spawnLocationController;
 
     private void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= spawnInterval)
+        if (isActive)
         {
-            timer = 0f;
-            SpawnTrailSprite();
+            timer += Time.deltaTime;
+
+            if (timer >= spawnInterval)
+            {
+                timer = 0f;
+                SpawnTrailSprite();
+            }
         }
     }
 
-    void SpawnTrailSprite()
+    public void StartTrail()
     {
-        GameObject spriteObj = GetPooledSprite();
-
-        // Use the specified GameObject's position as the spawn location
-        if (spawnLocationController != null)
-        {
-            spriteObj.transform.position = spawnLocationController.transform.position;
-        }
-        else
-        {
-            spriteObj.transform.position = transform.position; // Fallback to the script owner's position
-        }
-
-        Sprite selectedSprite = trailSprites[Random.Range(0, trailSprites.Count)];
-        SpriteRenderer sr = spriteObj.GetComponent<SpriteRenderer>();
-        sr.sprite = selectedSprite;
-        spriteObj.SetActive(true);
-
-        // Optional: Adjust sorting layer and order here as needed
-        sr.sortingOrder = 2;
-
-        StartCoroutine(FadeSprite(spriteObj));
+        isActive = true;
     }
 
-    GameObject GetPooledSprite()
+    public void StopTrail()
+    {
+        isActive = false;
+        // Optionally reset all active trail sprites
+        foreach (var sprite in pooledSprites)
+        {
+            sprite.SetActive(false);
+        }
+    }
+
+    private GameObject GetPooledSprite()
     {
         foreach (var obj in pooledSprites)
         {
@@ -60,12 +54,14 @@ public class TrailEffect : MonoBehaviour
             }
         }
 
-        GameObject newObj = Instantiate(spritePrefab);
+        // Instantiating a new object if none are available in the pool
+        GameObject newObj = Instantiate(spritePrefab, transform.position, Quaternion.identity);
+        newObj.SetActive(false); // Start inactive, activate when needed
         pooledSprites.Add(newObj);
         return newObj;
     }
 
-    IEnumerator FadeSprite(GameObject spriteObj)
+    private IEnumerator FadeSprite(GameObject spriteObj)
     {
         SpriteRenderer sr = spriteObj.GetComponent<SpriteRenderer>();
         Color initialColor = sr.color;
@@ -80,5 +76,18 @@ public class TrailEffect : MonoBehaviour
         }
 
         spriteObj.SetActive(false);
+    }
+
+    private void SpawnTrailSprite()
+    {
+        GameObject spriteObj = GetPooledSprite();
+        spriteObj.transform.position = spawnLocationController ? spawnLocationController.transform.position : transform.position;
+        Sprite selectedSprite = trailSprites[Random.Range(0, trailSprites.Count)];
+        SpriteRenderer sr = spriteObj.GetComponent<SpriteRenderer>();
+        sr.sprite = selectedSprite;
+        sr.sortingLayerName = "Foreground"; // Ensure this is a visible layer
+        sr.color = new Color(1f, 1f, 1f, 1f); // Ensure full visibility
+        spriteObj.SetActive(true);
+        StartCoroutine(FadeSprite(spriteObj));
     }
 }

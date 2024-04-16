@@ -8,6 +8,7 @@ public class EatingCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        
         scale = agent.EatingSlider.localScale;
         scale.x = 1;
         agent.EatingSlider.localScale = scale;

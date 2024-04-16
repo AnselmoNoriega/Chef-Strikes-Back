@@ -48,12 +48,14 @@ public class Table : MonoBehaviour
             {
                 if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
+                    chair.Customer.HappyParticles.Play();
                     ServiceLocator.Get<GameManager>().FoodGiven(25 * chair.Customer.EatingSlider.localScale.x);
                     newItem.IsServed = true;
                     newItem.IsPickable = false;
                     chair.Food = newItem;
                     chair.Customer.ChangeState(AIState.Eating);
                     newItem.LaunchedInTable(platePos);
+                    
 
                     return;
                 }
