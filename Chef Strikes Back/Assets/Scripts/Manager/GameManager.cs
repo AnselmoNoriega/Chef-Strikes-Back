@@ -12,8 +12,13 @@ public class Levels
 
 public class GameManager : MonoBehaviour
 {
+    [Header("System")]
+    [SerializeField] public InputsUI UI_Navegation;
+
+    [Header("Levels")]
     [SerializeField] private List<Levels> _levelsLocked = new();
 
+    [Header("Game Variables")]
     [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;

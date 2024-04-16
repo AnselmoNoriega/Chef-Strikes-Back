@@ -11,9 +11,13 @@ public class SceneControl : MonoBehaviour
     [SerializeField] private GameObject _noMoneyText;
     private int _currentLevelSelected;
 
+    [Space, Header("Level UI")]
+    [SerializeField] private GameObject[] _firstSelectedButton;
+
     private void Start()
     {
         _gameManager = ServiceLocator.Get<GameManager>();
+        SetButtonSelected(0);
         if (_buttons.Count > 0)
         {
             _gameManager.SetLockedLevels(_buttons);
@@ -36,12 +40,18 @@ public class SceneControl : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetButtonSelected(int uiLayer)
+    {
+        _gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]);
+    }
+
     public void Go2Level(int level)
     {
         if (_gameManager.IsLevelLocked(level))
         {
             _currentLevelSelected = level;
             _purchasePanel.SetActive(true);
+            SetButtonSelected(4);
         }
         else
         {
