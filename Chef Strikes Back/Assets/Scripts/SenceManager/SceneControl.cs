@@ -42,7 +42,13 @@ public class SceneControl : MonoBehaviour
 
     public void SetButtonSelected(int uiLayer)
     {
-        _gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]);
+        if (_firstSelectedButton != null)
+        {
+            if (_firstSelectedButton.Length > 0)
+            {
+                _gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]);
+            }
+        }
     }
 
     public void Go2Level(int level)
