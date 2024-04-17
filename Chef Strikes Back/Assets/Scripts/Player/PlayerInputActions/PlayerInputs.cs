@@ -81,6 +81,11 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
+        if(ServiceLocator.Get<DialogueManager>().dialogueMode)
+        {
+            ServiceLocator.Get<DialogueManager>().ContinueStory();
+            return;
+        }
 
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
