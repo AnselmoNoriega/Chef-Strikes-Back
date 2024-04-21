@@ -24,60 +24,9 @@ public class UIManager : MonoBehaviour
             _moneyText.text = "Money = " + ServiceLocator.Get<GameManager>().GetMoney().ToString();
         }
     }
-
-    private void OnEnable()
-    {
-        var gm = ServiceLocator.Get<GameManager>();
-        if (gm)
-        {
-            //_usingControllerButton.isOn = gm.GetControllerOption();
-        }
-    }
-
     public void SetScreenActive(string screenName)
     {
         _screens.SetState(screenName);
-        switch (screenName)
-        {
-            case "Root - Level Select":
-                {
-                    if (_LevelSelectFirst == null) return;
-                    EventSystem.current.SetSelectedGameObject(_LevelSelectFirst);
-                    break;
-                }
-            case "Root - Settings":
-                {
-                    if (_SettingSelectFirst == null) return;
-                    EventSystem.current.SetSelectedGameObject(_SettingSelectFirst);
-                    break;
-                }
-            case "Root - Main Menu":
-                {
-                    if (_MainMenuSeclectFirst == null) return;
-                    EventSystem.current.SetSelectedGameObject(_MainMenuSeclectFirst);
-                    break;
-                }
-            case "Root - Credits":
-                {
-                    if (_MainMenuSeclectFirst == null) return;
-                    EventSystem.current.SetSelectedGameObject(_CreditSelectFirst);
-                    break;
-                }
-            case "Root - Pause Menu":
-                {
-                    if (_PauseSelectFirst == null) return;
-                    EventSystem.current.SetSelectedGameObject(_PauseSelectFirst);
-                    break;
-                }
-            case "Root - How To Play":
-                {
-                    if (_HowToPlaySelectFirst == null) return;
-                    EventSystem.current.SetSelectedGameObject(_HowToPlaySelectFirst);
-                    break;
-                }
-            default:
-                return;
-        }
     }
 
     public void ResumeGame()
