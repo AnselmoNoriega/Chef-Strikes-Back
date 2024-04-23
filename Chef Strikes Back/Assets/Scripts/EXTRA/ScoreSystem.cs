@@ -9,6 +9,7 @@ public struct StarsWorth
     public string LevelName;
     public List<int> _extraMoneyForStars;
 }
+
 public class ScoreSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textStats;
@@ -28,7 +29,7 @@ public class ScoreSystem : MonoBehaviour
         if(score >= 50)
         {
             var sceneName = ServiceLocator.Get<GameManager>().GetRepalyScene();
-            var level = SceneManager.GetSceneByName(sceneName).buildIndex - 3;
+            var level = GetLevelIndex(sceneName);
             ServiceLocator.Get<GameManager>().FullStarsForLevel(level);
         }
 
@@ -67,6 +68,25 @@ public class ScoreSystem : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private int GetLevelIndex(string name)
+    {
+        if(name == "MainScene")
+        {
+            return 0;
+        }
+
+        string indexString = name.Replace("Level_", "");
+        int level = 0;
+
+        if(int.TryParse(indexString, out level))
+        {
+            return level;
+        }
+
+        Debug.LogError("No level found");
+        return 0;
     }
 }
 
