@@ -82,7 +82,7 @@ public class Chair : MonoBehaviour
         var randValue = Random.Range(0, 100);
         int percentageValue = 0;
 
-        for(int i = 0; i < 100; ++i)
+        for(int i = 0; i < _foodPercentages.Length; ++i)
         {
             if(_foodPercentages[i].FoodPerecentage + percentageValue > randValue)
             {
