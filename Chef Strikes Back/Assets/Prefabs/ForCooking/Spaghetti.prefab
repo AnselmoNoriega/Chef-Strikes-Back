@@ -125,6 +125,16 @@ MonoBehaviour:
   IsPickable: 0
   _timeReduction: 0.8
   _magnetSmoodTime: 0
+  CollisionParticles: {fileID: 7391590874794281733, guid: 6be60e5deba760d4f847701f6c5a6371, type: 3}
+  tomatoColor: {r: 1, g: 0, b: 0, a: 1}
+  doughColor: {r: 1, g: 1, b: 1, a: 1}
+  cheeseColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  pizzaParticlesPrefab: {fileID: 7391590874794281733, guid: 426620948576dd145a7bd236250dea7b, type: 3}
+  spaghettiParticlesPrefab: {fileID: 7391590874794281733, guid: 426620948576dd145a7bd236250dea7b, type: 3}
+  finishedFoodColors:
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 1, g: 0.9215687, b: 0.015686275, a: 0}
 --- !u!50 &3061245746855138179
 Rigidbody2D:
   serializedVersion: 4

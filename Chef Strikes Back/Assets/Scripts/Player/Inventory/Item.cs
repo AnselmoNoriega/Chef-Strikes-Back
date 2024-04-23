@@ -24,6 +24,15 @@ public class Item : MonoBehaviour
     private Transform _magnetPos;
     private bool _isBeingDrag;
 
+    [Space, Header("Particles and Colors")]
+    [SerializeField] private ParticleSystem CollisionParticles;
+    [SerializeField] private Color tomatoColor = Color.red;
+    [SerializeField] private Color doughColor = Color.white;
+    [SerializeField] private Color cheeseColor = Color.yellow;
+    [SerializeField] private ParticleSystem pizzaParticlesPrefab;
+    [SerializeField] private ParticleSystem spaghettiParticlesPrefab;
+    [SerializeField] private Color[] finishedFoodColors;  // Array of colors for finished foods
+
     private void Start()
     {
         _isBeingDrag = false;
@@ -46,11 +55,10 @@ public class Item : MonoBehaviour
             _rb.velocity += _acceleration * Time.deltaTime;
             _time -= Time.deltaTime;
 
-            Checktime();
+            CheckTime();
         }
 
         MagnetToTable();
-
         DraggingFood();
     }
 
@@ -59,10 +67,12 @@ public class Item : MonoBehaviour
         _time = time * _timeReduction;
         _rb.velocity = velocity;
         _acceleration = acceleration;
-        IsPickable = true;
+        IsPickable = true;  // Assuming the item cannot be picked while it's being thrown
+
+        SetParticleColor(); // Set the particle color based on the food type
     }
 
-    private void Checktime()
+    private void CheckTime()
     {
         if (_time <= 0)
         {
@@ -88,9 +98,52 @@ public class Item : MonoBehaviour
     {
         if (_isBeingDrag)
         {
-            var temp = _rb.velocity;
-            transform.position = Vector2.SmoothDamp(transform.position, _magnetPos.position, ref temp, _magnetSmoodTime);
+            var tempVelocity = _rb.velocity;
+            transform.position = Vector2.SmoothDamp(transform.position, _magnetPos.position, ref tempVelocity, _magnetSmoodTime);
             _isBeingDrag = .2 <= Vector3.Distance(transform.position, _magnetPos.position);
+        }
+    }
+
+    private void SetParticleColor()
+    {
+        ParticleSystem.MainModule mainModule = CollisionParticles.main;  // Get the main module
+        switch (Type)
+        {
+            case FoodType.Tomato:
+                mainModule.startColor = tomatoColor;
+                break;
+            case FoodType.Dough:
+                mainModule.startColor = doughColor;
+                break;
+            case FoodType.Cheese:
+                mainModule.startColor = cheeseColor;
+                break;
+            case FoodType.Pizza:
+                // Use a specific particle prefab for pizza
+                InstantiateParticle(pizzaParticlesPrefab);
+                return;  // Exit the method to avoid playing the default particle system
+            case FoodType.Spaghetti:
+                // Use a specific particle prefab for spaghetti
+                InstantiateParticle(spaghettiParticlesPrefab);
+                return;  // Exit the method to avoid playing the default particle system
+            default:
+                mainModule.startColor = Color.white;  // Default color if none of the above
+                break;
+        }
+        CollisionParticles.Play();
+    }
+
+    private void InstantiateParticle(ParticleSystem prefab)
+    {
+        if (prefab != null)
+        {
+            ParticleSystem instantiatedParticles = Instantiate(prefab, transform.position, Quaternion.identity);
+            instantiatedParticles.Play();
+            Destroy(instantiatedParticles.gameObject, instantiatedParticles.main.duration + 2.0f);
+        }
+        else
+        {
+            Debug.LogError("Particle prefab is not assigned.");
         }
     }
 
@@ -98,6 +151,7 @@ public class Item : MonoBehaviour
     {
         tgrCollider.enabled = state;
         childCollider.enabled = state;
+        
     }
 
     public SpriteRenderer GetHighlight()
@@ -105,6 +159,41 @@ public class Item : MonoBehaviour
         return _spriteRenderer;
     }
 
+    private int _collisionCount = 0;
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Increase collision count on each collision
+        _collisionCount++;
+        if (_collisionCount == 2) // Assuming you want to trigger on every second collision
+        {
+            // Reset the collision count
+            _collisionCount = 0;
+
+            // Check if there are contact points and the CollisionParticles system is assigned
+            if (collision.contactCount > 0 && CollisionParticles != null)
+            {
+                // Get the first contact point
+                ContactPoint2D contact = collision.GetContact(0);
+                Vector2 collisionPoint = contact.point;
+
+                // Instantiate the particle system at the collision point
+                ParticleSystem instantiatedParticles = Instantiate(CollisionParticles, collisionPoint, Quaternion.identity);
+
+                // Optionally, align the particle system with the collision normal
+                instantiatedParticles.transform.rotation = Quaternion.FromToRotation(Vector3.forward, contact.normal);
+
+                // Play the particle system
+                instantiatedParticles.Play();
+
+                // Destroy the particle system after it has finished
+                Destroy(instantiatedParticles.gameObject, instantiatedParticles.main.duration + 2.0f);
+            }
+            else
+            {
+                Debug.LogError("CollisionParticles prefab is not assigned or no contact points available.");
+            }
+        }
+    }
 }
 
 public enum FoodType
@@ -112,6 +201,6 @@ public enum FoodType
     Pizza,
     Spaghetti,
     Dough,
-    Tomatoe,
+    Tomato,
     Cheese,
 }
