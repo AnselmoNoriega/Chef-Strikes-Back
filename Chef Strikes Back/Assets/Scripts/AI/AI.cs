@@ -66,6 +66,8 @@ public class AI : MonoBehaviour
     public ParticleSystem BloodParticles;
     public ParticleSystem HappyParticles;
     public ParticleSystem AngryParticles;
+    private bool _IsDead = false;
+    [SerializeField] private Animator _animator;
 
     private void Awake()
     {
@@ -152,7 +154,33 @@ public class AI : MonoBehaviour
 
     public void DestroyAI()
     {
-        ChangeState(AIState.Rage);
+        if (!_IsDead)
+        {
+            _IsDead = true;
+            ChangeState(AIState.Rage);
+            _animator.SetBool("IsDead", true); 
+
+            Speed = 0;
+
+            
+            if (Rb2d != null)
+            {
+                Rb2d.velocity = Vector2.zero;
+            }
+
+            // Deactivate blood particles if active
+            if (BloodParticles.gameObject.activeSelf)
+            {
+                BloodParticles.gameObject.SetActive(false);
+            }
+
+            StartCoroutine(WaitForAnimationToEnd());
+        }
+    }
+
+    private IEnumerator WaitForAnimationToEnd()
+    {
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !_animator.IsInTransition(0));
         Destroy(gameObject);
     }
 
