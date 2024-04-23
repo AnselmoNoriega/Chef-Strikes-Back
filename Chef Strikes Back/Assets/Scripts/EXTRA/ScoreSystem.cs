@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public struct StarsWorth
@@ -8,6 +9,7 @@ public struct StarsWorth
     public string LevelName;
     public List<int> _extraMoneyForStars;
 }
+
 public class ScoreSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textStats;
@@ -23,12 +25,21 @@ public class ScoreSystem : MonoBehaviour
         _textStats.text = "Score: " + score.ToString() + "\nKill Count: " + ServiceLocator.Get<GameManager>().GetKillCount();
         ServiceLocator.Get<GameManager>().ResetScore();
         int starNum = 0;
-        while (score > 9 && starNum < 5)
+
+        if(score >= 50)
+        {
+            var sceneName = ServiceLocator.Get<GameManager>().GetRepalyScene();
+            var level = GetLevelIndex(sceneName);
+            ServiceLocator.Get<GameManager>().FullStarsForLevel(level);
+        }
+
+        do
         {
             Instantiate(_star, _gridParent);
             score -= 10;
             ++starNum;
         }
+        while (score > 9 && starNum < 5);
 
         if (score - 5 >= 0 && starNum < 5)
         {
@@ -57,6 +68,25 @@ public class ScoreSystem : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private int GetLevelIndex(string name)
+    {
+        if(name == "MainScene")
+        {
+            return 0;
+        }
+
+        string indexString = name.Replace("Level_", "");
+        int level = 0;
+
+        if(int.TryParse(indexString, out level))
+        {
+            return level;
+        }
+
+        Debug.LogError("No level found");
+        return 0;
     }
 }
 

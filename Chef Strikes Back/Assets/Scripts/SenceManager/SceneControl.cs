@@ -1,19 +1,28 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-
-[System.Serializable]
-public struct Levels
-{
-    public int Price;
-    public Button LevelButtons;
-    public bool IsLock;
-}
 
 public class SceneControl : MonoBehaviour
 {
-    [SerializeField] private List<Levels> _levelLocks;
+    private GameManager _gameManager;
+    [SerializeField] private List<Button> _buttons;
+    [SerializeField] private GameObject _purchasePanel;
+    [SerializeField] private GameObject _noMoneyText;
+    private int _currentLevelSelected;
+
+    [Space, Header("Level UI")]
+    [SerializeField] private GameObject[] _firstSelectedButton;
+
+    private void Start()
+    {
+        _gameManager = ServiceLocator.Get<GameManager>();
+        SetButtonSelected(0);
+        if (_buttons.Count > 0)
+        {
+            _gameManager.SetLockedLevels(_buttons);
+        }
+    }
 
     public void GoToEndScene()
     {
@@ -31,23 +40,44 @@ public class SceneControl : MonoBehaviour
         Application.Quit();
     }
 
+    public void SetButtonSelected(int uiLayer)
+    {
+        if (_firstSelectedButton != null)
+        {
+            if (_firstSelectedButton.Length > 0)
+            {
+                _gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]);
+            }
+        }
+    }
+
     public void Go2Level(int level)
     {
-        if(_levelLocks[level].IsLock)
+        if (_gameManager.IsLevelLocked(level))
         {
-            //open panel
+            _currentLevelSelected = level;
+            _purchasePanel.SetActive(true);
+            SetButtonSelected(4);
         }
         else
         {
+            Time.timeScale = 1.0f;
             SceneManager.LoadScene("Level_" + level.ToString());
         }
     }
 
-    public void UnlockLevel(int level)
+    public void UnlockLevel()
     {
-        if (ServiceLocator.Get<GameManager>().UnlockLevel(_levelLocks[level]))
+        if (_gameManager.UnlockLevel(_currentLevelSelected))
         {
-            //close panel
+            _purchasePanel.SetActive(false);
+            var colors = _buttons[_currentLevelSelected].colors;
+            colors.normalColor = Color.white;
+            _buttons[_currentLevelSelected].colors = colors;
+        }
+        else
+        {
+            _noMoneyText.SetActive(true);
         }
     }
 

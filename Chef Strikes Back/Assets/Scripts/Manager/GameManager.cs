@@ -1,11 +1,28 @@
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class Levels
+{
+    public int Price;
+    public bool IsLock;
+    public bool AllStarsAchieved;
+}
 
 public class GameManager : MonoBehaviour
 {
+    [Header("System")]
+    [SerializeField] public InputsUI UI_Navegation;
+
+    [Header("Levels")]
+    [SerializeField] private List<Levels> _levelsLocked = new();
+
+    [Header("Game Variables")]
     [SerializeField] private int _customerMadPoints;
     [SerializeField] private int _killPoints;
     [SerializeField] private int _grabMoneyPoints;
-    
+
     private bool _isUsingController = false;
 
     [SerializeField] private int _score = 0;
@@ -14,7 +31,14 @@ public class GameManager : MonoBehaviour
     private string _lastScenePlayed;
     private int _money = 0;
 
-    //levelLocks
+    public void LoadLevels()
+    {
+        var levelsLoaded = ServiceLocator.Get<SaveSystem>().Load<List<Levels>>("levels.doNotOpen");
+        if (levelsLoaded != null)
+        {
+            _levelsLocked = levelsLoaded;
+        }
+    }
 
     public void LoadGameStats()
     {
@@ -119,16 +143,58 @@ public class GameManager : MonoBehaviour
         return _isUsingController;
     }
 
-    //for onClick
-    public bool UnlockLevel(Levels lv)
+    public bool UnlockLevel(int lv)
     {
-        if (_money >= lv.Price)
+        if (lv == 6)
         {
-            lv.IsLock = false;
-            _money -= lv.Price;
+            for (int i = 0; i < 6; ++i)
+            {
+                if (!_levelsLocked[lv].AllStarsAchieved)
+                {
+                    return false;
+                }
+            }
+
+            SaveLevels();
+            return true;
+        }
+        if (_money >= _levelsLocked[lv].Price)
+        {
+            _levelsLocked[lv].IsLock = false;
+            _money -= _levelsLocked[lv].Price;
+            SaveLevels();
             return true;
         }
 
         return false;
+    }
+
+    public void SetLockedLevels(List<Button> buttons)
+    {
+        for (int i = 0; i < _levelsLocked.Count; ++i)
+        {
+            if (_levelsLocked[i].IsLock)
+            {
+                var colors = buttons[i].colors;
+                colors.normalColor = Color.gray;
+                buttons[i].colors = colors;
+            }
+        }
+    }
+
+    public void FullStarsForLevel(int lv)
+    {
+        _levelsLocked[lv].AllStarsAchieved = true;
+        SaveLevels();
+    }
+
+    public bool IsLevelLocked(int lv)
+    {
+        return _levelsLocked[lv].IsLock;
+    }
+
+    private void SaveLevels()
+    {
+        ServiceLocator.Get<SaveSystem>().Save<List<Levels>>(_levelsLocked, "levels.doNotOpen");
     }
 }
