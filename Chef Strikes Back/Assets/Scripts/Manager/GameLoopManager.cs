@@ -46,7 +46,6 @@ public class GameLoopManager : MonoBehaviour
 
     private void Update()
     {
-        IsHavingConversation();
         _countToSpawn += Time.deltaTime;
 
         SpawnBadAIWithinTime();
@@ -59,17 +58,7 @@ public class GameLoopManager : MonoBehaviour
         }
     }
 
-    private void IsHavingConversation()
-    {
-        if (ServiceLocator.Get<DialogueManager>().dialogueIsPlaying)
-        {
-            Time.timeScale = 0.0f;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-        }
-    }
+
   
 
     private void SpawnCustomer()

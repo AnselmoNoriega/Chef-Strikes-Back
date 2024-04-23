@@ -13,7 +13,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private SceneControl _sceneControl = null;
     [SerializeField] private StatefulObject _statefulObject = null;
     [SerializeField] private CameraController _cameraController = null;
-    [SerializeField] private DialogueManager _dialogueManager = null;
 
     GameLoader _loader;
 
@@ -43,7 +42,6 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Register<AIManager>(_AIManager);
         ServiceLocator.Register<SceneControl>(_sceneControl);
         ServiceLocator.Register<StatefulObject>(_statefulObject);
-        ServiceLocator.Register<DialogueManager>(_dialogueManager);
 
         _audioManager.Initialize();
         _tileManager.Initialize();
@@ -51,7 +49,6 @@ public class LevelManager : MonoBehaviour
         _timeManger.Initialize();  
         _player.Initialize();
         _cameraController.Initialize();
-        _dialogueManager.Initialize();
 
     }
     private void OnDestroy()
@@ -64,6 +61,5 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Unregister<Player>();
         ServiceLocator.Unregister<AIManager>();
         ServiceLocator.Unregister<StatefulObject>();
-        ServiceLocator.Unregister<DialogueManager>();
     }
 }
