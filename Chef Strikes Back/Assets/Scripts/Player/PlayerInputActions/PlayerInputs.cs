@@ -11,6 +11,7 @@ public class PlayerInputs : MonoBehaviour
     private InputAction _leftTrigger;
     private InputAction _rightJoystick;
     private InputAction _leftButton;
+    private InputAction _rightButton;
     private InputAction _pauseKeyboard;
     private InputAction _moveKeyboard;
 
@@ -40,7 +41,8 @@ public class PlayerInputs : MonoBehaviour
 
         _leftTrigger = _inputManager.Player.LeftTrigger;
         _leftButton = _inputManager.Player.LeftButton;
-        _rightJoystick = _inputManager.Player.LeftJoystick;
+        _rightButton = _inputManager.Player.RightButton;
+        _rightJoystick = _inputManager.Player.RightJoystick;
 
         _pauseKeyboard = _inputManager.Player.Esc;
         _pauseController = _inputManager.Player.PauseController;
@@ -56,6 +58,7 @@ public class PlayerInputs : MonoBehaviour
 
         _leftTrigger.performed += LeftTgrClick;
         _leftButton.performed += LeftbuttonDown;
+        _rightButton.performed += RightbuttonDown;
         _leftTrigger.canceled += LeftTgrRelease;
 
         _pauseKeyboard.performed += TogglePauseMenu;
@@ -112,6 +115,16 @@ public class PlayerInputs : MonoBehaviour
         _action.Attacking(Vector2.zero);
     }
 
+    private void RightbuttonDown(InputAction.CallbackContext input)
+    {
+        if (_isOnPaused)
+        {
+            return;
+        }
+
+        _action.GrabItem();
+    }
+
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
         if (_isOnPaused)
@@ -120,7 +133,6 @@ public class PlayerInputs : MonoBehaviour
         }
 
         _action.PrepareToThrow(_rightJoystick);
-        _action.GrabItem();
     }
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
@@ -250,6 +262,7 @@ public class PlayerInputs : MonoBehaviour
         {
             _leftTrigger.Enable();
             _leftButton.Enable();
+            _rightButton.Enable();
             _rightJoystick.Enable();
             _pauseController.Enable();
             _moveStick.Enable();
@@ -275,6 +288,7 @@ public class PlayerInputs : MonoBehaviour
         {
             _leftTrigger.Disable();
             _leftButton.Disable();
+            _rightButton.Disable();
             _rightJoystick.Disable();
             _pauseController.Disable();
             _moveStick.Disable();
@@ -297,6 +311,7 @@ public class PlayerInputs : MonoBehaviour
         _rightMouse.canceled -= RightClickRelease;
 
         _leftButton.performed -= LeftbuttonDown;
+        _rightButton.performed -= RightbuttonDown;
         _leftTrigger.performed -= LeftTgrClick;
         _leftTrigger.canceled -= LeftTgrRelease;
 
