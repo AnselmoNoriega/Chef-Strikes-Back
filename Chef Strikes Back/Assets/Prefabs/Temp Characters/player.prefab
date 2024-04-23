@@ -378,6 +378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4367353946861778790}
   - component: {fileID: 899982497105419736}
+  - component: {fileID: 1846026832}
   m_Layer: 7
   m_Name: TrailSpawn
   m_TagString: Untagged
@@ -393,7 +394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4325177426433219011}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.01, z: 0}
+  m_LocalPosition: {x: -0.026, y: -0.145, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -419,9 +420,61 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e2b6b9838d50e8c4fb73585e06f2714f, type: 3}
   - {fileID: 21300000, guid: d9891bd76cf8c1a4a97bd6972a81f8fb, type: 3}
   spritePrefab: {fileID: 8124000928845714758, guid: 1dae3b9ba95d6f04684deb8ef73e7b23, type: 3}
-  spawnInterval: 0.1
-  fadeDuration: 1
+  spawnInterval: 0.2
+  fadeDuration: 0.1
   spawnLocationController: {fileID: 4325177426433219011}
+--- !u!212 &1846026832
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4325177426433219011}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &5458735608316875857
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +596,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 741703309, guid: f4f2972f48da80846bbf5d8618befc76, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -704,6 +757,7 @@ MonoBehaviour:
   FlashingTime: 2
   _speedBoostAmount: 1.5
   _animSpeedInBoost: 0.5
+  _boostDuration: 5
   trailEffect: {fileID: 899982497105419736}
 --- !u!1 &8950749653407707308
 GameObject:

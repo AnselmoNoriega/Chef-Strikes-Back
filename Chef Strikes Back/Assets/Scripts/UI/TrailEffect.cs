@@ -32,15 +32,19 @@ public class TrailEffect : MonoBehaviour
     public void StartTrail()
     {
         isActive = true;
+        Debug.Log("Trail effect activated.");
     }
 
     public void StopTrail()
     {
         isActive = false;
-        // Optionally reset all active trail sprites
+        // Initiate a fade-out for each active sprite instead of deactivating them immediately
         foreach (var sprite in pooledSprites)
         {
-            sprite.SetActive(false);
+            if (sprite.activeInHierarchy)
+            {
+                StartCoroutine(FadeOutSprite(sprite));
+            }
         }
     }
 
@@ -50,28 +54,28 @@ public class TrailEffect : MonoBehaviour
         {
             if (!obj.activeInHierarchy)
             {
+                obj.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f); // Reset color to fully opaque
                 return obj;
             }
         }
 
-        // Instantiating a new object if none are available in the pool
         GameObject newObj = Instantiate(spritePrefab, transform.position, Quaternion.identity);
-        newObj.SetActive(false); // Start inactive, activate when needed
+        newObj.SetActive(false);  // Start inactive, activate when needed
         pooledSprites.Add(newObj);
         return newObj;
     }
 
-    private IEnumerator FadeSprite(GameObject spriteObj)
+    private IEnumerator FadeOutSprite(GameObject spriteObj)
     {
         SpriteRenderer sr = spriteObj.GetComponent<SpriteRenderer>();
-        Color initialColor = sr.color;
+        float fadeOutDuration = 1.0f; // Duration for the fade-out effect, adjust as needed
         float elapsed = 0f;
 
-        while (elapsed < fadeDuration)
+        while (elapsed < fadeOutDuration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / fadeDuration;
-            sr.color = new Color(initialColor.r, initialColor.g, initialColor.b, Mathf.Lerp(1f, 0f, t));
+            float t = elapsed / fadeOutDuration;
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, Mathf.Lerp(sr.color.a, 0f, t));
             yield return null;
         }
 
@@ -80,14 +84,42 @@ public class TrailEffect : MonoBehaviour
 
     private void SpawnTrailSprite()
     {
+        if (!isActive)
+            return; // Prevent spawning new sprites if the trail is stopped
+
         GameObject spriteObj = GetPooledSprite();
         spriteObj.transform.position = spawnLocationController ? spawnLocationController.transform.position : transform.position;
         Sprite selectedSprite = trailSprites[Random.Range(0, trailSprites.Count)];
         SpriteRenderer sr = spriteObj.GetComponent<SpriteRenderer>();
         sr.sprite = selectedSprite;
-        sr.sortingLayerName = "Foreground"; // Ensure this is a visible layer
-        sr.color = new Color(1f, 1f, 1f, 1f); // Ensure full visibility
+        sr.color = new Color(1f, 1f, 1f, 1f); // Fully visible when spawned
         spriteObj.SetActive(true);
-        StartCoroutine(FadeSprite(spriteObj));
+        StartCoroutine(FadeSprite(spriteObj)); // Start fading immediately upon spawn
+    }
+
+    public void SetFadeDuration(float duration)
+    {
+        fadeDuration = duration;
+    }
+
+    private IEnumerator FadeSprite(GameObject spriteObj)
+    {
+        SpriteRenderer sr = spriteObj.GetComponent<SpriteRenderer>();
+        float initialFadeDuration = 0.5f; // Shorter duration for initial fade if necessary
+        float elapsed = 0f;
+
+        while (elapsed < initialFadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / initialFadeDuration;
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, Mathf.Lerp(1f, 0f, t));
+            yield return null;
+        }
+
+        // Do not deactivate here if `StopTrail` is handling final fade outs
+        if (isActive)
+        {
+            spriteObj.SetActive(false);
+        }
     }
 }
