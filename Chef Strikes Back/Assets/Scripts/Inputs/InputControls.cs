@@ -179,6 +179,15 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e191a42-8051-4f55-9614-470b7478c3fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -423,6 +432,17 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""action"": ""MoveStick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d026827-6139-4b3c-beef-dfc65326aac3"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -551,6 +571,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         m_Player_LeftButton = m_Player.FindAction("LeftButton", throwIfNotFound: true);
         m_Player_LowerButton = m_Player.FindAction("LowerButton", throwIfNotFound: true);
         m_Player_PauseController = m_Player.FindAction("PauseController", throwIfNotFound: true);
+        m_Player_RightButton = m_Player.FindAction("RightButton", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
@@ -631,6 +652,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftButton;
     private readonly InputAction m_Player_LowerButton;
     private readonly InputAction m_Player_PauseController;
+    private readonly InputAction m_Player_RightButton;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -652,6 +674,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         public InputAction @LeftButton => m_Wrapper.m_Player_LeftButton;
         public InputAction @LowerButton => m_Wrapper.m_Player_LowerButton;
         public InputAction @PauseController => m_Wrapper.m_Player_PauseController;
+        public InputAction @RightButton => m_Wrapper.m_Player_RightButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -712,6 +735,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @PauseController.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseController;
                 @PauseController.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseController;
                 @PauseController.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPauseController;
+                @RightButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightButton;
+                @RightButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightButton;
+                @RightButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightButton;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -767,6 +793,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 @PauseController.started += instance.OnPauseController;
                 @PauseController.performed += instance.OnPauseController;
                 @PauseController.canceled += instance.OnPauseController;
+                @RightButton.started += instance.OnRightButton;
+                @RightButton.performed += instance.OnRightButton;
+                @RightButton.canceled += instance.OnRightButton;
             }
         }
     }
@@ -831,6 +860,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         void OnLeftButton(InputAction.CallbackContext context);
         void OnLowerButton(InputAction.CallbackContext context);
         void OnPauseController(InputAction.CallbackContext context);
+        void OnRightButton(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
