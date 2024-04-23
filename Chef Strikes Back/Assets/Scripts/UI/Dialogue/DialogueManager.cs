@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool dialogueIsPlaying;
 
-    
+    private static DialogueManager instance;
 
     private void Update()
     {
@@ -30,13 +30,23 @@ public class DialogueManager : MonoBehaviour
         
     }
 
-    public void Initialize()
+    private void Awake()
     {
+        if(instance != null)
+        {
+            Debug.LogWarning("Found more than one Dialogue Manager in the scene");
+        }
+        instance = this;
+
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(false);
         dialogueMode = true;
     }
 
+    public static DialogueManager GetInstance()
+    {
+        return instance;
+    }
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);

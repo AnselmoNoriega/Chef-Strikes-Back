@@ -17,7 +17,6 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (isConversation)
         {
-            //ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON);
             isConversation = false;
         }
     }
