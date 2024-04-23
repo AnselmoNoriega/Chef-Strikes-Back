@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -81,6 +82,11 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
+        if(ServiceLocator.Get<DialogueManager>().dialogueMode)
+        {
+            ServiceLocator.Get<DialogueManager>().ContinueStory();
+            return;
+        }
 
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
@@ -149,6 +155,7 @@ public class PlayerInputs : MonoBehaviour
             _isOnPaused = true;
             Time.timeScale = 0;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Pause Menu");
+            ServiceLocator.Get<SceneControl>().SetButtonSelected(0);
         }
         else
         {

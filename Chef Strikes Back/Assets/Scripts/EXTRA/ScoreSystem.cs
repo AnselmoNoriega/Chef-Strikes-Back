@@ -32,12 +32,13 @@ public class ScoreSystem : MonoBehaviour
             ServiceLocator.Get<GameManager>().FullStarsForLevel(level);
         }
 
-        while (score > 9 && starNum < 5)
+        do
         {
             Instantiate(_star, _gridParent);
             score -= 10;
             ++starNum;
         }
+        while (score > 9 && starNum < 5);
 
         if (score - 5 >= 0 && starNum < 5)
         {
