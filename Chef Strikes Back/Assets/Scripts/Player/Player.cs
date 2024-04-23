@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 
     private void CheckFloorType()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.2f);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 0.25f);
 
         foreach (Collider2D hit in hits)
         {
@@ -193,5 +193,10 @@ public class Player : MonoBehaviour
         {
             _floorSpeed = Vector2.zero;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, 0.1f);
     }
 }

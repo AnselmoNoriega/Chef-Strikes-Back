@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class SceneControl : MonoBehaviour
 {
@@ -13,23 +12,16 @@ public class SceneControl : MonoBehaviour
     private int _currentLevelSelected;
 
     [Space, Header("Level UI")]
-    [SerializeField] private GameObject[] _firstSelectedButtons;
+    [SerializeField] private GameObject[] _firstSelectedButton;
 
     private void Start()
     {
         _gameManager = ServiceLocator.Get<GameManager>();
-        _gameManager.UI_Navegation.UIEnter(_firstSelectedButtons);
-        StartCoroutine(SetFirstButton());
+        SetButtonSelected(0);
         if (_buttons.Count > 0)
         {
             _gameManager.SetLockedLevels(_buttons);
         }
-    }
-
-    private IEnumerator SetFirstButton()
-    {
-        yield return new WaitForSeconds(0.2f);
-        _gameManager.UI_Navegation.SelectButton(0);
     }
 
     public void GoToEndScene()
@@ -50,7 +42,13 @@ public class SceneControl : MonoBehaviour
 
     public void SetButtonSelected(int uiLayer)
     {
-        _gameManager.UI_Navegation.SelectButton(uiLayer);
+        if (_firstSelectedButton != null)
+        {
+            if (_firstSelectedButton.Length > 0)
+            {
+                _gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]);
+            }
+        }
     }
 
     public void Go2Level(int level)
@@ -60,8 +58,6 @@ public class SceneControl : MonoBehaviour
             _currentLevelSelected = level;
             _purchasePanel.SetActive(true);
             SetButtonSelected(4);
-
-            SetButtonsInteractable(false);
         }
         else
         {
@@ -78,21 +74,10 @@ public class SceneControl : MonoBehaviour
             var colors = _buttons[_currentLevelSelected].colors;
             colors.normalColor = Color.white;
             _buttons[_currentLevelSelected].colors = colors;
-            SetButtonSelected(3);
-
-            SetButtonsInteractable(true);
         }
         else
         {
             _noMoneyText.SetActive(true);
-        }
-    }
-
-    public void SetButtonsInteractable(bool interactable)
-    {
-        foreach (var button in _buttons)
-        {
-            button.interactable = interactable;
         }
     }
 
