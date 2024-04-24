@@ -135,6 +135,8 @@ public class PlayerThrowing : StateClass<Player>
     public void Enter(Player agent)
     {
         _variables = agent.Variables;
+        agent.Legs.SetActive(true);
+        agent.PlayerAnimator.SetBool("IsThrowing", true);
 
         agent.Rb.velocity = Vector2.zero;
         agent.PlayerAnimator.speed -= _variables.ThrowAnimSpeed;
@@ -164,8 +166,10 @@ public class PlayerThrowing : StateClass<Player>
     public void Exit(Player agent)
     {
         ServiceLocator.Get<AudioManager>().PlaySource("throw");
+        agent.PlayerAnimator.SetBool("IsThrowing", false);
         _variables.ThrowDirection = Vector2.zero;
         agent.PlayerAnimator.speed += _variables.ThrowAnimSpeed;
+        agent.Legs.SetActive(false);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)
