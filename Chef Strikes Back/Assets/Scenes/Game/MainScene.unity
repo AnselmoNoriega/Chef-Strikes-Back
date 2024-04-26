@@ -732,8 +732,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24119476}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.61, y: 3.2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.6100001, y: 3.1999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7685,24 +7685,36 @@ PrefabInstance:
       propertyPath: _narrivativepos.Array.data[0]
       value: 
       objectReference: {fileID: 24119476}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9030363438698883342, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
---- !u!114 &1209050867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9030363438698883342, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
+--- !u!1 &1209050867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9030363438698883328, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
   m_PrefabInstance: {fileID: 1209050866}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99c82f2a1f2aa1b47a208fd9fde01bdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1209050868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1000603084825942754, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
   m_PrefabInstance: {fileID: 1209050866}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1209050869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209050867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb942e29db048b443aa0ef4307da8d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _followSpeed: 0
+  _zoomSpeed: 0
+  _narrativePos:
+  - {fileID: 24119476}
+  _followPlayer: 1
 --- !u!1 &1219672283
 GameObject:
   m_ObjectHideFlags: 0
@@ -18816,7 +18828,7 @@ PrefabInstance:
     - target: {fileID: 2927658306438362226, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _cameraController
       value: 
-      objectReference: {fileID: 1209050867}
+      objectReference: {fileID: 0}
     - target: {fileID: 5644264936419189592, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _firstSelectedButton.Array.size
       value: 3
