@@ -15,7 +15,7 @@ public class TutorialCameraManager : MonoBehaviour
     private PlayerVariables _playerVariables;
 
     //[SerializeField] private List<GameObject> _narrativePos;
-    [SerializeField] public bool FollowPlayer = true;
+    [SerializeField] private bool _followPlayer = true;
 
     public void Initialize()
     {
@@ -28,11 +28,11 @@ public class TutorialCameraManager : MonoBehaviour
     }
     void Update()
     {
-        if (!ShouldFollowPlayer())
+        if (!_followPlayer)
         {
             StartNarrativeMovement();
         }
-        else if (ShouldFollowPlayer())
+        else if (_followPlayer)
         {
             GoFollowPlayer();
         }
@@ -55,7 +55,7 @@ public class TutorialCameraManager : MonoBehaviour
 
     private void StartNarrativeMovement(int index = 0)
     {
-        FollowPlayer = false;
+        _followPlayer = false;
         var TLM = ServiceLocator.Get<TutorialLoopManager>();
         if (index < TLM.FocusPositions.Count)
         {
@@ -69,7 +69,7 @@ public class TutorialCameraManager : MonoBehaviour
                 }
                 else
                 {
-                    FollowPlayer = true;
+                    _followPlayer = true;
                 }
             }
         }
@@ -83,8 +83,8 @@ public class TutorialCameraManager : MonoBehaviour
         _camHeight = Camera.main.orthographicSize;
         _camWidth = Camera.main.aspect * _camHeight;
     }
-    private bool ShouldFollowPlayer()
+    public void SetFollowPlayer(bool shouldfollow)
     {
-        return FollowPlayer;
+        _followPlayer = shouldfollow;
     }
 }
