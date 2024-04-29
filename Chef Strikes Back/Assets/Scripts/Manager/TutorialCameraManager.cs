@@ -14,40 +14,77 @@ public class TutorialCameraManager : MonoBehaviour
     private Transform _playerTransform;
     private PlayerVariables _playerVariables;
 
-    [SerializeField] private List<GameObject> _narrativePos;
-    [SerializeField] private bool _followPlayer = true;
+    //[SerializeField] private List<GameObject> _narrativePos;
+    [SerializeField] public bool FollowPlayer = true;
 
-    public void MoveThePos(Vector3 position)
+    public void Initialize()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _targetPosition = position;
-            _followPlayer = false;
+        _camHeight = Camera.main.orthographicSize;
+        _camWidth = Camera.main.aspect * _camHeight;
 
-            Vector2 dz = _zoomSpeed * Time.deltaTime * (-new Vector2(5.0f, 5.0f));
-            Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
-
-            _camHeight = Camera.main.orthographicSize;
-            _camWidth = Camera.main.aspect * _camHeight;
-        }
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            _followPlayer = true;
-        }
+        var player = ServiceLocator.Get<Player>();
+        _playerTransform = player.transform;
+        _playerVariables = player.GetComponent<PlayerVariables>();
     }
     void Update()
     {
-        if (_narrativePos.Count > 0)
+        if (!ShouldFollowPlayer())
         {
-            foreach (var pos in _narrativePos)
+            StartNarrativeMovement();
+        }
+        else if (ShouldFollowPlayer())
+        {
+            GoFollowPlayer();
+        }
+    }
+
+    private void GoFollowPlayer()
+    {
+        if (_playerTransform != null)
+        {
+            _targetPosition = _playerTransform.position;
+            MoveCameraToPosition(_targetPosition);
+        }
+    }
+
+    private void MoveCameraToPosition(Vector3 position)
+    {
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(position.x, position.y, Camera.main.transform.position.z), _followSpeed * Time.deltaTime);
+        ZoomIn();
+    }
+
+    private void StartNarrativeMovement(int index = 0)
+    {
+        FollowPlayer = false;
+        var TLM = ServiceLocator.Get<TutorialLoopManager>();
+        if (index < TLM.FocusPositions.Count)
+        {
+            _targetPosition = TLM.FocusPositions[index].transform.position;
+            MoveCameraToPosition(_targetPosition);        
+            if (Vector3.Distance(Camera.main.transform.position, _targetPosition) < 0.1f)
             {
-                Vector3 newpos = pos.transform.position;
-                MoveThePos(newpos);
+                if (index + 1 < TLM.FocusPositions.Count)
+                {
+                    StartNarrativeMovement(index + 1);
+                }
+                else
+                {
+                    FollowPlayer = true;
+                }
             }
         }
-        if (_followPlayer)
-        {
-            _targetPosition = (Vector2)_playerTransform.position;
-        }
+    }
+
+    public void ZoomIn()
+    {
+        Vector2 dz = _zoomSpeed * Time.deltaTime * new Vector2(-5.0f, -5.0f);
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
+
+        _camHeight = Camera.main.orthographicSize;
+        _camWidth = Camera.main.aspect * _camHeight;
+    }
+    private bool ShouldFollowPlayer()
+    {
+        return FollowPlayer;
     }
 }

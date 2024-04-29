@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private GameObject _customerPrefabs;
+    [SerializeField] public List<GameObject> FocusPositions;
     bool isConversation;
 
     [Header("Ink JSON")]
