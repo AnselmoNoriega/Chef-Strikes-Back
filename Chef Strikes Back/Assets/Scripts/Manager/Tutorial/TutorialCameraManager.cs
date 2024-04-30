@@ -8,12 +8,14 @@ public class TutorialCameraManager : MonoBehaviour
     private Vector3 _targetPosition;
     private float _camHeight;
     private float _camWidth;
-    [SerializeField] private bool _followPlayer = true;
 
     [Space]
     [SerializeField] private PolygonCollider2D _boundaryPolygon;
     private Transform _playerTransform;
+    private Transform _targetTransform;
+    private Transform _movingTargetTransform;
     private PlayerVariables _playerVariables;
+
     public void Initialize()
     {
         _camHeight = Camera.main.orthographicSize;
@@ -28,22 +30,23 @@ public class TutorialCameraManager : MonoBehaviour
         if (_followPlayer)
         {
             GoFollowPlayer();
-            StayInsideBound();
             MoveToThrowDir();
-        }
-        else
-        {
-            StartNarrativeMovement();
+            StayInsideBound();
         }
     }
 
-    private void GoFollowPlayer()
+    public void FollowTarget(Transform target)
     {
-        if (_playerTransform != null)
-        {
-            _targetPosition = _playerTransform.position;
-            MoveCameraToPosition(_targetPosition);
-        }
+        _targetTransform = target;
+        _movingTargetTransform = null;
+        MoveCameraToPosition(_targetTransform.position);
+    }
+
+    public void Go2Target(Transform target)
+    {
+        _targetTransform = null;
+        _movingTargetTransform = target;
+        MoveCameraToPosition(_movingTargetTransform.position);
     }
 
     private void MoveCameraToPosition(Vector3 position)
@@ -52,27 +55,6 @@ public class TutorialCameraManager : MonoBehaviour
         ZoomIn();
     }
 
-    private void StartNarrativeMovement(int index = 0)
-    {
-        _followPlayer = false;
-        var tlm = ServiceLocator.Get<TutorialLoopManager>();
-        if (index < tlm.FocusPositions.Count)
-        {
-            _targetPosition = tlm.FocusPositions[index].transform.position;
-            MoveCameraToPosition(_targetPosition);
-            if (Vector3.Distance(Camera.main.transform.position, _targetPosition) < 0.1f)
-            {
-                if (index + 1 < tlm.FocusPositions.Count)
-                {
-                    StartNarrativeMovement(index + 1);
-                }
-                else
-                {
-                    _followPlayer = true;
-                }
-            }
-        }
-    }
     private void MoveToThrowDir()
     {
         if (_targetPosition == transform.position)
@@ -81,6 +63,7 @@ public class TutorialCameraManager : MonoBehaviour
         }
         _targetPosition = (Vector2)_playerTransform.position + _playerVariables.ThrowDirection;
     }
+
     private void StayInsideBound()
     {
         _targetPosition.x = Mathf.Clamp(_targetPosition.x, _boundaryPolygon.bounds.min.x + _camWidth, _boundaryPolygon.bounds.max.x - _camWidth);
@@ -94,9 +77,5 @@ public class TutorialCameraManager : MonoBehaviour
 
         _camHeight = Camera.main.orthographicSize;
         _camWidth = Camera.main.aspect * _camHeight;
-    }
-    public void SetFollowPlayer(bool shouldfollow)
-    {
-        _followPlayer = shouldfollow;
     }
 }

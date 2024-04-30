@@ -36,6 +36,7 @@ public class TutorialLevelManager : MonoBehaviour
         ServiceLocator.Register<StatefulObject>(_statefulObject);
         ServiceLocator.Register<TutorialCameraManager>(_tutorialCamerManager);
 
+        _dialogueManager.Initialize();
         _audioManager.Initialize();
         _player.Initialize();
         _tutorialCamerManager.Initialize();
