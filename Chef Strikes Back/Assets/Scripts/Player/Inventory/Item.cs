@@ -162,36 +162,54 @@ public class Item : MonoBehaviour
     private int _collisionCount = 0;
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Increase collision count on each collision
-        _collisionCount++;
-        if (_collisionCount == 2) // Assuming you want to trigger on every second collision
+        
+        _collisionCount++; 
+
+        if (_collisionCount == 2) 
         {
-            // Reset the collision count
+            
             _collisionCount = 0;
 
-            // Check if there are contact points and the CollisionParticles system is assigned
-            if (collision.contactCount > 0 && CollisionParticles != null)
+            
+            if (collision.contactCount > 0)
             {
-                // Get the first contact point
+                
                 ContactPoint2D contact = collision.GetContact(0);
                 Vector2 collisionPoint = contact.point;
-
-                // Instantiate the particle system at the collision point
-                ParticleSystem instantiatedParticles = Instantiate(CollisionParticles, collisionPoint, Quaternion.identity);
-
-                // Optionally, align the particle system with the collision normal
-                instantiatedParticles.transform.rotation = Quaternion.FromToRotation(Vector3.forward, contact.normal);
-
-                // Play the particle system
-                instantiatedParticles.Play();
-
-                // Destroy the particle system after it has finished
-                Destroy(instantiatedParticles.gameObject, instantiatedParticles.main.duration + 2.0f);
+                TriggerParticles(collisionPoint, contact.normal);
             }
             else
             {
-                Debug.LogError("CollisionParticles prefab is not assigned or no contact points available.");
+                Debug.LogError("No contact points available for collision.");
             }
+        }
+
+        
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            
+            if (collision.contactCount > 0)
+            {
+                ContactPoint2D contact = collision.GetContact(0);
+                Vector2 collisionPoint = contact.point;
+                TriggerParticles(collisionPoint, contact.normal);
+            }
+        }
+    }
+
+    private void TriggerParticles(Vector2 position, Vector3 normal)
+    {
+        if (CollisionParticles != null)
+        {
+            
+            ParticleSystem instantiatedParticles = Instantiate(CollisionParticles, position, Quaternion.identity);
+            instantiatedParticles.transform.rotation = Quaternion.FromToRotation(Vector3.forward, normal);
+            instantiatedParticles.Play();
+            Destroy(instantiatedParticles.gameObject, instantiatedParticles.main.duration + 2.0f);
+        }
+        else
+        {
+            Debug.LogError("CollisionParticles prefab is not assigned.");
         }
     }
 }
