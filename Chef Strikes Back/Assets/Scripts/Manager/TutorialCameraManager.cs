@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialCameraManager : MonoBehaviour
@@ -12,9 +10,7 @@ public class TutorialCameraManager : MonoBehaviour
     private float _camWidth;
 
     private Transform _playerTransform;
-    private PlayerVariables _playerVariables;
 
-    //[SerializeField] private List<GameObject> _narrativePos;
     [SerializeField] private bool _followPlayer = true;
 
     public void Initialize()
@@ -24,17 +20,16 @@ public class TutorialCameraManager : MonoBehaviour
 
         var player = ServiceLocator.Get<Player>();
         _playerTransform = player.transform;
-        _playerVariables = player.GetComponent<PlayerVariables>();
     }
     void Update()
     {
-        if (!_followPlayer)
-        {
-            StartNarrativeMovement();
-        }
-        else if (_followPlayer)
+        if (_followPlayer)
         {
             GoFollowPlayer();
+        }
+        else
+        {
+            StartNarrativeMovement();
         }
     }
 
@@ -56,14 +51,14 @@ public class TutorialCameraManager : MonoBehaviour
     private void StartNarrativeMovement(int index = 0)
     {
         _followPlayer = false;
-        var TLM = ServiceLocator.Get<TutorialLoopManager>();
-        if (index < TLM.FocusPositions.Count)
+        var tlm = ServiceLocator.Get<TutorialLoopManager>();
+        if (index < tlm.FocusPositions.Count)
         {
-            _targetPosition = TLM.FocusPositions[index].transform.position;
+            _targetPosition = tlm.FocusPositions[index].transform.position;
             MoveCameraToPosition(_targetPosition);        
             if (Vector3.Distance(Camera.main.transform.position, _targetPosition) < 0.1f)
             {
-                if (index + 1 < TLM.FocusPositions.Count)
+                if (index + 1 < tlm.FocusPositions.Count)
                 {
                     StartNarrativeMovement(index + 1);
                 }

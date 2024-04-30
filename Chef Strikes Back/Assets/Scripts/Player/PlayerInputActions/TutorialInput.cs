@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class TutorialInput : MonoBehaviour
 {
+    [SerializeField] private DialogueManager _dialogueManager;
+
     private InputControls _inputManager;
     private InputAction _leftMouse;
 
@@ -20,7 +22,7 @@ public class TutorialInput : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        DialogueManager.GetInstance().ContinueStory();
+        _dialogueManager.ContinueStory();
     }
 
    

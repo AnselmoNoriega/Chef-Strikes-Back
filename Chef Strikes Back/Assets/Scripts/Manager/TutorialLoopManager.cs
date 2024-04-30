@@ -1,26 +1,27 @@
-using DG.Tweening.Core.Easing;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialLoopManager : MonoBehaviour
 {
+    [Header("Game Loop")]
     [SerializeField] private GameObject _customerPrefabs;
-    [SerializeField] public List<GameObject> FocusPositions;
-    bool isConversation;
 
-    [Header("Ink JSON")]
-    [SerializeField] private TextAsset inkJSON;
+    [SerializeField] public List<GameObject> FocusPositions;
+
+    [Header("Ink Text")]
+    [SerializeField] private DialogueManager _dialogueManager;
+    [SerializeField] private List<TextAsset> inkJSON;
+
     private void Awake()
     {
         Initialize();
-        
     }
 
     private void Start()
     {
-        EnterConversation(inkJSON);
+
     }
+
     private void Update()
     {
         //flow of tutorial
@@ -29,11 +30,12 @@ public class TutorialLoopManager : MonoBehaviour
         //camera
         //spawn a Customer
     }
+
     private void Initialize()
     {
         //initialize variable
-        isConversation = true;
     }
+
     private void SpawnCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
@@ -42,7 +44,7 @@ public class TutorialLoopManager : MonoBehaviour
 
     private void EnterConversation(TextAsset _inkJSON)
     {
-        DialogueManager.GetInstance().EnterDialogueMode(_inkJSON);
+        _dialogueManager.EnterDialogueMode(_inkJSON);
     }
 
 }

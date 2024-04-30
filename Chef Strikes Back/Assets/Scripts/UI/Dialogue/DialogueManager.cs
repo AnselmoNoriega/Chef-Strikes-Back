@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using Ink.Runtime;
-using UnityEngine.AI;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -13,15 +11,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
 
-    
-
     private Story currentStory;
 
     public bool dialogueMode;
 
     public bool dialogueIsPlaying;
-
-    private static DialogueManager instance;
 
     private const string SPEAKER_TAG = "speaker";
 
@@ -35,26 +29,15 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
-        
     }
 
     private void Awake()
     {
-        if(instance != null)
-        {
-            Debug.LogWarning("Found more than one Dialogue Manager in the scene");
-        }
-        instance = this;
-
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(false);
         dialogueMode = true;
     }
 
-    public static DialogueManager GetInstance()
-    {
-        return instance;
-    }
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
