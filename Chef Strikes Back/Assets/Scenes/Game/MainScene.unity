@@ -3037,7 +3037,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _customerPrefabs: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
-  inkJSON: {fileID: 4900000, guid: f410d66ae82126f45ba9c67319463c53, type: 3}
+  FocusPositions: []
+  _dialogueManager: {fileID: 0}
+  inkJSON:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &416248982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3050,6 +3055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bea085fe18fca34781ceac74fbd2b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogueManager: {fileID: 0}
 --- !u!1 &444968875
 GameObject:
   m_ObjectHideFlags: 0
@@ -7710,11 +7716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb942e29db048b443aa0ef4307da8d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _followSpeed: 0
-  _zoomSpeed: 0
-  _narrativePos:
-  - {fileID: 24119476}
+  _followSpeed: 0.009
+  _zoomSpeed: 1500
   _followPlayer: 1
+  _boundaryPolygon: {fileID: 0}
 --- !u!1 &1219672283
 GameObject:
   m_ObjectHideFlags: 0
