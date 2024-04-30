@@ -16,6 +16,11 @@ public class AttackingCustomer : StateClass<AI>
     {
         if (Time.time - _countDown >= 0.25f && !_hasAttacked)
         {
+            if (agent.IsDead())  // Check if the AI is dead
+            {
+                return;  // Exit early if dead, preventing attack
+            }
+
             _hasAttacked = true;
             var player = ServiceLocator.Get<Player>();
             Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;

@@ -69,6 +69,7 @@ public class AI : MonoBehaviour
     private bool _IsDead = false;
     [SerializeField] private Animator _animator;
 
+
     private void Awake()
     {
         Indicator = GetComponent<Indicator>();
@@ -275,5 +276,8 @@ public class AI : MonoBehaviour
         _moneyUIParticleSystem.Play();
     }
 
-    
+    public bool IsDead()
+    {
+        return _IsDead;
+    }
 }
