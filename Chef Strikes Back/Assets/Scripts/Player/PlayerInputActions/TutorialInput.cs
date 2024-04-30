@@ -22,7 +22,10 @@ public class TutorialInput : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        _dialogueManager.ContinueStory();
+        if(_dialogueManager.dialogueIsPlaying)
+        {
+            _dialogueManager.ContinueStory();
+        }
     }
 
    

@@ -12,16 +12,7 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private DialogueManager _dialogueManager;
     [SerializeField] private List<TextAsset> inkJSON;
 
-    private void Awake()
-    {
-        Initialize();
-    }
-
-    private void Start()
-    {
-
-    }
-
+    
     private void Update()
     {
         //flow of tutorial

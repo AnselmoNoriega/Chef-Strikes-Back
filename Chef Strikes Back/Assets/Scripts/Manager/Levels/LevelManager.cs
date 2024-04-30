@@ -3,7 +3,6 @@ using UnityEngine;
 //I hate Marc
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private TileManager _tileManager = null;
     [SerializeField] private GameLoopManager _gameLoopManager = null;
     [SerializeField] private LevelTimer _timeManger = null;
     [SerializeField] private Player _player = null;
@@ -33,7 +32,6 @@ public class LevelManager : MonoBehaviour
 
     private void Init()
     {
-        ServiceLocator.Register<TileManager>(_tileManager);
         ServiceLocator.Register<GameLoopManager>(_gameLoopManager);
         ServiceLocator.Register<LevelTimer>(_timeManger);
         ServiceLocator.Register<AudioManager>(_audioManager);
@@ -44,7 +42,6 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Register<StatefulObject>(_statefulObject);
 
         _audioManager.Initialize();
-        _tileManager.Initialize();
         _gameLoopManager.Initialize();
         _timeManger.Initialize();  
         _player.Initialize();
@@ -53,7 +50,6 @@ public class LevelManager : MonoBehaviour
     }
     private void OnDestroy()
     {
-        ServiceLocator.Unregister<TileManager>();
         ServiceLocator.Unregister<GameLoopManager>();
         ServiceLocator.Unregister<LevelTimer>();
         ServiceLocator.Unregister<AudioManager>();
