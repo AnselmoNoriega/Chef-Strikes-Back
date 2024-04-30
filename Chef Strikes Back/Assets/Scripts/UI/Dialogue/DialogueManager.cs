@@ -23,14 +23,7 @@ public class DialogueManager : MonoBehaviour
 
     private const string LAYOUT_TAG = "layout";
 
-    private void Update()
-    {
-        if (!dialogueIsPlaying)
-        {
-            return;
-        }
-    }
-
+   
     private void Awake()
     {
         dialogueIsPlaying = true;
