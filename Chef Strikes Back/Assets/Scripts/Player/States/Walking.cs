@@ -27,7 +27,8 @@ public class PlayerWalking : StateClass<Player>
 
         agent.PlayerAnimator.SetBool("isWalking", true);
         agent.Legs.GetComponent<Animator>().SetBool("IsWalking", true);
-        _audioManager.PlaySource("walk");
+        ServiceLocator.Get<Player>().IsWalking = true;
+        _audioManager.PlaySource(ServiceLocator.Get<Player>().soundName);
         _canvasManager.UITransparent();
     }
 
@@ -85,4 +86,5 @@ public class PlayerWalking : StateClass<Player>
         _playerRB.velocity = _moveDirection * _playerRB.velocity.magnitude;
         _direction = newDirection;
     }
+    
 }

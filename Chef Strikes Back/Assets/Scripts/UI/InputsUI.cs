@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,8 +10,9 @@ public class InputsUI : MonoBehaviour
     private List<GameObject> _UIbuttons = new List<GameObject>();
     private GameObject _firstSelectedButton;
 
-    public void SetSelected(GameObject obj)
+    public IEnumerator SetSelected(GameObject obj)
     {
+        yield return new WaitForSeconds(0.1f);
         _firstSelectedButton = obj;
         _eventSystem.SetSelectedGameObject(obj);
     }
