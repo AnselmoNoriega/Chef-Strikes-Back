@@ -7,7 +7,7 @@ public class TutorialLevelManager : MonoBehaviour
 {
     [SerializeField] private AIManager _AIManager = null;
     [SerializeField] private Player _player = null;
-    [SerializeField] private LevelTimer _timeManager = null;
+    [SerializeField] private TutorialTimer _timeManager = null;
     [SerializeField] private TutorialLoopManager _tutorialLoopManager = null;
     [SerializeField] private AudioManager _audioManager = null;
     [SerializeField] private CanvasManager _canvasManager = null;
