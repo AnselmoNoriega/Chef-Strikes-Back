@@ -22,10 +22,11 @@ public class Player : MonoBehaviour
     [Space, Header("State Info")]
     public PlayerStates PlayerState;
     public PlayerActions PlayerAction;
+    public string soundName;
+    public bool IsWalking = false;
 
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
-
     [Space, Header("Conections")]
     private CanvasManager _canvasManager;
     private GameManager _gameManager;

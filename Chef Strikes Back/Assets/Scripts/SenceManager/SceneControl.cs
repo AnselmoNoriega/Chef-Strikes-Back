@@ -46,7 +46,7 @@ public class SceneControl : MonoBehaviour
         {
             if (_firstSelectedButton.Length > 0)
             {
-                _gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]);
+                StartCoroutine(_gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]));
             }
         }
     }
