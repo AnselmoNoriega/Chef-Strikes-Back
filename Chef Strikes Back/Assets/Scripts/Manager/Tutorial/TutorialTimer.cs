@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-/*[Serializable]
+[Serializable]
 public struct SpawningTimer
 {
     public float Time;
     public int SpawningTime;
-}*/
+}
 
-public class LevelTimer : MonoBehaviour
+public class TutorialTimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textTime;
     [SerializeField] private Light2D worldLight;
@@ -63,19 +63,19 @@ public class LevelTimer : MonoBehaviour
 
     private void SpawnTimeChangeBasedOnTimer()
     {
-        float time;
-        for (int i = 0; i < _spawningTimes.Count; i++)
-        {
-            time = (elapsTimeStart * 60) - _spawningTimes[_spawningTimes.Count - 1 - i].Time;
-            if (time >= (elapsedTime * 60))
-            {
-                var loopManager = ServiceLocator.Get<GameLoopManager>();
-                loopManager.ChangeSpawnTime(_spawningTimes[_spawningTimes.Count - 1 - i].SpawningTime);
-                return;
-            }
-        }
+        //float time;
+        //for (int i = 0; i < _spawningTimes.Count; i++)
+        //{
+        //    time = (elapsTimeStart * 60) - _spawningTimes[_spawningTimes.Count - 1 - i].Time;
+        //    if (time >= (elapsedTime * 60))
+        //    {
+        //        var loopManager = ServiceLocator.Get<GameLoopManager>();
+        //        loopManager.ChangeSpawnTime(_spawningTimes[_spawningTimes.Count - 1 - i].SpawningTime);
+        //        return;
+        //    }
+        //}
     }
 
     //60-0>59.999
-    //60 - 5 > 54.999 
+    //60 - 5 > 54.999  
 }
