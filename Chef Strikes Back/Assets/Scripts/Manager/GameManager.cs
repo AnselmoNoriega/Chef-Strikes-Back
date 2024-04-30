@@ -177,6 +177,18 @@ public class GameManager : MonoBehaviour
 
     public void SetLockedLevels(List<Button> buttons)
     {
+        if(_isInDebug)
+        {
+            for (int i = 0; i < _levelsLocked.Count; ++i)
+            {
+                if (_levelsLocked[i].IsLock)
+                {
+                    _levelsLocked[i].IsLock = false;
+                }
+            }
+            return;
+        }
+
         for (int i = 0; i < _levelsLocked.Count; ++i)
         {
             if (_levelsLocked[i].IsLock)
