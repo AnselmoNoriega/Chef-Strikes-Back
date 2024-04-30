@@ -85,6 +85,7 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
+        
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 
