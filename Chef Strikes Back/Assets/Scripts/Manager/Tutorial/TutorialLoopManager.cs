@@ -4,7 +4,7 @@ using UnityEngine;
 public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private TutorialCameraManager _tutorialCameraManager;
-    [SerializeField] private List<GameObject> _focusPositions;
+    [SerializeField] private List<Transform> _focusPositions;
 
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
@@ -33,20 +33,13 @@ public class TutorialLoopManager : MonoBehaviour
     private void EnterConversation(TextAsset _inkJSON)
     {
         ServiceLocator.Get<DialogueManager>().EnterDialogueMode(_inkJSON);
+        ChangeFocusTarget();
     }
 
-    public void FinishCurrentDialogue()
+    public void ChangeFocusTarget()
     {
         ++_tutorialState;
-
-        switch (_tutorialState)
-        {
-            case 1:
-                {
-                    _tutorialCameraManager.
-                }
-                break;
-        }
+        _tutorialCameraManager.ChangeTarget(_focusPositions[_tutorialState]);
     }
 
 }

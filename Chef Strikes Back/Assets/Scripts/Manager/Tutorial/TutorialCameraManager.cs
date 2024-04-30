@@ -13,45 +13,32 @@ public class TutorialCameraManager : MonoBehaviour
     [SerializeField] private PolygonCollider2D _boundaryPolygon;
     private Transform _playerTransform;
     private Transform _targetTransform;
-    private Transform _movingTargetTransform;
     private PlayerVariables _playerVariables;
 
     public void Initialize()
     {
         _camHeight = Camera.main.orthographicSize;
         _camWidth = Camera.main.aspect * _camHeight;
-
         var player = ServiceLocator.Get<Player>();
         _playerTransform = player.transform;
         _playerVariables = player.GetComponent<PlayerVariables>();
+        _targetTransform = _playerTransform;
     }
     void Update()
     {
-        if (_followPlayer)
-        {
-            GoFollowPlayer();
-            MoveToThrowDir();
-            StayInsideBound();
-        }
+        MoveToThrowDir();
+        MoveCameraToPosition();
+        StayInsideBound();
     }
 
-    public void FollowTarget(Transform target)
+    public void ChangeTarget(Transform target)
     {
         _targetTransform = target;
-        _movingTargetTransform = null;
-        MoveCameraToPosition(_targetTransform.position);
     }
 
-    public void Go2Target(Transform target)
+    private void MoveCameraToPosition()
     {
-        _targetTransform = null;
-        _movingTargetTransform = target;
-        MoveCameraToPosition(_movingTargetTransform.position);
-    }
-
-    private void MoveCameraToPosition(Vector3 position)
-    {
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(position.x, position.y, Camera.main.transform.position.z), _followSpeed * Time.deltaTime);
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(_targetTransform.position.x, _targetTransform.position.y, Camera.main.transform.position.z), _followSpeed * Time.deltaTime);
         ZoomIn();
     }
 
@@ -70,9 +57,10 @@ public class TutorialCameraManager : MonoBehaviour
         _targetPosition.y = Mathf.Clamp(_targetPosition.y, _boundaryPolygon.bounds.min.y + _camHeight, _boundaryPolygon.bounds.max.y - _camHeight);
         _targetPosition.z = -1.0f;
     }
-    public void ZoomIn()
+
+    public void ZoomIn(float x  = -5.0f, float y = -5.0f)
     {
-        Vector2 dz = _zoomSpeed * Time.deltaTime * new Vector2(-5.0f, -5.0f);
+        Vector2 dz = _zoomSpeed * Time.deltaTime * new Vector2(x, y);
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);
 
         _camHeight = Camera.main.orthographicSize;
