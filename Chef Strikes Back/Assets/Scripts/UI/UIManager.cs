@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _PauseSelectFirst;
     [SerializeField] private GameObject _HowToPlaySelectFirst;
 
+    [SerializeField] private bool _useConfetti = false;
+
     private void Start()
     {
         if (_moneyText != null)
@@ -38,5 +40,11 @@ public class UIManager : MonoBehaviour
     public void ActiveateController()
     {
         ServiceLocator.Get<GameManager>().ToggleController();
+    }
+
+    public void ToggleConfettiEffect()
+    {
+        AI.ToggleUseConfetti(!AI.UseConfetti); // Toggle and apply new state
+        Debug.Log("Confetti On");
     }
 }

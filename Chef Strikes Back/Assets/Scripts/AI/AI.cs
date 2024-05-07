@@ -64,14 +64,19 @@ public class AI : MonoBehaviour
 
     [Space, Header("Particles")]
     public ParticleSystem BloodParticles;
+    public ParticleSystem ConfettiParticles;
     public ParticleSystem HappyParticles;
     public ParticleSystem AngryParticles;
     private bool _IsDead = false;
     [SerializeField] private Animator _animator;
 
+    public static bool UseConfetti { get; private set; } = false;
+
 
     private void Awake()
     {
+        
+
         Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
         _stateManager = new StateMachine<AI>(this);
@@ -132,6 +137,11 @@ public class AI : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ToggleParticleEffect(UseConfetti);
+
+    }
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
@@ -158,22 +168,19 @@ public class AI : MonoBehaviour
         if (!_IsDead)
         {
             _IsDead = true;
-            ChangeState(AIState.Rage);
-            _animator.SetBool("IsDead", true); 
+            ChangeState(AIState.Rage); // Assuming the dying state triggers here or similar
+            _animator.SetBool("IsDead", true);
 
             Speed = 0;
 
-            
             if (Rb2d != null)
             {
                 Rb2d.velocity = Vector2.zero;
             }
 
-            // Deactivate blood particles if active
-            if (BloodParticles.gameObject.activeSelf)
-            {
-                BloodParticles.gameObject.SetActive(false);
-            }
+            // Deactivate both particle systems when dying
+            BloodParticles.gameObject.SetActive(false);
+            ConfettiParticles.gameObject.SetActive(false);
 
             StartCoroutine(WaitForAnimationToEnd());
         }
@@ -187,34 +194,43 @@ public class AI : MonoBehaviour
 
     public void Damage(int amt)
     {
-        BloodParticles.Play();
+        if (!_IsDead)  // Ensure no changes if AI is already dead
+        {
+            ParticleSystem particlesToPlay = UseConfetti ? ConfettiParticles : BloodParticles;
 
+            particlesToPlay.gameObject.SetActive(true);
+            particlesToPlay.Play();
+
+            _health -= amt;
+            if (_health <= 0)
+            {
+                DestroyAI();
+            }
+
+            StartCoroutine(SpriteFlashing());
+        }
+    }
+
+    private void ApplyDamageEffects(int amt)
+    {
+        // Remaining damage logic, health reduction and state changes
         if ((int)state >= 3 && (int)state <= 8)
         {
             _health -= amt;
-            
-
             if (_health <= 0)
             {
-                ServiceLocator.Get<GameManager>().KillScoreUpdate();
-                ServiceLocator.Get<Player>().AddKillCount();
-                ServiceLocator.Get<Player>().Variables.GiveSpeedBoost();
-                ServiceLocator.Get<GameLoopManager>().WantedSystem();
-
+                // Call game manager and other components for game effects and cleanup
                 DestroyAI();
             }
         }
         else
         {
             --_hitsToGetMad;
-            
-
             if (_hitsToGetMad <= 0)
             {
                 ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
             }
         }
-
         StartCoroutine(SpriteFlashing());
     }
 
@@ -280,4 +296,33 @@ public class AI : MonoBehaviour
     {
         return _IsDead;
     }
+
+
+    public static void ToggleUseConfetti(bool useConfetti)
+    {
+        UseConfetti = useConfetti;
+        foreach (AI ai in FindObjectsOfType<AI>())
+        {
+            ai.ToggleParticleEffect(useConfetti);
+        }
+    }
+
+    public void ToggleParticleEffect(bool useConfetti)
+    {
+        if (useConfetti)
+        {
+            BloodParticles.gameObject.SetActive(false);
+            ConfettiParticles.gameObject.SetActive(true);
+            ConfettiParticles.transform.SetSiblingIndex(1);  // Move Confetti to the top if using confetti
+            BloodParticles.transform.SetSiblingIndex(0);     // Move Blood below Confetti
+        }
+        else
+        {
+            ConfettiParticles.gameObject.SetActive(false);
+            BloodParticles.gameObject.SetActive(true);
+            BloodParticles.transform.SetSiblingIndex(1);     // Move Blood to the top if not using confetti
+            ConfettiParticles.transform.SetSiblingIndex(0);  // Move Confetti below Blood
+        }
+    }
+
 }

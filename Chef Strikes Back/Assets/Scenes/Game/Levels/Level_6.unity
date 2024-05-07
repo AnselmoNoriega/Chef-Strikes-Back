@@ -1294,6 +1294,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 4367854921746654978, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: m_IsOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4367854921746654978, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4367854921746654978, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 531067169}
+    - target: {fileID: 4367854921746654978, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleConfettiEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 4927014490911516715, guid: dd4b2f39849980b489fa075844713829, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4056,6 +4072,7 @@ MonoBehaviour:
   _CreditSelectFirst: {fileID: 0}
   _PauseSelectFirst: {fileID: 107689838}
   _HowToPlaySelectFirst: {fileID: 107689839}
+  _useConfetti: 0
 --- !u!114 &531067170
 MonoBehaviour:
   m_ObjectHideFlags: 0
