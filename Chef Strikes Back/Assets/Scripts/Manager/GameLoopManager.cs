@@ -59,8 +59,6 @@ public class GameLoopManager : MonoBehaviour
     }
 
 
-  
-
     private void SpawnCustomer()
     {
         if (_aiManager.GetAvailableChairsCount() > 0)

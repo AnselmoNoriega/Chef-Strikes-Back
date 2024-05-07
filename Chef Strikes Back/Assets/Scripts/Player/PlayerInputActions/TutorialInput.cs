@@ -16,8 +16,8 @@ public class TutorialInput : MonoBehaviour
         _inputManager = new InputControls();
         _leftMouse = _inputManager.Player.MouseLeftClick;
 
-        _leftMouse.performed += LeftClick;
         _leftMouse.Enable();
+        _leftMouse.performed += LeftClick;
     }
 
     private void LeftClick(InputAction.CallbackContext input)

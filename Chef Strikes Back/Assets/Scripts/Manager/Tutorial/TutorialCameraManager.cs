@@ -58,7 +58,7 @@ public class TutorialCameraManager : MonoBehaviour
         _targetPosition.z = -1.0f;
     }
 
-    public void ZoomIn(float x  = -5.0f, float y = -5.0f)
+    public void ZoomIn(float x  = -5f, float y = -5f)
     {
         Vector2 dz = _zoomSpeed * Time.deltaTime * new Vector2(x, y);
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize + dz.y, 2.3f, 3.5f);

@@ -50,7 +50,7 @@ public class AI : MonoBehaviour
     public float ReloadCountDown = 0;
     public float ShootRange = 3;
     public bool IsHit = false;
-    public GameObject SliderParenObj; 
+    public GameObject SliderParenObj;
     public Transform ReloadSlider;
     public GameObject BulletPrefab;
     public Transform GunPos;
@@ -81,7 +81,14 @@ public class AI : MonoBehaviour
         _stateManager.AddState<BobAttackState>();
         _stateManager.AddState<AttackingCustomer>();
         _stateManager.AddState<LeavingCustomer>();
-        ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+        if (ServiceLocator.Get<GameLoopManager>())
+        {
+            ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+        }
+        else
+        {
+            ChangeState(AIState.Good);
+        }
     }
 
     private void Update()
@@ -183,7 +190,7 @@ public class AI : MonoBehaviour
         }
     }
 
-    
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
