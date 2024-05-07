@@ -7,6 +7,8 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private List<Transform> _focusPositions;
     [SerializeField] private GameObject _aiPrefab;
 
+    public AIState AiStandState = AIState.Good;
+
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
 
@@ -39,12 +41,20 @@ public class TutorialLoopManager : MonoBehaviour
 
     public void ChangeFocusTarget()
     {
-        if (_tutorialState == 1)
+        switch (_tutorialState)
         {
-            SpawnCustomer();
+            case 1:
+            case 3:
+                {
+                    SpawnCustomer();
+                    break;
+                }
         }
 
-        _tutorialCameraManager.ChangeTarget(_focusPositions[_tutorialState]);
+        if (_focusPositions.Count > _tutorialState)
+        {
+            _tutorialCameraManager.ChangeTarget(_focusPositions[_tutorialState]);
+        }
 
         ++_tutorialState;
     }

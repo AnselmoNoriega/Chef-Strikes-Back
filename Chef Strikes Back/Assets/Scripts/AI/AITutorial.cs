@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AITutorial : MonoBehaviour
 {
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
@@ -10,6 +9,8 @@ public class AITutorial : MonoBehaviour
             var ai = collision.GetComponent<AI>();
             ai.enabled = false;
             ServiceLocator.Get<TutorialLoopManager>().EnterConversation(1);
+            Destroy(gameObject);
         }
+
     }
 }

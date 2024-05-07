@@ -69,25 +69,13 @@ public class AI : MonoBehaviour
         _stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
-        _stateManager.AddState<GoodCustomerState>();
-        _stateManager.AddState<HungryCustomer>();
-        _stateManager.AddState<EatingCustomer>();
-
-        _stateManager.AddState<RageCustomerState>();
-        _stateManager.AddState<FoodLockCustomer>();
-        _stateManager.AddState<HonkingCustomer>();
-        _stateManager.AddState<BobChasingState>();
-
-        _stateManager.AddState<BobAttackState>();
-        _stateManager.AddState<AttackingCustomer>();
-        _stateManager.AddState<LeavingCustomer>();
-        if (ServiceLocator.Get<GameLoopManager>())
+        if(ServiceLocator.Get<GameLoopManager>())
         {
-            ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+            SetBaseState();
         }
         else
         {
-            ChangeState(AIState.Good);
+            SetTutorialState();
         }
     }
 
@@ -190,8 +178,6 @@ public class AI : MonoBehaviour
         }
     }
 
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _stateManager.CollisionEnter2D(collision);
@@ -207,5 +193,39 @@ public class AI : MonoBehaviour
         _moneyUIParticleSystem.Play();
     }
 
+    private void SetTutorialState()
+    {
+        _stateManager.AddState<GoodTutorialCus>();
+        _stateManager.AddState<HungryTutorialCus>();
+        _stateManager.AddState<EatingTutorialCus>();
 
+        _stateManager.AddState<RageTutorialCus>();
+        _stateManager.AddState<FoodLockTutorialCus>();
+        _stateManager.AddState<HonkingTutorialCus>();
+        _stateManager.AddState<BobChasingState>();
+
+        _stateManager.AddState<BobAttackState>();
+        _stateManager.AddState<AttackingTutorialCus>();
+        _stateManager.AddState<LeavingTutorialCus>();
+
+        ChangeState(ServiceLocator.Get<TutorialLoopManager>().AiStandState);
+    }
+
+    private void SetBaseState()
+    {
+        _stateManager.AddState<GoodCustomerState>();
+        _stateManager.AddState<HungryCustomer>();
+        _stateManager.AddState<EatingCustomer>();
+
+        _stateManager.AddState<RageCustomerState>();
+        _stateManager.AddState<FoodLockCustomer>();
+        _stateManager.AddState<HonkingCustomer>();
+        _stateManager.AddState<BobChasingState>();
+
+        _stateManager.AddState<BobAttackState>();
+        _stateManager.AddState<AttackingCustomer>();
+        _stateManager.AddState<LeavingCustomer>();
+
+        ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+    }
 }
