@@ -187,42 +187,18 @@ CompositeCollider2D:
         Y: 35199996
       - X: 25600000
         Y: 31999998
-    - - X: 6400024
-        Y: 22379900
-      - X: 12800100
-        Y: 25579936
-      - X: 12800100
-        Y: 25580060
-      - X: 6400024
-        Y: 28780100
-      - X: 6399976
-        Y: 28780100
-      - X: -100
-        Y: 25580060
-      - X: -6400100
-        Y: 22380062
-      - X: -6400100
-        Y: 22379938
-      - X: -24
-        Y: 19179900
-      - X: 24
-        Y: 19179900
-    - - X: 38400096
-        Y: 19179938
-      - X: 38400096
-        Y: 19180062
-      - X: 32000022
-        Y: 22380100
-      - X: 31999974
-        Y: 22380100
-      - X: 25599900
-        Y: 19180062
-      - X: 25599900
-        Y: 19179938
-      - X: 31999974
-        Y: 15979898
-      - X: 32000022
-        Y: 15979898
+    - - X: 6400000
+        Y: 22380000
+      - X: 12800000
+        Y: 25579998
+      - X: 6400000
+        Y: 28780000
+      - X: 0
+        Y: 25579998
+      - X: -6400000
+        Y: 22380000
+      - X: 0
+        Y: 19180000
     - - X: -31999998
         Y: 16003299
       - X: -38400000
@@ -231,44 +207,62 @@ CompositeCollider2D:
         Y: 16003299
       - X: -38400000
         Y: 12803299
-    - - X: -12799900
-        Y: 6379938
-      - X: -12799900
-        Y: 6380062
-      - X: -19199976
-        Y: 9580100
-      - X: -19200024
-        Y: 9580100
-      - X: -25600100
-        Y: 6380062
-      - X: -25600100
-        Y: 6379938
-      - X: -19200024
-        Y: 3179900
-      - X: -19199976
-        Y: 3179900
+    - - X: 32000018
+        Y: 15979898
+      - X: 31999974
+        Y: 15979898
+      - X: 25599900
+        Y: 19179938
+      - X: 25599900
+        Y: 19180062
+      - X: 19199900
+        Y: 15980062
+      - X: 19199900
+        Y: 15979938
+      - X: 25599976
+        Y: 12779899
+      - X: 25600024
+        Y: 12779899
+    - - X: 100
+        Y: 12779937
+      - X: 100
+        Y: 12780061
+      - X: -6399976
+        Y: 15980100
+      - X: -6400024
+        Y: 15980100
+      - X: -12800100
+        Y: 12780061
+      - X: -12800024
+        Y: 12780099
+      - X: -12799976
+        Y: 12780099
+      - X: -6399900
+        Y: 9580061
+      - X: -6399900
+        Y: 9579938
   m_CompositePaths:
     m_Paths:
     - - {x: 2.5599883, y: 3.2000055}
       - {x: 3.199938, y: 3.5200305}
       - {x: 2.5599883, y: 3.8399937}
       - {x: 1.9200616, y: 3.5199687}
-    - - {x: -0.0000142, y: 1.917996}
-      - {x: 1.2799484, y: 2.5580368}
-      - {x: 0.6399858, y: 2.878004}
-      - {x: -0.6399483, y: 2.2379627}
-    - - {x: 3.1999857, y: 1.5979958}
-      - {x: 3.839948, y: 1.9180372}
-      - {x: 3.1999857, y: 2.238004}
-      - {x: 2.5600517, y: 1.9179628}
+    - - {x: -0.0000118, y: 1.9180058}
+      - {x: 1.2799383, y: 2.5580308}
+      - {x: 0.6399882, y: 2.877994}
+      - {x: -0.6399383, y: 2.2379692}
     - - {x: -3.840012, y: 1.2803357}
       - {x: -3.2000616, y: 1.6003609}
       - {x: -3.840012, y: 1.920324}
       - {x: -4.4799385, y: 1.600299}
-    - - {x: -1.9200143, y: 0.3179959}
-      - {x: -1.2800517, y: 0.6380371}
-      - {x: -1.9200143, y: 0.9580041}
-      - {x: -2.5599484, y: 0.6379629}
+    - - {x: 2.5599859, y: 1.2779958}
+      - {x: 3.1999357, y: 1.5980207}
+      - {x: 2.5599782, y: 1.9180005}
+      - {x: 1.9200516, y: 1.597963}
+    - - {x: -0.64000183, y: 0.958012}
+      - {x: -0.0000517, y: 1.2780371}
+      - {x: -0.64001423, y: 1.5980041}
+      - {x: -1.279936, y: 1.277979}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &12259219
@@ -366,7 +360,7 @@ Tilemap:
   m_GameObject: {fileID: 12259216}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: 5, y: 0, z: 0}
+  - first: {x: 4, y: 0, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 3
@@ -376,7 +370,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -1, y: 2, z: 0}
+  - first: {x: 1, y: 2, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 3
@@ -3206,6 +3200,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 682670467}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -4979,6 +4989,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 1224198774}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -5934,11 +5952,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 708874540804505622, guid: ad4dee89f5e89534e851f7548c8dad79, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.498
+      value: 0.729
       objectReference: {fileID: 0}
     - target: {fileID: 708874540804505622, guid: ad4dee89f5e89534e851f7548c8dad79, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42
+      value: 1.029
       objectReference: {fileID: 0}
     - target: {fileID: 708874540804505622, guid: ad4dee89f5e89534e851f7548c8dad79, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7692,6 +7710,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 20450599}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
       propertyPath: m_Name
       value: Chair_02_1
@@ -8169,6 +8195,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2053553769}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -8294,6 +8328,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 1879106478}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -8393,39 +8443,7 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1239517494}
     m_ColliderPaths:
-    - - X: -12799976
-        Y: -12800100
-      - X: 25600024
-        Y: 6399900
-      - X: 38400020
-        Y: 12799900
-      - X: 38400024
-        Y: 12799900
-      - X: 51200024
-        Y: 19199898
-      - X: 57600020
-        Y: 22399900
-      - X: 70400016
-        Y: 28799898
-      - X: 70400024
-        Y: 28799898
-      - X: 76800100
-        Y: 31999936
-      - X: 76800100
-        Y: 32000060
-      - X: 70400024
-        Y: 35200096
-      - X: 70399976
-        Y: 35200096
-      - X: 70399884
-        Y: 35200050
-      - X: 63999996
-        Y: 38399996
-      - X: 57600108
-        Y: 35200052
-      - X: 57600104
-        Y: 35200054
-      - X: 63999996
+    - - X: 63999996
         Y: 38400000
       - X: 57599996
         Y: 41600000
@@ -8451,10 +8469,122 @@ CompositeCollider2D:
         Y: 48000000
       - X: -12800000
         Y: 38400000
-      - X: -6400108
-        Y: 35200054
-      - X: -6400112
-        Y: 35200052
+      - X: -6400000
+        Y: 35200000
+      - X: 0
+        Y: 38400000
+      - X: 6400000
+        Y: 35200000
+      - X: 12800000
+        Y: 38400000
+      - X: 19200000
+        Y: 35200000
+      - X: 25600000
+        Y: 38400000
+      - X: 31999998
+        Y: 35200000
+      - X: 38399996
+        Y: 38400000
+      - X: 31999998
+        Y: 41600000
+      - X: 38399996
+        Y: 44800000
+      - X: 32000002
+        Y: 47999998
+      - X: 38400000
+        Y: 44800000
+      - X: 31999998
+        Y: 41600000
+      - X: 38400000
+        Y: 38400000
+      - X: 44800000
+        Y: 35200000
+      - X: 51200000
+        Y: 38400000
+      - X: 57599996
+        Y: 35200000
+    - - X: 31999998
+        Y: 35199996
+      - X: 25600000
+        Y: 38399996
+      - X: 19200000
+        Y: 35199996
+      - X: 25600000
+        Y: 31999998
+    - - X: -12800000
+        Y: -12800000
+      - X: 25600000
+        Y: 6400000
+      - X: 38399996
+        Y: 12800000
+      - X: 32000110
+        Y: 15999943
+      - X: 32000022
+        Y: 15999899
+      - X: 31999974
+        Y: 15999899
+      - X: 31999886
+        Y: 15999943
+      - X: 25600000
+        Y: 12800000
+      - X: 19200000
+        Y: 15999999
+      - X: 25599900
+        Y: 19199948
+      - X: 25599900
+        Y: 19200048
+      - X: 19200000
+        Y: 22399998
+      - X: 12800000
+        Y: 19199998
+      - X: 6400000
+        Y: 15999999
+      - X: 0
+        Y: 19199998
+      - X: -6400000
+        Y: 22399998
+      - X: -12800000
+        Y: 19199998
+      - X: -6400000
+        Y: 22400000
+      - X: 0
+        Y: 19199998
+      - X: 6400000
+        Y: 22400000
+      - X: 12800000
+        Y: 25600000
+      - X: 19200000
+        Y: 22400000
+      - X: 25599900
+        Y: 19200048
+      - X: 25599900
+        Y: 19200060
+      - X: 31999974
+        Y: 22400098
+      - X: 32000022
+        Y: 22400098
+      - X: 32000108
+        Y: 22400055
+      - X: 38399996
+        Y: 25600000
+      - X: 31999998
+        Y: 28799998
+      - X: 25600000
+        Y: 25600000
+      - X: 19200000
+        Y: 28799998
+      - X: 12800000
+        Y: 31999998
+      - X: 19200000
+        Y: 35199996
+      - X: 12800000
+        Y: 38399996
+      - X: 6400000
+        Y: 35199996
+      - X: 0
+        Y: 38399996
+      - X: -6400000
+        Y: 35199996
       - X: -12800000
         Y: 38399996
       - X: -19200000
@@ -8465,14 +8595,116 @@ CompositeCollider2D:
         Y: 28799998
       - X: -38399996
         Y: 25600000
-      - X: -32000098
-        Y: 22400050
+      - X: -31999998
+        Y: 22400000
+      - X: -25600000
+        Y: 19199998
+      - X: -19200000
+        Y: 22400000
+      - X: -12800000
+        Y: 19199998
+      - X: -19200000
+        Y: 22399998
+      - X: -25600000
+        Y: 19199998
+      - X: -19200000
+        Y: 15999999
+      - X: -25600000
+        Y: 12800000
+      - X: -38399996
+        Y: 6400000
+      - X: -31999998
+        Y: 3200000
+      - X: -38399996
+        Y: 0
+      - X: -31999998
+        Y: -3200000
+      - X: -38399996
+        Y: -6400000
+      - X: -25600000
+        Y: -12800000
+      - X: -19200000
+        Y: -15999999
+    - - X: 57599996
+        Y: 22400000
+      - X: 70399992
+        Y: 28799998
+      - X: 63999996
+        Y: 31999998
+      - X: 70399992
+        Y: 35199996
+      - X: 63999996
+        Y: 38399996
+      - X: 57599996
+        Y: 35199996
+      - X: 51200000
+        Y: 38399996
+      - X: 44800000
+        Y: 35199996
+      - X: 38400000
+        Y: 38399996
+      - X: 31999998
+        Y: 35199996
+      - X: 38400000
+        Y: 31999998
+      - X: 31999998
+        Y: 28799998
+      - X: 38400000
+        Y: 25600000
+      - X: 32000108
+        Y: 22400055
+      - X: 38400096
+        Y: 19200060
+      - X: 38400096
+        Y: 19200046
+      - X: 44800000
+        Y: 22400000
+      - X: 51200000
+        Y: 19199998
+    - - X: 76800000
+        Y: 31999998
+      - X: 70400000
+        Y: 35199996
+      - X: 64000000
+        Y: 31999998
+      - X: 70400000
+        Y: 28799998
+    - - X: -31999998
+        Y: 22400000
       - X: -38400000
         Y: 25600000
       - X: -44800000
         Y: 22400000
-      - X: -38400112
-        Y: 19200054
+      - X: -38400000
+        Y: 19199998
+    - - X: 51200000
+        Y: 19199998
+      - X: 44800000
+        Y: 22399998
+      - X: 38400096
+        Y: 19200046
+      - X: 38400096
+        Y: 19199936
+      - X: 32000110
+        Y: 15999943
+      - X: 38400000
+        Y: 12800000
+    - - X: -31999998
+        Y: -3200000
+      - X: -38400000
+        Y: 0
+      - X: -31999998
+        Y: 3200000
+      - X: -38400000
+        Y: 6400000
+      - X: -31999998
+        Y: 9600000
+      - X: -38400000
+        Y: 12800000
+      - X: -31999998
+        Y: 15999999
+      - X: -38400000
+        Y: 19199998
       - X: -44800000
         Y: 22399998
       - X: -51200000
@@ -8483,120 +8715,66 @@ CompositeCollider2D:
         Y: 12800000
       - X: -70399992
         Y: 9600000
-      - X: -64000096
-        Y: 6400050
-      - X: -64000096
-        Y: 6399938
-      - X: -57600020
-        Y: 3199900
-      - X: -51200024
-        Y: -100
-      - X: -38400024
-        Y: -6400100
-      - X: -38400020
-        Y: -6400100
-      - X: -25600024
-        Y: -12800100
-      - X: -19200024
-        Y: -16000099
-      - X: -19199976
-        Y: -16000099
-    - - X: 19200024
-        Y: 28800098
-      - X: 12800224
-        Y: 31999998
-      - X: 19200000
-        Y: 35199884
-      - X: 25599976
-        Y: 31999898
-      - X: 25600024
-        Y: 31999898
-      - X: 31999998
-        Y: 35199884
-      - X: 38399776
-        Y: 31999998
-      - X: 31999898
-        Y: 28800060
-      - X: 25600000
-        Y: 25600112
-    - - X: 224
-        Y: 19199998
-      - X: 6400024
-        Y: 22399900
-      - X: 12800000
-        Y: 25599888
-      - X: 19199778
-        Y: 22399999
-      - X: 12799900
-        Y: 19200060
-      - X: 6400000
-        Y: 16000111
-    - - X: -38399776
-        Y: 12800000
-      - X: -31999898
-        Y: 15999937
-      - X: -31999898
-        Y: 16000061
-      - X: -38399888
-        Y: 19200054
-      - X: -32000098
-        Y: 22399950
-      - X: -32000098
-        Y: 22399938
-      - X: -25600024
-        Y: 19199898
-      - X: -19200224
-        Y: 15999999
-      - X: -25600100
+      - X: -63999996
+        Y: 6400000
+      - X: -57599996
+        Y: 3200000
+      - X: -51200000
+        Y: 0
+      - X: -38400000
+        Y: -6400000
+    - - X: -19200000
+        Y: 9600000
+      - X: -12800100
+        Y: 12799950
+      - X: -12800100
         Y: 12800062
-      - X: -31999998
-        Y: 9600112
-    - - X: 19200224
-        Y: 15999999
-      - X: 25600000
-        Y: 19199886
-      - X: 31999774
-        Y: 15999999
-      - X: 25600000
-        Y: 12800112
-    - - X: -19199776
-        Y: 9600000
+      - X: -6400024
+        Y: 16000099
+      - X: -6399976
+        Y: 16000099
+      - X: 100
+        Y: 12800062
+      - X: 100
+        Y: 12799938
+      - X: -6399976
+        Y: 9599900
+      - X: -6400024
+        Y: 9599900
+      - X: -6400112
+        Y: 9599944
       - X: -12800000
-        Y: 12799888
-      - X: -6400224
-        Y: 9600000
-      - X: -12800000
-        Y: 6400112
+        Y: 6400000
   m_CompositePaths:
     m_Paths:
-    - - {x: -1.9200143, y: -1.6000041}
-      - {x: 7.679948, y: 3.2000368}
+    - - {x: -1.9200119, y: -1.5999941}
+      - {x: 7.6799383, y: 3.2000308}
       - {x: 2.5599883, y: 5.7599945}
       - {x: -7.0399375, y: 0.9599691}
-    - - {x: 2.5600119, y: 2.5600173}
-      - {x: 1.2800843, y: 3.2000308}
-      - {x: 1.9200119, y: 3.5199823}
-      - {x: 2.5600142, y: 3.1999958}
-      - {x: 3.2000117, y: 3.5199823}
-      - {x: 3.839916, y: 3.1999688}
-    - - {x: 0.6400118, y: 1.6000171}
-      - {x: 0.0000842, y: 1.9200308}
-      - {x: 1.2800118, y: 2.5599828}
-      - {x: 1.919916, y: 2.239969}
-    - - {x: -3.1999881, y: 0.9600171}
-      - {x: -3.839916, y: 1.280031}
-      - {x: -3.2000515, y: 1.600037}
-      - {x: -3.8399272, y: 1.9200364}
-      - {x: -3.1999981, y: 2.239988}
-      - {x: -1.9200842, y: 1.599969}
-    - - {x: 2.5600119, y: 1.2800171}
-      - {x: 1.9200842, y: 1.6000308}
-      - {x: 2.5600119, y: 1.9199828}
-      - {x: 3.1999156, y: 1.599969}
-    - - {x: -1.2799882, y: 0.6400171}
-      - {x: -1.9199158, y: 0.9600309}
-      - {x: -1.2799882, y: 1.2799829}
-      - {x: -0.6400842, y: 0.9599691}
+    - - {x: 2.5600119, y: 2.5600061}
+      - {x: 1.2800618, y: 3.2000308}
+      - {x: 1.9200119, y: 3.5199935}
+      - {x: 2.5600119, y: 3.2000055}
+      - {x: 3.2000117, y: 3.5199935}
+      - {x: 3.8399384, y: 3.1999688}
+    - - {x: 0.6400118, y: 1.6000059}
+      - {x: 0.0000618, y: 1.9200308}
+      - {x: 1.2800118, y: 2.559994}
+      - {x: 1.9199388, y: 2.2399693}
+    - - {x: 2.5600119, y: 1.2800059}
+      - {x: 1.9200618, y: 1.6000308}
+      - {x: 3.2000172, y: 2.2400024}
+      - {x: 3.8399532, y: 1.9199709}
+    - - {x: -3.1999881, y: 0.96000594}
+      - {x: -3.8399384, y: 1.280031}
+      - {x: -3.2000616, y: 1.6000308}
+      - {x: -3.8399382, y: 1.9200308}
+      - {x: -3.1999881, y: 2.239994}
+      - {x: -1.9200618, y: 1.599969}
+    - - {x: -1.2799882, y: 0.6400059}
+      - {x: -1.9199382, y: 0.9600309}
+      - {x: -0.6399858, y: 1.6000041}
+      - {x: -0.0000518, y: 1.2799629}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &1239517493
@@ -8875,16 +9053,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: 5, y: 0, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: 6, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -9116,16 +9284,6 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: -1, y: 2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: 1, y: 2, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -9747,13 +9905,13 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 110
+  - m_RefCount: 108
     m_Data: {fileID: 11400000, guid: 2fea53ce2fad53640816d01698803e2f, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 110
+  - m_RefCount: 108
     m_Data: {fileID: 21300000, guid: 128659199685a7748a70f0ce9a54ea0e, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 110
+  - m_RefCount: 108
     m_Data:
       e00: 1
       e01: 0
@@ -9772,7 +9930,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 110
+  - m_RefCount: 108
     m_Data: {r: 1, g: 0, b: 0, a: 0}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -10370,6 +10528,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 97530380}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 7c737349272825844898f66632c40e48, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 7c737349272825844898f66632c40e48, type: 3}
       propertyPath: m_Name
       value: Chair_03_1
@@ -11323,8 +11497,8 @@ Tilemap:
   - first: {x: 5, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 4
+      m_TileIndex: 6
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -11583,8 +11757,8 @@ Tilemap:
   - first: {x: 1, y: 2, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 4
+      m_TileIndex: 6
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -12386,7 +12560,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 110
+  - m_RefCount: 108
     m_Data: {fileID: 11400000, guid: 6eb6b59a02ffeeb49b76ac131e6bec76, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -12394,7 +12568,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7f4d451af1c62444693c4668a24f923c, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 10
+  - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: e7b9cbf05b3343d469dc4c9487473f4f, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -12403,9 +12577,9 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: a96a20c2b84267f4a9a983ffdb5a4900, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 10
+  - m_RefCount: 12
     m_Data: {fileID: 21300000, guid: 9b8544ae2af5d1a4d9b6047e2e00af3b, type: 3}
-  - m_RefCount: 110
+  - m_RefCount: 108
     m_Data: {fileID: 21300000, guid: 0f136f8cec673c94f8ccac10eac789e9, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 130
@@ -12466,11 +12640,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2273120689214740680, guid: 917e237362e21204d818162dbe98a876, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.557
+      value: 3.966
       objectReference: {fileID: 0}
     - target: {fileID: 2273120689214740680, guid: 917e237362e21204d818162dbe98a876, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.466
+      value: 1.184
       objectReference: {fileID: 0}
     - target: {fileID: 2273120689214740680, guid: 917e237362e21204d818162dbe98a876, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12785,6 +12959,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 567319778}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 6dae3e3333f150545a608b60b84968cf, type: 3}
       propertyPath: m_Name
       value: Chair_02_1
@@ -13219,6 +13401,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 45628720}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 8152765c185fd9543bc004a705895281, type: 3}
       propertyPath: m_Name
       value: Chair_02_2
@@ -18043,6 +18241,14 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2003492294}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 8152765c185fd9543bc004a705895281, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 8152765c185fd9543bc004a705895281, type: 3}
       propertyPath: m_Name
       value: Chair_02_2
@@ -18914,11 +19120,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 956538742652072032, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.005
+      value: 1.696
       objectReference: {fileID: 0}
     - target: {fileID: 956538742652072032, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.235
+      value: 2.099
       objectReference: {fileID: 0}
     - target: {fileID: 956538742652072032, guid: 4932a2075b8bca9409b69566741c69cf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19057,6 +19263,22 @@ PrefabInstance:
       propertyPath: SpawnPointForBadAI
       value: 
       objectReference: {fileID: 2074581098}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].TypeOfFood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].TypeOfFood
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[0].FoodPerecentage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3913419226850297557, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
+      propertyPath: _foodPercentages.Array.data[1].FoodPerecentage
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 3913419226850297583, guid: 9513efabdc4d97b4e9272300953c0cdf, type: 3}
       propertyPath: m_Name
       value: Chair_03_2
@@ -19241,6 +19463,10 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[1].SpawningTime
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[2].SpawningTime
       value: 9
       objectReference: {fileID: 0}
@@ -19249,8 +19475,12 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _spawningTimes.Array.data[4].SpawningTime
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[5].SpawningTime
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.data[6].SpawningTime
