@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    private TutorialLoopManager _tutorialLoopManager;
+
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
 
@@ -22,17 +24,11 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
 
     private const string LAYOUT_TAG = "layout";
-
-    private void Update()
+   
+    public void Initialize()
     {
-        if (!dialogueIsPlaying)
-        {
-            return;
-        }
-    }
+        _tutorialLoopManager = ServiceLocator.Get<TutorialLoopManager>();
 
-    private void Awake()
-    {
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(false);
         dialogueMode = true;
@@ -66,6 +62,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             ExitDialogueMode();
+            _tutorialLoopManager.ChangeFocusTarget();
         }
     }
 
