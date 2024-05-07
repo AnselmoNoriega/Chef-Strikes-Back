@@ -32,12 +32,14 @@ public class Item : MonoBehaviour
     [SerializeField] private ParticleSystem pizzaParticlesPrefab;
     [SerializeField] private ParticleSystem spaghettiParticlesPrefab;
     [SerializeField] private Color[] finishedFoodColors;  // Array of colors for finished foods
+    [SerializeField] private TrailRenderer _trailRenderer;
 
     private void Start()
     {
         _isBeingDrag = false;
         IsPickable = true;
         IsServed = false;
+        InitializeTrailRenderer();
     }
 
     private void Update()
@@ -210,6 +212,40 @@ public class Item : MonoBehaviour
         else
         {
             Debug.LogError("CollisionParticles prefab is not assigned.");
+        }
+    }
+
+    private void InitializeTrailRenderer()
+    {
+        if (_trailRenderer == null)
+        {
+            _trailRenderer = gameObject.AddComponent<TrailRenderer>();
+        }
+
+        _trailRenderer.time = 0.2f;  // Trail length in seconds
+        _trailRenderer.startWidth = 0.2f;  // Start width of the trail
+        _trailRenderer.endWidth = 0.01f;  // End width of the trail
+        _trailRenderer.material = new Material(Shader.Find("Sprites/Default"));  // Assign a basic material
+
+        // Set the color of the trail based on the food type
+        switch (Type)
+        {
+            case FoodType.Tomato:
+                _trailRenderer.startColor = new Color(tomatoColor.r, tomatoColor.g, tomatoColor.b, 0.5f); // Fully opaque start color
+                _trailRenderer.endColor = new Color(tomatoColor.r, tomatoColor.g, tomatoColor.b, 0f); // Transparent end color
+                break;
+            case FoodType.Dough:
+                _trailRenderer.startColor = new Color(doughColor.r, doughColor.g, doughColor.b, 0.5f); // Fully opaque start color
+                _trailRenderer.endColor = new Color(doughColor.r, doughColor.g, doughColor.b, 0f); // Transparent end color
+                break;
+            case FoodType.Cheese:
+                _trailRenderer.startColor = new Color(cheeseColor.r, cheeseColor.g, cheeseColor.b, 0.5f); // Fully opaque start color
+                _trailRenderer.endColor = new Color(cheeseColor.r, cheeseColor.g, cheeseColor.b, 0f); // Transparent end color
+                break;
+            default:
+                _trailRenderer.startColor = new Color(1.0f, 1.0f, 1.0f, 1.0f); // Fully opaque white start color
+                _trailRenderer.endColor = new Color(1.0f, 1.0f, 1.0f, 0f); // Transparent white end color
+                break;
         }
     }
 }
