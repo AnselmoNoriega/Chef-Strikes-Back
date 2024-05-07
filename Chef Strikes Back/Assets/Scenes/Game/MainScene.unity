@@ -179,14 +179,22 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 12259220}
     m_ColliderPaths:
-    - - X: -44800000
-        Y: 16003299
-      - X: -51200000
-        Y: 19203300
-      - X: -57599996
-        Y: 16003299
-      - X: -51200000
-        Y: 12803299
+    - - X: -44799900
+        Y: 16025939
+      - X: -44799900
+        Y: 16026063
+      - X: -51199976
+        Y: 19226100
+      - X: -51200024
+        Y: 19226100
+      - X: -57600096
+        Y: 16026063
+      - X: -57600096
+        Y: 16025939
+      - X: -51200024
+        Y: 12825899
+      - X: -51199976
+        Y: 12825899
     - - X: -38399900
         Y: 12779937
       - X: -38399900
@@ -315,10 +323,10 @@ CompositeCollider2D:
         Y: -19220000
   m_CompositePaths:
     m_Paths:
-    - - {x: -5.1200123, y: 1.2803358}
-      - {x: -4.4800615, y: 1.6003609}
-      - {x: -5.1200123, y: 1.920324}
-      - {x: -5.7599382, y: 1.600299}
+    - - {x: -5.1200147, y: 1.2825959}
+      - {x: -4.4800515, y: 1.6026372}
+      - {x: -5.1200147, y: 1.922604}
+      - {x: -5.7599483, y: 1.602563}
     - - {x: -4.4800143, y: 0.9579959}
       - {x: -3.8400517, y: 1.2780371}
       - {x: -4.4800143, y: 1.5980042}
@@ -430,7 +438,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.18, y: 0.45999998, z: 0}
+  m_ChunkCullingBounds: {x: 0.18, y: 0.5626, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -619,14 +627,26 @@ Tilemap:
   - first: {x: -2, y: 6, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 4
+      m_TileIndex: 6
       m_TileSpriteIndex: 5
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  m_AnimatedTiles: {}
+      m_AllTileFlags: 1073741824
+  m_AnimatedTiles:
+  - first: {x: -2, y: 6, z: 0}
+    second:
+      m_AnimatedSprites:
+      - {fileID: -1127222263, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
+      - {fileID: -931019032, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
+      - {fileID: 1425928931, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
+      - {fileID: -444158901, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
+      - {fileID: 166679972, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
+      - {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
+      m_AnimationSpeed: 12
+      m_AnimationTimeOffset: 0
+      m_IsLooping: 1
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -636,12 +656,12 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 46e95216c00e8524f94460eedb5d045d, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: dab45bc6fa163aa4cbf1ca163f9957b5, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 646a478f29fa51f4f867f6fe1a34bc5b, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+    m_Data: {fileID: 11400000, guid: 099f62805e54ac54ca6892131f09cf00, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -654,7 +674,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 50c7010ff25f88f4f896819b9276caee, type: 3}
+    m_Data: {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: d97db6180b2bf0246ad15652c4cbf62f, type: 3}
   m_TileMatrixArray:
@@ -7621,7 +7641,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _followSpeed: 0.009
   _zoomSpeed: 1500
-  _followPlayer: 1
   _boundaryPolygon: {fileID: 1209050870}
 --- !u!60 &1209050870 stripped
 PolygonCollider2D:
@@ -12601,7 +12620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e89c98821aa8440b70b1cbe90e26cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FocusPositions: []
+  _tutorialCameraManager: {fileID: 0}
+  _focusPositions: []
   inkJSON:
   - {fileID: 4900000, guid: de9af8e5dde963a4f8d1eab2a8ea5eb2, type: 3}
 --- !u!1001 &1733833529
