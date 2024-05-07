@@ -12,6 +12,8 @@ public class Levels
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] bool _isInDebug = true;
+
     [Header("System")]
     [SerializeField] public InputsUI UI_Navegation;
 
@@ -43,6 +45,10 @@ public class GameManager : MonoBehaviour
     public void LoadGameStats()
     {
         _money = ServiceLocator.Get<SaveSystem>().Load<int>("money.doNotOpen");
+        if(_isInDebug)
+        {
+            _money = 100000;
+        }
     }
 
     public void EnterRageModeScore()
@@ -171,6 +177,18 @@ public class GameManager : MonoBehaviour
 
     public void SetLockedLevels(List<Button> buttons)
     {
+        if(_isInDebug)
+        {
+            for (int i = 0; i < _levelsLocked.Count; ++i)
+            {
+                if (_levelsLocked[i].IsLock)
+                {
+                    _levelsLocked[i].IsLock = false;
+                }
+            }
+            return;
+        }
+
         for (int i = 0; i < _levelsLocked.Count; ++i)
         {
             if (_levelsLocked[i].IsLock)

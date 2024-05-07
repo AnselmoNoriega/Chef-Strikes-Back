@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d411e2a98fb7ebd4b95758ad56a9f0b1
+guid: b357bb4b1f6dbd14e8a6479020cef55e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -125,23 +125,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_0
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -149,20 +137,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f43459bdc031941478d0308f0c331e08
-      internalID: 992164020
+      spriteID: b1f0c82a9d767834a85eb4b251cc2656
+      internalID: 93144289
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_1
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_1
       rect:
         serializedVersion: 2
         x: 200
@@ -170,20 +158,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db6089c04e1a23948bb529a0f824588e
-      internalID: -1203735710
+      spriteID: 3ac60bc4d35ad724ea2bbf73231c4955
+      internalID: -1344102306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_2
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_2
       rect:
         serializedVersion: 2
         x: 400
@@ -191,20 +179,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c65b3a177e6008b4081611a55bf0a39c
-      internalID: 1274006374
+      spriteID: 786216a0d833a6a4eaaccd8903c8fd1c
+      internalID: 1686862464
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_3
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_3
       rect:
         serializedVersion: 2
         x: 600
@@ -212,20 +200,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17c8f5ae15e50e24cb78f36b2dc4e187
-      internalID: -743403502
+      spriteID: ef7c5a0658efac348bd6d56c065b13ff
+      internalID: 899734227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_4
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_4
       rect:
         serializedVersion: 2
         x: 800
@@ -233,20 +221,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 582d00ce3f8a8d64b8a792a8d96023e3
-      internalID: -1224013680
+      spriteID: 1693197a7aafa2841b445692001ee332
+      internalID: 71693271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_5
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_5
       rect:
         serializedVersion: 2
         x: 1000
@@ -254,20 +242,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79d438cf1ee86b849af44dcc160e3420
-      internalID: 683500814
+      spriteID: 0df335605e278d246b89d0c3760ceab5
+      internalID: 705748220
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_6
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_6
       rect:
         serializedVersion: 2
         x: 1200
@@ -275,20 +263,20 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33e2506e5ef366a41a1e323d0cd1b261
-      internalID: 1120790959
+      spriteID: e67e63abbe1a88442be9203d56057018
+      internalID: -1529183094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_7
+      name: Front_Throw_Anim_Done_half_of_the_anim-Sheet_7
       rect:
         serializedVersion: 2
         x: 1400
@@ -296,98 +284,14 @@ TextureImporter:
         width: 200
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.17}
+      pivot: {x: 0.5, y: 0.19}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94a24870b507cb643b392db5f3be4a91
-      internalID: -1142220706
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_8
-      rect:
-        serializedVersion: 2
-        x: 1600
-        y: 0
-        width: 200
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.17}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b218bdd9510373d4f9de65a3549d8384
-      internalID: -1550507743
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_9
-      rect:
-        serializedVersion: 2
-        x: 1800
-        y: 0
-        width: 200
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.17}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc50c1468ba972545a2e035d95677ce3
-      internalID: 874957435
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_10
-      rect:
-        serializedVersion: 2
-        x: 2000
-        y: 0
-        width: 200
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.17}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5590aad47af47914b9ab44809399f5fb
-      internalID: -19959002
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Front_Throw_Anim_Done-Sheet_Body_11
-      rect:
-        serializedVersion: 2
-        x: 2200
-        y: 0
-        width: 200
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.17}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4c56973f377325468fe4c23e6aa3ba9
-      internalID: 275718493
+      spriteID: f22426f2db071314d94dc091dcecc1ac
+      internalID: -2096431406
       vertices: []
       indices: 
       edges: []
@@ -403,18 +307,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Front_Throw_Anim_Done-Sheet_Body_6: 1120790959
-      Front_Throw_Anim_Done-Sheet_Body_11: 275718493
-      Front_Throw_Anim_Done-Sheet_Body_10: -19959002
-      Front_Throw_Anim_Done-Sheet_Body_5: 683500814
-      Front_Throw_Anim_Done-Sheet_Body_9: 874957435
-      Front_Throw_Anim_Done-Sheet_Body_8: -1550507743
-      Front_Throw_Anim_Done-Sheet_Body_0: 992164020
-      Front_Throw_Anim_Done-Sheet_Body_3: -743403502
-      Front_Throw_Anim_Done-Sheet_Body_7: -1142220706
-      Front_Throw_Anim_Done-Sheet_Body_2: 1274006374
-      Front_Throw_Anim_Done-Sheet_Body_4: -1224013680
-      Front_Throw_Anim_Done-Sheet_Body_1: -1203735710
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_1: -1344102306
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_7: -2096431406
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_4: 71693271
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_0: 93144289
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_3: 899734227
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_6: -1529183094
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_2: 1686862464
+      Front_Throw_Anim_Done_half_of_the_anim-Sheet_5: 705748220
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

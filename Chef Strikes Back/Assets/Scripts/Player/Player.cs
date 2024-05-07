@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Player Properties")]
+    public GameObject Legs;
     private SpriteRenderer _playerSprite;
 
     [Header("Counts Info")]
