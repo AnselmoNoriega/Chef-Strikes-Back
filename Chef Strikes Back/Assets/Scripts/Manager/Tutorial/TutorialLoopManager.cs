@@ -12,11 +12,12 @@ public class TutorialLoopManager : MonoBehaviour
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
 
-    private int _tutorialState = 0;
+    private int _storyIdx = 0;
+    private int _focusPosIdx = 0;
 
     private void Start()
     {
-        EnterConversation(0);
+        EnterConversation();
     }
 
     private void Initialize()
@@ -33,36 +34,33 @@ public class TutorialLoopManager : MonoBehaviour
         //spawn a Customer
     }
 
-    public void EnterConversation(int idx)
+    public void EnterConversation()
     {
-        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[idx]);
-        ChangeFocusTarget();
+        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++]);
     }
 
     public void ChangeFocusTarget()
     {
-        switch (_tutorialState)
+        switch (_focusPosIdx)
         {
-            case 1:
-            case 3:
+            case 0:
                 {
                     SpawnCustomer();
                     break;
                 }
         }
 
-        if (_focusPositions.Count > _tutorialState)
+        if (_focusPositions.Count > _focusPosIdx)
         {
-            _tutorialCameraManager.ChangeTarget(_focusPositions[_tutorialState]);
+            _tutorialCameraManager.ChangeTarget(_focusPositions[_focusPosIdx++]);
         }
-
-        ++_tutorialState;
     }
+
     private void SpawnCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
         var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
-        _focusPositions[_tutorialState] = customer.transform;
+        _focusPositions[_focusPosIdx] = customer.transform;
     }
 
 }

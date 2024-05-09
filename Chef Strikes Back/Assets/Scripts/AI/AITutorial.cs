@@ -8,7 +8,7 @@ public class AITutorial : MonoBehaviour
         {
             var ai = collision.GetComponent<AI>();
             ai.enabled = false;
-            ServiceLocator.Get<TutorialLoopManager>().EnterConversation(1);
+            ServiceLocator.Get<TutorialLoopManager>().EnterConversation();
             Destroy(gameObject);
         }
 
