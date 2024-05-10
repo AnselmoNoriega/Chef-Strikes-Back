@@ -4,8 +4,8 @@ using UnityEngine;
 public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private TutorialCameraManager _tutorialCameraManager;
-    [SerializeField] private List<Transform> _focusPositions;
     [SerializeField] private GameObject _aiPrefab;
+    private AI _tutorialAI;
 
     public AIState AiStandState = AIState.Good;
 
@@ -39,20 +39,23 @@ public class TutorialLoopManager : MonoBehaviour
         ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++]);
     }
 
-    public void ChangeFocusTarget()
+    public void EndConversation()
     {
         switch (_focusPosIdx)
         {
             case 0:
                 {
                     SpawnCustomer();
+                    ++_focusPosIdx;
                     break;
                 }
-        }
-
-        if (_focusPositions.Count > _focusPosIdx)
-        {
-            _tutorialCameraManager.ChangeTarget(_focusPositions[_focusPosIdx++]);
+            case 1:
+                {
+                    _tutorialAI.ChangeState(AIState.Hungry);
+                    EnterConversation();
+                    _tutorialCameraManager.ChangeTarget(_tutorialAI.OrderBubble[_tutorialAI.ChoiceIndex].transform);
+                    break;
+                }
         }
     }
 
@@ -60,7 +63,8 @@ public class TutorialLoopManager : MonoBehaviour
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
         var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
-        _focusPositions[_focusPosIdx] = customer.transform;
+        _tutorialCameraManager.ChangeTarget(customer.transform);
+        _tutorialAI = customer.GetComponent<AI>();
     }
 
 }

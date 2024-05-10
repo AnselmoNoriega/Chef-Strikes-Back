@@ -6,12 +6,12 @@ public class GoodTutorialCus : StateClass<AI>
     private float _countDown = 0;
     private int _currentWaypoint = 0;
     private AI _agent;
+    private bool _stateFinished = false;
 
     public void Enter(AI agent)
     {
         _agent = agent;
         _countDown = Time.time;
-        //ServiceLocator.Get<AIManager>().AddGoodCustomer(agent);
         agent.SelectedChair = ServiceLocator.Get<AIManager>().GiveMeChair();
         agent.Seeker.StartPath(agent.Rb2d.position, agent.SelectedChair.transform.position, PathCompleted);
     }
@@ -23,6 +23,11 @@ public class GoodTutorialCus : StateClass<AI>
 
     public void FixedUpdate(AI agent)
     {
+        if(_stateFinished)
+        {
+            return;
+        }
+
         if (agent.Path == null)
         {
             return;
@@ -31,7 +36,9 @@ public class GoodTutorialCus : StateClass<AI>
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
             agent.SelectedChair.SitOnChair(agent);
-            agent.ChangeState(AIState.Hungry);
+            ServiceLocator.Get<TutorialLoopManager>().EnterConversation();
+            _stateFinished = true;
+            agent.enabled = false;
             return;
         }
 

@@ -1,5 +1,6 @@
 INCLUDE globals.ink
 
+->Beginning
 === Beginning ===
 
 {controller:

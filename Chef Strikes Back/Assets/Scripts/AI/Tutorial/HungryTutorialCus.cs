@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HungryTutorialCus : StateClass<AI>
@@ -7,15 +8,12 @@ public class HungryTutorialCus : StateClass<AI>
     private float angerMultiplier = 4;
     private float _flashingTime = 0.0f;
 
-    SpriteRenderer _spriteRenderer;
-
     private Vector3 scale = Vector3.zero;
 
     public void Enter(AI agent)
     {
-        waitingTime = ServiceLocator.Get<GameLoopManager>().CustomerFoodWaitingTime;
-        //ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
-        _spriteRenderer = agent.GetComponent<SpriteRenderer>();
+        waitingTime = 25;
+
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
         agent.EatingSlider.localScale = scale;
@@ -27,6 +25,7 @@ public class HungryTutorialCus : StateClass<AI>
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
         timer = 0.0f;
 
+        agent.enabled = false;
     }
 
     public void Update(AI agent, float dt)
@@ -43,15 +42,6 @@ public class HungryTutorialCus : StateClass<AI>
         else
         {
             scale.x += (Time.deltaTime / waitingTime) * 2;
-        }
-
-        if (agent.IsAnnoyed)
-        {
-            Anselmo();
-        }
-        else if (!agent.IsHit && _spriteRenderer.color != Color.white)
-        {
-            _spriteRenderer.color = Color.white;
         }
 
         agent.EatingSlider.localScale = scale;
@@ -90,26 +80,6 @@ public class HungryTutorialCus : StateClass<AI>
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
         ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
-    }
-
-    private void Anselmo()
-    {
-        _flashingTime -= Time.deltaTime;
-        if (_flashingTime <= 0)
-        {
-            if (_spriteRenderer.color == Color.red)
-            {
-                _spriteRenderer.color = Color.white;
-            }
-            else
-            {
-                _spriteRenderer.color = Color.red;
-            }
-
-            _flashingTime = 0.5f;
-        }
-
-
     }
 
 }
