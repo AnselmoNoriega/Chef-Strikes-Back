@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             ExitDialogueMode();
-            _tutorialLoopManager.ChangeFocusTarget();
+            _tutorialLoopManager.EndConversation();
         }
     }
 
