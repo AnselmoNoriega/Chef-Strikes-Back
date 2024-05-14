@@ -16,7 +16,7 @@ public class AttackingCustomer : StateClass<AI>
     {
         if (Time.time - _countDown >= 0.25f && !_hasAttacked)
         {
-            if (agent.IsDead())  // Check if the AI is dead
+            if (agent.IsDead)  // Check if the AI is dead
             {
                 return;  // Exit early if dead, preventing attack
             }
