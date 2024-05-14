@@ -4,8 +4,10 @@ using UnityEngine;
 public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private TutorialCameraManager _tutorialCameraManager;
+    [SerializeField] private List<ButtonReminder> buttonReminder;
     [SerializeField] private GameObject _aiPrefab;
 
+    [SerializeField] private Player _player;
     private AI _tutorialAI;
 
     public AIState AiStandState = AIState.Good;
@@ -56,6 +58,16 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialCameraManager.ChangeTarget(_tutorialAI.OrderBubble[_tutorialAI.ChoiceIndex].transform);
                     break;
                 }
+            case 2:
+                {
+                    foreach (var button in buttonReminder)
+                    {
+                        button.SetHitOn(true);
+                    }
+                    _tutorialCameraManager.ChangeTarget(_player.transform);
+                    break;
+                }
+
         }
         ++_focusPosIdx;
     }
