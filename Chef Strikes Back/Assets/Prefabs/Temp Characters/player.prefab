@@ -680,6 +680,8 @@ MonoBehaviour:
   Variables: {fileID: 137093403580132108}
   PlayerState: 0
   PlayerAction: 0
+  soundName: 
+  IsWalking: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -744,7 +746,7 @@ MonoBehaviour:
   PlayerAcceleration: 100
   MoveSpeed: 2.3
   ThrowMoveSpeed: 0.8
-  AttackDuration: 0.1
+  AttackDuration: 0.25
   AttackRange: 1
   KnockbackForce: 100
   HandOffset: {x: 0, y: 0.35, z: 0}
