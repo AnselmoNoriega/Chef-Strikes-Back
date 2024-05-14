@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed8aa7e07d441c546a71405dcc8acc1b
+guid: 46e4bbc1eafa280419bc6b6973f43472
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -101,35 +101,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done_other_half-Sheet_0
+      name: Front_Attack_Anim_Done-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -143,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa0b329e29b8da345b04d95f44dcab02
-      internalID: 1731445445
+      spriteID: 3872c8454759b2d4fa7f88ef829adc9a
+      internalID: 1348848656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done_other_half-Sheet_1
+      name: Front_Attack_Anim_Done-Sheet_1
       rect:
         serializedVersion: 2
         x: 200
@@ -164,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 752b9075ad4b7af419c81bc969857ef9
-      internalID: -269433110
+      spriteID: f51d49e10f52eb544948977e9b95335b
+      internalID: -1823167474
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done_other_half-Sheet_2
+      name: Front_Attack_Anim_Done-Sheet_2
       rect:
         serializedVersion: 2
         x: 400
@@ -185,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ee5810e7813f2640be7bc9223c66aec
-      internalID: 1372119362
+      spriteID: ee304b1ac7d58a34daf2decac6a0aca9
+      internalID: 1196771695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Front_Throw_Anim_Done_other_half-Sheet_3
+      name: Front_Attack_Anim_Done-Sheet_3
       rect:
         serializedVersion: 2
         x: 600
@@ -206,8 +182,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a75e437d93a4c8c43a6cc6a7fa202c44
-      internalID: -1938046189
+      spriteID: 2ff462337162d9e44a45cf44069c106a
+      internalID: -1788317159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Front_Attack_Anim_Done-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 200
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac9aceb2e3154794d8aec6d393ed0f38
+      internalID: -801878412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Front_Attack_Anim_Done-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 200
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 057fc0b30bb942b42b62b2f190b810b4
+      internalID: 1137358691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Front_Attack_Anim_Done-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 200
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.19}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de753be73e4ede7448f64839192dc3c5
+      internalID: -870901953
       vertices: []
       indices: 
       edges: []
@@ -223,10 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Front_Throw_Anim_Done_other_half-Sheet_2: 1372119362
-      Front_Throw_Anim_Done_other_half-Sheet_3: -1938046189
-      Front_Throw_Anim_Done_other_half-Sheet_1: -269433110
-      Front_Throw_Anim_Done_other_half-Sheet_0: 1731445445
+      Front_Attack_Anim_Done-Sheet_1: -1823167474
+      Front_Attack_Anim_Done-Sheet_0: 1348848656
+      Front_Attack_Anim_Done-Sheet_4: -801878412
+      Front_Attack_Anim_Done-Sheet_5: 1137358691
+      Front_Attack_Anim_Done-Sheet_6: -870901953
+      Front_Attack_Anim_Done-Sheet_2: 1196771695
+      Front_Attack_Anim_Done-Sheet_3: -1788317159
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -62,86 +62,23 @@ public class AI : MonoBehaviour
     public Seeker Seeker { get; set; }
     public Chair SelectedChair { get; set; }
 
-    [Space, Header("Particles")]
-    public ParticleSystem BloodParticles;
-    public ParticleSystem ConfettiParticles;
-    public ParticleSystem HappyParticles;
-    public ParticleSystem AngryParticles;
-    private bool _IsDead = false;
-    [SerializeField] private Animator _animator;
-
-    public static bool UseConfetti { get; private set; } = false;
-
-
     private void Awake()
     {
-        
-
         Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
         _stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
-        _stateManager.AddState<GoodCustomerState>();
-        _stateManager.AddState<HungryCustomer>();
-        _stateManager.AddState<EatingCustomer>();
-
-        _stateManager.AddState<RageCustomerState>();
-        _stateManager.AddState<FoodLockCustomer>();
-        _stateManager.AddState<HonkingCustomer>();
-        _stateManager.AddState<BobChasingState>();
-
-        _stateManager.AddState<BobAttackState>();
-        _stateManager.AddState<AttackingCustomer>();
-        _stateManager.AddState<LeavingCustomer>();
-        ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
-
-        if (transform.childCount > 0)
+        if(ServiceLocator.Get<GameLoopManager>())
         {
-            Transform firstChild = transform.GetChild(0);
-            BloodParticles = firstChild.GetComponent<ParticleSystem>();
-
-            if (BloodParticles == null)
-                Debug.LogError("No Blood ParticleSystem");
+            SetBaseState();
         }
         else
         {
-            Debug.LogError("No first child");
-        }
-
-        // Assign Angry Particles from the second child
-        if (transform.childCount > 1)
-        {
-            Transform secondChild = transform.GetChild(1);
-            AngryParticles = secondChild.GetComponent<ParticleSystem>();
-
-            if (AngryParticles == null)
-                Debug.LogError("No Angry ParticleSystem found");
-        }
-        else
-        {
-            Debug.LogError("No second child");
-        }
-
-        if (transform.childCount > 2)
-        {
-            Transform secondChild = transform.GetChild(2);
-            HappyParticles = secondChild.GetComponent<ParticleSystem>();
-
-            if (HappyParticles == null)
-                Debug.LogError("No Happy ParticleSystem found");
-        }
-        else
-        {
-            Debug.LogError("No third child");
+            SetTutorialState();
         }
     }
 
-    private void Start()
-    {
-        ToggleParticleEffect(UseConfetti);
-
-    }
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
@@ -165,72 +102,36 @@ public class AI : MonoBehaviour
 
     public void DestroyAI()
     {
-        if (!_IsDead)
-        {
-            _IsDead = true;
-            ChangeState(AIState.Rage); // Assuming the dying state triggers here or similar
-            _animator.SetBool("IsDead", true);
-
-            Speed = 0;
-
-            if (Rb2d != null)
-            {
-                Rb2d.velocity = Vector2.zero;
-            }
-
-            // Deactivate both particle systems when dying
-            BloodParticles.gameObject.SetActive(false);
-            ConfettiParticles.gameObject.SetActive(false);
-
-            StartCoroutine(WaitForAnimationToEnd());
-        }
-    }
-
-    private IEnumerator WaitForAnimationToEnd()
-    {
-        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !_animator.IsInTransition(0));
+        ChangeState(AIState.Rage);
         Destroy(gameObject);
     }
 
     public void Damage(int amt)
     {
-        if (!_IsDead)  // Ensure no changes if AI is already dead
-        {
-            ParticleSystem particlesToPlay = UseConfetti ? ConfettiParticles : BloodParticles;
-
-            particlesToPlay.gameObject.SetActive(true);
-            particlesToPlay.Play();
-
-            _health -= amt;
-            if (_health <= 0)
-            {
-                DestroyAI();
-            }
-
-            StartCoroutine(SpriteFlashing());
-        }
-    }
-
-    private void ApplyDamageEffects(int amt)
-    {
-        // Remaining damage logic, health reduction and state changes
         if ((int)state >= 3 && (int)state <= 8)
         {
             _health -= amt;
+
             if (_health <= 0)
             {
-                // Call game manager and other components for game effects and cleanup
+                ServiceLocator.Get<GameManager>().KillScoreUpdate();
+                ServiceLocator.Get<Player>().AddKillCount();
+                ServiceLocator.Get<Player>().Variables.GiveSpeedBoost();
+                ServiceLocator.Get<GameLoopManager>().WantedSystem();
+
                 DestroyAI();
             }
         }
         else
         {
             --_hitsToGetMad;
+
             if (_hitsToGetMad <= 0)
             {
                 ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
             }
         }
+
         StartCoroutine(SpriteFlashing());
     }
 
@@ -292,37 +193,39 @@ public class AI : MonoBehaviour
         _moneyUIParticleSystem.Play();
     }
 
-    public bool IsDead()
+    private void SetTutorialState()
     {
-        return _IsDead;
+        _stateManager.AddState<GoodTutorialCus>();
+        _stateManager.AddState<HungryTutorialCus>();
+        _stateManager.AddState<EatingTutorialCus>();
+
+        _stateManager.AddState<RageTutorialCus>();
+        _stateManager.AddState<FoodLockTutorialCus>();
+        _stateManager.AddState<HonkingTutorialCus>();
+        _stateManager.AddState<BobChasingState>();
+
+        _stateManager.AddState<BobAttackState>();
+        _stateManager.AddState<AttackingTutorialCus>();
+        _stateManager.AddState<LeavingTutorialCus>();
+
+        ChangeState(ServiceLocator.Get<TutorialLoopManager>().AiStandState);
     }
 
-
-    public static void ToggleUseConfetti(bool useConfetti)
+    private void SetBaseState()
     {
-        UseConfetti = useConfetti;
-        foreach (AI ai in FindObjectsOfType<AI>())
-        {
-            ai.ToggleParticleEffect(useConfetti);
-        }
-    }
+        _stateManager.AddState<GoodCustomerState>();
+        _stateManager.AddState<HungryCustomer>();
+        _stateManager.AddState<EatingCustomer>();
 
-    public void ToggleParticleEffect(bool useConfetti)
-    {
-        if (useConfetti)
-        {
-            BloodParticles.gameObject.SetActive(false);
-            ConfettiParticles.gameObject.SetActive(true);
-            ConfettiParticles.transform.SetSiblingIndex(1);  // Move Confetti to the top if using confetti
-            BloodParticles.transform.SetSiblingIndex(0);     // Move Blood below Confetti
-        }
-        else
-        {
-            ConfettiParticles.gameObject.SetActive(false);
-            BloodParticles.gameObject.SetActive(true);
-            BloodParticles.transform.SetSiblingIndex(1);     // Move Blood to the top if not using confetti
-            ConfettiParticles.transform.SetSiblingIndex(0);  // Move Confetti below Blood
-        }
-    }
+        _stateManager.AddState<RageCustomerState>();
+        _stateManager.AddState<FoodLockCustomer>();
+        _stateManager.AddState<HonkingCustomer>();
+        _stateManager.AddState<BobChasingState>();
 
+        _stateManager.AddState<BobAttackState>();
+        _stateManager.AddState<AttackingCustomer>();
+        _stateManager.AddState<LeavingCustomer>();
+
+        ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+    }
 }

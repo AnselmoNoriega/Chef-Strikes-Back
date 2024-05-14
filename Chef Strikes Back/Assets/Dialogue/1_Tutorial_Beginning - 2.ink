@@ -1,5 +1,6 @@
 INCLUDE globals.ink
 
+->Beginning
 === Beginning ===
 
 Here’s a customer. Soon enough you’ll be crushed under the weight of dozens of these
