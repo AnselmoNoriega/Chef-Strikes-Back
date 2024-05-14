@@ -196,44 +196,25 @@ public class AI : MonoBehaviour
             particlesToPlay.gameObject.SetActive(true);
             particlesToPlay.Play();
 
-            _health -= amt;
-
-            if (_health <= 0)
+            if ((int)state >= 3 && (int)state <= 8)
             {
-                if (state == AIState.Rage)
+                _health -= amt;
+                if (_health <= 0)
                 {
                     DestroyAI();
                 }
-                else
+            }
+            else
+            {
+                --_hitsToGetMad;
+                if (_hitsToGetMad <= 0)
                 {
-                    ChangeState(AIState.Rage);
-                    _health = 1; // Set health to a small value for the next hit to destroy the AI
+                    ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
                 }
             }
 
             StartCoroutine(SpriteFlashing());
         }
-    }
-
-    private void ApplyDamageEffects(int amt)
-    {
-        if ((int)state >= 3 && (int)state <= 8)
-        {
-            _health -= amt;
-            if (_health <= 0)
-            {
-                DestroyAI();
-            }
-        }
-        else
-        {
-            --_hitsToGetMad;
-            if (_hitsToGetMad <= 0)
-            {
-                ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
-            }
-        }
-        StartCoroutine(SpriteFlashing());
     }
 
     public void ZeldasChikens()

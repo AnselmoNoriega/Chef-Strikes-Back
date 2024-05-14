@@ -7,6 +7,7 @@ using System.Diagnostics.Contracts;
 public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds;
+
     public void Initialize()
     {
         foreach (Sounds s in sounds)
@@ -27,9 +28,12 @@ public class AudioManager : MonoBehaviour
             if (s.name == name)
             {
                 s.source.Play();
+                return;
             }
         }
+        Debug.LogError($"Sound with name {name} not found!");
     }
+
     public void StopSource(string name)
     {
         foreach (var s in sounds)
@@ -37,10 +41,12 @@ public class AudioManager : MonoBehaviour
             if (s.name == name)
             {
                 s.source.Stop();
-                break;
+                return;
             }
         }
+        Debug.LogError($"Sound with name {name} not found!");
     }
+
     public bool IsPlaying(string name)
     {
         foreach (var s in sounds)
@@ -62,7 +68,7 @@ public class AudioManager : MonoBehaviour
                 PlaySource("BGM");
                 break;
 
-                default: break;
+            default: break;
         }
     }
 }
