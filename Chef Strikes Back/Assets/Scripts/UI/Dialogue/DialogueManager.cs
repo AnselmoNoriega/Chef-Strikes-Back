@@ -38,7 +38,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
-        ServiceLocator.Get<Player>().tutorialFreeze = true;
+        ServiceLocator.Get<Player>().shouldNotMove = true;
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
-        ServiceLocator.Get<Player>().tutorialFreeze = false;
+        ServiceLocator.Get<Player>().shouldNotMove = false;
     }
 
     public void ContinueStory()
@@ -107,7 +107,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            isPaused = false;
+            isPaused = true;
         }
     }
 }

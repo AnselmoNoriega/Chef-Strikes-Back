@@ -81,24 +81,17 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-        if (_player.tutorialFreeze)
-        {
-            return;
-        }
+        
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 
     private void RightClick(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
-        {
-            return;
-        }
-        if (_player.tutorialFreeze)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -108,11 +101,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
-        {
-            return;
-        }
-        if (_player.tutorialFreeze)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -122,11 +111,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightbuttonDown(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
-        {
-            return;
-        }
-        if (_player.tutorialFreeze)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -135,11 +120,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
-        {
-            return;
-        }
-        if(_player.tutorialFreeze)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -148,11 +129,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
-        {
-            return;
-        }
-        if (_player.tutorialFreeze)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -161,11 +138,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
-        {
-            return;
-        }
-        if (_player.tutorialFreeze)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }

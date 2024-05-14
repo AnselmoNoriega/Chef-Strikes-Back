@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     public Animator PlayerAnimator { get; private set; }
     
     private bool _initialized = false;
-    public bool tutorialFreeze = false;
+    public bool shouldNotMove = false;
 
     public void Initialize()
     {
