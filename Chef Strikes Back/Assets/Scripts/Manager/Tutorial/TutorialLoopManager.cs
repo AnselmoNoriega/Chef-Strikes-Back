@@ -5,6 +5,7 @@ public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private TutorialCameraManager _tutorialCameraManager;
     [SerializeField] private GameObject _aiPrefab;
+
     private AI _tutorialAI;
 
     public AIState AiStandState = AIState.Good;

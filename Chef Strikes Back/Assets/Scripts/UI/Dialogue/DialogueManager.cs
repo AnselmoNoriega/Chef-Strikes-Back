@@ -13,6 +13,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
 
+    public bool isPaused = false;
+
     private Story currentStory;
 
     public bool dialogueMode;
@@ -36,10 +38,10 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON)
     {
+        ServiceLocator.Get<Player>().tutorialFreeze = true;
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-
         ContinueStory();
     }
 
@@ -49,6 +51,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
+        ServiceLocator.Get<Player>().tutorialFreeze = false;
     }
 
     public void ContinueStory()
@@ -93,6 +96,18 @@ public class DialogueManager : MonoBehaviour
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
             }
+        }
+    }
+
+    public void SetPause()
+    {
+        if(isPaused)
+        {
+            isPaused = false;
+        }
+        else
+        {
+            isPaused = false;
         }
     }
 }

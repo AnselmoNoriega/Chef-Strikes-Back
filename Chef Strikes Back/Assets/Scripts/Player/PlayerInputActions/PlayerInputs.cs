@@ -85,7 +85,10 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-        
+        if (_player.tutorialFreeze)
+        {
+            return;
+        }
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 
@@ -95,7 +98,10 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-
+        if (_player.tutorialFreeze)
+        {
+            return;
+        }
         _action.PrepareToThrow(_mouse);
         _action.GrabItem();
     }
@@ -103,6 +109,10 @@ public class PlayerInputs : MonoBehaviour
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
         if (_isOnPaused)
+        {
+            return;
+        }
+        if (_player.tutorialFreeze)
         {
             return;
         }
@@ -116,7 +126,10 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-
+        if (_player.tutorialFreeze)
+        {
+            return;
+        }
         _action.GrabItem();
     }
 
@@ -126,7 +139,10 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-
+        if(_player.tutorialFreeze)
+        {
+            return;
+        }
         _action.PrepareToThrow(_rightJoystick);
     }
 
@@ -136,7 +152,10 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-
+        if (_player.tutorialFreeze)
+        {
+            return;
+        }
         _action.ThrowItem();
     }
 
@@ -146,7 +165,10 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-
+        if (_player.tutorialFreeze)
+        {
+            return;
+        }
         _action.ThrowItem();
     }
 
