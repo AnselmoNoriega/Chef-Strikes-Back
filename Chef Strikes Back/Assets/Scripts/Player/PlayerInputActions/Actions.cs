@@ -16,6 +16,11 @@ public class Actions : MonoBehaviour
     [SerializeField] private float _grabDistance;
     private SpriteRenderer _selectedItem = null;
 
+
+    public ParticleSystem TomatoParticles;
+    public ParticleSystem DoughParticles;
+    public ParticleSystem CheeseParticles;
+
     private void Start()
     {
         _player = GetComponent<Player>();
@@ -119,9 +124,34 @@ public class Actions : MonoBehaviour
                 _isCarryingItem = true;
                 ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
+
+                if (_inventory.GetFoodItem().Type == FoodType.Tomato)
+                {
+                    TomatoParticles.gameObject.SetActive(true);
+                }
+
+                else if (_inventory.GetFoodItem().Type != FoodType.Cheese)
+                {
+                    CheeseParticles.gameObject.SetActive(true);
+                }
+
+                else if (_inventory.GetFoodItem().Type != FoodType.Dough)
+                {
+                    DoughParticles.gameObject.SetActive(true);
+                }
+
+                else
+                {
+                    Debug.Log("No food");
+                }
+
                 return;
             }
         }
+
+        //TomatoParticles.gameObject.SetActive(false);
+        //CheeseParticles.gameObject.SetActive(false);
+        //DoughParticles.gameObject.SetActive(false);
     }
 
     public void PrepareToThrow(InputAction mouse)
