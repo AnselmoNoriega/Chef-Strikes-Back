@@ -46,7 +46,6 @@ public class TutorialLoopManager : MonoBehaviour
             case 0:
                 {
                     SpawnCustomer();
-                    ++_focusPosIdx;
                     break;
                 }
             case 1:
@@ -57,6 +56,7 @@ public class TutorialLoopManager : MonoBehaviour
                     break;
                 }
         }
+        ++_focusPosIdx;
     }
 
     private void SpawnCustomer()
