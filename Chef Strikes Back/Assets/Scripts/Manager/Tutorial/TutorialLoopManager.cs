@@ -16,6 +16,7 @@ public class TutorialLoopManager : MonoBehaviour
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
     [SerializeField] private TextAsset inkJSONFoodThrow;
+    [SerializeField] private TextAsset inkJSONPickingUp;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -89,6 +90,11 @@ public class TutorialLoopManager : MonoBehaviour
             ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, "ingredientInHand", timeUp);
             inkJSONFoodThrow = null;
         }
+    }
+
+    public void PickUpEvent()
+    {
+        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONPickingUp);
     }
 
 }
