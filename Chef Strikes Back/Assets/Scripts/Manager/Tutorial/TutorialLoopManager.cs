@@ -12,8 +12,10 @@ public class TutorialLoopManager : MonoBehaviour
 
     public AIState AiStandState = AIState.Good;
 
+
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
+    [SerializeField] private TextAsset inkJSONFoodThrow;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -78,6 +80,15 @@ public class TutorialLoopManager : MonoBehaviour
         var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
         _tutorialCameraManager.ChangeTarget(customer.transform);
         _tutorialAI = customer.GetComponent<AI>();
+    }
+
+    public void CheckIfHolding(bool timeUp)
+    {
+        if (inkJSONFoodThrow)
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, "ingredientInHand", timeUp);
+            inkJSONFoodThrow = null;
+        }
     }
 
 }

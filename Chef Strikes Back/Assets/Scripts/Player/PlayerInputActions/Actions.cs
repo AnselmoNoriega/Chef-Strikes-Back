@@ -121,6 +121,7 @@ public class Actions : MonoBehaviour
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
                 return;
             }
+         
         }
     }
 

@@ -45,6 +45,16 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
+    public void EnterDialogueModeBool(TextAsset inkJSON, string name, bool active)
+    {
+        ServiceLocator.Get<Player>().shouldNotMove = true;
+        currentStory = new Story(inkJSON.text);
+        currentStory.variablesState[name] = active;
+        dialogueIsPlaying = true;
+        dialoguePanel.SetActive(true);
+        ContinueStory();
+    }
+
     private void ExitDialogueMode() 
     {
         dialogueIsPlaying = false;    

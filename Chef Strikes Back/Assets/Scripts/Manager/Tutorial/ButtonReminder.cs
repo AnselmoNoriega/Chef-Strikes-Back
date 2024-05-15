@@ -12,6 +12,10 @@ public class ButtonReminder : MonoBehaviour
     private bool _hintOn = false;
     private bool _shouldFlash = false;
 
+    private bool _runTimer = false;
+    private float _timer = 15;
+
+
     private void Update()
     {
         if (_hintOn && ServiceLocator.Get<Player>().GetComponent<Actions>().IsCarryingItem)
@@ -20,6 +24,16 @@ public class ButtonReminder : MonoBehaviour
             _buttonObjects.SetActive(false);
             _hintOn = false;
         }
+        if (_runTimer)
+        {
+            _timer -= Time.deltaTime;
+            if(_timer <= 0.0f)
+            {
+                ServiceLocator.Get<TutorialLoopManager>().CheckIfHolding(false);
+                _runTimer = false;
+            }
+        }
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -44,23 +58,18 @@ public class ButtonReminder : MonoBehaviour
 
     private IEnumerator ButtonFlashing(GameObject gameObject)
     {
-        
-            while (_shouldFlash)
-            {
-                gameObject.SetActive(true);
-                yield return new WaitForSeconds(0.2f);
-                gameObject.SetActive(false);
-                yield return new WaitForSeconds(0.2f);
-            }
+        while (_shouldFlash)
+        {
+            gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
     public void SetHitOn(bool active)
     {
         _hintOn = active;
-        if(!_hintOn)
-        {
-            _shouldFlash = false;
-        }
+        _runTimer = true;
     }
-
 }

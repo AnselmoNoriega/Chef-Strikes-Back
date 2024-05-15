@@ -3142,8 +3142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 326534258}
-  _flashingTime: 2
-  hintOn: 0
 --- !u!1 &444968875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3243,8 +3241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 974587919}
-  _flashingTime: 2
-  hintOn: 0
 --- !u!1 &459114730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4186,6 +4182,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1029468879}
   dialogueText: {fileID: 1251405667}
   displayNameText: {fileID: 2105654943}
+  isPaused: 0
   dialogueMode: 1
   dialogueIsPlaying: 0
 --- !u!1 &710306905
@@ -7301,8 +7298,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 2088344444}
-  _flashingTime: 2
-  hintOn: 0
 --- !u!1 &1102096396
 GameObject:
   m_ObjectHideFlags: 0
@@ -13049,6 +13044,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: b0a07af5bf909d647ba58bb623d19210, type: 3}
   - {fileID: 4900000, guid: fad214f61f4ba3d419afc39f3e4e5539, type: 3}
   - {fileID: 4900000, guid: 960efd35cdd187042b2e89110d18201f, type: 3}
+  inkJSONFoodThrow: {fileID: 4900000, guid: 75642803cc8a9504db59e243e18676c7, type: 3}
 --- !u!1001 &1733833529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17717,7 +17713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bea085fe18fca34781ceac74fbd2b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogueManager: {fileID: 708684899}
 --- !u!1 &1852254339
 GameObject:
   m_ObjectHideFlags: 0

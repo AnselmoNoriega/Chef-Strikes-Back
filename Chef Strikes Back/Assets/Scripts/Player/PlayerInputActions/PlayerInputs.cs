@@ -173,6 +173,11 @@ public class PlayerInputs : MonoBehaviour
 
     public Vector2 GetMovement()
     {
+        if(_player.shouldNotMove)
+        {
+            return Vector2.zero;
+        }
+
         if (_isUsingController)
         {
             return _moveStick.ReadValue<Vector2>();
