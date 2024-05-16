@@ -7,9 +7,15 @@ public class CauldronEvent : MonoBehaviour
         if (collision.tag == "Food")
         {
             var component = collision.gameObject.GetComponent<Item>();
-            if (component)
+            var tutorialManager = ServiceLocator.Get<TutorialLoopManager>();
+
+            if (component && tutorialManager.TutorialSecondFace)
             {
-                ServiceLocator.Get<TutorialLoopManager>().TriggerCauldronEvent(component.Type == FoodType.Pizza);
+                tutorialManager.TriggerSpaghettiEvent(component.Type == FoodType.Spaghetti);
+            }
+            else if (component)
+            {
+                tutorialManager.TriggerCauldronEvent(component.Type == FoodType.Pizza);
             }
         }
     }

@@ -18,9 +18,12 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private TextAsset inkJSONFoodThrow;
     [SerializeField] private TextAsset inkJSONPickingUp;
     [SerializeField] private TextAsset inkJSONCauldronEvent;
+    [SerializeField] private TextAsset inkJSONSpaghetiEvent;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
+    public bool TutorialSecondFace = false;
+    public bool _multipleSpaghettiesMade = false;
 
     private void Start()
     {
@@ -71,6 +74,7 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialAI.enabled = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialCameraManager.ChangeTarget(_player.transform);
+                    TutorialSecondFace = true;
                     break;
                 }
 
@@ -93,7 +97,9 @@ public class TutorialLoopManager : MonoBehaviour
     {
         if (inkJSONFoodThrow)
         {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, "ingredientInHand", timeUp);
+            string[] names = new string[] { "ingredientInHand" };
+            bool[] bools = new bool[] { timeUp };
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, names, bools);
             inkJSONFoodThrow = null;
         }
     }
@@ -102,10 +108,27 @@ public class TutorialLoopManager : MonoBehaviour
     {
         if (inkJSONCauldronEvent)
         {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONCauldronEvent, "pizzaMade", isPizza);
+            string[] names = new string[] { "pizzaMade" };
+            bool[] bools = new bool[] { isPizza };
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONCauldronEvent, names, bools);
             if (isPizza)
             {
                 inkJSONCauldronEvent = null;
+            }
+        }
+    }
+
+    public void TriggerSpaghettiEvent(bool isSpaghetti)
+    {
+        if (inkJSONSpaghetiEvent)
+        {
+            string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
+            bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
+            _multipleSpaghettiesMade = true;
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONSpaghetiEvent, names, bools);
+            if (isSpaghetti)
+            {
+                inkJSONSpaghetiEvent = null;
             }
         }
     }
