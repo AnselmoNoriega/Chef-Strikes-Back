@@ -11,20 +11,19 @@ public class HungryTutorialCus : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        waitingTime = 25;
+        waitingTime = 60;
 
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
+        agent.ChoiceIndex = ServiceLocator.Get<TutorialLoopManager>().AiChoice++;
         agent.Indicator.SetIndicator(true, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
         timer = 0.0f;
-
-        agent.enabled = false;
     }
 
     public void Update(AI agent, float dt)

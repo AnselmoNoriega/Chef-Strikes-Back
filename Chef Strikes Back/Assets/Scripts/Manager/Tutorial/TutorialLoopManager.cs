@@ -11,7 +11,7 @@ public class TutorialLoopManager : MonoBehaviour
     private AI _tutorialAI;
 
     public AIState AiStandState = AIState.Good;
-
+    public int AiChoice = 0;
 
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
@@ -66,12 +66,19 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     break;
                 }
+            case 3:
+                {
+                    _tutorialAI.enabled = true;
+                    _tutorialAI.ChangeState(AIState.Hungry);
+                    _tutorialCameraManager.ChangeTarget(_player.transform);
+                    break;
+                }
 
         }
         ++_focusPosIdx;
     }
 
-    private void SpawnCustomer()
+    public void SpawnCustomer()
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
         var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
@@ -96,13 +103,16 @@ public class TutorialLoopManager : MonoBehaviour
         if (inkJSONCauldronEvent)
         {
             ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONCauldronEvent, "pizzaMade", isPizza);
-            inkJSONCauldronEvent = null;
+            if (isPizza)
+            {
+                inkJSONCauldronEvent = null;
+            }
         }
     }
 
     public void PickUpEvent()
     {
-        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONPickingUp);
+        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONPickingUp, false);
     }
 
 }

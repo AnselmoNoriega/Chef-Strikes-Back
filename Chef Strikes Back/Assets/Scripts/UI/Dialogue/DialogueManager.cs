@@ -26,7 +26,9 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
 
     private const string LAYOUT_TAG = "layout";
-   
+
+    private bool _callMethodIfFinished = true;
+
     public void Initialize()
     {
         _tutorialLoopManager = ServiceLocator.Get<TutorialLoopManager>();
@@ -36,8 +38,9 @@ public class DialogueManager : MonoBehaviour
         dialogueMode = true;
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
+    public void EnterDialogueMode(TextAsset inkJSON, bool callMethodIfFinished = true)
     {
+        _callMethodIfFinished = callMethodIfFinished;
         ServiceLocator.Get<Player>().shouldNotMove = true;
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
@@ -47,6 +50,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueModeBool(TextAsset inkJSON, string name, bool active)
     {
+        _callMethodIfFinished = false;
         ServiceLocator.Get<Player>().shouldNotMove = true;
         currentStory = new Story(inkJSON.text);
         currentStory.variablesState[name] = active;
@@ -55,9 +59,9 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
-    private void ExitDialogueMode() 
+    private void ExitDialogueMode()
     {
-        dialogueIsPlaying = false;    
+        dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
@@ -75,7 +79,10 @@ public class DialogueManager : MonoBehaviour
         else
         {
             ExitDialogueMode();
-            _tutorialLoopManager.EndConversation();
+            if (_callMethodIfFinished)
+            {
+                _tutorialLoopManager.EndConversation();
+            }
         }
     }
 
@@ -84,7 +91,7 @@ public class DialogueManager : MonoBehaviour
         foreach (string tag in currentTags)
         {
             string[] splitTag = tag.Split(':');
-            if(splitTag.Length != 2)
+            if (splitTag.Length != 2)
             {
                 Debug.LogError("Tag could not be appropriately parsed: " + tag);
             }
@@ -111,7 +118,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SetPause()
     {
-        if(IsPaused)
+        if (IsPaused)
         {
             IsPaused = false;
         }
