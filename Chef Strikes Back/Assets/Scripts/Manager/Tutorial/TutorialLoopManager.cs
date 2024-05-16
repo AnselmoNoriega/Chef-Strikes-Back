@@ -17,6 +17,7 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private List<TextAsset> inkJSON;
     [SerializeField] private TextAsset inkJSONFoodThrow;
     [SerializeField] private TextAsset inkJSONPickingUp;
+    [SerializeField] private TextAsset inkJSONCauldronEvent;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -24,11 +25,6 @@ public class TutorialLoopManager : MonoBehaviour
     private void Start()
     {
         EnterConversation();
-    }
-
-    private void Initialize()
-    {
-
     }
 
     private void Update()
@@ -81,6 +77,9 @@ public class TutorialLoopManager : MonoBehaviour
         var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
         _tutorialCameraManager.ChangeTarget(customer.transform);
         _tutorialAI = customer.GetComponent<AI>();
+
+        EnterConversation();
+        ServiceLocator.Get<DialogueManager>().IsPaused = true;
     }
 
     public void CheckIfHolding(bool timeUp)
@@ -89,6 +88,15 @@ public class TutorialLoopManager : MonoBehaviour
         {
             ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, "ingredientInHand", timeUp);
             inkJSONFoodThrow = null;
+        }
+    }
+
+    public void TriggerCauldronEvent(bool isPizza)
+    {
+        if (inkJSONCauldronEvent)
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONCauldronEvent, "pizzaMade", isPizza);
+            inkJSONCauldronEvent = null;
         }
     }
 

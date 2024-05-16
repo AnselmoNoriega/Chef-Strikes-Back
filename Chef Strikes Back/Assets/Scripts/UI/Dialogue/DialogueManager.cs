@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
 
-    public bool isPaused = false;
+    public bool IsPaused { get; set; }
 
     private Story currentStory;
 
@@ -111,13 +111,13 @@ public class DialogueManager : MonoBehaviour
 
     public void SetPause()
     {
-        if(isPaused)
+        if(IsPaused)
         {
-            isPaused = false;
+            IsPaused = false;
         }
         else
         {
-            isPaused = true;
+            IsPaused = true;
         }
     }
 }

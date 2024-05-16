@@ -42,7 +42,7 @@ public class TutorialInput : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        if(_dialogueManager.dialogueIsPlaying && !_dialogueManager.isPaused)
+        if(_dialogueManager.dialogueIsPlaying && !_dialogueManager.IsPaused)
         {
             _dialogueManager.ContinueStory();
         }
