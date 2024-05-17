@@ -19,6 +19,7 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private TextAsset inkJSONPickingUp;
     [SerializeField] private TextAsset inkJSONCauldronEvent;
     [SerializeField] private TextAsset inkJSONSpaghetiEvent;
+    [SerializeField] private TextAsset inkJSONGettingMad;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -74,7 +75,19 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialAI.enabled = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialCameraManager.ChangeTarget(_player.transform);
-                    TutorialSecondFace = true;
+                    break;
+                }
+            case 4:
+                {
+                    AiStandState = AIState.HonkingCustomer;
+                    ServiceLocator.Get<AIManager>().AddHungryCustomer(_tutorialAI);
+                    SpawnCustomer(false);
+                    EnterConversation();
+                    break;
+                }
+            case 5:
+                {
+                    _tutorialCameraManager.ChangeTarget(_player.transform);
                     break;
                 }
 
@@ -82,7 +95,7 @@ public class TutorialLoopManager : MonoBehaviour
         ++_focusPosIdx;
     }
 
-    public void SpawnCustomer()
+    public void SpawnCustomer(bool shouldPause = true)
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
         var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
@@ -90,7 +103,7 @@ public class TutorialLoopManager : MonoBehaviour
         _tutorialAI = customer.GetComponent<AI>();
 
         EnterConversation();
-        ServiceLocator.Get<DialogueManager>().IsPaused = true;
+        ServiceLocator.Get<DialogueManager>().IsPaused = shouldPause;
     }
 
     public void CheckIfHolding(bool timeUp)
@@ -101,6 +114,15 @@ public class TutorialLoopManager : MonoBehaviour
             bool[] bools = new bool[] { timeUp };
             ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, names, bools);
             inkJSONFoodThrow = null;
+        }
+    }
+
+    public void CustomerGetsMad()
+    {
+        if (inkJSONGettingMad)
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONGettingMad, false);
+            inkJSONGettingMad = null;
         }
     }
 
@@ -125,7 +147,7 @@ public class TutorialLoopManager : MonoBehaviour
             string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
             bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
             _multipleSpaghettiesMade = true;
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONSpaghetiEvent, names, bools);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONSpaghetiEvent, names, bools, true);
             if (isSpaghetti)
             {
                 inkJSONSpaghetiEvent = null;

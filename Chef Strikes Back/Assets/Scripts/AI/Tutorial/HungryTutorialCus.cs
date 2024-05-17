@@ -50,9 +50,8 @@ public class HungryTutorialCus : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
-
-            int value = Random.Range(0, 100) % 4;
-            agent.ChangeState((AIState)(value + 3));
+            ServiceLocator.Get<TutorialLoopManager>().CustomerGetsMad();
+            agent.ChangeState(AIState.Rage);
         }
     }
 

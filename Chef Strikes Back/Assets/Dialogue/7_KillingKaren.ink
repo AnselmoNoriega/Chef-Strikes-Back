@@ -1,6 +1,6 @@
 INCLUDE globals.ink
 
-
+->KillingKaren
 === KillingKaren ===
 
 {controller:

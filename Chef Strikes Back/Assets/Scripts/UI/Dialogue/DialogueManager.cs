@@ -48,9 +48,9 @@ public class DialogueManager : MonoBehaviour
         ContinueStory();
     }
 
-    public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active)
+    public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active, bool callMethodIfFinished = false)
     {
-        _callMethodIfFinished = false;
+        _callMethodIfFinished = callMethodIfFinished;
         ServiceLocator.Get<Player>().shouldNotMove = true;
         currentStory = new Story(inkJSON.text);
         for (int i = 0; i < name.Length; ++i)
