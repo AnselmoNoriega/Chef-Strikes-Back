@@ -20,6 +20,7 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private TextAsset inkJSONCauldronEvent;
     [SerializeField] private TextAsset inkJSONSpaghetiEvent;
     [SerializeField] private TextAsset inkJSONGettingMad;
+    [SerializeField] private TextAsset inkJSONEndLevel;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -70,22 +71,19 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     break;
                 }
-            case 3:
+            case 4:
                 {
-                    _tutorialAI.enabled = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     break;
                 }
-            case 4:
+            case 5:
                 {
-                    AiStandState = AIState.HonkingCustomer;
-                    ServiceLocator.Get<AIManager>().AddHungryCustomer(_tutorialAI);
-                    SpawnCustomer(false);
-                    EnterConversation();
+                    _tutorialAI.ChangeState(AIState.Hungry);
+                    _tutorialAI.enabled = true;
                     break;
                 }
-            case 5:
+            case 6:
                 {
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     break;
@@ -121,8 +119,17 @@ public class TutorialLoopManager : MonoBehaviour
     {
         if (inkJSONGettingMad)
         {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONGettingMad, false);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONGettingMad);
             inkJSONGettingMad = null;
+        }
+    }
+
+    public void EndTutorial()
+    {
+        if (inkJSONEndLevel)
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONEndLevel);
+            inkJSONEndLevel = null;
         }
     }
 
@@ -147,7 +154,7 @@ public class TutorialLoopManager : MonoBehaviour
             string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
             bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
             _multipleSpaghettiesMade = true;
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONSpaghetiEvent, names, bools, true);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONSpaghetiEvent, names, bools);
             if (isSpaghetti)
             {
                 inkJSONSpaghetiEvent = null;

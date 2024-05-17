@@ -8,6 +8,10 @@ public class EatingTutorialCus : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        if(!ServiceLocator.Get<TutorialLoopManager>().TutorialSecondFace)
+        {
+        ServiceLocator.Get<TutorialLoopManager>().EnterConversation();
+        }
         scale = agent.EatingSlider.localScale;
         agent.enabled = true;
         scale.x = 1;

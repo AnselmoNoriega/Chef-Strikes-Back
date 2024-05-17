@@ -76,7 +76,10 @@ public class RageTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-
+        if (agent.IsDead)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EndTutorial();
+        }
     }
 
     private void PathCompleted(Path p)

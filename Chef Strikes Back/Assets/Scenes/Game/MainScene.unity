@@ -3580,6 +3580,17 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &725547635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+  m_PrefabInstance: {fileID: 2927658305668911198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489507a675b2d9a4d8c1811953c49628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &834441975
 GameObject:
   m_ObjectHideFlags: 0
@@ -10387,13 +10398,13 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 960efd35cdd187042b2e89110d18201f, type: 3}
   - {fileID: 4900000, guid: 248c12e26f187134198b176b81642975, type: 3}
   - {fileID: 4900000, guid: ed3287d73e2452f499c270675798087a, type: 3}
-  - {fileID: 4900000, guid: e250b2a49660d7a4ab8de217b72a699a, type: 3}
-  - {fileID: 4900000, guid: 3ecb1660766e5c64d88084904920275b, type: 3}
+  - {fileID: 4900000, guid: 4ea9d86e64852f94eb2e0059ab5a6216, type: 3}
   inkJSONFoodThrow: {fileID: 4900000, guid: 75642803cc8a9504db59e243e18676c7, type: 3}
   inkJSONPickingUp: {fileID: 4900000, guid: e5db76c124bd314468c59982fcbb6bf5, type: 3}
   inkJSONCauldronEvent: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
   inkJSONSpaghetiEvent: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
-  inkJSONGettingMad: {fileID: 0}
+  inkJSONGettingMad: {fileID: 4900000, guid: f3b98b4f30ccfef439f251f00ed10376, type: 3}
+  inkJSONEndLevel: {fileID: 4900000, guid: c0637455a219e42488e2a67587fc911c, type: 3}
   TutorialSecondFace: 0
   _multipleSpaghettiesMade: 0
 --- !u!1001 &1733833529
@@ -12142,7 +12153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933894, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: m_Enabled
@@ -12379,6 +12390,7 @@ MonoBehaviour:
   _statefulObject: {fileID: 592392311}
   _tutorialCamerManager: {fileID: 1209050869}
   _tutorialInput: {fileID: 1846026831}
+  _gameLoopManager: {fileID: 725547635}
 --- !u!114 &2927658305668911206
 MonoBehaviour:
   m_ObjectHideFlags: 0

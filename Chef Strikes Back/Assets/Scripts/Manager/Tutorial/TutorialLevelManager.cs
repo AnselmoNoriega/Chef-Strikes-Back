@@ -16,6 +16,7 @@ public class TutorialLevelManager : MonoBehaviour
     [SerializeField] private StatefulObject _statefulObject = null;
     [SerializeField] private TutorialCameraManager _tutorialCamerManager = null;
     [SerializeField] private TutorialInput _tutorialInput = null;
+    [SerializeField] private GameLoopManager _gameLoopManager = null;
 
     GameLoader _gameLoader;
 
@@ -37,6 +38,7 @@ public class TutorialLevelManager : MonoBehaviour
         ServiceLocator.Register<StatefulObject>(_statefulObject);
         ServiceLocator.Register<TutorialCameraManager>(_tutorialCamerManager);
         ServiceLocator.Register<TutorialInput>(_tutorialInput);
+        ServiceLocator.Register<GameLoopManager>(_gameLoopManager);
 
         _dialogueManager.Initialize();
         _audioManager.Initialize();

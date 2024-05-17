@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
 
     private const string LAYOUT_TAG = "layout";
 
-    private bool _callMethodIfFinished = true;
+    private bool _callMethodIfFinished = false;
 
     public void Initialize()
     {
@@ -40,6 +40,12 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON, bool callMethodIfFinished = true)
     {
+        if(_callMethodIfFinished)
+        {
+            _callMethodIfFinished = false;
+            _tutorialLoopManager.EndConversation();
+        }
+
         _callMethodIfFinished = callMethodIfFinished;
         ServiceLocator.Get<Player>().shouldNotMove = true;
         currentStory = new Story(inkJSON.text);
@@ -50,6 +56,12 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active, bool callMethodIfFinished = false)
     {
+        if (_callMethodIfFinished)
+        {
+            _callMethodIfFinished = false;
+            _tutorialLoopManager.EndConversation();
+        }
+
         _callMethodIfFinished = callMethodIfFinished;
         ServiceLocator.Get<Player>().shouldNotMove = true;
         currentStory = new Story(inkJSON.text);
@@ -84,6 +96,7 @@ public class DialogueManager : MonoBehaviour
             ExitDialogueMode();
             if (_callMethodIfFinished)
             {
+                _callMethodIfFinished = false;
                 _tutorialLoopManager.EndConversation();
             }
         }
