@@ -2,21 +2,35 @@ using UnityEngine;
 
 public class CauldronEvent : MonoBehaviour
 {
+    private TutorialLoopManager _loopManager;
+    private int _creationTimes = 0;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Food")
         {
             var component = collision.gameObject.GetComponent<Item>();
-            var tutorialManager = ServiceLocator.Get<TutorialLoopManager>();
+            _loopManager = ServiceLocator.Get<TutorialLoopManager>();
 
-            if (component && tutorialManager.TutorialSecondFace)
+            if (component && _loopManager.TutorialSecondFace)
             {
-                tutorialManager.TriggerSpaghettiEvent(component.Type == FoodType.Spaghetti);
+                _loopManager.TriggerSpaghettiEvent(component.Type == FoodType.Spaghetti);
+                CheckCreationTimes();
             }
             else if (component)
             {
-                tutorialManager.TriggerCauldronEvent(component.Type == FoodType.Pizza);
+                _loopManager.TriggerCauldronEvent(component.Type == FoodType.Pizza);
+                CheckCreationTimes();
             }
+        }
+    }
+
+    private void CheckCreationTimes()
+    {
+        ++_creationTimes;
+        if( _creationTimes == 4)
+        {
+            _loopManager.CombinerPop();
         }
     }
 }

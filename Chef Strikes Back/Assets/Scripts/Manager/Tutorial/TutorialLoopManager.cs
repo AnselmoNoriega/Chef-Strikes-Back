@@ -21,6 +21,7 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private TextAsset inkJSONSpaghetiEvent;
     [SerializeField] private TextAsset inkJSONGettingMad;
     [SerializeField] private TextAsset inkJSONEndLevel;
+    [SerializeField] private TextAsset inkJSONCombinerPop;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -88,6 +89,14 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     break;
                 }
+            case 7:
+                {
+                    ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
+                    var glm = ServiceLocator.Get<GameLoopManager>();
+                    glm.enabled = true;
+                    glm.Initialize();
+                    break;
+                }
 
         }
         ++_focusPosIdx;
@@ -121,6 +130,15 @@ public class TutorialLoopManager : MonoBehaviour
         {
             ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONGettingMad);
             inkJSONGettingMad = null;
+        }
+    }
+
+    public void CombinerPop()
+    {
+        if (inkJSONCombinerPop)
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONCombinerPop);
+            inkJSONCombinerPop = null;
         }
     }
 

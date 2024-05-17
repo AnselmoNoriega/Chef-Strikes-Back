@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //Kingston is gay
@@ -30,6 +28,7 @@ public class TutorialLevelManager : MonoBehaviour
     {
         ServiceLocator.Register<AIManager>(_AIManager);
         ServiceLocator.Register<Player>(_player);
+        ServiceLocator.Register<TutorialTimer>(_timeManager);
         ServiceLocator.Register<TutorialLoopManager>(_tutorialLoopManager);
         ServiceLocator.Register<AudioManager>(_audioManager);
         ServiceLocator.Register<CanvasManager>(_canvasManager);
@@ -46,17 +45,23 @@ public class TutorialLevelManager : MonoBehaviour
         _tutorialCamerManager.Initialize();
         _timeManager.Initialize();
         _tutorialInput.Initialize();
+
+        _timeManager.SetTimeState(false);
     }
 
     private void OnDestroy()
     {
         ServiceLocator.Unregister<AIManager>();
         ServiceLocator.Unregister<Player>();
+        ServiceLocator.Unregister<TutorialTimer>();
         ServiceLocator.Unregister<TutorialLoopManager>();
         ServiceLocator.Unregister<AudioManager>();
         ServiceLocator.Unregister<CanvasManager>();
         ServiceLocator.Unregister<DialogueManager>();
+        ServiceLocator.Unregister<SceneControl>();
         ServiceLocator.Unregister<StatefulObject>();
         ServiceLocator.Unregister<TutorialCameraManager>();
+        ServiceLocator.Unregister<TutorialInput>();
+        ServiceLocator.Unregister<GameLoopManager>();
     }
 }
