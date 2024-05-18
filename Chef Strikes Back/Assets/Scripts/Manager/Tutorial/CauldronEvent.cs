@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class CauldronEvent : MonoBehaviour
 {
+    [SerializeField] private CreationTable _creationTable;
+
     private TutorialLoopManager _loopManager;
+    
     private int _creationTimes = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,6 +25,11 @@ public class CauldronEvent : MonoBehaviour
                 _loopManager.TriggerCauldronEvent(component.Type == FoodType.Pizza);
                 CheckCreationTimes();
             }
+        }
+
+        if (_creationTable.GetIsLocked() && collision.transform.tag == "Ingredient")
+        {
+            _loopManager.TableLocked();
         }
     }
 

@@ -1,5 +1,6 @@
 VAR stars = 0
 
+->PlayerDeath
 ==PlayerDeath
 {stars == 1:
     Alright, well, I’ve seen better first tries. No I’m being too nice, it’s the worst one I’ve ever seen. However many stars you get is how much extra money you get. If you want to move on to the next level, you need [#MONEY]. So you better try again is what I’m saying.

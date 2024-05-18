@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour
     private InputControls _inputManager;
     private InputAction _zoom;
     [SerializeField] private List<GameObject> _narrativePos;
-    [SerializeField] private bool _followPlayer = true;
 
     public void Initialize()
     {

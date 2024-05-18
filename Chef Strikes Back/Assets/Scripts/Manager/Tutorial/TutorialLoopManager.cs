@@ -23,6 +23,7 @@ public class TutorialLoopManager : MonoBehaviour
     [SerializeField] private TextAsset inkJSONGettingMad;
     [SerializeField] private TextAsset inkJSONEndLevel;
     [SerializeField] private TextAsset inkJSONCombinerPop;
+    [SerializeField] private TextAsset inkJSONTableLocked;
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -139,8 +140,17 @@ public class TutorialLoopManager : MonoBehaviour
     {
         if (inkJSONCombinerPop)
         {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONCombinerPop);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONCombinerPop, false);
             inkJSONCombinerPop = null;
+        }
+    }
+
+    public void TableLocked()
+    {
+        if (inkJSONTableLocked)
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONTableLocked, false);
+            inkJSONTableLocked = null;
         }
     }
 

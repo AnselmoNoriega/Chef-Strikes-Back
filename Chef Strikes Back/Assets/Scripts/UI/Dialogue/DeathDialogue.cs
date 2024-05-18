@@ -12,6 +12,7 @@ public class DeathDialogue : MonoBehaviour
     [SerializeField] private TextMeshProUGUI displayNameText;
 
     [SerializeField] private TextAsset _deathFrace;
+    [SerializeField] private TextAsset _starDialogues;
     private DeathScreen _deathScreen;
 
     private Story currentStory;
@@ -28,6 +29,15 @@ public class DeathDialogue : MonoBehaviour
     {
         _deathScreen = screen;
         currentStory = new Story(_deathFrace.text);
+        dialogueIsPlaying = true;
+        dialoguePanel.SetActive(true);
+        ContinueStory();
+    }
+
+    public void EnterDialogueMode(int storyIdx)
+    {
+        currentStory = new Story(_starDialogues.text);
+        currentStory.variablesState["stars"] = storyIdx;
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
         ContinueStory();
@@ -51,7 +61,10 @@ public class DeathDialogue : MonoBehaviour
         else
         {
             ExitDialogueMode();
-            _deathScreen.StartExitTimer();
+            if (_deathScreen)
+            {
+                _deathScreen.StartExitTimer();
+            }
         }
     }
 

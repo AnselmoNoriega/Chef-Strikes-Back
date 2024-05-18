@@ -5,7 +5,6 @@ public class HungryTutorialCus : StateClass<AI>
     private float waitingTime;
     private float timer = 0;
     private float angerMultiplier = 4;
-    private float _flashingTime = 0.0f;
 
     private Vector3 scale = Vector3.zero;
 
