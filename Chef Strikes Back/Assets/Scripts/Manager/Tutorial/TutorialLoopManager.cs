@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialLoopManager : MonoBehaviour
 {
@@ -80,6 +81,7 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 5:
                 {
+                    ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialAI.enabled = true;
                     break;
@@ -167,7 +169,7 @@ public class TutorialLoopManager : MonoBehaviour
 
     public void TriggerSpaghettiEvent(bool isSpaghetti)
     {
-        if (inkJSONSpaghetiEvent)
+        if (inkJSONSpaghetiEvent && !ServiceLocator.Get<DialogueManager>().dialogueIsPlaying)
         {
             string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
             bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
