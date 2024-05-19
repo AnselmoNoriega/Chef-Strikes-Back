@@ -53,7 +53,7 @@ public class HungryTutorialCus : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
-            ServiceLocator.Get<TutorialLoopManager>().CustomerGetsMad();
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren", true);
             agent.ChangeState(AIState.Rage);
         }
     }

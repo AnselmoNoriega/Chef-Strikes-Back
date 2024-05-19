@@ -29,7 +29,7 @@ public class CauldronEvent : MonoBehaviour
 
         if (_creationTable.GetIsLocked() && collision.transform.tag == "Ingredient")
         {
-            _loopManager.TableLocked();
+            _loopManager.EnterDialogueEvent("TableLocked");
         }
     }
 
@@ -38,7 +38,7 @@ public class CauldronEvent : MonoBehaviour
         ++_creationTimes;
         if( _creationTimes == 4)
         {
-            _loopManager.CombinerPop();
+            _loopManager.EnterDialogueEvent("AfterThreeFood");
         }
     }
 }

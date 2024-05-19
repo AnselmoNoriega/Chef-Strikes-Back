@@ -59,7 +59,7 @@ public class TutorialInput : MonoBehaviour
         if(_pickItemCount == 5)
         {
             ++_pickItemCount;
-            ServiceLocator.Get<TutorialLoopManager>().PickUpEvent();
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("PickingUp");
         }
     }
 

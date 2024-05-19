@@ -1,6 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+[Serializable]
+struct DictionaryField<KeyType, ValueType>
+{
+    public KeyType Name;
+    public ValueType Value;
+}
 
 public class TutorialLoopManager : MonoBehaviour
 {
@@ -16,14 +24,8 @@ public class TutorialLoopManager : MonoBehaviour
 
     [Header("Ink Text")]
     [SerializeField] private List<TextAsset> inkJSON;
-    [SerializeField] private TextAsset inkJSONFoodThrow;
-    [SerializeField] private TextAsset inkJSONPickingUp;
-    [SerializeField] private TextAsset inkJSONCauldronEvent;
-    [SerializeField] private TextAsset inkJSONSpaghetiEvent;
-    [SerializeField] private TextAsset inkJSONGettingMad;
-    [SerializeField] private TextAsset inkJSONEndLevel;
-    [SerializeField] private TextAsset inkJSONCombinerPop;
-    [SerializeField] private TextAsset inkJSONTableLocked;
+    [SerializeField] private List<DictionaryField<string, TextAsset>> inkJSONEvents;
+    private Dictionary<string, TextAsset> _eventsDictionary = new();
 
     private int _storyIdx = 0;
     private int _focusPosIdx = 0;
@@ -33,15 +35,11 @@ public class TutorialLoopManager : MonoBehaviour
     private void Start()
     {
         EnterConversation();
-    }
 
-    private void Update()
-    {
-        //flow of tutorial
-        //dialogue
-
-        //camera
-        //spawn a Customer
+        foreach(var inkEvent in inkJSONEvents)
+        {
+            _eventsDictionary.Add(inkEvent.Name, inkEvent.Value);
+        }
     }
 
     public void EnterConversation()
@@ -116,85 +114,53 @@ public class TutorialLoopManager : MonoBehaviour
         ServiceLocator.Get<DialogueManager>().IsPaused = shouldPause;
     }
 
+    public void EnterDialogueEvent(string name, bool triggerExit = false)
+    {
+        if (_eventsDictionary.ContainsKey(name))
+        {
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(_eventsDictionary[name], triggerExit);
+            _eventsDictionary.Remove(name);
+        }
+    }
+
     public void CheckIfHolding(bool timeUp)
     {
-        if (inkJSONFoodThrow)
+        if (_eventsDictionary.ContainsKey("FoodThrow"))
         {
             string[] names = new string[] { "ingredientInHand" };
             bool[] bools = new bool[] { timeUp };
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONFoodThrow, names, bools);
-            inkJSONFoodThrow = null;
-        }
-    }
-
-    public void CustomerGetsMad()
-    {
-        if (inkJSONGettingMad)
-        {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONGettingMad);
-            inkJSONGettingMad = null;
-        }
-    }
-
-    public void CombinerPop()
-    {
-        if (inkJSONCombinerPop)
-        {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONCombinerPop, false);
-            inkJSONCombinerPop = null;
-        }
-    }
-
-    public void TableLocked()
-    {
-        if (inkJSONTableLocked)
-        {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONTableLocked, false);
-            inkJSONTableLocked = null;
-        }
-    }
-
-    public void EndTutorial()
-    {
-        if (inkJSONEndLevel)
-        {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONEndLevel);
-            inkJSONEndLevel = null;
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["FoodThrow"], names, bools);
+            _eventsDictionary.Remove("FoodThrow");
         }
     }
 
     public void TriggerCauldronEvent(bool isPizza)
     {
-        if (inkJSONCauldronEvent)
+        if (_eventsDictionary.ContainsKey("PizzaMade"))
         {
             string[] names = new string[] { "pizzaMade" };
             bool[] bools = new bool[] { isPizza };
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONCauldronEvent, names, bools);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["PizzaMade"], names, bools);
             if (isPizza)
             {
-                inkJSONCauldronEvent = null;
+                _eventsDictionary.Remove("PizzaMade");
             }
         }
     }
 
     public void TriggerSpaghettiEvent(bool isSpaghetti)
     {
-        if (inkJSONSpaghetiEvent && !ServiceLocator.Get<DialogueManager>().dialogueIsPlaying)
+        if (_eventsDictionary.ContainsKey("SpaghettiMade"))
         {
             string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
             bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
             _multipleSpaghettiesMade = true;
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(inkJSONSpaghetiEvent, names, bools);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["SpaghettiMade"], names, bools);
             if (isSpaghetti)
             {
-                inkJSONSpaghetiEvent = null;
+                _eventsDictionary.Remove("SpaghettiMade");
             }
         }
-    }
-
-    public void PickUpEvent()
-    {
-        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSONPickingUp, false);
     }
 
 }

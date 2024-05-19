@@ -644,7 +644,7 @@ Tilemap:
       - {fileID: -444158901, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 166679972, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
-      m_AnimationSpeed: 12
+      m_AnimationSpeed: 12.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -10383,13 +10383,23 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 248c12e26f187134198b176b81642975, type: 3}
   - {fileID: 4900000, guid: ed3287d73e2452f499c270675798087a, type: 3}
   - {fileID: 4900000, guid: 4ea9d86e64852f94eb2e0059ab5a6216, type: 3}
-  inkJSONFoodThrow: {fileID: 4900000, guid: 75642803cc8a9504db59e243e18676c7, type: 3}
-  inkJSONPickingUp: {fileID: 4900000, guid: e5db76c124bd314468c59982fcbb6bf5, type: 3}
-  inkJSONCauldronEvent: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
-  inkJSONSpaghetiEvent: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
-  inkJSONGettingMad: {fileID: 4900000, guid: f3b98b4f30ccfef439f251f00ed10376, type: 3}
-  inkJSONEndLevel: {fileID: 4900000, guid: c0637455a219e42488e2a67587fc911c, type: 3}
-  inkJSONCombinerPop: {fileID: 4900000, guid: 6c15fb675f61fc64b8eb6f546eb891d0, type: 3}
+  inkJSONEvents:
+  - Name: FoodThrow
+    Value: {fileID: 4900000, guid: 75642803cc8a9504db59e243e18676c7, type: 3}
+  - Name: PickingUp
+    Value: {fileID: 4900000, guid: e5db76c124bd314468c59982fcbb6bf5, type: 3}
+  - Name: PizzaMade
+    Value: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
+  - Name: SpaghettiMade
+    Value: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
+  - Name: KillingKaren
+    Value: {fileID: 4900000, guid: f3b98b4f30ccfef439f251f00ed10376, type: 3}
+  - Name: TutorialEnd
+    Value: {fileID: 4900000, guid: c0637455a219e42488e2a67587fc911c, type: 3}
+  - Name: AfterThreeFood
+    Value: {fileID: 4900000, guid: 6c15fb675f61fc64b8eb6f546eb891d0, type: 3}
+  - Name: TableLocked
+    Value: {fileID: 4900000, guid: 1a0cd956db324544096c4f14ae560e86, type: 3}
   TutorialSecondFace: 0
   _multipleSpaghettiesMade: 0
 --- !u!1001 &1733833529
