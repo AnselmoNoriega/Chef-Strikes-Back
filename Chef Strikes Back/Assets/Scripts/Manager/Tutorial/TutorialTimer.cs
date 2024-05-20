@@ -70,4 +70,9 @@ public class TutorialTimer : MonoBehaviour
     {
         _shouldRun = active;
     }  
+
+    public bool GetTimeState()
+    {
+        return _shouldRun;
+    }  
 }

@@ -18,7 +18,7 @@ public class HungryTutorialCus : StateClass<AI>
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
         agent.ChoiceIndex = ServiceLocator.Get<TutorialLoopManager>().AiChoice++;
-        if(ServiceLocator.Get<TutorialLoopManager>().AiChoice > 1)
+        if (ServiceLocator.Get<TutorialLoopManager>().AiChoice > 1)
         {
             ServiceLocator.Get<TutorialLoopManager>().AiChoice = 0;
         }
@@ -54,7 +54,20 @@ public class HungryTutorialCus : StateClass<AI>
             agent.SelectedChair.FreeTableSpace();
 
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren", true);
-            agent.ChangeState(AIState.Rage);
+            if (ServiceLocator.Get<TutorialTimer>().GetTimeState())
+            {
+
+                int value = Random.Range(0, 100) % 4;
+                if(value == 3)
+                {
+                    ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("BobTriggered");
+                }
+                agent.ChangeState((AIState)(value + 3));
+            }
+            else
+            {
+                agent.ChangeState(AIState.Rage);
+            }
         }
     }
 
