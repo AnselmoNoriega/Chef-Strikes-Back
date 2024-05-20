@@ -81,6 +81,7 @@ public class TutorialLoopManager : MonoBehaviour
             case 5:
                 {
                     ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
+                    ServiceLocator.Get<Player>().shouldNotMove = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialAI.enabled = true;
                     break;
@@ -150,7 +151,7 @@ public class TutorialLoopManager : MonoBehaviour
 
     public void TriggerSpaghettiEvent(bool isSpaghetti)
     {
-        if (_eventsDictionary.ContainsKey("SpaghettiMade"))
+        if (!ServiceLocator.Get<DialogueManager>().dialogueIsPlaying && _eventsDictionary.ContainsKey("SpaghettiMade"))
         {
             string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
             bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
