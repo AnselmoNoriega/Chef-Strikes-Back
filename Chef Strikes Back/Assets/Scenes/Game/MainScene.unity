@@ -5508,6 +5508,11 @@ PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 4834053325950378973, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
   m_PrefabInstance: {fileID: 1209050866}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1209050871 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9030363438698883340, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
+  m_PrefabInstance: {fileID: 1209050866}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1219672283
 GameObject:
   m_ObjectHideFlags: 0
@@ -10704,7 +10709,7 @@ PrefabInstance:
     - target: {fileID: 4983911565616285863, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1209050871}
     - target: {fileID: 6355847347339370371, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Name
       value: player
