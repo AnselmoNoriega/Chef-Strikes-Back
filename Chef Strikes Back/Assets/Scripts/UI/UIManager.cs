@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _HowToPlaySelectFirst;
 
     [SerializeField] private bool _useConfetti = false;
+    private AudioManager _audioManager;
+    private bool IsPaused;
+    private int escapeKeyPressCount = 0;
 
     private void Start()
     {
@@ -25,16 +28,32 @@ public class UIManager : MonoBehaviour
         {
             _moneyText.text = "Money = " + ServiceLocator.Get<GameManager>().GetMoney().ToString();
         }
+
+        _audioManager = ServiceLocator.Get<AudioManager>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && IsPaused == true) 
+        {
+            _audioManager.PlaySource("UIClick");
+            Debug.Log("UIClick");
+        }
+
     }
     public void SetScreenActive(string screenName)
     {
         _screens.SetState(screenName);
+        
+        _audioManager.PlaySource("Pause");
+        Debug.Log("PauseSound");
     }
 
     public void ResumeGame()
     {
         var inputs = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>();
         inputs.TogglePauseMenu();
+        IsPaused = false;
     }
 
     public void ActiveateController()
@@ -47,4 +66,6 @@ public class UIManager : MonoBehaviour
         AI.ToggleUseConfetti(!AI.UseConfetti); // Toggle and apply new state
         Debug.Log("Confetti On");
     }
+
+
 }

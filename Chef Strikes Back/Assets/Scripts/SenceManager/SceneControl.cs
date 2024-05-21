@@ -13,10 +13,13 @@ public class SceneControl : MonoBehaviour
 
     [Space, Header("Level UI")]
     [SerializeField] private GameObject[] _firstSelectedButton;
+    private AudioManager _audioManager;
+
 
     private void Start()
     {
         _gameManager = ServiceLocator.Get<GameManager>();
+        _audioManager = ServiceLocator.Get<AudioManager>();
         SetButtonSelected(0);
         if (_buttons.Count > 0)
         {
@@ -26,6 +29,8 @@ public class SceneControl : MonoBehaviour
 
     public void GoToEndScene()
     {
+        _audioManager.PlaySource("ButtonPress");
+        Debug.Log("ButtonPress");
         SceneManager.LoadScene("EndLevel");
     }
 
@@ -42,19 +47,25 @@ public class SceneControl : MonoBehaviour
 
     public void SetButtonSelected(int uiLayer)
     {
+        
         if (_firstSelectedButton != null)
         {
             if (_firstSelectedButton.Length > 0)
             {
+                _audioManager.PlaySource("ButtonPress");
+                Debug.Log("ButtonPress");
                 StartCoroutine(_gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]));
+
             }
         }
     }
 
     public void Go2Level(int level)
     {
+        
         if (_gameManager.IsLevelLocked(level))
         {
+            
             _currentLevelSelected = level;
             _purchasePanel.SetActive(true);
             SetButtonSelected(4);
@@ -68,8 +79,10 @@ public class SceneControl : MonoBehaviour
 
     public void UnlockLevel()
     {
+       
         if (_gameManager.UnlockLevel(_currentLevelSelected))
         {
+            
             _purchasePanel.SetActive(false);
             var colors = _buttons[_currentLevelSelected].colors;
             colors.normalColor = Color.white;

@@ -30,9 +30,12 @@ public class PlayerInputs : MonoBehaviour
 
     private bool _isUsingController = false;
     private bool _isOnPaused = false;
+    private AudioManager _audioManager;
+
 
     private void Awake()
     {
+        _audioManager = ServiceLocator.Get<AudioManager>();
         _inputManager = new InputControls();
 
         _rightMouse = _inputManager.Player.MouseRightClick;
@@ -85,7 +88,9 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
+
         
+
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 

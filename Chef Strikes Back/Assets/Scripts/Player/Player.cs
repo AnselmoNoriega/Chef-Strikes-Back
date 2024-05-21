@@ -133,7 +133,6 @@ public class Player : MonoBehaviour
         Money += 10;
         _gameManager.MoneyGrabed();
         _canvasManager.ChangeMoneyValue(Money);
-        _audioManager.PlaySource("money");
     }
 
     public void MovePlayer(Vector2 moveDirection)

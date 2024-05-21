@@ -65,6 +65,7 @@ public class AI : MonoBehaviour
     public ParticleSystem AngryParticles;
     private bool _IsDead = false;
     [SerializeField] private Animator _animator;
+    private AudioManager _audioManager;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -79,6 +80,8 @@ public class AI : MonoBehaviour
 
     private void Awake()
     {
+        _audioManager = ServiceLocator.Get<AudioManager>();
+        _audioManager.PlaySource("DoorOpen");
         Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
         _stateManager = new StateMachine<AI>(this);
@@ -246,6 +249,9 @@ public class AI : MonoBehaviour
     public void Shoot()
     {
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
+
+        _audioManager.PlaySource("Shoot");
+        Debug.Log("GunShot");
     }
 
     private IEnumerator SpriteFlashing()
@@ -272,6 +278,7 @@ public class AI : MonoBehaviour
     public void PlayMoneyUIPopUp()
     {
         _moneyUIParticleSystem.Play();
+        _audioManager.PlaySource("Pay");
     }
 
     public static void ToggleUseConfetti(bool useConfetti)

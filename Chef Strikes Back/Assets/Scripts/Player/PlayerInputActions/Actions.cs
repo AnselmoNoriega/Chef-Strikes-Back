@@ -20,11 +20,14 @@ public class Actions : MonoBehaviour
     public ParticleSystem TomatoParticles;
     public ParticleSystem DoughParticles;
     public ParticleSystem CheeseParticles;
+    private AudioManager _audioManager;
+
 
     private void Start()
     {
         _player = GetComponent<Player>();
         _inventory = GetComponent<Inventory>();
+        _audioManager = ServiceLocator.Get<AudioManager>();
         _ready2Throw = false;
         IsCarryingItem = false;
     }
@@ -122,22 +125,28 @@ public class Actions : MonoBehaviour
                 var newFoodPileItem = pile.Hit();
                 _inventory.AddItem(newFoodPileItem.GetComponent<Item>());
                 IsCarryingItem = true;
-                ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
+                
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
 
                 if (_inventory.GetFoodItem().Type == FoodType.Tomato)
                 {
                     TomatoParticles.gameObject.SetActive(true);
+                    _audioManager.PlaySource("PickupTomato");
+                    Debug.Log("PlayingTomatoPickup");
                 }
 
                 else if (_inventory.GetFoodItem().Type != FoodType.Cheese)
                 {
                     CheeseParticles.gameObject.SetActive(true);
+                    _audioManager.PlaySource("PickupCheese");
+                    Debug.Log("PlayingCheesePickup");
                 }
 
                 else if (_inventory.GetFoodItem().Type != FoodType.Dough)
                 {
                     DoughParticles.gameObject.SetActive(true);
+                    _audioManager.PlaySource("PickupDough");
+                    Debug.Log("PlayingDoughPickup");
                 }
 
                 else

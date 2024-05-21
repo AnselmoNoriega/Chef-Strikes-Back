@@ -3,10 +3,16 @@ using System;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using System.Diagnostics.Contracts;
+using System.Diagnostics;
 
 public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds;
+
+    private void Awake()
+    {
+        Initialize();
+    }
 
     public void Initialize()
     {
@@ -31,7 +37,7 @@ public class AudioManager : MonoBehaviour
                 return;
             }
         }
-        Debug.LogError($"Sound with name {name} not found!");
+        LogErrorWithCallerInfo($"Sound with name {name} not found!");
     }
 
     public void StopSource(string name)
@@ -44,7 +50,7 @@ public class AudioManager : MonoBehaviour
                 return;
             }
         }
-        Debug.LogError($"Sound with name {name} not found!");
+        LogErrorWithCallerInfo($"Sound with name {name} not found!");
     }
 
     public bool IsPlaying(string name)
@@ -56,7 +62,7 @@ public class AudioManager : MonoBehaviour
                 return s.source.isPlaying;
             }
         }
-        Debug.LogError($"Sound with name {name} not found!");
+        LogErrorWithCallerInfo($"Sound with name {name} not found!");
         return false;
     }
 
@@ -69,6 +75,26 @@ public class AudioManager : MonoBehaviour
                 break;
 
             default: break;
+        }
+    }
+
+    private void LogErrorWithCallerInfo(string message)
+    {
+        StackTrace stackTrace = new StackTrace();
+        StackFrame[] stackFrames = stackTrace.GetFrames();
+
+        if (stackFrames != null && stackFrames.Length > 1)
+        {
+            StackFrame callerFrame = stackFrames[1]; // Get the caller frame
+            var method = callerFrame.GetMethod();
+            var callerClass = method.DeclaringType.Name;
+            var callerMethod = method.Name;
+
+            UnityEngine.Debug.LogError($"[{callerClass}.{callerMethod}] {message}");
+        }
+        else
+        {
+            UnityEngine.Debug.LogError(message);
         }
     }
 }

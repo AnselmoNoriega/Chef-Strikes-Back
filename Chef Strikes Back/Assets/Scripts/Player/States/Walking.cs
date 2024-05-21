@@ -28,7 +28,7 @@ public class PlayerWalking : StateClass<Player>
         agent.PlayerAnimator.SetBool("isWalking", true);
         agent.Legs.GetComponent<Animator>().SetBool("IsWalking", true);
         ServiceLocator.Get<Player>().IsWalking = true;
-        _audioManager.PlaySource(ServiceLocator.Get<Player>().soundName);
+        
         _canvasManager.UITransparent();
     }
 
@@ -50,7 +50,6 @@ public class PlayerWalking : StateClass<Player>
         if (_moveDirection == Vector2.zero)
         {
             agent.ChangeState(PlayerStates.Idle);
-            _audioManager.StopSource("walk");
         }
         else if (_moveDirection.magnitude >= 0.1f)
         {

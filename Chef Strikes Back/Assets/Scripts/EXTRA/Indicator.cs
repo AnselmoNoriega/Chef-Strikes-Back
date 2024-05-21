@@ -28,13 +28,18 @@ public class Indicator : MonoBehaviour
     private float diffScreen;
     private AI _ai;
 
+    private AudioManager _audioManager;
+
     private void Awake()
     {
+
         foreach (var image in _image)
         {
             image.enabled = false;
+            
         }
-
+        _audioManager = ServiceLocator.Get<AudioManager>();
+        
         width = Camera.main.orthographicSize * Camera.main.aspect;
         height = Camera.main.orthographicSize;
         _ai = GetComponent<AI>();
@@ -42,6 +47,9 @@ public class Indicator : MonoBehaviour
         diffScreen = width / height;
         _newTimerSize.x = _imageMaskTransform.sizeDelta.x;
     }
+
+   
+
     private void Update()
     {
         if (IsOutOfScreen() && _isHungry)
@@ -49,6 +57,7 @@ public class Indicator : MonoBehaviour
             if (!_arrow.enabled)
             {
                 _image[_index].enabled = true;
+                
                 _arrow.enabled = true;
                 _imageMaskTransform.GetComponent<Image>().enabled = true;
             }
@@ -116,6 +125,8 @@ public class Indicator : MonoBehaviour
         _arrow.enabled = active;
         _isHungry = active;
         _imageMaskTransform.GetComponent<Image>().enabled = true;
+        _audioManager.PlaySource("OrderBubble");
+        Debug.Log("PlayingOrderBubble");
     }
 
     public void UpdateTimerIndicator(float timePersentage)
