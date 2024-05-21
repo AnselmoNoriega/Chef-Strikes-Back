@@ -1,8 +1,7 @@
 VAR pizzaMade = true
 
+->PizzaMade
 ===PizzaMade===
-Boom! There! Pizza! Now pick it up and throw it on the customer’s plate.
-Won’t they be offended you ask? Not if they want to eat at your restaurant they won’t!
 {pizzaMade:
     Boom! There! Pizza! Now pick it up and throw it on the customer’s plate.
     Won’t they be offended you ask? Not if they want to eat at your restaurant they won’t!

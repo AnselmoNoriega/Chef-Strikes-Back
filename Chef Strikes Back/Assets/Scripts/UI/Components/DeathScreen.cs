@@ -9,6 +9,7 @@ public class DeathScreen : MonoBehaviour
     [SerializeField] private GameObject[] _deathQuoteList;
 
     [Header("Screen Timer")]
+    private DeathDialogue _deathDialogue;
     [SerializeField] private float _screenTimer;
     
     private GameLoader _loader;
@@ -23,12 +24,30 @@ public class DeathScreen : MonoBehaviour
     {
         Debug.Log("Initializing Death Screen");
         // Get random quote GameObject from the list 
+        if(ServiceLocator.Get<GameManager>().GetRepalyScene() == "MainScene")
+        {
+            _deathDialogue = GetComponent<DeathDialogue>();
+            _deathDialogue.EnterDialogueMode(this);
+            return;
+        }
+
         var randomQuote = _deathQuoteList[Random.Range(0, _deathQuoteList.Length)];
 
         // Set random quote GameObject active
         randomQuote.SetActive(true);
 
         // Start timer to change scenes
+
+        StartCoroutine(GoToStarRatingScreen());
+    }
+
+    public void StartExitTimer()
+    {
+        var randomQuote = _deathQuoteList[Random.Range(0, _deathQuoteList.Length)];
+
+        // Set random quote GameObject active
+        randomQuote.SetActive(true);
+
         StartCoroutine(GoToStarRatingScreen());
     }
 

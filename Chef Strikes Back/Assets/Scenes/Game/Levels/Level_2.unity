@@ -528,7 +528,7 @@ Tilemap:
       - {fileID: -444158901, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 166679972, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
-      m_AnimationSpeed: 6.8038235
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -8623,6 +8623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c82f2a1f2aa1b47a208fd9fde01bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1291591217 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9030363438698883340, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
+  m_PrefabInstance: {fileID: 1291591215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!213 &1319905705
 Sprite:
   m_ObjectHideFlags: 0
@@ -9297,7 +9302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1371257853
 Transform:
   m_ObjectHideFlags: 0
@@ -9330,17 +9335,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1371257856}
-    m_ColliderPaths:
-    - - X: 6400000
-        Y: 0
-      - X: 0
-        Y: 3200000
-      - X: -6400000
-        Y: 0
-      - X: 0
-        Y: -3200000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: -0.0000118, y: -0.3199942}
@@ -18783,7 +18778,7 @@ PrefabInstance:
     - target: {fileID: 4983911565616285863, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1291591217}
     - target: {fileID: 5930601569406457724, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

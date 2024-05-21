@@ -46,6 +46,9 @@ public class AttackingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-
+        if (agent.IsDead)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+        }
     }
 }

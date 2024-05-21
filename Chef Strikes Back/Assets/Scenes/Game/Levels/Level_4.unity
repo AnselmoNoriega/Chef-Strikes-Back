@@ -8193,6 +8193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c82f2a1f2aa1b47a208fd9fde01bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1056662205 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9030363438698883340, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
+  m_PrefabInstance: {fileID: 1056662203}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1068191597
 GameObject:
   m_ObjectHideFlags: 0
@@ -15798,7 +15803,7 @@ PrefabInstance:
     - target: {fileID: 4983911565616285863, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1056662205}
     - target: {fileID: 5930601569406457724, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

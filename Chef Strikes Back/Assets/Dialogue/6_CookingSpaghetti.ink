@@ -1,6 +1,7 @@
 VAR spaghettiMade = true
 VAR wrongFoodMadeBefore = true
 
+->PizzaMade
 ===PizzaMade===
 {spaghettiMade:
 Good, now I have one last thing to teach you. And that is murder!

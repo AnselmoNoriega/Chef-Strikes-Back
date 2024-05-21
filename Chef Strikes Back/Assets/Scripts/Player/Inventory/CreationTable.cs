@@ -111,14 +111,6 @@ public class CreationTable : MonoBehaviour
         {
             CheckAvailability(_acceptedFoodTypes[i].Food);
         }
-        if (_isLocked)
-        {
-            _circleCollider2D.enabled = true;
-        }
-        else
-        {
-            _circleCollider2D.enabled = false;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -201,12 +193,14 @@ public class CreationTable : MonoBehaviour
     {
         _lockedRedCross.enabled = true;
         _isLocked = true;
+        _circleCollider2D.enabled = true;
     }
 
     public void Unlock()
     {
         _lockedRedCross.enabled = false;
         _isLocked = false;
+        _circleCollider2D.enabled = false;
     }
 
     public bool GetIsLocked()

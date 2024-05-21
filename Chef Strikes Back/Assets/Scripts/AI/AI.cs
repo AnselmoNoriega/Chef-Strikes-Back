@@ -38,6 +38,7 @@ public class AI : MonoBehaviour
     public float KnockbackForce = 0.0f;
     public float NextWaypointDistance = 0;
     public bool IsAnnoyed = false;
+    public bool IsDead = false;
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
 
@@ -58,25 +59,9 @@ public class AI : MonoBehaviour
     [Space, Header("UI")]
     public ParticleSystem _moneyUIParticleSystem;
 
-    [Space, Header("Particles")]
-    public ParticleSystem BloodParticles;
-    public ParticleSystem ConfettiParticles;
-    public ParticleSystem HappyParticles;
-    public ParticleSystem AngryParticles;
-    private bool _IsDead = false;
-    [SerializeField] private Animator _animator;
-
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
     public Chair SelectedChair { get; set; }
-
-
-    public static bool UseConfetti { get; private set; } = false;
-
-    public bool IsDead
-    {
-        get { return _IsDead; }
-    }
 
     private void Awake()
     {
@@ -85,7 +70,7 @@ public class AI : MonoBehaviour
         _stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
-        if (ServiceLocator.Get<GameLoopManager>())
+        if(ServiceLocator.Get<GameLoopManager>().enabled)
         {
             SetBaseState();
         }
@@ -93,50 +78,6 @@ public class AI : MonoBehaviour
         {
             SetTutorialState();
         }
-
-        if (transform.childCount > 0)
-        {
-            Transform firstChild = transform.GetChild(0);
-            BloodParticles = firstChild.GetComponent<ParticleSystem>();
-
-            if (BloodParticles == null)
-                Debug.LogError("No Blood ParticleSystem");
-        }
-        else
-        {
-            Debug.LogError("No first child");
-        }
-
-        if (transform.childCount > 1)
-        {
-            Transform secondChild = transform.GetChild(1);
-            AngryParticles = secondChild.GetComponent<ParticleSystem>();
-
-            if (AngryParticles == null)
-                Debug.LogError("No Angry ParticleSystem found");
-        }
-        else
-        {
-            Debug.LogError("No second child");
-        }
-
-        if (transform.childCount > 2)
-        {
-            Transform thirdChild = transform.GetChild(2);
-            HappyParticles = thirdChild.GetComponent<ParticleSystem>();
-
-            if (HappyParticles == null)
-                Debug.LogError("No Happy ParticleSystem found");
-        }
-        else
-        {
-            Debug.LogError("No third child");
-        }
-    }
-
-    private void Start()
-    {
-        ToggleParticleEffect(UseConfetti);
     }
 
     private void Update()
@@ -162,59 +103,37 @@ public class AI : MonoBehaviour
 
     public void DestroyAI()
     {
-        if (!_IsDead)
-        {
-            _IsDead = true;
-            _animator.SetBool("IsDead", true);
-
-            Speed = 0;
-
-            if (Rb2d != null)
-            {
-                Rb2d.velocity = Vector2.zero;
-            }
-
-            BloodParticles.gameObject.SetActive(false);
-            ConfettiParticles.gameObject.SetActive(false);
-
-            StartCoroutine(WaitForAnimationToEnd());
-        }
-    }
-
-    private IEnumerator WaitForAnimationToEnd()
-    {
-        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !_animator.IsInTransition(0));
+        ChangeState(AIState.Rage);
         Destroy(gameObject);
     }
 
     public void Damage(int amt)
     {
-        if (!_IsDead)
+        if ((int)state >= 3 && (int)state <= 8)
         {
-            ParticleSystem particlesToPlay = UseConfetti ? ConfettiParticles : BloodParticles;
+            _health -= amt;
 
-            particlesToPlay.gameObject.SetActive(true);
-            particlesToPlay.Play();
-
-            if ((int)state >= 3 && (int)state <= 8)
+            if (_health <= 0)
             {
-                _health -= amt;
-                if (_health <= 0)
-                {
-                    DestroyAI();
-                }
+                ServiceLocator.Get<GameManager>().KillScoreUpdate();
+                ServiceLocator.Get<Player>().AddKillCount();
+                ServiceLocator.Get<Player>().Variables.GiveSpeedBoost();
+                ServiceLocator.Get<GameLoopManager>().WantedSystem();
+                IsDead = true;
+                DestroyAI();
             }
-            else
-            {
-                --_hitsToGetMad;
-                if (_hitsToGetMad <= 0)
-                {
-                    ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
-                }
-            }
-
-            StartCoroutine(SpriteFlashing());
         }
+        else
+        {
+            --_hitsToGetMad;
+
+            if (_hitsToGetMad <= 0)
+            {
+                ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
+            }
+        }
+
+        StartCoroutine(SpriteFlashing());
     }
 
     public void ZeldasChikens()
@@ -273,33 +192,6 @@ public class AI : MonoBehaviour
     public void PlayMoneyUIPopUp()
     {
         _moneyUIParticleSystem.Play();
-    }
-
-    public static void ToggleUseConfetti(bool useConfetti)
-    {
-        UseConfetti = useConfetti;
-        foreach (AI ai in FindObjectsOfType<AI>())
-        {
-            ai.ToggleParticleEffect(useConfetti);
-        }
-    }
-
-    public void ToggleParticleEffect(bool useConfetti)
-    {
-        if (useConfetti)
-        {
-            BloodParticles.gameObject.SetActive(false);
-            ConfettiParticles.gameObject.SetActive(true);
-            ConfettiParticles.transform.SetSiblingIndex(1);
-            BloodParticles.transform.SetSiblingIndex(0);
-        }
-        else
-        {
-            ConfettiParticles.gameObject.SetActive(false);
-            BloodParticles.gameObject.SetActive(true);
-            BloodParticles.transform.SetSiblingIndex(1);
-            ConfettiParticles.transform.SetSiblingIndex(0);
-        }
     }
 
     private void SetTutorialState()

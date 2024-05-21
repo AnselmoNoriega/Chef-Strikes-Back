@@ -81,7 +81,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -91,18 +91,17 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightClick(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-
         _action.PrepareToThrow(_mouse);
         _action.GrabItem();
     }
 
     private void LeftbuttonDown(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
@@ -112,41 +111,37 @@ public class PlayerInputs : MonoBehaviour
 
     private void RightbuttonDown(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-
         _action.GrabItem();
     }
 
     private void LeftTgrClick(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-
         _action.PrepareToThrow(_rightJoystick);
     }
 
     private void LeftTgrRelease(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-
         _action.ThrowItem();
     }
 
     private void RightClickRelease(InputAction.CallbackContext input)
     {
-        if (_isOnPaused)
+        if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-
         _action.ThrowItem();
     }
 
@@ -178,6 +173,11 @@ public class PlayerInputs : MonoBehaviour
 
     public Vector2 GetMovement()
     {
+        if(_player.shouldNotMove)
+        {
+            return Vector2.zero;
+        }
+
         if (_isUsingController)
         {
             return _moveStick.ReadValue<Vector2>();

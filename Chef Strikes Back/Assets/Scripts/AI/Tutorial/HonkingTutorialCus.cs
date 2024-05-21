@@ -12,7 +12,7 @@ public class HonkingTutorialCus : StateClass<AI>
     {
         _agent = agent;
         _countDown = Time.time;
-        //_customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
+        _customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
         if (_customer == null)
         {
             agent.ChangeState(AIState.Rage);
@@ -40,6 +40,7 @@ public class HonkingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
+        ServiceLocator.Get<TutorialLoopManager>().EnterConversation();
         if (_customer != null)
         {
             _customer.IsAnnoyed = false;
