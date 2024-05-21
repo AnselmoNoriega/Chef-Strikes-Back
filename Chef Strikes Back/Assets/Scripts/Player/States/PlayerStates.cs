@@ -131,13 +131,16 @@ public class PlayerThrowing : StateClass<Player>
     private PlayerVariables _variables;
     private PlayerInputs _playerInputs;
     private float _throwStrength;
+    private Animator _legsAnimator;
 
     public void Enter(Player agent)
     {
         _variables = agent.Variables;
         agent.Legs.SetActive(true);
-        agent.PlayerAnimator.SetBool("IsThrowing", true);
+        var value = agent.Legs.GetComponent<Animator>();
+        _legsAnimator = value;
 
+        agent.PlayerAnimator.SetBool("IsThrowing", true);
         agent.Rb.velocity = Vector2.zero;
         agent.PlayerAnimator.speed -= _variables.ThrowAnimSpeed;
         _throwStrength = 0.0f;
@@ -148,8 +151,10 @@ public class PlayerThrowing : StateClass<Player>
     public void Update(Player agent, float dt)
     {
         var dir = _playerInputs.GetLookingDir();
-        PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, dir);
+        var val = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, dir);
+        _legsAnimator.SetInteger("PosNum",val);
 
+        agent.PlayerAnimator.SetBool("IsThrowing", true);
         if (_throwStrength <= _variables.MaxTimer)
         {
             _throwStrength += _variables.ThrowMultiplier * Time.deltaTime;

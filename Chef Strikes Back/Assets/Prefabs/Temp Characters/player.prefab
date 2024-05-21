@@ -682,6 +682,7 @@ MonoBehaviour:
   PlayerAction: 0
   soundName: 
   IsWalking: 0
+  shouldNotMove: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwForce: 1
+  IsCarryingItem: 0
   _grabDistance: 1
 --- !u!114 &323981142111727875
 MonoBehaviour:
