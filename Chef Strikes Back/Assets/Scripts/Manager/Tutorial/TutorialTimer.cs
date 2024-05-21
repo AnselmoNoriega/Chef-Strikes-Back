@@ -25,6 +25,8 @@ public class TutorialTimer : MonoBehaviour
 
     [SerializeField] private List<SpawningTimer> _spawningTimes;
 
+    private bool _shouldRun = true;
+
     public struct PhaseDefinition
     {
         public int StartTime;
@@ -45,7 +47,10 @@ public class TutorialTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnTimeChangeBasedOnTimer();
+        if(!_shouldRun)
+        {
+            return;
+        }
 
         elapsedTime -= Time.deltaTime / 60;
         worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
@@ -61,21 +66,13 @@ public class TutorialTimer : MonoBehaviour
         }
     }
 
-    private void SpawnTimeChangeBasedOnTimer()
+    public void SetTimeState(bool active)
     {
-        //float time;
-        //for (int i = 0; i < _spawningTimes.Count; i++)
-        //{
-        //    time = (elapsTimeStart * 60) - _spawningTimes[_spawningTimes.Count - 1 - i].Time;
-        //    if (time >= (elapsedTime * 60))
-        //    {
-        //        var loopManager = ServiceLocator.Get<GameLoopManager>();
-        //        loopManager.ChangeSpawnTime(_spawningTimes[_spawningTimes.Count - 1 - i].SpawningTime);
-        //        return;
-        //    }
-        //}
-    }
+        _shouldRun = active;
+    }  
 
-    //60-0>59.999
-    //60 - 5 > 54.999  
+    public bool GetTimeState()
+    {
+        return _shouldRun;
+    }  
 }

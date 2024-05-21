@@ -1,25 +1,23 @@
-using Ink.Runtime;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Ink.Runtime;
 
-public class DialogueManager : MonoBehaviour
+public class DeathDialogue : MonoBehaviour
 {
-    private TutorialLoopManager _tutorialLoopManager;
-
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
 
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
 
-    public bool IsPaused { get; set; }
+    [SerializeField] private TextAsset _deathFrace;
+    [SerializeField] private TextAsset _starDialogues;
+    private DeathScreen _deathScreen;
 
     private Story currentStory;
 
-    public bool dialogueMode;
-
-    public bool dialogueIsPlaying;
+    public bool dialogueIsPlaying = false;
 
     private const string SPEAKER_TAG = "speaker";
 
@@ -27,48 +25,19 @@ public class DialogueManager : MonoBehaviour
 
     private const string LAYOUT_TAG = "layout";
 
-    private bool _callMethodIfFinished = false;
-
-    public void Initialize()
+    public void EnterDialogueMode(DeathScreen screen)
     {
-        _tutorialLoopManager = ServiceLocator.Get<TutorialLoopManager>();
-
-        dialogueIsPlaying = true;
-        dialoguePanel.SetActive(false);
-        dialogueMode = true;
-    }
-
-    public void EnterDialogueMode(TextAsset inkJSON, bool callMethodIfFinished = true)
-    {
-        if(_callMethodIfFinished)
-        {
-            _callMethodIfFinished = false;
-            _tutorialLoopManager.EndConversation();
-        }
-
-        _callMethodIfFinished = callMethodIfFinished;
-        ServiceLocator.Get<Player>().shouldNotMove = true;
-        currentStory = new Story(inkJSON.text);
+        _deathScreen = screen;
+        currentStory = new Story(_deathFrace.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
         ContinueStory();
     }
 
-    public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active, bool callMethodIfFinished = false)
+    public void EnterDialogueMode(int storyIdx)
     {
-        if (_callMethodIfFinished)
-        {
-            _callMethodIfFinished = false;
-            _tutorialLoopManager.EndConversation();
-        }
-
-        _callMethodIfFinished = callMethodIfFinished;
-        ServiceLocator.Get<Player>().shouldNotMove = true;
-        currentStory = new Story(inkJSON.text);
-        for (int i = 0; i < name.Length; ++i)
-        {
-            currentStory.variablesState[name[i]] = active[i];
-        }
+        currentStory = new Story(_starDialogues.text);
+        currentStory.variablesState["stars"] = storyIdx;
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
         ContinueStory();
@@ -79,8 +48,6 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
-        dialogueMode = false;
-        ServiceLocator.Get<Player>().shouldNotMove = false;
     }
 
     public void ContinueStory()
@@ -94,10 +61,9 @@ public class DialogueManager : MonoBehaviour
         else
         {
             ExitDialogueMode();
-            if (_callMethodIfFinished)
+            if (_deathScreen)
             {
-                _callMethodIfFinished = false;
-                _tutorialLoopManager.EndConversation();
+                _deathScreen.StartExitTimer();
             }
         }
     }
@@ -129,18 +95,6 @@ public class DialogueManager : MonoBehaviour
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
             }
-        }
-    }
-
-    public void SetPause()
-    {
-        if (IsPaused)
-        {
-            IsPaused = false;
-        }
-        else
-        {
-            IsPaused = true;
         }
     }
 }

@@ -1,6 +1,6 @@
 INCLUDE globals.ink
-VAR ingredientInHand = true
-
+->HowToThrow
+VAR ingredientInHand = false
 === HowToThrow ===
 
 {controller:

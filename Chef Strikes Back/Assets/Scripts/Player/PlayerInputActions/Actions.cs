@@ -10,7 +10,7 @@ public class Actions : MonoBehaviour
     [SerializeField] private float throwForce;
     private bool _ready2Throw;
     private Inventory _inventory;
-    private bool _isCarryingItem;
+    public bool IsCarryingItem;
 
     [Space, Header("Player Grab")]
     [SerializeField] private float _grabDistance;
@@ -21,12 +21,12 @@ public class Actions : MonoBehaviour
         _player = GetComponent<Player>();
         _inventory = GetComponent<Inventory>();
         _ready2Throw = false;
-        _isCarryingItem = false;
+        IsCarryingItem = false;
     }
 
     public void Check4CloseItems(InputAction mouse)
     {
-        if (!_isCarryingItem)
+        if (!IsCarryingItem)
         {
             Collider2D[] hits;
 
@@ -98,7 +98,7 @@ public class Actions : MonoBehaviour
 
     public void GrabItem()
     {
-        if (!_isCarryingItem && _selectedItem)
+        if (!IsCarryingItem && _selectedItem)
         {
             var parent = _selectedItem.transform.parent;
 
@@ -106,7 +106,7 @@ public class Actions : MonoBehaviour
             if (item)
             {
                 _inventory.AddItem(item);
-                _isCarryingItem = true;
+                IsCarryingItem = true;
                 item.CollidersState(false);
                 return;
             }
@@ -116,11 +116,12 @@ public class Actions : MonoBehaviour
             {
                 var newFoodPileItem = pile.Hit();
                 _inventory.AddItem(newFoodPileItem.GetComponent<Item>());
-                _isCarryingItem = true;
+                IsCarryingItem = true;
                 ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
                 return;
             }
+         
         }
     }
 
@@ -141,7 +142,7 @@ public class Actions : MonoBehaviour
             ServiceLocator.Get<AudioManager>().PlaySource("charge");
             _inventory.ThrowFood(_player.Variables.ThrowDirection);
             _ready2Throw = false;
-            _isCarryingItem = false;
+            IsCarryingItem = false;
             _player.ChangeAction(PlayerActions.None);
         }
     }
@@ -153,7 +154,7 @@ public class Actions : MonoBehaviour
             _inventory.ThrowFood(Vector2.zero);
         }
         _ready2Throw = false;
-        _isCarryingItem = false;
+        IsCarryingItem = false;
         _player.ChangeAction(PlayerActions.None);
     }
 

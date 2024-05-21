@@ -19,6 +19,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Vector2 _pointerSize;
 
     private PlayerVariables _playerVar;
+    private Player _player;
     private SpriteRenderer _pointerImage;
     private bool _isLaunchingFood;
 
@@ -26,6 +27,7 @@ public class Inventory : MonoBehaviour
     {
         _pointerImage = _pointer.GetComponent<SpriteRenderer>();
         _playerVar = GetComponent<PlayerVariables>();
+        _player = GetComponent<Player>();
         _isLaunchingFood = false;
         _length.value = 0.0f;
     }
@@ -34,7 +36,7 @@ public class Inventory : MonoBehaviour
     {
         if (_isLaunchingFood)
         {
-            _length.transform.position = transform.localPosition + _offset;
+            _length.transform.position = _player.transform.localPosition + _offset;
             _length.value += Time.deltaTime * _distanceMultiplier;
             PointerMovement();
         }

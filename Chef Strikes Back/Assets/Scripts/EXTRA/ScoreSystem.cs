@@ -68,6 +68,9 @@ public class ScoreSystem : MonoBehaviour
                 break;
             }
         }
+
+        var deathDialogue = GetComponent<DeathDialogue>();
+        deathDialogue.EnterDialogueMode(starNum);
     }
 
     private int GetLevelIndex(string name)

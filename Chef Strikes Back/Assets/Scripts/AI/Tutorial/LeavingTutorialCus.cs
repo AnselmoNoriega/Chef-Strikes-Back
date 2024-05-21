@@ -67,7 +67,10 @@ public class LeavingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
+        var manager = ServiceLocator.Get<TutorialLoopManager>();
 
+        manager.TutorialSecondFace = true;
+        manager.SpawnCustomer();
     }
 
     private void PathCompleted(Path p)

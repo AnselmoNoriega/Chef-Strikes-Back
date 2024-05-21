@@ -38,6 +38,7 @@ public class AI : MonoBehaviour
     public float KnockbackForce = 0.0f;
     public float NextWaypointDistance = 0;
     public bool IsAnnoyed = false;
+    public bool IsDead = false;
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
 
@@ -69,7 +70,7 @@ public class AI : MonoBehaviour
         _stateManager = new StateMachine<AI>(this);
         state = AIState.None;
 
-        if(ServiceLocator.Get<GameLoopManager>())
+        if(ServiceLocator.Get<GameLoopManager>().enabled)
         {
             SetBaseState();
         }
@@ -118,7 +119,7 @@ public class AI : MonoBehaviour
                 ServiceLocator.Get<Player>().AddKillCount();
                 ServiceLocator.Get<Player>().Variables.GiveSpeedBoost();
                 ServiceLocator.Get<GameLoopManager>().WantedSystem();
-
+                IsDead = true;
                 DestroyAI();
             }
         }

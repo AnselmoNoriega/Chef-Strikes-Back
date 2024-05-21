@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class HungryTutorialCus : StateClass<AI>
@@ -6,26 +5,28 @@ public class HungryTutorialCus : StateClass<AI>
     private float waitingTime;
     private float timer = 0;
     private float angerMultiplier = 4;
-    private float _flashingTime = 0.0f;
 
     private Vector3 scale = Vector3.zero;
 
     public void Enter(AI agent)
     {
-        waitingTime = 25;
+        waitingTime = 6;
 
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
+        agent.ChoiceIndex = ServiceLocator.Get<TutorialLoopManager>().AiChoice++;
+        if (ServiceLocator.Get<TutorialLoopManager>().AiChoice > 1)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().AiChoice = 0;
+        }
         agent.Indicator.SetIndicator(true, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
         timer = 0.0f;
-
-        agent.enabled = false;
     }
 
     public void Update(AI agent, float dt)
@@ -52,9 +53,21 @@ public class HungryTutorialCus : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren", true);
+            if (ServiceLocator.Get<TutorialTimer>().GetTimeState())
+            {
 
-            int value = Random.Range(0, 100) % 4;
-            agent.ChangeState((AIState)(value + 3));
+                int value = Random.Range(0, 100) % 4;
+                if(value == 3)
+                {
+                    ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("BobTriggered");
+                }
+                agent.ChangeState((AIState)(value + 3));
+            }
+            else
+            {
+                agent.ChangeState(AIState.Rage);
+            }
         }
     }
 
