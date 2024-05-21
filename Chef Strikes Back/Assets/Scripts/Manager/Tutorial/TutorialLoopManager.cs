@@ -70,16 +70,19 @@ public class TutorialLoopManager : MonoBehaviour
                         button.SetHitOn(true);
                     }
                     _tutorialCameraManager.ChangeTarget(_player.transform);
+                    _tutorialCameraManager.ZoomIn(-0.6f, -0.6f);
                     break;
                 }
             case 4:
                 {
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialCameraManager.ChangeTarget(_player.transform);
+                    _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     break;
                 }
             case 5:
                 {
+                    _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
                     ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
                     ServiceLocator.Get<Player>().shouldNotMove = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
@@ -89,10 +92,12 @@ public class TutorialLoopManager : MonoBehaviour
             case 6:
                 {
                     _tutorialCameraManager.ChangeTarget(_player.transform);
+                    _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     break;
                 }
             case 7:
                 {
+                    _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
                     var glm = ServiceLocator.Get<GameLoopManager>();
                     glm.enabled = true;

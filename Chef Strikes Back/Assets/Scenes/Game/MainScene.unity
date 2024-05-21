@@ -5453,11 +5453,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4834053325950378973, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[10].x
-      value: 0.10780556
+      value: 0.110396065
       objectReference: {fileID: 0}
     - target: {fileID: 4834053325950378973, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[10].y
-      value: -0.23171103
+      value: -0.20331874
       objectReference: {fileID: 0}
     - target: {fileID: 4834053325950378973, guid: 7d4ce5ed801da1342aff6faa8913a501, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[11].x
@@ -5500,8 +5500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb942e29db048b443aa0ef4307da8d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _followSpeed: 1
   _zoomSpeed: 1500
+  _followTargetSpeed: 1
+  _followThrowSpeed: 5
   _boundaryPolygon: {fileID: 1209050870}
 --- !u!60 &1209050870 stripped
 PolygonCollider2D:
