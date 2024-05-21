@@ -56,6 +56,7 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Unregister<CanvasManager>();
         ServiceLocator.Unregister<Player>();
         ServiceLocator.Unregister<AIManager>();
+        ServiceLocator.Unregister<SceneControl>();
         ServiceLocator.Unregister<StatefulObject>();
     }
 }

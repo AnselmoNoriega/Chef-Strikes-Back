@@ -26,9 +26,9 @@ public class ScoreSystem : MonoBehaviour
         ServiceLocator.Get<GameManager>().ResetScore();
         int starNum = 0;
 
-        if(score >= 50)
+        var sceneName = ServiceLocator.Get<GameManager>().GetRepalyScene();
+        if (score >= 50)
         {
-            var sceneName = ServiceLocator.Get<GameManager>().GetRepalyScene();
             var level = GetLevelIndex(sceneName);
             ServiceLocator.Get<GameManager>().FullStarsForLevel(level);
         }
@@ -56,7 +56,7 @@ public class ScoreSystem : MonoBehaviour
         {
             if (ServiceLocator.Get<SceneControl>().GetSceneName(startworth.LevelName))
             {
-                int moneyValue =0;
+                int moneyValue = 0;
                 for (int i = 0; i < startworth._extraMoneyForStars.Count; i++)
                 {
                     if (i == starNum)
@@ -70,12 +70,15 @@ public class ScoreSystem : MonoBehaviour
         }
 
         var deathDialogue = GetComponent<DeathDialogue>();
-        deathDialogue.EnterDialogueMode(starNum);
+        if (sceneName == "MainScene")
+        {
+            deathDialogue.EnterDialogueMode(starNum);
+        }
     }
 
     private int GetLevelIndex(string name)
     {
-        if(name == "MainScene")
+        if (name == "MainScene")
         {
             return 0;
         }
@@ -83,7 +86,7 @@ public class ScoreSystem : MonoBehaviour
         string indexString = name.Replace("Level_", "");
         int level = 0;
 
-        if(int.TryParse(indexString, out level))
+        if (int.TryParse(indexString, out level))
         {
             return level;
         }
