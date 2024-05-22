@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
-
+        
         if (_currentHealth <= 0)
         {
             _gameManager.SetKillCount(KillCount);
@@ -167,9 +167,10 @@ public class Player : MonoBehaviour
     {
         for (int i = 0; i < Variables.FlashingTime; i++)
         {
-            _playerSprite.color = Color.red;
+
+            PlayerAnimator.Play("Damage_"+ PlayerHelper.FaceMovementDirection(PlayerAnimator,LookingDirection));
             yield return new WaitForSeconds(0.1f);
-            _playerSprite.color = Color.white;
+            PlayerAnimator.Play("Idle_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
         }
     }
 
