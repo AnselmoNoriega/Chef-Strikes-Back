@@ -2894,6 +2894,7 @@ GameObject:
   - component: {fileID: 506134665}
   - component: {fileID: 506134664}
   - component: {fileID: 506134663}
+  - component: {fileID: 506134668}
   m_Layer: 12
   m_Name: MainFloor
   m_TagString: Untagged
@@ -2928,7 +2929,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClipName: walk
+  tileClipName: Tile
+  woodClipName: Wood
+  brickClipName: Brick
   player: {fileID: 1846026830}
 --- !u!66 &506134664
 CompositeCollider2D:
@@ -3723,6 +3726,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &506134668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506134661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8bb7e7bc7fe1478357266a255651e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 1
 --- !u!114 &514693053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9184,6 +9200,7 @@ GameObject:
   - component: {fileID: 1375202446}
   - component: {fileID: 1375202445}
   - component: {fileID: 1375202444}
+  - component: {fileID: 1375202449}
   m_Layer: 12
   m_Name: KitchenFloor
   m_TagString: Untagged
@@ -9218,7 +9235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClipName: walk
+  tileClipName: Tile
+  woodClipName: Wood
+  brickClipName: Brick
   player: {fileID: 1846026830}
 --- !u!66 &1375202445
 CompositeCollider2D:
@@ -9503,6 +9522,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1375202449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375202442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8bb7e7bc7fe1478357266a255651e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 0
 --- !u!1001 &1396789944
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17067,6 +17099,7 @@ GameObject:
   - component: {fileID: 1914010065}
   - component: {fileID: 1914010064}
   - component: {fileID: 1914010063}
+  - component: {fileID: 1914010068}
   m_Layer: 12
   m_Name: EntranceFloor
   m_TagString: Untagged
@@ -17101,7 +17134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClipName: walk
+  tileClipName: Tile
+  woodClipName: Wood
+  brickClipName: Brick
   player: {fileID: 1846026830}
 --- !u!66 &1914010064
 CompositeCollider2D:
@@ -17418,6 +17453,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &1914010068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914010061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d8bb7e7bc7fe1478357266a255651e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileType: 2
 --- !u!213 &1928454661
 Sprite:
   m_ObjectHideFlags: 0
@@ -18166,7 +18214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.size
-      value: 22
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[1].clip
@@ -18325,6 +18373,30 @@ PrefabInstance:
       value: Shoot
       objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[22].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 39af2f773b859b448a5edf92cf33afbc, type: 3}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[22].name
+      value: Brick
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[23].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e8a0c98a23ea6e64fa8a50b2b4fe1306, type: 3}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[23].name
+      value: Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[24].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 57eb158026714a640a866633d529f2b1, type: 3}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[24].name
+      value: Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[13].pitch
       value: 1.46
       objectReference: {fileID: 0}
@@ -18358,6 +18430,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[21].pitch
+      value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[22].pitch
+      value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[23].pitch
+      value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[24].pitch
       value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
@@ -18419,6 +18503,18 @@ PrefabInstance:
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[21].volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[22].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[23].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[24].volume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: textTime
