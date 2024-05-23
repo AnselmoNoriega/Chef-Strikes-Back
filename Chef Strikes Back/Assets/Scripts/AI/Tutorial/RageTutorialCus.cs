@@ -7,6 +7,7 @@ public class RageTutorialCus : StateClass<AI>
     private int _currentWaypoint = 0;
     private Transform _playerPos = null;
     private AI _agent = null;
+    private bool _istotallydead = false;
 
     public void Enter(AI agent)
     {
@@ -52,7 +53,10 @@ public class RageTutorialCus : StateClass<AI>
             _currentWaypoint = 0;
             return;
         }
-
+        if (agent.IsDead)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+        }
         var direction = ((Vector2)agent.Path.vectorPath[_currentWaypoint] - agent.Rb2d.position).normalized;
         agent.Rb2d.AddForce(direction * agent.Speed);
 
@@ -76,10 +80,7 @@ public class RageTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.IsDead)
-        {
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
-        }
+
     }
 
     private void PathCompleted(Path p)

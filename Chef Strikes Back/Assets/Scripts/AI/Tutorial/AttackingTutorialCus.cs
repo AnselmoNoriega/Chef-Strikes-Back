@@ -22,7 +22,10 @@ public class AttackingTutorialCus : StateClass<AI>
             player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
             player.TakeDamage(10);
         }
-
+        if (agent.IsDead)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+        }
         if (Time.time - _countDown >= 1.0f)
         {
             agent.ChangeState(AIState.Rage);
@@ -46,9 +49,6 @@ public class AttackingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.IsDead)
-        {
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
-        }
+
     }
 }
