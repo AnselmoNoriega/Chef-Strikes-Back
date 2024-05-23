@@ -82,6 +82,7 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 5:
                 {
+                    SpawnCustomer();
                     _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
                     ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
                     ServiceLocator.Get<Player>().shouldNotMove = true;
