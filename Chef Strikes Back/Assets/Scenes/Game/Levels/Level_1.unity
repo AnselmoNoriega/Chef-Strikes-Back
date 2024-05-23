@@ -678,7 +678,7 @@ Tilemap:
       - {fileID: -444158901, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 166679972, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
-      m_AnimationSpeed: 12
+      m_AnimationSpeed: 12.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -18477,6 +18477,10 @@ PrefabInstance:
       value: FoodPot
       objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[13].pitch
       value: 1.46
       objectReference: {fileID: 0}
@@ -18503,6 +18507,10 @@ PrefabInstance:
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[19].pitch
       value: 1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[1].volume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[20].pitch
