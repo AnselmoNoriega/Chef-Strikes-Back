@@ -18,6 +18,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private float _distanceMultiplier;
     [SerializeField] private Vector2 _pointerSize;
 
+    [SerializeField] private Vector3 _throwOffset = new Vector3(0.0f, 0.2f, 0.0f);
+
     private PlayerVariables _playerVar;
     private Player _player;
     private SpriteRenderer _pointerImage;
@@ -76,7 +78,7 @@ public class Inventory : MonoBehaviour
 
     private void SetEquation2Throw(Vector2 direction)
     {
-        direction = _pointer.transform.up.normalized;
+        direction = (_pointer.transform.up - _throwOffset).normalized;
         if (direction == Vector2.zero)
         {
             _foodItem.Throw(Vector2.zero, Vector2.zero, 0);

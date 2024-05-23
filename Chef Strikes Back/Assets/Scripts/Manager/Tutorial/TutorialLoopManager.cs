@@ -98,7 +98,8 @@ public class TutorialLoopManager : MonoBehaviour
             case 7:
                 {
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
-                    ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
+                    ServiceLocator.Get<TutorialTimer>().SetTimeState(true); 
+                    ServiceLocator.Get<AISupportManager>().SetAllChair();
                     var glm = ServiceLocator.Get<GameLoopManager>();
                     glm.enabled = true;
                     glm.Initialize();
