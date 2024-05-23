@@ -13,13 +13,13 @@ public class SceneControl : MonoBehaviour
 
     [Space, Header("Level UI")]
     [SerializeField] private GameObject[] _firstSelectedButton;
-    private AudioManager _audioManager;
+    //private AudioManager _audioManager;
 
 
     private void Start()
     {
         _gameManager = ServiceLocator.Get<GameManager>();
-        _audioManager = ServiceLocator.Get<AudioManager>();
+        //_audioManager = ServiceLocator.Get<AudioManager>();
         SetButtonSelected(0);
         if (_buttons.Count > 0)
         {
@@ -29,7 +29,7 @@ public class SceneControl : MonoBehaviour
 
     public void GoToEndScene()
     {
-        _audioManager.PlaySource("ButtonPress");
+        //_audioManager.PlaySource("ButtonPress");
         Debug.Log("ButtonPress");
         SceneManager.LoadScene("EndLevel");
     }
@@ -52,7 +52,7 @@ public class SceneControl : MonoBehaviour
         {
             if (_firstSelectedButton.Length > 0)
             {
-                _audioManager.PlaySource("ButtonPress");
+                //_audioManager.PlaySource("ButtonPress");
                 Debug.Log("ButtonPress");
                 StartCoroutine(_gameManager.UI_Navegation.SetSelected(_firstSelectedButton[uiLayer]));
 

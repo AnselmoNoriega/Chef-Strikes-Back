@@ -16,7 +16,6 @@ public class Actions : MonoBehaviour
     [SerializeField] private float _grabDistance;
     private SpriteRenderer _selectedItem = null;
 
-
     public ParticleSystem TomatoParticles;
     public ParticleSystem DoughParticles;
     public ParticleSystem CheeseParticles;
