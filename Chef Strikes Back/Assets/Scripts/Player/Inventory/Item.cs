@@ -34,12 +34,17 @@ public class Item : MonoBehaviour
     [SerializeField] private Color[] finishedFoodColors;  // Array of colors for finished foods
     [SerializeField] private TrailRenderer _trailRenderer;
 
+    private AudioManager _audioManager;
+
     private void Start()
     {
         _isBeingDrag = false;
         IsPickable = true;
         IsServed = false;
         InitializeTrailRenderer();
+
+        // Initialize the audio manager
+        _audioManager = ServiceLocator.Get<AudioManager>();
     }
 
     private void Update()
@@ -153,7 +158,7 @@ public class Item : MonoBehaviour
     {
         tgrCollider.enabled = state;
         childCollider.enabled = state;
-        
+
     }
 
     public SpriteRenderer GetHighlight()
@@ -164,18 +169,15 @@ public class Item : MonoBehaviour
     private int _collisionCount = 0;
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        _collisionCount++; 
 
-        if (_collisionCount == 2) 
+        _collisionCount++;
+
+        if (_collisionCount == 2)
         {
-            
             _collisionCount = 0;
 
-            
             if (collision.contactCount > 0)
             {
-                
                 ContactPoint2D contact = collision.GetContact(0);
                 Vector2 collisionPoint = contact.point;
                 TriggerParticles(collisionPoint, contact.normal);
@@ -184,26 +186,36 @@ public class Item : MonoBehaviour
             {
                 Debug.LogError("No contact points available for collision.");
             }
+
+            // Play bounce sound based on the food type
+            PlayBounceSound();
         }
 
-        
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            
             if (collision.contactCount > 0)
             {
                 ContactPoint2D contact = collision.GetContact(0);
                 Vector2 collisionPoint = contact.point;
                 TriggerParticles(collisionPoint, contact.normal);
+
+                // Play bounce sound based on the food type
+                PlayBounceSound();
             }
         }
+    }
+
+    private void PlayBounceSound()
+    {
+        string soundClipName = Type.ToString() + "Bounce";
+        _audioManager.PlaySource(soundClipName);
+        Debug.Log(soundClipName);
     }
 
     private void TriggerParticles(Vector2 position, Vector3 normal)
     {
         if (CollisionParticles != null)
         {
-            
             ParticleSystem instantiatedParticles = Instantiate(CollisionParticles, position, Quaternion.identity);
             instantiatedParticles.transform.rotation = Quaternion.FromToRotation(Vector3.forward, normal);
             instantiatedParticles.Play();
