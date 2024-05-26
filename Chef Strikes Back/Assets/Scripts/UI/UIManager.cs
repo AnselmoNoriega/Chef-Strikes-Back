@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _HowToPlaySelectFirst;
 
     [SerializeField] private bool _useConfetti = false;
-    private AudioManager _audioManager;
+    //private AudioManager _audioManager;
     private bool IsPaused;
     private int escapeKeyPressCount = 0;
 
@@ -29,14 +29,14 @@ public class UIManager : MonoBehaviour
             _moneyText.text = "Money = " + ServiceLocator.Get<GameManager>().GetMoney().ToString();
         }
 
-        _audioManager = ServiceLocator.Get<AudioManager>();
+        //_audioManager = ServiceLocator.Get<AudioManager>();
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && IsPaused == true) 
         {
-            _audioManager.PlaySource("UIClick");
+            //_audioManager.PlaySource("UIClick");
             Debug.Log("UIClick");
         }
 
@@ -44,8 +44,8 @@ public class UIManager : MonoBehaviour
     public void SetScreenActive(string screenName)
     {
         _screens.SetState(screenName);
-        
-        _audioManager.PlaySource("Pause");
+
+        //_audioManager.PlaySource("Pause");
         Debug.Log("PauseSound");
     }
 

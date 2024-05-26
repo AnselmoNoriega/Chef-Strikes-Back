@@ -7,6 +7,7 @@ public class LeavingTutorialCus : StateClass<AI>
     private int _currentWaypoint = 0;
     private Vector2 _exitPosition = Vector2.zero;
     private AI _agent = null;
+    private bool isSpawn = false;
 
     public void Enter(AI agent)
     {
@@ -33,6 +34,15 @@ public class LeavingTutorialCus : StateClass<AI>
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
             agent.DestroyAI();
+            if (!isSpawn)
+            {
+                var manager = ServiceLocator.Get<TutorialLoopManager>();
+
+                manager.TutorialSecondFace = true;
+                manager.SpawnCustomer();
+                isSpawn = true;
+            }
+
             return;
         }
 
@@ -67,10 +77,7 @@ public class LeavingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        var manager = ServiceLocator.Get<TutorialLoopManager>();
 
-        manager.TutorialSecondFace = true;
-        manager.SpawnCustomer();
     }
 
     private void PathCompleted(Path p)

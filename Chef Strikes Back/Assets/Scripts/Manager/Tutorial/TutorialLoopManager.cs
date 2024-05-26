@@ -82,6 +82,7 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 5:
                 {
+                    //SpawnCustomer();
                     _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
                     ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
                     ServiceLocator.Get<Player>().shouldNotMove = true;
@@ -99,6 +100,8 @@ public class TutorialLoopManager : MonoBehaviour
                 {
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
+                    ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
+                   //ServiceLocator.Get<AISupportManager>().SetAllChair();
                     var glm = ServiceLocator.Get<GameLoopManager>();
                     glm.enabled = true;
                     glm.Initialize();

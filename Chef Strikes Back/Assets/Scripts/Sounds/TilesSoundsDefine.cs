@@ -22,21 +22,21 @@ public class TilesSoundsDefine : MonoBehaviour
     private void Start()
     {
         // Cache the Rigidbody2D component
-        playerRb = player.GetComponent<Rigidbody2D>();
-        currentClipName = tileClipName; // Default to tile sound
+        //playerRb = player.GetComponent<Rigidbody2D>();
+        //currentClipName = tileClipName; // Default to tile sound
     }
 
     private void Update()
     {
-        if (playerRb != null && IsPlayerMoving())
-        {
-            UpdateCurrentClipName();
-            StartSound();
-        }
-        else
-        {
-            StopSound();
-        }
+        //if (playerRb != null && IsPlayerMoving())
+        //{
+        //    UpdateCurrentClipName();
+        //    StartSound();
+        //}
+        //else
+        //{
+        //    StopSound();
+        //}
     }
 
     private bool IsPlayerMoving()
