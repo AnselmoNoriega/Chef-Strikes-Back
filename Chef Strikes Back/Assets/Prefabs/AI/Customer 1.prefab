@@ -187,6 +187,7 @@ MonoBehaviour:
   KnockbackForce: 100
   NextWaypointDistance: 0.1
   IsAnnoyed: 0
+  IsDead: 0
   _health: 30
   _hitsToGetMad: 3
   _currentSpriteColor: {r: 1, g: 1, b: 1, a: 1}
@@ -230,7 +231,7 @@ Animator:
   m_GameObject: {fileID: 34484012071288454}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8a4ef6aab8860eb4d953f31ea1b701b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9712961d0a79d05439618159235a52ce, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
