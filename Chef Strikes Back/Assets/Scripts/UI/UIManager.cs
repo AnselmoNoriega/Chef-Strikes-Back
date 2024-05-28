@@ -45,8 +45,6 @@ public class UIManager : MonoBehaviour
     {
         _screens.SetState(screenName);
 
-        //_audioManager.PlaySource("Pause");
-        Debug.Log("PauseSound");
     }
 
     public void ResumeGame()

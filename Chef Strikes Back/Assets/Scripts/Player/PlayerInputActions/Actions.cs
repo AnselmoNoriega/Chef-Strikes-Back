@@ -21,7 +21,6 @@ public class Actions : MonoBehaviour
     public ParticleSystem CheeseParticles;
     private AudioManager _audioManager;
 
-
     private void Start()
     {
         _player = GetComponent<Player>();
@@ -124,7 +123,7 @@ public class Actions : MonoBehaviour
                 var newFoodPileItem = pile.Hit();
                 _inventory.AddItem(newFoodPileItem.GetComponent<Item>());
                 IsCarryingItem = true;
-                
+
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
 
                 if (_inventory.GetFoodItem().Type == FoodType.Tomato)
@@ -155,7 +154,7 @@ public class Actions : MonoBehaviour
 
                 return;
             }
-         
+
         }
 
         //TomatoParticles.gameObject.SetActive(false);
@@ -167,6 +166,8 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null)
         {
+            _audioManager.PlaySource("charge");
+            Debug.Log("ChargeSound");
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
             _player.ChangeAction(PlayerActions.Throwing);
@@ -177,11 +178,11 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null && _ready2Throw)
         {
-            ServiceLocator.Get<AudioManager>().PlaySource("charge");
             _inventory.ThrowFood(_player.Variables.ThrowDirection);
             _ready2Throw = false;
             IsCarryingItem = false;
             _player.ChangeAction(PlayerActions.None);
+            StopChargeSound();
         }
     }
 
@@ -194,6 +195,7 @@ public class Actions : MonoBehaviour
         _ready2Throw = false;
         IsCarryingItem = false;
         _player.ChangeAction(PlayerActions.None);
+        //StopChargeSound();
     }
 
     public void Attacking(Vector2 anglePos)
@@ -206,6 +208,12 @@ public class Actions : MonoBehaviour
                 _player.LookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
             }
             _player.ChangeAction(PlayerActions.Attacking);
+            //StopChargeSound();
         }
+    }
+
+    private void StopChargeSound()
+    {
+        _audioManager.StopSource("charge");
     }
 }

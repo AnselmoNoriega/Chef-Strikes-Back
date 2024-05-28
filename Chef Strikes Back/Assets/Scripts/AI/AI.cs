@@ -63,9 +63,10 @@ public class AI : MonoBehaviour
     public ParticleSystem ConfettiParticles;
     public ParticleSystem HappyParticles;
     public ParticleSystem AngryParticles;
+    public ParticleSystem GunParticles;
     private bool _IsDead = false;
     [SerializeField] private Animator _animator;
-    //private AudioManager _audioManager;
+    private AudioManager _audioManager;
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
@@ -80,8 +81,9 @@ public class AI : MonoBehaviour
 
     private void Awake()
     {
-        //_audioManager = ServiceLocator.Get<AudioManager>();
+        _audioManager = ServiceLocator.Get<AudioManager>();
         //_audioManager.PlaySource("DoorOpen");
+        Debug.Log("DoorOpen");
         Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
         _stateManager = new StateMachine<AI>(this);
@@ -133,6 +135,19 @@ public class AI : MonoBehaviour
         else
         {
             Debug.LogError("No third child");
+        }
+
+        if (transform.childCount > 3)
+        {
+            Transform fifthChild = transform.GetChild(4);
+            GunParticles = fifthChild.GetComponent<ParticleSystem>();
+
+            if (GunParticles == null)
+                Debug.LogError("No Gun ParticleSystem found");
+        }
+        else
+        {
+            Debug.LogError("No fifth child");
         }
     }
 
@@ -249,9 +264,21 @@ public class AI : MonoBehaviour
     public void Shoot()
     {
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
+        
+        StartCoroutine(PlayGunParticles());
 
         //_audioManager.PlaySource("Shoot");
         Debug.Log("GunShot");
+    }
+
+    private IEnumerator PlayGunParticles()
+    {
+        yield return new WaitForSeconds(0.1f);
+        GunParticles.gameObject.SetActive(true);
+        GunParticles.Play();
+        yield return new WaitForSeconds(0.5f); // Adjust the duration as needed
+        GunParticles.Stop();
+        GunParticles.gameObject.SetActive(false);
     }
 
     private IEnumerator SpriteFlashing()
@@ -279,6 +306,7 @@ public class AI : MonoBehaviour
     {
         _moneyUIParticleSystem.Play();
         //_audioManager.PlaySource("Pay");
+        Debug.Log("PaySound");
     }
 
     public static void ToggleUseConfetti(bool useConfetti)
