@@ -132,17 +132,6 @@ public class TutorialLoopManager : MonoBehaviour
         }
     }
 
-    public void CheckIfHolding(bool timeUp)
-    {
-        if (_eventsDictionary.ContainsKey("FoodThrow"))
-        {
-            string[] names = new string[] { "ingredientInHand" };
-            bool[] bools = new bool[] { timeUp };
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["FoodThrow"], names, bools);
-            _eventsDictionary.Remove("FoodThrow");
-        }
-    }
-
     public void TriggerCauldronEvent(bool isPizza)
     {
         if (_eventsDictionary.ContainsKey("PizzaMade"))

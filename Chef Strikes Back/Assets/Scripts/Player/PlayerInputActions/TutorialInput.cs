@@ -53,7 +53,7 @@ public class TutorialInput : MonoBehaviour
         if(_playerActions.IsCarryingItem && _player.PlayerAction != PlayerActions.Throwing)
         {
             ++_pickItemCount;
-            ServiceLocator.Get<TutorialLoopManager>().CheckIfHolding(true);
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("FoodThrow");
         }
 
         if(_pickItemCount == 5)

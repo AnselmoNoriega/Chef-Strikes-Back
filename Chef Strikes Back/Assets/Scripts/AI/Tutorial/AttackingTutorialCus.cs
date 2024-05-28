@@ -5,19 +5,26 @@ public class AttackingTutorialCus : StateClass<AI>
 {
     private float _countDown = 0;
     private bool _hasAttacked = false;
+    private Player player;
 
     public void Enter(AI agent)
     {
+        player = ServiceLocator.Get<Player>();
         _hasAttacked = false;
         _countDown = Time.time;
     }
 
     public void Update(AI agent, float dt)
     {
+        if (player.GotDamage)
+        {
+
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren");
+            return;
+        }
         if (Time.time - _countDown >= 0.25f && !_hasAttacked)
         {
             _hasAttacked = true;
-            var player = ServiceLocator.Get<Player>();
             Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
             player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
             player.TakeDamage(10);

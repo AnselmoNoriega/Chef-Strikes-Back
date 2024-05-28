@@ -494,6 +494,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2023291835}
     m_Modifications:
+    - target: {fileID: 1746946325212103394, guid: f421f8d39682d3d41bbe5c192de42ee7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3584592211049191626, guid: f421f8d39682d3d41bbe5c192de42ee7, type: 3}
       propertyPath: m_Name
       value: Root - Title Screen
@@ -582,6 +586,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8722925273456717236, guid: f421f8d39682d3d41bbe5c192de42ee7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6bb0e8ac8c6c3e440ad313363ed72d02, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f421f8d39682d3d41bbe5c192de42ee7, type: 3}
 --- !u!224 &1860009862676534606 stripped
