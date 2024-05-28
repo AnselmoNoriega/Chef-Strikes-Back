@@ -28,6 +28,7 @@ public class TutorialLoopManager : MonoBehaviour
     private Dictionary<string, TextAsset> _eventsDictionary = new();
 
     private int _storyIdx = 0;
+    private int _customerIdx = 0;
     private int _focusPosIdx = 0;
     public bool TutorialSecondFace = false;
     public bool _multipleSpaghettiesMade = false;
@@ -44,6 +45,10 @@ public class TutorialLoopManager : MonoBehaviour
 
     public void EnterConversation()
     {
+        if (inkJSON.Count <= _storyIdx)
+        {
+            return;
+        }
         ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++]);
     }
 
@@ -82,26 +87,10 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 5:
                 {
-                    //SpawnCustomer();
-                    _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
-                    ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
-                    ServiceLocator.Get<Player>().shouldNotMove = true;
-                    _tutorialAI.ChangeState(AIState.Hungry);
-                    _tutorialAI.enabled = true;
-                    break;
-                }
-            case 6:
-                {
-                    _tutorialCameraManager.ChangeTarget(_player.transform);
-                    _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
-                    break;
-                }
-            case 7:
-                {
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
                     ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
-                   //ServiceLocator.Get<AISupportManager>().SetAllChair();
+                    ServiceLocator.Get<AISupportManager>().SetAllChair();
                     var glm = ServiceLocator.Get<GameLoopManager>();
                     glm.enabled = true;
                     glm.Initialize();
@@ -111,6 +100,39 @@ public class TutorialLoopManager : MonoBehaviour
         }
         ++_focusPosIdx;
     }
+
+    public void CustomerArraved(AI agent)
+    {
+        switch(_customerIdx)
+        {
+            case 0:
+                {
+                    agent.SelectedChair.SitOnChair(agent);
+                    ServiceLocator.Get<DialogueManager>().IsPaused = false;
+                    agent.enabled = false;
+                }
+                break;
+            case 1:
+                {
+                    agent.SelectedChair.SitOnChair(agent);
+                    ServiceLocator.Get<DialogueManager>().IsPaused = false;
+                }
+                break;
+            case 2:
+                {
+                    agent.SelectedChair.SitOnChair(agent);
+                    ServiceLocator.Get<DialogueManager>().IsPaused = false;
+                    _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
+                    ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
+                    ServiceLocator.Get<Player>().shouldNotMove = true;
+                    _tutorialAI.ChangeState(AIState.Hungry);
+                    EnterDialogueEvent("KarenMadNow");
+                }
+                break;
+        }
+        ++_customerIdx;
+    }
+
 
     public void SpawnCustomer(bool shouldPause = true)
     {

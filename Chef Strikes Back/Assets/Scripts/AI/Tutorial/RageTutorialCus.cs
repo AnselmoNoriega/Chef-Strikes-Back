@@ -8,7 +8,7 @@ public class RageTutorialCus : StateClass<AI>
     private Transform _playerPos = null;
     private AI _agent = null;
     private bool _istotallydead = false;
-
+    private Player player;
     public void Enter(AI agent)
     {
         _agent = agent;
@@ -17,10 +17,17 @@ public class RageTutorialCus : StateClass<AI>
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
         agent.ChangeSpriteColor(Color.magenta);
         agent.Speed = 200;
+        player = ServiceLocator.Get<Player>();
     }
 
     public void Update(AI agent, float dt)
     {
+        if (player.GotDamage)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren");
+            return;
+        }
+
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
             agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
