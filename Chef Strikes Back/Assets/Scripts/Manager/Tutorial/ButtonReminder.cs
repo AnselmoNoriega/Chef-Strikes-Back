@@ -29,7 +29,7 @@ public class ButtonReminder : MonoBehaviour
             _timer -= Time.deltaTime;
             if(_timer <= 0.0f)
             {
-                ServiceLocator.Get<TutorialLoopManager>().CheckIfHolding(false);
+                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("PickUpFood");
                 _runTimer = false;
             }
         }
