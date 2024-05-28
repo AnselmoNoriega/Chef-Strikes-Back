@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4617263295547057938}
   - component: {fileID: -1032899175772524887}
   m_Layer: 15
-  m_Name: Customer 3
+  m_Name: Customer - Karen
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,6 @@ MonoBehaviour:
   KnockbackForce: 100
   NextWaypointDistance: 0.1
   IsAnnoyed: 0
-  IsDead: 0
   _health: 30
   _hitsToGetMad: 3
   _currentSpriteColor: {r: 1, g: 1, b: 1, a: 1}
@@ -201,6 +200,11 @@ MonoBehaviour:
   BulletPrefab: {fileID: 6170349750736654560, guid: 036b46ac6bffa054fa18dd65dd673486, type: 3}
   GunPos: {fileID: 6545289985960163005}
   _moneyUIParticleSystem: {fileID: 6059910264114621169}
+  BloodParticles: {fileID: 0}
+  ConfettiParticles: {fileID: 0}
+  HappyParticles: {fileID: 0}
+  AngryParticles: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!114 &4617263295547057938
 MonoBehaviour:
   m_ObjectHideFlags: 0
