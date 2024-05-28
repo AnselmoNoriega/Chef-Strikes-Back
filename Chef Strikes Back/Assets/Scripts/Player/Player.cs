@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public PlayerActions PlayerAction;
     public string soundName;
     public bool IsWalking = false;
+    public bool GotDamage = false;
 
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D Rb { get; private set; }
     public Animator PlayerAnimator { get; private set; }
-    
+
     private bool _initialized = false;
     public bool shouldNotMove = false;
 
@@ -117,7 +118,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
-        
+        GotDamage = true;
         if (_currentHealth <= 0)
         {
             _gameManager.SetKillCount(KillCount);
@@ -168,11 +169,13 @@ public class Player : MonoBehaviour
         for (int i = 0; i < Variables.FlashingTime; i++)
         {
 
-            PlayerAnimator.Play("Damage_"+ PlayerHelper.FaceMovementDirection(PlayerAnimator,LookingDirection));
+            PlayerAnimator.Play("Damage_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
             yield return new WaitForSeconds(0.1f);
             PlayerAnimator.Play("Idle_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
         }
+        GotDamage = false;
     }
+
 
     private void CheckFloorType()
     {
