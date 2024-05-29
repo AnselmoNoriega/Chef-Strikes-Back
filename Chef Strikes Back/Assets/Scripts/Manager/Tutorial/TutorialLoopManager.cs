@@ -90,7 +90,6 @@ public class TutorialLoopManager : MonoBehaviour
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
                     ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
-                    ServiceLocator.Get<AISupportManager>().SetAllChair();
                     var glm = ServiceLocator.Get<GameLoopManager>();
                     glm.enabled = true;
                     glm.Initialize();
@@ -103,22 +102,24 @@ public class TutorialLoopManager : MonoBehaviour
 
     public void CustomerArraved(AI agent)
     {
-        switch(_customerIdx)
+        ++_customerIdx;
+
+        switch (_customerIdx)
         {
-            case 0:
+            case 1:
                 {
                     agent.SelectedChair.SitOnChair(agent);
                     ServiceLocator.Get<DialogueManager>().IsPaused = false;
                     agent.enabled = false;
                 }
                 break;
-            case 1:
+            case 2:
                 {
                     agent.SelectedChair.SitOnChair(agent);
                     ServiceLocator.Get<DialogueManager>().IsPaused = false;
                 }
                 break;
-            case 2:
+            case 3:
                 {
                     agent.SelectedChair.SitOnChair(agent);
                     ServiceLocator.Get<DialogueManager>().IsPaused = false;
@@ -130,7 +131,11 @@ public class TutorialLoopManager : MonoBehaviour
                 }
                 break;
         }
-        ++_customerIdx;
+    }
+
+    public void CameraTargetChange()
+    {
+        _tutorialCameraManager.ChangeTarget(_player.transform);
     }
 
 
@@ -183,4 +188,26 @@ public class TutorialLoopManager : MonoBehaviour
         }
     }
 
+    public float GetWaitingTime()
+    {
+        if(_customerIdx == 3)
+        {
+            return 6.0f;
+        }
+        return 60.0f;
+    }
+
+    public int GetCustomerIdx()
+    {
+        return _customerIdx;
+    }
+
+    public void PlayerShouldntMove()
+    {
+        if(_customerIdx == 3)
+        {
+            ServiceLocator.Get<Player>().shouldNotMove = true;
+            
+        }
+    }
 }

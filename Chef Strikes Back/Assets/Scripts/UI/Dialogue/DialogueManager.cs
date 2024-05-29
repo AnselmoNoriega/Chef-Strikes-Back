@@ -80,7 +80,11 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
-        ServiceLocator.Get<Player>().shouldNotMove = false;
+        if(ServiceLocator.Get<TutorialLoopManager>().GetCustomerIdx() != 3)
+        {
+            ServiceLocator.Get<Player>().shouldNotMove = false;
+            ServiceLocator.Get<TutorialLoopManager>().CameraTargetChange();
+        }
     }
 
     public void ContinueStory()

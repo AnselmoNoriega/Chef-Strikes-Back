@@ -10,7 +10,7 @@ public class HungryTutorialCus : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        waitingTime = 60;
+        waitingTime = ServiceLocator.Get<TutorialLoopManager>().GetWaitingTime();
 
         scale = agent.EatingSlider.localScale;
         scale.x = 0;

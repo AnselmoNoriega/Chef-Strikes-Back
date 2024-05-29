@@ -12,9 +12,6 @@ public class ButtonReminder : MonoBehaviour
     private bool _hintOn = false;
     private bool _shouldFlash = false;
 
-    private bool _runTimer = false;
-    private float _timer = 15;
-
 
     private void Update()
     {
@@ -23,15 +20,6 @@ public class ButtonReminder : MonoBehaviour
             _shouldFlash = false;
             _buttonObjects.SetActive(false);
             _hintOn = false;
-        }
-        if (_runTimer)
-        {
-            _timer -= Time.deltaTime;
-            if(_timer <= 0.0f)
-            {
-                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("PickUpFood");
-                _runTimer = false;
-            }
         }
 
     }
@@ -70,6 +58,5 @@ public class ButtonReminder : MonoBehaviour
     public void SetHitOn(bool active)
     {
         _hintOn = active;
-        _runTimer = true;
     }
 }
