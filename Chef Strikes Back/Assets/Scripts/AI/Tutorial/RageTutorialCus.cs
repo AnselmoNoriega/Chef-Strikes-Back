@@ -18,7 +18,7 @@ public class RageTutorialCus : StateClass<AI>
         agent.ChangeSpriteColor(Color.magenta);
         agent.Speed = 200;
         player = ServiceLocator.Get<Player>();
-        ServiceLocator.Get<TutorialLoopManager>().PlayerShouldntMove();
+        ServiceLocator.Get<TutorialLoopManager>().PlayerShouldMove();
     }
 
     public void Update(AI agent, float dt)

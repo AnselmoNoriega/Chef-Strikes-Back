@@ -37,7 +37,7 @@ public class TutorialLoopManager : MonoBehaviour
     {
         EnterConversation();
 
-        foreach(var inkEvent in inkJSONEvents)
+        foreach (var inkEvent in inkJSONEvents)
         {
             _eventsDictionary.Add(inkEvent.Name, inkEvent.Value);
         }
@@ -91,6 +91,7 @@ public class TutorialLoopManager : MonoBehaviour
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
                     ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
                     var glm = ServiceLocator.Get<GameLoopManager>();
+                    PlayerShouldMove();
                     glm.enabled = true;
                     glm.Initialize();
                     break;
@@ -125,7 +126,7 @@ public class TutorialLoopManager : MonoBehaviour
                     ServiceLocator.Get<DialogueManager>().IsPaused = false;
                     _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
                     ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
-                    ServiceLocator.Get<Player>().shouldNotMove = true;
+                    _player.shouldNotMove = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
                     EnterDialogueEvent("KarenMadNow");
                 }
@@ -190,7 +191,7 @@ public class TutorialLoopManager : MonoBehaviour
 
     public float GetWaitingTime()
     {
-        if(_customerIdx == 3)
+        if (_customerIdx == 3)
         {
             return 6.0f;
         }
@@ -202,12 +203,9 @@ public class TutorialLoopManager : MonoBehaviour
         return _customerIdx;
     }
 
-    public void PlayerShouldntMove()
+    public void PlayerShouldMove()
     {
-        if(_customerIdx == 3)
-        {
-            ServiceLocator.Get<Player>().shouldNotMove = true;
-            
-        }
+        _player.shouldNotMove = false;
+        _tutorialCameraManager.ChangeTarget(_player.transform);
     }
 }
