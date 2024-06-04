@@ -343,8 +343,8 @@ public class AI : MonoBehaviour
         _stateManager.AddState<EatingCustomer>();
 
         _stateManager.AddState<RageCustomerState>();
-        _stateManager.AddState<FoodLockCustomer>();
         _stateManager.AddState<HonkingCustomer>();
+        _stateManager.AddState<FoodLockCustomer>();
         _stateManager.AddState<BobChasingState>();
 
         _stateManager.AddState<BobAttackState>();

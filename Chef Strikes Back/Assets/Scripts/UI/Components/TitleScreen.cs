@@ -5,7 +5,7 @@ using UnityEngine;
 public class TitleScreen : MonoBehaviour
 {
     [Header("Title")]
-    [SerializeField] TMPro.TextMeshProUGUI _title;
+    //[SerializeField] TMPro.TextMeshProUGUI _title;
     [SerializeField] private string titleText;
 
     [Header("Continue")]
@@ -23,7 +23,7 @@ public class TitleScreen : MonoBehaviour
     public void Initialize()
     {
         Debug.Log("Initializing Title Screen");
-        _title.text = titleText;
+      //  _title.text = titleText;
         _pressAnyButtonToContinue.text = continueText;
     }
 }
