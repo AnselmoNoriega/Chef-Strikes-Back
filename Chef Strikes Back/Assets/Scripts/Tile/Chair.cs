@@ -55,6 +55,7 @@ public class Chair : MonoBehaviour
             Destroy(Food.gameObject);
             Food = null;
         }
+        Customer.Anim.Play("AI_Walk_North");
     }
 
     public bool IsAIsFood(Item item)
