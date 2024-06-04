@@ -28,6 +28,7 @@ public class TutorialLoopManager : MonoBehaviour
     private Dictionary<string, TextAsset> _eventsDictionary = new();
 
     private int _storyIdx = 0;
+    private int _customerIdx = 0;
     private int _focusPosIdx = 0;
     public bool TutorialSecondFace = false;
     public bool _multipleSpaghettiesMade = false;
@@ -36,7 +37,7 @@ public class TutorialLoopManager : MonoBehaviour
     {
         EnterConversation();
 
-        foreach(var inkEvent in inkJSONEvents)
+        foreach (var inkEvent in inkJSONEvents)
         {
             _eventsDictionary.Add(inkEvent.Name, inkEvent.Value);
         }
@@ -44,6 +45,10 @@ public class TutorialLoopManager : MonoBehaviour
 
     public void EnterConversation()
     {
+        if (inkJSON.Count <= _storyIdx)
+        {
+            return;
+        }
         ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++]);
     }
 
@@ -82,27 +87,11 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 5:
                 {
-                    //SpawnCustomer();
-                    _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
-                    ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
-                    ServiceLocator.Get<Player>().shouldNotMove = true;
-                    _tutorialAI.ChangeState(AIState.Hungry);
-                    _tutorialAI.enabled = true;
-                    break;
-                }
-            case 6:
-                {
-                    _tutorialCameraManager.ChangeTarget(_player.transform);
-                    _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
-                    break;
-                }
-            case 7:
-                {
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
                     ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
-                   //ServiceLocator.Get<AISupportManager>().SetAllChair();
                     var glm = ServiceLocator.Get<GameLoopManager>();
+                    PlayerShouldMove();
                     glm.enabled = true;
                     glm.Initialize();
                     break;
@@ -111,6 +100,44 @@ public class TutorialLoopManager : MonoBehaviour
         }
         ++_focusPosIdx;
     }
+
+    public void CustomerArraved(AI agent)
+    {
+        ++_customerIdx;
+
+        switch (_customerIdx)
+        {
+            case 1:
+                {
+                    agent.SelectedChair.SitOnChair(agent);
+                    ServiceLocator.Get<DialogueManager>().IsPaused = false;
+                    agent.enabled = false;
+                }
+                break;
+            case 2:
+                {
+                    agent.SelectedChair.SitOnChair(agent);
+                    ServiceLocator.Get<DialogueManager>().IsPaused = false;
+                }
+                break;
+            case 3:
+                {
+                    agent.SelectedChair.SitOnChair(agent);
+                    ServiceLocator.Get<DialogueManager>().IsPaused = false;
+                    _tutorialCameraManager.ZoomIn(-5.0f, -5.0f);
+                    ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
+                    _player.shouldNotMove = true;
+                    _tutorialAI.ChangeState(AIState.Hungry);
+                }
+                break;
+        }
+    }
+
+    public void CameraTargetChange()
+    {
+        _tutorialCameraManager.ChangeTarget(_player.transform);
+    }
+
 
     public void SpawnCustomer(bool shouldPause = true)
     {
@@ -161,4 +188,23 @@ public class TutorialLoopManager : MonoBehaviour
         }
     }
 
+    public float GetWaitingTime()
+    {
+        if (_customerIdx == 3)
+        {
+            return 6.0f;
+        }
+        return 60.0f;
+    }
+
+    public int GetCustomerIdx()
+    {
+        return _customerIdx;
+    }
+
+    public void PlayerShouldMove()
+    {
+        _player.shouldNotMove = false;
+        _tutorialCameraManager.ChangeTarget(_player.transform);
+    }
 }

@@ -626,7 +626,7 @@ Tilemap:
       - {fileID: -444158901, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 166679972, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
       - {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -2429,6 +2429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 326534258}
+  _controllerSprite: {fileID: 21300000, guid: 233e23c919e7ad548a3ffa20d2c1d7be, type: 3}
+  _keyboardSprite: {fileID: 21300000, guid: 2b6e58e066a469c499d930cd4a4ceade, type: 3}
 --- !u!1 &444968875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,6 +2530,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 974587919}
+  _controllerSprite: {fileID: 21300000, guid: 233e23c919e7ad548a3ffa20d2c1d7be, type: 3}
+  _keyboardSprite: {fileID: 21300000, guid: 2b6e58e066a469c499d930cd4a4ceade, type: 3}
 --- !u!1 &459114730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5296,6 +5300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 2088344444}
+  _controllerSprite: {fileID: 21300000, guid: 233e23c919e7ad548a3ffa20d2c1d7be, type: 3}
+  _keyboardSprite: {fileID: 21300000, guid: 2b6e58e066a469c499d930cd4a4ceade, type: 3}
 --- !u!1 &1102096396
 GameObject:
   m_ObjectHideFlags: 0
@@ -10874,28 +10880,31 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 960efd35cdd187042b2e89110d18201f, type: 3}
   - {fileID: 4900000, guid: 248c12e26f187134198b176b81642975, type: 3}
   - {fileID: 4900000, guid: ed3287d73e2452f499c270675798087a, type: 3}
-  - {fileID: 4900000, guid: 4ea9d86e64852f94eb2e0059ab5a6216, type: 3}
   inkJSONEvents:
   - Name: FoodThrow
     Value: {fileID: 4900000, guid: ef08327c80badb94abf1df0c0d469597, type: 3}
   - Name: PickUpFood
     Value: {fileID: 4900000, guid: 132bdee964a826b4b972299212a270c5, type: 3}
   - Name: PickingUp
-    Value: {fileID: 4900000, guid: e5db76c124bd314468c59982fcbb6bf5, type: 3}
+    Value: {fileID: 4900000, guid: 23062ea56cda5924cb7b1d5acae46edc, type: 3}
   - Name: PizzaMade
     Value: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
   - Name: SpaghettiMade
     Value: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
   - Name: KillingKaren
-    Value: {fileID: 4900000, guid: f3b98b4f30ccfef439f251f00ed10376, type: 3}
+    Value: {fileID: 4900000, guid: e6831e820ba4a7f4183a446b48d7bfd8, type: 3}
   - Name: TutorialEnd
-    Value: {fileID: 4900000, guid: c0637455a219e42488e2a67587fc911c, type: 3}
+    Value: {fileID: 4900000, guid: 171e5e07148000a45b896772ce5a38c1, type: 3}
   - Name: AfterThreeFood
     Value: {fileID: 4900000, guid: 6c15fb675f61fc64b8eb6f546eb891d0, type: 3}
   - Name: TableLocked
     Value: {fileID: 4900000, guid: 1a0cd956db324544096c4f14ae560e86, type: 3}
   - Name: BobTriggered
     Value: {fileID: 4900000, guid: 4602010e8dc8fc44da00f196a6dfb835, type: 3}
+  - Name: ServedSpaghetti
+    Value: {fileID: 4900000, guid: 3eec1a48644c03740adc815880974d38, type: 3}
+  - Name: KarenMadNow
+    Value: {fileID: 4900000, guid: 929cf50de262e9c45be8774f6a68238e, type: 3}
   TutorialSecondFace: 0
   _multipleSpaghettiesMade: 0
 --- !u!1001 &1733833529

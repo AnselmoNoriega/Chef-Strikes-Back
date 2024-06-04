@@ -18,7 +18,6 @@ public class AttackingTutorialCus : StateClass<AI>
     {
         if (player.GotDamage)
         {
-
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren");
             return;
         }
