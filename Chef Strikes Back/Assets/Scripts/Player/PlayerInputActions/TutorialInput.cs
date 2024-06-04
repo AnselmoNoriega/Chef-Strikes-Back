@@ -12,6 +12,8 @@ public class TutorialInput : MonoBehaviour
     private InputAction _rightMouse;
 
     private int _pickItemCount = 0;
+    private int _foodThrows = 5;
+    private int _foodThrowsAmount = 0;
 
     public void Initialize()
     {
@@ -28,6 +30,8 @@ public class TutorialInput : MonoBehaviour
         _dialogueManager = ServiceLocator.Get<DialogueManager>();
         _player = ServiceLocator.Get<Player>();
         _playerActions = _player.GetComponent<Actions>();
+
+
     }
     
     private void OnDestroy()
@@ -50,10 +54,18 @@ public class TutorialInput : MonoBehaviour
 
     private void ThrowFirstTime(InputAction.CallbackContext input)
     {
+        if(_playerActions.IsCarryingItem && ServiceLocator.Get<TutorialTimer>().GetTimeState())
+        {
+            ++_foodThrowsAmount;
+            if(_foodThrows == _foodThrowsAmount)
+            {
+                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("PickUpFood");
+            }
+        }
         if(_playerActions.IsCarryingItem && _player.PlayerAction != PlayerActions.Throwing)
         {
             ++_pickItemCount;
-            ServiceLocator.Get<TutorialLoopManager>().CheckIfHolding(true);
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("FoodThrow");
         }
 
         if(_pickItemCount == 5)

@@ -7,33 +7,45 @@ public class ButtonReminder : MonoBehaviour
 {
     [Header("buttons")]
     [SerializeField] private GameObject _buttonObjects;
+    [SerializeField] private Sprite _controllerSprite;
+    [SerializeField] private Sprite _keyboardSprite;
+
+    private SpriteRenderer _mainSprite;
+
+    private Actions _actions;
+    private PlayerInputs _inputs;
 
     [Header("Pamaters")]
     private bool _hintOn = false;
     private bool _shouldFlash = false;
 
-    private bool _runTimer = false;
-    private float _timer = 15;
+    private void Start()
+    {
+        _mainSprite = _buttonObjects.GetComponent<SpriteRenderer>();
 
+        _mainSprite.sprite = _controllerSprite;
+        var player = ServiceLocator.Get<Player>();
+        _actions = player.GetComponent<Actions>();
+        _inputs = player.GetComponent<PlayerInputs>();
+    }
 
     private void Update()
     {
-        if (_hintOn && ServiceLocator.Get<Player>().GetComponent<Actions>().IsCarryingItem)
+        if (_hintOn && _actions.IsCarryingItem)
         {
             _shouldFlash = false;
             _buttonObjects.SetActive(false);
             _hintOn = false;
         }
-        if (_runTimer)
-        {
-            _timer -= Time.deltaTime;
-            if(_timer <= 0.0f)
-            {
-                ServiceLocator.Get<TutorialLoopManager>().CheckIfHolding(false);
-                _runTimer = false;
-            }
-        }
 
+        if (_inputs.IsUsingController() && _mainSprite.sprite != _controllerSprite)
+        {
+            _mainSprite.sprite = _controllerSprite;
+        }
+        else if (!_inputs.IsUsingController() && _mainSprite.sprite == _controllerSprite)
+        {
+            _mainSprite.sprite = _keyboardSprite;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -70,6 +82,5 @@ public class ButtonReminder : MonoBehaviour
     public void SetHitOn(bool active)
     {
         _hintOn = active;
-        _runTimer = true;
     }
 }

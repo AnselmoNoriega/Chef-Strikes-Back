@@ -47,7 +47,9 @@ public class TutorialTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!_shouldRun)
+        SpawnTimeChangeBasedOnTimer();
+
+        if (!_shouldRun)
         {
             return;
         }
@@ -63,6 +65,21 @@ public class TutorialTimer : MonoBehaviour
             ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().KillCount);
             ServiceLocator.Get<GameManager>().SaveMoney(ServiceLocator.Get<Player>().Money);
             sceneControl.GoToEndScene();
+        }
+    }
+
+    private void SpawnTimeChangeBasedOnTimer()
+    {
+        float time;
+        for (int i = 0; i < _spawningTimes.Count; i++)
+        {
+            time = (elapsTimeStart * 60) - _spawningTimes[_spawningTimes.Count - 1 - i].Time;
+            if (time >= (elapsedTime * 60))
+            {
+                var loopManager = ServiceLocator.Get<GameLoopManager>();
+                loopManager.ChangeSpawnTime(_spawningTimes[_spawningTimes.Count - 1 - i].SpawningTime);
+                return;
+            }
         }
     }
 

@@ -5,7 +5,7 @@ public class CauldronEvent : MonoBehaviour
     [SerializeField] private CreationTable _creationTable;
 
     private TutorialLoopManager _loopManager;
-    
+
     private int _creationTimes = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -17,7 +17,7 @@ public class CauldronEvent : MonoBehaviour
 
             if (component && _loopManager.TutorialSecondFace)
             {
-                _loopManager.TriggerSpaghettiEvent(component.Type == FoodType.Spaghetti);
+                //_loopManager.TriggerSpaghettiEvent(component.Type == FoodType.Spaghetti);
                 CheckCreationTimes();
             }
             else if (component)
@@ -36,7 +36,7 @@ public class CauldronEvent : MonoBehaviour
     private void CheckCreationTimes()
     {
         ++_creationTimes;
-        if( _creationTimes == 4)
+        if (_creationTimes == 4)
         {
             _loopManager.EnterDialogueEvent("AfterThreeFood");
         }

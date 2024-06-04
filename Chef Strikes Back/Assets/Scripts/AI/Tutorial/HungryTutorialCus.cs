@@ -10,7 +10,7 @@ public class HungryTutorialCus : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        waitingTime = 6;
+        waitingTime = ServiceLocator.Get<TutorialLoopManager>().GetWaitingTime();
 
         scale = agent.EatingSlider.localScale;
         scale.x = 0;
@@ -53,10 +53,8 @@ public class HungryTutorialCus : StateClass<AI>
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren", true);
             if (ServiceLocator.Get<TutorialTimer>().GetTimeState())
             {
-
                 int value = Random.Range(0, 100) % 4;
                 if(value == 3)
                 {
@@ -88,6 +86,10 @@ public class HungryTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
+        if (agent.ChoiceIndex == 1)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("ServedSpaghetti");
+        }
         agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(false);
 
