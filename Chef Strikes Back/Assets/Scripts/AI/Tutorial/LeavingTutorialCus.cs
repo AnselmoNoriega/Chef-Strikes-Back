@@ -11,6 +11,7 @@ public class LeavingTutorialCus : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        agent.Anim.Play("AI_Walk_NW");
         agent.TorsoCollider.enabled = false;
         agent.gameObject.layer = LayerMask.NameToLayer("CustomerLeaving");
         _agent = agent;
