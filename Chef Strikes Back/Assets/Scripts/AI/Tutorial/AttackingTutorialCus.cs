@@ -21,27 +21,36 @@ public class AttackingTutorialCus : StateClass<AI>
         if (player.GotDamage)
         {
             _loopManager.EnterDialogueEvent("KillingKaren");
+            if(_loopManager.TutorialThirdFace)
+            {
+                player.shouldNotMove = true;
+                agent.shouldNotMove = true;
+                _loopManager.TutorialThirdFace = false;
+            }
+            
             return;
         }
-        if (Time.time - _countDown >= 0.25f && !_hasAttacked)
+
+        if(!agent.shouldNotMove)
         {
-            _hasAttacked = true;
-            Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
-            player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
-            player.TakeDamage(10);
-            if(!_loopManager.TutorialThirdFace)
+            if (Time.time - _countDown >= 0.25f && !_hasAttacked)
             {
-                Time.timeScale = 0;
+                _hasAttacked = true;
+                Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
+                player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
+                player.TakeDamage(10);
+
+            }
+            if (agent.IsDead)
+            {
+                _loopManager.EnterDialogueEvent("TutorialEnd", true);
+            }
+            if (Time.time - _countDown >= 1.0f)
+            {
+                agent.ChangeState(AIState.Rage);
             }
         }
-        if (agent.IsDead)
-        {
-            _loopManager.EnterDialogueEvent("TutorialEnd", true);
-        }
-        if (Time.time - _countDown >= 1.0f)
-        {
-            agent.ChangeState(AIState.Rage);
-        }
+        
     }
 
     public void FixedUpdate(AI agent)

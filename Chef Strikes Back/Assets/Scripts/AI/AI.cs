@@ -64,6 +64,7 @@ public class AI : MonoBehaviour
     public ParticleSystem HappyParticles;
     public ParticleSystem AngryParticles;
     private bool _IsDead = false;
+    public bool shouldNotMove = false;
     [SerializeField] private Animator _animator;
     //private AudioManager _audioManager;
 

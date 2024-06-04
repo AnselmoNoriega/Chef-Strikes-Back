@@ -31,7 +31,7 @@ public class TutorialLoopManager : MonoBehaviour
     private int _customerIdx = 0;
     private int _focusPosIdx = 0;
     public bool TutorialSecondFace = false;
-    public bool TutorialThirdFace = false;
+    public bool TutorialThirdFace = true;
     public bool _multipleSpaghettiesMade = false;
 
     private void Start()
@@ -208,4 +208,9 @@ public class TutorialLoopManager : MonoBehaviour
         _player.shouldNotMove = false;
         _tutorialCameraManager.ChangeTarget(_player.transform);
     }
+    public void AIShouldMove()
+    {
+        _tutorialAI.shouldNotMove = false;
+    }
+    
 }
