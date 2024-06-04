@@ -40,7 +40,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON, bool callMethodIfFinished = true)
     {
-        if(_callMethodIfFinished)
+        if (_callMethodIfFinished)
         {
             _callMethodIfFinished = false;
             _tutorialLoopManager.EndConversation();
@@ -51,6 +51,10 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+        currentStory.variablesState["controller"] = controller;
+
         ContinueStory();
     }
 
@@ -71,6 +75,10 @@ public class DialogueManager : MonoBehaviour
         }
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+        currentStory.variablesState["controller"] = controller;
+
         ContinueStory();
     }
 
@@ -80,7 +88,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
-        if(ServiceLocator.Get<TutorialLoopManager>().GetCustomerIdx() != 3)
+        if (ServiceLocator.Get<TutorialLoopManager>().GetCustomerIdx() != 3)
         {
             ServiceLocator.Get<Player>().shouldNotMove = false;
             ServiceLocator.Get<TutorialLoopManager>().CameraTargetChange();
