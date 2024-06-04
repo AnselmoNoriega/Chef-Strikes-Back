@@ -33,7 +33,7 @@ public class AI : MonoBehaviour
     private StateMachine<AI> _stateManager;
 
     [Space, Header("AI Properties")]
-    [SerializeField] private Animator _anim;
+    public Animator Anim;
     public Rigidbody2D Rb2d;
     public Collider2D TorsoCollider;
     public List<GameObject> OrderBubble;
@@ -153,7 +153,7 @@ public class AI : MonoBehaviour
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
-        FaceDirection(_anim, Rb2d.velocity);
+        FaceDirection(Anim, Rb2d.velocity);
     }
 
     private void FixedUpdate()
