@@ -72,7 +72,7 @@ public class GameLoopManager : MonoBehaviour
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
         AiStandState = AIState.Rage;
-        Instantiate(_customerPrefabs[3], spawnPos, Quaternion.identity);
+        Instantiate(_customerPrefabs[_customerPrefabs.Length - 1], spawnPos, Quaternion.identity);
         AiStandState = AIState.Good;
     }
     private void SpawnCops()

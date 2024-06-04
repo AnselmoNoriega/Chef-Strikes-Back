@@ -3,7 +3,7 @@ using UnityEngine;
 public class HungryTutorialCus : StateClass<AI>
 {
     private float waitingTime;
-    private float timer = 0;
+    private float timer = 1.0f;
     private float angerMultiplier = 4;
 
     private Vector3 scale = Vector3.zero;
@@ -13,7 +13,7 @@ public class HungryTutorialCus : StateClass<AI>
         waitingTime = ServiceLocator.Get<TutorialLoopManager>().GetWaitingTime();
 
         scale = agent.EatingSlider.localScale;
-        scale.x = 0;
+        scale.x = 1.0f;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
@@ -26,29 +26,29 @@ public class HungryTutorialCus : StateClass<AI>
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-        timer = 0.0f;
+        timer = 1.0f;
     }
 
     public void Update(AI agent, float dt)
     {
-        timer += (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
-        if (timer >= 0.8f / 2)
+        timer -= (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
+        if (timer >= 0.2f / 2)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 2;
+            scale.x -= (Time.deltaTime / waitingTime) / 2;
         }
-        if (timer >= 0.6f / 2)
+        if (timer >= 0.4f / 2)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 1.5f;
+            scale.x -= (Time.deltaTime / waitingTime) / 1.5f;
         }
         else
         {
-            scale.x += (Time.deltaTime / waitingTime) * 2;
+            scale.x -= (Time.deltaTime / waitingTime) * 2;
         }
 
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
-        if (scale.x >= 1.0f)
+        if (scale.x <= 0.0f)
         {
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
