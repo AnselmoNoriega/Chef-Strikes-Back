@@ -37,7 +37,10 @@ public class LeavingTutorialCus : StateClass<AI>
             if (!isSpawn)
             {
                 var manager = ServiceLocator.Get<TutorialLoopManager>();
-
+                if(manager.TutorialSecondFace)
+                {
+                    manager.EnterDialogueEvent("KarenMadNow");
+                }
                 manager.TutorialSecondFace = true;
                 manager.SpawnCustomer();
                 isSpawn = true;
