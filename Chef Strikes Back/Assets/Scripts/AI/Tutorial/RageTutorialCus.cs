@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using System.Threading;
 
 public class RageTutorialCus : StateClass<AI>
 {

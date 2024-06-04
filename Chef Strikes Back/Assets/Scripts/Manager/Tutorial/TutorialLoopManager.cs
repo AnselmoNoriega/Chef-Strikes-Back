@@ -31,6 +31,7 @@ public class TutorialLoopManager : MonoBehaviour
     private int _customerIdx = 0;
     private int _focusPosIdx = 0;
     public bool TutorialSecondFace = false;
+    public bool TutorialThirdFace = false;
     public bool _multipleSpaghettiesMade = false;
 
     private void Start()
