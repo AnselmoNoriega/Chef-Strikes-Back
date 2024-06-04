@@ -18,6 +18,14 @@ public enum AIState
     None
 }
 
+public enum CustomerType
+{
+    Karen = 3,
+    Fank = 4,
+    Jill = 5,
+    Joaquin = 6
+}
+
 public class AI : MonoBehaviour
 {
     [Header("AI Behaviour")]
@@ -33,6 +41,7 @@ public class AI : MonoBehaviour
     [HideInInspector] public int ChoiceIndex;
 
     [Space, Header("AI Info")]
+    public CustomerType CustomerAIType;
     public AIState state;
     public int Speed = 0;
     public float KnockbackForce = 0.0f;
