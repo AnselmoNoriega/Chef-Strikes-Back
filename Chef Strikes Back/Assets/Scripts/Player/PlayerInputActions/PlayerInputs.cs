@@ -14,6 +14,7 @@ public class PlayerInputs : MonoBehaviour
     private InputAction _rightButton;
     private InputAction _pauseKeyboard;
     private InputAction _moveKeyboard;
+    private InputAction _anyKey;
 
     private InputAction _leftMouse;
     private InputAction _rightMouse;
@@ -53,8 +54,12 @@ public class PlayerInputs : MonoBehaviour
         _moveKeyboard = _inputManager.Player.MoveKeyboard;
         _moveStick = _inputManager.Player.MoveStick;
 
+        _anyKey = _inputManager.Controller.AnyKey;
+        _anyKey.Enable();
+
         SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
 
+        _anyKey.performed += Test;
         _rightMouse.performed += RightClick;
         _leftMouse.performed += LeftClick;
         _rightMouse.canceled += RightClickRelease;
@@ -80,6 +85,11 @@ public class PlayerInputs : MonoBehaviour
         }
 
         CheckMovement();
+    }
+
+    private void Test(InputAction.CallbackContext input)
+    {
+        Debug.Log("Test Success");
     }
 
     private void LeftClick(InputAction.CallbackContext input)
