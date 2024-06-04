@@ -80,6 +80,7 @@ public class Chair : MonoBehaviour
             Customer.ChoiceIndex = GiveFoodChoice();
             Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             Customer.transform.position = transform.position;
+            
             switch (_dir)
             {
                 case Dir.North:

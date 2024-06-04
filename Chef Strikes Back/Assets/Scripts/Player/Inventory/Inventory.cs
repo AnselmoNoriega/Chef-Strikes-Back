@@ -52,6 +52,16 @@ public class Inventory : MonoBehaviour
         item.transform.localPosition = Vector2.zero;
     }
 
+    public FoodType CarryItemType()
+    {
+        if(_foodItem == null)
+        {
+            return FoodType.None;
+        }
+
+        return _foodItem.Type;
+    }
+
     public Item GetFoodItem()
     {
         return _foodItem;
