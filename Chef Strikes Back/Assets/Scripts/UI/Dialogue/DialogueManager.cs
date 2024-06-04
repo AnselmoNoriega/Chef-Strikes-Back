@@ -1,4 +1,5 @@
 using Ink.Runtime;
+using MyBox;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -52,8 +53,11 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
-        var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
-        currentStory.variablesState["controller"] = controller;
+        if (currentStory.HasField("controller"))
+        {
+            var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+            currentStory.variablesState["controller"] = controller;
+        }
 
         ContinueStory();
     }
@@ -76,8 +80,11 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
-        var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
-        currentStory.variablesState["controller"] = controller;
+        if (currentStory.HasField("controller"))
+        {
+            var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+            currentStory.variablesState["controller"] = controller;
+        }
 
         ContinueStory();
     }
@@ -111,6 +118,7 @@ public class DialogueManager : MonoBehaviour
                 _callMethodIfFinished = false;
                 _tutorialLoopManager.EndConversation();
             }
+            _tutorialLoopManager.AIShouldMove();
         }
     }
 

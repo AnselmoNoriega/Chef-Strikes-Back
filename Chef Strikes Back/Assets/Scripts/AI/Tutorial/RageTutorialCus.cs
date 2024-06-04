@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using System.Threading;
 
 public class RageTutorialCus : StateClass<AI>
 {
@@ -29,21 +30,24 @@ public class RageTutorialCus : StateClass<AI>
             return;
         }
 
-        if (_currentWaypoint >= agent.Path.vectorPath.Count)
+        if(!agent.shouldNotMove)
         {
-            agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-            _currentWaypoint = 0;
-            return;
-        }
-        if (agent.IsDead)
-        {
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
-        }
+            if (_currentWaypoint >= agent.Path.vectorPath.Count)
+            {
+                agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
+                _currentWaypoint = 0;
+                return;
+            }
+            if (agent.IsDead)
+            {
+                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+            }
 
-        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-        if (distance < agent.NextWaypointDistance + 0.1f)
-        {
-            ++_currentWaypoint;
+            var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
+            if (distance < agent.NextWaypointDistance + 0.1f)
+            {
+                ++_currentWaypoint;
+            }
         }
     }
 
