@@ -675,6 +675,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Keyboard",
+            "id": "3203ee1a-a839-493d-b061-d3c482c438c0",
+            "actions": [
+                {
+                    "name": "Anykey",
+                    "type": "Button",
+                    "id": "ed17f62a-842f-4104-bcd4-37d32bb9bbce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "de28c9bb-e76d-4a2e-ae12-9b0e628cc058",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Anykey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

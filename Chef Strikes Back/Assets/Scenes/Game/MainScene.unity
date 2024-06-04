@@ -614,7 +614,7 @@ Tilemap:
       - {fileID: 1232622588, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
       - {fileID: -392221189, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
       - {fileID: 1015389073, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
-      m_AnimationSpeed: 12.000001
+      m_AnimationSpeed: 12
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -2, y: 6, z: 0}
@@ -2429,6 +2429,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 326534258}
+  _controllerSprite: {fileID: 21300000, guid: 233e23c919e7ad548a3ffa20d2c1d7be, type: 3}
+  _keyboardSprite: {fileID: 21300000, guid: 2b6e58e066a469c499d930cd4a4ceade, type: 3}
 --- !u!1 &444968875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,6 +2530,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 974587919}
+  _controllerSprite: {fileID: 21300000, guid: 233e23c919e7ad548a3ffa20d2c1d7be, type: 3}
+  _keyboardSprite: {fileID: 21300000, guid: 2b6e58e066a469c499d930cd4a4ceade, type: 3}
 --- !u!1 &459114730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5296,6 +5300,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonObjects: {fileID: 2088344444}
+  _controllerSprite: {fileID: 21300000, guid: 233e23c919e7ad548a3ffa20d2c1d7be, type: 3}
+  _keyboardSprite: {fileID: 21300000, guid: 2b6e58e066a469c499d930cd4a4ceade, type: 3}
 --- !u!1 &1102096396
 GameObject:
   m_ObjectHideFlags: 0

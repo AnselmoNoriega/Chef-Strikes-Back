@@ -697,6 +697,34 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""3203ee1a-a839-493d-b061-d3c482c438c0"",
+            ""actions"": [
+                {
+                    ""name"": ""Anykey"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed17f62a-842f-4104-bcd4-37d32bb9bbce"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""de28c9bb-e76d-4a2e-ae12-9b0e628cc058"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Anykey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -728,6 +756,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         // Controller
         m_Controller = asset.FindActionMap("Controller", throwIfNotFound: true);
         m_Controller_AnyKey = m_Controller.FindAction("AnyKey", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_Anykey = m_Keyboard.FindAction("Anykey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1026,6 +1057,39 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
         }
     }
     public ControllerActions @Controller => new ControllerActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_Anykey;
+    public struct KeyboardActions
+    {
+        private @InputControls m_Wrapper;
+        public KeyboardActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Anykey => m_Wrapper.m_Keyboard_Anykey;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
+            {
+                @Anykey.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnAnykey;
+                @Anykey.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnAnykey;
+                @Anykey.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnAnykey;
+            }
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Anykey.started += instance.OnAnykey;
+                @Anykey.performed += instance.OnAnykey;
+                @Anykey.canceled += instance.OnAnykey;
+            }
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IPlayerActions
     {
         void OnMoveKeyboard(InputAction.CallbackContext context);
@@ -1055,5 +1119,9 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
     public interface IControllerActions
     {
         void OnAnyKey(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnAnykey(InputAction.CallbackContext context);
     }
 }
