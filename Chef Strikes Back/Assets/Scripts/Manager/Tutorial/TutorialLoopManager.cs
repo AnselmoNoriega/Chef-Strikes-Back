@@ -128,7 +128,6 @@ public class TutorialLoopManager : MonoBehaviour
                     ServiceLocator.Get<GameManager>().SetThisLevelSceneName(SceneManager.GetActiveScene().name);
                     _player.shouldNotMove = true;
                     _tutorialAI.ChangeState(AIState.Hungry);
-                    EnterDialogueEvent("KarenMadNow");
                 }
                 break;
         }
