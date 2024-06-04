@@ -9,12 +9,19 @@ struct FoodPercentage
 
 public class Chair : MonoBehaviour
 {
+    public enum Dir
+    {
+        North,
+        South,
+        West,
+        East
+    }
     public bool seatAvaliable = true;
 
     [SerializeField] private GameObject SpawnPointForBadAI = null;
     [SerializeField] private FoodPercentage[] _foodPercentages;
-
     [SerializeField] private Table table;
+    [SerializeField] Dir _dir;
     public AI Customer;
 
     private SpriteRenderer chairSprite;
@@ -73,6 +80,19 @@ public class Chair : MonoBehaviour
             Customer.ChoiceIndex = GiveFoodChoice();
             Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             Customer.transform.position = transform.position;
+            switch (_dir)
+            {
+                case Dir.North:
+                    break;
+                case Dir.South:
+                    break;
+                case Dir.West:
+                    break;
+                case Dir.East:
+                    break;
+                default:
+                    break;
+            }
             table.AddCostumer(this);
         }
     }
