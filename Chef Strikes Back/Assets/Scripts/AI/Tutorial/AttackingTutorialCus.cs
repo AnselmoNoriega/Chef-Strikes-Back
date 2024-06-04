@@ -18,20 +18,20 @@ public class AttackingTutorialCus : StateClass<AI>
 
     public void Update(AI agent, float dt)
     {
+        
         if (player.GotDamage)
         {
             _loopManager.EnterDialogueEvent("KillingKaren");
-            if(_loopManager.TutorialThirdFace)
+            if(!_loopManager.TutorialThirdFace)
             {
                 player.shouldNotMove = true;
                 agent.shouldNotMove = true;
-                _loopManager.TutorialThirdFace = false;
+                _loopManager.TutorialThirdFace = true;
             }
-            
             return;
         }
 
-        if(!agent.shouldNotMove)
+        if (!agent.shouldNotMove)
         {
             if (Time.time - _countDown >= 0.25f && !_hasAttacked)
             {
@@ -41,16 +41,17 @@ public class AttackingTutorialCus : StateClass<AI>
                 player.TakeDamage(10);
 
             }
-            if (agent.IsDead)
-            {
-                _loopManager.EnterDialogueEvent("TutorialEnd", true);
-            }
             if (Time.time - _countDown >= 1.0f)
             {
                 agent.ChangeState(AIState.Rage);
             }
         }
-        
+        if (agent.IsDead)
+        {
+            _loopManager.EnterDialogueEvent("TutorialEnd", true);
+        }
+
+
     }
 
     public void FixedUpdate(AI agent)

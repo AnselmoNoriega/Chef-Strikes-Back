@@ -29,8 +29,12 @@ public class RageTutorialCus : StateClass<AI>
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren");
             return;
         }
+        if (agent.IsDead)
+        {
+            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+        }
 
-        if(!agent.shouldNotMove)
+        if (!agent.shouldNotMove)
         {
             if (_currentWaypoint >= agent.Path.vectorPath.Count)
             {

@@ -152,15 +152,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void SetPause()
+    public void PanelDeactivate()
     {
-        if (IsPaused)
-        {
-            IsPaused = false;
-        }
-        else
-        {
-            IsPaused = true;
-        }
+        dialoguePanel.SetActive(false);
+    }
+    public void PanelActivate()
+    {
+        if(dialogueIsPlaying) { dialoguePanel.SetActive(true); }
+        
     }
 }
