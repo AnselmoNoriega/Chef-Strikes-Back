@@ -18,6 +18,14 @@ public enum AIState
     None
 }
 
+public enum CustomerType
+{
+    Karen = 3,
+    Fank = 4,
+    Jill = 5,
+    Joaquin = 6
+}
+
 public class AI : MonoBehaviour
 {
     [Header("AI Behaviour")]
@@ -25,7 +33,7 @@ public class AI : MonoBehaviour
     private StateMachine<AI> _stateManager;
 
     [Space, Header("AI Properties")]
-    [SerializeField] private Animator _anim;
+    public Animator Anim;
     public Rigidbody2D Rb2d;
     public Collider2D TorsoCollider;
     public List<GameObject> OrderBubble;
@@ -33,6 +41,7 @@ public class AI : MonoBehaviour
     [HideInInspector] public int ChoiceIndex;
 
     [Space, Header("AI Info")]
+    public CustomerType CustomerAIType;
     public AIState state;
     public int Speed = 0;
     public float KnockbackForce = 0.0f;
@@ -64,6 +73,7 @@ public class AI : MonoBehaviour
     public ParticleSystem HappyParticles;
     public ParticleSystem AngryParticles;
     private bool _IsDead = false;
+    public bool shouldNotMove = false;
     [SerializeField] private Animator _animator;
     //private AudioManager _audioManager;
 
@@ -144,7 +154,7 @@ public class AI : MonoBehaviour
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
-        FaceDirection(_anim, Rb2d.velocity);
+        FaceDirection(Anim, Rb2d.velocity);
     }
 
     private void FixedUpdate()

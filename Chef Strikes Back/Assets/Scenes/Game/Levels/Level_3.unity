@@ -10930,7 +10930,7 @@ Tilemap:
       - {fileID: -1926635928, guid: 463bf05ec20892649b76ab551d9177a5, type: 3}
       - {fileID: -865376248, guid: 463bf05ec20892649b76ab551d9177a5, type: 3}
       - {fileID: -1432833944, guid: 463bf05ec20892649b76ab551d9177a5, type: 3}
-      m_AnimationSpeed: 9.000001
+      m_AnimationSpeed: 9
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -1, y: 0, z: 0}
@@ -20246,6 +20246,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Manager's Group
       objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 3d77c32617ce1664c948e49f2a3c2712, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 196b147d0f3555f498942bff6588bcc2, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 21605b2440397a74898c0910693d05c8, type: 3}
     - target: {fileID: 2927658305668911201, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: data.dataString
       value: UEsDBBQAAAgIAACQn+vovx/NkgIAAFYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMFy2jAQ/RVG5+KxjW2gt5YQkkMSprSTCxdhLViDkTySHCAZ/r27ssEuZZhBvLf7dvdp7S8mla0gd9osjBQvWgD7PmDPVh/AGZkTyL4NuqgnOPGdViv5CdfgdylcQUHcx/ziTmrEI0q76vxQu5KCszAI6TOaIFsrudXmMBc7mGnrLPJbXlpAymhHMgqhrwE74c8wSRE/4ykeh3j6xNM0HFzwmINyYHqhcRCNkiQKs7hNiYLJJEvjBqDM4SiYhmmC33g+DCdeplZ5yQ8VCBquU4tGQeJ7zq5iURD7BIUGtLFhQMq5Lktp27aZO1fenxmvbI3TY4CQHP3wvUbBCIEC5K5wNFQ//W27tUAoDWr4+UEaNLbRZT914/aB233T5Qcva6qURFljSKP68l/AMPL01ujD07VwFFIRV8h8/4ufc25d7xr68EOvd+/WkZd7vinhvQD1qhdG10og6UxNqbWF+KH7e5ttVkC+7/Cm1Tuwrjr7w9b1653TDBc//mlWysPGm580wKrU3vIpBYPB63nGhv0i2VYCUerij4XffNffuJZ4lMY6pNopFbW30bWhUDb3ntE0tZtpo8DDbdMVKF668xJl3P0d3nG9snfMI6eHrC3ectdn5y7Fw118GN5RS328XZYt9PEFbPFWu1Kqvhgxr2jUTCvV7Ji9YylvVZstz6EbdldL8e9usWTM0zQdx4JvRlmW8eE0SUdxmog0E5zzMTC/fFLhoLxcNp22/uC1qU5c4aKRIr18BgvDK7/vwvDjQn4edL9BqbZ6lRsA9dZI3DoHg1Xw4RRzIdGiFTgnlb9x9rVmpc73INa3mms/6vzkDF93KmtWyQ/tCFmzmX/LrBnBt21eGviQcKTiV7ELu/wFUEsDBBQAAAgIAACQn+uK8lz6bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM011FQSi9KLMgoBooYgjilmSkgdrSSiXmiqampuVFKYpKxmZlZoq6liamxkalJiqlZSmJionmqUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACQn+vovx/NkgIAAFYFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACQn+uK8lz6bQAAAHgAAAAJACQAAAAAAAAAAAAAAN8CAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAlwMAAAAA

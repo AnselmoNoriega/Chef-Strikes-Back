@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
@@ -18,7 +17,7 @@ public class GameLoopManager : MonoBehaviour
 {
     public float CustomerFoodWaitingTime;
     [SerializeField] private float _spawnTime;
-    [SerializeField] private GameObject _customerPrefabs;
+    [SerializeField] private GameObject[] _customerPrefabs;
     [SerializeField] private GameObject _copsPrefabs;
     [SerializeField] private List<WantedSpawner> _wantedSystemTimer;
 
@@ -64,7 +63,7 @@ public class GameLoopManager : MonoBehaviour
         if (_aiManager.GetAvailableChairsCount() > 0)
         {
             Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
-            Instantiate(_customerPrefabs, spawnPos, Quaternion.identity);
+            Instantiate(_customerPrefabs[Random.Range(0, _customerPrefabs.Length)], spawnPos, Quaternion.identity);
         }
     }
 
@@ -73,7 +72,7 @@ public class GameLoopManager : MonoBehaviour
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().BadAiEnterPosition();
         AiStandState = AIState.Rage;
-        Instantiate(_customerPrefabs, spawnPos, Quaternion.identity);
+        Instantiate(_customerPrefabs[3], spawnPos, Quaternion.identity);
         AiStandState = AIState.Good;
     }
     private void SpawnCops()

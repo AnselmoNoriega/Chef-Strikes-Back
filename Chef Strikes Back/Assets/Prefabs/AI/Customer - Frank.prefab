@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Indicator: {fileID: 0}
-  _anim: {fileID: -1032899175772524887}
+  Anim: {fileID: -1032899175772524887}
   Rb2d: {fileID: 34484012071288450}
   TorsoCollider: {fileID: 3427429296975997274}
   OrderBubble:
@@ -186,6 +186,7 @@ MonoBehaviour:
   - {fileID: 2895648848159499705}
   EatingSlider: {fileID: 6104358329182333462}
   ChoiceIndex: 0
+  CustomerAIType: 4
   state: 0
   Speed: 62
   KnockbackForce: 100

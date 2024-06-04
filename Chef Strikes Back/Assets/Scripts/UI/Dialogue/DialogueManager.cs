@@ -118,6 +118,7 @@ public class DialogueManager : MonoBehaviour
                 _callMethodIfFinished = false;
                 _tutorialLoopManager.EndConversation();
             }
+            _tutorialLoopManager.AIShouldMove();
         }
     }
 
