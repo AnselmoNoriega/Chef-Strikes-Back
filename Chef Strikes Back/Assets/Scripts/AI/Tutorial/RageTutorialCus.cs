@@ -44,7 +44,7 @@ public class RageTutorialCus : StateClass<AI>
             }
             if (agent.IsDead)
             {
-                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("Ten_one", true);
             }
 
             var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);

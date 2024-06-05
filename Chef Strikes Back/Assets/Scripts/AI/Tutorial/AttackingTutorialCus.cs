@@ -41,6 +41,12 @@ public class AttackingTutorialCus : StateClass<AI>
                 player.TakeDamage(10);
 
             }
+            
+            if (agent.IsDead)
+            {
+                _loopManager.EnterDialogueEvent("Ten_one", true);
+            }
+            
             if (Time.time - _countDown >= 1.0f)
             {
                 agent.ChangeState(AIState.Rage);

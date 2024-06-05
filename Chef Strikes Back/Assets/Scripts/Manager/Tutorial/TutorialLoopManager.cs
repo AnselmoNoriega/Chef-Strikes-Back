@@ -88,6 +88,21 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 5:
                 {
+                    EnterDialogueEvent("Ten_two", true);
+                    break;
+                }
+            case 6:
+                {
+                    EnterDialogueEvent("Ten_three", true);
+                    break;
+                }
+            case 7:
+                {
+                    EnterDialogueEvent("Ten_four", true);
+                    break;
+                }
+            case 8:
+                {
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
                     ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
