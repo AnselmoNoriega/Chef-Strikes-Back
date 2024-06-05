@@ -32,7 +32,10 @@ public class Player : MonoBehaviour
     [Space, Header("Conections")]
     private CanvasManager _canvasManager;
     private GameManager _gameManager;
+
+    [Header("Audio")]
     private AudioManager _audioManager;
+    [SerializeField] private string[] _hitSound;
 
     public Rigidbody2D Rb { get; private set; }
     public Animator PlayerAnimator { get; private set; }
@@ -127,6 +130,8 @@ public class Player : MonoBehaviour
         }
         StartCoroutine(SpriteFlashing());
         _canvasManager.AddTooHealthSlider(-amt);
+        _audioManager.PlaySource(_hitSound[Random.Range(0, _hitSound.Length)]);
+ 
     }
 
     public void MakeETransfer()

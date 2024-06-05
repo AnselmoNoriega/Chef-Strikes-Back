@@ -737,6 +737,13 @@ MonoBehaviour:
   PlayerAction: 0
   soundName: 
   IsWalking: 0
+  GotDamage: 0
+  _hitSound:
+  - C_Hit_00
+  - C_Hit_01
+  - C_Hit_02
+  - C_Hit_03
+  - C_Hit_04
   shouldNotMove: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
@@ -773,6 +780,9 @@ MonoBehaviour:
   throwForce: 1
   IsCarryingItem: 0
   _grabDistance: 1
+  TomatoParticles: {fileID: 0}
+  DoughParticles: {fileID: 0}
+  CheeseParticles: {fileID: 0}
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
