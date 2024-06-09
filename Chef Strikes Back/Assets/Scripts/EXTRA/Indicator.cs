@@ -90,7 +90,7 @@ public class Indicator : MonoBehaviour
         else
         {
             _image[_index].enabled = false;
-            _orderBubbles[_index].SetActive(true);
+            _orderBubbles[_index].SetActive(true && _isHungry);
             _arrow.enabled = false;
             _imageMaskTransform.GetComponent<Image>().enabled = false;
         }
