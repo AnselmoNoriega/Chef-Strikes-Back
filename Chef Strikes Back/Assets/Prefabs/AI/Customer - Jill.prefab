@@ -194,7 +194,6 @@ MonoBehaviour:
   IsAnnoyed: 0
   _health: 30
   _hitsToGetMad: 3
-  _currentSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   _goodAISprite: {fileID: 34484012071288455}
   _flashingTime: 1
   ReloadCountDown: 0
@@ -226,11 +225,15 @@ MonoBehaviour:
   _image:
   - {fileID: 1316305484600293001}
   - {fileID: 1567169437809526574}
+  _orderBubbles:
+  - {fileID: 1268310554165276681}
+  - {fileID: 2895648848159499705}
   _arrow: {fileID: 4996913246588421570}
   _arrowOffset: {x: 0.45, y: 0.45}
   _offsetOutOfScreen: {x: 0, y: 1.25, z: 0}
   _timerTranform: {fileID: 896270631046892999}
   _imageMaskTransform: {fileID: 1360957378533967392}
+  _positionOffset: {x: 0, y: 1.35, z: 0}
 --- !u!95 &-1032899175772524887
 Animator:
   serializedVersion: 4
