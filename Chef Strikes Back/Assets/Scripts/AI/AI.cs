@@ -51,7 +51,6 @@ public class AI : MonoBehaviour
     [SerializeField] private int _hitsToGetMad = 0;
 
     [Space, Header("AI's got hit animation")]
-    [SerializeField] private Color _currentSpriteColor = Color.white;
     [SerializeField] private SpriteRenderer _goodAISprite;
     [SerializeField] private int _flashingTime;
 
@@ -250,12 +249,6 @@ public class AI : MonoBehaviour
         state = newState;
     }
 
-    public void ChangeSpriteColor(Color color)
-    {
-        _currentSpriteColor = color;
-        _goodAISprite.color = color;
-    }
-
     public void Shoot()
     {
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
@@ -270,7 +263,7 @@ public class AI : MonoBehaviour
         {
             _goodAISprite.color = Color.red;
             yield return new WaitForSeconds(0.1f);
-            _goodAISprite.color = _currentSpriteColor;
+            _goodAISprite.color = Color.white;
             IsHit = false;
         }
     }

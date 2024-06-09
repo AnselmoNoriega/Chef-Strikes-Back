@@ -16,7 +16,6 @@ public class RageTutorialCus : StateClass<AI>
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.ChangeSpriteColor(Color.magenta);
         agent.Speed = 200;
         player = ServiceLocator.Get<Player>();
         ServiceLocator.Get<TutorialLoopManager>().PlayerShouldMove();
