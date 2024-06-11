@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3855758162051612581}
   - component: {fileID: -4840731560457261022}
+  - component: {fileID: 5114027060924681446}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b43bd2d88167a4296bc9e27af93921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isInDebug: 1
   UI_Navegation: {fileID: 6856160241339135286}
   _levelsLocked:
   - Price: 0
@@ -72,6 +74,18 @@ MonoBehaviour:
   _killPoints: 0
   _grabMoneyPoints: 1
   _score: 0
+--- !u!114 &5114027060924681446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455199093096613857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb736b640ae4eb45a6f5c593a46873a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9058400644946677808
 GameObject:
   m_ObjectHideFlags: 0

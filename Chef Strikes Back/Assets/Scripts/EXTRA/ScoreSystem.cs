@@ -133,6 +133,7 @@ public class ScoreSystem : MonoBehaviour
         {
             deathDialogue.EnterDialogueMode(starNum);
         }
+
     }
 
     private int GetLevelIndex(string name)

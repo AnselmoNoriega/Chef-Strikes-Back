@@ -44,7 +44,7 @@ public class TutorialLoopManager : MonoBehaviour
     private void Start()
     {
         EnterConversation();
-
+        
         foreach (var inkEvent in inkJSONEvents)
         {
             _eventsDictionary.Add(inkEvent.Name, inkEvent.Value);
@@ -57,7 +57,8 @@ public class TutorialLoopManager : MonoBehaviour
         {
             return;
         }
-        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++].InkStory);
+        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx].InkStory);
+        ServiceLocator.Get<DialogueManager>().EnterSoundDialogue(inkJSON[_storyIdx++].ClipStory);
     }
 
     public void EndConversation()
@@ -110,13 +111,9 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 8:
                 {
+                    ServiceLocator.Get<CountDownManager>().StartCountDown();
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
-                    ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
-                    ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
-                    var glm = ServiceLocator.Get<GameLoopManager>();
-                    PlayerShouldMove();
-                    glm.enabled = true;
-                    glm.Initialize();
+
                     break;
                 }
 
@@ -178,6 +175,7 @@ public class TutorialLoopManager : MonoBehaviour
         if (_eventsDictionary.ContainsKey(name))
         {
             ServiceLocator.Get<DialogueManager>().EnterDialogueMode(_eventsDictionary[name].InkStory, triggerExit);
+            ServiceLocator.Get<DialogueManager>().EnterSoundDialogue(_eventsDictionary[name].ClipStory);
             _eventsDictionary.Remove(name);
         }
     }
@@ -191,7 +189,13 @@ public class TutorialLoopManager : MonoBehaviour
             ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["PizzaMade"].InkStory, names, bools);
             if (isPizza)
             {
+                ServiceLocator.Get<DialogueManager>().EnterSoundDialogue(_eventsDictionary["PizzaMade"].ClipStory);
                 _eventsDictionary.Remove("PizzaMade");
+                _eventsDictionary.Remove("PizzaMadeTwo");
+            }
+            else
+            {
+                ServiceLocator.Get<DialogueManager>().EnterSoundDialogue(_eventsDictionary["PizzaMadeTwo"].ClipStory);
             }
         }
     }
@@ -206,7 +210,13 @@ public class TutorialLoopManager : MonoBehaviour
             ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["SpaghettiMade"].InkStory, names, bools);
             if (isSpaghetti)
             {
+                ServiceLocator.Get<DialogueManager>().EnterSoundDialogue(_eventsDictionary["SpaghettiMade"].ClipStory);
                 _eventsDictionary.Remove("SpaghettiMade");
+                _eventsDictionary.Remove("SpaghettiMadeTwo");
+            }
+            else
+            {
+                ServiceLocator.Get<DialogueManager>().EnterSoundDialogue(_eventsDictionary["SpaghettiMadeTwo"].ClipStory);
             }
         }
     }

@@ -1,9 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -15,8 +12,6 @@ public class PlayerInputs : MonoBehaviour
     private InputAction _rightButton;
     private InputAction _pauseKeyboard;
     private InputAction _moveKeyboard;
-    private InputAction _anyKeyController;
-    private InputAction _anyKeyKeyboard;
 
     private InputAction _leftMouse;
     private InputAction _rightMouse;
@@ -56,16 +51,6 @@ public class PlayerInputs : MonoBehaviour
         _moveKeyboard = _inputManager.Player.MoveKeyboard;
         _moveStick = _inputManager.Player.MoveStick;
 
-        _anyKeyController = _inputManager.Controller.AnyKey;
-        _anyKeyController.Enable();
-
-        _anyKeyKeyboard = _inputManager.Keyboard.Anykey;
-        _anyKeyKeyboard.Enable();
-
-        SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
-
-        _anyKeyController.performed += ToggleController;
-        _anyKeyKeyboard.performed += ToggleKeyboard;
         _rightMouse.performed += RightClick;
         _leftMouse.performed += LeftClick;
         _rightMouse.canceled += RightClickRelease;
@@ -77,6 +62,8 @@ public class PlayerInputs : MonoBehaviour
 
         _pauseKeyboard.performed += TogglePauseMenu;
         _pauseController.performed += TogglePauseMenu;
+
+        ServiceLocator.Get<GlobalInput>().SetPlayerInput(this);
     }
 
     private void Update()
@@ -93,34 +80,12 @@ public class PlayerInputs : MonoBehaviour
         CheckMovement();
     }
 
-    private void ToggleController(InputAction.CallbackContext input)
-    {
-        if(!_isUsingController)
-        {
-            EnableController();
-            DisableKeyboard();
-            _isUsingController = true;
-        }
-    }
-
-    private void ToggleKeyboard(InputAction.CallbackContext input)
-    {
-        if (_isUsingController)
-        {
-            EnableKeyboard();
-            DisableController();
-            _isUsingController = false;
-        }
-    }
-
     private void LeftClick(InputAction.CallbackContext input)
     {
         if (_isOnPaused || _player.shouldNotMove)
         {
             return;
         }
-
-        
 
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
