@@ -33,11 +33,13 @@ public class CreditsScreen : MonoBehaviour
         {
             Page1.SetActive(false);
             Page2.SetActive(true);
+            page1Active = false;
         }
         else
         {
             Page2.SetActive(false);
             Page1.SetActive(true);
+            page1Active = true;
         }
         
     }
