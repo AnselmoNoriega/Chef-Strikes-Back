@@ -129,24 +129,21 @@ public class Actions : MonoBehaviour
                 if (_inventory.GetFoodItem().Type == FoodType.Tomato)
                 {
                     TomatoParticles.gameObject.SetActive(true);
-                    _audioManager.PlaySource("PickupTomato");
+                    PlayRandomSound("PickupTomato");
                     Debug.Log("PlayingTomatoPickup");
                 }
-
-                else if (_inventory.GetFoodItem().Type != FoodType.Cheese)
+                else if (_inventory.GetFoodItem().Type == FoodType.Cheese)
                 {
                     CheeseParticles.gameObject.SetActive(true);
-                    _audioManager.PlaySource("PickupCheese");
+                    PlayRandomSound("PickupCheese");
                     Debug.Log("PlayingCheesePickup");
                 }
-
-                else if (_inventory.GetFoodItem().Type != FoodType.Dough)
+                else if (_inventory.GetFoodItem().Type == FoodType.Dough)
                 {
                     DoughParticles.gameObject.SetActive(true);
-                    _audioManager.PlaySource("PickupDough");
+                    PlayRandomSound("PickupDough");
                     Debug.Log("PlayingDoughPickup");
                 }
-
                 else
                 {
                     Debug.Log("No food");
@@ -154,12 +151,14 @@ public class Actions : MonoBehaviour
 
                 return;
             }
-
         }
+    }
 
-        //TomatoParticles.gameObject.SetActive(false);
-        //CheeseParticles.gameObject.SetActive(false);
-        //DoughParticles.gameObject.SetActive(false);
+    private void PlayRandomSound(string baseName)
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 5); // Random index between 0 and 4
+        string soundName = $"{baseName}_{randomIndex:D2}"; // Formatted as "baseName_00" to "baseName_04"
+        _audioManager.PlaySource(soundName);
     }
 
     public void PrepareToThrow(InputAction mouse)
