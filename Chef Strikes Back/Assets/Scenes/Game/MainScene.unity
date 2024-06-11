@@ -3486,6 +3486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 708684898}
   - component: {fileID: 708684899}
+  - component: {fileID: 708684900}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -3523,8 +3524,105 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1029468879}
   dialogueText: {fileID: 1251405667}
   displayNameText: {fileID: 2105654943}
+  audioSource: {fileID: 708684900}
   dialogueMode: 1
   dialogueIsPlaying: 0
+--- !u!82 &708684900
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708684897}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &710306905
 GameObject:
   m_ObjectHideFlags: 0
@@ -11018,42 +11116,85 @@ MonoBehaviour:
   AiStandState: 0
   AiChoice: 0
   inkJSON:
-  - {fileID: 4900000, guid: b0a07af5bf909d647ba58bb623d19210, type: 3}
-  - {fileID: 4900000, guid: fad214f61f4ba3d419afc39f3e4e5539, type: 3}
-  - {fileID: 4900000, guid: 960efd35cdd187042b2e89110d18201f, type: 3}
-  - {fileID: 4900000, guid: 248c12e26f187134198b176b81642975, type: 3}
-  - {fileID: 4900000, guid: ed3287d73e2452f499c270675798087a, type: 3}
+  - InkStory: {fileID: 4900000, guid: b0a07af5bf909d647ba58bb623d19210, type: 3}
+    ClipStory: {fileID: 8300000, guid: 94051f395832506469a1df9bb06fcd3c, type: 3}
+  - InkStory: {fileID: 4900000, guid: fad214f61f4ba3d419afc39f3e4e5539, type: 3}
+    ClipStory: {fileID: 8300000, guid: 4e256368b8e64a54d938487b577acf0e, type: 3}
+  - InkStory: {fileID: 4900000, guid: 960efd35cdd187042b2e89110d18201f, type: 3}
+    ClipStory: {fileID: 8300000, guid: ed43c2f88a846134a8dca6ea0fff4172, type: 3}
+  - InkStory: {fileID: 4900000, guid: 248c12e26f187134198b176b81642975, type: 3}
+    ClipStory: {fileID: 8300000, guid: 388ab8907fecdaf4e87a717c5a45a1ac, type: 3}
+  - InkStory: {fileID: 4900000, guid: ed3287d73e2452f499c270675798087a, type: 3}
+    ClipStory: {fileID: 8300000, guid: ed4917b3a400e86499713439d617e584, type: 3}
   inkJSONEvents:
   - Name: FoodThrow
-    Value: {fileID: 4900000, guid: ef08327c80badb94abf1df0c0d469597, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: ef08327c80badb94abf1df0c0d469597, type: 3}
+      ClipStory: {fileID: 8300000, guid: 1f3fc294edf307342b0b4142647e6cd2, type: 3}
   - Name: PickUpFood
-    Value: {fileID: 4900000, guid: 132bdee964a826b4b972299212a270c5, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 132bdee964a826b4b972299212a270c5, type: 3}
+      ClipStory: {fileID: 8300000, guid: 69b1a352cce75ed4980531a125ab0de7, type: 3}
   - Name: PickingUp
-    Value: {fileID: 4900000, guid: 23062ea56cda5924cb7b1d5acae46edc, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 23062ea56cda5924cb7b1d5acae46edc, type: 3}
+      ClipStory: {fileID: 8300000, guid: bf3d1c8da9aec4a4ea15962f683b48b1, type: 3}
   - Name: PizzaMade
-    Value: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
+      ClipStory: {fileID: 8300000, guid: 471fb3869f51ea54eae874e935268ea0, type: 3}
+  - Name: PizzaMadeTwo
+    Value:
+      InkStory: {fileID: 4900000, guid: 34b6b84a7bf97354a8919d07248b6aa3, type: 3}
+      ClipStory: {fileID: 8300000, guid: 08a36efadf3515243ab07a9d51ffeb22, type: 3}
   - Name: SpaghettiMade
-    Value: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
+      ClipStory: {fileID: 8300000, guid: c720f553923c5cb4cbb9646ed75c71f9, type: 3}
+  - Name: SpaghettiMadeTwo
+    Value:
+      InkStory: {fileID: 4900000, guid: 9e229874f4774f04d9280983d9330bf4, type: 3}
+      ClipStory: {fileID: 8300000, guid: 3af467bc0ffb26e46a39a4e4be047374, type: 3}
   - Name: KillingKaren
-    Value: {fileID: 4900000, guid: e6831e820ba4a7f4183a446b48d7bfd8, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: e6831e820ba4a7f4183a446b48d7bfd8, type: 3}
+      ClipStory: {fileID: 8300000, guid: bd7e99032c5cef14391a4955ea71ddd1, type: 3}
   - Name: AfterThreeFood
-    Value: {fileID: 4900000, guid: 6c15fb675f61fc64b8eb6f546eb891d0, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 6c15fb675f61fc64b8eb6f546eb891d0, type: 3}
+      ClipStory: {fileID: 8300000, guid: 4bed226e07be5a24a94188cadcbb5ef6, type: 3}
   - Name: TableLocked
-    Value: {fileID: 4900000, guid: 1a0cd956db324544096c4f14ae560e86, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 1a0cd956db324544096c4f14ae560e86, type: 3}
+      ClipStory: {fileID: 8300000, guid: d24185b61851bc84f9486327666c49e8, type: 3}
   - Name: BobTriggered
-    Value: {fileID: 4900000, guid: fd7be8eaabcafb54a899748294f97f5c, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: fd7be8eaabcafb54a899748294f97f5c, type: 3}
+      ClipStory: {fileID: 8300000, guid: 4b946e82c5301244085c7440f83f5825, type: 3}
   - Name: ServedSpaghetti
-    Value: {fileID: 4900000, guid: 3eec1a48644c03740adc815880974d38, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 3eec1a48644c03740adc815880974d38, type: 3}
+      ClipStory: {fileID: 8300000, guid: ed5d9f13b01719f4c9c9b58d385bfa15, type: 3}
   - Name: KarenMadNow
-    Value: {fileID: 4900000, guid: 929cf50de262e9c45be8774f6a68238e, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 929cf50de262e9c45be8774f6a68238e, type: 3}
+      ClipStory: {fileID: 8300000, guid: 5f3ec65f043d4394799284c13517a377, type: 3}
   - Name: Ten_one
-    Value: {fileID: 4900000, guid: 338978b973e8701409f9b3dd26df61b3, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 338978b973e8701409f9b3dd26df61b3, type: 3}
+      ClipStory: {fileID: 8300000, guid: 6b5324411016af243aece313f89b8c38, type: 3}
   - Name: Ten_two
-    Value: {fileID: 4900000, guid: f94eec9207f85cb4a9c3d264594f5964, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: f94eec9207f85cb4a9c3d264594f5964, type: 3}
+      ClipStory: {fileID: 8300000, guid: ad8104c744bd8274f823f26f716aa614, type: 3}
   - Name: Ten_three
-    Value: {fileID: 4900000, guid: 0923f36b75f77aa47b3453f3a5e5ba9c, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 0923f36b75f77aa47b3453f3a5e5ba9c, type: 3}
+      ClipStory: {fileID: 8300000, guid: 647c2eb7a15ea774c911864a1d6c7f48, type: 3}
   - Name: Ten_four
-    Value: {fileID: 4900000, guid: 04f0aa5b483f52149a61ac6b8d198602, type: 3}
+    Value:
+      InkStory: {fileID: 4900000, guid: 04f0aa5b483f52149a61ac6b8d198602, type: 3}
+      ClipStory: {fileID: 8300000, guid: 2f0643b82561ec54c836e7fae20ccc0c, type: 3}
   TutorialSecondFace: 0
   TutorialThirdFace: 0
   _multipleSpaghettiesMade: 0

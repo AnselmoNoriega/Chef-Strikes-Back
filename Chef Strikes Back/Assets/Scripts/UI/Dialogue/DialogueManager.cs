@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private AudioSource audioSource;
 
     public bool IsPaused { get; set; }
 
@@ -32,6 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Initialize()
     {
+        audioSource.loop = false;
         _tutorialLoopManager = ServiceLocator.Get<TutorialLoopManager>();
 
         dialogueIsPlaying = true;
@@ -60,6 +62,13 @@ public class DialogueManager : MonoBehaviour
         }
 
         ContinueStory();
+    }
+
+    public void EnterSoundDialogue(AudioClip audioClip)
+    {
+        audioSource.Stop();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active, bool callMethodIfFinished = false)

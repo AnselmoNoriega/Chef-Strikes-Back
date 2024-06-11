@@ -10,6 +10,13 @@ struct DictionaryField<KeyType, ValueType>
     public ValueType Value;
 }
 
+[Serializable]
+struct StoryData
+{
+    public TextAsset InkStory;
+    public AudioClip ClipStory;
+}
+
 public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private TutorialCameraManager _tutorialCameraManager;
@@ -23,9 +30,9 @@ public class TutorialLoopManager : MonoBehaviour
     public int AiChoice = 0;
 
     [Header("Ink Text")]
-    [SerializeField] private List<TextAsset> inkJSON;
-    [SerializeField] private List<DictionaryField<string, TextAsset>> inkJSONEvents;
-    private Dictionary<string, TextAsset> _eventsDictionary = new();
+    [SerializeField] private List<StoryData> inkJSON;
+    [SerializeField] private List<DictionaryField<string, StoryData>> inkJSONEvents;
+    private Dictionary<string, StoryData> _eventsDictionary = new();
 
     private int _storyIdx = 0;
     private int _customerIdx = 0;
@@ -50,7 +57,7 @@ public class TutorialLoopManager : MonoBehaviour
         {
             return;
         }
-        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++]);
+        ServiceLocator.Get<DialogueManager>().EnterDialogueMode(inkJSON[_storyIdx++].InkStory);
     }
 
     public void EndConversation()
@@ -170,7 +177,7 @@ public class TutorialLoopManager : MonoBehaviour
     {
         if (_eventsDictionary.ContainsKey(name))
         {
-            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(_eventsDictionary[name], triggerExit);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueMode(_eventsDictionary[name].InkStory, triggerExit);
             _eventsDictionary.Remove(name);
         }
     }
@@ -181,7 +188,7 @@ public class TutorialLoopManager : MonoBehaviour
         {
             string[] names = new string[] { "pizzaMade" };
             bool[] bools = new bool[] { isPizza };
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["PizzaMade"], names, bools);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["PizzaMade"].InkStory, names, bools);
             if (isPizza)
             {
                 _eventsDictionary.Remove("PizzaMade");
@@ -196,7 +203,7 @@ public class TutorialLoopManager : MonoBehaviour
             string[] names = new string[] { "spaghettiMade", "wrongFoodMadeBefore" };
             bool[] bools = new bool[] { isSpaghetti, _multipleSpaghettiesMade };
             _multipleSpaghettiesMade = true;
-            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["SpaghettiMade"], names, bools);
+            ServiceLocator.Get<DialogueManager>().EnterDialogueModeBool(_eventsDictionary["SpaghettiMade"].InkStory, names, bools);
             if (isSpaghetti)
             {
                 _eventsDictionary.Remove("SpaghettiMade");
@@ -227,5 +234,5 @@ public class TutorialLoopManager : MonoBehaviour
     {
         _tutorialAI.shouldNotMove = false;
     }
-    
+
 }
