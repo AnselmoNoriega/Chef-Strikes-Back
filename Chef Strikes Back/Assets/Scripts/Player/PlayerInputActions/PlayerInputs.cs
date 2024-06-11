@@ -183,6 +183,8 @@ public class PlayerInputs : MonoBehaviour
 
     private void TogglePauseMenu(InputAction.CallbackContext input)
     {
+        _audioManager.PlaySource("Pause");
+        Debug.Log("PauseSound");
         TogglePauseMenu();
     }
 

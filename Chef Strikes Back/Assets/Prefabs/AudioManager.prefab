@@ -1,0 +1,1001 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2427887960420102701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2427887960420102698}
+  - component: {fileID: 2427887960420102699}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2427887960420102698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427887960420102701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.094886, y: 0.58260715, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2427887960420102699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427887960420102701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9aa6108c8fc5dc43bb47f3561b40ec9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: miss_attack
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: bcfbc183c1843d94cb4cbf62c51c54f4, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: hit_attack
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ca6775c4c36af8c4586e7f28f7694bac, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: throw
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 19e9558503a9677439a92c4dcb5b07bb, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: charge
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f4ae96344ed20e041946cc83611800f4, type: 3}
+    volume: 0
+    pitch: 1.46
+    loop: 0
+  - name: walk
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9f928b92e373e9e4d8fbaae856828485, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: enter_rage
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 83090992697a15e4abd0f4b113af5a81, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: money
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7abb8ed7992f984499e74c4c39cce0bf, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: shove
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b312f6cd14c60d44ba976b72b35e80e1, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: ragebar_filling
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b57192eff4bf6874f97110d823bb3f4e, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: pause
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 29caba3691d7ea54cb8c490222b1bdbc, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: resume
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 79300139e927db6429fe4a8f8942ab45, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: food_hit
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 516a385893633ef4da75b711a23ff41d, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 0
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: BGM
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6d869deceb499e44ba6a92a0b39eebfa, type: 3}
+    volume: 1
+    pitch: 1.46
+    loop: 1
+  - name: FoodDone
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a666ae0350a94bc44ba2589b62b8cf5c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Attack_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 804ff98faaf0c04478996d488788ca41, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Attack_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8a79b6e03c34b4348985861c829452a4, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Attack_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2246e5aab8a40544d9a243da51f8f29b, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Attack_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: d9de7ad3ef288e645bade43554fb7fd4, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Attack_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: bdad81aac00e7f84687771b40d6cdf92, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Bump-Player_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 859e8608974485146a7535b99d4c0f6a, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Bump-Player_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 96ab1980ba678f145b79feeddb2d6be0, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Bump-Player_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 210d1fbcccafa8041ad9729df9119278, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Bump-Player_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 812eaa9a531b4bf46958eb9491f91ab9, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Bump-Player_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 651c4ae2c4edd3f44892af9604291e4a, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Death_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 56f5f24638367c8459c026e9f6c22e3b, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Death_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f3acdc1755edcea428efe80e69e9d9f7, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: abf76abbe3da7554598bbefe4098f991, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ec7ccf7be0a7227479e73fb50b1473c6, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 367387aba27712340a81a59d3cf4ee63, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4689234af231b50478ae8702c1998495, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: cd9928b0e5d1c114ea63c88b980183f3, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Release_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b6dc97494b96fa24ebf1944de542a96c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Release_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: cfaf15440569db1458b8e5403a7f659a, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Release_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ac969b750f851ea44933e0dacf70db51, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Release_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8fa0acbca2f7a0e4588b65299fb78e98, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_Release_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 386df9693d12dc441b3bf49af7e082af, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_WindUp_Long_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9cbb99d27bc147e4a916b067cf9f20d9, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_WindUp_Long_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3e5a3e24f27ba394a9b8f5ed65fc8d4b, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: C_WindUp_Short_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0cb98c05eec3ead46a414d249253a0f3, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b66fbe5c62fed494a9fd013910ef1c32, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Annoy-NPC_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 03c3a2f095365904fa2b62d8daf9d914, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Attack_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a24b6cc01222e8340a4897f10001b818, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Attack_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a24b6cc01222e8340a4897f10001b818, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Attack_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: bcdc060db91ae2746a6453342179f688, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Attack_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b592128704a7cb14da58a90ffbbbb176, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Attack_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5526e1c80c8f0db44962af1974cc9b75, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Bad-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a0c231760c48b834d95b9db1c30d6c85, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Bad-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 685d1b783f727e0429f7f51480ce89f5, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Bad-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: d6c4b5734e820c94db62b885b0959e49, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Bad-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6dd7266b257e1034a8e76ed95b001fe7, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Bad-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b3db7722b61e7ef42bd4e2305bf0b3cd, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Death_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: bdd3ff3a33eba7f4285f5beb7004b3f6, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Death_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: fdfd5a234d4d6b54db8c48e0f8a605d6, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Good-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8ab6647da07d12b4996b9fd459b8b30e, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Good-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ab42579cfb5492d45a78779f66fba961, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Good-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1c074fcb3e9e315478c0babc7992cb8c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Good-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6e660936ed810ff4eb6c3f8a55942758, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Good-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6ff1f24425367404ca5b9b9c44529181, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-Nearly-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c26072ceb9d0aca469233e86e02c71de, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-receive-food_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6e2035664f68d27419f5384aafc489d8, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-receive-food_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 297f8e18a0460d5419f18abf5f670346, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-receive-food_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 59b1222ca23a57c4d8a99ffcbc81b4dc, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-receive-food_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 01cd5afc71010f643a0e8e65c1778ef3, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: F-receive-food_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 45f5f1ccf1810f841b1050bd7afd3d0f, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji_Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ce182911d3a02c447a3a24e7e2f11096, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Attack_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ce182911d3a02c447a3a24e7e2f11096, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Attack_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: dedf5d66283ba974f82e74cd60bb7cff, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Attack_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e6183d60581d7b44a956aa351981e118, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Attack_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6050a76e2f3625d47b0ff10bb4578067, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Attack_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: bee4d50c24bb4a44db9c00a9faeed550, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Bad-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e655645de0a033f46b6d9cd90362f45e, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Bad-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 6cf2d83fca1b2c6438a01b13bbac7b9c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Bad-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 69859722c780bfb41b12b69536640867, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Bad-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c602d857afc4b3f4792d73b3f2079838, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Bad-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9714ce3feac8bde4893a9ec02d3ac58f, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Cancel-Cooking_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5831d9b837580984d8a272f4d1613f4d, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Cancel-Cooking_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9107915583852154d97509938ad69176, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Cancel-Cooking_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b1edd6b2c9e1830428d9d3683bee6f2d, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Cancel-Cooking_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 05ed59b271a0de44c9218e511fbc6f3c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Cancel-Cooking_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: cbc224e592f6a0c4f9c911a5bdb07117, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Death_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b8f5e1e98c557b740986c042a0ad99b6, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Death_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5bd7dd3404befa0418cee7c9dfade042, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Good-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b89d787f0e01b914c8effe10c499c78b, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Good-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9b483449e5aa40e4eb81afaeed1cb048, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Good-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8358b6b971811664e9676c629518f479, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Good-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c20659dc35fc388478bb9c9ed0a107c5, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Good-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ae403a94eded83344afac2e110185d17, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-Nearly-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 75fe0dcab75772b41802741e728742f1, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-receive-food_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4a311b07af7554943a7009ac8a3b5f4c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-receive-food_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ae987a9e93c79c94da0938ab067992b3, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-receive-food_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 38a8b345860c75045adfe13d20d334f0, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-receive-food_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1a3c16a9e6ab9ca4da99fa134888fa83, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Ji-receive-food_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f8ea7a783f2ac1244875308747f802cd, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 930c74432cc00c44da6b08e2d4d48d7c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Bad-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e55134579bcc8ad4b9f1b236fd9cc593, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Bad-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 196c347db90073d4ab0617598b8c43b7, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Bad-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7a463a0ac4346f14792de3d917d88f6a, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Bad-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5cfef29dbaa9afb43ab790304411b27f, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Bad-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 60f65a267c4c01b4fbc1468bd943d7b6, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Death_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e21d351a47c5bff4ea12fa10c613312c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Death_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b3210c46429b1124e85599019acc4526, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Good-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b8c9dfd1bdf4a584cbed32c262287e1f, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Good-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f9e39f7196120b54fa05e188a5c20c9f, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Good-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c61d75a10e119c8449ec55c87be30518, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Good-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 32aacb031173ba74580260cbdd936714, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Good-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e7f46069d967ce54cb99bc594324f2de, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-Nearly-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: bebddf37cfbd0bf4ab28f8c37d423e13, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-receive-food_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c921a6ccb411ab94c8f91108c2fc6b95, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-receive-food_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 497b0ac8fc45175408c839250aaf95d2, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-receive-food_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 85f6bfb101432b843a76869ea6c6ae69, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-receive-food_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 49c3f26665c430e4b9148bdcdf60a46b, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Jo-receive-food_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0ffd3b2fff4f5eb49bc747fa63fa4986, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 62808a86f9ae8f8429e063c5a6dc05ce, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Attack_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4633ab7ab86176248a1399c354b39607, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Attack_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 12045608774203f48931227f7135c938, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Attack_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2742e4dc047a0a54984da949ea74bdcf, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Attack_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: fcf811c78199d6b4ba7ccc433ab3f6df, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Attack_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 158d5f8637aefb947b14511119c6006b, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Bad-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: d41a4bdaf8e3a8240acb91d826cae7f2, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Bad-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5f45a6f7e0b860b4095e8b0fd088fd66, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Bad-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e69981bc0a688e3418b0277f124a8154, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Bad-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ded2897753c0c2e4ebc1727096317ad7, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Bad-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: fcf517b510ddc5942b520a6e92b8e279, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Death_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 335d88bd082d0aa41b8d6e98b9a0768c, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Death_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c3c1bdedcc05de440a51954ab88af34d, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Good-Customer-Hit_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 499e25c46c5359d479562bf6e17f0c78, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Good-Customer-Hit_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9b2f8ab6fd74b734fa34f5115a3e6b95, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Good-Customer-Hit_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 86a8f3657868a5741bae08cf9e3df5e3, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Good-Customer-Hit_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1024cbfeb6520274499535a0008e563a, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Good-Customer-Hit_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7e90f68df51e7be43a2fd06e77e9de7f, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-Nearly-Angry_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3213b7f6bd7eff246984a14bd6053518, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-receive-food_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 89a6207e709604e4c98ba1d83e9242d4, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-receive-food_01
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b286ac5f3f78bce40ae306478ca3afc4, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-receive-food_02
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9d9a5b921fd0ac84cb3b78207ac2b0b4, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-receive-food_03
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c2da991a213526440bf2ee911866a2d1, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: K-receive-food_04
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7968a967e8e32b6409c79908960da7e4, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: UI-Pause-Cutting-Board_00
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 56ff5725221b30f44bd16285f4348fb0, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1
+  - name: Conveyor-Belt
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0da016c47e5b5214986ec01f2b4d2ca6, type: 3}
+    volume: 0.3
+    pitch: 1.46
+    loop: 1

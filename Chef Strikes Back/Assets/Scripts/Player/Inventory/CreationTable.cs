@@ -149,6 +149,7 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             CompleteParticles.Play();
+            _audioManager.PlaySource("FoodDone");
             _count[_acceptedFoodTypes[i].Food] = false;
             _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);
