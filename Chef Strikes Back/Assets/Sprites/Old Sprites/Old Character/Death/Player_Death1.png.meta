@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cd7ca91ca88d65b4788c60402149f2f2
+guid: ee46d5465f960ed4b802a96eb807539f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,7 +106,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -118,7 +118,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,85 +129,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jill_attack_front_0
+      name: Player_Death1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 200
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.32}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4da250326a77adc448f5d154cea097b8
-      internalID: -1847735158
+      spriteID: bbe2d9b1b0fbd4646bb5942c28d9efe5
+      internalID: 1261172520
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jill_attack_front_1
+      name: Player_Death1_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 200
         y: 0
-        width: 128
-        height: 128
+        width: 200
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.32}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72d6d96bce385da449142a3c24b92a00
-      internalID: 313431665
+      spriteID: d91854b423d9cc84991c1260346279a6
+      internalID: -709713507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jill_attack_front_2
+      name: Player_Death1_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 400
         y: 0
-        width: 128
-        height: 128
+        width: 200
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.32}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f20f29aeaa8d814880dccdaf2209592
-      internalID: -2143185385
+      spriteID: c342293b70f70c14fb73e9d68f57aa3a
+      internalID: -880872184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jill_attack_front_3
+      name: Player_Death1_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 600
         y: 0
-        width: 128
-        height: 128
+        width: 200
+        height: 256
       alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+      pivot: {x: 0.5, y: 0.32}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ebb77261b9c83f044b4dd95c6b93cc28
-      internalID: 1579923839
+      spriteID: 17fe8248107d7c246b9094ed457bb454
+      internalID: 1412037670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Death1_4
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 200
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a412db0ee46ce64899c6860250ee631
+      internalID: -430016700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Death1_5
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 200
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada9f24ed2edd7546b3645422dc1bf39
+      internalID: -1902597357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Death1_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 200
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 521f794564533264fa59f58e276e1762
+      internalID: 1655103670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Death1_7
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 200
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.32}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4cf97d62fa5cf49b99dc328c6e2926
+      internalID: -1203359693
       vertices: []
       indices: 
       edges: []
@@ -223,10 +307,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Jill_attack_front_3: 1579923839
-      Jill_attack_front_1: 313431665
-      Jill_attack_front_2: -2143185385
-      Jill_attack_front_0: -1847735158
+      Player_Death1_2: -880872184
+      Player_Death1_6: 1655103670
+      Player_Death1_7: -1203359693
+      Player_Death1_4: -430016700
+      Player_Death1_3: 1412037670
+      Player_Death1_5: -1902597357
+      Player_Death1_0: 1261172520
+      Player_Death1_1: -709713507
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
