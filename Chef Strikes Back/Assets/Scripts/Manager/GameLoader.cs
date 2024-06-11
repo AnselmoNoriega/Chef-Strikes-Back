@@ -71,7 +71,9 @@ public class GameLoader : AsyncLoader
 
         var gm = Instantiate(_gameManager, SystemsParent);
         var gmComp = gm.GetComponentInChildren<GameManager>();
+        var imComp = gm.GetComponentInChildren<GlobalInput>();
         ServiceLocator.Register<GameManager>(gmComp);
+        ServiceLocator.Register<GlobalInput>(imComp);
 
         yield return null;
     }
