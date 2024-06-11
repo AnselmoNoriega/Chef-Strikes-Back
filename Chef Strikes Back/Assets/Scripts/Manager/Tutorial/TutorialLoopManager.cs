@@ -44,7 +44,7 @@ public class TutorialLoopManager : MonoBehaviour
     private void Start()
     {
         EnterConversation();
-
+        
         foreach (var inkEvent in inkJSONEvents)
         {
             _eventsDictionary.Add(inkEvent.Name, inkEvent.Value);
@@ -111,13 +111,9 @@ public class TutorialLoopManager : MonoBehaviour
                 }
             case 8:
                 {
+                    ServiceLocator.Get<CountDownManager>().StartCountDown();
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
-                    ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
-                    ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
-                    var glm = ServiceLocator.Get<GameLoopManager>();
-                    glm.enabled = true;
-                    glm.Initialize();
-                    PlayerShouldMove();
+
                     break;
                 }
 

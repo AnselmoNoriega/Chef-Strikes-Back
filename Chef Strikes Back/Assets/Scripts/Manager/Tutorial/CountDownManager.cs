@@ -1,0 +1,49 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class CountDownManager : MonoBehaviour
+{
+    [Header ("Canvas Prop")]
+    [SerializeField] private TMP_Text _countDownText;
+    [SerializeField] private GameObject _countDownPanel;
+    [SerializeField] private string _endMessage;
+    private int _countDownCount = 3;
+    public bool GameStart = false;
+
+
+    public void StartCountDown()
+    {
+        _countDownPanel.SetActive(true);
+        StartCoroutine(CountDown());
+    }   
+    
+    private IEnumerator CountDown()
+    {
+        if(_countDownCount > 0)
+        {
+            _countDownText.text = _countDownCount.ToString();
+        }
+        else
+        {
+            _countDownText.text = _endMessage;
+        }
+        yield return new WaitForSeconds(1f);
+        _countDownCount--;
+        if(_countDownCount >=0)
+        {
+            StartCoroutine(CountDown());
+        }
+        else
+        {
+            _countDownPanel.SetActive(false);
+            ServiceLocator.Get<TutorialTimer>().SetTimeState(true);
+            ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
+            var glm = ServiceLocator.Get<GameLoopManager>();
+            ServiceLocator.Get<TutorialLoopManager>().PlayerShouldMove();
+            glm.enabled = true;
+            glm.Initialize();
+        }
+    }
+}

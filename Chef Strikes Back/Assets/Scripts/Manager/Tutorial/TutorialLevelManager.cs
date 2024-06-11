@@ -15,6 +15,7 @@ public class TutorialLevelManager : MonoBehaviour
     [SerializeField] private TutorialCameraManager _tutorialCamerManager = null;
     [SerializeField] private TutorialInput _tutorialInput = null;
     [SerializeField] private GameLoopManager _gameLoopManager = null;
+    [SerializeField] private CountDownManager _countDownManager = null;
 
     GameLoader _gameLoader;
 
@@ -38,6 +39,7 @@ public class TutorialLevelManager : MonoBehaviour
         ServiceLocator.Register<TutorialCameraManager>(_tutorialCamerManager);
         ServiceLocator.Register<TutorialInput>(_tutorialInput);
         ServiceLocator.Register<GameLoopManager>(_gameLoopManager);
+        ServiceLocator.Register<CountDownManager>(_countDownManager);
 
         _dialogueManager.Initialize();
         _audioManager.Initialize();
@@ -63,5 +65,6 @@ public class TutorialLevelManager : MonoBehaviour
         ServiceLocator.Unregister<TutorialCameraManager>();
         ServiceLocator.Unregister<TutorialInput>();
         ServiceLocator.Unregister<GameLoopManager>();
+        ServiceLocator.Unregister<CountDownManager>();
     }
 }
