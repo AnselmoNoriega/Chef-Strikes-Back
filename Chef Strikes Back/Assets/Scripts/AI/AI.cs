@@ -75,7 +75,12 @@ public class AI : MonoBehaviour
     private bool _IsDead = false;
     public bool shouldNotMove = false;
     [SerializeField] private Animator _animator;
+
+    [Space, Header("Audio")]
     private AudioManager _audioManager;
+    private AudioSource _audioSource;
+    [SerializeField] private Sounds[] sounds;
+
 
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
