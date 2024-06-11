@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private SceneControl _sceneControl = null;
     [SerializeField] private StatefulObject _statefulObject = null;
     [SerializeField] private CameraController _cameraController = null;
+    [SerializeField] private CountDownManager _countDownManager = null;
 
     GameLoader _loader;
 
@@ -40,9 +41,10 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Register<AIManager>(_AIManager);
         ServiceLocator.Register<SceneControl>(_sceneControl);
         ServiceLocator.Register<StatefulObject>(_statefulObject);
+        ServiceLocator.Register<CountDownManager>(_countDownManager);
 
+        _countDownManager.StartGame();
         _audioManager.Initialize();
-        _gameLoopManager.Initialize();
         _timeManger.Initialize();  
         _player.Initialize();
         _cameraController.Initialize();
@@ -58,5 +60,6 @@ public class LevelManager : MonoBehaviour
         ServiceLocator.Unregister<AIManager>();
         ServiceLocator.Unregister<SceneControl>();
         ServiceLocator.Unregister<StatefulObject>();
+        ServiceLocator.Unregister<CountDownManager>();
     }
 }
