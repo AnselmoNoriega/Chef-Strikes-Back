@@ -201,13 +201,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231826271109957594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 2
+  m_Father: {fileID: 578931868531884403}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8462317492019071887
 SpriteRenderer:
@@ -364,9 +364,10 @@ Transform:
   m_LocalPosition: {x: 0.078, y: 0.294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3100146290728529144}
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373743241353836299
 GameObject:
@@ -399,7 +400,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6789242544989567566
 SpriteRenderer:
@@ -603,7 +604,6 @@ Transform:
   m_Children:
   - {fileID: 8472611319032405623}
   - {fileID: 1237283022793716927}
-  - {fileID: 3100146290728529144}
   - {fileID: 578931868531884403}
   - {fileID: 567927445575894956}
   m_Father: {fileID: 0}
@@ -737,6 +737,7 @@ MonoBehaviour:
   PlayerAction: 0
   soundName: 
   IsWalking: 0
+  GotDamage: 0
   shouldNotMove: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
@@ -773,6 +774,9 @@ MonoBehaviour:
   throwForce: 1
   IsCarryingItem: 0
   _grabDistance: 1
+  TomatoParticles: {fileID: 0}
+  DoughParticles: {fileID: 0}
+  CheeseParticles: {fileID: 0}
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0

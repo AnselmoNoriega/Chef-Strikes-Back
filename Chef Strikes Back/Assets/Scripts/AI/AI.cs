@@ -18,6 +18,14 @@ public enum AIState
     None
 }
 
+public enum CustomerType
+{
+    Karen = 3,
+    Fank = 4,
+    Jill = 5,
+    Joaquin = 6
+}
+
 public class AI : MonoBehaviour
 {
     [Header("AI Behaviour")]
@@ -25,7 +33,7 @@ public class AI : MonoBehaviour
     private StateMachine<AI> _stateManager;
 
     [Space, Header("AI Properties")]
-    [SerializeField] private Animator _anim;
+    public Animator Anim;
     public Rigidbody2D Rb2d;
     public Collider2D TorsoCollider;
     public List<GameObject> OrderBubble;
@@ -33,6 +41,7 @@ public class AI : MonoBehaviour
     [HideInInspector] public int ChoiceIndex;
 
     [Space, Header("AI Info")]
+    public CustomerType CustomerAIType;
     public AIState state;
     public int Speed = 0;
     public float KnockbackForce = 0.0f;
@@ -42,7 +51,6 @@ public class AI : MonoBehaviour
     [SerializeField] private int _hitsToGetMad = 0;
 
     [Space, Header("AI's got hit animation")]
-    [SerializeField] private Color _currentSpriteColor = Color.white;
     [SerializeField] private SpriteRenderer _goodAISprite;
     [SerializeField] private int _flashingTime;
 
@@ -64,6 +72,7 @@ public class AI : MonoBehaviour
     public ParticleSystem HappyParticles;
     public ParticleSystem AngryParticles;
     private bool _IsDead = false;
+    public bool shouldNotMove = false;
     [SerializeField] private Animator _animator;
     //private AudioManager _audioManager;
 
@@ -144,7 +153,7 @@ public class AI : MonoBehaviour
     private void Update()
     {
         _stateManager.Update(Time.deltaTime);
-        FaceDirection(_anim, Rb2d.velocity);
+        FaceDirection(Anim, Rb2d.velocity);
     }
 
     private void FixedUpdate()
@@ -240,12 +249,6 @@ public class AI : MonoBehaviour
         state = newState;
     }
 
-    public void ChangeSpriteColor(Color color)
-    {
-        _currentSpriteColor = color;
-        _goodAISprite.color = color;
-    }
-
     public void Shoot()
     {
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
@@ -260,7 +263,7 @@ public class AI : MonoBehaviour
         {
             _goodAISprite.color = Color.red;
             yield return new WaitForSeconds(0.1f);
-            _goodAISprite.color = _currentSpriteColor;
+            _goodAISprite.color = Color.white;
             IsHit = false;
         }
     }
@@ -333,8 +336,8 @@ public class AI : MonoBehaviour
         _stateManager.AddState<EatingCustomer>();
 
         _stateManager.AddState<RageCustomerState>();
-        _stateManager.AddState<FoodLockCustomer>();
         _stateManager.AddState<HonkingCustomer>();
+        _stateManager.AddState<FoodLockCustomer>();
         _stateManager.AddState<BobChasingState>();
 
         _stateManager.AddState<BobAttackState>();

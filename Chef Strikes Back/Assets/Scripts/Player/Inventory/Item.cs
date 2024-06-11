@@ -269,4 +269,5 @@ public enum FoodType
     Dough,
     Tomato,
     Cheese,
+    None
 }

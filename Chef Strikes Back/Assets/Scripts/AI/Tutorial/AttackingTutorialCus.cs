@@ -6,36 +6,58 @@ public class AttackingTutorialCus : StateClass<AI>
     private float _countDown = 0;
     private bool _hasAttacked = false;
     private Player player;
+    private TutorialLoopManager _loopManager;
 
     public void Enter(AI agent)
     {
         player = ServiceLocator.Get<Player>();
         _hasAttacked = false;
         _countDown = Time.time;
+        _loopManager = ServiceLocator.Get<TutorialLoopManager>();
     }
 
     public void Update(AI agent, float dt)
     {
+        
         if (player.GotDamage)
         {
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren");
+            _loopManager.EnterDialogueEvent("KillingKaren");
+            if(!_loopManager.TutorialThirdFace)
+            {
+                player.shouldNotMove = true;
+                agent.shouldNotMove = true;
+                _loopManager.TutorialThirdFace = true;
+            }
             return;
         }
-        if (Time.time - _countDown >= 0.25f && !_hasAttacked)
+
+        if (!agent.shouldNotMove)
         {
-            _hasAttacked = true;
-            Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
-            player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
-            player.TakeDamage(10);
+            if (Time.time - _countDown >= 0.25f && !_hasAttacked)
+            {
+                _hasAttacked = true;
+                Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
+                player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
+                player.TakeDamage(10);
+
+            }
+            
+            if (agent.IsDead)
+            {
+                _loopManager.EnterDialogueEvent("Ten_one", true);
+            }
+            
+            if (Time.time - _countDown >= 1.0f)
+            {
+                agent.ChangeState(AIState.Rage);
+            }
         }
         if (agent.IsDead)
         {
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
+            _loopManager.EnterDialogueEvent("TutorialEnd", true);
         }
-        if (Time.time - _countDown >= 1.0f)
-        {
-            agent.ChangeState(AIState.Rage);
-        }
+
+
     }
 
     public void FixedUpdate(AI agent)

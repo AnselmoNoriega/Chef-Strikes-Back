@@ -20049,9 +20049,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4629491789166812219, guid: 0537e4e458f663d48aacd6674a852ff5, type: 3}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 900f87a42f0ac464f84f9ca36f38c70a, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 3d77c32617ce1664c948e49f2a3c2712, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 196b147d0f3555f498942bff6588bcc2, type: 3}
+    - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: _customerPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 34484012071288454, guid: 21605b2440397a74898c0910693d05c8, type: 3}
     - target: {fileID: 2927658305319933895, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _wantedSystemTimer.Array.data[0].Stars
       value: 1

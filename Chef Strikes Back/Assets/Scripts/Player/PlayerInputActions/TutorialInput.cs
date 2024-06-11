@@ -11,6 +11,9 @@ public class TutorialInput : MonoBehaviour
     private InputAction _leftMouse;
     private InputAction _rightMouse;
 
+    private InputAction _pauseKeyboard;
+    private InputAction _pauseController;
+
     private int _pickItemCount = 0;
     private int _foodThrows = 5;
     private int _foodThrowsAmount = 0;
@@ -20,6 +23,14 @@ public class TutorialInput : MonoBehaviour
         _inputManager = new InputControls();
         _leftMouse = _inputManager.Player.MouseLeftClick;
         _rightMouse = _inputManager.Player.MouseRightClick;
+
+        _pauseKeyboard = _inputManager.Player.Esc;
+        _pauseController = _inputManager.Player.PauseController;
+        _pauseKeyboard.Enable();
+        _pauseController.Enable();
+
+        _pauseKeyboard.performed += CloseDialogueMenu;
+        _pauseController.performed += CloseDialogueMenu;
 
         _leftMouse.Enable();
         _leftMouse.performed += LeftClick;
@@ -31,9 +42,13 @@ public class TutorialInput : MonoBehaviour
         _player = ServiceLocator.Get<Player>();
         _playerActions = _player.GetComponent<Actions>();
 
-
     }
-    
+
+    private void _pauseController_performed(InputAction.CallbackContext obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
     private void OnDestroy()
     {
         _leftMouse.Disable();
@@ -46,7 +61,7 @@ public class TutorialInput : MonoBehaviour
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        if(_dialogueManager.dialogueIsPlaying && !_dialogueManager.IsPaused)
+        if(_dialogueManager.dialogueIsPlaying && !_dialogueManager.IsPaused && Time.timeScale == 1)
         {
             _dialogueManager.ContinueStory();
         }
@@ -75,5 +90,19 @@ public class TutorialInput : MonoBehaviour
         }
     }
 
-   
+    private void CloseDialogueMenu(InputAction.CallbackContext input)
+    {
+        if(Time.timeScale == 1)
+        {
+            ServiceLocator.Get<DialogueManager>().PanelActivate();
+        }
+        else
+        {
+            ServiceLocator.Get<DialogueManager>().PanelDeactivate();
+        }
+        
+    }
+
+
+
 }

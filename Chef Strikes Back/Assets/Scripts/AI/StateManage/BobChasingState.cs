@@ -14,7 +14,6 @@ public class BobChasingState : StateClass<AI>
         _countDown = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.ChangeSpriteColor(Color.blue);
     }
     public void Update(AI agent, float dt)
     {

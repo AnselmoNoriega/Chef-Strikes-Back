@@ -16,7 +16,6 @@ public class LeavingCustomer : StateClass<AI>
         _countDown = Time.time;
         _exitPosition = ServiceLocator.Get<AIManager>().ExitPosition();
         agent.Seeker.StartPath(agent.Rb2d.position, _exitPosition, PathCompleted);
-        agent.ChangeSpriteColor(Color.white);
     }
 
     public void Update(AI agent, float dt)

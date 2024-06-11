@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Indicator: {fileID: 0}
-  _anim: {fileID: -1032899175772524887}
+  Anim: {fileID: -1032899175772524887}
   Rb2d: {fileID: 34484012071288450}
   TorsoCollider: {fileID: 3427429296975997274}
   OrderBubble:
@@ -186,6 +186,7 @@ MonoBehaviour:
   - {fileID: 2895648848159499705}
   EatingSlider: {fileID: 6104358329182333462}
   ChoiceIndex: 0
+  CustomerAIType: 4
   state: 0
   Speed: 62
   KnockbackForce: 100
@@ -193,7 +194,6 @@ MonoBehaviour:
   IsAnnoyed: 0
   _health: 30
   _hitsToGetMad: 3
-  _currentSpriteColor: {r: 1, g: 1, b: 1, a: 1}
   _goodAISprite: {fileID: 34484012071288455}
   _flashingTime: 1
   ReloadCountDown: 0
@@ -208,6 +208,7 @@ MonoBehaviour:
   ConfettiParticles: {fileID: 4334602939879611795}
   HappyParticles: {fileID: 5057430948577461386}
   AngryParticles: {fileID: 2181867299460988573}
+  shouldNotMove: 0
   _animator: {fileID: -1032899175772524887}
 --- !u!114 &4617263295547057938
 MonoBehaviour:
@@ -224,11 +225,15 @@ MonoBehaviour:
   _image:
   - {fileID: 1316305484600293001}
   - {fileID: 1567169437809526574}
+  _orderBubbles:
+  - {fileID: 1268310554165276681}
+  - {fileID: 2895648848159499705}
   _arrow: {fileID: 4996913246588421570}
   _arrowOffset: {x: 0.45, y: 0.45}
   _offsetOutOfScreen: {x: 0, y: 1.25, z: 0}
   _timerTranform: {fileID: 896270631046892999}
   _imageMaskTransform: {fileID: 1360957378533967392}
+  _positionOffset: {x: 0, y: 1.35, z: 0}
 --- !u!95 &-1032899175772524887
 Animator:
   serializedVersion: 4

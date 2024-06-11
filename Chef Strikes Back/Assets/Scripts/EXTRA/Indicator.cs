@@ -12,6 +12,7 @@ public enum IndicatorImage
 public class Indicator : MonoBehaviour
 {
     [SerializeField] private List<Image> _image;
+    [SerializeField] private List<GameObject> _orderBubbles;
     [SerializeField] private Image _arrow;
     [SerializeField] private Vector2 _arrowOffset;
     [SerializeField] private Vector3 _offsetOutOfScreen;
@@ -21,18 +22,17 @@ public class Indicator : MonoBehaviour
     private float height;
 
     private Vector2 _newTimerSize;
+    [SerializeField] private Vector3 _positionOffset;
 
     private int _index = 0;
     private bool _isHungry = false;
 
     private float diffScreen;
-    private AI _ai;
 
     private AudioManager _audioManager;
 
     private void Awake()
     {
-
         foreach (var image in _image)
         {
             image.enabled = false;
@@ -42,7 +42,6 @@ public class Indicator : MonoBehaviour
         
         width = Camera.main.orthographicSize * Camera.main.aspect;
         height = Camera.main.orthographicSize;
-        _ai = GetComponent<AI>();
 
         diffScreen = width / height;
         _newTimerSize.x = _imageMaskTransform.sizeDelta.x;
@@ -52,12 +51,13 @@ public class Indicator : MonoBehaviour
 
     private void Update()
     {
-        if (IsOutOfScreen() && _isHungry)
+        if (!IsInScreen() && _isHungry)
         {
             if (!_arrow.enabled)
             {
                 _image[_index].enabled = true;
-                
+                _orderBubbles[_index].SetActive(false);
+
                 _arrow.enabled = true;
                 _imageMaskTransform.GetComponent<Image>().enabled = true;
             }
@@ -90,15 +90,18 @@ public class Indicator : MonoBehaviour
         else
         {
             _image[_index].enabled = false;
+            _orderBubbles[_index].SetActive(true && _isHungry);
             _arrow.enabled = false;
             _imageMaskTransform.GetComponent<Image>().enabled = false;
         }
     }
 
-    private bool IsOutOfScreen()
+    private bool IsInScreen()
     {
-        return transform.position.x > Camera.main.transform.position.x + width || transform.position.x < Camera.main.transform.position.x - width
-            || transform.position.y + _offsetOutOfScreen.y > Camera.main.transform.position.y + height || transform.position.y < Camera.main.transform.position.y - height;
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position + _positionOffset);
+        return viewportPosition.x >= 0.0f && viewportPosition.x <= 1.0 &&
+               viewportPosition.y >= 0.0f && viewportPosition.y <= 1.0 &&
+               viewportPosition.z >= 0.0f;
     }
     private bool IsInCorner()
     {
@@ -131,6 +134,7 @@ public class Indicator : MonoBehaviour
 
     public void UpdateTimerIndicator(float timePersentage)
     {
+        timePersentage = 1.0f - timePersentage;
         _newTimerSize.y = 108 * timePersentage;
         _imageMaskTransform.sizeDelta = _newTimerSize;
     }

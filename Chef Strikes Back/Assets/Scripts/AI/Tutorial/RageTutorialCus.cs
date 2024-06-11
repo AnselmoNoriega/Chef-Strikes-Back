@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using System.Threading;
 
 public class RageTutorialCus : StateClass<AI>
 {
@@ -15,7 +16,6 @@ public class RageTutorialCus : StateClass<AI>
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.ChangeSpriteColor(Color.magenta);
         agent.Speed = 200;
         player = ServiceLocator.Get<Player>();
         ServiceLocator.Get<TutorialLoopManager>().PlayerShouldMove();
@@ -28,22 +28,29 @@ public class RageTutorialCus : StateClass<AI>
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("KillingKaren");
             return;
         }
-
-        if (_currentWaypoint >= agent.Path.vectorPath.Count)
-        {
-            agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-            _currentWaypoint = 0;
-            return;
-        }
         if (agent.IsDead)
         {
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
         }
 
-        var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
-        if (distance < agent.NextWaypointDistance + 0.1f)
+        if (!agent.shouldNotMove)
         {
-            ++_currentWaypoint;
+            if (_currentWaypoint >= agent.Path.vectorPath.Count)
+            {
+                agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
+                _currentWaypoint = 0;
+                return;
+            }
+            if (agent.IsDead)
+            {
+                ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("Ten_one", true);
+            }
+
+            var distance = Vector2.Distance(agent.Rb2d.position, agent.Path.vectorPath[_currentWaypoint]);
+            if (distance < agent.NextWaypointDistance + 0.1f)
+            {
+                ++_currentWaypoint;
+            }
         }
     }
 

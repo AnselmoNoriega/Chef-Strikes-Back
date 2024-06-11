@@ -1,4 +1,5 @@
 using Ink.Runtime;
+using MyBox;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private AudioSource audioSource;
 
     public bool IsPaused { get; set; }
 
@@ -31,6 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Initialize()
     {
+        audioSource.loop = false;
         _tutorialLoopManager = ServiceLocator.Get<TutorialLoopManager>();
 
         dialogueIsPlaying = true;
@@ -52,10 +55,20 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
-        var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
-        currentStory.variablesState["controller"] = controller;
+        if (currentStory.HasField("controller"))
+        {
+            var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+            currentStory.variablesState["controller"] = controller;
+        }
 
         ContinueStory();
+    }
+
+    public void EnterSoundDialogue(AudioClip audioClip)
+    {
+        audioSource.Stop();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active, bool callMethodIfFinished = false)
@@ -76,8 +89,11 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
-        var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
-        currentStory.variablesState["controller"] = controller;
+        if (currentStory.HasField("controller"))
+        {
+            var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+            currentStory.variablesState["controller"] = controller;
+        }
 
         ContinueStory();
     }
@@ -111,6 +127,7 @@ public class DialogueManager : MonoBehaviour
                 _callMethodIfFinished = false;
                 _tutorialLoopManager.EndConversation();
             }
+            _tutorialLoopManager.AIShouldMove();
         }
     }
 
@@ -144,15 +161,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void SetPause()
+    public void PanelDeactivate()
     {
-        if (IsPaused)
-        {
-            IsPaused = false;
-        }
-        else
-        {
-            IsPaused = true;
-        }
+        dialoguePanel.SetActive(false);
+    }
+    public void PanelActivate()
+    {
+        if(dialogueIsPlaying) { dialoguePanel.SetActive(true); }
+        
     }
 }

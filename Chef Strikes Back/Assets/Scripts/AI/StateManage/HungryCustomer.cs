@@ -3,7 +3,7 @@ using UnityEngine;
 public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime;
-    private float timer = 0;
+    private float timer = 1.0f;
     private float angerMultiplier = 4;
     private float _flashingTime = 0.0f;
 
@@ -13,12 +13,11 @@ public class HungryCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
-        
         waitingTime = ServiceLocator.Get<GameLoopManager>().CustomerFoodWaitingTime;
         ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
         _spriteRenderer = agent.GetComponent<SpriteRenderer>();
         scale = agent.EatingSlider.localScale;
-        scale.x = 0;
+        scale.x = 1.0f;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
@@ -26,24 +25,23 @@ public class HungryCustomer : StateClass<AI>
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-        timer = 0.0f;
-        
+        timer = 1.0f;
     }
 
     public void Update(AI agent, float dt)
     {
-        timer += (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
-        if (timer >= 0.8f / 2)
+        timer -= (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
+        if (timer >= 0.2f / 2)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 2;
+            scale.x -= (Time.deltaTime / waitingTime) / 2;
         }
-        if (timer >= 0.6f / 2)
+        if (timer >= 0.4f / 2)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 1.5f;
+            scale.x -= (Time.deltaTime / waitingTime) / 1.5f;
         }
         else
         {
-            scale.x += (Time.deltaTime / waitingTime) * 2;
+            scale.x -= (Time.deltaTime / waitingTime) * 2;
         }
 
         if(agent.IsAnnoyed)
@@ -58,18 +56,15 @@ public class HungryCustomer : StateClass<AI>
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
-        if (scale.x >= 1.0f)
+        if (scale.x <= 0.0f)
         {
             agent.AngryParticles.Play();
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
             
-            int value = Random.Range(0, 100) % 4;
-            agent.ChangeState((AIState)(value + 3));
+            agent.ChangeState((AIState)agent.CustomerAIType);
         }
-
-        
     }
 
     public void FixedUpdate(AI agent)

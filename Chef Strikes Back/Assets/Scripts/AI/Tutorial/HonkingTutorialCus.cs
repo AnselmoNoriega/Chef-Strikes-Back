@@ -19,7 +19,6 @@ public class HonkingTutorialCus : StateClass<AI>
             return;
         }
         agent.Seeker.StartPath(agent.Rb2d.position, _customer.transform.position, PathCompleted);
-        agent.ChangeSpriteColor(Color.green);
     }
     public void Update(AI agent, float dt)
     {

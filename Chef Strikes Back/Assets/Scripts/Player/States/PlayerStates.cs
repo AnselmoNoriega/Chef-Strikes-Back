@@ -161,6 +161,8 @@ public class PlayerThrowing : StateClass<Player>
         }
 
         _variables.ThrowDirection = dir * _throwStrength;
+        int lookingPos = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, _variables.ThrowDirection);
+        agent.PlayerAnimator.SetFloat("Blend", lookingPos);
     }
 
     public void FixedUpdate(Player agent)

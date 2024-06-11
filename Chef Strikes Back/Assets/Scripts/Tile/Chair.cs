@@ -55,6 +55,7 @@ public class Chair : MonoBehaviour
             Destroy(Food.gameObject);
             Food = null;
         }
+        Customer.Anim.Play("AI_Walk_North");
     }
 
     public bool IsAIsFood(Item item)
@@ -80,15 +81,20 @@ public class Chair : MonoBehaviour
             Customer.ChoiceIndex = GiveFoodChoice();
             Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             Customer.transform.position = transform.position;
+            
             switch (_dir)
             {
                 case Dir.North:
+                    Customer.Anim.Play("Sit_North");
                     break;
                 case Dir.South:
+                    Customer.Anim.Play("Sit_South");
                     break;
                 case Dir.West:
+                    Customer.Anim.Play("Sit_West");
                     break;
                 case Dir.East:
+                    Customer.Anim.Play("Sit_East");
                     break;
                 default:
                     break;

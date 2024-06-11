@@ -19,7 +19,6 @@ public class FoodLockCustomer : StateClass<AI>
             return;
         }
         agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
-        agent.ChangeSpriteColor(Color.yellow);
     }
 
     public void Update(AI agent, float dt)
