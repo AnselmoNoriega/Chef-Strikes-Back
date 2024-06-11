@@ -81,7 +81,6 @@ public class AI : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField] private Sounds[] sounds;
 
-
     public Path Path { get; set; }
     public Seeker Seeker { get; set; }
     public Chair SelectedChair { get; set; }
@@ -272,7 +271,7 @@ public class AI : MonoBehaviour
     public void Shoot()
     {
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
-        
+
         StartCoroutine(PlayGunParticles());
 
         //_audioManager.PlaySource("Shoot");
@@ -323,6 +322,21 @@ public class AI : MonoBehaviour
         foreach (AI ai in FindObjectsOfType<AI>())
         {
             ai.ToggleParticleEffect(useConfetti);
+        }
+    }
+
+    public void PlaySound(string name)
+    {
+        _audioSource.Stop();
+
+        foreach (var s in sounds)
+        {
+            if (s.name == name)
+            {
+                _audioSource.clip = s.clip;
+                _audioSource.Play();
+                return;
+            }
         }
     }
 
