@@ -8,6 +8,11 @@ public class CreditsScreen : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI _title;
     [SerializeField] private string titleText;
 
+    [Header("Containers")]
+    [SerializeField] GameObject Page1;
+    [SerializeField] GameObject Page2;
+    private bool page1Active = true;
+
     private GameLoader _loader;
 
     private void Awake()
@@ -20,5 +25,22 @@ public class CreditsScreen : MonoBehaviour
     {
         Debug.Log("Initializing Credits Screen");
         _title.text = titleText;
+    }
+
+    public void SwitchPage()
+    {
+        if (page1Active == true)
+        {
+            Page1.SetActive(false);
+            Page2.SetActive(true);
+            page1Active = false;
+        }
+        else
+        {
+            Page2.SetActive(false);
+            Page1.SetActive(true);
+            page1Active = true;
+        }
+        
     }
 }
