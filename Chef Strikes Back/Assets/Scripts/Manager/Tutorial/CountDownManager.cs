@@ -16,6 +16,7 @@ public class CountDownManager : MonoBehaviour
     public void StartCountDown()
     {
         _countDownPanel.SetActive(true);
+        ServiceLocator.Get<Player>().shouldNotMove = true;
         StartCoroutine(CountDown());
     }   
     
