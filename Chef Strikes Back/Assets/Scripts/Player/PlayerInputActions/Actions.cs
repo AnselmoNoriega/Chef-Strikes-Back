@@ -141,7 +141,7 @@ public class Actions : MonoBehaviour
                 else if (_inventory.GetFoodItem().Type == FoodType.Dough)
                 {
                     DoughParticles.gameObject.SetActive(true);
-                    PlayRandomSound("PickupDough");
+                    PlayRandomSound("Pickup_Dough");
                     Debug.Log("PlayingDoughPickup");
                 }
                 else
@@ -165,7 +165,7 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null)
         {
-            _audioManager.PlaySource("charge");
+            _audioManager.PlaySource("C_WindUp_Short_00");
             Debug.Log("ChargeSound");
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
@@ -194,7 +194,7 @@ public class Actions : MonoBehaviour
         _ready2Throw = false;
         IsCarryingItem = false;
         _player.ChangeAction(PlayerActions.None);
-        //StopChargeSound();
+        StopChargeSound();
     }
 
     public void Attacking(Vector2 anglePos)
@@ -213,6 +213,6 @@ public class Actions : MonoBehaviour
 
     private void StopChargeSound()
     {
-        _audioManager.StopSource("charge");
+        _audioManager.StopSource("C_WindUp_Short_00");
     }
 }
