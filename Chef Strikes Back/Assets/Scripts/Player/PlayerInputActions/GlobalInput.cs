@@ -64,4 +64,9 @@ public class GlobalInput : MonoBehaviour
         _playerInput = pInput;
         _playerInput.SetControllerActive(_controller);
     }
+
+    public bool IsUsingController()
+    {
+        return _controller;
+    }
 }
