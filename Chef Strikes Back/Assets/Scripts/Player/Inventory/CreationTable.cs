@@ -51,6 +51,7 @@ public class CreationTable : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private string itemPlacementSound;
     [SerializeField] private string lockedSound;
+    private string[] soundNames = { "FoodDone_00", "FoodDone_01" };
 
     private void Start()
     {
@@ -149,7 +150,8 @@ public class CreationTable : MonoBehaviour
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
             CompleteParticles.Play();
-            _audioManager.PlaySource("FoodDone");
+            string randomSound = soundNames[UnityEngine.Random.Range(0, soundNames.Length)];
+            _audioManager.PlaySource(randomSound);
             _count[_acceptedFoodTypes[i].Food] = false;
             _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);

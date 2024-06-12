@@ -207,9 +207,10 @@ public class Item : MonoBehaviour
 
     private void PlayBounceSound()
     {
-        string soundClipName = Type.ToString() + "Bounce";
+        int randomIndex = Random.Range(0, 3); // Random index between 0 and 2
+        string soundClipName = $"{Type}Bounce_{randomIndex:D2}"; // Formatted as "TypeBounce_00" to "TypeBounce_02"
         _audioManager.PlaySource(soundClipName);
-        Debug.Log(soundClipName);
+        Debug.Log($"Playing sound: {soundClipName}");
     }
 
     private void TriggerParticles(Vector2 position, Vector3 normal)

@@ -130,7 +130,7 @@ public class Player : MonoBehaviour
         }
         StartCoroutine(SpriteFlashing());
         _canvasManager.AddTooHealthSlider(-amt);
-        _audioManager.PlaySource(_hitSound[Random.Range(0, _hitSound.Length)]);
+        _audioManager.PlaySource(_hitSound[Random.Range(0, _hitSound.Length - 1)]);
  
     }
 

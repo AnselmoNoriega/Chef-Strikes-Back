@@ -16,6 +16,7 @@ public class CountDownManager : MonoBehaviour
     public void StartCountDown()
     {
         _countDownPanel.SetActive(true);
+        ServiceLocator.Get<Player>().shouldNotMove = true;
         StartCoroutine(CountDown());
     }   
     
@@ -42,6 +43,39 @@ public class CountDownManager : MonoBehaviour
             ServiceLocator.Get<AIManager>().GetComponent<AISupportManager>().SetAllChair();
             var glm = ServiceLocator.Get<GameLoopManager>();
             ServiceLocator.Get<TutorialLoopManager>().PlayerShouldMove();
+            glm.enabled = true;
+            glm.Initialize();
+        }
+    }
+
+    public void StartGame()
+    {
+        _countDownPanel.SetActive(true);
+        ServiceLocator.Get<Player>().shouldNotMove = true;
+        StartCoroutine(LevelCountDown());
+    }
+
+    private IEnumerator LevelCountDown()
+    {
+        if (_countDownCount > 0)
+        {
+            _countDownText.text = _countDownCount.ToString();
+        }
+        else
+        {
+            _countDownText.text = _endMessage;
+        }
+        yield return new WaitForSeconds(1f);
+        _countDownCount--;
+        if (_countDownCount >= 0)
+        {
+            StartCoroutine(LevelCountDown());
+        }
+        else
+        {
+            _countDownPanel.SetActive(false);
+            var glm = ServiceLocator.Get<GameLoopManager>();
+            ServiceLocator.Get<Player>().shouldNotMove = false;
             glm.enabled = true;
             glm.Initialize();
         }
