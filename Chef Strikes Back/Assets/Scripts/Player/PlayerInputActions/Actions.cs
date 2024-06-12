@@ -147,6 +147,18 @@ public class Actions : MonoBehaviour
                     PlayRandomSound("Pickup_Dough");
                     Debug.Log("PlayingDoughPickup");
                 }
+                else if (_inventory.GetFoodItem().Type == FoodType.Spaghetti)
+                {
+                    DoughParticles.gameObject.SetActive(true);
+                    PlayRandomSound("Pickup_Spaghetti");
+                    Debug.Log("PlayingSpaghettiPickup");
+                }
+                else if (_inventory.GetFoodItem().Type == FoodType.Pizza)
+                {
+                    DoughParticles.gameObject.SetActive(true);
+                    PlayRandomSound("Pickup-Pizza");
+                    Debug.Log("PlayingPizzaPickup");
+                }
                 else
                 {
                     Debug.Log("No food");
@@ -168,8 +180,8 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null)
         {
-            _audioManager.PlaySource(_windUp[UnityEngine.Random.Range(0, _windUp.Length - 2)]);
-            Debug.Log("ChargeSound");
+            PlayRandomSound("C_WindUp");
+            Debug.Log("WindUpSound");
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
             _player.ChangeAction(PlayerActions.Throwing);
@@ -184,7 +196,7 @@ public class Actions : MonoBehaviour
             _ready2Throw = false;
             IsCarryingItem = false;
             _player.ChangeAction(PlayerActions.None);
-            StopChargeSound();
+            StopRandomSound("C_WindUp");
         }
     }
 
@@ -197,11 +209,12 @@ public class Actions : MonoBehaviour
         _ready2Throw = false;
         IsCarryingItem = false;
         _player.ChangeAction(PlayerActions.None);
-        StopChargeSound();
+        StopRandomSound("C_WindUp");
     }
 
     public void Attacking(Vector2 anglePos)
     {
+        
         if (_player.PlayerAction != PlayerActions.Attacking && !_ready2Throw)
         {
             if (anglePos != Vector2.zero)
@@ -210,12 +223,15 @@ public class Actions : MonoBehaviour
                 _player.LookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
             }
             _player.ChangeAction(PlayerActions.Attacking);
-            //StopChargeSound();
+            PlayRandomSound("C_Attack");
+            StopRandomSound("C_WindUp");
         }
     }
 
-    private void StopChargeSound()
+    private void StopRandomSound(string baseName)
     {
-        _audioManager.StopSource(_windUp[UnityEngine.Random.Range(0, _windUp.Length - 2)]);
+        int randomIndex = UnityEngine.Random.Range(0, 5); // Random index between 0 and 4
+        string soundName = $"{baseName}_{randomIndex:D2}"; // Formatted as "baseName_00" to "baseName_04"
+        _audioManager.StopSource(soundName);
     }
 }
