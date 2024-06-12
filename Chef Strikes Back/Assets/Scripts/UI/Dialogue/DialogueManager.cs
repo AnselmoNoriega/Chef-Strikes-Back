@@ -104,7 +104,7 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
-        if (ServiceLocator.Get<TutorialLoopManager>().GetCustomerIdx() != 3)
+        if (ServiceLocator.Get<TutorialLoopManager>().GetCustomerIdx() != 3 || ServiceLocator.Get<TutorialLoopManager>().TutorialFinish)
         {
             ServiceLocator.Get<Player>().shouldNotMove = false;
             ServiceLocator.Get<TutorialLoopManager>().CameraTargetChange();

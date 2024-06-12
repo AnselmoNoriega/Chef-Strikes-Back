@@ -40,6 +40,7 @@ public class TutorialLoopManager : MonoBehaviour
     public bool TutorialSecondFace = false;
     public bool TutorialThirdFace = true;
     public bool _multipleSpaghettiesMade = false;
+    public bool TutorialFinish = false;
 
     private void Start()
     {
@@ -113,9 +114,10 @@ public class TutorialLoopManager : MonoBehaviour
                 {
                     ServiceLocator.Get<CountDownManager>().StartCountDown();
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
-
+                    TutorialFinish = true;
                     break;
                 }
+           
 
         }
         ++_focusPosIdx;
