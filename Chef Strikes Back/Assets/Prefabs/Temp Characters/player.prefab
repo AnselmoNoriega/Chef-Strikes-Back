@@ -738,6 +738,7 @@ MonoBehaviour:
   soundName: 
   IsWalking: 0
   GotDamage: 0
+  _hitSound: []
   shouldNotMove: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
@@ -777,6 +778,10 @@ MonoBehaviour:
   TomatoParticles: {fileID: 0}
   DoughParticles: {fileID: 0}
   CheeseParticles: {fileID: 0}
+  _windUp:
+  - C_WindUp_Long_00
+  - C_WindUp_Long_01
+  - C_WindUp_Short_00
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0

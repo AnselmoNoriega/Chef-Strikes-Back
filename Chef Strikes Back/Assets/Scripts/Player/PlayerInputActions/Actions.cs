@@ -19,7 +19,10 @@ public class Actions : MonoBehaviour
     public ParticleSystem TomatoParticles;
     public ParticleSystem DoughParticles;
     public ParticleSystem CheeseParticles;
+
+    [Header("Audio")]
     private AudioManager _audioManager;
+    [SerializeField] private string[] _windUp;
 
     private void Start()
     {
@@ -165,7 +168,7 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null)
         {
-            _audioManager.PlaySource("C_WindUp_Short_00");
+            _audioManager.PlaySource(_windUp[UnityEngine.Random.Range(0, _windUp.Length - 2)]);
             Debug.Log("ChargeSound");
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
@@ -213,6 +216,6 @@ public class Actions : MonoBehaviour
 
     private void StopChargeSound()
     {
-        _audioManager.StopSource("C_WindUp_Short_00");
+        _audioManager.StopSource(_windUp[UnityEngine.Random.Range(0, _windUp.Length - 2)]);
     }
 }
