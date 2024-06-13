@@ -73,7 +73,27 @@ public class AudioManager : MonoBehaviour
             case "MainScene":
                 PlaySource("BGM");
                 break;
-
+            case "Level_1":
+                PlaySource("Level_1");
+                break;
+            case "Level_2":
+                PlaySource("Level_1");
+                break;
+            case "Level_3":
+                PlaySource("Level_3");
+                break;
+            case "Level_4":
+                PlaySource("Level_4");
+                break;
+            case "Level_5":
+                PlaySource("Level_3");
+                break;
+            case "Level_6":
+                PlaySource("Level_4");
+                break;
+            case "DeathScene":
+                PlaySource("Level_4");
+                break;
             default: break;
         }
     }
