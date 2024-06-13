@@ -92,11 +92,11 @@ public class TutorialInput : MonoBehaviour
 
     private void CloseDialogueMenu(InputAction.CallbackContext input)
     {
-        if(Time.timeScale == 1)
+        if(Time.timeScale == 1 && _dialogueManager != null)
         {
             ServiceLocator.Get<DialogueManager>().PanelActivate();
         }
-        else
+        else if(_dialogueManager != null) 
         {
             ServiceLocator.Get<DialogueManager>().PanelDeactivate();
         }
