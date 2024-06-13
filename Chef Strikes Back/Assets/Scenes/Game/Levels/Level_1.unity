@@ -315,30 +315,28 @@ CompositeCollider2D:
         Y: 3225900
       - X: 6400024
         Y: 3225900
-    - - X: 6400000
+    - - X: -19888
+        Y: -10056
+      - X: 0
+        Y: -20000
+      - X: 6400000
         Y: 3180000
       - X: 0
         Y: 6380000
-      - X: -6380000
-        Y: 3190000
-      - X: 0
-        Y: 0
-      - X: -20000
-        Y: -10000
-      - X: 0
-        Y: -20000
-    - - X: -20000
-        Y: -10000
-      - X: -6400000
-        Y: 3180000
-      - X: -6380000
-        Y: 3190000
-      - X: -6400000
-        Y: 3200000
-      - X: -12800000
-        Y: 0
-      - X: -6400000
-        Y: -3200000
+      - X: -6379888
+        Y: 3190056
+      - X: -6399976
+        Y: 3200100
+      - X: -6400024
+        Y: 3200100
+      - X: -12800100
+        Y: 62
+      - X: -12800100
+        Y: -62
+      - X: -6400024
+        Y: -3200100
+      - X: -6399976
+        Y: -3200100
   m_CompositePaths:
     m_Paths:
     - - {x: -0.0000118, y: -2.5599942}
@@ -369,18 +367,14 @@ CompositeCollider2D:
       - {x: 1.2799484, y: 0.64263713}
       - {x: 0.6399858, y: 0.9626041}
       - {x: 0.0000517, y: 0.6425629}
-    - - {x: -0.0000118, y: -0.0019941}
+    - - {x: -0.6400094, y: -0.3200042}
+      - {x: -0.001977, y: -0.0010115}
+      - {x: 0.0000118, y: -0.0019941}
       - {x: 0.6399383, y: 0.3180309}
-      - {x: -0.0000118, y: 0.6379941}
-      - {x: -0.6379382, y: 0.3189691}
-      - {x: -0.0000618, y: -0.0000309}
-      - {x: -0.0019382, y: -0.0010309}
-    - - {x: -0.6400118, y: -0.3199941}
-      - {x: -0.0020618, y: -0.0009691}
-      - {x: -0.63993824, y: 0.3180309}
-      - {x: -0.6380618, y: 0.3190309}
-      - {x: -0.6400118, y: 0.3199941}
-      - {x: -1.2799383, y: -0.0000309}
+      - {x: -0.0000118, y: 0.6379942}
+      - {x: -0.6380007, y: 0.3190115}
+      - {x: -0.64001423, y: 0.3200041}
+      - {x: -1.2799484, y: -0.0000371}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!50 &12259219
@@ -631,13 +625,13 @@ Tilemap:
   - first: {x: -1, y: 0, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 3
+      m_TileIndex: 4
       m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 3
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741825
+      m_AllTileFlags: 1073741824
   - first: {x: 0, y: 0, z: 0}
     second:
       serializedVersion: 2
@@ -669,6 +663,18 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   m_AnimatedTiles:
+  - first: {x: -1, y: 0, z: 0}
+    second:
+      m_AnimatedSprites:
+      - {fileID: -437070517, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
+      - {fileID: 683178173, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
+      - {fileID: 680700286, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
+      - {fileID: 1232622588, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
+      - {fileID: -392221189, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
+      - {fileID: 1015389073, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
+      m_AnimationSpeed: 12
+      m_AnimationTimeOffset: 0
+      m_IsLooping: 1
   - first: {x: 1, y: 0, z: 0}
     second:
       m_AnimatedSprites:
@@ -688,10 +694,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 14
     m_Data: {fileID: 11400000, guid: 46e95216c00e8524f94460eedb5d045d, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: dab45bc6fa163aa4cbf1ca163f9957b5, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 2f745cbe243731b418e90129fa661827, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: 2f0bbd00773bcd94e91444eeaa47dfda, type: 2}
   - m_RefCount: 1
@@ -710,7 +716,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 1192787836, guid: 50e8aa4375ed4dd4bb710d67ff50148e, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: d97db6180b2bf0246ad15652c4cbf62f, type: 3}
+    m_Data: {fileID: 1015389073, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 19
     m_Data:
