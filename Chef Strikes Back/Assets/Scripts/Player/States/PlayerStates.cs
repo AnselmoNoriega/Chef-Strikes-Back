@@ -112,7 +112,7 @@ public class PlayerAttacking : StateClass<Player>
 
                 if (angleToCollider <= 45.0f && hit.GetComponent<AI>())
                 {
-                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
+                    ServiceLocator.Get<AudioManager>().PlaySource("Slice_01");
                     enemyAI.GetComponent<AI>().Damage((int)player.Weapon.Damage);
                     enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * _variables.KnockbackForce, ForceMode2D.Impulse);
                     enemyAI.GetComponent<AI>().IsHit = true;
@@ -121,7 +121,7 @@ public class PlayerAttacking : StateClass<Player>
                 
             }
 
-            ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
+            ServiceLocator.Get<AudioManager>().PlaySource("C_Attack_00");
         }
     }
 }
@@ -172,7 +172,7 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Exit(Player agent)
     {
-        ServiceLocator.Get<AudioManager>().PlaySource("throw");
+        ServiceLocator.Get<AudioManager>().PlaySource("C_Release_00");
         agent.PlayerAnimator.SetBool("IsThrowing", false);
         _variables.ThrowDirection = Vector2.zero;
         agent.PlayerAnimator.speed += _variables.ThrowAnimSpeed;
