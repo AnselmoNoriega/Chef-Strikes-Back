@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     [Header("Audio")]
     private AudioManager _audioManager;
-    [SerializeField] private string[] _hitSound;
+    [SerializeField] private string[] _hitSound = { "C-Hit_00", "C-Hit_01", "C-Hit_02", "C-Hit_03", "C-Hit_04" };
 
     public Rigidbody2D Rb { get; private set; }
     public Animator PlayerAnimator { get; private set; }
@@ -130,8 +130,18 @@ public class Player : MonoBehaviour
         }
         StartCoroutine(SpriteFlashing());
         _canvasManager.AddTooHealthSlider(-amt);
-        _audioManager.PlaySource(_hitSound[Random.Range(0, _hitSound.Length - 1)]);
- 
+
+        if (_hitSound.Length > 0)
+        {
+            string randomSound = _hitSound[Random.Range(0, _hitSound.Length)];
+            Debug.Log($"Playing sound: {randomSound}");
+            _audioManager.PlaySource(randomSound);
+        }
+        else
+        {
+            Debug.LogError("Hit sound array is empty!");
+        }
+
     }
 
     public void MakeETransfer()
