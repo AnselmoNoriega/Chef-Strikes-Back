@@ -314,7 +314,7 @@ public class AI : MonoBehaviour
     public void PlayMoneyUIPopUp()
     {
         _moneyUIParticleSystem.Play();
-        int randomIndex = Random.Range(0, 2); // Generates a number between 0 and 1
+        int randomIndex = Random.Range(0, 2);
         string randomSoundName = "Pay_0" + randomIndex;
         _audioManager.PlaySource(randomSoundName);
         Debug.Log("PaySound");
