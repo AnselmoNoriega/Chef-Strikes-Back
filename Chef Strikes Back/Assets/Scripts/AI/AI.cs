@@ -95,7 +95,9 @@ public class AI : MonoBehaviour
     private void Awake()
     {
         _audioManager = ServiceLocator.Get<AudioManager>();
-        //_audioManager.PlaySource("DoorOpen");
+        int randomIndex = Random.Range(0, 3);
+        string randomSoundName = "DoorOpen_0" + randomIndex;
+        _audioManager.PlaySource(randomSoundName);
         Debug.Log("DoorOpen");
         Indicator = GetComponent<Indicator>();
         Seeker = GetComponent<Seeker>();
@@ -312,7 +314,9 @@ public class AI : MonoBehaviour
     public void PlayMoneyUIPopUp()
     {
         _moneyUIParticleSystem.Play();
-        //_audioManager.PlaySource("Pay");
+        int randomIndex = Random.Range(0, 2); // Generates a number between 0 and 1
+        string randomSoundName = "Pay_0" + randomIndex;
+        _audioManager.PlaySource(randomSoundName);
         Debug.Log("PaySound");
     }
 

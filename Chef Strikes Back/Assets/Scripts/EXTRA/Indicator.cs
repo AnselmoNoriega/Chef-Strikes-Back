@@ -128,8 +128,8 @@ public class Indicator : MonoBehaviour
         _arrow.enabled = active;
         _isHungry = active;
         _imageMaskTransform.GetComponent<Image>().enabled = true;
-        //_audioManager.PlaySource("OrderBubble");
-        //Debug.Log("PlayingOrderBubble");
+        _audioManager.PlaySource("OrderBubble");
+        Debug.Log("PlayingOrderBubble");
     }
 
     public void UpdateTimerIndicator(float timePersentage)
