@@ -180,7 +180,7 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null)
         {
-            PlayRandomSound("C_WindUp");
+            _audioManager.PlaySource("C_WindUp_01"); 
             Debug.Log("WindUpSound");
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
@@ -196,7 +196,8 @@ public class Actions : MonoBehaviour
             _ready2Throw = false;
             IsCarryingItem = false;
             _player.ChangeAction(PlayerActions.None);
-            StopRandomSound("C_WindUp");
+            PlayRandomSound("C_Release");
+            _audioManager.StopSource("C_WindUp_01");
         }
     }
 
@@ -224,7 +225,8 @@ public class Actions : MonoBehaviour
             }
             _player.ChangeAction(PlayerActions.Attacking);
             PlayRandomSound("C_Attack");
-            StopRandomSound("C_WindUp");
+            PlayRandomSound("Slice");
+            _audioManager.StopSource("C_WindUp_01");
         }
     }
 
