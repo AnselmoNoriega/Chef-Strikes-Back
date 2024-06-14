@@ -76,6 +76,7 @@ public class CountDownManager : MonoBehaviour
             _countDownPanel.SetActive(false);
             var glm = ServiceLocator.Get<GameLoopManager>();
             ServiceLocator.Get<Player>().shouldNotMove = false;
+            ServiceLocator.Get<AudioManager>().BGMforScenes();
             glm.enabled = true;
             glm.Initialize();
         }

@@ -13,7 +13,10 @@ public class AudioManager : MonoBehaviour
     {
         Initialize();
     }
-
+    public void PostInitialize()
+    {
+        
+    }
     public void Initialize()
     {
         foreach (Sounds s in sounds)
@@ -24,7 +27,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
-        BGMforScenes();
+        //BGMforScenes();
     }
 
     public void PlaySource(string name)
@@ -66,7 +69,7 @@ public class AudioManager : MonoBehaviour
         return false;
     }
 
-    private void BGMforScenes()
+    public void BGMforScenes()
     {
         switch (SceneManager.GetActiveScene().name)
         {
@@ -92,7 +95,7 @@ public class AudioManager : MonoBehaviour
                 PlaySource("Level_4");
                 break;
             case "DeathScene":
-                PlaySource("Level_4");
+                PlaySource("DeathScene_BGM");
                 break;
             default: break;
         }
