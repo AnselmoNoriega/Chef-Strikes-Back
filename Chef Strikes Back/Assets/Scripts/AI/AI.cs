@@ -21,7 +21,7 @@ public enum AIState
 public enum CustomerType
 {
     Karen = 3,
-    Fank = 4,
+    Frank = 4,
     Jill = 5,
     Joaquin = 6
 }
@@ -77,7 +77,7 @@ public class AI : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     [Space, Header("Audio")]
-    private AudioManager _audioManager;
+    public AudioManager _audioManager;
     private AudioSource _audioSource;
     [SerializeField] private Sounds[] sounds;
 
@@ -199,6 +199,13 @@ public class AI : MonoBehaviour
             _IsDead = true;
             _animator.SetBool("IsDead", true);
 
+            // Play random death sound
+            string deathSoundName = GetRandomDeathSound(CustomerAIType);
+            if (!string.IsNullOrEmpty(deathSoundName))
+            {
+                _audioManager.PlaySource(deathSoundName);
+            }
+
             Speed = 0;
 
             if (Rb2d != null)
@@ -210,6 +217,24 @@ public class AI : MonoBehaviour
             ConfettiParticles.gameObject.SetActive(false);
 
             StartCoroutine(WaitForAnimationToEnd());
+        }
+    }
+
+    private string GetRandomDeathSound(CustomerType customerType)
+    {
+        int randomIndex = Random.Range(0, 2); // Assuming 00 and 01 for each character
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-Death_0" + randomIndex;
+            case CustomerType.Frank:
+                return "F-Death_0" + randomIndex;
+            case CustomerType.Jill:
+                return "Ji-Death_0" + randomIndex;
+            case CustomerType.Joaquin:
+                return "Jo-Death_0" + randomIndex;
+            default:
+                return null;
         }
     }
 
@@ -228,6 +253,22 @@ public class AI : MonoBehaviour
             particlesToPlay.gameObject.SetActive(true);
             particlesToPlay.Play();
 
+            string hitSoundName;
+
+            if ((int)state >= 3 && (int)state <= 8) // Assuming these states are considered "Bad"
+            {
+                hitSoundName = GetBadCustomerHitSound(CustomerAIType);
+            }
+            else
+            {
+                hitSoundName = GetGoodCustomerHitSound(CustomerAIType);
+            }
+
+            if (!string.IsNullOrEmpty(hitSoundName))
+            {
+                _audioManager.PlaySource(hitSoundName);
+            }
+
             if ((int)state >= 3 && (int)state <= 8)
             {
                 _health -= amt;
@@ -242,10 +283,47 @@ public class AI : MonoBehaviour
                 if (_hitsToGetMad <= 0)
                 {
                     ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
+                    ChangeState(AIState.Rage);
                 }
             }
 
             StartCoroutine(SpriteFlashing());
+        }
+    }
+
+    private string GetGoodCustomerHitSound(CustomerType customerType)
+    {
+        int randomIndex = Random.Range(0, 5); // Assuming 00 to 04 for hit sounds
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-Good-Customer-Hit_0" + randomIndex;
+            case CustomerType.Frank:
+                return "F-Good-Customer-Hit_0" + randomIndex;
+            case CustomerType.Jill:
+                return "Ji-Good-Customer-Hit_0" + randomIndex;
+            case CustomerType.Joaquin:
+                return "Jo-Good-Customer-Hit_0" + randomIndex;
+            default:
+                return null;
+        }
+    }
+
+    private string GetBadCustomerHitSound(CustomerType customerType)
+    {
+        int randomIndex = Random.Range(0, 5); // Assuming 00 to 04 for hit sounds
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-Bad-Customer-Hit_0" + randomIndex;
+            case CustomerType.Frank:
+                return "F-Bad-Customer-Hit_0" + randomIndex;
+            case CustomerType.Jill:
+                return "Ji-Bad-Customer-Hit_0" + randomIndex;
+            case CustomerType.Joaquin:
+                return "Jo-Bad-Customer-Hit_0" + randomIndex;
+            default:
+                return null;
         }
     }
 
@@ -268,6 +346,32 @@ public class AI : MonoBehaviour
     {
         _stateManager.ChangeState((int)newState);
         state = newState;
+
+        if (newState == AIState.Rage)
+        {
+            string soundName = GetRageSound(CustomerAIType);
+            if (!string.IsNullOrEmpty(soundName))
+            {
+                _audioManager.PlaySource(soundName);
+            }
+        }
+    }
+
+    private string GetRageSound(CustomerType customerType)
+    {
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-Angry_00";
+            case CustomerType.Frank:
+                return "F-Angry_00";
+            case CustomerType.Jill:
+                return "Ji-Angry_00";
+            case CustomerType.Joaquin:
+                return "Jo-Angry_00";
+            default:
+                return null;
+        }
     }
 
     public void Shoot()
@@ -276,8 +380,23 @@ public class AI : MonoBehaviour
 
         StartCoroutine(PlayGunParticles());
 
-        //_audioManager.PlaySource("Shoot");
+        // Play random gun sound for Joaquin
+        if (CustomerAIType == CustomerType.Joaquin)
+        {
+            string gunSoundName = GetRandomGunSound();
+            if (!string.IsNullOrEmpty(gunSoundName))
+            {
+                _audioManager.PlaySource(gunSoundName);
+            }
+        }
+
         Debug.Log("GunShot");
+    }
+
+    private string GetRandomGunSound()
+    {
+        int randomIndex = Random.Range(0, 3); // Assuming Gun_00 to Gun_02
+        return "Gun_0" + randomIndex;
     }
 
     private IEnumerator PlayGunParticles()
@@ -341,6 +460,38 @@ public class AI : MonoBehaviour
                 _audioSource.Play();
                 return;
             }
+        }
+    }
+
+    public void PlayAttackSound()
+    {
+        string attackSoundName = GetRandomAttackSound(CustomerAIType);
+        if (!string.IsNullOrEmpty(attackSoundName))
+        {
+            _audioManager.PlaySource(attackSoundName);
+            Debug.Log($"Playing attack sound: {attackSoundName}");
+        }
+        else
+        {
+            Debug.Log("No attack sound found");
+        }
+    }
+
+    private string GetRandomAttackSound(CustomerType customerType)
+    {
+        int randomIndex = Random.Range(0, 5); // Assuming 00 to 04 for attack sounds
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K_Attack_0" + randomIndex;
+            case CustomerType.Frank:
+                return "F_Attack_0" + randomIndex;
+            case CustomerType.Jill:
+                return "Ji_Attack_0" + randomIndex;
+            case CustomerType.Joaquin:
+                return "Gun_0" + Random.Range(0, 3); // Joaquin's gun sounds
+            default:
+                return null;
         }
     }
 

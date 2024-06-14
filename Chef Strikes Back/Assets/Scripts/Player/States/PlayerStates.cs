@@ -172,7 +172,7 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Exit(Player agent)
     {
-        ServiceLocator.Get<AudioManager>().PlaySource("C_Release_00");
+
         agent.PlayerAnimator.SetBool("IsThrowing", false);
         _variables.ThrowDirection = Vector2.zero;
         agent.PlayerAnimator.speed += _variables.ThrowAnimSpeed;

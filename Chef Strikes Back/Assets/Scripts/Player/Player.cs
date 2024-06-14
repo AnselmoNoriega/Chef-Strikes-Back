@@ -35,7 +35,9 @@ public class Player : MonoBehaviour
 
     [Header("Audio")]
     private AudioManager _audioManager;
-    [SerializeField] private string[] _hitSound;
+    [SerializeField] private string[] _hitSound = { "C-Hit_00", "C-Hit_01", "C-Hit_02", "C-Hit_03", "C-Hit_04" };
+    [SerializeField] private string[] _deathSound = { "C-Death_00", "C-Death_01"};
+    [SerializeField] private string[] _bumpSound = { "C_Bump-Player_00", "C_Bump-Player_01", "C_Bump - Player_02", "C_Bump - Player_03", "C_Bump - Player_04" };
 
     public Rigidbody2D Rb { get; private set; }
     public Animator PlayerAnimator { get; private set; }
@@ -124,14 +126,27 @@ public class Player : MonoBehaviour
         GotDamage = true;
         if (_currentHealth <= 0)
         {
+            string randomSound = _deathSound[Random.Range(0, _deathSound.Length)];
+            Debug.Log($"Playing sound: {randomSound}");
+            _audioManager.PlaySource(randomSound);
             _gameManager.SetKillCount(KillCount);
             ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
             return;
         }
         StartCoroutine(SpriteFlashing());
         _canvasManager.AddTooHealthSlider(-amt);
-        _audioManager.PlaySource(_hitSound[Random.Range(0, _hitSound.Length - 1)]);
- 
+
+        if (_hitSound.Length > 0)
+        {
+            string randomSound = _hitSound[Random.Range(0, _hitSound.Length)];
+            Debug.Log($"Playing sound: {randomSound}");
+            _audioManager.PlaySource(randomSound);
+        }
+        else
+        {
+            Debug.LogError("Hit sound array is empty!");
+        }
+
     }
 
     public void MakeETransfer()
@@ -162,6 +177,9 @@ public class Player : MonoBehaviour
     public void StopPlayerMovement()
     {
         Rb.AddForce((-Rb.velocity + _floorSpeed) * Variables.PlayerAcceleration);
+        string randomSound = _bumpSound[Random.Range(0, _bumpSound.Length)];
+        _audioManager.PlaySource(randomSound);
+
     }
 
     public void AddKillCount()

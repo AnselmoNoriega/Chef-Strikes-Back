@@ -384,8 +384,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cb869ecd2e9e282488b552fa21f3b8ae, type: 2}
-  m_sharedMaterial: {fileID: -369733016526487593, guid: cb869ecd2e9e282488b552fa21f3b8ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1111,6 +1111,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3df06909c3ec31943b7143889cceca40, type: 3}
     - target: {fileID: 8772369273757668514, guid: 6da4be589b40caa4f810631348517be2, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 99d6cbb4c12474045b2f18ccfbaa842c, type: 3}
+    - target: {fileID: 8772369273757668514, guid: 6da4be589b40caa4f810631348517be2, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 99d6cbb4c12474045b2f18ccfbaa842c, type: 3}
@@ -1268,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: 7aa9aeda141759b4abcc30808b98e01f, type: 3}
+    - target: {fileID: 8772369273757668514, guid: 6da4be589b40caa4f810631348517be2, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c772e7c186b5b54488feed9b655aaf8d, type: 3}
     - target: {fileID: 8772369273757668514, guid: 6da4be589b40caa4f810631348517be2, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
@@ -1430,6 +1438,10 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: db2d995705cb1a54e9c6e6d61d6c5de8, type: 3}
+    - target: {fileID: 8772369273757668514, guid: 6da4be589b40caa4f810631348517be2, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f81d8ec9080b3134f8537666b7bb006b, type: 3}
     - target: {fileID: 8772369273757668514, guid: 6da4be589b40caa4f810631348517be2, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
