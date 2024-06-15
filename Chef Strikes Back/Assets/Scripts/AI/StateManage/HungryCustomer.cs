@@ -47,7 +47,7 @@ public class HungryCustomer : StateClass<AI>
         {
             scale.x -= (Time.deltaTime / waitingTime) / 1.5f;
         }
-        if (timer == 0.5f)
+        if (timer == 5f)
         {
             GetAlmostAngrySound(CustomerAIType);
         }
