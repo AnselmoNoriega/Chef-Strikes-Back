@@ -208,8 +208,11 @@ MonoBehaviour:
   ConfettiParticles: {fileID: 4334602939879611795}
   HappyParticles: {fileID: 5057430948577461386}
   AngryParticles: {fileID: 2181867299460988573}
+  GunParticles: {fileID: 0}
   shouldNotMove: 0
   _animator: {fileID: -1032899175772524887}
+  _audioManager: {fileID: 0}
+  sounds: []
 --- !u!114 &4617263295547057938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +330,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 3c772c85a724fec4ea4b2519ac1c1b81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88bd89e61a3e36c4d907e13efef72e83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -565,7 +568,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 3f31d983ba6e2c8448bc1fb7b796fb89, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a16e6c5fe2b95984aab1adb0e2ee9127, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

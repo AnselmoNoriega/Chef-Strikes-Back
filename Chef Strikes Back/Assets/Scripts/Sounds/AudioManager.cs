@@ -73,8 +73,17 @@ public class AudioManager : MonoBehaviour
     {
         switch (SceneManager.GetActiveScene().name)
         {
-            case "MainScene":
+            case "TitleScreen":
                 PlaySource("BGM");
+                break;
+            case "MainMenu":
+                PlaySource("BGM");
+                break;
+            case "EndLEvel":
+                PlaySource("BGM");
+                break;
+            case "MainScene":
+                PlaySource("Level_1");
                 break;
             case "Level_1":
                 PlaySource("Level_1");

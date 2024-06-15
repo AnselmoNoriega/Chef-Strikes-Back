@@ -11,6 +11,12 @@ public class HungryCustomer : StateClass<AI>
 
     private Vector3 scale = Vector3.zero;
 
+    public CustomerType CustomerAIType;
+    [Space, Header("Audio")]
+    public AudioManager _audioManager;
+    private AudioSource _audioSource;
+    [SerializeField] private Sounds[] sounds;
+
     public void Enter(AI agent)
     {
         waitingTime = ServiceLocator.Get<GameLoopManager>().CustomerFoodWaitingTime;
@@ -81,7 +87,7 @@ public class HungryCustomer : StateClass<AI>
     {
 
     }
-
+    
     public void Exit(AI agent)
     {
         agent.Indicator.SetIndicator(false, (IndicatorImage)agent.ChoiceIndex);
@@ -89,6 +95,9 @@ public class HungryCustomer : StateClass<AI>
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
         ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
+
+        // Play random death sound
+        
     }
 
     private void Anselmo()
