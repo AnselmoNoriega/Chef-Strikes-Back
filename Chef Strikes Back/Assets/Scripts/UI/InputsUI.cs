@@ -36,6 +36,7 @@ public class InputsUI : MonoBehaviour
 
     public void SelectButton(int index)
     {
+        
         _firstSelectedButton = _UIbuttons[index];
         _eventSystem.SetSelectedGameObject(_firstSelectedButton);
     }
