@@ -37,6 +37,8 @@ public class HungryCustomer : StateClass<AI>
     public void Update(AI agent, float dt)
     {
         timer -= (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
+        int randomIndex = Random.Range(0, 2);
+
         if (timer >= 0.2f / 2)
         {
             scale.x -= (Time.deltaTime / waitingTime) / 2;
@@ -44,6 +46,10 @@ public class HungryCustomer : StateClass<AI>
         if (timer >= 0.4f / 2)
         {
             scale.x -= (Time.deltaTime / waitingTime) / 1.5f;
+        }
+        if (timer == 0.5f)
+        {
+            GetAlmostAngrySound(CustomerAIType);
         }
         else
         {
@@ -120,4 +126,22 @@ public class HungryCustomer : StateClass<AI>
         
     }
 
-}
+    private string GetAlmostAngrySound(CustomerType customerType)
+        {
+            int randomIndex = Random.Range(0, 2);
+            switch (customerType)
+            {
+                case CustomerType.Karen:
+                    return "K-Nearly-Angry_00" + randomIndex;
+                case CustomerType.Frank:
+                    return "F-Nearly-Angry_00" + randomIndex;
+                case CustomerType.Jill:
+                    return "Ji-Nearly-Angry_00" + randomIndex;
+                case CustomerType.Joaquin:
+                    return "Jo-Nearly-Angry_00" + randomIndex;
+                default:
+                    return null;
+            }
+        }
+    }
+    
