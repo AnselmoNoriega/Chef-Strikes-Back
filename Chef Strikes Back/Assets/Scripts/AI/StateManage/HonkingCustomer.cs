@@ -11,6 +11,7 @@ public class HonkingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _agent.AngryIndicate.SetActive(true);
         _countDown = Time.time;
         _customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
         if( _customer == null )

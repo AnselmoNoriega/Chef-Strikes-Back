@@ -11,6 +11,7 @@ public class FoodLockCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _agent.AngryIndicate.SetActive(true);
         _countDown = Time.time;
         _combiner = ServiceLocator.Get<AIManager>().GiveMeCreationTable();
         if (_combiner == null)

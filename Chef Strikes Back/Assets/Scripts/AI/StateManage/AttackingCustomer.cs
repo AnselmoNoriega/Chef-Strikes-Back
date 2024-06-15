@@ -1,5 +1,6 @@
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.InputSystem.Android;
 
 public class AttackingCustomer : StateClass<AI>
 {
@@ -9,6 +10,7 @@ public class AttackingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _hasAttacked = false;
+        agent.AngryIndicate.SetActive(true);
         _countDown = Time.time;
     }
 

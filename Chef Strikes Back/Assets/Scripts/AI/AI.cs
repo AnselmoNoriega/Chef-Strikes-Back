@@ -49,6 +49,7 @@ public class AI : MonoBehaviour
     public bool IsAnnoyed = false;
     [SerializeField] private int _health = 0;
     [SerializeField] private int _hitsToGetMad = 0;
+    [SerializeField] public GameObject AngryIndicate;
 
     [Space, Header("AI's got hit animation")]
     [SerializeField] private SpriteRenderer _goodAISprite;
