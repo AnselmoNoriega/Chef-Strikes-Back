@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using Pathfinding;
+using Unity.Collections;
 
 public enum AIState
 {
@@ -268,6 +269,8 @@ public class AI : MonoBehaviour
             {
                 _audioManager.PlaySource(hitSoundName);
             }
+
+            PlayRandomSound("slice");
 
             if ((int)state >= 3 && (int)state <= 8)
             {
@@ -547,5 +550,12 @@ public class AI : MonoBehaviour
         _stateManager.AddState<LeavingCustomer>();
 
         ChangeState(ServiceLocator.Get<GameLoopManager>().AiStandState);
+    }
+
+    private void PlayRandomSound(string baseName)
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 5); // Random index between 0 and 4
+        string soundName = $"{baseName}_{randomIndex:D2}"; // Formatted as "baseName_00" to "baseName_04"
+        _audioManager.PlaySource(soundName);
     }
 }
