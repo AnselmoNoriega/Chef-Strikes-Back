@@ -151,8 +151,6 @@ public class PlayerThrowing : StateClass<Player>
     public void Update(Player agent, float dt)
     {
         var dir = _playerInputs.GetLookingDir();
-        var val = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, dir);
-        _legsAnimator.SetInteger("PosNum",val);
 
         agent.PlayerAnimator.SetBool("IsThrowing", true);
         if (_throwStrength <= _variables.MaxTimer)
@@ -163,6 +161,7 @@ public class PlayerThrowing : StateClass<Player>
         _variables.ThrowDirection = dir * _throwStrength;
         int lookingPos = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, _variables.ThrowDirection);
         agent.PlayerAnimator.SetFloat("Blend", lookingPos);
+        _legsAnimator.SetInteger("PosNum", lookingPos);
     }
 
     public void FixedUpdate(Player agent)
