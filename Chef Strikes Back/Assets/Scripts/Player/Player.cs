@@ -177,9 +177,17 @@ public class Player : MonoBehaviour
     public void StopPlayerMovement()
     {
         Rb.AddForce((-Rb.velocity + _floorSpeed) * Variables.PlayerAcceleration);
-        string randomSound = _bumpSound[Random.Range(0, _bumpSound.Length)];
-        _audioManager.PlaySource(randomSound);
+       
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            string randomSound = _bumpSound[Random.Range(0, _bumpSound.Length)];
+            _audioManager.PlaySource(randomSound);
+        }
     }
 
     public void AddKillCount()

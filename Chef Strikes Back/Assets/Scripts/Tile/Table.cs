@@ -11,7 +11,7 @@ public class Table : MonoBehaviour
     public SpriteRenderer plateSprite;
 
 
-    public CustomerType CustomerAIType;
+    
     [Space, Header("Audio")]
     public AudioManager _audioManager;
     private AudioSource _audioSource;
@@ -96,10 +96,10 @@ public class Table : MonoBehaviour
                     chair.Customer.ChangeState(AIState.Eating);
                     newItem.LaunchedInTable(platePos);
 
-                    string eatingSoundName = GetEatingSound(CustomerAIType);
+                    string eatingSoundName = GetEatingSound(chair.Customer.CustomerAIType);
                     if (!string.IsNullOrEmpty(eatingSoundName))
                     {
-                        _audioManager.PlaySource(eatingSoundName);
+                        ServiceLocator.Get<AudioManager>().PlaySource(eatingSoundName);
                     }
                     return;
                 }

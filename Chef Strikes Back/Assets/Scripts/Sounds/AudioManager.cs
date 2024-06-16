@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds;
 
+    
     private void Awake()
     {
         Initialize();
@@ -74,40 +75,45 @@ public class AudioManager : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "TitleScreen":
-                PlaySource("BGM");
+                PlaySource("MusicBurntPizza");
                 break;
             case "MainMenu":
-                PlaySource("BGM");
+                PlaySource("MusicBurntPizza");
                 break;
             case "EndLEvel":
-                PlaySource("BGM");
+                PlaySource("MusicBurntPizza");
                 break;
             case "MainScene":
-                PlaySource("Level_1");
+                PlaySource("MusicLaPizzaria");
                 break;
             case "Level_1":
-                PlaySource("Level_1");
+                PlaySource("MusicLaPizzaria");
                 break;
             case "Level_2":
-                PlaySource("Level_1");
+                PlaySource("MusicLaPizzaria");
                 break;
             case "Level_3":
-                PlaySource("Level_3");
+                PlaySource("MusicOvenFull");
                 break;
             case "Level_4":
-                PlaySource("Level_4");
+                PlaySource("MusicPepperonis");
                 break;
             case "Level_5":
-                PlaySource("Level_3");
+                PlaySource("MusicOvenFull");
                 break;
             case "Level_6":
-                PlaySource("Level_4");
+                PlaySource("MusicPepperonis");
                 break;
             case "DeathScene":
-                PlaySource("DeathScene_BGM");
+                PlaySource("MusicHawaiian");
                 break;
             default: break;
         }
+    }
+
+    public void ButtonClickSound()
+    {
+
     }
 
     private void LogErrorWithCallerInfo(string message)
