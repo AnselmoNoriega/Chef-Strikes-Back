@@ -1009,12 +1009,16 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2090645746919194350, guid: 8c944aede35307e4e90638db8f59b8c6, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11500000, guid: 412292d10be2a914fb1e8442d48488c4, type: 3}
+    - target: {fileID: 2090645746919194350, guid: 8c944aede35307e4e90638db8f59b8c6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2090645746919194350, guid: 8c944aede35307e4e90638db8f59b8c6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetScreenActive
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2090645746919194350, guid: 8c944aede35307e4e90638db8f59b8c6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

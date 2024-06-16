@@ -119,4 +119,6 @@ public class Chair : MonoBehaviour
 
         return 0;
     }
+
+   
 }
