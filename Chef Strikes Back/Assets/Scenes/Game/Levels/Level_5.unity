@@ -4962,17 +4962,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d540b2665d5bfbc43b0d16ff275da69f, type: 3}
---- !u!114 &629283103 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6583533360615572389, guid: d540b2665d5bfbc43b0d16ff275da69f, type: 3}
+--- !u!224 &629283103 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1555385117759533292, guid: d540b2665d5bfbc43b0d16ff275da69f, type: 3}
   m_PrefabInstance: {fileID: 629283102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &629283104 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 515267152168242832, guid: d540b2665d5bfbc43b0d16ff275da69f, type: 3}
@@ -5261,6 +5255,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d396632d0560b4bacc3efabc4d9ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &723724129 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4584778047650873789, guid: d540b2665d5bfbc43b0d16ff275da69f, type: 3}
+  m_PrefabInstance: {fileID: 629283102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &751758874
 GameObject:
   m_ObjectHideFlags: 0
@@ -22376,11 +22375,23 @@ PrefabInstance:
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: textTime
       value: 
-      objectReference: {fileID: 629283103}
+      objectReference: {fileID: 0}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: worldLight
       value: 
       objectReference: {fileID: 387362748}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: clockHands.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: clockHands.Array.data[0]
+      value: 
+      objectReference: {fileID: 723724129}
+    - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: clockHands.Array.data[1]
+      value: 
+      objectReference: {fileID: 629283103}
     - target: {fileID: 1586224115833489991, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: _spawningTimes.Array.size
       value: 7
