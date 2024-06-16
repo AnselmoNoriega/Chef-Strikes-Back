@@ -13,6 +13,9 @@ public class HonkingTutorialCus : StateClass<AI>
         _agent = agent;
         _countDown = Time.time;
         _customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
+
+        ServiceLocator.Get<AudioManager>().PlaySource("F-Annoy-NPC_00");
+
         if (_customer == null)
         {
             agent.ChangeState(AIState.Rage);
@@ -45,6 +48,8 @@ public class HonkingTutorialCus : StateClass<AI>
             _customer.IsAnnoyed = false;
         }
         agent.IsHit = false;
+
+        ServiceLocator.Get<AudioManager>().StopSource("F-Annoy-NPC_00");
     }
 
     public void FixedUpdate(AI agent)

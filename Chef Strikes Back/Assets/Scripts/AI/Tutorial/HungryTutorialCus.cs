@@ -8,6 +8,8 @@ public class HungryTutorialCus : StateClass<AI>
 
     private Vector3 scale = Vector3.zero;
 
+    private bool _soundAngry = false;
+
     public void Enter(AI agent)
     {
         waitingTime = ServiceLocator.Get<TutorialLoopManager>().GetWaitingTime();
@@ -39,7 +41,7 @@ public class HungryTutorialCus : StateClass<AI>
         if (timer >= 0.4f / 2)
         {
             scale.x -= (Time.deltaTime / waitingTime) / 1.5f;
-        }
+        }      
         else
         {
             scale.x -= (Time.deltaTime / waitingTime) * 2;
@@ -47,6 +49,13 @@ public class HungryTutorialCus : StateClass<AI>
 
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
+
+        if (!_soundAngry && scale.x <= 0.16f)
+        {
+            _soundAngry = true;
+            string phiphi = GetAlmostAngrySound(agent.CustomerAIType);
+            ServiceLocator.Get<AudioManager>().PlaySource(phiphi);
+        }
 
         if (scale.x <= 0.0f)
         {
@@ -95,6 +104,23 @@ public class HungryTutorialCus : StateClass<AI>
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
         ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
+    }
+
+    private string GetAlmostAngrySound(CustomerType customerType)
+    {
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-Nearly-Angry_00";
+            case CustomerType.Frank:
+                return "F-Nearly-Angry_00";
+            case CustomerType.Jill:
+                return "Ji-Nearly-Angry_00";
+            case CustomerType.Joaquin:
+                return "Jo-Nearly-Angry_00";
+            default:
+                return null;
+        }
     }
 
 }
