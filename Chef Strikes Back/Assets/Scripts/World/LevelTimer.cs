@@ -33,7 +33,7 @@ public class LevelTimer : MonoBehaviour
     }
     private PhaseDefinition _currentPhase;
     [SerializeField] private List<PhaseDefinition> _phases = new();
-
+    private bool _shouldRun = false;
     public void Initialize()
     {
         timePlaying = TimeSpan.FromMinutes(elapsedTime);
@@ -47,6 +47,11 @@ public class LevelTimer : MonoBehaviour
     {
         SpawnTimeChangeBasedOnTimer();
 
+
+        if (!_shouldRun)
+        {
+            return;
+        }
         elapsedTime -= Time.deltaTime / 60;
         worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
 
@@ -59,6 +64,11 @@ public class LevelTimer : MonoBehaviour
             ServiceLocator.Get<GameManager>().SaveMoney(ServiceLocator.Get<Player>().Money);
             sceneControl.GoToEndScene();
         }
+    }
+
+    public void SetTimeState(bool active)
+    {
+        _shouldRun = active;
     }
 
     private void SpawnTimeChangeBasedOnTimer()
