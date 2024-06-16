@@ -14,6 +14,7 @@ public class AttackingTutorialCus : StateClass<AI>
         _hasAttacked = false;
         _countDown = Time.time;
         _loopManager = ServiceLocator.Get<TutorialLoopManager>();
+        agent.Anim.SetBool("IsAttacking", true);
     }
 
     public void Update(AI agent, float dt)
@@ -77,6 +78,6 @@ public class AttackingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-
+        agent.Anim.SetBool("IsAttacking", false);
     }
 }

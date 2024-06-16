@@ -16,6 +16,7 @@ public class BobAttackState : StateClass<AI>
 
         scale = agent.ReloadSlider.localScale;
         agent.ReloadSlider.localScale = scale;
+        agent.Anim.SetBool("IsAttacking", true);
     }
     public void Update(AI agent, float dt)
     {
@@ -43,6 +44,7 @@ public class BobAttackState : StateClass<AI>
     {
         agent.SliderParenObj.SetActive(false);
         agent.ReloadCountDown = 0;
+        agent.Anim.SetBool("IsAttacking", false);
     }
 
     public void FixedUpdate(AI agent)

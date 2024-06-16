@@ -12,6 +12,7 @@ public class AttackingCustomer : StateClass<AI>
         _hasAttacked = false;
         agent.AngryIndicate.SetActive(true);
         _countDown = Time.time;
+        agent.Anim.SetBool("IsAttacking", true);
     }
 
     public void Update(AI agent, float dt)
@@ -64,6 +65,6 @@ public class AttackingCustomer : StateClass<AI>
 
     public void Exit(AI agent)
     {
-
+        agent.Anim.SetBool("IsAttacking", false);
     }
 }
