@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Plates_Reminder : MonoBehaviour
 {
     [SerializeField] public GameObject plates_Reminders;
-    private bool _isActive = true;
+    private bool _isActive = false;
+
+    private void Awake()
+    {
+        plates_Reminders.SetActive(false);
+    }
+
     private void Update()
     {
-
-        if (IsHoldingFood() && _isActive)
+        if (IsHoldingFood() && !_isActive)
+        {
+            _isActive = true;
+            StartCoroutine(ButtonFlashing(plates_Reminders));
+        }
+        else if (!IsHoldingFood() && _isActive)
         {
             _isActive = false;
-            ButtonFlashing(plates_Reminders);
-        }
-        else if(!IsHoldingFood()&&!_isActive)
-        {
-            _isActive=true;
             plates_Reminders.SetActive(false);
         }
 
@@ -34,7 +41,7 @@ public class Plates_Reminder : MonoBehaviour
     private bool IsHoldingFood()
     {
         var inventory = ServiceLocator.Get<Player>().GetComponent<Inventory>();
-        if (inventory.CarryItemType() == FoodType.Pizza && inventory.CarryItemType() == FoodType.Spaghetti)
+        if (inventory.CarryItemType() == FoodType.Pizza || inventory.CarryItemType() == FoodType.Spaghetti)
         {
             return true;
         }
@@ -42,7 +49,7 @@ public class Plates_Reminder : MonoBehaviour
     }
     public bool IsSitting()
     {
-        var chair = ServiceLocator.Get<Chair>();
-        return chair.seatAvaliable;
+        var chair = GetComponent<Chair>();
+        return !chair.seatAvaliable;
     }
 }
