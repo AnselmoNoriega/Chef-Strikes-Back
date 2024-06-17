@@ -1,14 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Plates_Reminder : MonoBehaviour
 {
     [SerializeField] public GameObject plates_Reminders;
     private bool _isActive = false;
-
     private void Awake()
     {
         plates_Reminders.SetActive(false);

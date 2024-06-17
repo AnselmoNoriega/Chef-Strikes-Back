@@ -1,14 +1,10 @@
-using UnityEngine;
-using System;
-using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public Sounds[] sounds;
-
     
     private void Awake()
     {
