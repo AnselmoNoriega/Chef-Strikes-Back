@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
     [Space, Header("State Info")]
     public PlayerStates PlayerState;
     public PlayerActions PlayerAction;
-    public string soundName;
     public bool IsWalking = false;
     public bool GotDamage = false;
 
