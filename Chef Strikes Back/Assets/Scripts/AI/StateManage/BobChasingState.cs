@@ -10,6 +10,7 @@ public class BobChasingState : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _agent.AngryIndicate.SetActive(true);
         agent.ReloadCountDown = 0;
         _countDown = Time.time;
         _playerPos = ServiceLocator.Get<Player>().transform;

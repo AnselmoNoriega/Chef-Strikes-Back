@@ -104,6 +104,7 @@ public class HungryCustomer : StateClass<AI>
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
         ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
+        _spriteRenderer.color = Color.white;
 
         // Play random death sound
 
