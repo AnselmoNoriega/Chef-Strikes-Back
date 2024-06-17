@@ -7767,9 +7767,7 @@ GameObject:
   - component: {fileID: 1066284187}
   - component: {fileID: 1066284186}
   - component: {fileID: 1066284185}
-  - component: {fileID: 1066284184}
   - component: {fileID: 1066284183}
-  - component: {fileID: 1066284188}
   m_Layer: 12
   m_Name: KitchenFloor
   m_TagString: Untagged
@@ -7804,68 +7802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileClipName: Tile
-  woodClipName: Wood
-  brickClipName: Brick
-  player: {fileID: 1846026830}
---- !u!66 &1066284184
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066284181}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1066284186}
-    m_ColliderPaths:
-    - - X: -25599900
-        Y: -12800062
-      - X: -25599900
-        Y: -12799938
-      - X: -31999898
-        Y: -9599938
-      - X: -38399976
-        Y: -6399900
-      - X: -51199976
-        Y: 100
-      - X: -51200024
-        Y: 100
-      - X: -57600096
-        Y: -3199938
-      - X: -64000096
-        Y: -6399938
-      - X: -70400092
-        Y: -9599938
-      - X: -70400092
-        Y: -9600062
-      - X: -64000020
-        Y: -12800100
-      - X: -57600020
-        Y: -16000099
-      - X: -51200024
-        Y: -19200100
-      - X: -44800024
-        Y: -22400100
-      - X: -44799976
-        Y: -22400100
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -4.4800143, y: -2.240004}
-      - {x: -2.5600517, y: -1.2799629}
-      - {x: -5.1200147, y: 0.0000041}
-      - {x: -7.0399475, y: -0.9600371}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  clipName: Tile
 --- !u!50 &1066284185
 Rigidbody2D:
   serializedVersion: 4
@@ -7897,9 +7834,9 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
@@ -8085,19 +8022,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1066284188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066284181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d8bb7e7bc7fe1478357266a255651e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileType: 0
 --- !u!1 &1068478776
 GameObject:
   m_ObjectHideFlags: 0
@@ -8491,9 +8415,7 @@ GameObject:
   - component: {fileID: 1128336686}
   - component: {fileID: 1128336685}
   - component: {fileID: 1128336684}
-  - component: {fileID: 1128336683}
   - component: {fileID: 1128336682}
-  - component: {fileID: 1128336687}
   m_Layer: 12
   m_Name: EntranceFloor
   m_TagString: Untagged
@@ -8528,86 +8450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileClipName: Tile
-  woodClipName: Wood
-  brickClipName: Brick
-  player: {fileID: 1846026830}
---- !u!66 &1128336683
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128336680}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1128336685}
-    m_ColliderPaths:
-    - - X: 70400016
-        Y: 28799898
-      - X: 70400024
-        Y: 28799898
-      - X: 76800100
-        Y: 31999936
-      - X: 76800100
-        Y: 32000060
-      - X: 70400024
-        Y: 35200096
-      - X: 70400016
-        Y: 35200096
-      - X: 64000096
-        Y: 38400058
-      - X: 64000096
-        Y: 38400062
-      - X: 57600020
-        Y: 41600100
-      - X: 51200100
-        Y: 44800062
-      - X: 44800024
-        Y: 48000100
-      - X: 38400024
-        Y: 51200104
-      - X: 38399976
-        Y: 51200104
-      - X: 31999898
-        Y: 48000062
-      - X: 25599900
-        Y: 44800062
-      - X: 25599900
-        Y: 44799938
-      - X: 31999974
-        Y: 41599900
-      - X: 38399976
-        Y: 38399900
-      - X: 44799900
-        Y: 35199938
-      - X: 44799900
-        Y: 35199934
-      - X: 51199976
-        Y: 31999898
-      - X: 57599972
-        Y: 28799898
-      - X: 63999972
-        Y: 25599900
-      - X: 64000020
-        Y: 25599900
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 6.399986, y: 2.5599961}
-      - {x: 7.679948, y: 3.2000368}
-      - {x: 3.8399856, y: 5.1200047}
-      - {x: 2.5600517, y: 4.479963}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  clipName: Brick
 --- !u!50 &1128336684
 Rigidbody2D:
   serializedVersion: 4
@@ -8639,9 +8482,9 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
@@ -8827,19 +8670,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1128336687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128336680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d8bb7e7bc7fe1478357266a255651e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileType: 2
 --- !u!213 &1138703576
 Sprite:
   m_ObjectHideFlags: 0
@@ -11512,7 +11342,7 @@ Tilemap:
       - {fileID: -155499156, guid: b714f009ee1667e49a16a10a60cc9cf6, type: 3}
       - {fileID: 747639270, guid: b714f009ee1667e49a16a10a60cc9cf6, type: 3}
       - {fileID: 1774044338, guid: b714f009ee1667e49a16a10a60cc9cf6, type: 3}
-      m_AnimationSpeed: 9.000001
+      m_AnimationSpeed: 9
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 0, y: 3, z: 0}
@@ -12145,7 +11975,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
   m_PrefabInstance: {fileID: 1846026829}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1846026830}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b20c124d29183e45ba7d95b4f06480a, type: 3}
@@ -12163,9 +11993,7 @@ GameObject:
   - component: {fileID: 1659042727}
   - component: {fileID: 1659042726}
   - component: {fileID: 1659042725}
-  - component: {fileID: 1659042724}
   - component: {fileID: 1659042723}
-  - component: {fileID: 1659042728}
   m_Layer: 12
   m_Name: MainFloor
   m_TagString: Untagged
@@ -12200,150 +12028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileClipName: Tile
-  woodClipName: Wood
-  brickClipName: Brick
-  player: {fileID: 1846026830}
---- !u!66 &1659042724
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659042721}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1659042726}
-    m_ColliderPaths:
-    - - X: -12800000
-        Y: -6400112
-      - X: -6400024
-        Y: -9600100
-      - X: -6399976
-        Y: -9600100
-      - X: 19200100
-        Y: 3199938
-      - X: 19200100
-        Y: 3200062
-      - X: 12800224
-        Y: 6400000
-      - X: 19200000
-        Y: 9599888
-      - X: 25599976
-        Y: 6399900
-      - X: 25600024
-        Y: 6399900
-      - X: 38400020
-        Y: 12799900
-      - X: 38400024
-        Y: 12799900
-      - X: 44800024
-        Y: 15999899
-      - X: 51200100
-        Y: 19199936
-      - X: 51200100
-        Y: 19200060
-      - X: 44800222
-        Y: 22399999
-      - X: 57600096
-        Y: 28799936
-      - X: 57600096
-        Y: 28800060
-      - X: 51200100
-        Y: 32000060
-      - X: 44800024
-        Y: 35200096
-      - X: 38400096
-        Y: 38400060
-      - X: 38400096
-        Y: 38400062
-      - X: 32000022
-        Y: 41600100
-      - X: 31999974
-        Y: 41600100
-      - X: 25599900
-        Y: 38400062
-      - X: 25599900
-        Y: 38400058
-      - X: 19200000
-        Y: 35200108
-      - X: 12800024
-        Y: 38400096
-      - X: 12799976
-        Y: 38400096
-      - X: 6399900
-        Y: 35200058
-      - X: -100
-        Y: 32000060
-      - X: -6400100
-        Y: 28800060
-      - X: -12800100
-        Y: 25600062
-      - X: -12800100
-        Y: 25599938
-      - X: -6400222
-        Y: 22399999
-      - X: -12800000
-        Y: 19200110
-      - X: -19199976
-        Y: 22400098
-      - X: -19200024
-        Y: 22400098
-      - X: -38400020
-        Y: 12800100
-      - X: -38400024
-        Y: 12800100
-      - X: -44800100
-        Y: 9600062
-      - X: -44800100
-        Y: 9599938
-      - X: -38400224
-        Y: 6400000
-      - X: -51200100
-        Y: 62
-      - X: -51200100
-        Y: -62
-      - X: -38400024
-        Y: -6400100
-      - X: -38400020
-        Y: -6400100
-      - X: -25600024
-        Y: -12800100
-      - X: -25599976
-        Y: -12800100
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -2.5600095, y: -1.2800043}
-      - {x: -1.2799882, y: -0.6400171}
-      - {x: -0.6399858, y: -0.9600041}
-      - {x: 1.9199485, y: 0.3200371}
-      - {x: 1.2800843, y: 0.6400309}
-      - {x: 1.9200119, y: 0.95998293}
-      - {x: 2.5600142, y: 0.63999593}
-      - {x: 5.1199484, y: 1.9200368}
-      - {x: 4.480084, y: 2.2400308}
-      - {x: 5.7599483, y: 2.8800368}
-      - {x: 3.1999857, y: 4.160004}
-      - {x: 1.9199883, y: 3.520017}
-      - {x: 1.2799858, y: 3.8400037}
-      - {x: -1.2799484, y: 2.5599627}
-      - {x: -0.640084, y: 2.239969}
-      - {x: -1.2800118, y: 1.9200168}
-      - {x: -1.9200143, y: 2.240004}
-      - {x: -4.4799485, y: 0.9599629}
-      - {x: -3.840084, y: 0.6399691}
-      - {x: -5.1199484, y: -0.0000371}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  clipName: Wood
 --- !u!50 &1659042725
 Rigidbody2D:
   serializedVersion: 4
@@ -12375,9 +12060,9 @@ TilemapCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
@@ -13123,19 +12808,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1659042728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659042721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37d8bb7e7bc7fe1478357266a255651e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tileType: 1
 --- !u!1 &1676453113
 GameObject:
   m_ObjectHideFlags: 0
@@ -18056,11 +17728,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27281946ff144974aa050e692b861ef9, type: 3}
---- !u!1 &1846026830 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6355847347339370371, guid: 27281946ff144974aa050e692b861ef9, type: 3}
-  m_PrefabInstance: {fileID: 1846026829}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1855862039
 PrefabInstance:
   m_ObjectHideFlags: 0
