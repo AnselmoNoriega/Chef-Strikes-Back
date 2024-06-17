@@ -19,13 +19,14 @@ public class Player : MonoBehaviour
     [Space, Header("World Info")]
     public PlayerVariables Variables;
     private Vector2 _floorSpeed;
+    public string FloorSoundName = "";
 
     [Space, Header("State Info")]
     public PlayerStates PlayerState;
     public PlayerActions PlayerAction;
     public bool IsWalking = false;
     public bool GotDamage = false;
-
+    
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
     [Space, Header("Conections")]
@@ -73,6 +74,9 @@ public class Player : MonoBehaviour
         _audioManager = ServiceLocator.Get<AudioManager>();
 
         _canvasManager.SetMaxHealth(Variables.MaxHealth);
+
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 
     public void Update()
@@ -96,7 +100,6 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
         _stateMachine.FixedUpdate();
         _actionState.FixedUpdate();
     }

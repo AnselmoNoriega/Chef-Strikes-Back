@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class TilemapType : MonoBehaviour
 {
-    public TileType tileType;
+    
 }

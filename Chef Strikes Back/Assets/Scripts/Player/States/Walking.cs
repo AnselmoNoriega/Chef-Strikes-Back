@@ -28,7 +28,7 @@ public class PlayerWalking : StateClass<Player>
         agent.PlayerAnimator.SetBool("isWalking", true);
         agent.Legs.GetComponent<Animator>().SetBool("IsWalking", true);
         ServiceLocator.Get<Player>().IsWalking = true;
-        
+        ServiceLocator.Get<AudioManager>().PlaySource(agent.FloorSoundName);
         _canvasManager.UITransparent();
     }
 
@@ -68,6 +68,7 @@ public class PlayerWalking : StateClass<Player>
         agent.Legs.GetComponent<Animator>().SetBool("IsWalking", false);
         agent.GetComponent<Animator>().SetBool("isWalking", false);
         ServiceLocator.Get<CanvasManager>().UIUnTransparent();
+        ServiceLocator.Get<AudioManager>().StopSource(agent.FloorSoundName);
     }
 
     public void CollisionEnter2D(Player agent, Collision2D collision)

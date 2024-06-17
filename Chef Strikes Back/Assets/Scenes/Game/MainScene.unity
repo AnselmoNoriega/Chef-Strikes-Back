@@ -946,10 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileClipName: 
-  woodClipName: 
-  brickClipName: 
-  player: {fileID: 0}
+  clipName: Tile
 --- !u!19719996 &136170698
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -5229,10 +5226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileClipName: 
-  woodClipName: 
-  brickClipName: 
-  player: {fileID: 0}
+  clipName: Brick
 --- !u!19719996 &1079277609
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -6849,10 +6843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070ccc810cd328b42a119b5b23febced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileClipName: 
-  woodClipName: 
-  brickClipName: 
-  player: {fileID: 0}
+  clipName: Wood
 --- !u!66 &1320455078
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -11931,6 +11922,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7746550428048061511, guid: 27281946ff144974aa050e692b861ef9, type: 3}
+      propertyPath: FloorSoundName
+      value: Tile
+      objectReference: {fileID: 0}
     - target: {fileID: 323981142111727875, guid: 27281946ff144974aa050e692b861ef9, type: 3}
       propertyPath: _PauseFirst
       value: 
@@ -12629,7 +12624,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012302338}
-  - component: {fileID: 2012302339}
   m_Layer: 6
   m_Name: Table_Set_Group
   m_TagString: Obstacle
@@ -12656,19 +12650,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2012302339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012302337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f789eea8c13fec34da2cb84b63f4b8ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plates_Reminders: {fileID: 0}
 --- !u!1 &2012521570
 GameObject:
   m_ObjectHideFlags: 0
@@ -14241,6 +14222,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 39af2f773b859b448a5edf92cf33afbc, type: 3}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[50].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[50].name
       value: Brick
       objectReference: {fileID: 0}
@@ -14249,6 +14234,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: e8a0c98a23ea6e64fa8a50b2b4fe1306, type: 3}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[51].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[51].name
       value: Tile
       objectReference: {fileID: 0}
@@ -14256,6 +14245,10 @@ PrefabInstance:
       propertyPath: sounds.Array.data[52].clip
       value: 
       objectReference: {fileID: 8300000, guid: 57eb158026714a640a866633d529f2b1, type: 3}
+    - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
+      propertyPath: sounds.Array.data[52].loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 905427861, guid: 06c8a7a736b5ac0428ef2eb47aa1e72d, type: 3}
       propertyPath: sounds.Array.data[52].name
       value: Wood
