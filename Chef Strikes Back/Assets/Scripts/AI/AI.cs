@@ -343,7 +343,7 @@ public class AI : MonoBehaviour
             ServiceLocator.Get<AIManager>().AddAvailableChair(SelectedChair);
         }
 
-        ChangeState(AIState.Rage);
+        ChangeState(CustomerAIType == CustomerType.Joaquin ? AIState.BobChase : AIState.Rage);
     }
 
     public void ChangeState(AIState newState)
@@ -380,6 +380,7 @@ public class AI : MonoBehaviour
 
     public void Shoot()
     {
+        Anim.SetBool("IsAttacking", true);
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
 
         StartCoroutine(PlayGunParticles());

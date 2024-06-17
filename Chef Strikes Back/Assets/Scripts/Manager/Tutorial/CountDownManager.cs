@@ -7,7 +7,7 @@ public class CountDownManager : MonoBehaviour
 {
     [Header ("Canvas Prop")]
     [SerializeField] private TMP_Text _countDownText;
-    [SerializeField] private GameObject _countDownPanel;
+    [SerializeField] public GameObject _countDownPanel;
     [SerializeField] private string _endMessage;
     private int _countDownCount = 3;
     public bool GameStart = false;
