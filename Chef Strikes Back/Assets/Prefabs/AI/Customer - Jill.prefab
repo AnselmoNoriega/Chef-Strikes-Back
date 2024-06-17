@@ -111,7 +111,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -762955783, guid: 77cb705168611d54b8c8607187698249, type: 3}
+  m_Sprite: {fileID: -697734894, guid: 582fbceb745e9fd44b7fb2636737a5fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   - {fileID: 2895648848159499705}
   EatingSlider: {fileID: 6104358329182333462}
   ChoiceIndex: 0
-  CustomerAIType: 5
+  CustomerAIType: 4
   state: 0
   Speed: 62
   KnockbackForce: 100
@@ -249,7 +249,7 @@ Animator:
   m_GameObject: {fileID: 34484012071288454}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9712961d0a79d05439618159235a52ce, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8a4ef6aab8860eb4d953f31ea1b701b9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -523,7 +523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2809499200025642023}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.028, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5943,7 +5943,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 643006544, guid: 8452c6a1f6026fc40b37d6bf813834b4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
