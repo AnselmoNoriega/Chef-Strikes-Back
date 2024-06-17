@@ -21,8 +21,8 @@ public enum AIState
 public enum CustomerType
 {
     Karen = 3,
-    Frank = 4,
-    Jill = 5,
+    Jill = 4,
+    Frank = 5,
     Joaquin = 6
 }
 
@@ -539,8 +539,8 @@ public class AI : MonoBehaviour
         _stateManager.AddState<EatingCustomer>();
 
         _stateManager.AddState<RageCustomerState>();
-        _stateManager.AddState<HonkingCustomer>();
         _stateManager.AddState<FoodLockCustomer>();
+        _stateManager.AddState<HonkingCustomer>();
         _stateManager.AddState<BobChasingState>();
 
         _stateManager.AddState<BobAttackState>();
