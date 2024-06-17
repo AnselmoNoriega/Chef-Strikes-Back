@@ -343,7 +343,7 @@ public class AI : MonoBehaviour
             ServiceLocator.Get<AIManager>().AddAvailableChair(SelectedChair);
         }
 
-        ChangeState(AIState.Rage);
+        ChangeState(CustomerAIType == CustomerType.Joaquin ? AIState.BobChase : AIState.Rage);
     }
 
     public void ChangeState(AIState newState)
