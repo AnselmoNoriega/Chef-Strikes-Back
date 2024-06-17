@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
 
     [Header("Audio")]
     private AudioManager _audioManager;
-    [SerializeField] private string[] _hitSound = { "C-Hit_00", "C-Hit_01", "C-Hit_02", "C-Hit_03", "C-Hit_04" };
+    [SerializeField] private string[] _hitSound = { "C_Hit_00", "C_Hit_01", "C_Hit_02", "C_Hit_03", "C_Hit_04" };
     [SerializeField] private string[] _deathSound = { "C-Death_00", "C-Death_01"};
     [SerializeField] private string[] _bumpSound = { "C_Bump-Player_00", "C_Bump-Player_01", "C_Bump-Player_02", "C_Bump-Player_03", "C_Bump-Player_04" };
 
@@ -135,6 +135,8 @@ public class Player : MonoBehaviour
         }
         StartCoroutine(SpriteFlashing());
         _canvasManager.AddTooHealthSlider(-amt);
+
+
 
         if (_hitSound.Length > 0)
         {

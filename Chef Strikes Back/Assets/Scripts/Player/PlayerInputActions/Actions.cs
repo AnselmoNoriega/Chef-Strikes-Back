@@ -175,7 +175,7 @@ public class Actions : MonoBehaviour
         string soundName = $"{baseName}_{randomIndex:D2}"; // Formatted as "baseName_00" to "baseName_04"
         _audioManager.PlaySource(soundName);
     }
-
+   
     public void PrepareToThrow(InputAction mouse)
     {
         if (_inventory.GetFoodItem() != null)
@@ -225,7 +225,7 @@ public class Actions : MonoBehaviour
             }
             _player.ChangeAction(PlayerActions.Attacking);
             PlayRandomSound("C_Attack");
-            PlayRandomSound("Slice");
+          //  PlayRandomSound("Slice");
             _audioManager.StopSource("C_WindUp_01");
         }
     }

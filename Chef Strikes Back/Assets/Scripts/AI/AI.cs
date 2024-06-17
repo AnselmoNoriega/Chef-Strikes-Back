@@ -271,7 +271,7 @@ public class AI : MonoBehaviour
                 _audioManager.PlaySource(hitSoundName);
             }
 
-            PlayRandomSound("slice");
+            PlayRandomSound("Slice");
 
             if ((int)state >= 3 && (int)state <= 8)
             {

@@ -46,8 +46,8 @@ public class LevelTimer : MonoBehaviour
     {
         elapsTimeStart = elapsedTime;
         lightStartValue = worldLight.falloffIntensity;
-        _rotationTime[(int)ClockHands.SmallHand] = new Vector3(0.0f, 0.0f, 360 / (elapsTimeStart * 60));
-        _rotationTime[(int)ClockHands.BigHand] = new Vector3(0.0f, 0.0f, 360 / (elapsTimeStart/12 * 60));
+        _rotationTime[(int)ClockHands.SmallHand] = new Vector3(0.0f, 0.0f, -360 / (elapsTimeStart * 60));
+        _rotationTime[(int)ClockHands.BigHand] = new Vector3(0.0f, 0.0f, -360 / (elapsTimeStart/12 * 60));
     }
 
     // Update is called once per frame
