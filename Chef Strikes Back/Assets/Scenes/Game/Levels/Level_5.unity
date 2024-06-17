@@ -2257,6 +2257,10 @@ PrefabInstance:
       value: AudioLoader, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2879310690940878940, guid: dd4b2f39849980b489fa075844713829, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: TitleScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879310690940878940, guid: dd4b2f39849980b489fa075844713829, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
