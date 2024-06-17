@@ -380,6 +380,7 @@ public class AI : MonoBehaviour
 
     public void Shoot()
     {
+        Anim.SetBool("IsAttacking", true);
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
 
         StartCoroutine(PlayGunParticles());
