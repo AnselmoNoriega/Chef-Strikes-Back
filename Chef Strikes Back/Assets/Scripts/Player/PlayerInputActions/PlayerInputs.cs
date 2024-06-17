@@ -161,12 +161,14 @@ public class PlayerInputs : MonoBehaviour
             Time.timeScale = 0;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Pause Menu");
             ServiceLocator.Get<SceneControl>().SetButtonSelected(0);
+            ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(false);
         }
         else
         {
             _isOnPaused = false;
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
+            ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(true);
             if (_pauseFirst)
             {
                 EventSystem.current.SetSelectedGameObject(_pauseFirst);
