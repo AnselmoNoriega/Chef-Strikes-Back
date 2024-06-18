@@ -380,6 +380,8 @@ public class AI : MonoBehaviour
 
     public void Shoot()
     {
+        Vector2 aimDirection = (Vector2)ServiceLocator.Get<Player>().transform.position - (Vector2)transform.position;
+        FaceDirection(Anim, aimDirection);
         Anim.SetBool("IsAttacking", true);
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
 
