@@ -382,9 +382,37 @@ public class AI : MonoBehaviour
     {
         Vector2 aimDirection = (Vector2)ServiceLocator.Get<Player>().transform.position - (Vector2)transform.position;
         FaceDirection(Anim, aimDirection);
-        Anim.SetBool("IsAttacking", true);
         Instantiate(BulletPrefab, GunPos.transform.position, Quaternion.identity);
-
+        int directionIndex = Mathf.FloorToInt((Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 360 + 22.5f) / 45f) % 8;
+        switch (directionIndex)
+        {
+            case 0:
+                Anim.Play("Shoot_East");
+                break;
+            case 1:
+                Anim.Play("Shoot_NE");
+                break;
+            case 2:
+                Anim.Play("Shoot_North");
+                break;
+            case 3:
+                Anim.Play("Shoot_NW");
+                break;
+            case 4:
+                Anim.Play("Shoot_West");
+                break;
+            case 5:
+                Anim.Play("Shoot_SW");
+                break;
+            case 6:
+                Anim.Play("Shoot_South");
+                break;
+            case 7:
+                Anim.Play("Shoot_SE");
+                break;
+            default:
+                break;
+        }
         StartCoroutine(PlayGunParticles());
 
         // Play random gun sound for Joaquin
