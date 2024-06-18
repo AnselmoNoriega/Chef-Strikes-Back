@@ -35,10 +35,8 @@ public class GoodTutorialCus : StateClass<AI>
 
         if (_currentWaypoint >= agent.Path.vectorPath.Count)
         {
-            agent.SelectedChair.SitOnChair(agent);
-            ServiceLocator.Get<DialogueManager>().IsPaused = false;
             _stateFinished = true;
-            agent.enabled = false;
+            ServiceLocator.Get<TutorialLoopManager>().CustomerArraved(agent);
             return;
         }
 

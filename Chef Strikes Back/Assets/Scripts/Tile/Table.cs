@@ -10,6 +10,12 @@ public class Table : MonoBehaviour
     public Transform platePos;
     public SpriteRenderer plateSprite;
 
+
+    
+    [Space, Header("Audio")]
+    public AudioManager _audioManager;
+    private AudioSource _audioSource;
+    [SerializeField] private Sounds[] sounds;
     private void Awake()
     {
         _aiSitting = new();
@@ -39,6 +45,37 @@ public class Table : MonoBehaviour
         }
     }
 
+    public void PlaySound(string name)
+    {
+        _audioSource.Stop();
+
+        foreach (var s in sounds)
+        {
+            if (s.name == name)
+            {
+                _audioSource.clip = s.clip;
+                _audioSource.Play();
+                return;
+            }
+        }
+    }
+    private string GetEatingSound(CustomerType customerType)
+    {
+        int randomIndex = Random.Range(0, 5); // Assuming 00 to 04 for hit sounds
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-receive-food_0" + randomIndex;
+            case CustomerType.Frank:
+                return "F-receive-food_0" + randomIndex;
+            case CustomerType.Jill:
+                return "Ji-receive-food_0" + randomIndex;
+            case CustomerType.Joaquin:
+                return "Jo-receive-food_0" + randomIndex;
+            default:
+                return null;
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var newItem = collision.GetComponent<Item>();
@@ -48,6 +85,10 @@ public class Table : MonoBehaviour
             {
                 if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
+
+                   
+
+                    chair.Customer.HappyParticles.Play();
                     ServiceLocator.Get<GameManager>().FoodGiven(25 * chair.Customer.EatingSlider.localScale.x);
                     newItem.IsServed = true;
                     newItem.IsPickable = false;
@@ -55,6 +96,11 @@ public class Table : MonoBehaviour
                     chair.Customer.ChangeState(AIState.Eating);
                     newItem.LaunchedInTable(platePos);
 
+                    string eatingSoundName = GetEatingSound(chair.Customer.CustomerAIType);
+                    if (!string.IsNullOrEmpty(eatingSoundName))
+                    {
+                        ServiceLocator.Get<AudioManager>().PlaySource(eatingSoundName);
+                    }
                     return;
                 }
             }

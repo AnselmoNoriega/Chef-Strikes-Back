@@ -11,15 +11,18 @@ public class HonkingCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _agent.AngryIndicate.SetActive(true);
         _countDown = Time.time;
         _customer = ServiceLocator.Get<AIManager>().GetRandomCustomer();
-        if( _customer == null )
+
+        ServiceLocator.Get<AudioManager>().PlaySource("F-Annoy-NPC_00");
+
+        if ( _customer == null )
         {
             agent.ChangeState(AIState.Rage);
             return;
         }
         agent.Seeker.StartPath(agent.Rb2d.position, _customer.transform.position , PathCompleted);
-        agent.ChangeSpriteColor(Color.green);
     }
     public void Update(AI agent, float dt)
     {
@@ -45,6 +48,8 @@ public class HonkingCustomer : StateClass<AI>
             _customer.IsAnnoyed = false;
         }
         agent.IsHit = false;
+
+        ServiceLocator.Get<AudioManager>().StopSource("F-Annoy-NPC_00");
     }
 
     public void FixedUpdate(AI agent)

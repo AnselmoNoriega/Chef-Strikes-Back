@@ -5,28 +5,60 @@ public class AttackingTutorialCus : StateClass<AI>
 {
     private float _countDown = 0;
     private bool _hasAttacked = false;
+    private Player player;
+    private TutorialLoopManager _loopManager;
 
     public void Enter(AI agent)
     {
+        player = ServiceLocator.Get<Player>();
         _hasAttacked = false;
         _countDown = Time.time;
+        _loopManager = ServiceLocator.Get<TutorialLoopManager>();
+        agent.Anim.SetBool("IsAttacking", true);
     }
 
     public void Update(AI agent, float dt)
     {
-        if (Time.time - _countDown >= 0.25f && !_hasAttacked)
+        
+        if (player.GotDamage)
         {
-            _hasAttacked = true;
-            var player = ServiceLocator.Get<Player>();
-            Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
-            player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
-            player.TakeDamage(10);
+            _loopManager.EnterDialogueEvent("KillingKaren");
+            if(!_loopManager.TutorialThirdFace)
+            {
+                player.shouldNotMove = true;
+                agent.shouldNotMove = true;
+                _loopManager.TutorialThirdFace = true;
+            }
+            return;
         }
 
-        if (Time.time - _countDown >= 1.0f)
+        if (!agent.shouldNotMove)
         {
-            agent.ChangeState(AIState.Rage);
+            if (Time.time - _countDown >= 0.25f && !_hasAttacked)
+            {
+                _hasAttacked = true;
+                Vector2 dirToCollider = (player.transform.position - agent.transform.position).normalized;
+                player.Rb.AddForce(dirToCollider * agent.KnockbackForce, ForceMode2D.Impulse);
+                player.TakeDamage(10);
+
+            }
+            
+            if (agent.IsDead)
+            {
+                _loopManager.EnterDialogueEvent("Ten_one", true);
+            }
+            
+            if (Time.time - _countDown >= 1.0f)
+            {
+                agent.ChangeState(AIState.Rage);
+            }
         }
+        if (agent.IsDead)
+        {
+            _loopManager.EnterDialogueEvent("TutorialEnd", true);
+        }
+
+
     }
 
     public void FixedUpdate(AI agent)
@@ -46,9 +78,6 @@ public class AttackingTutorialCus : StateClass<AI>
 
     public void Exit(AI agent)
     {
-        if (agent.IsDead)
-        {
-            ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("TutorialEnd", true);
-        }
+        agent.Anim.SetBool("IsAttacking", false);
     }
 }

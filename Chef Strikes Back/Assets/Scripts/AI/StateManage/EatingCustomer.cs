@@ -8,6 +8,7 @@ public class EatingCustomer : StateClass<AI>
 
     public void Enter(AI agent)
     {
+        
         scale = agent.EatingSlider.localScale;
         scale.x = 1;
         agent.EatingSlider.localScale = scale;
@@ -21,6 +22,9 @@ public class EatingCustomer : StateClass<AI>
     {
         scale.x -= Time.deltaTime / timer;
         agent.EatingSlider.localScale = scale;
+
+        string receiveFoodSFX = GetFoodReceiveSound(agent.CustomerAIType);
+        ServiceLocator.Get<AudioManager>().PlaySource(receiveFoodSFX);
 
         if (scale.x <= 0)
         {
@@ -49,5 +53,24 @@ public class EatingCustomer : StateClass<AI>
     public void Exit(AI agent)
     {
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
+    }
+
+    private string GetFoodReceiveSound(CustomerType customerType)
+    {
+        int randomIndex = Random.Range(0, 4);
+        switch (customerType)
+        {
+            
+            case CustomerType.Karen:
+                return "K-receive-food_0" + randomIndex;
+            case CustomerType.Frank:
+                return "F-receive-food_0" + randomIndex;
+            case CustomerType.Jill:
+                return "Ji-receive-food_0" + randomIndex;
+            case CustomerType.Joaquin:
+                return "Jo-receive-food_0" + randomIndex;
+            default:
+                return null;
+        }
     }
 }

@@ -3,13 +3,19 @@ using UnityEngine;
 public class HungryCustomer : StateClass<AI>
 {
     private float waitingTime;
-    private float timer = 0;
+    private float timer = 1.0f;
     private float angerMultiplier = 4;
     private float _flashingTime = 0.0f;
+    private bool _soundAngry = false;
 
     SpriteRenderer _spriteRenderer;
 
     private Vector3 scale = Vector3.zero;
+
+    [Space, Header("Audio")]
+    public AudioManager _audioManager;
+    private AudioSource _audioSource;
+    [SerializeField] private Sounds[] sounds;
 
     public void Enter(AI agent)
     {
@@ -17,7 +23,7 @@ public class HungryCustomer : StateClass<AI>
         ServiceLocator.Get<AIManager>().AddHungryCustomer(agent);
         _spriteRenderer = agent.GetComponent<SpriteRenderer>();
         scale = agent.EatingSlider.localScale;
-        scale.x = 0;
+        scale.x = 1.0f;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
 
@@ -25,31 +31,32 @@ public class HungryCustomer : StateClass<AI>
         agent.OrderBubble[agent.ChoiceIndex].gameObject.SetActive(true);
 
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.red;
-        timer = 0.0f;
-        
+        timer = 1.0f;
     }
 
     public void Update(AI agent, float dt)
     {
-        timer += (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
-        if (timer >= 0.8f / 2)
+        timer -= (Time.deltaTime / waitingTime) * (agent.IsAnnoyed ? angerMultiplier : 1);
+        int randomIndex = Random.Range(0, 2);
+
+        if (timer >= 0.2f / 2)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 2;
+            scale.x -= (Time.deltaTime / waitingTime) / 2;
         }
-        if (timer >= 0.6f / 2)
+        if (timer >= 0.4f / 2)
         {
-            scale.x += (Time.deltaTime / waitingTime) / 1.5f;
+            scale.x -= (Time.deltaTime / waitingTime) / 1.5f;
         }
         else
         {
-            scale.x += (Time.deltaTime / waitingTime) * 2;
+            scale.x -= (Time.deltaTime / waitingTime) * 2;
         }
 
-        if(agent.IsAnnoyed)
+        if (agent.IsAnnoyed)
         {
             Anselmo();
         }
-        else if(!agent.IsHit && _spriteRenderer.color != Color.white)
+        else if (!agent.IsHit && _spriteRenderer.color != Color.white)
         {
             _spriteRenderer.color = Color.white;
         }
@@ -57,14 +64,21 @@ public class HungryCustomer : StateClass<AI>
         agent.EatingSlider.localScale = scale;
         agent.Indicator.UpdateTimerIndicator(scale.x);
 
-        if (scale.x >= 1.0f)
+        if (!_soundAngry && scale.x <= 0.16f)
         {
+            _soundAngry = true;
+            string phiphi = GetAlmostAngrySound(agent.CustomerAIType);
+            ServiceLocator.Get<AudioManager>().PlaySource(phiphi);
+        }
+
+        if (scale.x <= 0.0f)
+        {
+            agent.AngryParticles.Play();
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
             agent.SelectedChair.FreeTableSpace();
 
-            
-            int value = Random.Range(0, 100) % 4;
-            agent.ChangeState((AIState)(value + 3));
+
+            agent.ChangeState((AIState)agent.CustomerAIType);
         }
     }
 
@@ -90,14 +104,18 @@ public class HungryCustomer : StateClass<AI>
 
         agent.EatingSlider.transform.parent.gameObject.SetActive(false);
         ServiceLocator.Get<AIManager>().RemoveCustomer(agent);
+        _spriteRenderer.color = Color.white;
+
+        // Play random death sound
+
     }
 
     private void Anselmo()
     {
         _flashingTime -= Time.deltaTime;
-        if( _flashingTime <= 0 )
+        if (_flashingTime <= 0)
         {
-            if(_spriteRenderer.color == Color.red )
+            if (_spriteRenderer.color == Color.red)
             {
                 _spriteRenderer.color = Color.white;
             }
@@ -105,11 +123,28 @@ public class HungryCustomer : StateClass<AI>
             {
                 _spriteRenderer.color = Color.red;
             }
-            
+
             _flashingTime = 0.5f;
         }
-        
-        
+
+
     }
 
+    private string GetAlmostAngrySound(CustomerType customerType)
+    {
+        switch (customerType)
+        {
+            case CustomerType.Karen:
+                return "K-Nearly-Angry_00";
+            case CustomerType.Frank:
+                return "F-Nearly-Angry_00";
+            case CustomerType.Jill:
+                return "Ji-Nearly-Angry_00";
+            case CustomerType.Joaquin:
+                return "Jo-Nearly-Angry_00";
+            default:
+                return null;
+        }
+    }
 }
+

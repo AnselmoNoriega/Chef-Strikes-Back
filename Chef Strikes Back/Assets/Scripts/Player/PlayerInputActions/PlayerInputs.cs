@@ -1,8 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -30,9 +28,12 @@ public class PlayerInputs : MonoBehaviour
 
     private bool _isUsingController = false;
     private bool _isOnPaused = false;
+    private AudioManager _audioManager;
+
 
     private void Awake()
     {
+        _audioManager = ServiceLocator.Get<AudioManager>();
         _inputManager = new InputControls();
 
         _rightMouse = _inputManager.Player.MouseRightClick;
@@ -50,8 +51,6 @@ public class PlayerInputs : MonoBehaviour
         _moveKeyboard = _inputManager.Player.MoveKeyboard;
         _moveStick = _inputManager.Player.MoveStick;
 
-        SetControllerActive(ServiceLocator.Get<GameManager>().GetControllerOption());
-
         _rightMouse.performed += RightClick;
         _leftMouse.performed += LeftClick;
         _rightMouse.canceled += RightClickRelease;
@@ -63,6 +62,8 @@ public class PlayerInputs : MonoBehaviour
 
         _pauseKeyboard.performed += TogglePauseMenu;
         _pauseController.performed += TogglePauseMenu;
+
+        ServiceLocator.Get<GlobalInput>().SetPlayerInput(this);
     }
 
     private void Update()
@@ -85,7 +86,7 @@ public class PlayerInputs : MonoBehaviour
         {
             return;
         }
-        
+
         _action.Attacking(_mouse.ReadValue<Vector2>());
     }
 
@@ -147,6 +148,8 @@ public class PlayerInputs : MonoBehaviour
 
     private void TogglePauseMenu(InputAction.CallbackContext input)
     {
+        ServiceLocator.Get<AudioManager>().PlaySource("UI_Pause");
+        Debug.Log("PauseSound");
         TogglePauseMenu();
     }
 
@@ -158,12 +161,14 @@ public class PlayerInputs : MonoBehaviour
             Time.timeScale = 0;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Pause Menu");
             ServiceLocator.Get<SceneControl>().SetButtonSelected(0);
+            ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(false);
         }
         else
         {
             _isOnPaused = false;
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
+            ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(true);
             if (_pauseFirst)
             {
                 EventSystem.current.SetSelectedGameObject(_pauseFirst);
@@ -312,5 +317,10 @@ public class PlayerInputs : MonoBehaviour
 
         _pauseKeyboard.performed -= TogglePauseMenu;
         _pauseController.performed -= TogglePauseMenu;
+    }
+
+    public bool IsUsingController()
+    {
+        return _isUsingController;
     }
 }

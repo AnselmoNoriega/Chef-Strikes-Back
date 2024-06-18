@@ -16,10 +16,19 @@ public class Actions : MonoBehaviour
     [SerializeField] private float _grabDistance;
     private SpriteRenderer _selectedItem = null;
 
+    public ParticleSystem TomatoParticles;
+    public ParticleSystem DoughParticles;
+    public ParticleSystem CheeseParticles;
+
+    [Header("Audio")]
+    private AudioManager _audioManager;
+    [SerializeField] private string[] _windUp;
+
     private void Start()
     {
         _player = GetComponent<Player>();
         _inventory = GetComponent<Inventory>();
+        _audioManager = ServiceLocator.Get<AudioManager>();
         _ready2Throw = false;
         IsCarryingItem = false;
     }
@@ -117,18 +126,62 @@ public class Actions : MonoBehaviour
                 var newFoodPileItem = pile.Hit();
                 _inventory.AddItem(newFoodPileItem.GetComponent<Item>());
                 IsCarryingItem = true;
-                ServiceLocator.Get<AudioManager>().PlaySource("food_hit");
+
                 newFoodPileItem.GetComponent<Item>().CollidersState(false);
+
+                if (_inventory.GetFoodItem().Type == FoodType.Tomato)
+                {
+                    TomatoParticles.gameObject.SetActive(true);
+                    PlayRandomSound("PickupTomato");
+                    Debug.Log("PlayingTomatoPickup");
+                }
+                else if (_inventory.GetFoodItem().Type == FoodType.Cheese)
+                {
+                    CheeseParticles.gameObject.SetActive(true);
+                    PlayRandomSound("PickupCheese");
+                    Debug.Log("PlayingCheesePickup");
+                }
+                else if (_inventory.GetFoodItem().Type == FoodType.Dough)
+                {
+                    DoughParticles.gameObject.SetActive(true);
+                    PlayRandomSound("Pickup_Dough");
+                    Debug.Log("PlayingDoughPickup");
+                }
+                else if (_inventory.GetFoodItem().Type == FoodType.Spaghetti)
+                {
+                    DoughParticles.gameObject.SetActive(true);
+                    PlayRandomSound("Pickup_Spaghetti");
+                    Debug.Log("PlayingSpaghettiPickup");
+                }
+                else if (_inventory.GetFoodItem().Type == FoodType.Pizza)
+                {
+                    DoughParticles.gameObject.SetActive(true);
+                    PlayRandomSound("Pickup-Pizza");
+                    Debug.Log("PlayingPizzaPickup");
+                }
+                else
+                {
+                    Debug.Log("No food");
+                }
+
                 return;
             }
-         
         }
     }
 
+    private void PlayRandomSound(string baseName)
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 5); // Random index between 0 and 4
+        string soundName = $"{baseName}_{randomIndex:D2}"; // Formatted as "baseName_00" to "baseName_04"
+        _audioManager.PlaySource(soundName);
+    }
+   
     public void PrepareToThrow(InputAction mouse)
     {
         if (_inventory.GetFoodItem() != null)
         {
+            _audioManager.PlaySource("C_WindUp_01"); 
+            Debug.Log("WindUpSound");
             _inventory.PrepareToThrowFood(mouse);
             _ready2Throw = true;
             _player.ChangeAction(PlayerActions.Throwing);
@@ -139,11 +192,12 @@ public class Actions : MonoBehaviour
     {
         if (_inventory.GetFoodItem() != null && _ready2Throw)
         {
-            ServiceLocator.Get<AudioManager>().PlaySource("charge");
             _inventory.ThrowFood(_player.Variables.ThrowDirection);
             _ready2Throw = false;
             IsCarryingItem = false;
             _player.ChangeAction(PlayerActions.None);
+            PlayRandomSound("C_Release");
+            _audioManager.StopSource("C_WindUp_01");
         }
     }
 
@@ -156,10 +210,12 @@ public class Actions : MonoBehaviour
         _ready2Throw = false;
         IsCarryingItem = false;
         _player.ChangeAction(PlayerActions.None);
+        StopRandomSound("C_WindUp");
     }
 
     public void Attacking(Vector2 anglePos)
     {
+        
         if (_player.PlayerAction != PlayerActions.Attacking && !_ready2Throw)
         {
             if (anglePos != Vector2.zero)
@@ -168,6 +224,16 @@ public class Actions : MonoBehaviour
                 _player.LookingDirection = (Camera.main.ScreenToWorldPoint(anglePos) - rayOrigin).normalized;
             }
             _player.ChangeAction(PlayerActions.Attacking);
+            PlayRandomSound("C_Attack");
+          //  PlayRandomSound("Slice");
+            _audioManager.StopSource("C_WindUp_01");
         }
+    }
+
+    private void StopRandomSound(string baseName)
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 5); // Random index between 0 and 4
+        string soundName = $"{baseName}_{randomIndex:D2}"; // Formatted as "baseName_00" to "baseName_04"
+        _audioManager.StopSource(soundName);
     }
 }

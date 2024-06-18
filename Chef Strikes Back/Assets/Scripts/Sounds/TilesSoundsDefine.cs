@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class TilesSoundsDefine : MonoBehaviour
 {
-    [SerializeField] public string ClipName;
-    public void OnTriggerEnter2D(Collider2D collision)
+    [SerializeField] private string clipName;
+    private Player _player;
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        var player = ServiceLocator.Get<Player>();
-        player.soundName = ClipName;
+        if (collision.CompareTag("Player"))
+        {
+            _player = ServiceLocator.Get<Player>();
+            if (_player.FloorSoundName != clipName)
+            {
+                ServiceLocator.Get<AudioManager>().StopSource(_player.FloorSoundName);
+                _player.FloorSoundName = clipName;
+                if (_player.IsWalking)
+                {
+                    ServiceLocator.Get<AudioManager>().PlaySource(_player.FloorSoundName);
+                }
+            }
+        }
     }
 }

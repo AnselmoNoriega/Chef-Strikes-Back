@@ -112,7 +112,7 @@ public class PlayerAttacking : StateClass<Player>
 
                 if (angleToCollider <= 45.0f && hit.GetComponent<AI>())
                 {
-                    ServiceLocator.Get<AudioManager>().PlaySource("hit_attack");
+                    ServiceLocator.Get<AudioManager>().PlaySource("Slice_01");
                     enemyAI.GetComponent<AI>().Damage((int)player.Weapon.Damage);
                     enemyAI.GetComponent<AI>().Rb2d.AddForce(dirToCollider * _variables.KnockbackForce, ForceMode2D.Impulse);
                     enemyAI.GetComponent<AI>().IsHit = true;
@@ -121,7 +121,7 @@ public class PlayerAttacking : StateClass<Player>
                 
             }
 
-            ServiceLocator.Get<AudioManager>().PlaySource("miss_attack");
+            ServiceLocator.Get<AudioManager>().PlaySource("C_Attack_00");
         }
     }
 }
@@ -151,8 +151,6 @@ public class PlayerThrowing : StateClass<Player>
     public void Update(Player agent, float dt)
     {
         var dir = _playerInputs.GetLookingDir();
-        var val = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, dir);
-        _legsAnimator.SetInteger("PosNum",val);
 
         agent.PlayerAnimator.SetBool("IsThrowing", true);
         if (_throwStrength <= _variables.MaxTimer)
@@ -161,6 +159,9 @@ public class PlayerThrowing : StateClass<Player>
         }
 
         _variables.ThrowDirection = dir * _throwStrength;
+        int lookingPos = PlayerHelper.FaceMovementDirection(agent.PlayerAnimator, _variables.ThrowDirection);
+        agent.PlayerAnimator.SetFloat("Blend", lookingPos);
+        _legsAnimator.SetInteger("PosNum", lookingPos);
     }
 
     public void FixedUpdate(Player agent)
@@ -170,7 +171,7 @@ public class PlayerThrowing : StateClass<Player>
 
     public void Exit(Player agent)
     {
-        ServiceLocator.Get<AudioManager>().PlaySource("throw");
+
         agent.PlayerAnimator.SetBool("IsThrowing", false);
         _variables.ThrowDirection = Vector2.zero;
         agent.PlayerAnimator.speed += _variables.ThrowAnimSpeed;

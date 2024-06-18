@@ -249,6 +249,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container - Money Counter
       objectReference: {fileID: 0}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_text
+      value: $0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: bbddf956c31fd4a499e1a41ae1668898, type: 2}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8886792145110805692, guid: bbddf956c31fd4a499e1a41ae1668898, type: 2}
+    - target: {fileID: 7155558179235441752, guid: 109866252b39e784db1710075d500a13, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4291809231
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 109866252b39e784db1710075d500a13, type: 3}
 --- !u!224 &4713781642164830999 stripped
@@ -427,6 +455,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Container - Wanted Stars
       objectReference: {fileID: 0}
+    - target: {fileID: 6633966560199334929, guid: 4bf2da05aa2475b41b16684bb9d9660f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6658114669300994280, guid: 4bf2da05aa2475b41b16684bb9d9660f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -465,6 +497,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3029303705698655284}
     m_Modifications:
+    - target: {fileID: 851296663334165278, guid: 7b988de1b13db8b4fadc21d7bff1af2d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 851296663334165278, guid: 7b988de1b13db8b4fadc21d7bff1af2d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

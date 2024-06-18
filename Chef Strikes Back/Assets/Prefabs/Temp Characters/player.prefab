@@ -109,7 +109,7 @@ RectTransform:
   m_Children:
   - {fileID: 4640885627648078670}
   m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -201,13 +201,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231826271109957594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6355847347339370374}
-  m_RootOrder: 1
+  m_Father: {fileID: 578931868531884403}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8462317492019071887
 SpriteRenderer:
@@ -364,7 +364,8 @@ Transform:
   m_LocalPosition: {x: 0.078, y: 0.294, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3100146290728529144}
   m_Father: {fileID: 6355847347339370374}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -473,6 +474,60 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &3195949247196511145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8472611319032405623}
+  - component: {fileID: 8887181020107578042}
+  m_Layer: 7
+  m_Name: TrailEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8472611319032405623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195949247196511145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.018, y: -0.143, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6355847347339370374}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8887181020107578042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195949247196511145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efc8d740f17e92458bc2d9431c1a88b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailSprites:
+  - {fileID: 21300000, guid: 993345913f0c4b041ba5b7da4226c8b8, type: 3}
+  - {fileID: 21300000, guid: 18bd9051b680856459ff81aa3362ed75, type: 3}
+  - {fileID: 21300000, guid: c9f29863d246a5b4d88f949c5b7e3200, type: 3}
+  - {fileID: 21300000, guid: e2b6b9838d50e8c4fb73585e06f2714f, type: 3}
+  - {fileID: 21300000, guid: d9891bd76cf8c1a4a97bd6972a81f8fb, type: 3}
+  spritePrefab: {fileID: 8124000928845714758, guid: 1dae3b9ba95d6f04684deb8ef73e7b23, type: 3}
+  spawnInterval: 0.1
+  fadeDuration: 1
+  spawnLocationController: {fileID: 3195949247196511145}
 --- !u!1 &5458735608316875857
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,8 +602,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 8472611319032405623}
   - {fileID: 1237283022793716927}
-  - {fileID: 3100146290728529144}
   - {fileID: 578931868531884403}
   - {fileID: 567927445575894956}
   m_Father: {fileID: 0}
@@ -678,10 +733,21 @@ MonoBehaviour:
   Legs: {fileID: 1373743241353836299}
   LookingDirection: {x: 0, y: 0}
   Variables: {fileID: 137093403580132108}
+  FloorSoundName: Tile
   PlayerState: 0
   PlayerAction: 0
-  soundName: 
   IsWalking: 0
+  GotDamage: 0
+  _hitSound: []
+  _deathSound:
+  - C-Death_00
+  - C-Death_01
+  _bumpSound:
+  - C_Bump-Player_00
+  - C_Bump-Player_01
+  - C_Bump-Player_02
+  - C_Bump-Player_03
+  - C_Bump-Player_04
   shouldNotMove: 0
 --- !u!114 &6143374723223897878
 MonoBehaviour:
@@ -718,6 +784,13 @@ MonoBehaviour:
   throwForce: 1
   IsCarryingItem: 0
   _grabDistance: 1
+  TomatoParticles: {fileID: 0}
+  DoughParticles: {fileID: 0}
+  CheeseParticles: {fileID: 0}
+  _windUp:
+  - C_WindUp_Long_00
+  - C_WindUp_Long_01
+  - C_WindUp_Short_00
 --- !u!114 &323981142111727875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +833,8 @@ MonoBehaviour:
   FlashingTime: 2
   _speedBoostAmount: 1.5
   _animSpeedInBoost: 0.5
+  _boostDuration: 5
+  trailEffect: {fileID: 8887181020107578042}
 --- !u!1 &8950749653407707308
 GameObject:
   m_ObjectHideFlags: 0

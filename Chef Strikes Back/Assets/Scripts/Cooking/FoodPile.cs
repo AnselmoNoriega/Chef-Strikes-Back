@@ -9,7 +9,7 @@ public class FoodPile : MonoBehaviour
 
     public GameObject Hit()
     {
-        ServiceLocator.Get<AudioManager>().PlaySource("cut");
+        
         return Instantiate(_foodItem, transform.position, Quaternion.identity);
     }
 

@@ -11,6 +11,7 @@ public class FoodLockCustomer : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _agent.AngryIndicate.SetActive(true);
         _countDown = Time.time;
         _combiner = ServiceLocator.Get<AIManager>().GiveMeCreationTable();
         if (_combiner == null)
@@ -19,7 +20,6 @@ public class FoodLockCustomer : StateClass<AI>
             return;
         }
         agent.Seeker.StartPath(agent.Rb2d.position, _combiner.CombinerPos(), PathCompleted);
-        agent.ChangeSpriteColor(Color.yellow);
     }
 
     public void Update(AI agent, float dt)

@@ -9,12 +9,19 @@ struct FoodPercentage
 
 public class Chair : MonoBehaviour
 {
+    public enum Dir
+    {
+        NorthWest,
+        SouthEast,
+        SouthWest,
+        NorthEast
+    }
     public bool seatAvaliable = true;
 
     [SerializeField] private GameObject SpawnPointForBadAI = null;
     [SerializeField] private FoodPercentage[] _foodPercentages;
-
     [SerializeField] private Table table;
+    [SerializeField] Dir _dir;
     public AI Customer;
 
     private SpriteRenderer chairSprite;
@@ -48,6 +55,7 @@ public class Chair : MonoBehaviour
             Destroy(Food.gameObject);
             Food = null;
         }
+        Customer.Anim.Play("AI_Walk_North");
     }
 
     public bool IsAIsFood(Item item)
@@ -73,6 +81,24 @@ public class Chair : MonoBehaviour
             Customer.ChoiceIndex = GiveFoodChoice();
             Customer.Rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
             Customer.transform.position = transform.position;
+            
+            switch (_dir)
+            {
+                case Dir.NorthWest:
+                    Customer.Anim.Play("Sit_North");
+                    break;
+                case Dir.SouthEast:
+                    Customer.Anim.Play("Sit_South");
+                    break;
+                case Dir.SouthWest:
+                    Customer.Anim.Play("Sit_West");
+                    break;
+                case Dir.NorthEast:
+                    Customer.Anim.Play("Sit_East");
+                    break;
+                default:
+                    break;
+            }
             table.AddCostumer(this);
         }
     }
@@ -93,4 +119,6 @@ public class Chair : MonoBehaviour
 
         return 0;
     }
+
+   
 }

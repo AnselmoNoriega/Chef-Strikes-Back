@@ -11,10 +11,10 @@ public class RageCustomerState : StateClass<AI>
     public void Enter(AI agent)
     {
         _agent = agent;
+        _agent.AngryIndicate.SetActive(true);
         _playerPos = ServiceLocator.Get<Player>().transform;
         _countDown = Time.time;
         agent.Seeker.StartPath(agent.Rb2d.position, _playerPos.position, PathCompleted);
-        agent.ChangeSpriteColor(Color.magenta);
         agent.Speed = 200;
     }
 

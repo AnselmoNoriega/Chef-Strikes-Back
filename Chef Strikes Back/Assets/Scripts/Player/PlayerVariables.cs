@@ -27,20 +27,68 @@ public class PlayerVariables : MonoBehaviour
     [Space, Header("Player Got Hit Animation")]
     public int FlashingTime;
 
-    [Space, Header("Boost Info")]
+    [Header("Boost Info")]
     [SerializeField] private float _speedBoostAmount;
     [SerializeField] private float _animSpeedInBoost;
+    [SerializeField] private float _boostDuration = 5.0f; 
     public float SpeedBoost { get; private set; }
-    private float _boostDuration;
     private bool _isInSpeedBoost;
     private float _speedBoostTimer;
 
+    [Header("Effects")]
+    public TrailEffect trailEffect;
+
     private Animator _animator;
+
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         SpeedBoost = 1.0f;
+
+        if (transform.childCount > 0)
+        {
+            Transform firstChild = transform.GetChild(0);
+            trailEffect = firstChild.GetComponent<TrailEffect>();
+
+            if (trailEffect == null)
+                Debug.LogError("No Trail Effect");
+        }
+        else
+        {
+            Debug.LogError("No trail effect child");
+        }
+    }
+
+
+    private void EndSpeedBoost()
+    {
+        _isInSpeedBoost = false;
+        SpeedBoost = 1.0f;
+        _animator.speed -= _animSpeedInBoost;
+        if (trailEffect != null)
+            trailEffect.StopTrail(); 
+        Debug.Log("Speed boost ended, trail effect stopped.");
+    }
+
+    public void GiveSpeedBoost()
+    {
+        _speedBoostTimer = _boostDuration;
+        if (!_isInSpeedBoost)
+        {
+            _isInSpeedBoost = true;
+            SpeedBoost = _speedBoostAmount;
+            _animator.speed += _animSpeedInBoost;
+            if (trailEffect != null)
+            {
+                trailEffect.StartTrail(); // Ensure this is getting called
+                Debug.Log("Trail effect started.");
+            }
+            else
+            {
+                Debug.LogError("TrailEffect not assigned in PlayerVariables.");
+            }
+        }
     }
 
     public void SpeedBoostTimer()
@@ -53,19 +101,12 @@ public class PlayerVariables : MonoBehaviour
                 _isInSpeedBoost = false;
                 SpeedBoost = 1.0f;
                 _animator.speed -= _animSpeedInBoost;
+                if (trailEffect != null)
+                {
+                    trailEffect.StopTrail(); // Ensure this is getting called
+                    Debug.Log("Trail effect stopped.");
+                }
             }
-        }
-    }
-
-    public void GiveSpeedBoost()
-    {
-        _speedBoostTimer = _boostDuration;
-
-        if (!_isInSpeedBoost)
-        {
-            _isInSpeedBoost = true;
-            SpeedBoost = _speedBoostAmount;
-            _animator.speed += _animSpeedInBoost;
         }
     }
 }

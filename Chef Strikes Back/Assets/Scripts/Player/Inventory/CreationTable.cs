@@ -11,12 +11,17 @@ public class CreationTable : MonoBehaviour
         public FoodType Food;
         public bool IsAllowed;
     }
+
     [Serializable]
     public struct FoodImages
     {
         public FoodType Type;
         public GameObject Object;
     }
+
+    [Header("Particles")]
+    public ParticleSystem IngredientParticles;
+    public ParticleSystem CompleteParticles;
 
     [Header("Storage Info")]
     [SerializeField] private List<AllowedFood> _acceptedFoodTypes = new();
@@ -41,10 +46,17 @@ public class CreationTable : MonoBehaviour
 
     [Header("Sprites")]
     [SerializeField] private SpriteRenderer _lockedRedCross;
+    private AudioManager _audioManager;
+
+    [Header("Sounds")]
+    [SerializeField] private string itemPlacementSound;
+    [SerializeField] private string lockedSound;
+    private string[] soundNames = { "FoodDone_00", "FoodDone_01" };
 
     private void Start()
     {
         _circleCollider2D = GetComponent<CircleCollider2D>();
+        _audioManager = ServiceLocator.Get<AudioManager>();
         _waitList = new();
         foreach (var foodType in _acceptedFoodTypes)
         {
@@ -54,9 +66,15 @@ public class CreationTable : MonoBehaviour
             _items.Add(foodType.Food, null);
         }
 
-        foreach(var foodSprite in _foodImagesInspector)
+        foreach (var foodSprite in _foodImagesInspector)
         {
             _foodSprites.Add(foodSprite.Type, foodSprite.Object);
+        }
+
+        if (IngredientParticles == null)
+        {
+            IngredientParticles = GetComponent<ParticleSystem>();
+            CompleteParticles = GetComponent<ParticleSystem>();
         }
     }
 
@@ -78,6 +96,9 @@ public class CreationTable : MonoBehaviour
                 recivedItem.LaunchedInTable(_magnet);
                 recivedItem.IsPickable = false;
                 StartCoroutine(IngredientSpriteActive(recivedItem));
+                IngredientParticles.Play();
+
+                PlaySound(itemPlacementSound, "Item placed: ");
             }
             else if (_count[recivedItem.Type] && !_waitList[recivedItem.Type].Contains(recivedItem.gameObject))
             {
@@ -128,6 +149,9 @@ public class CreationTable : MonoBehaviour
 
         for (int i = 0; i < _acceptedFoodTypes.Count; ++i)
         {
+            CompleteParticles.Play();
+            string randomSound = soundNames[UnityEngine.Random.Range(0, soundNames.Length)];
+            _audioManager.PlaySource(randomSound);
             _count[_acceptedFoodTypes[i].Food] = false;
             _foodSprites[_acceptedFoodTypes[i].Food].SetActive(false);
             Destroy(_items[_acceptedFoodTypes[i].Food]);
@@ -179,6 +203,9 @@ public class CreationTable : MonoBehaviour
         _lockedRedCross.enabled = true;
         _isLocked = true;
         _circleCollider2D.enabled = true;
+
+        // Allow the locked sound to be played repeatedly
+        OnTableClicked();
     }
 
     public void Unlock()
@@ -191,5 +218,23 @@ public class CreationTable : MonoBehaviour
     public bool GetIsLocked()
     {
         return _isLocked;
+    }
+
+    public void OnTableClicked()
+    {
+        Debug.Log("Table clicked. Is locked: " + _isLocked);
+        if (_isLocked)
+        {
+            PlaySound(lockedSound, "Table locked: ");
+        }
+    }
+
+    private void PlaySound(string soundName, string debugMessage)
+    {
+        if (!string.IsNullOrEmpty(soundName))
+        {
+            _audioManager.PlaySource(soundName);
+            Debug.Log(debugMessage + soundName);
+        }
     }
 }

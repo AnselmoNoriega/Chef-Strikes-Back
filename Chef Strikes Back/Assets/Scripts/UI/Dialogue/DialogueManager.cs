@@ -1,4 +1,5 @@
 using Ink.Runtime;
+using MyBox;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
+    [SerializeField] private AudioSource audioSource;
 
     public bool IsPaused { get; set; }
 
@@ -31,6 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Initialize()
     {
+        audioSource.loop = false;
         _tutorialLoopManager = ServiceLocator.Get<TutorialLoopManager>();
 
         dialogueIsPlaying = true;
@@ -40,7 +43,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogueMode(TextAsset inkJSON, bool callMethodIfFinished = true)
     {
-        if(_callMethodIfFinished)
+        if (_callMethodIfFinished)
         {
             _callMethodIfFinished = false;
             _tutorialLoopManager.EndConversation();
@@ -51,7 +54,21 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        if (currentStory.HasField("controller"))
+        {
+            var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+            currentStory.variablesState["controller"] = controller;
+        }
+
         ContinueStory();
+    }
+
+    public void EnterSoundDialogue(AudioClip audioClip)
+    {
+        audioSource.Stop();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     public void EnterDialogueModeBool(TextAsset inkJSON, string[] name, bool[] active, bool callMethodIfFinished = false)
@@ -71,6 +88,13 @@ public class DialogueManager : MonoBehaviour
         }
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        if (currentStory.HasField("controller"))
+        {
+            var controller = ServiceLocator.Get<Player>().GetComponent<PlayerInputs>().IsUsingController();
+            currentStory.variablesState["controller"] = controller;
+        }
+
         ContinueStory();
     }
 
@@ -80,7 +104,11 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
         dialogueMode = false;
-        ServiceLocator.Get<Player>().shouldNotMove = false;
+        if (ServiceLocator.Get<TutorialLoopManager>().GetCustomerIdx() != 3 || ServiceLocator.Get<TutorialLoopManager>().TutorialFinish)
+        {
+            ServiceLocator.Get<Player>().shouldNotMove = false;
+            ServiceLocator.Get<TutorialLoopManager>().CameraTargetChange();
+        }
     }
 
     public void ContinueStory()
@@ -99,6 +127,7 @@ public class DialogueManager : MonoBehaviour
                 _callMethodIfFinished = false;
                 _tutorialLoopManager.EndConversation();
             }
+            _tutorialLoopManager.AIShouldMove();
         }
     }
 
@@ -132,15 +161,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void SetPause()
+    public void PanelDeactivate()
     {
-        if (IsPaused)
-        {
-            IsPaused = false;
-        }
-        else
-        {
-            IsPaused = true;
-        }
+        dialoguePanel.SetActive(false);
+    }
+    public void PanelActivate()
+    {
+        if(dialogueIsPlaying) { dialoguePanel.SetActive(true); }
+        
     }
 }

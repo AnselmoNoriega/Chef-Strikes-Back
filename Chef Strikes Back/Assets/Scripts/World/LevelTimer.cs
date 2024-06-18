@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -11,19 +12,26 @@ public struct SpawningTimer
     public int SpawningTime;
 }*/
 
+enum ClockHands
+{
+    BigHand,
+    SmallHand
+}
+
 public class LevelTimer : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textTime;
+    [SerializeField] private RectTransform[] clockHands;
     [SerializeField] private Light2D worldLight;
     private float lightStartValue;
 
     [SerializeField] private float elapsedTime;
     private float elapsTimeStart;
-    private TimeSpan timePlaying;
 
     [SerializeField] private SceneControl sceneControl;
 
     [SerializeField] private List<SpawningTimer> _spawningTimes;
+
+    private Vector3[] _rotationTime = new Vector3[2];
 
     public struct PhaseDefinition
     {
@@ -33,13 +41,13 @@ public class LevelTimer : MonoBehaviour
     }
     private PhaseDefinition _currentPhase;
     [SerializeField] private List<PhaseDefinition> _phases = new();
-
+    private bool _shouldRun = false;
     public void Initialize()
     {
-        timePlaying = TimeSpan.FromMinutes(elapsedTime);
         elapsTimeStart = elapsedTime;
-        textTime.text = timePlaying.ToString("mm':'ss'.'ff");
         lightStartValue = worldLight.falloffIntensity;
+        _rotationTime[(int)ClockHands.SmallHand] = new Vector3(0.0f, 0.0f, -360 / (elapsTimeStart * 60));
+        _rotationTime[(int)ClockHands.BigHand] = new Vector3(0.0f, 0.0f, -360 / (elapsTimeStart/12 * 60));
     }
 
     // Update is called once per frame
@@ -47,11 +55,15 @@ public class LevelTimer : MonoBehaviour
     {
         SpawnTimeChangeBasedOnTimer();
 
+        if (!_shouldRun)
+        {
+            return;
+        }
         elapsedTime -= Time.deltaTime / 60;
         worldLight.falloffIntensity += (lightStartValue / elapsTimeStart) * Time.deltaTime / 60;
 
-        timePlaying = TimeSpan.FromMinutes(elapsedTime);
-        textTime.text = timePlaying.ToString("mm':'ss");
+        clockHands[(int)ClockHands.SmallHand].Rotate(_rotationTime[(int)ClockHands.SmallHand] * Time.deltaTime);
+        clockHands[(int)ClockHands.BigHand].Rotate(_rotationTime[(int)ClockHands.BigHand] * Time.deltaTime);
 
         if (elapsedTime < 0)
         {
@@ -59,6 +71,11 @@ public class LevelTimer : MonoBehaviour
             ServiceLocator.Get<GameManager>().SaveMoney(ServiceLocator.Get<Player>().Money);
             sceneControl.GoToEndScene();
         }
+    }
+
+    public void SetTimeState(bool active)
+    {
+        _shouldRun = active;
     }
 
     private void SpawnTimeChangeBasedOnTimer()
