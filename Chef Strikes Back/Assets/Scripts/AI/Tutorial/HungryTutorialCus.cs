@@ -60,21 +60,10 @@ public class HungryTutorialCus : StateClass<AI>
         if (scale.x <= 0.0f)
         {
             ServiceLocator.Get<GameManager>().EnterRageModeScore();
+            agent.AngryParticles.Play();
             agent.SelectedChair.FreeTableSpace();
 
-            if (ServiceLocator.Get<TutorialTimer>().GetTimeState())
-            {
-                int value = Random.Range(0, 100) % 4;
-                if(value == 3)
-                {
-                    ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("BobTriggered");
-                }
-                agent.ChangeState((AIState)(value + 3));
-            }
-            else
-            {
-                agent.ChangeState(AIState.Rage);
-            }
+            agent.ChangeState(agent.CustomerAIType == CustomerType.Joaquin ? AIState.BobChase : AIState.Rage);
         }
     }
 

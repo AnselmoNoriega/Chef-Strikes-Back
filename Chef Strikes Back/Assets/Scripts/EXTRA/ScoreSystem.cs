@@ -111,7 +111,7 @@ public class ScoreSystem : MonoBehaviour
 
         DisplayQuote(starNum); // Display the quote and image after determining the star count
 
-       foreach (var startworth in _starsWorths)
+        foreach (var startworth in _starsWorths)
         {
             if (ServiceLocator.Get<SceneControl>().GetSceneName(startworth.LevelName))
             {

@@ -287,7 +287,7 @@ public class AI : MonoBehaviour
                 if (_hitsToGetMad <= 0)
                 {
                     ServiceLocator.Get<AIManager>().TurnAllCustomersBad();
-                    ChangeState(AIState.Rage);
+                    ChangeState(CustomerAIType == CustomerType.Joaquin ? AIState.BobChase : AIState.Rage);
                 }
             }
 
