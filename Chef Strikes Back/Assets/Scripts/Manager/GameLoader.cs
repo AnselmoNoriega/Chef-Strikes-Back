@@ -106,6 +106,7 @@ public class GameLoader : AsyncLoader
 
     private IEnumerator LoadInitialScene(int index)
     {
+        yield return new WaitForSeconds(2.5f);
         Debug.Log("GameLoader Starting Scene Load");
         yield return SceneManager.LoadSceneAsync(index);
     }
