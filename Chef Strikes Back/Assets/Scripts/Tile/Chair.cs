@@ -11,10 +11,10 @@ public class Chair : MonoBehaviour
 {
     public enum Dir
     {
-        North,
-        South,
-        West,
-        East
+        NorthWest,
+        SouthEast,
+        SouthWest,
+        NorthEast
     }
     public bool seatAvaliable = true;
 
@@ -84,16 +84,16 @@ public class Chair : MonoBehaviour
             
             switch (_dir)
             {
-                case Dir.North:
+                case Dir.NorthWest:
                     Customer.Anim.Play("Sit_North");
                     break;
-                case Dir.South:
+                case Dir.SouthEast:
                     Customer.Anim.Play("Sit_South");
                     break;
-                case Dir.West:
+                case Dir.SouthWest:
                     Customer.Anim.Play("Sit_West");
                     break;
-                case Dir.East:
+                case Dir.NorthEast:
                     Customer.Anim.Play("Sit_East");
                     break;
                 default:
