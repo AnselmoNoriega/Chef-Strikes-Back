@@ -738,7 +738,12 @@ MonoBehaviour:
   PlayerAction: 0
   IsWalking: 0
   GotDamage: 0
-  _hitSound: []
+  _hitSound:
+  - C_Hit_00
+  - C_Hit_01
+  - C_Hit_02
+  - C_Hit_03
+  - C_Hit_04
   _deathSound:
   - C-Death_00
   - C-Death_01

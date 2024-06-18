@@ -112,20 +112,17 @@ public class ScoreSystem : MonoBehaviour
         DisplayQuote(starNum); // Display the quote and image after determining the star count
 
         foreach (var startworth in _starsWorths)
-        {
-            if (ServiceLocator.Get<SceneControl>().GetSceneName(startworth.LevelName))
+        {       
+            int moneyValue = 0;
+            for (int i = 0; i < startworth._extraMoneyForStars.Count; i++)
             {
-                int moneyValue = 0;
-                for (int i = 0; i < startworth._extraMoneyForStars.Count; i++)
+                if (i == starNum)
                 {
-                    if (i == starNum)
-                    {
-                        moneyValue = startworth._extraMoneyForStars[i];
-                    }
+                    moneyValue = startworth._extraMoneyForStars[i];
                 }
-                ServiceLocator.Get<GameManager>().SaveMoney(moneyValue);
-                break;
             }
+            ServiceLocator.Get<GameManager>().SaveMoney(moneyValue);
+            break;
         }
 
         var deathDialogue = GetComponent<DeathDialogue>();
