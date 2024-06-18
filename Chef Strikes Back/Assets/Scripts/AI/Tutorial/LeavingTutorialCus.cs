@@ -41,7 +41,7 @@ public class LeavingTutorialCus : StateClass<AI>
                     manager.EnterDialogueEvent("KarenMadNow");
                 }
                 manager.TutorialSecondFace = true;
-                manager.SpawnCustomer();
+                manager.SpawnCustomer(true, true);
                 isSpawn = true;
             }
 

@@ -21,7 +21,7 @@ public class TutorialLoopManager : MonoBehaviour
 {
     [SerializeField] private TutorialCameraManager _tutorialCameraManager;
     [SerializeField] private List<ButtonReminder> buttonReminder;
-    [SerializeField] private GameObject _aiPrefab;
+    [SerializeField] private GameObject[] _aiPrefab;
 
     [SerializeField] private Player _player;
     private AI _tutorialAI;
@@ -162,10 +162,10 @@ public class TutorialLoopManager : MonoBehaviour
     }
 
 
-    public void SpawnCustomer(bool shouldPause = true)
+    public void SpawnCustomer(bool shouldPause = true, bool shouldBeKaren = false)
     {
         Vector2 spawnPos = ServiceLocator.Get<AIManager>().ExitPosition();
-        var customer = Instantiate(_aiPrefab, spawnPos, Quaternion.identity);
+        var customer = Instantiate(_aiPrefab[shouldBeKaren ? 1 : 0], spawnPos, Quaternion.identity);
         _tutorialCameraManager.ChangeTarget(customer.transform);
         _tutorialAI = customer.GetComponent<AI>();
 
