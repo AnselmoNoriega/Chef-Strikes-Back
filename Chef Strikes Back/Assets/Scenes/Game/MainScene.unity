@@ -614,7 +614,7 @@ Tilemap:
       - {fileID: 1232622588, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
       - {fileID: -392221189, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
       - {fileID: 1015389073, guid: 666824c7548357c48ada12f7ee0cbca2, type: 3}
-      m_AnimationSpeed: 12
+      m_AnimationSpeed: 12.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: -2, y: 6, z: 0}
@@ -6250,6 +6250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _creationTable: {fileID: 324600514}
+  _cbReminder: {fileID: 802632985}
 --- !u!1 &1251405665
 GameObject:
   m_ObjectHideFlags: 0
@@ -11038,6 +11039,7 @@ MonoBehaviour:
   _player: {fileID: 1656972438}
   AiStandState: 0
   AiChoice: 0
+  _cbReminder: {fileID: 802632985}
   inkJSON:
   - InkStory: {fileID: 4900000, guid: b0a07af5bf909d647ba58bb623d19210, type: 3}
     ClipStory: {fileID: 8300000, guid: 94051f395832506469a1df9bb06fcd3c, type: 3}
@@ -12365,6 +12367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _creationTable: {fileID: 1575051547}
+  _cbReminder: {fileID: 802632985}
 --- !u!1 &2043464126
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,6 +29,9 @@ public class TutorialLoopManager : MonoBehaviour
     public AIState AiStandState = AIState.Good;
     public int AiChoice = 0;
 
+    [Header("World")]
+    [SerializeField] private CB_Reminder _cbReminder;
+
     [Header("Ink Text")]
     [SerializeField] private List<StoryData> inkJSON;
     [SerializeField] private List<DictionaryField<string, StoryData>> inkJSONEvents;
@@ -84,12 +87,14 @@ public class TutorialLoopManager : MonoBehaviour
                     {
                         button.SetHitOn(true);
                     }
+                    _cbReminder.StartArrowEvent(FoodType.Pizza);
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     _tutorialCameraManager.ZoomIn(-0.6f, -0.6f);
                     break;
                 }
             case 4:
                 {
+                    _cbReminder.StartArrowEvent(FoodType.Spaghetti);
                     _tutorialAI.ChangeState(AIState.Hungry);
                     _tutorialCameraManager.ChangeTarget(_player.transform);
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
