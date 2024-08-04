@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public PlayerActions PlayerAction;
     public bool IsWalking = false;
     public bool GotDamage = false;
+    private bool _isDead = false;
     
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
@@ -106,7 +107,7 @@ public class Player : MonoBehaviour
 
     public void ChangeState(PlayerStates state)
     {
-        if (PlayerState != state)
+        if (PlayerState != state && !_isDead)
         {
             PlayerState = state;
             _stateMachine.ChangeState((int)state);
@@ -115,7 +116,7 @@ public class Player : MonoBehaviour
 
     public void ChangeAction(PlayerActions state)
     {
-        if (PlayerAction != state)
+        if (PlayerAction != state && !_isDead)
         {
             PlayerAction = state;
             _actionState.ChangeState((int)state);
@@ -128,11 +129,7 @@ public class Player : MonoBehaviour
         GotDamage = true;
         if (_currentHealth <= 0)
         {
-            string randomSound = _deathSound[Random.Range(0, _deathSound.Length)];
-            Debug.Log($"Playing sound: {randomSound}");
-            _audioManager.PlaySource(randomSound);
-            _gameManager.SetKillCount(KillCount);
-            ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
+            StartCoroutine(KillPlayer());
             return;
         }
         StartCoroutine(SpriteFlashing());
@@ -181,8 +178,6 @@ public class Player : MonoBehaviour
     public void StopPlayerMovement()
     {
         Rb.AddForce((-Rb.velocity + _floorSpeed) * Variables.PlayerAcceleration);
-       
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -234,6 +229,21 @@ public class Player : MonoBehaviour
         {
             _floorSpeed = Vector2.zero;
         }
+    }
+
+    private IEnumerator KillPlayer()
+    {
+        string randomSound = _deathSound[Random.Range(0, _deathSound.Length)];
+        _audioManager.PlaySource(randomSound);
+        _gameManager.SetKillCount(KillCount);
+        ChangeState(PlayerStates.Idle);
+        ChangeAction(PlayerActions.None);
+        _isDead = true;
+        PlayerAnimator.Play("Player_Death");
+
+        yield return new WaitForSeconds(3);
+
+        ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
     }
 
     private void OnDrawGizmos()
