@@ -126,6 +126,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
+        _canvasManager.AddTooHealthSlider(-amt);
         GotDamage = true;
         if (_currentHealth <= 0)
         {
@@ -133,9 +134,6 @@ public class Player : MonoBehaviour
             return;
         }
         StartCoroutine(SpriteFlashing());
-        _canvasManager.AddTooHealthSlider(-amt);
-
-
 
         if (_hitSound.Length > 0)
         {
@@ -236,6 +234,8 @@ public class Player : MonoBehaviour
         string randomSound = _deathSound[Random.Range(0, _deathSound.Length)];
         _audioManager.PlaySource(randomSound);
         _gameManager.SetKillCount(KillCount);
+        Rb.bodyType = RigidbodyType2D.Static;
+        GetComponent<Collider2D>().enabled = false;
         ChangeState(PlayerStates.Idle);
         ChangeAction(PlayerActions.None);
         _isDead = true;
