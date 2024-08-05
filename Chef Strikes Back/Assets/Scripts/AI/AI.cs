@@ -69,6 +69,7 @@ public class AI : MonoBehaviour
     public ParticleSystem _moneyUIParticleSystem;
 
     [Space, Header("Particles")]
+    public GameObject _deathParticles;
     public ParticleSystem BloodParticles;
     public ParticleSystem ConfettiParticles;
     public ParticleSystem HappyParticles;
@@ -278,6 +279,8 @@ public class AI : MonoBehaviour
                 _health -= amt;
                 if (_health <= 0)
                 {
+                    var particles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
+                    particles.GetComponent<ParticleHandler>().SetTimerToDelete();
                     DestroyAI();
                 }
             }
