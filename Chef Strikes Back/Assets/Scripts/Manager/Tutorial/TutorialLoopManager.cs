@@ -119,6 +119,7 @@ public class TutorialLoopManager : MonoBehaviour
                 {
                     ServiceLocator.Get<Player>().shouldNotMove = false;
                     ServiceLocator.Get<CountDownManager>().StartCountDown();
+                    ServiceLocator.Get<AudioManager>().BGMforScenes();
                     _tutorialCameraManager.ZoomIn(0.2f, 0.2f);
                     TutorialFinish = true;
                     break;
