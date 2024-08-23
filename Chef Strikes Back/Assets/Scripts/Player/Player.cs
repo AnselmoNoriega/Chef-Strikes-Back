@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     public bool IsWalking = false;
     public bool GotDamage = false;
     private bool _isDead = false;
-    
+
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
     [Space, Header("Conections")]
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     private AudioManager _audioManager;
     [SerializeField] private string[] _hitSound = { "C_Hit_00", "C_Hit_01", "C_Hit_02", "C_Hit_03", "C_Hit_04" };
-    [SerializeField] private string[] _deathSound = { "C-Death_00", "C-Death_01"};
+    [SerializeField] private string[] _deathSound = { "C-Death_00", "C-Death_01" };
     [SerializeField] private string[] _bumpSound = { "C_Bump-Player_00", "C_Bump-Player_01", "C_Bump-Player_02", "C_Bump-Player_03", "C_Bump-Player_04" };
 
     public Rigidbody2D Rb { get; private set; }
@@ -194,13 +194,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpriteFlashing()
     {
-        for (int i = 0; i < Variables.FlashingTime; i++)
-        {
-
-            PlayerAnimator.Play("Damage_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
-            yield return new WaitForSeconds(0.1f);
-            PlayerAnimator.Play("Idle_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
-        }
+        PlayerAnimator.Play("Damage_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
+        yield return new WaitForSeconds(Variables.FlashingTime);
+        PlayerAnimator.Play("Idle_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
         GotDamage = false;
     }
 
