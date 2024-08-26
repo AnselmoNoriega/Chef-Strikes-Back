@@ -25,7 +25,7 @@ public class PlayerVariables : MonoBehaviour
     public int MaxHealth;
 
     [Space, Header("Player Got Hit Animation")]
-    public int FlashingTime;
+    public float FlashingTime;
 
     [Header("Boost Info")]
     [SerializeField] private float _speedBoostAmount;
