@@ -168,7 +168,10 @@ public class PlayerInputs : MonoBehaviour
             _isOnPaused = false;
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
-            ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(true);
+            if (ServiceLocator.Get<CountDownManager>().IsInCountdown())
+            {
+                ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(true);
+            }
             if (_pauseFirst)
             {
                 EventSystem.current.SetSelectedGameObject(_pauseFirst);
@@ -178,7 +181,7 @@ public class PlayerInputs : MonoBehaviour
 
     public Vector2 GetMovement()
     {
-        if(_player.shouldNotMove)
+        if (_player.shouldNotMove)
         {
             return Vector2.zero;
         }

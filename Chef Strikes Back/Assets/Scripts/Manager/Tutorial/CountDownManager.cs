@@ -48,6 +48,11 @@ public class CountDownManager : MonoBehaviour
         }
     }
 
+    public bool IsInCountdown()
+    {
+        return ServiceLocator.Get<GameLoopManager>().enabled && _countDownCount > 0;
+    }
+
     public void StartGame()
     {
         _countDownPanel.SetActive(true);

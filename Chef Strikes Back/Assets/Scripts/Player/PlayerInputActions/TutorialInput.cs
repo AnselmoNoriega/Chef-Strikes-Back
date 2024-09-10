@@ -9,6 +9,7 @@ public class TutorialInput : MonoBehaviour
 
     private InputControls _inputManager;
     private InputAction _leftMouse;
+    private InputAction _southController;
     private InputAction _rightMouse;
 
     private InputAction _pauseKeyboard;
@@ -24,6 +25,8 @@ public class TutorialInput : MonoBehaviour
         _leftMouse = _inputManager.Player.MouseLeftClick;
         _rightMouse = _inputManager.Player.MouseRightClick;
 
+        _southController = _inputManager.Player.LowerButton;
+
         _pauseKeyboard = _inputManager.Player.Esc;
         _pauseController = _inputManager.Player.PauseController;
         _pauseKeyboard.Enable();
@@ -33,7 +36,9 @@ public class TutorialInput : MonoBehaviour
         _pauseController.performed += CloseDialogueMenu;
 
         _leftMouse.Enable();
+        _southController.Enable();
         _leftMouse.performed += LeftClick;
+        _southController.performed += LeftClick;
 
         _rightMouse.Enable();
         _rightMouse.performed += ThrowFirstTime;
@@ -44,24 +49,26 @@ public class TutorialInput : MonoBehaviour
 
     }
 
-    private void _pauseController_performed(InputAction.CallbackContext obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
     private void OnDestroy()
     {
         _leftMouse.Disable();
         _leftMouse.performed -= LeftClick;
 
+        _southController.Disable();
+        _southController.performed -= LeftClick;
+
         _rightMouse.Disable();
         _rightMouse.performed -= ThrowFirstTime;
 
+        _pauseKeyboard.Disable();
+        _pauseController.Disable();
+        _pauseKeyboard.performed -= CloseDialogueMenu;
+        _pauseController.performed -= CloseDialogueMenu;
     }
 
     private void LeftClick(InputAction.CallbackContext input)
     {
-        if(_dialogueManager.dialogueIsPlaying && !_dialogueManager.IsPaused && Time.timeScale == 1)
+        if (_dialogueManager.dialogueIsPlaying && !_dialogueManager.IsPaused && Time.timeScale == 1)
         {
             _dialogueManager.ContinueStory();
         }
@@ -69,21 +76,21 @@ public class TutorialInput : MonoBehaviour
 
     private void ThrowFirstTime(InputAction.CallbackContext input)
     {
-        if(_playerActions.IsCarryingItem && ServiceLocator.Get<TutorialTimer>().GetTimeState())
+        if (_playerActions.IsCarryingItem && ServiceLocator.Get<TutorialTimer>().GetTimeState())
         {
             ++_foodThrowsAmount;
-            if(_foodThrows == _foodThrowsAmount)
+            if (_foodThrows == _foodThrowsAmount)
             {
                 ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("PickUpFood");
             }
         }
-        if(_playerActions.IsCarryingItem && _player.PlayerAction != PlayerActions.Throwing)
+        if (_playerActions.IsCarryingItem && _player.PlayerAction != PlayerActions.Throwing)
         {
             ++_pickItemCount;
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("FoodThrow");
         }
 
-        if(_pickItemCount == 5)
+        if (_pickItemCount == 5)
         {
             ++_pickItemCount;
             ServiceLocator.Get<TutorialLoopManager>().EnterDialogueEvent("PickingUp");
@@ -92,17 +99,14 @@ public class TutorialInput : MonoBehaviour
 
     private void CloseDialogueMenu(InputAction.CallbackContext input)
     {
-        if(Time.timeScale == 1 && _dialogueManager != null)
+        if (Time.timeScale == 1 && _dialogueManager != null)
         {
             ServiceLocator.Get<DialogueManager>().PanelActivate();
         }
-        else if(_dialogueManager != null) 
+        else if (_dialogueManager != null)
         {
             ServiceLocator.Get<DialogueManager>().PanelDeactivate();
         }
-        
+
     }
-
-
-
 }
