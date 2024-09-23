@@ -425,7 +425,7 @@ public partial class @InputControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2e44debc-0219-4d7c-8914-ee9771d997d6"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
