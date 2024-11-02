@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
     public PlayerActions PlayerAction;
     public bool IsWalking = false;
     public bool GotDamage = false;
-    
+    private bool _isDead = false;
+
     private StateMachine<Player> _stateMachine;
     private StateMachine<Player> _actionState;
     [Space, Header("Conections")]
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
     [Header("Audio")]
     private AudioManager _audioManager;
     [SerializeField] private string[] _hitSound = { "C_Hit_00", "C_Hit_01", "C_Hit_02", "C_Hit_03", "C_Hit_04" };
-    [SerializeField] private string[] _deathSound = { "C-Death_00", "C-Death_01"};
+    [SerializeField] private string[] _deathSound = { "C-Death_00", "C-Death_01" };
     [SerializeField] private string[] _bumpSound = { "C_Bump-Player_00", "C_Bump-Player_01", "C_Bump-Player_02", "C_Bump-Player_03", "C_Bump-Player_04" };
 
     public Rigidbody2D Rb { get; private set; }
@@ -106,7 +107,7 @@ public class Player : MonoBehaviour
 
     public void ChangeState(PlayerStates state)
     {
-        if (PlayerState != state)
+        if (PlayerState != state && !_isDead)
         {
             PlayerState = state;
             _stateMachine.ChangeState((int)state);
@@ -115,7 +116,7 @@ public class Player : MonoBehaviour
 
     public void ChangeAction(PlayerActions state)
     {
-        if (PlayerAction != state)
+        if (PlayerAction != state && !_isDead)
         {
             PlayerAction = state;
             _actionState.ChangeState((int)state);
@@ -125,20 +126,14 @@ public class Player : MonoBehaviour
     public void TakeDamage(int amt)
     {
         _currentHealth -= amt;
+        _canvasManager.AddTooHealthSlider(-amt);
         GotDamage = true;
         if (_currentHealth <= 0)
         {
-            string randomSound = _deathSound[Random.Range(0, _deathSound.Length)];
-            Debug.Log($"Playing sound: {randomSound}");
-            _audioManager.PlaySource(randomSound);
-            _gameManager.SetKillCount(KillCount);
-            ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
+            StartCoroutine(KillPlayer());
             return;
         }
         StartCoroutine(SpriteFlashing());
-        _canvasManager.AddTooHealthSlider(-amt);
-
-
 
         if (_hitSound.Length > 0)
         {
@@ -181,8 +176,6 @@ public class Player : MonoBehaviour
     public void StopPlayerMovement()
     {
         Rb.AddForce((-Rb.velocity + _floorSpeed) * Variables.PlayerAcceleration);
-       
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -201,13 +194,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator SpriteFlashing()
     {
-        for (int i = 0; i < Variables.FlashingTime; i++)
-        {
-
-            PlayerAnimator.Play("Damage_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
-            yield return new WaitForSeconds(0.1f);
-            PlayerAnimator.Play("Idle_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
-        }
+        PlayerAnimator.Play("Damage_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
+        yield return new WaitForSeconds(Variables.FlashingTime);
+        PlayerAnimator.Play("Idle_" + PlayerHelper.FaceMovementDirection(PlayerAnimator, LookingDirection));
         GotDamage = false;
     }
 
@@ -234,6 +223,23 @@ public class Player : MonoBehaviour
         {
             _floorSpeed = Vector2.zero;
         }
+    }
+
+    private IEnumerator KillPlayer()
+    {
+        string randomSound = _deathSound[Random.Range(0, _deathSound.Length)];
+        _audioManager.PlaySource(randomSound);
+        _gameManager.SetKillCount(KillCount);
+        Rb.bodyType = RigidbodyType2D.Static;
+        GetComponent<Collider2D>().enabled = false;
+        ChangeState(PlayerStates.Idle);
+        ChangeAction(PlayerActions.None);
+        _isDead = true;
+        PlayerAnimator.Play("Player_Death");
+
+        yield return new WaitForSeconds(3);
+
+        ServiceLocator.Get<SceneControl>().ChangeScene("DeathScene");
     }
 
     private void OnDrawGizmos()

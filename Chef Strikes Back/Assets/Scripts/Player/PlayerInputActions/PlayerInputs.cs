@@ -18,6 +18,7 @@ public class PlayerInputs : MonoBehaviour
     private InputAction _mouse;
     private InputAction _pauseController;
     private InputAction _moveStick;
+    private InputAction _aimStick;
 
     [SerializeField] private Actions _action;
     [SerializeField] private Player _player;
@@ -50,6 +51,7 @@ public class PlayerInputs : MonoBehaviour
 
         _moveKeyboard = _inputManager.Player.MoveKeyboard;
         _moveStick = _inputManager.Player.MoveStick;
+        _aimStick = _inputManager.Player.AimStick;
 
         _rightMouse.performed += RightClick;
         _leftMouse.performed += LeftClick;
@@ -168,7 +170,10 @@ public class PlayerInputs : MonoBehaviour
             _isOnPaused = false;
             Time.timeScale = 1;
             ServiceLocator.Get<StatefulObject>().SetState("Root - Inactive");
-            ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(true);
+            if (ServiceLocator.Get<CountDownManager>().IsInCountdown())
+            {
+                ServiceLocator.Get<CountDownManager>()._countDownPanel.SetActive(true);
+            }
             if (_pauseFirst)
             {
                 EventSystem.current.SetSelectedGameObject(_pauseFirst);
@@ -178,7 +183,7 @@ public class PlayerInputs : MonoBehaviour
 
     public Vector2 GetMovement()
     {
-        if(_player.shouldNotMove)
+        if (_player.shouldNotMove)
         {
             return Vector2.zero;
         }
@@ -220,7 +225,7 @@ public class PlayerInputs : MonoBehaviour
     {
         if (_isUsingController)
         {
-            return (_moveStick.ReadValue<Vector2>() - (Vector2)_player.Variables.HandOffset).normalized;
+            return (_aimStick.ReadValue<Vector2>() - (Vector2)_player.Variables.HandOffset).normalized;
         }
         else
         {
@@ -266,6 +271,7 @@ public class PlayerInputs : MonoBehaviour
             _rightJoystick.Enable();
             _pauseController.Enable();
             _moveStick.Enable();
+            _aimStick.Enable();
         }
     }
 
@@ -292,6 +298,7 @@ public class PlayerInputs : MonoBehaviour
             _rightJoystick.Disable();
             _pauseController.Disable();
             _moveStick.Disable();
+            _aimStick.Disable();
         }
     }
 

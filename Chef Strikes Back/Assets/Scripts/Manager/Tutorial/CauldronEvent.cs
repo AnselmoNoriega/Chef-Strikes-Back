@@ -6,6 +6,8 @@ public class CauldronEvent : MonoBehaviour
 
     private TutorialLoopManager _loopManager;
 
+    [SerializeField] private CB_Reminder _cbReminder;
+
     private int _creationTimes = 0;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,11 +21,13 @@ public class CauldronEvent : MonoBehaviour
             {
                 //_loopManager.TriggerSpaghettiEvent(component.Type == FoodType.Spaghetti);
                 CheckCreationTimes();
+                _cbReminder.FoodCreated(component.Type);
             }
             else if (component)
             {
                 _loopManager.TriggerCauldronEvent(component.Type == FoodType.Pizza);
                 CheckCreationTimes();
+                _cbReminder.FoodCreated(component.Type);
             }
         }
 

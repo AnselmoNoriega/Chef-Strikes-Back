@@ -131,31 +131,31 @@ public class Actions : MonoBehaviour
 
                 if (_inventory.GetFoodItem().Type == FoodType.Tomato)
                 {
-                    TomatoParticles.gameObject.SetActive(true);
+                    //TomatoParticles.gameObject.SetActive(true);
                     PlayRandomSound("PickupTomato");
                     Debug.Log("PlayingTomatoPickup");
                 }
                 else if (_inventory.GetFoodItem().Type == FoodType.Cheese)
                 {
-                    CheeseParticles.gameObject.SetActive(true);
+                    //CheeseParticles.gameObject.SetActive(true);
                     PlayRandomSound("PickupCheese");
                     Debug.Log("PlayingCheesePickup");
                 }
                 else if (_inventory.GetFoodItem().Type == FoodType.Dough)
                 {
-                    DoughParticles.gameObject.SetActive(true);
+                    //DoughParticles.gameObject.SetActive(true);
                     PlayRandomSound("Pickup_Dough");
                     Debug.Log("PlayingDoughPickup");
                 }
                 else if (_inventory.GetFoodItem().Type == FoodType.Spaghetti)
                 {
-                    DoughParticles.gameObject.SetActive(true);
+                    //DoughParticles.gameObject.SetActive(true);
                     PlayRandomSound("Pickup_Spaghetti");
                     Debug.Log("PlayingSpaghettiPickup");
                 }
                 else if (_inventory.GetFoodItem().Type == FoodType.Pizza)
                 {
-                    DoughParticles.gameObject.SetActive(true);
+                    //DoughParticles.gameObject.SetActive(true);
                     PlayRandomSound("Pickup-Pizza");
                     Debug.Log("PlayingPizzaPickup");
                 }

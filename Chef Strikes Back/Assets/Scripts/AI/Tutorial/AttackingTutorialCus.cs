@@ -11,6 +11,7 @@ public class AttackingTutorialCus : StateClass<AI>
     public void Enter(AI agent)
     {
         player = ServiceLocator.Get<Player>();
+        agent.AngryIndicate.SetActive(true);
         _hasAttacked = false;
         _countDown = Time.time;
         _loopManager = ServiceLocator.Get<TutorialLoopManager>();

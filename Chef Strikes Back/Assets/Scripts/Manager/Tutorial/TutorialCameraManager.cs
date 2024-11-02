@@ -62,7 +62,11 @@ public class TutorialCameraManager : MonoBehaviour
             _targetPosition = _targetTransform.position;
             return;
         }
-        _targetPosition = (Vector2)_playerTransform.position + (_playerVariables.ThrowDirection * 5);
+        _targetPosition = (Vector2)_playerTransform.position + _playerVariables.ThrowDirection;
+        _targetPosition.x = Mathf.Clamp(_targetPosition.x, _boundaryPolygon.bounds.min.x + _camWidth, _boundaryPolygon.bounds.max.x - _camWidth);
+        _targetPosition.y = Mathf.Clamp(_targetPosition.y, _boundaryPolygon.bounds.min.y + _camHeight, _boundaryPolygon.bounds.max.y - _camHeight);
+        _targetPosition.z = -1.0f;
+        transform.position = Vector3.Lerp(transform.position, _targetPosition, 0.0f);
     }
 
     private void StayInsideBound()
