@@ -279,6 +279,7 @@ public class AI : MonoBehaviour
                 _health -= amt;
                 if (_health <= 0)
                 {
+                    ServiceLocator.Get<Player>().AddKillCount();
                     var particles = Instantiate(_deathParticles, transform.position, Quaternion.identity);
                     particles.GetComponent<ParticleHandler>().SetTimerToDelete();
                     DestroyAI();
