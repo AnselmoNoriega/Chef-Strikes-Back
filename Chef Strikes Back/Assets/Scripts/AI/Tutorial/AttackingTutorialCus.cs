@@ -23,6 +23,7 @@ public class AttackingTutorialCus : StateClass<AI>
         
         if (player.GotDamage)
         {
+            _loopManager.EnableKilling();
             _loopManager.EnterDialogueEvent("KillingKaren");
             if(!_loopManager.TutorialThirdFace)
             {
