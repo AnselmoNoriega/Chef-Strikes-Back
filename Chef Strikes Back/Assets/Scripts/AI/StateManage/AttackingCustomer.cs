@@ -1,6 +1,4 @@
 using UnityEngine;
-using Pathfinding;
-using UnityEngine.InputSystem.Android;
 
 public class AttackingCustomer : StateClass<AI>
 {
