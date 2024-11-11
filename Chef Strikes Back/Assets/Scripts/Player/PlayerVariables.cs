@@ -13,6 +13,7 @@ public class PlayerVariables : MonoBehaviour
     public float AttackDuration;
     public float AttackRange;
     public float KnockbackForce;
+    public bool AttackDisabled = false;
 
     [Header("Player Throw")]
     public Vector3 HandOffset;

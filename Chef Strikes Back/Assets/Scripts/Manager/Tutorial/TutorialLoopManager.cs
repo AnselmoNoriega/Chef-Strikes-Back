@@ -47,6 +47,7 @@ public class TutorialLoopManager : MonoBehaviour
 
     private void Start()
     {
+        _player.Variables.AttackDisabled = true;
         EnterConversation();
         
         foreach (var inkEvent in inkJSONEvents)
@@ -254,4 +255,8 @@ public class TutorialLoopManager : MonoBehaviour
         _tutorialAI.shouldNotMove = false;
     }
 
+    public void EnableKilling()
+    {
+        _player.Variables.AttackDisabled = false;
+    }
 }

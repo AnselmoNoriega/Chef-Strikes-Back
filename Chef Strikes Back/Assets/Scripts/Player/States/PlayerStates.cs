@@ -61,6 +61,12 @@ public class PlayerAttacking : StateClass<Player>
     public void Enter(Player agent)
     {
         _variables = agent.Variables;
+        if(_variables.AttackDisabled)
+        {
+            _stateDuration = -1.0f;
+            return;
+        }
+
         _stateDuration = agent.Variables.AttackDuration;
         agent.Rb.velocity = Vector2.zero;
         Attack(agent.LookingDirection, agent);

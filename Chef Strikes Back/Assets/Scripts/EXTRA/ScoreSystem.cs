@@ -128,9 +128,8 @@ public class ScoreSystem : MonoBehaviour
         var deathDialogue = GetComponent<DeathDialogue>();
         if (sceneName == "MainScene")
         {
-            deathDialogue.EnterDialogueMode(starNum);
+            //deathDialogue.EnterDialogueMode(starNum);
         }
-
     }
 
     private int GetLevelIndex(string name)
