@@ -10,8 +10,6 @@ public class Table : MonoBehaviour
     public Transform platePos;
     public SpriteRenderer plateSprite;
 
-
-    
     [Space, Header("Audio")]
     public AudioManager _audioManager;
     private AudioSource _audioSource;
@@ -85,9 +83,6 @@ public class Table : MonoBehaviour
             {
                 if (chair.Customer.state == AIState.Hungry && chair.IsAIsFood(newItem))
                 {
-
-                   
-
                     chair.Customer.HappyParticles.Play();
                     ServiceLocator.Get<GameManager>().FoodGiven(25 * chair.Customer.EatingSlider.localScale.x);
                     newItem.IsServed = true;
