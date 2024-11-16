@@ -1,4 +1,4 @@
-# Chef-Strikes-Back🍔🥤
+# Chef-Strikes-Back🍕🍝
 Welcome to Chef-Strikes-Back, a fast-paced 2D hack-and-slash game where cooking, chaos, and combat come together! Serve food, manage customer moods, and fight off angry patrons in this unique blend of cooking and action.
 
 ## 🎮 Gameplay
