@@ -224,6 +224,7 @@ public class GameManager : MonoBehaviour
         var ach = new Steamworks.Data.Achievement(levelName);
         if (!ach.State)
         {
+            Debug.Log("<color=yellow>Achievement Unlocked: </color>" + levelName);
             ach.Trigger();
         }
 
@@ -239,6 +240,7 @@ public class GameManager : MonoBehaviour
         if(!ach.State)
         {
             ach.Trigger();
+            Debug.Log("<color=yellow>Achievement Unlocked: </color>" + "the_lettuce_man");
         }
     }
 
