@@ -7,7 +7,7 @@ public class Levels
 {
     public int Price;
     public bool IsLock;
-    public bool AllStarsAchieved;
+    public bool AllStarsAchieved = false;
 }
 
 public class GameManager : MonoBehaviour
@@ -204,6 +204,16 @@ public class GameManager : MonoBehaviour
     {
         _levelsLocked[lv].AllStarsAchieved = true;
         SaveLevels();
+
+        for (int i = 0; i < _levelsLocked.Count; ++i)
+        {
+            if (!_levelsLocked[i].AllStarsAchieved)
+            {
+                return;
+            }
+        }
+
+        //var ach = new Steamworks
     }
 
     public bool IsLevelLocked(int lv)
