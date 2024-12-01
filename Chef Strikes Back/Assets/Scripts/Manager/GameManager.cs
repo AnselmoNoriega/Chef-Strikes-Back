@@ -33,6 +33,21 @@ public class GameManager : MonoBehaviour
     private string _lastScenePlayed;
     private int _money = 0;
 
+    private void Awake()
+    {
+        Steamworks.SteamClient.Init(3329730);
+    }
+
+    private void Update()
+    {
+        Steamworks.SteamClient.RunCallbacks();
+    }
+
+    private void OnApplicationQuit()
+    {
+        Steamworks.SteamClient.Shutdown();
+    }
+
     public void LoadLevels()
     {
         var levelsLoaded = ServiceLocator.Get<SaveSystem>().Load<List<Levels>>("levels.doNotOpen");
@@ -205,6 +220,13 @@ public class GameManager : MonoBehaviour
         _levelsLocked[lv].AllStarsAchieved = true;
         SaveLevels();
 
+        string levelName = "level_full_stars_" + (lv + 1).ToString();
+        var ach = new Steamworks.Data.Achievement(levelName);
+        if (!ach.State)
+        {
+            ach.Trigger();
+        }
+
         for (int i = 0; i < _levelsLocked.Count; ++i)
         {
             if (!_levelsLocked[i].AllStarsAchieved)
@@ -213,7 +235,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //var ach = new Steamworks
+        ach = new Steamworks.Data.Achievement("the_lettuce_man");
+        if(!ach.State)
+        {
+            ach.Trigger();
+        }
     }
 
     public bool IsLevelLocked(int lv)
