@@ -69,6 +69,7 @@ public class LevelTimer : MonoBehaviour
         {
             ServiceLocator.Get<GameManager>().SetKillCount(ServiceLocator.Get<Player>().KillCount);
             ServiceLocator.Get<GameManager>().SaveMoney(ServiceLocator.Get<Player>().Money);
+            ServiceLocator.Get<GameManager>().SaveAchievements();
             sceneControl.GoToEndScene();
         }
     }

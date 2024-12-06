@@ -10,6 +10,15 @@ public class Levels
     public bool AllStarsAchieved = false;
 }
 
+[System.Serializable]
+public class AchievementsStats
+{
+    public int TotalServes = 0;
+    public int TotalKills = 0;
+    public int TotalPizzasMade = 0;
+    public int TotalSpaghettisMade = 0;
+}
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] bool _isInDebug = true;
@@ -33,6 +42,9 @@ public class GameManager : MonoBehaviour
     private string _lastScenePlayed;
     private int _money = 0;
 
+    [Header("Achievements")]
+    private AchievementsStats _achievements = new();
+
     private void Awake()
     {
         Steamworks.SteamClient.Init(3329730);
@@ -55,6 +67,8 @@ public class GameManager : MonoBehaviour
         {
             _levelsLocked = levelsLoaded;
         }
+
+        var achievements = ServiceLocator.Get<SaveSystem>().Load<AchievementsStats>("achievements.doNotOpen");
     }
 
     public void LoadGameStats()
@@ -132,6 +146,47 @@ public class GameManager : MonoBehaviour
     {
         _money += earnings;
         ServiceLocator.Get<SaveSystem>().Save<int>(_money, "money.doNotOpen");
+    }
+
+    public void SaveAchievements()
+    {
+        ServiceLocator.Get<SaveSystem>().Save<AchievementsStats>(_achievements ,"achievements.doNotOpen");
+        if (_achievements.TotalServes >= 100)
+        {
+            var ach = new Steamworks.Data.Achievement("100_serves");
+            if (!ach.State)
+            {
+                Debug.Log("<color=yellow>Achievement Unlocked: </color>" + "100_serves");
+                ach.Trigger();
+            }
+        }
+        if (_achievements.TotalKills >= 50)
+        {
+            var ach = new Steamworks.Data.Achievement("50_kills");
+            if (!ach.State)
+            {
+                Debug.Log("<color=yellow>Achievement Unlocked: </color>" + "50_kills");
+                ach.Trigger();
+            }
+        }
+        if (_achievements.TotalPizzasMade >= 50)
+        {
+            var ach = new Steamworks.Data.Achievement("50_pizza");
+            if (!ach.State)
+            {
+                Debug.Log("<color=yellow>Achievement Unlocked: </color>" + "50_pizza");
+                ach.Trigger();
+            }
+        }
+        if (_achievements.TotalSpaghettisMade >= 50)
+        {
+            var ach = new Steamworks.Data.Achievement("50_spaghetti");
+            if (!ach.State)
+            {
+                Debug.Log("<color=yellow>Achievement Unlocked: </color>" + "50_spaghetti");
+                ach.Trigger();
+            }
+        }
     }
 
     public int GetMoney()
@@ -252,5 +307,25 @@ public class GameManager : MonoBehaviour
     private void SaveLevels()
     {
         ServiceLocator.Get<SaveSystem>().Save<List<Levels>>(_levelsLocked, "levels.doNotOpen");
+    }
+
+    private void AddToServeCount()
+    {
+        ++_achievements.TotalServes;
+    }
+
+    private void AddToKillCount()
+    {
+        ++_achievements.TotalKills;
+    }
+
+    private void AddToPizzasMadeCount()
+    {
+        ++_achievements.TotalPizzasMade;
+    }
+
+    private void AddToSpaguettismadeCount()
+    {
+        ++_achievements.TotalSpaghettisMade;
     }
 }
