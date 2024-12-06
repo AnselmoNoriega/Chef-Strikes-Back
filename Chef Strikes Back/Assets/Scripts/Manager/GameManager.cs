@@ -309,22 +309,22 @@ public class GameManager : MonoBehaviour
         ServiceLocator.Get<SaveSystem>().Save<List<Levels>>(_levelsLocked, "levels.doNotOpen");
     }
 
-    private void AddToServeCount()
+    public void AddToServeCount()
     {
         ++_achievements.TotalServes;
     }
 
-    private void AddToKillCount()
+    public void AddToKillCount()
     {
         ++_achievements.TotalKills;
     }
 
-    private void AddToPizzasMadeCount()
+    public void AddToPizzasMadeCount()
     {
         ++_achievements.TotalPizzasMade;
     }
 
-    private void AddToSpaguettismadeCount()
+    public void AddToSpaguettismadeCount()
     {
         ++_achievements.TotalSpaghettisMade;
     }
