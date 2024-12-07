@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class Levels
@@ -44,20 +46,38 @@ public class GameManager : MonoBehaviour
 
     [Header("Achievements")]
     private AchievementsStats _achievements = new();
+    bool _isSteamInitialized = false;
 
     private void Awake()
     {
-        Steamworks.SteamClient.Init(3329730);
+        try
+        {
+            Steamworks.SteamClient.Init(3329730);
+            _isSteamInitialized = true;
+        }
+        catch (Exception e) { Debug.Log("Can't Sonect to Steam Game: " + e); }
+
+        try
+        {
+            Debug.Log(Steamworks.SteamClient.Name);
+        }
+        catch (Exception e) { Debug.Log("Can't Print Steam Name: " + e); }
     }
 
     private void Update()
     {
-        Steamworks.SteamClient.RunCallbacks();
+        if (_isSteamInitialized)
+        {
+            Steamworks.SteamClient.RunCallbacks();
+        }
     }
 
     private void OnApplicationQuit()
     {
-        Steamworks.SteamClient.Shutdown();
+        if (_isSteamInitialized)
+        {
+            Steamworks.SteamClient.Shutdown();
+        }
     }
 
     public void LoadLevels()
@@ -74,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void LoadGameStats()
     {
         _money = ServiceLocator.Get<SaveSystem>().Load<int>("money.doNotOpen");
-        if(_isInDebug)
+        if (_isInDebug)
         {
             _money = 100000;
         }
@@ -150,7 +170,13 @@ public class GameManager : MonoBehaviour
 
     public void SaveAchievements()
     {
-        ServiceLocator.Get<SaveSystem>().Save<AchievementsStats>(_achievements ,"achievements.doNotOpen");
+        ServiceLocator.Get<SaveSystem>().Save<AchievementsStats>(_achievements, "achievements.doNotOpen");
+
+        if (!_isSteamInitialized)
+        {
+            return;
+        }
+
         if (_achievements.TotalServes >= 100)
         {
             var ach = new Steamworks.Data.Achievement("100_serves");
@@ -247,7 +273,7 @@ public class GameManager : MonoBehaviour
 
     public void SetLockedLevels(List<Button> buttons)
     {
-        if(_isInDebug)
+        if (_isInDebug)
         {
             for (int i = 0; i < _levelsLocked.Count; ++i)
             {
@@ -292,7 +318,7 @@ public class GameManager : MonoBehaviour
         }
 
         ach = new Steamworks.Data.Achievement("the_lettuce_man");
-        if(!ach.State)
+        if (!ach.State)
         {
             ach.Trigger();
             Debug.Log("<color=yellow>Achievement Unlocked: </color>" + "the_lettuce_man");
