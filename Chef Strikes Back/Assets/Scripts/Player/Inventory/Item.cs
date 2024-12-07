@@ -128,12 +128,10 @@ public class Item : MonoBehaviour
             case FoodType.Pizza:
                 // Use a specific particle prefab for pizza
                 InstantiateParticle(pizzaParticlesPrefab);
-                ServiceLocator.Get<GameManager>().AddToPizzasMadeCount();
                 return;  // Exit the method to avoid playing the default particle system
             case FoodType.Spaghetti:
                 // Use a specific particle prefab for spaghetti
                 InstantiateParticle(spaghettiParticlesPrefab);
-                ServiceLocator.Get<GameManager>().AddToSpaguettismadeCount();
                 return;  // Exit the method to avoid playing the default particle system
             default:
                 mainModule.startColor = Color.white;  // Default color if none of the above

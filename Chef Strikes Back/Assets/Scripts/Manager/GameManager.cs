@@ -55,13 +55,13 @@ public class GameManager : MonoBehaviour
             Steamworks.SteamClient.Init(3329730);
             _isSteamInitialized = true;
         }
-        catch (Exception e) { Debug.Log("Can't Sonect to Steam Game: " + e); }
+        catch (Exception e) { Debug.Log("<color=yellow> Can't Sonect to Steam Game: </color>" + e); }
 
         try
         {
             Debug.Log(Steamworks.SteamClient.Name);
         }
-        catch (Exception e) { Debug.Log("Can't Print Steam Name: " + e); }
+        catch (Exception e) { Debug.Log("<color=yellow> Can't Print Steam Name: </color>" + e); }
     }
 
     private void Update()

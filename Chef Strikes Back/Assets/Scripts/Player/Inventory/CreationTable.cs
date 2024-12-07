@@ -159,7 +159,15 @@ public class CreationTable : MonoBehaviour
 
         Vector2 randomOffset = new Vector2(UnityEngine.Random.Range(-_spawnFoodOffset, _spawnFoodOffset), UnityEngine.Random.Range(-_spawnFoodOffset, _spawnFoodOffset));
         randomOffset /= 100;
-        Instantiate(_burger, (Vector2)_foodOffset.position + randomOffset, Quaternion.identity);
+        var item = Instantiate(_burger, (Vector2)_foodOffset.position + randomOffset, Quaternion.identity);
+        if (item.GetComponent<Item>().Type == FoodType.Pizza)
+        {
+            ServiceLocator.Get<GameManager>().AddToPizzasMadeCount();
+        }
+        else
+        {
+            ServiceLocator.Get<GameManager>().AddToSpaguettismadeCount();
+        }
     }
 
     private IEnumerator IngredientSpriteActive(Item item)
