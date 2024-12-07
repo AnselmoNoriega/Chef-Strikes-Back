@@ -13,7 +13,7 @@ public class EatingCustomer : StateClass<AI>
         scale.x = 1;
         agent.EatingSlider.localScale = scale;
         agent.EatingSlider.transform.parent.gameObject.SetActive(true);
-
+        ServiceLocator.Get<GameManager>().AddToServeCount();
         agent.EatingSlider.GetChild(0).GetComponent<SpriteRenderer>().color = Color.green;
         timer = eatingTime;
     }

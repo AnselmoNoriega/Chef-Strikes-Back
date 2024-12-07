@@ -190,6 +190,7 @@ public class Player : MonoBehaviour
     public void AddKillCount()
     {
         ++KillCount;
+        ServiceLocator.Get<GameManager>().AddToKillCount();
     }
 
     private IEnumerator SpriteFlashing()
